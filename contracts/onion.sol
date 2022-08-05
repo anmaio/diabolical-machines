@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import 'base64-sol/base64.sol';
 
-contract Llama is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable, ERC721Burnable {
+contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable, ERC721Burnable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
@@ -80,7 +80,7 @@ contract Llama is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
 	}
 
 	// Composes HTML string, populates with IPFS sourced image layers and base64 encode
-	function composeHTML(uint256 tokenId) public pure returns (string memory) {
+	function composeHTML(uint256 _tokenId) public view returns (string memory) {
 		string[9] memory parts;
         parts[0] = '<!DOCTYPE html> <html lang="">  <meta charset="utf-8">  <title>html-ipfs-test</title>  <head><style>img    {    position:absolute;    top: 0px;    left: 0px;    }    #layer1    {       z-index: 10;    }    #layer2    {    z-index: 20;    }        </style></head> <body style="background-color:grey; margin: 0"> <canvas  id="c"></canvas><img id="layer1" src="';
         parts[1] = 'https://anma.mypinata.cloud/ipfs/QmYwF6ybRUa6BE63CbfZG2nrhFJZmy5Dt8oDMGkhBhmM9Y/backgrounds/background_';
@@ -99,16 +99,15 @@ contract Llama is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
 	// Function build metadata for a given token
 	function buildMetadata(uint _tokenId) public view returns (string memory) {
 		string memory json = Base64.encode(bytes(string(abi.encodePacked(
-			'{"name": "Onion #" ', Strings.toString(_tokenId), '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":',traitData[_tokenId].trait01,'}, {"trait_type": "Trait 2", "value":',traitData[_tokenId].trait02,'}, {"trait_type": "Trait 3", "value":',traitData[_tokenId].trait03,'}, {"trait_type": "Trait 4", "value":',traitData[_tokenId].trait04,'}, {"trait_type": "Trait 5", "value":',traitData[_tokenId].trait05,'}, {"trait_type": "Trait 6", "value":',traitData[_tokenId].trait06,'}, {"trait_type": "Trait 7", "value":',traitData[_tokenId].trait07,'}], "image": "data:image/svg+xml;base64,', composeHTML(), '"}'))));
-
-		return json;
+			'{"name": "Onion #" ', Strings.toString(_tokenId), '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":',traitData[_tokenId].trait01,'}, {"trait_type": "Trait 2", "value":',traitData[_tokenId].trait02,'}],"image": "https://anma.mypinata.cloud/ipfs/QmYDLv6aCMcE9oSngnYMAyKFzjWYCeyevKeqom9NU2c7Kh", "animation_url": "data:text/html;base64,', composeHTML(_tokenId), '"}'))));
+		string memory output = string(abi.encodePacked('data:application/json;base64,', json));
+		return output;
 	}
 
-    function safeMint(address to, string memory uri) public onlyOwner {
+    function safeMint(address to) public onlyOwner {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
 		initialTraitValues(tokenId);
     }
 
