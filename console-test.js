@@ -33,3 +33,7 @@ main();
 // const accounts = await hre.ethers.getSigners();
 // toAddress = accounts[0].address;
 // await t.symbol();
+
+// const address = '0x0387861b85dB31FdC724Dbf35F74182aAf39536E';
+// toAddress = '0x161eb2283E222F156215a11D7B3E69a1E50064e6'
+// const t = await ethers.getContractAt("Onion", address);
