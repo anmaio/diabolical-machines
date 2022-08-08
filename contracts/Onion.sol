@@ -17,7 +17,7 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     uint256 public maxSupply;
     bool public saleComplete = false;
 
-    constructor() ERC721("Onion", "o") {}
+    constructor() ERC721("Onion", "O") {}
 
     // event is emitted when initial trait values are set
     event InitialTraitValuesSet(uint256 tokenId);
