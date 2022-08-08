@@ -82,7 +82,7 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
 	// Composes HTML string, populates with IPFS sourced image layers and base64 encode
 	function composeHTML(uint256 _tokenId) public view returns (string memory) {
 		string[9] memory parts;
-        parts[0] = '<!DOCTYPE html> <html lang="">  <meta charset="utf-8">  <title>html-ipfs-test</title>  <head><style>img    {    position:absolute;    top: 0px;    left: 0px;    }    #layer1    {       z-index: 10;    }    #layer2    {    z-index: 20;    }        </style></head> <body style="background-color:grey; margin: 0"> <canvas  id="c"></canvas><img id="layer1" src="';
+        parts[0] = '<!DOCTYPE html> <html lang="">  <meta charset="utf-8">  <title>html-ipfs-test</title>  <head><style>img    {position:absolute;top: 0px;left: 0px;}#layer1{z-index: 10;}#layer2{z-index: 20;}</style></head> <body style="background-color:grey; margin: 0"> <canvas id="c"></canvas><img id="layer1" src="';
         parts[1] = 'https://anma.mypinata.cloud/ipfs/QmYwF6ybRUa6BE63CbfZG2nrhFJZmy5Dt8oDMGkhBhmM9Y/backgrounds/background_';
         parts[2] = traitData[_tokenId].trait01;
         parts[3] = '.png">';
