@@ -1,9 +1,14 @@
+# Node
 node_modules
-.env
-coverage
-coverage.json
-typechain
 
-#Hardhat files
+# Secrets
+*.env
+.contract
+.wallet
+
+# Solidity compiler
 cache
 artifacts
+
+# Temporary local dir used for testing
+.temp

@@ -1,0 +1,5 @@
+steps:
+- script: |
+    docker compose rm -f
+  name: cleanup
+  displayName: Docker cleanup

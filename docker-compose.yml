@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  # Hardhat node container
+  # Binds lcoal source dir and docker daemon as volumes
+  # NOTE: Local source MUST use full path or the volume will fail to mount (i.e. .:usr/src/app)
+  node:
+    build:
+      args: 
+        - NODE_VERSION=16.x
+        - ROLE=node
+      context: .
+    container_name: htmlipfs_node
+    env_file:
+      - './config/.node.env'
+    # network_mode: "host"
+    ports:
+      - "8545:8545"
+    volumes:
+      - /home/olied/source/fr-solidity-hardhat-docker-template:/usr/src/app
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  # Development environment container
+  # Binds local source dir. docker daemon and git credential manager ass volumes  
+  dev:
+    build:
+      args: 
+        - NODE_VERSION=16.x
+        - ROLE=dev
+      context: .
+    container_name: htmlipfs_dev
+    env_file:
+      - './config/.dev.env'
+    network_mode: "host"
+    volumes:
+      - .:/usr/src/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe:/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe
+  
+  # # Test client container
+  # # Binds local source dir. docker daemon and git credential manager ass volumes
+  # # NOTE: If using a test client with web-based UI you may need to expose the required ports (e.g. 80 or 443)
+  # client:
+  #   build:
+  #     args: 
+  #       - NODE_VERSION=16.x
+  #       - ROLE=client
+  #     context: .
+  #   container_name: htmlipfs_client
+  #   env_file:
+  #     - './config/.client.env'
+  #   network_mode: "host"
+  #   volumes:
+  #     - /home/olied/source/fr-solidity-hardhat-docker-template:/usr/src/app
