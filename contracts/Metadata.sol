@@ -2,6 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "base64-sol/base64.sol";
 import "./Compose.sol";
 
@@ -19,7 +20,7 @@ contract Metadata is Ownable {
     }
 
     // Function initial trait values pseudo randomly generated
-    function initialTraitValues(uint256 _tokenId) external onlyOwner {
+    function initialTraitValues(uint256 _tokenId) external {
         uint256 random = randomNumber();
         traitData[_tokenId].trait01 = Strings.toString(random);
         traitData[_tokenId].trait02 = Strings.toString(random % 5);
@@ -60,6 +61,7 @@ contract Metadata is Ownable {
         return output;
     }
 
+<<<<<<< Updated upstream
     // // Function build metadata using string builder
     // function buildMetadataWithSB(uint256 _tokenId) public view returns (string memory) {
     //     string[9] memory values = [
@@ -84,4 +86,9 @@ contract Metadata is Ownable {
     //     string memory output = string(abi.encodePacked("data:application/json;base64,", json));
     //     return output;
     // }
+=======
+    function onERC721Received(address, address, uint256, bytes memory) public virtual returns (bytes4) {
+        return this.onERC721Received.selector;
+    }
+>>>>>>> Stashed changes
 }

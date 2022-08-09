@@ -37,9 +37,9 @@ task("deploy-local", "Deploys contract", async (taskArgs, hre) => {
   console.log("Contract deployed to address:", onion.address)
   console.log("Minting token and getting tokenURI...")
 
-  await onion.safeMint(onion.signer.getAddress());
-  const tokenURI = await onion.tokenURI(0);
-  console.log("TokenURI:", tokenURI);
+  // await onion.safeMint(onion.signer.getAddress());
+  // const tokenURI = await onion.tokenURI(0);
+  // console.log("TokenURI:", tokenURI);
 });
 
 // You need to export an object to set up your config
