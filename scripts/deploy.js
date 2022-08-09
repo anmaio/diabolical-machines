@@ -5,11 +5,19 @@ const hre = require("hardhat");
   const [deployer] = await ethers.getSigners();
   console.log(`Address deploying the contract ====> ${deployer.address}`);
 
-   const Token = await hre.ethers.getContractFactory("Onion");
-   console.log('Deploying ERC721 token...');
-   const token = await Token.deploy();    
-   await token.deployed();  
-   console.log("deployed to:", token.address);
+   const TokenB = await hre.ethers.getContractFactory("Compose");
+   console.log('Deploying B token...');
+   const tokenB = await TokenB.deploy();    
+   await tokenB.deployed();  
+   console.log("B deployed to:", tokenB.address);
+
+
+   const TokenA = await hre.ethers.getContractFactory("Onion");
+   console.log('Deploying A token...');
+   const tokenA = await TokenA.deploy(tokenB.address);    
+   await tokenA.deployed();  
+   console.log("A deployed to:", tokenA.address);
+
 
  }
  main()
