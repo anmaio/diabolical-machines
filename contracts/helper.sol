@@ -11,4 +11,20 @@ library Helper {
         string trait06; //glasses 5
         string trait07; //outfits 7
     }
+
+    struct HTML {
+        string header;
+        string baseURI;
+        string imgOpen;
+        string imgSrc;
+        string folder01;
+        string folder02;
+        string folder03;
+        string folder04;
+        string folder05;
+        string folder06;
+        string folder07;
+        string imgClose;
+        string footer;
+    }
 }
