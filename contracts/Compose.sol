@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "base64-sol/base64.sol";
-import "./helper.sol";
+import "./Helper.sol";
 
 contract Compose {
     Helper.HTML private _html;
