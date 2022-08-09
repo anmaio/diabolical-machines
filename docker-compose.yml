@@ -17,7 +17,7 @@ services:
     ports:
       - "8545:8545"
     volumes:
-      - /home/olied/source/fr-solidity-hardhat-docker-template:/usr/src/app
+      - /home/danny/source/fr-html-ipfs:/usr/src/app
       - /var/run/docker.sock:/var/run/docker.sock
 
   # Development environment container
@@ -51,4 +51,4 @@ services:
   #     - './config/.client.env'
   #   network_mode: "host"
   #   volumes:
-  #     - /home/olied/source/fr-solidity-hardhat-docker-template:/usr/src/app
+  #     - /home/danny/source/fr-solidity-hardhat-docker-template:/usr/src/app

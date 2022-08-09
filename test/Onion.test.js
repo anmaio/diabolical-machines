@@ -1,10 +1,11 @@
 const assert = require("assert");
 const { ethers } = require("hardhat");
 
+const CONTRACT_NAME_PRE = "Compose"
 const CONTRACT_NAME = "Onion"
 
 const TOKEN_NAME = "Onion";
-const TOKEN_SYMBOL = "O";
+const TOKEN_SYMBOL = "o";
 
 let provider;
 let accounts = [];
@@ -12,8 +13,10 @@ let contract;
 let signer;
 
 beforeEach(async () => {
+    const Compose = await ethers.getContractFactory(CONTRACT_NAME_PRE);
+    const compose = await Compose.deploy();
     const factory = await ethers.getContractFactory(CONTRACT_NAME);
-    contract = await factory.deploy();
+    contract = await factory.deploy(compose.address);
     await contract.deployTransaction.wait();
 
     provider = ethers.provider;

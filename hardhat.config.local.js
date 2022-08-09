@@ -17,8 +17,14 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 
 task("deploy-local", "Deploys contract", async (taskArgs, hre) => {
+  const Compose = await hre.ethers.getContractFactory("Compose");
+  const compose = await Compose.deploy();
+
+  await compose.deployed();
+  console.log("Contract deployed to address:", compose.address)  
+  
   const Onion = await hre.ethers.getContractFactory("Onion");
-  const onion = await Onion.deploy();
+  const onion = await Onion.deploy(compose.address);
 
   // Push to Ethernal if enabled
   await hre.ethernal.push({
