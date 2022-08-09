@@ -8,16 +8,16 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import 'base64-sol/base64.sol';
-import './compose.sol';
+import "base64-sol/base64.sol";
+import "./compose.sol";
 
 
 contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable, ERC721Burnable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
-    uint256 public maxSupply;
-    bool public saleComplete = false;
+    // uint256 public maxSupply;
+    // bool public saleComplete = false;
     Compose private _compose;
     
 
@@ -60,13 +60,13 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
 	// Function initial trait values pseudo randomly generated
 	function initialTraitValues(uint _tokenId) private {
 		uint random = randomNumber();
-		traitData[_tokenId].trait01 = string(abi.encodePacked(random));
-		traitData[_tokenId].trait02 = string(abi.encodePacked(random%5));
-		traitData[_tokenId].trait03 = string(abi.encodePacked(random%5));
-		traitData[_tokenId].trait04 = string(abi.encodePacked(random%2));
-		traitData[_tokenId].trait05 = string(abi.encodePacked(random%9));
-		traitData[_tokenId].trait06 = string(abi.encodePacked(random%5));
-		traitData[_tokenId].trait07 = string(abi.encodePacked(random%7));
+		traitData[_tokenId].trait01 = string(abi.encodePacked(Strings.toString(random)));
+		traitData[_tokenId].trait02 = string(abi.encodePacked(Strings.toString(random%5)));
+		traitData[_tokenId].trait03 = string(abi.encodePacked(Strings.toString(random%5)));
+		traitData[_tokenId].trait04 = string(abi.encodePacked(Strings.toString(random%2)));
+		traitData[_tokenId].trait05 = string(abi.encodePacked(Strings.toString(random%9)));
+		traitData[_tokenId].trait06 = string(abi.encodePacked(Strings.toString(random%5)));
+		traitData[_tokenId].trait07 = string(abi.encodePacked(Strings.toString(random%7)));
 		emit InitialTraitValuesSet(_tokenId);
 	}
 
