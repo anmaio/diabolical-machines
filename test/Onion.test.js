@@ -1,23 +1,25 @@
 const assert = require("assert");
 const { ethers } = require("hardhat");
 
-const CONTRACT_NAME_PRE = "Compose"
-const CONTRACT_NAME = "Onion"
-
-const TOKEN_NAME = "Onion";
-const TOKEN_SYMBOL = "o";
-
 let provider;
 let accounts = [];
-let contract;
+let compose;
+let metadata;
+let onion;
 let signer;
 
 beforeEach(async () => {
-    const Compose = await ethers.getContractFactory(CONTRACT_NAME_PRE);
-    const compose = await Compose.deploy();
-    const factory = await ethers.getContractFactory(CONTRACT_NAME);
-    contract = await factory.deploy(compose.address);
-    await contract.deployTransaction.wait();
+    const Compose = await ethers.getContractFactory("Compose");
+    compose = await Compose.deploy();
+    await compose.deployTransaction.wait();
+
+    const Metadata = await ethers.getContractFactory("Metadata");
+    metadata = await Metadata.deploy(compose.address);
+    await metadata.deployTransaction.wait();
+
+    const Onion = await ethers.getContractFactory("Onion");
+    onion = await Onion.deploy(metadata.address);
+    await onion.deployTransaction.wait();
 
     provider = ethers.provider;
 
@@ -30,24 +32,29 @@ beforeEach(async () => {
     }
 });
 
-describe("MetaToken Contract", () => {
+describe("Onion Contract", () => {
     it("successfully deploys", () => {
-        assert.ok(contract.address);
+        assert.ok(compose.address);
+        assert.ok(metadata.address);
+        assert.ok(onion.address);
     });
 
-    it("sets the token name and symbol", async () => {
-        const actualName = await contract.name();
-        const actualSymbol = await contract.symbol();
-
-        assert.strictEqual(actualName, TOKEN_NAME);
-        assert.strictEqual(actualSymbol, TOKEN_SYMBOL);
+    it("mints a token", async () => {
+        await onion.safeMint(accounts[0]);
     });
 
-    it("composes html the standard way", async () => {
-        await contract.composeHTMLWithSB()
+    it("returns token uri without string builder", async () => {
+        await onion.safeMint(accounts[0]);
+        await onion.tokenURI(0);
     });
 
-    it("composes html the string builder way", async () => {
+    it("returns token uri with string builder", async () => {
+        await onion.safeMint(accounts[0]);
+        await onion.tokenURIWithSB(0);
+    });
 
+    it("returns the same uri with and without string builder", async () => {
+        await onion.safeMint(accounts[0]);
+        assert.strictEqual(await onion.tokenURI(0), await onion.tokenURIWithSB(0))
     });
 });

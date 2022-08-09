@@ -1,6 +1,6 @@
 // Imports
 const ethers = require('ethers');
-const abi = require('../artifacts/contracts/Greeter.sol/Greeter.json').abi;
+const abi = require('../artifacts/contracts/MockCompose.sol/MockCompose.json').abi;
 const config = require('dotenv').config;
 
 // Config

@@ -19,12 +19,16 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 task("deploy-local", "Deploys contract", async (taskArgs, hre) => {
   const Compose = await hre.ethers.getContractFactory("Compose");
   const compose = await Compose.deploy();
-
   await compose.deployed();
-  console.log("Contract deployed to address:", compose.address)  
+  console.log("Contract Compose deployed to address:", compose.address)  
   
+  const Metadata = await hre.ethers.getContractFactory("Metadata");
+  const metadata = await Metadata.deploy(compose.address);    
+  await metadata.deployed();
+  console.log("Contract 'Metadata' deployed to:", metadata.address);
+
   const Onion = await hre.ethers.getContractFactory("Onion");
-  const onion = await Onion.deploy(compose.address);
+  const onion = await Onion.deploy(metadata.address);
 
   // Push to Ethernal if enabled
   await hre.ethernal.push({
@@ -35,11 +39,12 @@ task("deploy-local", "Deploys contract", async (taskArgs, hre) => {
   await onion.deployed();
 
   console.log("Contract deployed to address:", onion.address)
-  console.log("Minting token and getting tokenURI...")
 
-  // await onion.safeMint(onion.signer.getAddress());
-  // const tokenURI = await onion.tokenURI(0);
-  // console.log("TokenURI:", tokenURI);
+
+  console.log("Minting token and getting tokenURI...")
+  await onion.safeMint(onion.signer.getAddress());
+  console.log("TokenURI:", await onion.tokenURI(0));
+  console.log("TokenURIWithSB:", await onion.tokenURIWithSB(0));
 });
 
 // You need to export an object to set up your config
@@ -61,15 +66,15 @@ module.exports = {
     gasPriceApi: "https://api.etherscan.io/api?module=proxy&action=eth_gasPrice",
     showTimeSpent: true,
     excludeContracts: [],
-    src: "contracts" 
+    src: "contracts"
   },
   ethernal: {
     email: process.env.ETHERNAL_EMAIL,
     password: process.env.ETHERNAL_PASSWORD,
-    disableSync: (process.env.ETHERNAL_DISABLE_SYNC == "true") ? true : false,
-    disableTrace: (process.env.ETHERNAL_DISABLE_TRACE == "true") ? true : false,
+    disableSync: false,
+    disableTrace: false,
     workspace: (process.env.ETHERNAL_WORKSPACE) ? process.env.ETHERNAL_WORKSPACE : undefined,
-    uploadAst: (process.env.ETHERNAL_UPLOAD_AST == "true") ? true : false,
+    uploadAst: true,
     disabled: (process.env.ETHERNAL_ENABLED == "true") ? false : true,
     resetOnStart: (process.env.ETHERNAL_RESET_ON_START == "true") ? true : false
   }

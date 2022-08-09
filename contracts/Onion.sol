@@ -62,7 +62,7 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     // 	emit TraitValueChanged(_tokenId, _traitNumber, _value, msg.sender);
     // }
 
-    function safeMint(address to) public onlyOwner {
+    function safeMint(address to) public {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
@@ -87,9 +87,9 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
         return _metadata.buildMetadata(_tokenId);
     }
 
-    // function tokenURIWithSB(uint256 _tokenId) public view returns (string memory) {
-    //     return _metadata.buildMetadataWithSB(_tokenId);
-    // }
+    function tokenURIWithSB(uint256 _tokenId) public view returns (string memory) {
+        return _metadata.buildMetadataWithSB(_tokenId);
+    }
 
     function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable) returns (bool) {
         return super.supportsInterface(interfaceId);

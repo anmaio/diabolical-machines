@@ -61,34 +61,37 @@ contract Metadata is Ownable {
         return output;
     }
 
-<<<<<<< Updated upstream
-    // // Function build metadata using string builder
-    // function buildMetadataWithSB(uint256 _tokenId) public view returns (string memory) {
-    //     string[9] memory values = [
-    //         '{"name": "Onion #" ',
-    //         Strings.toString(_tokenId),
-    //         '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":',
-    //         traitData[_tokenId].trait01,
-    //         '}, {"trait_type": "Trait 2", "value":',
-    //         traitData[_tokenId].trait02,
-    //         '}],"image": "https://anma.mypinata.cloud/ipfs/QmYDLv6aCMcE9oSngnYMAyKFzjWYCeyevKeqom9NU2c7Kh", "animation_url": "data:text/html;base64,',
-    //         _compose.composeHTML(traitData[_tokenId]),
-    //         '"}'
-    //     ];
+    // Function build metadata using string builder
+    function buildMetadataWithSB(uint256 _tokenId) public view returns (string memory) {
+        string[9] memory values = [
+            '{"name": "Onion #" ',
+            Strings.toString(_tokenId),
+            '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":',
+            traitData[_tokenId].trait01,
+            '}, {"trait_type": "Trait 2", "value":',
+            traitData[_tokenId].trait02,
+            '}],"image": "https://anma.mypinata.cloud/ipfs/QmYDLv6aCMcE9oSngnYMAyKFzjWYCeyevKeqom9NU2c7Kh", "animation_url": "data:text/html;base64,',
+            _compose.composeHTML(traitData[_tokenId]),
+            '"}'
+        ];
 
-    //     StringBuilder memory sb = SB.create(128 * 1024);
+        StringBuilder memory sb = SB.create(128 * 1024);
 
-    //     for (uint256 i = 0; i < values.length; i++) {
-    //         SB.writeStr(sb, values[i]);
-    //     }
-        
-    //     string memory json = Base64.encode(bytes(string(abi.encodePacked(SB.getString(sb)))));                        
-    //     string memory output = string(abi.encodePacked("data:application/json;base64,", json));
-    //     return output;
-    // }
-=======
-    function onERC721Received(address, address, uint256, bytes memory) public virtual returns (bytes4) {
+        for (uint256 i = 0; i < values.length; i++) {
+            SB.writeStr(sb, values[i]);
+        }
+
+        string memory json = Base64.encode(bytes(string(abi.encodePacked(SB.getString(sb)))));
+        string memory output = string(abi.encodePacked("data:application/json;base64,", json));
+        return output;
+    }
+
+    function onERC721Received(
+        address,
+        address,
+        uint256,
+        bytes memory
+    ) public virtual returns (bytes4) {
         return this.onERC721Received.selector;
     }
->>>>>>> Stashed changes
 }

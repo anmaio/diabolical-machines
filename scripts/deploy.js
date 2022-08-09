@@ -5,19 +5,24 @@ const hre = require("hardhat");
   const [deployer] = await ethers.getSigners();
   console.log(`Address deploying the contract ====> ${deployer.address}`);
 
-   const TokenB = await hre.ethers.getContractFactory("Compose");
-   console.log('Deploying B token...');
-   const tokenB = await TokenB.deploy();    
-   await tokenB.deployed();  
-   console.log("B deployed to:", tokenB.address);
+   const Compose = await hre.ethers.getContractFactory("Compose");
+   const compose = await Compose.deploy();    
+   await compose.deployed();  
+   console.log("Contract 'Compose' deployed to:", compose.address);
 
+   const Metadata = await hre.ethers.getContractFactory("Metadata");
+   const metadata = await Metadata.deploy(compose.address);    
+   await metadata.deployed();  
+   console.log("Contract 'Metadata' deployed to:", metadata.address);
 
-   const TokenA = await hre.ethers.getContractFactory("Onion");
-   console.log('Deploying A token...');
-   const tokenA = await TokenA.deploy(tokenB.address);    
-   await tokenA.deployed();  
-   console.log("A deployed to:", tokenA.address);
+   const Onion = await hre.ethers.getContractFactory("Metadata");
+   const onion = await Onion.deploy(metadata.address);    
+   await onion.deployed();  
+   console.log("Contract 'Onion' deployed to:", onion.address);
 
+   await onion.safeMint(deployer.address);
+   console.log("URI (no SB):", await onion.tokenURI(0));
+   console.log("URI (with SB):", await onion.tokenURIWithSB(0));
 
  }
  main()
