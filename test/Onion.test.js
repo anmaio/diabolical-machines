@@ -42,4 +42,12 @@ describe("MetaToken Contract", () => {
         assert.strictEqual(actualName, TOKEN_NAME);
         assert.strictEqual(actualSymbol, TOKEN_SYMBOL);
     });
+
+    it("composes html the standard way", async () => {
+        await contract.composeHTMLWithSB()
+    });
+
+    it("composes html the string builder way", async () => {
+
+    });
 });
