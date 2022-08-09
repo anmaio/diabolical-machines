@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "base64-sol/base64.sol";
-import "./compose.sol";
+import "./Metadata.sol";
 
 contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable, ERC721Burnable {
     using Counters for Counters.Counter;
@@ -17,14 +17,11 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     Counters.Counter private _tokenIdCounter;
     // uint256 public maxSupply;
     // bool public saleComplete = false;
-    Compose private _compose;
+    Metadata private _metadata;
 
-    constructor(Compose compose) ERC721("Onion", "o") {
-        _compose = compose;
+    constructor(Metadata metadata) ERC721("Onion", "o") {
+        _metadata = metadata;
     }
-
-    // event is emitted when initial trait values are set
-    event InitialTraitValuesSet(uint256 tokenId);
 
     // success event is emitted when a trait value is changed
     event TraitValueChanged(uint256 tokenId, uint256 traitId, string value, address owner);
@@ -48,25 +45,6 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     // array of worker states
     // string[2] public workerStates = ["idle", "working"];
 
-    // Function to generate pseudo random number between 0 and 3
-    function randomNumber() public view returns (uint8) {
-        uint8 number = uint8(uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))) % 14);
-        return (number);
-    }
-
-    // Function initial trait values pseudo randomly generated
-    function initialTraitValues(uint256 _tokenId) private {
-        uint256 random = randomNumber();
-        traitData[_tokenId].trait01 = string(abi.encodePacked(Strings.toString((random + 1))));
-        traitData[_tokenId].trait02 = string(abi.encodePacked(Strings.toString((random % 5) + 1)));
-        traitData[_tokenId].trait03 = string(abi.encodePacked(Strings.toString((random % 5) + 1)));
-        traitData[_tokenId].trait04 = string(abi.encodePacked(Strings.toString((random % 2) + 1)));
-        traitData[_tokenId].trait05 = string(abi.encodePacked(Strings.toString((random % 9) + 1)));
-        traitData[_tokenId].trait06 = string(abi.encodePacked(Strings.toString((random % 5) + 1)));
-        traitData[_tokenId].trait07 = string(abi.encodePacked(Strings.toString((random % 7) + 1)));
-        emit InitialTraitValuesSet(_tokenId);
-    }
-
     // Function to update a single trait value for a given token
     // function updateTraitValue(uint _tokenId, uint _traitNumber, string memory _value) public {
 
@@ -84,34 +62,11 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     // 	emit TraitValueChanged(_tokenId, _traitNumber, _value, msg.sender);
     // }
 
-    // Function build metadata for a given token
-    function buildMetadata(uint256 _tokenId) public view returns (string memory) {
-        string memory json = Base64.encode(
-            bytes(
-                string(
-                    abi.encodePacked(
-                        '{"name": "Onion #" ',
-                        Strings.toString(_tokenId),
-                        '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":',
-                        traitData[_tokenId].trait01,
-                        '}, {"trait_type": "Trait 2", "value":',
-                        traitData[_tokenId].trait02,
-                        '}],"image": "https://anma.mypinata.cloud/ipfs/QmYDLv6aCMcE9oSngnYMAyKFzjWYCeyevKeqom9NU2c7Kh", "animation_url": "data:text/html;base64,',
-                        _compose.composeHTML(traitData[_tokenId]),
-                        '"}'
-                    )
-                )
-            )
-        );
-        string memory output = string(abi.encodePacked("data:application/json;base64,", json));
-        return output;
-    }
-
     function safeMint(address to) public onlyOwner {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        initialTraitValues(tokenId);
+        _metadata.initialTraitValues(tokenId);
     }
 
     function _beforeTokenTransfer(
@@ -129,7 +84,7 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     }
 
     function tokenURI(uint256 _tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        return buildMetadata(_tokenId);
+        return _metadata.buildMetadata(_tokenId);
     }
 
     function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable) returns (bool) {
