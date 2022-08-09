@@ -43,7 +43,7 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     
 
 	// storage of each traits name and base64 PNG data
-  	mapping(uint256 => helper.Trait) public traitData;	
+  	mapping(uint256 => Helper.Trait) public traitData;	
 
 	// array of background colours 
 	// string[4] public backgroundColours = ["blue", "green", "red", "white"];

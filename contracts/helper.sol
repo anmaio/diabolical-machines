@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-library helper {
+library Helper {
     struct Trait {
         string trait01; //BG 14
         string trait02; //body 5
