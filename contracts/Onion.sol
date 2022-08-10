@@ -86,18 +86,22 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
 
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
+        string memory imgSVG = Base64.encode(bytes("<svg version='1.1' xmlns='http://www.w3.org/2000/svg' id='frame'>    <script type='text/javascript'><![CDATA[  const frame = document.getElementById('frame'); function createrLayer(count) { layerArray = ['BG', 'body', 'Eyes', 'Mouths', 'Outfits', 'beard', 'beard']; const baseURI = 'https://anma.mypinata.cloud/ipfs/QmZjvU6vAfDSQEBJ2fDGRSYu65aoG459CXAWV5g1MxBLbp/';  var img = document.createElementNS('http://www.w3.org/2000/svg','image'); img.setAttribute('id', 'layer' + count); img.setAttribute('style', 'position:absolute;top: 0px;left: 0px; z-index: ' + count + '0;width: 45vw; height:45vw'); img.setAttributeNS('http://www.w3.org/1999/xlink','href',baseURI + layerArray[count - 1] + '/2.png'); frame.appendChild(img); } for (i = 1; i < 8; i++) {createrLayer(i); } ]]></script> </svg>"));
+
         string memory json = Base64.encode(
             bytes(
                 string(
                     abi.encodePacked(
-                        '{"name": "Onion #" ',
+                        '{"name": "Onion # ',
                         Strings.toString(_tokenId),
                         '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":',
                         traitData[_tokenId].trait01,
                         '}, {"trait_type": "Trait 2", "value":',
                         traitData[_tokenId].trait02,
-                        '}],"image": "https://anma.mypinata.cloud/ipfs/QmYDLv6aCMcE9oSngnYMAyKFzjWYCeyevKeqom9NU2c7Kh", "animation_url": "data:text/html;base64,',
-                        _compose.composeHTML(traitData[_tokenId]),
+                        '}],"image": "data:image/svg+xml;base64,',
+                        imgSVG,
+                        '", "animation_url": "data:image/svg+xml;base64,',
+                        imgSVG,
                         '"}'
                     )
                 )
