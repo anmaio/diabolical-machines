@@ -32,7 +32,8 @@
 				"hbenl.vscode-test-explore",
 				"hbenl.vscode-mocha-test-adapter",
 				"JuanBlanco.solidity",
-				"mikestead.dotenv"
+				"mikestead.dotenv",
+                "github.copilot"
 			]
 		}
 	},

@@ -11,8 +11,8 @@ contract Metadata is Ownable {
     // storage of each traits name and base64 PNG data
     mapping(uint256 => Helper.Trait) public traitData;
 
-    // event is emitted when initial trait values are set
-    event InitialTraitValuesSet(uint256 tokenId);
+    // tokenId and initial traits emmitted when a nft is minted
+    event InitialTraitValuesSet(uint256 tokenId, Helper.Trait traitData);
 
     constructor(Compose compose) {
         _compose = compose;
@@ -21,20 +21,20 @@ contract Metadata is Ownable {
     // Function initial trait values pseudo randomly generated
     function initialTraitValues(uint256 _tokenId) external onlyOwner {
         uint256 random = randomNumber();
-        traitData[_tokenId].trait01 = Strings.toString(random);
+        traitData[_tokenId].trait01 = Strings.toString(random % 14);
         traitData[_tokenId].trait02 = Strings.toString(random % 5);
         traitData[_tokenId].trait03 = Strings.toString(random % 5);
         traitData[_tokenId].trait04 = Strings.toString(random % 2);
         traitData[_tokenId].trait05 = Strings.toString(random % 9);
         traitData[_tokenId].trait06 = Strings.toString(random % 5);
         traitData[_tokenId].trait07 = Strings.toString(random % 7);
-        emit InitialTraitValuesSet(_tokenId);
+        emit InitialTraitValuesSet(_tokenId, traitData[_tokenId]);
     }
 
-    // Function to generate pseudo random number between 1 and 15
-    function randomNumber() public view returns (uint8) {
-        uint8 number = uint8(uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))) % 14);
-        return (number + 1);
+    // Function to generate pseudo random number
+    function randomNumber() public view returns (uint256) {
+        uint256 number = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender)));
+        return number;
     }
 
     // Function build metadata for a given token

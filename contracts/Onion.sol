@@ -19,12 +19,12 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     // bool public saleComplete = false;
     Metadata private _metadata;
 
+    // success event is emitted when a trait value is changed
+    event TraitValueChanged(uint256 tokenId, uint256 traitId, string value, address owner);
+
     constructor(Metadata metadata) ERC721("Onion", "o") {
         _metadata = metadata;
     }
-
-    // success event is emitted when a trait value is changed
-    event TraitValueChanged(uint256 tokenId, uint256 traitId, string value, address owner);
 
     function pause() public onlyOwner {
         _pause();

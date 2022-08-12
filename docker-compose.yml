@@ -17,7 +17,7 @@ services:
     ports:
       - "8545:8545"
     volumes:
-      - /home/danny/source/fr-html-ipfs:/usr/src/app
+      - /home/zac/source/fr-html-ipfs:/usr/src/app
       - /var/run/docker.sock:/var/run/docker.sock
 
   # Development environment container
