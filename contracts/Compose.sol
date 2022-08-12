@@ -8,7 +8,7 @@ contract Compose {
     Helper.HTML private _html;
 
     constructor() {
-        _html.baseURI = "https://anma.mypinata.cloud/ipfs/QmZjvU6vAfDSQEBJ2fDGRSYu65aoG459CXAWV5g1MxBLbp/";
+        _html.baseURI = "https://anma.mypinata.cloud/ipfs/QmdB4mHwu62gx765HjyoH6F2rkQaxtPQ4nmmNvMAiDGUMN/";
         _html
             .header = "<!DOCTYPE html> <html lang=''>  <meta charset='utf-8'>  <title>html-ipfs-test</title>  <head><style>img{position:absolute;top: 0px;left: 0px;}#layer1{z-index: 10;}#layer2{z-index: 20;}#layer3{z-index: 30;}#layer4{z-index: 40;}#layer5{z-index: 50;}#layer6{z-index: 60;}#layer7{z-index: 70;}</style></head> <body> <canvas id='c'></canvas>";
         _html.imgOpen = "<img id='layer";
