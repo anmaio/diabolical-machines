@@ -62,7 +62,7 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     // 	emit TraitValueChanged(_tokenId, _traitNumber, _value, msg.sender);
     // }
 
-    function safeMint(address to) public onlyOwner {
+    function safeMint(address to) public {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);

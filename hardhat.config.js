@@ -13,10 +13,20 @@ task("deploy", "Deploy contract to testnet and mainnet")
         console.log("Account balance:", (await deployer.getBalance()).toString())
 
         // Deploy contracts
+        const Compose = await hre.ethers.getContractFactory("Compose");
+        const compose = await Compose.deploy();
+        await compose.deployed();
+
+        const Metadata = await hre.ethers.getContractFactory("Metadata");
+        const metadata = await Metadata.deploy(compose.address);
+        await metadata.deployed();
+
         const Onion = await hre.ethers.getContractFactory("Onion");
-        const onion = await Onion.deploy();
+        const onion = await Onion.deploy(metadata.address);
         await onion.deployed();
 
+        console.log("Contract deployed to address:", compose.address);
+        console.log("Contract deployed to address:", metadata.address);
         console.log("Contract deployed to address:", onion.address);
 
         if (taskArgs.verify === 'true') {
@@ -36,25 +46,28 @@ task("verify", "Verify a deployed contract")
     .setAction(async(taskArgs, hre) => {
         // Verify the contract using the verify-etherscan subtask
         await hre.run("verify-etherscan", {
-            address: taskArgs.address
+            address: taskArgs.address,
+            constructorArguments: taskArgs.constructorArgsParams[0]
         });
     });
 
 // By default Etherscan validation will fail if contract is already validated so we override this behaviour
 subtask("verify-etherscan", "Verifies the deployed contract. ")
     .addParam("address", "The address of the contract")
+    .addParam("constructorArguments", "The construction arguments of the contract")
     .setAction(async(taskArgs, hre) => {
+        console.log("taskArgs", taskArgs);
         if (hre.network.config.chainId === 31337 || !hre.config.etherscan.apiKey) {
             return; // contract is deployed on local network or no apiKey is configured
         };
 
         try {
-            console.log("Verifying contract at address:", taskArgs.address)
+            console.log("Verifying contract at address:", taskArgs.address, taskArgs.constructorArguments);
 
             // As per https://hardhat.org/plugins/nomiclabs-hardhat-etherscan
             await hre.run("verify:verify", {
                 address: taskArgs.address,
-                constructorArguments: [],
+                constructorArguments: [taskArgs.constructorArguments],
             });
         } catch (err) {
             if (err.message.includes("Reason: Already Verified")) {

@@ -19,7 +19,7 @@ contract Metadata is Ownable {
     }
 
     // Function initial trait values pseudo randomly generated
-    function initialTraitValues(uint256 _tokenId) external onlyOwner {
+    function initialTraitValues(uint256 _tokenId) external {
         uint256 random = randomNumber();
         traitData[_tokenId].trait01 = Strings.toString(random % 14);
         traitData[_tokenId].trait02 = Strings.toString(random % 5);
@@ -34,7 +34,7 @@ contract Metadata is Ownable {
     // Function to generate pseudo random number
     function randomNumber() public view returns (uint256) {
         uint256 number = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender)));
-        return number;
+        return number + 1;
     }
 
     // Function build metadata for a given token
@@ -43,7 +43,7 @@ contract Metadata is Ownable {
             bytes(
                 string(
                     abi.encodePacked(
-                        '{"name": "Onion #" ',
+                        '{"name": "Onion # ',
                         Strings.toString(_tokenId),
                         '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":',
                         traitData[_tokenId].trait01,
