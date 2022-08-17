@@ -19,9 +19,6 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
     // bool public saleComplete = false;
     Metadata private _metadata;
 
-    // success event is emitted when a trait value is changed
-    event TraitValueChanged(uint256 tokenId, uint256 traitId, string value, address owner);
-
     constructor(Metadata metadata) ERC721("Onion", "o") {
         _metadata = metadata;
     }
@@ -34,39 +31,15 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
         _unpause();
     }
 
-    // struct to store each trait's data for metadata and rendering
-
-    // storage of each traits name and base64 PNG data
-    mapping(uint256 => Helper.Trait) public traitData;
-
-    // array of background colours
-    // string[4] public backgroundColours = ["blue", "green", "red", "white"];
-
-    // array of worker states
-    // string[2] public workerStates = ["idle", "working"];
-
-    // Function to update a single trait value for a given token
-    // function updateTraitValue(uint _tokenId, uint _traitNumber, string memory _value) public {
-
-    // 	// only the owner of the nft can update the trait values
-    // 	require(msg.sender == ownerOf(_tokenId), "Only the owner of the nft can update the trait values");
-
-    // 	if (_traitNumber == 1) {
-    // 		traitData[_tokenId].trait01 = _value;
-    // 	} else if (_traitNumber == 2) {
-    // 		traitData[_tokenId].trait02 = _value;
-    // 	} else {
-    // 		revert();
-    // 	}
-
-    // 	emit TraitValueChanged(_tokenId, _traitNumber, _value, msg.sender);
-    // }
-
     function safeMint(address to) public {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
         _metadata.initialTraitValues(tokenId);
+    }
+
+    function tokenURI(uint256 _tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
+        return _metadata.buildMetadata(_tokenId);
     }
 
     function _beforeTokenTransfer(
@@ -81,10 +54,6 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);
-    }
-
-    function tokenURI(uint256 _tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        return _metadata.buildMetadata(_tokenId);
     }
 
     function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable) returns (bool) {
