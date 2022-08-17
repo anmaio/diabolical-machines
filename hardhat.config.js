@@ -25,10 +25,10 @@ task("deploy", "Deploy contract to testnet and mainnet")
         const onion = await Onion.deploy(metadata.address);
         await onion.deployed();
 
-        console.log("Contract deployed to address:", compose.address);
-        console.log("Contract deployed to address:", metadata.address);
-        console.log("Contract deployed to address:", onion.address);
-
+        console.log("Compose contract deployed to address:", compose.address);
+        console.log("Metadata contract deployed to address:", metadata.address);
+        console.log("Onion contract deployed to address:", onion.address);
+        
         if (taskArgs.verify === 'true') {
             console.log("Waiting 5 block confirmations...");
             await onion.deployTransaction.wait(5); // needed as verify-etherscan subtask is called immediately after deployment
