@@ -8,6 +8,9 @@ import "./Compose.sol";
 contract Metadata is Ownable {
     Compose private _compose;
 
+    // storage image base uri
+    string private _imageURI = "https://apidevukssaoutput.blob.core.windows.net/output/";
+
     // storage of each traits name and base64 PNG data
     mapping(uint256 => Helper.Trait) public traitData;
 
@@ -31,6 +34,12 @@ contract Metadata is Ownable {
         emit InitialTraitValuesSet(_tokenId, traitData[_tokenId]);
     }
 
+    // Function to update image base uri
+    // @dev Needs onlyOwner but not sure if working yet
+    function updateImageURI(string memory _newImageUri) public {
+        _imageURI = _newImageUri;
+    }
+
     // Function to generate pseudo random number
     function randomNumber() public view returns (uint256) {
         uint256 number = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender)));
@@ -39,8 +48,7 @@ contract Metadata is Ownable {
 
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
-        string memory json = Base64.encode(
-            bytes(
+        string memory jsonInitial = 
                 string(
                     abi.encodePacked(
                         '{"name": "Onion # ',
@@ -59,14 +67,29 @@ contract Metadata is Ownable {
                         traitData[_tokenId].trait06,
                         '}, {"trait_type": "Trait 7", "value":',
                         traitData[_tokenId].trait07,
-                        '}],"image": "https://anma.mypinata.cloud/ipfs/QmYDLv6aCMcE9oSngnYMAyKFzjWYCeyevKeqom9NU2c7Kh", "animation_url": "data:text/html;base64,',
+                        "}],"
+                    )               
+            );
+
+        string memory jsonFinal = Base64.encode(
+            bytes(
+                string(
+                    abi.encodePacked(
+                        jsonInitial,
+                        '"image": "',
+                        _imageURI,
+                        Strings.toString(_tokenId),
+                        '.png", "animation_url": "data:text/html;base64,',
                         _compose.composeHTML(traitData[_tokenId]),
                         '"}'
                     )
                 )
             )
         );
-        string memory output = string(abi.encodePacked("data:application/json;base64,", json));
+
+        
+
+        string memory output = string(abi.encodePacked("data:application/json;base64,", jsonFinal));
         return output;
     }
 }
