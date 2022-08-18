@@ -17,7 +17,7 @@ services:
     ports:
       - "8545:8545"
     volumes:
-      - /home/danny/source/fr-html-ipfs:/usr/src/app
+      - /home/olied/source/fr-html-ipfs:/usr/src/app
       - /var/run/docker.sock:/var/run/docker.sock
 
   # Development environment container
@@ -33,7 +33,7 @@ services:
       - './config/.dev.env'
     network_mode: "host"
     volumes:
-      - /home/danny/source/fr-html-ipfs:/usr/src/app
+      - /home/olied/source/fr-html-ipfs:/usr/src/app
       - /var/run/docker.sock:/var/run/docker.sock
       - /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe:/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe
   
