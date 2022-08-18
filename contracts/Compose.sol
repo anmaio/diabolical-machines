@@ -8,18 +8,18 @@ contract Compose {
     Helper.HTML private _html;
 
     constructor() {
-        _html.baseURI = "https://anma.mypinata.cloud/ipfs/QmdB4mHwu62gx765HjyoH6F2rkQaxtPQ4nmmNvMAiDGUMN/";
+        _html.baseURI = "https://anma.mypinata.cloud/ipfs/QmcQ6J1rbMNWbaEGt5m5vWLB3VzYNCQiuJHFxc9iZJgmPt/";
         _html
             .header = "<!DOCTYPE html> <html lang=''>  <meta charset='utf-8'>  <title>html-ipfs-test</title>  <head><style>img{position:absolute;top: 0px;left: 0px;}#layer1{z-index: 10;}#layer2{z-index: 20;}#layer3{z-index: 30;}#layer4{z-index: 40;}#layer5{z-index: 50;}#layer6{z-index: 60;}#layer7{z-index: 70;}</style></head> <body> <canvas id='c'></canvas>";
         _html.imgOpen = "<img id='layer";
         _html.imgSrc = "' src='";
-        _html.folder01 = "BG/";
-        _html.folder02 = "body/";
-        _html.folder03 = "Eyes/";
-        _html.folder04 = "Mouths/";
-        _html.folder05 = "beard/";
-        _html.folder06 = "Glasses/";
-        _html.folder07 = "Outfits/";
+        _html.folder01 = "backgrounds/";
+        _html.folder02 = "bodys/";
+        _html.folder03 = "eyes/";
+        _html.folder04 = "glasses/";
+        _html.folder05 = "mouths/";
+        _html.folder06 = "outfits/";
+        _html.folder07 = "beards/";
         _html.imgClose = ".png'/>";
         _html.footer = "</body> </html>";
     }
