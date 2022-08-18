@@ -23,14 +23,21 @@ contract Metadata is Ownable {
 
     // Function initial trait values pseudo randomly generated
     function initialTraitValues(uint256 _tokenId) external {
-        uint256 random = randomNumber();
-        traitData[_tokenId].trait01 = Strings.toString(random % 14);
-        traitData[_tokenId].trait02 = Strings.toString(random % 5);
-        traitData[_tokenId].trait03 = Strings.toString(random % 5);
-        traitData[_tokenId].trait04 = Strings.toString(random % 2);
-        traitData[_tokenId].trait05 = Strings.toString(random % 9);
-        traitData[_tokenId].trait06 = Strings.toString(random % 5);
-        traitData[_tokenId].trait07 = Strings.toString(random % 7);
+        // uint256 random = randomNumber();
+        // traitData[_tokenId].trait01 = Strings.toString(random % 14);
+        traitData[_tokenId].trait01 = "blue";
+        // traitData[_tokenId].trait02 = Strings.toString(random % 5);
+        traitData[_tokenId].trait02 = "red";
+        // traitData[_tokenId].trait03 = Strings.toString(random % 5);        
+        traitData[_tokenId].trait03 = "white";
+        // traitData[_tokenId].trait04 = Strings.toString(random % 2);
+        traitData[_tokenId].trait04 = "gold";
+        // traitData[_tokenId].trait05 = Strings.toString(random % 9);
+        traitData[_tokenId].trait05 = "toothy";
+        // traitData[_tokenId].trait06 = Strings.toString(random % 5);
+        traitData[_tokenId].trait06 = "vitalik";
+        // traitData[_tokenId].trait07 = Strings.toString(random % 7);
+        traitData[_tokenId].trait07 = "old timer";
         emit InitialTraitValuesSet(_tokenId, traitData[_tokenId]);
     }
 

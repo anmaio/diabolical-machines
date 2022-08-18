@@ -105,7 +105,6 @@ contract Compose {
                     _html.baseURI,
                     _html.folder06,
                     traitData.trait06,
-                    "_r",
                     _html.imgClose
                 )
             )
