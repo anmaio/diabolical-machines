@@ -33,7 +33,7 @@ services:
       - './config/.dev.env'
     network_mode: "host"
     volumes:
-      - /home/danny/source/fr-html-ipfs:/usr/src/app
+      - .:/usr/src/app
       - /var/run/docker.sock:/var/run/docker.sock
       - /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe:/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe
   
