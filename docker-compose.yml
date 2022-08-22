@@ -10,14 +10,14 @@ services:
         - NODE_VERSION=16.x
         - ROLE=node
       context: .
-    container_name: htmlipfs_node
+    container_name: htmlipfs_node2
     env_file:
       - './config/.node.env'
     # network_mode: "host"
     ports:
       - "8545:8545"
     volumes:
-      - /home/zac/source/fr-html-ipfs:/usr/src/app
+      - /home/danny/source/fr-html-ipfs:/usr/src/app
       - /var/run/docker.sock:/var/run/docker.sock
 
   # Development environment container
@@ -28,7 +28,7 @@ services:
         - NODE_VERSION=16.x
         - ROLE=dev
       context: .
-    container_name: htmlipfs_dev
+    container_name: htmlipfs_dev2
     env_file:
       - './config/.dev.env'
     network_mode: "host"

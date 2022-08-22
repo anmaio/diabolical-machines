@@ -35,7 +35,8 @@ task("deploy", "Deploy contract to testnet and mainnet")
 
             // Verify the contract using the verify-etherscan subtask
             await hre.run("verify-etherscan", {
-                address: onion.address
+                address: onion.address,
+                constructorArguments: metadata.address
             });
         };
     });
@@ -56,13 +57,12 @@ subtask("verify-etherscan", "Verifies the deployed contract. ")
     .addParam("address", "The address of the contract")
     .addParam("constructorArguments", "The construction arguments of the contract")
     .setAction(async(taskArgs, hre) => {
-        console.log("taskArgs", taskArgs);
         if (hre.network.config.chainId === 31337 || !hre.config.etherscan.apiKey) {
             return; // contract is deployed on local network or no apiKey is configured
         };
 
         try {
-            console.log("Verifying contract at address:", taskArgs.address, taskArgs.constructorArguments);
+            console.log("Verifying contract at address:", taskArgs.address);
 
             // As per https://hardhat.org/plugins/nomiclabs-hardhat-etherscan
             await hre.run("verify:verify", {

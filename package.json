@@ -18,7 +18,7 @@
         "test:local": "yarn format:sol && yarn lint:sol && ./node_modules/.bin/hardhat --config hardhat.config.local.js test",
         "compile:local": "./node_modules/.bin/hardhat --config hardhat.config.local.js compile",
         "deploy:local": "./node_modules/.bin/hardhat --config hardhat.config.local.js --network localhost deploy-local",
-        "deploy:rinkeby": "./node_modules/.bin/hardhat --config hardhat.config.js --network rinkeby deploy --verify false",
+        "deploy:rinkeby": "./node_modules/.bin/hardhat --config hardhat.config.js --network rinkeby deploy --verify true",
         "deploy:mainnet": "./node_modules/.bin/hardhat --config hardhat.config.js --network mainnet deploy --verify true",
         "verify:rinkeby": "./node_modules/.bin/hardhat --config hardhat.config.js --network rinkeby verify",
         "client:local": "node ./client/src/App.js",
