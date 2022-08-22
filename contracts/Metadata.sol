@@ -60,21 +60,21 @@ contract Metadata is Ownable {
                     abi.encodePacked(
                         '{"name": "Onion # ',
                         Strings.toString(_tokenId),
-                        '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":',
+                        '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":"',
                         traitData[_tokenId].trait01,
-                        '}, {"trait_type": "Trait 2", "value":',
+                        '"}, {"trait_type": "Trait 2", "value":"',
                         traitData[_tokenId].trait02,
-                        '}, {"trait_type": "Trait 3", "value":',
+                        '"}, {"trait_type": "Trait 3", "value":"',
                         traitData[_tokenId].trait03,
-                        '}, {"trait_type": "Trait 4", "value":',
+                        '"}, {"trait_type": "Trait 4", "value":"',
                         traitData[_tokenId].trait04,
-                        '}, {"trait_type": "Trait 5", "value":',
+                        '"}, {"trait_type": "Trait 5", "value":"',
                         traitData[_tokenId].trait05,
-                        '}, {"trait_type": "Trait 6", "value":',
+                        '"}, {"trait_type": "Trait 6", "value":"',
                         traitData[_tokenId].trait06,
-                        '}, {"trait_type": "Trait 7", "value":',
+                        '"}, {"trait_type": "Trait 7", "value":"',
                         traitData[_tokenId].trait07,
-                        "}],"
+                        '"}],'
                     )               
             );
 
