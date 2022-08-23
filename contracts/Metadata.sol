@@ -82,7 +82,10 @@ contract Metadata is Ownable {
         allSubtraits.push(["old timer"]);
     }
 
-    function determine_layer_rarity(uint percentage) public view returns (uint rarity) {
+    function determine_layer_rarity(uint percentage, bool isNone) public view returns (uint rarity) {
+        if (isNone) {
+            return 3;
+        }
         if (percentage < common) {
             return 0;
         } else if (percentage < common + rare) {
@@ -101,8 +104,11 @@ contract Metadata is Ownable {
             } else if (rarities[i] == 1) {
                 string memory subtrait = allSubtraits[i * numOfRarities + 1][values[i] % allSubtraits[i * numOfRarities + 1].length];
                 subTraits[i] = subtrait;
-            } else {
+            } else if (rarities[i] == 2) {
                 string memory subtrait = allSubtraits[i * numOfRarities + 2][values[i] % allSubtraits[i * numOfRarities + 2].length];
+                subTraits[i] = subtrait;
+            } else {
+                string memory subtrait = "none";
                 subTraits[i] = subtrait;
             }
         }
@@ -112,10 +118,23 @@ contract Metadata is Ownable {
     function generateTraits(uint _tokenId) public {
         uint rand = randomNumber();
         uint[] memory values = new uint[](num_of_layers);
+        uint[] memory optionalValues = new uint[](num_of_layers);
         (rand, values) = removeLastTwoDigits(rand);
+        (rand, optionalValues) = removeLastDigit(rand);
         uint[] memory rarities = new uint[](num_of_layers);
         for (uint i = 0; i < num_of_layers; i++) {
-            rarities[i] = determine_layer_rarity(values[i]);
+            bool isNone = false;
+            // glasses 20% chance of occuring
+            if (i == 3 && optionalValues[i] >= 2) {
+                isNone = true;
+            // outfits 90% chance of occuring
+            } else if (i == 5 && optionalValues[i] >= 9) {
+                isNone = true;
+            // beards 50% chance of occuring
+            } else if (i == 6 && optionalValues[i] >= 5) {
+                isNone = true;
+            }
+            rarities[i] = determine_layer_rarity(values[i], isNone);
         }
         (rand, values) = removeLastTwoDigits(rand);
         determineSubTraits(values, rarities, _tokenId);
@@ -130,24 +149,13 @@ contract Metadata is Ownable {
         return (number, values);
     }
 
-    // Function initial trait values pseudo randomly generated
-    function initialTraitValues(uint256 _tokenId) external {
-        // uint256 random = randomNumber();
-        // traitData[_tokenId].trait01 = Strings.toString(random % 14);
-        traitData[_tokenId].trait01 = "blue";
-        // traitData[_tokenId].trait02 = Strings.toString(random % 5);
-        traitData[_tokenId].trait02 = "red";
-        // traitData[_tokenId].trait03 = Strings.toString(random % 5);        
-        traitData[_tokenId].trait03 = "white";
-        // traitData[_tokenId].trait04 = Strings.toString(random % 2);
-        traitData[_tokenId].trait04 = "gold";
-        // traitData[_tokenId].trait05 = Strings.toString(random % 9);
-        traitData[_tokenId].trait05 = "toothy";
-        // traitData[_tokenId].trait06 = Strings.toString(random % 5);
-        traitData[_tokenId].trait06 = "vitalik";
-        // traitData[_tokenId].trait07 = Strings.toString(random % 7);
-        traitData[_tokenId].trait07 = "old timer";
-        emit InitialTraitValuesSet(_tokenId, traitData[_tokenId]);
+    function removeLastDigit(uint number) public view returns (uint, uint[] memory) {
+        uint[] memory values = new uint[](num_of_layers);
+        for(uint i = 0; i < num_of_layers; i++) {
+            values[i] = number % 10;
+            number = number / 10;
+        }
+        return (number, values);
     }
 
     // Function to update image base uri
