@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "base64-sol/base64.sol";
@@ -20,11 +20,10 @@ contract Metadata is Ownable {
     // storage image base uri
     string private _imageURI = "https://apidevukssaoutput.blob.core.windows.net/output/";
 
-    // storage of each traits name and base64 PNG data
-    mapping(uint256 => Helper.Trait) public traitData;
+    mapping(uint256 => string[7]) public traitData;
 
     // tokenId and initial traits emmitted when a nft is minted
-    event InitialTraitValuesSet(uint256 tokenId, Helper.Trait traitData);
+    event InitialTraitValuesSet(uint256 tokenId, string[7] traitData);
 
     constructor(Compose compose) {
         _compose = compose;
@@ -33,21 +32,9 @@ contract Metadata is Ownable {
 
     // Function initial trait values pseudo randomly generated
     function setTraitValues(uint256 _tokenId, string[] memory subTraits) public {
-        // uint256 random = randomNumber();
-        // traitData[_tokenId].trait01 = Strings.toString(random % 14);
-        traitData[_tokenId].trait01 = subTraits[0];
-        // traitData[_tokenId].trait02 = Strings.toString(random % 5);
-        traitData[_tokenId].trait02 = subTraits[1];
-        // traitData[_tokenId].trait03 = Strings.toString(random % 5);
-        traitData[_tokenId].trait03 = subTraits[2];
-        // traitData[_tokenId].trait04 = Strings.toString(random % 2);
-        traitData[_tokenId].trait04 = subTraits[3];
-        // traitData[_tokenId].trait05 = Strings.toString(random % 9);
-        traitData[_tokenId].trait05 = subTraits[4];
-        // traitData[_tokenId].trait06 = Strings.toString(random % 5);
-        traitData[_tokenId].trait06 = subTraits[5];
-        // traitData[_tokenId].trait07 = Strings.toString(random % 7);
-        traitData[_tokenId].trait07 = subTraits[6];
+        for (uint i = 0; i < subTraits.length; i++) {
+            traitData[_tokenId][i] = subTraits[i];
+        }
         emit InitialTraitValuesSet(_tokenId, traitData[_tokenId]);
     }
 
@@ -173,47 +160,42 @@ contract Metadata is Ownable {
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
         string memory jsonInitial = 
-                string(
-                    abi.encodePacked(
-                        '{"name": "Onion # ',
-                        Strings.toString(_tokenId),
-                        '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":"',
-                        traitData[_tokenId].trait01,
-                        '"}, {"trait_type": "Trait 2", "value":"',
-                        traitData[_tokenId].trait02,
-                        '"}, {"trait_type": "Trait 3", "value":"',
-                        traitData[_tokenId].trait03,
-                        '"}, {"trait_type": "Trait 4", "value":"',
-                        traitData[_tokenId].trait04,
-                        '"}, {"trait_type": "Trait 5", "value":"',
-                        traitData[_tokenId].trait05,
-                        '"}, {"trait_type": "Trait 6", "value":"',
-                        traitData[_tokenId].trait06,
-                        '"}, {"trait_type": "Trait 7", "value":"',
-                        traitData[_tokenId].trait07,
-                        '"}],'
-                    )               
+                
+            string.concat(
+                '{"name": "Onion # ',
+                Strings.toString(_tokenId),
+                '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":"',
+                traitData[_tokenId][0],
+                '"}, {"trait_type": "Trait 2", "value":"',
+                traitData[_tokenId][1],
+                '"}, {"trait_type": "Trait 3", "value":"',
+                traitData[_tokenId][2],
+                '"}, {"trait_type": "Trait 4", "value":"',
+                traitData[_tokenId][3],
+                '"}, {"trait_type": "Trait 5", "value":"',
+                traitData[_tokenId][4],
+                '"}, {"trait_type": "Trait 6", "value":"',
+                traitData[_tokenId][5],
+                '"}, {"trait_type": "Trait 7", "value":"',
+                traitData[_tokenId][6],
+                '"}],'
             );
 
         string memory jsonFinal = Base64.encode(
             bytes(
-                string(
-                    abi.encodePacked(
-                        jsonInitial,
-                        '"image": "',
-                        _imageURI,
-                        Strings.toString(_tokenId),
-                        '.png", "animation_url": "data:text/html;base64,',
-                        _compose.composeHTML(traitData[_tokenId]),
-                        '"}'
-                    )
+                string.concat(
+                    jsonInitial,
+                    '"image": "',
+                    _imageURI,
+                    Strings.toString(_tokenId),
+                    '.png", "animation_url": "data:text/html;base64,',
+                    _compose.composeHTML(traitData[_tokenId]),
+                    '"}'
                 )
             )
         );
 
-        
-
-        string memory output = string(abi.encodePacked("data:application/json;base64,", jsonFinal));
+        string memory output = string.concat("data:application/json;base64,", jsonFinal);
         return output;
     }
 }

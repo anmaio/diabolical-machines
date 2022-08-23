@@ -21,21 +21,21 @@ task("deploy", "Deploy contract to testnet and mainnet")
         const metadata = await Metadata.deploy(compose.address);
         await metadata.deployed();
 
-        const Onion = await hre.ethers.getContractFactory("Onion");
-        const onion = await Onion.deploy(metadata.address);
-        await onion.deployed();
+        const Clifford = await hre.ethers.getContractFactory("Clifford");
+        const clifford = await Clifford.deploy(metadata.address);
+        await clifford.deployed();
 
         console.log("Compose contract deployed to address:", compose.address);
         console.log("Metadata contract deployed to address:", metadata.address);
-        console.log("Onion contract deployed to address:", onion.address);
+        console.log("Clifford contract deployed to address:", clifford.address);
         
         if (taskArgs.verify === 'true') {
             console.log("Waiting 5 block confirmations...");
-            await onion.deployTransaction.wait(5); // needed as verify-etherscan subtask is called immediately after deployment
+            await clifford.deployTransaction.wait(5); // needed as verify-etherscan subtask is called immediately after deployment
 
             // Verify the contract using the verify-etherscan subtask
             await hre.run("verify-etherscan", {
-                address: onion.address,
+                address: clifford.address,
                 constructorArguments: metadata.address
             });
         };
@@ -85,7 +85,7 @@ subtask("verify-etherscan", "Verifies the deployed contract. ")
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-    solidity: "0.8.4",
+    solidity: "0.8.12",
     networks: {
         mainnet: {
             url: process.env.MAINNET_URL,
