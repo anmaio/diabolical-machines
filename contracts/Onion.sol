@@ -35,7 +35,7 @@ contract Onion is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable,
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        _metadata.initialTraitValues(tokenId);
+        _metadata.generateTraits(tokenId);
     }
 
     function tokenURI(uint256 _tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
