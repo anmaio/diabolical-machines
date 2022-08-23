@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "base64-sol/base64.sol";
@@ -9,22 +9,21 @@ import "./Compose.sol";
 contract Metadata is Ownable {
     Compose private _compose;
 
-    uint public num_of_layers = 7;
-    uint public numOfRarities = 3;
-    uint public common = 80;
-    uint public rare = 15;
-    uint public legendary = 5;
+    uint256 public num_of_layers = 7;
+    uint256 public numOfRarities = 3;
+    uint256 public common = 80;
+    uint256 public rare = 15;
+    uint256 public legendary = 5;
 
     string[][] public allSubtraits;
 
     // storage image base uri
     string private _imageURI = "https://apidevukssaoutput.blob.core.windows.net/output/";
 
-    // storage of each traits name and base64 PNG data
-    mapping(uint256 => Helper.Trait) public traitData;
+    mapping(uint256 => string[7]) public traitData;
 
     // tokenId and initial traits emmitted when a nft is minted
-    event InitialTraitValuesSet(uint256 tokenId, Helper.Trait traitData);
+    event InitialTraitValuesSet(uint256 tokenId, string[7] traitData);
 
     constructor(Compose compose) {
         _compose = compose;
@@ -33,21 +32,9 @@ contract Metadata is Ownable {
 
     // Function initial trait values pseudo randomly generated
     function setTraitValues(uint256 _tokenId, string[] memory subTraits) public {
-        // uint256 random = randomNumber();
-        // traitData[_tokenId].trait01 = Strings.toString(random % 14);
-        traitData[_tokenId].trait01 = subTraits[0];
-        // traitData[_tokenId].trait02 = Strings.toString(random % 5);
-        traitData[_tokenId].trait02 = subTraits[1];
-        // traitData[_tokenId].trait03 = Strings.toString(random % 5);
-        traitData[_tokenId].trait03 = subTraits[2];
-        // traitData[_tokenId].trait04 = Strings.toString(random % 2);
-        traitData[_tokenId].trait04 = subTraits[3];
-        // traitData[_tokenId].trait05 = Strings.toString(random % 9);
-        traitData[_tokenId].trait05 = subTraits[4];
-        // traitData[_tokenId].trait06 = Strings.toString(random % 5);
-        traitData[_tokenId].trait06 = subTraits[5];
-        // traitData[_tokenId].trait07 = Strings.toString(random % 7);
-        traitData[_tokenId].trait07 = subTraits[6];
+        for (uint256 i = 0; i < subTraits.length; i++) {
+            traitData[_tokenId][i] = subTraits[i];
+        }
         emit InitialTraitValuesSet(_tokenId, traitData[_tokenId]);
     }
 
@@ -82,7 +69,7 @@ contract Metadata is Ownable {
         allSubtraits.push(["old timer"]);
     }
 
-    function determine_layer_rarity(uint percentage, bool isNone) public view returns (uint rarity) {
+    function determine_layer_rarity(uint256 percentage, bool isNone) public view returns (uint256 rarity) {
         if (isNone) {
             return 3;
         }
@@ -95,17 +82,34 @@ contract Metadata is Ownable {
         }
     }
 
-    function determineSubTraits(uint[] memory values, uint[] memory rarities, uint _tokenId) public returns (uint[] memory, uint[] memory, string[] memory) {
+    function determineSubTraits(
+        uint256[] memory values,
+        uint256[] memory rarities,
+        uint256 _tokenId
+    )
+        public
+        returns (
+            uint256[] memory,
+            uint256[] memory,
+            string[] memory
+        )
+    {
         string[] memory subTraits = new string[](num_of_layers);
-        for (uint i = 0; i < num_of_layers; i++) {
+        for (uint256 i = 0; i < num_of_layers; i++) {
             if (rarities[i] == 0) {
-                string memory subtrait = allSubtraits[i * numOfRarities][values[i] % allSubtraits[i * numOfRarities].length];
+                string memory subtrait = allSubtraits[i * numOfRarities][
+                    values[i] % allSubtraits[i * numOfRarities].length
+                ];
                 subTraits[i] = subtrait;
             } else if (rarities[i] == 1) {
-                string memory subtrait = allSubtraits[i * numOfRarities + 1][values[i] % allSubtraits[i * numOfRarities + 1].length];
+                string memory subtrait = allSubtraits[i * numOfRarities + 1][
+                    values[i] % allSubtraits[i * numOfRarities + 1].length
+                ];
                 subTraits[i] = subtrait;
             } else if (rarities[i] == 2) {
-                string memory subtrait = allSubtraits[i * numOfRarities + 2][values[i] % allSubtraits[i * numOfRarities + 2].length];
+                string memory subtrait = allSubtraits[i * numOfRarities + 2][
+                    values[i] % allSubtraits[i * numOfRarities + 2].length
+                ];
                 subTraits[i] = subtrait;
             } else {
                 string memory subtrait = "none";
@@ -115,22 +119,22 @@ contract Metadata is Ownable {
         setTraitValues(_tokenId, subTraits);
     }
 
-    function generateTraits(uint _tokenId) public {
-        uint rand = randomNumber();
-        uint[] memory values = new uint[](num_of_layers);
-        uint[] memory optionalValues = new uint[](num_of_layers);
+    function generateTraits(uint256 _tokenId) public {
+        uint256 rand = randomNumber();
+        uint256[] memory values = new uint256[](num_of_layers);
+        uint256[] memory optionalValues = new uint256[](num_of_layers);
         (rand, values) = removeLastTwoDigits(rand);
         (rand, optionalValues) = removeLastDigit(rand);
-        uint[] memory rarities = new uint[](num_of_layers);
-        for (uint i = 0; i < num_of_layers; i++) {
+        uint256[] memory rarities = new uint256[](num_of_layers);
+        for (uint256 i = 0; i < num_of_layers; i++) {
             bool isNone = false;
             // glasses 20% chance of occuring
             if (i == 3 && optionalValues[i] >= 2) {
                 isNone = true;
-            // outfits 90% chance of occuring
+                // outfits 90% chance of occuring
             } else if (i == 5 && optionalValues[i] >= 9) {
                 isNone = true;
-            // beards 50% chance of occuring
+                // beards 50% chance of occuring
             } else if (i == 6 && optionalValues[i] >= 5) {
                 isNone = true;
             }
@@ -140,18 +144,18 @@ contract Metadata is Ownable {
         determineSubTraits(values, rarities, _tokenId);
     }
 
-    function removeLastTwoDigits(uint number) public view returns (uint, uint[] memory) {
-        uint[] memory values = new uint[](num_of_layers);
-        for(uint i = 0; i < num_of_layers; i++) {
+    function removeLastTwoDigits(uint256 number) public view returns (uint256, uint256[] memory) {
+        uint256[] memory values = new uint256[](num_of_layers);
+        for (uint256 i = 0; i < num_of_layers; i++) {
             values[i] = number % 100;
             number = number / 100;
         }
         return (number, values);
     }
 
-    function removeLastDigit(uint number) public view returns (uint, uint[] memory) {
-        uint[] memory values = new uint[](num_of_layers);
-        for(uint i = 0; i < num_of_layers; i++) {
+    function removeLastDigit(uint256 number) public view returns (uint256, uint256[] memory) {
+        uint256[] memory values = new uint256[](num_of_layers);
+        for (uint256 i = 0; i < num_of_layers; i++) {
             values[i] = number % 10;
             number = number / 10;
         }
@@ -172,48 +176,41 @@ contract Metadata is Ownable {
 
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
-        string memory jsonInitial = 
-                string(
-                    abi.encodePacked(
-                        '{"name": "Onion # ',
-                        Strings.toString(_tokenId),
-                        '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":"',
-                        traitData[_tokenId].trait01,
-                        '"}, {"trait_type": "Trait 2", "value":"',
-                        traitData[_tokenId].trait02,
-                        '"}, {"trait_type": "Trait 3", "value":"',
-                        traitData[_tokenId].trait03,
-                        '"}, {"trait_type": "Trait 4", "value":"',
-                        traitData[_tokenId].trait04,
-                        '"}, {"trait_type": "Trait 5", "value":"',
-                        traitData[_tokenId].trait05,
-                        '"}, {"trait_type": "Trait 6", "value":"',
-                        traitData[_tokenId].trait06,
-                        '"}, {"trait_type": "Trait 7", "value":"',
-                        traitData[_tokenId].trait07,
-                        '"}],'
-                    )               
-            );
+        string memory jsonInitial = string.concat(
+            '{"name": "Onion # ',
+            Strings.toString(_tokenId),
+            '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":"',
+            traitData[_tokenId][0],
+            '"}, {"trait_type": "Trait 2", "value":"',
+            traitData[_tokenId][1],
+            '"}, {"trait_type": "Trait 3", "value":"',
+            traitData[_tokenId][2],
+            '"}, {"trait_type": "Trait 4", "value":"',
+            traitData[_tokenId][3],
+            '"}, {"trait_type": "Trait 5", "value":"',
+            traitData[_tokenId][4],
+            '"}, {"trait_type": "Trait 6", "value":"',
+            traitData[_tokenId][5],
+            '"}, {"trait_type": "Trait 7", "value":"',
+            traitData[_tokenId][6],
+            '"}],'
+        );
 
         string memory jsonFinal = Base64.encode(
             bytes(
-                string(
-                    abi.encodePacked(
-                        jsonInitial,
-                        '"image": "',
-                        _imageURI,
-                        Strings.toString(_tokenId),
-                        '.png", "animation_url": "data:text/html;base64,',
-                        _compose.composeHTML(traitData[_tokenId]),
-                        '"}'
-                    )
+                string.concat(
+                    jsonInitial,
+                    '"image": "',
+                    _imageURI,
+                    Strings.toString(_tokenId),
+                    '.png", "animation_url": "data:text/html;base64,',
+                    _compose.composeHTML(traitData[_tokenId]),
+                    '"}'
                 )
             )
         );
 
-        
-
-        string memory output = string(abi.encodePacked("data:application/json;base64,", jsonFinal));
+        string memory output = string.concat("data:application/json;base64,", jsonFinal);
         return output;
     }
 }

@@ -27,23 +27,23 @@ task("deploy-local", "Deploys contract", async (taskArgs, hre) => {
   const metadata = await Metadata.deploy(compose.address);
   await metadata.deployed();
 
-  const Onion = await hre.ethers.getContractFactory("Onion");
-  const onion = await Onion.deploy(metadata.address);
-  await onion.deployed();
+  const Clifford = await hre.ethers.getContractFactory("Clifford");
+  const clifford = await Clifford.deploy(metadata.address);
+  await clifford.deployed();
 
   // Push to Ethernal if enabled
   await hre.ethernal.push({
-    name: 'Onion',
-    address: onion.address
+    name: 'Clifford',
+    address: clifford.address
   });
   
-  await onion.deployed();
+  await clifford.deployed();
 
-  console.log("Contract deployed to address:", onion.address)
+  console.log("Contract deployed to address:", clifford.address)
   console.log("Minting token and getting tokenURI...")
 
-  await onion.safeMint(onion.signer.getAddress());
-  const tokenURI = await onion.tokenURI(0);
+  await clifford.safeMint(clifford.signer.getAddress());
+  const tokenURI = await clifford.tokenURI(0);
   console.log("TokenURI:", tokenURI);
 });
 
@@ -54,7 +54,7 @@ task("deploy-local", "Deploys contract", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.4",
+  solidity: "0.8.12",
   networks: {
     localhost: {}
   },

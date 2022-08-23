@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.12;
 
 library Helper {
     struct Trait {
@@ -17,13 +17,6 @@ library Helper {
         string baseURI;
         string imgOpen;
         string imgSrc;
-        string folder01;
-        string folder02;
-        string folder03;
-        string folder04;
-        string folder05;
-        string folder06;
-        string folder07;
         string imgClose;
         string footer;
     }

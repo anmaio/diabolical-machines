@@ -2,9 +2,9 @@ const assert = require("assert");
 const { ethers } = require("hardhat");
 
 const CONTRACT_NAME_PRE = "Compose"
-const CONTRACT_NAME = "Onion"
+const CONTRACT_NAME = "Clifford"
 
-const TOKEN_NAME = "Onion";
+const TOKEN_NAME = "Clifford";
 const TOKEN_SYMBOL = "o";
 
 let provider;

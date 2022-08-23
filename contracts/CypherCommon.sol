@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.12;
 
 /*
     HIDEKI TSUKAMOTO | ANOMALOUS MATERIALS | 15.08.2021
