@@ -177,9 +177,9 @@ contract Metadata is Ownable {
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
         string memory jsonInitial = string.concat(
-            '{"name": "Onion # ',
+            '{"name": "Clifford # ',
             Strings.toString(_tokenId),
-            '", "description": "Onion nft description", "attributes": [{"trait_type": "Trait 1", "value":"',
+            '", "description": "Clifford nft description", "attributes": [{"trait_type": "Trait 1", "value":"',
             traitData[_tokenId][0],
             '"}, {"trait_type": "Trait 2", "value":"',
             traitData[_tokenId][1],

@@ -39,4 +39,9 @@ contract Compose {
         output = Base64.encode(bytes(string.concat(output, _html.footer)));
         return output;
     }
+
+    // function to update html baseURI
+    function updateBaseURI(string memory baseURI) public {
+        _html.baseURI = baseURI;
+    }
 }

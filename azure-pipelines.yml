@@ -58,8 +58,7 @@ stages:
           - script: |
               docker compose up dev --build --detach --no-color --quiet-pull
               docker compose exec dev yarn install
-              docker compose exec dev yarn compile:local
-              docker compose exec dev yarn deploy:rinkeby
+              docker compose exec dev yarn deploy:goerli
             name: deploy
             displayName: Run deployment
           - template: pipeline/templates/docker-cleanup.yml@self

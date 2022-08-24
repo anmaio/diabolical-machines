@@ -95,6 +95,10 @@ module.exports = {
             url: process.env.RINKEBY_URL,
             accounts: [process.env.RINKEBY_ACCOUNT]
         },
+        goerli: {
+            url: process.env.GOERLI_URL,
+            accounts: [process.env.GOERLI_ACCOUNT]
+        }
     },
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY
