@@ -19,8 +19,10 @@
         "compile:local": "./node_modules/.bin/hardhat --config hardhat.config.local.js compile",
         "deploy:local": "yarn compile:local && ./node_modules/.bin/hardhat --config hardhat.config.local.js --network localhost deploy-local",
         "deploy:rinkeby": "./node_modules/.bin/hardhat --config hardhat.config.js --network rinkeby deploy --verify true",
+        "deploy:goerli": "yarn compile:local && ./node_modules/.bin/hardhat --config hardhat.config.js --network goerli deploy --verify true",
         "deploy:mainnet": "./node_modules/.bin/hardhat --config hardhat.config.js --network mainnet deploy --verify true",
         "verify:rinkeby": "./node_modules/.bin/hardhat --config hardhat.config.js --network rinkeby verify",
+        "verify:goerli": "./node_modules/.bin/hardhat --config hardhat.config.js --network goerli verify",
         "client:local": "node ./client/src/App.js",
         "client:docker": "docker compose up client --build",
         "api:docker": "docker compose up api --build"
