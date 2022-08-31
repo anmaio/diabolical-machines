@@ -10,8 +10,11 @@ contract Metadata is Ownable {
     Compose private _compose;
 
     string[] public floorTraits = ["altar", "props"];
+    uint[] public floorProbabilities = [100, 50];
     string[] public wall1Traits = ["frame"];
+    uint[] public wall1Probabilities = [100];
     string[] public wall2Traits = ["frame", "clock"];
+    uint[] public wall2Probabilities = [50, 100];
 
     uint public constant MAX_GRID_INDEX = 8;
     uint public constant NUMBER_OF_SHELLS = 1;
@@ -44,7 +47,7 @@ contract Metadata is Ownable {
     string private _imageURI = "https://bepocdevukssaoutput.blob.core.windows.net/output/";
 
     // tokenId and initial traits emmitted when a nft is minted
-    event InitialTraitValuesSet(uint256 tokenId, string[7] traitData);
+    event InitialTraitValuesSet(uint256 tokenId, uint[] traitIndexes);
 
     constructor(Compose compose) {
         _compose = compose;
@@ -70,10 +73,13 @@ contract Metadata is Ownable {
         // start with an empty grid
         string[9] memory newGrid = emptyGrid;
         for (uint i = 0; i < floorTraits.length; i++) {
-            uint index;
-            uint position = rand % 9;
-            (newGrid, index) = pickPosition(newGrid, floorTraits[i], position);
-            rand  = rand / 10;
+            uint probability = rand % 100;
+            uint index = 9;
+            if (probability < floorProbabilities[i]) {
+                uint position = rand % 9;
+                (newGrid, index) = pickPosition(newGrid, floorTraits[i], position);
+            }
+            rand  = rand / 100;
             traitPositions[_tokenId].push(index);
         }
         tokenToFloorPositions[_tokenId] = newGrid;
@@ -85,11 +91,14 @@ contract Metadata is Ownable {
         // start with an empty grid
         string[9] memory newGrid = noRow1Grid;
         for (uint i = 0; i < wall1Traits.length; i++) {
-            uint index;
-            // cannot go on the bottom row of the wall
-            uint position = (rand % 6) + 3;
-            (newGrid, index) = pickPosition(newGrid, wall1Traits[i], position);
-            rand  = rand / 10;
+            uint probability = rand % 100;
+            uint index = 9;
+            if (probability < wall1Probabilities[i]) {
+                // cannot go on the bottom row of the wall
+                uint position = (rand % 6) + 3;
+                (newGrid, index) = pickPosition(newGrid, wall1Traits[i], position);
+            }
+            rand  = rand / 100;
             traitPositions[_tokenId].push(index);
         }
         tokenToWall1Positions[_tokenId] = newGrid;
@@ -101,11 +110,14 @@ contract Metadata is Ownable {
         // start with an empty grid
         string[9] memory newGrid = noRow1Grid;
         for (uint i = 0; i < wall2Traits.length; i++) {
-            uint index;
-            // cannot go on the bottom row of the wall
-            uint position = (rand % 6) + 3;
-            (newGrid, index) = pickPosition(newGrid, wall2Traits[i], position);
-            rand  = rand / 10;
+            uint probability = rand % 100;
+            uint index = 9;
+            if (probability < wall2Probabilities[i]) {
+                // cannot go on the bottom row of the wall
+                uint position = (rand % 6) + 3;
+                (newGrid, index) = pickPosition(newGrid, wall2Traits[i], position);
+            }
+            rand  = rand / 100;
             traitPositions[_tokenId].push(index);
         }
         tokenToWall2Positions[_tokenId] = newGrid;
@@ -113,8 +125,8 @@ contract Metadata is Ownable {
     }
 
     // isolated to function in case we want to change the logic later
-    function selectShell(uint rand) public pure returns (uint) {
-        return rand % NUMBER_OF_SHELLS;
+    function selectShell(uint _tokenId, uint rand) public {
+        traitPositions[_tokenId].push(rand % NUMBER_OF_SHELLS);
     }
 
     function generateAllPositions(uint _tokenId) public {
@@ -122,8 +134,8 @@ contract Metadata is Ownable {
         rand = generateFloorPositions(_tokenId, rand);
         rand = generateWall1Positions(_tokenId, rand);
         rand = generateWall2Positions(_tokenId, rand);
-        uint shell = selectShell(rand);
-        traitPositions[_tokenId].push(shell);
+        selectShell(_tokenId, rand);
+        emit InitialTraitValuesSet(_tokenId, traitPositions[_tokenId]);
     }
 
     // pseudo random number between min and max
@@ -177,6 +189,8 @@ contract Metadata is Ownable {
             Strings.toString(traitPositions[_tokenId][3]),
             '"}, {"trait_type": "Trait 5", "value":"',
             Strings.toString(traitPositions[_tokenId][4]),
+            '"}, {"trait_type": "Trait 6", "value":"',
+            Strings.toString(traitPositions[_tokenId][5]),
             '"}],'
         );
 
