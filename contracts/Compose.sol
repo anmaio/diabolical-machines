@@ -33,7 +33,7 @@ contract Compose {
     function composeAllExceptFloor(uint[] memory positions) public view returns (string memory) {
         string memory output = _html.header;
         for (uint256 i = 0; i < (TOTAL_LAYERS - FLOOR_LAYERS); i++) {
-            if (positions[i] != 9) {
+            if (positions[TOTAL_LAYERS - i - 1] != 9) {
                 output = string.concat(
                     output,
                     _html.imgOpen,
@@ -60,7 +60,7 @@ contract Compose {
         }
 
         string memory output;
-        for (uint256 i = 0; i < FLOOR_LAYERS; i++) {
+        for (uint256 i = 0; i < count; i++) {
             
                 output = string.concat(
                     output,
@@ -69,7 +69,7 @@ contract Compose {
                     _html.imgSrc,
                     _html.baseURI,
                     "f/",
-                    floorLayers[FLOOR_LAYERS - i - 1],
+                    floorLayers[count - i - 1],
                     _html.imgClose
                 );
         }
