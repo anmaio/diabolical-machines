@@ -19,6 +19,8 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
     // bool public saleComplete = false;
     Metadata private _metadata;
 
+    bool public constant CHAINLINK = false;
+
     constructor(Metadata metadata) ERC721("Clifford", "o") {
         _metadata = metadata;
     }
@@ -31,11 +33,22 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
         _unpause();
     }
 
+    // Function to generate pseudo random number
+    function randomNumber() public view returns (uint256) {
+        uint256 number = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender)));
+        return number;
+    }
+
     function safeMint(address to) public {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        _metadata.generateAllPositions(tokenId);
+        if (CHAINLINK) {
+            // CHAINLINK
+        } else {
+            uint rand = randomNumber();
+            _metadata.generateAllPositions(tokenId, rand);
+        }
     }
 
     function tokenURI(uint256 _tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {

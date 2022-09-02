@@ -9,8 +9,8 @@ contract Compose {
 
     string[] public folders = ["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"];
 
-    uint public constant TOTAL_LAYERS = 6;
-    uint public constant FLOOR_LAYERS = 2;
+    uint256 public constant TOTAL_LAYERS = 6;
+    uint256 public constant FLOOR_LAYERS = 2;
 
     constructor() {
         _html.baseURI = "https://anma.mypinata.cloud/ipfs/QmYSYKJrnZhFB3KUVXvWGimC7n39pscMMcqVWKvgqWqy4a/";
@@ -23,14 +23,14 @@ contract Compose {
     }
 
     // Composes HTML string, populates with IPFS sourced image layers and base64 encode
-    function composeHTML(uint[] memory positions, string[9] memory floor) public view returns (string memory) {
+    function composeHTML(uint256[] memory positions, string[9] memory floor) public view returns (string memory) {
         string memory output = composeAllExceptFloor(positions);
         output = string.concat(output, composeFloor(floor));
         output = Base64.encode(bytes(string.concat(output, _html.footer)));
         return output;
     }
 
-    function composeAllExceptFloor(uint[] memory positions) public view returns (string memory) {
+    function composeAllExceptFloor(uint256[] memory positions) public view returns (string memory) {
         string memory output = _html.header;
         for (uint256 i = 0; i < (TOTAL_LAYERS - FLOOR_LAYERS); i++) {
             if (positions[TOTAL_LAYERS - i - 1] != 9) {
@@ -51,9 +51,12 @@ contract Compose {
 
     function composeFloor(string[9] memory floor) public view returns (string memory) {
         string[] memory floorLayers = new string[](FLOOR_LAYERS);
-        uint count = 0;
+        uint256 count = 0;
         for (uint256 i = 0; i < floor.length; i++) {
-            if (keccak256(abi.encodePacked(floor[i])) != keccak256(abi.encodePacked("")) && keccak256(abi.encodePacked(floor[i])) != keccak256(abi.encodePacked("x"))) {
+            if (
+                keccak256(abi.encodePacked(floor[i])) != keccak256(abi.encodePacked("")) &&
+                keccak256(abi.encodePacked(floor[i])) != keccak256(abi.encodePacked("x"))
+            ) {
                 floorLayers[count] = string.concat(floor[i], Strings.toString(i));
                 count++;
             }
@@ -61,17 +64,16 @@ contract Compose {
 
         string memory output;
         for (uint256 i = 0; i < count; i++) {
-            
-                output = string.concat(
-                    output,
-                    _html.imgOpen,
-                    Strings.toString(TOTAL_LAYERS - FLOOR_LAYERS + i + 1),
-                    _html.imgSrc,
-                    _html.baseURI,
-                    "f/",
-                    floorLayers[count - i - 1],
-                    _html.imgClose
-                );
+            output = string.concat(
+                output,
+                _html.imgOpen,
+                Strings.toString(TOTAL_LAYERS - FLOOR_LAYERS + i + 1),
+                _html.imgSrc,
+                _html.baseURI,
+                "f/",
+                floorLayers[count - i - 1],
+                _html.imgClose
+            );
         }
 
         return output;
