@@ -4,6 +4,7 @@ pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import "./Metadata.sol";
 
 /**
  * THIS IS AN EXAMPLE CONTRACT THAT USES HARDCODED VALUES FOR CLARITY.
@@ -32,7 +33,7 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
   // this limit based on the network that you select, the size of the request,
   // and the processing of the callback request in the fulfillRandomWords()
   // function.
-  uint32 callbackGasLimit = 100000;
+  uint32 callbackGasLimit = 750000;
 
   // The default is 3, but you can set this higher.
   uint16 requestConfirmations = 3;
@@ -41,32 +42,39 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
   // Cannot exceed VRFCoordinatorV2.MAX_NUM_WORDS.
   uint32 numWords =  1;
 
-  uint256[] public s_randomWords;
-  uint256 public s_requestId;
   address s_owner;
 
-  constructor(address mintContract) VRFConsumerBaseV2(vrfCoordinator) {
+	mapping(uint256 => uint256) public requestIdToTokenId;
+	mapping(uint256 => uint256) public tokenIdToRandomWord;
+
+  Metadata private _metadata;
+
+  constructor(address mintContract, Metadata metadata) VRFConsumerBaseV2(vrfCoordinator) {
     COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
     s_owner = mintContract;
+    _metadata = metadata;
   }
 
   // Assumes the subscription is funded sufficiently.
-  function requestRandomWords() external onlyMintContract {
+  function requestRandomWords(uint _tokenId) external onlyMintContract {
     // Will revert if subscription is not set and funded.
-    s_requestId = COORDINATOR.requestRandomWords(
+		uint s_requestId = COORDINATOR.requestRandomWords(
       keyHash,
       s_subscriptionId,
       requestConfirmations,
       callbackGasLimit,
       numWords
     );
+		requestIdToTokenId[s_requestId] = _tokenId;
   }
 
   function fulfillRandomWords(
-    uint256, /* requestId */
+    uint256 requestId, /* requestId */
     uint256[] memory randomWords
   ) internal override {
-    s_randomWords = randomWords;
+		uint tokenId = requestIdToTokenId[requestId];
+		tokenIdToRandomWord[tokenId] = randomWords[0];
+    _metadata.generateAllPositions(tokenId, randomWords[0]);
   }
 
   modifier onlyMintContract() {
