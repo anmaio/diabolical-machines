@@ -25,9 +25,17 @@ task("deploy", "Deploy contract to testnet and mainnet")
         const clifford = await Clifford.deploy(metadata.address);
         await clifford.deployed();
 
+        const VRFv2Consumer = await hre.ethers.getContractFactory("VRFv2Consumer");
+        const vrfv2consumer = await VRFv2Consumer.deploy(clifford.address, metadata.address);
+        await vrfv2consumer.deployed();
+
+        // Set the vrf consumer address in the main contract
+        await clifford.setVrfConsumer(vrfv2consumer.address);
+
         console.log("Compose contract deployed to address:", compose.address);
         console.log("Metadata contract deployed to address:", metadata.address);
         console.log("Clifford contract deployed to address:", clifford.address);
+        console.log("VRFv2Consumer contract deployed to address:", vrfv2consumer.address);
         
         if (taskArgs.verify === 'true') {
             console.log("Waiting 5 block confirmations...");

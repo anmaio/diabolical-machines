@@ -10,6 +10,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "base64-sol/base64.sol";
 import "./Metadata.sol";
+import "./VRFv2Consumer.sol";
 
 contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable, ERC721Burnable {
     using Counters for Counters.Counter;
@@ -19,7 +20,9 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
     // bool public saleComplete = false;
     Metadata private _metadata;
 
-    bool public constant CHAINLINK = false;
+    VRFv2Consumer private _vrf;
+
+    bool public constant CHAINLINK = true;
 
     constructor(Metadata metadata) ERC721("Clifford", "o") {
         _metadata = metadata;
@@ -33,6 +36,10 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
         _unpause();
     }
 
+    function setVrfConsumer(VRFv2Consumer vrf) public {
+        _vrf = vrf;
+    }
+
     // Function to generate pseudo random number
     function randomNumber() public view returns (uint256) {
         uint256 number = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender)));
@@ -44,7 +51,7 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
         if (CHAINLINK) {
-            // CHAINLINK
+            _vrf.requestRandomWords(tokenId);
         } else {
             uint rand = randomNumber();
             _metadata.generateAllPositions(tokenId, rand);

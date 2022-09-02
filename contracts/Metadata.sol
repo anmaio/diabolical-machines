@@ -137,13 +137,6 @@ contract Metadata is Ownable {
         emit InitialTraitValuesSet(_tokenId, traitPositions[_tokenId]);
     }
 
-    // pseudo random number between min and max
-    function randomNumberRange(uint256 min, uint256 max) public view returns (uint256) {
-        return
-            min +
-            (uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))) % (max - min + 1));
-    }
-
     // check a given grid is not full
     function isGridFull(string[9] memory grid) public pure returns (bool) {
         for (uint256 i = 0; i < grid.length; i++) {
