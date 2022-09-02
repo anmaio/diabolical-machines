@@ -10,29 +10,25 @@ contract Metadata is Ownable {
     Compose private _compose;
 
     string[] public floorTraits = ["altar", "props"];
-    uint[] public floorProbabilities = [100, 50];
+    uint256[] public floorProbabilities = [100, 50];
     string[] public wall1Traits = ["frame"];
-    uint[] public wall1Probabilities = [100];
+    uint256[] public wall1Probabilities = [100];
     string[] public wall2Traits = ["frame", "clock"];
-    uint[] public wall2Probabilities = [50, 100];
+    uint256[] public wall2Probabilities = [50, 100];
 
-    uint public constant MAX_GRID_INDEX = 8;
-    uint public constant NUMBER_OF_SHELLS = 6;
+    uint256 public constant MAX_GRID_INDEX = 8;
+    uint256 public constant NUMBER_OF_SHELLS = 6;
 
     // tokenId -> [position]
-    mapping(uint => uint[]) public traitPositions;
+    mapping(uint256 => uint256[]) public traitPositions;
 
-    mapping(uint => string[9]) public tokenToFloorPositions;
-    mapping(uint => string[9]) public tokenToWall1Positions;
-    mapping(uint => string[9]) public tokenToWall2Positions;
+    mapping(uint256 => string[9]) public tokenToFloorPositions;
+    mapping(uint256 => string[9]) public tokenToWall1Positions;
+    mapping(uint256 => string[9]) public tokenToWall2Positions;
 
     string[9] public emptyGrid;
 
-    string[9] public noRow1Grid = [
-        "x", "x", "x",
-        "", "", "",
-        "", "", ""
-    ];
+    string[9] public noRow1Grid = ["x", "x", "x", "", "", "", "", "", ""];
     string[9] public wall1Positions;
     string[9] public wall2Positions;
 
@@ -47,17 +43,21 @@ contract Metadata is Ownable {
     string private _imageURI = "https://bepocdevukssaoutput.blob.core.windows.net/output/";
 
     // tokenId and initial traits emmitted when a nft is minted
-    event InitialTraitValuesSet(uint256 tokenId, uint[] traitIndexes);
+    event InitialTraitValuesSet(uint256 tokenId, uint256[] traitIndexes);
 
     constructor(Compose compose) {
         _compose = compose;
     }
 
-    function pickPosition(string[9] memory grid, string memory object, uint rand) public pure returns(string[9] memory newGrid, uint index) {
+    function pickPosition(
+        string[9] memory grid,
+        string memory object,
+        uint256 rand
+    ) public pure returns (string[9] memory newGrid, uint256 index) {
         // require the grid not to be full
         require(!isGridFull(grid), "Grid is full");
         // loop through the grid until a position is found that is not taken
-        for (uint i = 0; i < grid.length; i++) {
+        for (uint256 i = 0; i < grid.length; i++) {
             if (keccak256(abi.encodePacked(grid[rand])) == keccak256(abi.encodePacked(""))) {
                 grid[rand] = object;
                 return (grid, rand);
@@ -69,17 +69,17 @@ contract Metadata is Ownable {
     }
 
     // will only be called on mint
-    function generateFloorPositions(uint _tokenId, uint rand) public returns (uint newRand) {
+    function generateFloorPositions(uint256 _tokenId, uint256 rand) public returns (uint256 newRand) {
         // start with an empty grid
         string[9] memory newGrid = emptyGrid;
-        for (uint i = 0; i < floorTraits.length; i++) {
-            uint probability = rand % 100;
-            uint index = 9;
+        for (uint256 i = 0; i < floorTraits.length; i++) {
+            uint256 probability = rand % 100;
+            uint256 index = 9;
             if (probability < floorProbabilities[i]) {
-                uint position = rand % 9;
+                uint256 position = rand % 9;
                 (newGrid, index) = pickPosition(newGrid, floorTraits[i], position);
             }
-            rand  = rand / 100;
+            rand = rand / 100;
             traitPositions[_tokenId].push(index);
         }
         tokenToFloorPositions[_tokenId] = newGrid;
@@ -87,18 +87,18 @@ contract Metadata is Ownable {
     }
 
     // will only be called on mint
-    function generateWall1Positions(uint _tokenId, uint rand) public returns (uint newRand) {
+    function generateWall1Positions(uint256 _tokenId, uint256 rand) public returns (uint256 newRand) {
         // start with an empty grid
         string[9] memory newGrid = noRow1Grid;
-        for (uint i = 0; i < wall1Traits.length; i++) {
-            uint probability = rand % 100;
-            uint index = 9;
+        for (uint256 i = 0; i < wall1Traits.length; i++) {
+            uint256 probability = rand % 100;
+            uint256 index = 9;
             if (probability < wall1Probabilities[i]) {
                 // cannot go on the bottom row of the wall
-                uint position = (rand % 6) + 3;
+                uint256 position = (rand % 6) + 3;
                 (newGrid, index) = pickPosition(newGrid, wall1Traits[i], position);
             }
-            rand  = rand / 100;
+            rand = rand / 100;
             traitPositions[_tokenId].push(index);
         }
         tokenToWall1Positions[_tokenId] = newGrid;
@@ -106,18 +106,18 @@ contract Metadata is Ownable {
     }
 
     // will only be called on mint
-    function generateWall2Positions(uint _tokenId, uint rand) public returns (uint newRand) {
+    function generateWall2Positions(uint256 _tokenId, uint256 rand) public returns (uint256 newRand) {
         // start with an empty grid
         string[9] memory newGrid = noRow1Grid;
-        for (uint i = 0; i < wall2Traits.length; i++) {
-            uint probability = rand % 100;
-            uint index = 9;
+        for (uint256 i = 0; i < wall2Traits.length; i++) {
+            uint256 probability = rand % 100;
+            uint256 index = 9;
             if (probability < wall2Probabilities[i]) {
                 // cannot go on the bottom row of the wall
-                uint position = (rand % 6) + 3;
+                uint256 position = (rand % 6) + 3;
                 (newGrid, index) = pickPosition(newGrid, wall2Traits[i], position);
             }
-            rand  = rand / 100;
+            rand = rand / 100;
             traitPositions[_tokenId].push(index);
         }
         tokenToWall2Positions[_tokenId] = newGrid;
@@ -125,12 +125,11 @@ contract Metadata is Ownable {
     }
 
     // isolated to function in case we want to change the logic later
-    function selectShell(uint _tokenId, uint rand) public {
+    function selectShell(uint256 _tokenId, uint256 rand) public {
         traitPositions[_tokenId].push(rand % NUMBER_OF_SHELLS);
     }
 
-    function generateAllPositions(uint _tokenId) public {
-        uint rand = randomNumber();
+    function generateAllPositions(uint256 _tokenId, uint rand) public {
         rand = generateFloorPositions(_tokenId, rand);
         rand = generateWall1Positions(_tokenId, rand);
         rand = generateWall2Positions(_tokenId, rand);
@@ -139,19 +138,15 @@ contract Metadata is Ownable {
     }
 
     // pseudo random number between min and max
-    function randomNumberRange(uint min, uint max) public view returns (uint) {
-        return min + (uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))) % (max - min + 1));
-    }
-
-    // Function to generate pseudo random number
-    function randomNumber() public view returns (uint256) {
-        uint256 number = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender)));
-        return number;
+    function randomNumberRange(uint256 min, uint256 max) public view returns (uint256) {
+        return
+            min +
+            (uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))) % (max - min + 1));
     }
 
     // check a given grid is not full
     function isGridFull(string[9] memory grid) public pure returns (bool) {
-        for (uint i = 0; i < grid.length; i++) {
+        for (uint256 i = 0; i < grid.length; i++) {
             if (keccak256(abi.encodePacked(grid[i])) == keccak256(abi.encodePacked(""))) {
                 return false;
             }
@@ -160,26 +155,27 @@ contract Metadata is Ownable {
     }
 
     // get the floor grid for a given tokenId
-    function getFloorPositions(uint _tokenId) public view returns (string[9] memory grid) {
+    function getFloorPositions(uint256 _tokenId) public view returns (string[9] memory grid) {
         return tokenToFloorPositions[_tokenId];
     }
 
     // get the wall1 grid for a given tokenId
-    function getWall1Positions(uint _tokenId) public view returns (string[9] memory grid) {
+    function getWall1Positions(uint256 _tokenId) public view returns (string[9] memory grid) {
         return tokenToWall1Positions[_tokenId];
     }
 
     // get the wall2 grid for a given tokenId
-    function getWall2Positions(uint _tokenId) public view returns (string[9] memory grid) {
+    function getWall2Positions(uint256 _tokenId) public view returns (string[9] memory grid) {
         return tokenToWall2Positions[_tokenId];
     }
-//["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"]
+
+    //["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"]
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
         string memory jsonInitial = string.concat(
             '{"name": "Clifford # ',
             Strings.toString(_tokenId),
-            '", "description": "Clifford nft description", "attributes": [{"trait_type": "Altar, "value":"',
+            '", "description": "Clifford nft description", "attributes": [{"trait_type": "Altar", "value":"',
             Strings.toString(traitPositions[_tokenId][0]),
             '"}, {"trait_type": "Props", "value":"',
             Strings.toString(traitPositions[_tokenId][1]),
