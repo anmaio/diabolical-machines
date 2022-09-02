@@ -17,7 +17,7 @@ contract Metadata is Ownable {
     uint[] public wall2Probabilities = [50, 100];
 
     uint public constant MAX_GRID_INDEX = 8;
-    uint public constant NUMBER_OF_SHELLS = 1;
+    uint public constant NUMBER_OF_SHELLS = 6;
 
     // tokenId -> [position]
     mapping(uint => uint[]) public traitPositions;
@@ -173,23 +173,23 @@ contract Metadata is Ownable {
     function getWall2Positions(uint _tokenId) public view returns (string[9] memory grid) {
         return tokenToWall2Positions[_tokenId];
     }
-
+//["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"]
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
         string memory jsonInitial = string.concat(
             '{"name": "Clifford # ',
             Strings.toString(_tokenId),
-            '", "description": "Clifford nft description", "attributes": [{"trait_type": "Trait 1", "value":"',
+            '", "description": "Clifford nft description", "attributes": [{"trait_type": "Altar, "value":"',
             Strings.toString(traitPositions[_tokenId][0]),
-            '"}, {"trait_type": "Trait 2", "value":"',
+            '"}, {"trait_type": "Props", "value":"',
             Strings.toString(traitPositions[_tokenId][1]),
-            '"}, {"trait_type": "Trait 3", "value":"',
+            '"}, {"trait_type": "Left Frame", "value":"',
             Strings.toString(traitPositions[_tokenId][2]),
-            '"}, {"trait_type": "Trait 4", "value":"',
+            '"}, {"trait_type": "Right Frame", "value":"',
             Strings.toString(traitPositions[_tokenId][3]),
-            '"}, {"trait_type": "Trait 5", "value":"',
+            '"}, {"trait_type": "Clock", "value":"',
             Strings.toString(traitPositions[_tokenId][4]),
-            '"}, {"trait_type": "Trait 6", "value":"',
+            '"}, {"trait_type": "Shell", "value":"',
             Strings.toString(traitPositions[_tokenId][5]),
             '"}],'
         );
