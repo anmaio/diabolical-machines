@@ -106,6 +106,10 @@ module.exports = {
         goerli: {
             url: process.env.GOERLI_URL,
             accounts: [process.env.GOERLI_ACCOUNT]
+        },
+        polygon: {
+            url: process.env.POLYGON_URL,
+            accounts: [process.env.POLYGON_ACCOUNT]
         }
     },
     etherscan: {
