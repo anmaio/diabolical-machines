@@ -30,10 +30,11 @@ contract Compose {
 
     // Placeholder function to place several floor images in the canvas element
     function composeHTML() public view returns(string memory){
-        string memory output1;
-        string memory output2;
+        string memory output = "";        
+        // string memory output2;
         for (uint256 i = 0;i < 4; i ++){
-            output1 = string.concat( _html.const, 
+            output = string.concat( output, 
+                                    _html.const, 
                                     _html.img, Strings.toString(i), 
                                     _html.imgInstance, 
                                     _html.img, Strings.toString(i), 
@@ -41,15 +42,16 @@ contract Compose {
                                     _html.baseURI,
                                     folders[0],Strings.toString(i)
                                     );
-            output2 = string.concat(output1,                                       
+            output = string.concat( output,                                       
                                     _html.imgSrcClose,
                                     _html.img, Strings.toString(i),
                                     _html.scriptLoad1,
                                     _html.img, Strings.toString(i),
                                     _html.scriptLoad2
                                     );
+          
         }
-        string memory finalOutput = Base64.encode(bytes(string.concat(_html.header,_html.scriptOpen, output2, _html.scriptClose, _html.footer)));
+        string memory finalOutput = Base64.encode(bytes(string.concat(_html.header,_html.scriptOpen, output, _html.scriptClose, _html.footer)));
         return finalOutput;
     }
 
