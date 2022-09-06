@@ -191,7 +191,8 @@ contract Metadata is Ownable {
                     _imageURI,
                     Strings.toString(_tokenId),
                     '.png", "animation_url": "data:text/html;base64,',
-                    _compose.composeHTML(traitPositions[_tokenId], tokenToFloorPositions[_tokenId]),
+                    _compose.composeHTML(),
+                    // _compose.composeHTML(traitPositions[_tokenId], tokenToFloorPositions[_tokenId]),
                     '"}'
                 )
             )
