@@ -10,7 +10,7 @@ contract Metadata is Ownable {
     Compose private _compose;
 
     string[] public floorTraits = ["altar", "props"];
-    uint256[] public floorProbabilities = [100, 50];
+    uint256[] public floorProbabilities = [100, 100];
     string[] public wall1Traits = ["frame"];
     uint256[] public wall1Probabilities = [100];
     string[] public wall2Traits = ["frame", "clock"];
@@ -191,8 +191,8 @@ contract Metadata is Ownable {
                     _imageURI,
                     Strings.toString(_tokenId),
                     '.png", "animation_url": "data:text/html;base64,',
-                    _compose.composeHTML(),
-                    // _compose.composeHTML(traitPositions[_tokenId], tokenToFloorPositions[_tokenId]),
+                    // _compose.composeHTML(),
+                    _compose.composeHTML(tokenToFloorPositions[_tokenId]),
                     '"}'
                 )
             )
