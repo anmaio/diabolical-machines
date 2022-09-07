@@ -1,4 +1,5 @@
 const { task } = require("hardhat/config");
+const { BigNumber } = require('ethers');
 require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");
 
@@ -43,10 +44,22 @@ task("deploy", "Deploy contract to testnet and mainnet")
 
             // Verify the contract using the verify-etherscan subtask
             await hre.run("verify-etherscan", {
+                address: vrfv2consumer.address,
+                clifford: clifford.address,
+                metadata: metadata.address
+            });
+
+            // Verify the contract using the verify-etherscan subtask
+            await hre.run("verify-etherscan", {
                 address: clifford.address,
-                constructorArguments: metadata.address
+                metadata: metadata.address
             });
         };
+
+        // // Top up The subscription contract with LINK
+        // const link = BigNumber.from("100000000000000000"); // 0.1 Link
+        // console.log('link: ', link);
+        // await vrfv2consumer.topUpSubscription(link);
     });
 
 // Override the default verify task added with hardhat-etherscan plug-in
@@ -63,7 +76,8 @@ task("verify", "Verify a deployed contract")
 // By default Etherscan validation will fail if contract is already validated so we override this behaviour
 subtask("verify-etherscan", "Verifies the deployed contract. ")
     .addParam("address", "The address of the contract")
-    .addParam("constructorArguments", "The construction arguments of the contract")
+    .addOptionalParam("clifford", "The construction arguments of the contract")
+    .addParam("metadata", "The construction arguments of the contract")
     .setAction(async(taskArgs, hre) => {
         if (hre.network.config.chainId === 31337 || !hre.config.etherscan.apiKey) {
             return; // contract is deployed on local network or no apiKey is configured
@@ -73,10 +87,17 @@ subtask("verify-etherscan", "Verifies the deployed contract. ")
             console.log("Verifying contract at address:", taskArgs.address);
 
             // As per https://hardhat.org/plugins/nomiclabs-hardhat-etherscan
-            await hre.run("verify:verify", {
-                address: taskArgs.address,
-                constructorArguments: [taskArgs.constructorArguments],
-            });
+            if (taskArgs.clifford) {
+                await hre.run("verify:verify", {
+                    address: taskArgs.address,
+                    constructorArguments: [taskArgs.clifford, taskArgs.metadata]
+                });
+            } else {
+                await hre.run("verify:verify", {
+                    address: taskArgs.address,
+                    constructorArguments: [taskArgs.metadata]
+                });
+            }
         } catch (err) {
             if (err.message.includes("Reason: Already Verified")) {
                 console.log("Contract is already verified!");
