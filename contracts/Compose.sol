@@ -16,8 +16,7 @@ contract Compose {
         _html.baseURI = "https://anma.mypinata.cloud/ipfs/QmYSYKJrnZhFB3KUVXvWGimC7n39pscMMcqVWKvgqWqy4a/";
         _html
             .header = "<!DOCTYPE html> <html lang=''>  <meta charset='utf-8'>  <title>html-ipfs-test</title>  <head><style></style></head> <body> <canvas id='canvas'></canvas>";
-        _html
-            .script = "<script> var bw = 600; var bh = bw; const canvas = document.getElementById('canvas');const context = canvas.getContext('2d'); const gridArray = [    [bw * 0.333333, bh * 0.5],    [bw * 0.17, bh * 0.415],    [bw * 0.5, bh * 0.415],    [0, bh * 0.333333],    [bw * 0.33333, bh * 0.3333],    [bw * 0.66666, bh * 0.3333],    [bw * 0.17, bh * 0.25],    [bw * 0.5, bh * 0.25],    [bw * 0.33, bh * 0.175],]; canvas.width = bw+10; canvas.height = bh+10; function placeObject(obj, position){    const img = new Image();    img.src = `${obj}`;   img.onload = () => {context.drawImage(img, Math.round(gridArray[position][0]), Math.round(gridArray[position][1]), 200, 300)}};";
+        _html.script = "<script> var bw = 600; var bh = bw; const canvas = document.getElementById('canvas');const context = canvas.getContext('2d'); const gridArray = [    [bw * 0.333333, bh * 0.5],    [bw * 0.17, bh * 0.415],    [bw * 0.5, bh * 0.415],    [0, bh * 0.333333],    [bw * 0.33333, bh * 0.3333],    [bw * 0.66666, bh * 0.3333],    [bw * 0.17, bh * 0.25],    [bw * 0.5, bh * 0.25],    [bw * 0.33, bh * 0.175],]; canvas.width = bw+10; canvas.height = bh+10; function placeObject(obj, position){    const img = new Image();    img.src = `${obj}`;   img.onload = () => {context.drawImage(img, Math.round(gridArray[position][0]), Math.round(gridArray[position][1]), 200, 300)}};";
         _html.functionOpen = "placeObject('";
         _html.functionArgSeparator = "',";
         _html.fileExtension = ".png";
