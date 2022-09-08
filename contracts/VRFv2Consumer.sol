@@ -100,7 +100,7 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
   }
 
 	// 1000000000000000000 = 1 LINK
-  function topUpSubscription(uint256 amount) external onlyOwner {
+  function topUpSubscription(uint256 amount) external {
     LINKTOKEN.transferAndCall(address(COORDINATOR), amount, abi.encode(s_subscriptionId));
   }
 

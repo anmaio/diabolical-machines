@@ -33,10 +33,25 @@ task("deploy", "Deploy contract to testnet and mainnet")
         // Set the vrf consumer address in the main contract
         await clifford.setVrfConsumer(vrfv2consumer.address);
 
+        // Get Link contract
+        const link = await hre.ethers.getContractAt("LinkTokenInterface", "0x326C977E6efc84E512bB9C30f76E30c160eD06FB");
+        // Send the smallest amount of Link possible to the VRFv2Consumer contract
+        console.log("Sending Link to VRFv2Consumer contract");
+        await link.transfer(vrfv2consumer.address, 1);
+
+        // Top up The subscription contract with LINK
+        // const amount = BigNumber.from("100000000000000000"); // 0.1 Link
+        const amount = 1;
+        await vrfv2consumer.topUpSubscription(amount);
+
         console.log("Compose contract deployed to address:", compose.address);
         console.log("Metadata contract deployed to address:", metadata.address);
         console.log("Clifford contract deployed to address:", clifford.address);
         console.log("VRFv2Consumer contract deployed to address:", vrfv2consumer.address);
+
+        // A delay is needed before topping up the subscription
+        await new Promise(r => setTimeout(r, 20000)); // 20 seconds
+
         
         if (taskArgs.verify === 'true') {
             console.log("Waiting 5 block confirmations...");
@@ -55,11 +70,6 @@ task("deploy", "Deploy contract to testnet and mainnet")
                 metadata: metadata.address
             });
         };
-
-        // // Top up The subscription contract with LINK
-        // const link = BigNumber.from("100000000000000000"); // 0.1 Link
-        // console.log('link: ', link);
-        // await vrfv2consumer.topUpSubscription(link);
     });
 
 // Override the default verify task added with hardhat-etherscan plug-in
