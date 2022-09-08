@@ -16,7 +16,10 @@ library Helper {
         string header;
         string baseURI;
         string script;
-        string functionOpen;
+        string functionFloorOpen;
+        string functionRightWallOpen;
+        string functionLeftWallOpen;
+        string functionShellOpen;
         string functionArgSeparator;
         string fileExtension;
         string functionClose;

@@ -14,7 +14,7 @@ contract Metadata is Ownable {
     string[] public wall1Traits = ["frame"];
     uint256[] public wall1Probabilities = [100];
     string[] public wall2Traits = ["frame", "clock"];
-    uint256[] public wall2Probabilities = [50, 100];
+    uint256[] public wall2Probabilities = [100, 100];
 
     uint256 public constant MAX_GRID_INDEX = 8;
     uint256 public constant NUMBER_OF_SHELLS = 6;
@@ -192,7 +192,7 @@ contract Metadata is Ownable {
                     Strings.toString(_tokenId),
                     '.png", "animation_url": "data:text/html;base64,',
                     // _compose.composeHTML(),
-                    _compose.composeHTML(tokenToFloorPositions[_tokenId]),
+                    _compose.composeHTML(traitPositions[_tokenId],tokenToFloorPositions[_tokenId]),
                     '"}'
                 )
             )
