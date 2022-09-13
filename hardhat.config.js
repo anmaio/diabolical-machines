@@ -22,36 +22,33 @@ task("deploy", "Deploy contract to testnet and mainnet")
         const metadata = await Metadata.deploy(compose.address);
         await metadata.deployed();
 
+        const TokenSwap = await hre.ethers.getContractFactory("TokenSwap");
+        const tokenSwap = await TokenSwap.deploy();
+        await tokenSwap.deployed();
+
         const Clifford = await hre.ethers.getContractFactory("Clifford");
-        const clifford = await Clifford.deploy(metadata.address);
+        const clifford = await Clifford.deploy(metadata.address, tokenSwap.address);
         await clifford.deployed();
 
-        const VRFv2Consumer = await hre.ethers.getContractFactory("VRFv2Consumer");
-        const vrfv2consumer = await VRFv2Consumer.deploy(clifford.address, metadata.address);
-        await vrfv2consumer.deployed();
+        const Rng = await hre.ethers.getContractFactory("Rng");
+        const rng = await Rng.deploy(clifford.address, metadata.address);
+        await rng.deployed();
 
         // Set the vrf consumer address in the main contract
-        await clifford.setVrfConsumer(vrfv2consumer.address);
+        await clifford.setRandomNumberConsumer(rng.address);
 
         // Get Link contract
-        const link = await hre.ethers.getContractAt("LinkTokenInterface", "0x326C977E6efc84E512bB9C30f76E30c160eD06FB");
-        // Send the smallest amount of Link possible to the VRFv2Consumer contract
-        console.log("Sending Link to VRFv2Consumer contract");
-        await link.transfer(vrfv2consumer.address, 1);
-
-        // Top up The subscription contract with LINK
-        // const amount = BigNumber.from("100000000000000000"); // 0.1 Link
-        const amount = 1;
-        await vrfv2consumer.topUpSubscription(amount);
+        // const link = await hre.ethers.getContractAt("LinkTokenInterface", "0x326C977E6efc84E512bB9C30f76E30c160eD06FB");
+        
+        // console.log("Sending Link to Rng contract");
+        // const amount = BigNumber.from("1000000000000000000"); // 1 Link
+        // await link.transfer(rng.address, amount);
 
         console.log("Compose contract deployed to address:", compose.address);
         console.log("Metadata contract deployed to address:", metadata.address);
+        console.log("TokenSwap contract deployed to address:", tokenSwap.address);
         console.log("Clifford contract deployed to address:", clifford.address);
-        console.log("VRFv2Consumer contract deployed to address:", vrfv2consumer.address);
-
-        // A delay is needed before topping up the subscription
-        await new Promise(r => setTimeout(r, 20000)); // 20 seconds
-
+        console.log("Rng contract deployed to address:", rng.address);
         
         if (taskArgs.verify === 'true') {
             console.log("Waiting 5 block confirmations...");
@@ -59,7 +56,7 @@ task("deploy", "Deploy contract to testnet and mainnet")
 
             // Verify the contract using the verify-etherscan subtask
             await hre.run("verify-etherscan", {
-                address: vrfv2consumer.address,
+                address: rng.address,
                 clifford: clifford.address,
                 metadata: metadata.address
             });
@@ -67,7 +64,8 @@ task("deploy", "Deploy contract to testnet and mainnet")
             // Verify the contract using the verify-etherscan subtask
             await hre.run("verify-etherscan", {
                 address: clifford.address,
-                metadata: metadata.address
+                clifford: metadata.address,
+                metadata: tokenSwap.address
             });
         };
     });
