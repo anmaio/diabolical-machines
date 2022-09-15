@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "base64-sol/base64.sol";
 import "./Metadata.sol";
-import "./Rng.sol";
+import "./VRFv2SubscriptionManager.sol";
 import "./TokenSwap.sol";
 
 interface IWETH is IERC20 {
@@ -30,24 +30,26 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
 
 	bool public constant CHAINLINK = true;
 
-    uint public currentLinkBalance = 0;
-    uint public totalLinkNeeded = 0.5 * 10000 * 1e18; // 0.5 * 10k LINK
-    uint public totalLinkSwapped = 0;
-    // when link dips below this value go and swap some eth for link
-    uint minimumLink = 20 * 1e18; // 20 Link
+	uint public currentLinkBalance = 0;
+	uint public totalLinkNeeded = 0.5 * 10000 * 1e18; // 0.5 * 10k LINK
+	uint public totalLinkSwapped = 0;
+	// when link dips below this value go and swap some eth for link
+	uint minimumLink = 20 * 1e18; // 20 Link
 
-    address private weth = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6;
-    address private link = 0x326C977E6efc84E512bB9C30f76E30c160eD06FB;
+	address private weth = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6;
+	address private link = 0x326C977E6efc84E512bB9C30f76E30c160eD06FB;
 
-    LinkTokenInterface LINKTOKEN = LinkTokenInterface(link);
+	address private topUpAddress = msg.sender;
 
-    TokenSwap private _tokenSwap;
+	LinkTokenInterface LINKTOKEN = LinkTokenInterface(link);
 
-	Rng private _randomNumberConsumer;
+	TokenSwap private _tokenSwap;
+
+	VRFv2SubscriptionManager private _VRF;
 
 	constructor(Metadata metadata, TokenSwap tokenswap) ERC721("Clifford", "o") {
 		_metadata = metadata;
-        _tokenSwap = tokenswap;
+    _tokenSwap = tokenswap;
 	}
 
 	function pause() public onlyOwner {
@@ -58,8 +60,12 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
 		_unpause();
 	}
 
-	function setRandomNumberConsumer(Rng rng) public {
-		_randomNumberConsumer = rng;
+	function setTopUpAddress(address topUp) public onlyOwner {
+		topUpAddress = topUp;
+	}
+
+	function setSubscriptionManager(VRFv2SubscriptionManager vrf) public onlyOwner {
+		_VRF = vrf;
 	}
 
 	// Function to generate pseudo random number
@@ -98,15 +104,17 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
     function onMint(uint _tokenId) internal {
         if (totalLinkSwapped < totalLinkNeeded) {
             convertToWeth(address(this).balance);
-        } else if (LINKTOKEN.balanceOf(address(_randomNumberConsumer)) < minimumLink) { // 20 LINK
+        } else if (LINKTOKEN.balanceOf(address(_VRF)) < minimumLink) { // 20 LINK
             convertToWeth(1 ether);
         }
         uint balance = IWETH(weth).balanceOf(address(this));
         if (balance > 0) {
             wethToLink(balance);
-            LINKTOKEN.transfer(address(_randomNumberConsumer), LINKTOKEN.balanceOf(address(this)));
+						uint linkBalance = LINKTOKEN.balanceOf(address(this));
+            LINKTOKEN.transfer(address(_VRF), linkBalance);
+						_VRF.topUpSubscription(linkBalance);
         }
-        _randomNumberConsumer.getRandomNumber(_tokenId);
+        _VRF.requestRandomWords(_tokenId);
     }
 
 	function tokenURI(uint256 _tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {

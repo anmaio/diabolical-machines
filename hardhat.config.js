@@ -30,25 +30,30 @@ task("deploy", "Deploy contract to testnet and mainnet")
         const clifford = await Clifford.deploy(metadata.address, tokenSwap.address);
         await clifford.deployed();
 
-        const Rng = await hre.ethers.getContractFactory("Rng");
-        const rng = await Rng.deploy(clifford.address, metadata.address);
-        await rng.deployed();
+        const VRFv2SubscriptionManager = await hre.ethers.getContractFactory("VRFv2SubscriptionManager");
+        const vRFv2SubscriptionManager = await VRFv2SubscriptionManager.deploy(clifford.address, metadata.address);
+        await vRFv2SubscriptionManager.deployed();
 
         // Set the vrf consumer address in the main contract
-        await clifford.setRandomNumberConsumer(rng.address);
+        await clifford.setSubscriptionManager(vRFv2SubscriptionManager.address);
 
         // Get Link contract
         // const link = await hre.ethers.getContractAt("LinkTokenInterface", "0x326C977E6efc84E512bB9C30f76E30c160eD06FB");
         
-        // console.log("Sending Link to Rng contract");
-        // const amount = BigNumber.from("1000000000000000000"); // 1 Link
-        // await link.transfer(rng.address, amount);
+        // console.log("Sending Link to vRFv2SubscriptionManager contract");
+        // const amount = 1; // smallest possible amount of link, needed to be able to top up
+        // await link.transfer(vRFv2SubscriptionManager.address, amount);
+        // console.log("Link sent to vRFv2SubscriptionManager contract");
+
+        // await new Promise(r => setTimeout(r, 20000)); // wait 20 seconds before topping up
+        // const testTopUp = BigNumber.from("8000000000000000000"); // 8 Link
+        // await vRFv2SubscriptionManager.topUpSubscription(amount);
 
         console.log("Compose contract deployed to address:", compose.address);
         console.log("Metadata contract deployed to address:", metadata.address);
         console.log("TokenSwap contract deployed to address:", tokenSwap.address);
         console.log("Clifford contract deployed to address:", clifford.address);
-        console.log("Rng contract deployed to address:", rng.address);
+        console.log("VRFv2SubscriptionManager contract deployed to address:", vRFv2SubscriptionManager.address);
         
         if (taskArgs.verify === 'true') {
             console.log("Waiting 5 block confirmations...");
@@ -56,7 +61,7 @@ task("deploy", "Deploy contract to testnet and mainnet")
 
             // Verify the contract using the verify-etherscan subtask
             await hre.run("verify-etherscan", {
-                address: rng.address,
+                address: vRFv2SubscriptionManager.address,
                 clifford: clifford.address,
                 metadata: metadata.address
             });
