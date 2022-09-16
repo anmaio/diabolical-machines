@@ -2,9 +2,10 @@
 // An example of a consumer contract that relies on a subscription for funding.
 pragma solidity ^0.8.7;
 
+import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
-import "./Metadata.sol";
+import "../contracts/Metadata.sol";
 
 /**
  * THIS IS AN EXAMPLE CONTRACT THAT USES HARDCODED VALUES FOR CLARITY.
@@ -14,13 +15,15 @@ import "./Metadata.sol";
 
 contract VRFv2Consumer is VRFConsumerBaseV2 {
   VRFCoordinatorV2Interface COORDINATOR;
-
-  // Your subscription ID.
-  uint64 s_subscriptionId = 875;
+	LinkTokenInterface LINKTOKEN;
 
   // Goerli coordinator. For other networks,
   // see https://docs.chain.link/docs/vrf-contracts/#configurations
   address vrfCoordinator = 0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D;
+
+	// Goerli LINK token contract. For other networks, see
+  // https://docs.chain.link/docs/vrf-contracts/#configurations
+  address link_token_contract = 0x326C977E6efc84E512bB9C30f76E30c160eD06FB;
 
   // The gas lane to use, which specifies the maximum gas price to bump to.
   // For a list of available gas lanes on each network,
@@ -42,7 +45,15 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
   // Cannot exceed VRFCoordinatorV2.MAX_NUM_WORDS.
   uint32 numWords =  1;
 
+	// Contract that calls the mint function
+  address minter;
+
+	// Contract that deploys the contracts
+	// remaining LINK will be withdrawn to this address after minting
   address s_owner;
+
+	// Subscription Id set during deployment
+	uint64 public s_subscriptionId;
 
 	mapping(uint256 => uint256) public requestIdToTokenId;
 	mapping(uint256 => uint256) public tokenIdToRandomWord;
@@ -51,8 +62,12 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
 
   constructor(address mintContract, Metadata metadata) VRFConsumerBaseV2(vrfCoordinator) {
     COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
-    s_owner = mintContract;
+		LINKTOKEN = LinkTokenInterface(link_token_contract);
+    minter = mintContract;
+		s_owner = msg.sender;
     _metadata = metadata;
+		//Create a new subscription when you deploy the contract.
+    createNewSubscription();
   }
 
   // Assumes the subscription is funded sufficiently.
@@ -77,7 +92,36 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
     _metadata.generateAllPositions(tokenId, randomWords[0]);
   }
 
+	// Create a new subscription when the contract is initially deployed.
+  function createNewSubscription() private onlyOwner {
+    s_subscriptionId = COORDINATOR.createSubscription();
+    // Add this contract as a consumer of its own subscription.
+    COORDINATOR.addConsumer(s_subscriptionId, address(this));
+  }
+
+	// 1000000000000000000 = 1 LINK
+  function topUpSubscription(uint256 amount) external {
+    LINKTOKEN.transferAndCall(address(COORDINATOR), amount, abi.encode(s_subscriptionId));
+  }
+
+  function cancelSubscription(address receivingWallet) external onlyOwner {
+    // Cancel the subscription and send the remaining LINK to a wallet address.
+    COORDINATOR.cancelSubscription(s_subscriptionId, receivingWallet);
+    s_subscriptionId = 0;
+  }
+
+  // Transfer this contract's funds to an address.
+  // 1000000000000000000 = 1 LINK
+  function withdraw(uint256 amount, address to) external onlyOwner {
+    LINKTOKEN.transfer(to, amount);
+  }
+
   modifier onlyMintContract() {
+    require(msg.sender == minter);
+    _;
+  }
+
+  modifier onlyOwner() {
     require(msg.sender == s_owner);
     _;
   }

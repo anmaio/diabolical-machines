@@ -1,4 +1,5 @@
 const { task } = require("hardhat/config");
+const { BigNumber } = require('ethers');
 require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");
 
@@ -21,21 +22,38 @@ task("deploy", "Deploy contract to testnet and mainnet")
         const metadata = await Metadata.deploy(compose.address);
         await metadata.deployed();
 
+        const TokenSwap = await hre.ethers.getContractFactory("TokenSwap");
+        const tokenSwap = await TokenSwap.deploy();
+        await tokenSwap.deployed();
+
         const Clifford = await hre.ethers.getContractFactory("Clifford");
-        const clifford = await Clifford.deploy(metadata.address);
+        const clifford = await Clifford.deploy(metadata.address, tokenSwap.address);
         await clifford.deployed();
 
-        const VRFv2Consumer = await hre.ethers.getContractFactory("VRFv2Consumer");
-        const vrfv2consumer = await VRFv2Consumer.deploy(clifford.address, metadata.address);
-        await vrfv2consumer.deployed();
+        const VRFv2SubscriptionManager = await hre.ethers.getContractFactory("VRFv2SubscriptionManager");
+        const vRFv2SubscriptionManager = await VRFv2SubscriptionManager.deploy(clifford.address, metadata.address);
+        await vRFv2SubscriptionManager.deployed();
 
         // Set the vrf consumer address in the main contract
-        await clifford.setVrfConsumer(vrfv2consumer.address);
+        await clifford.setSubscriptionManager(vRFv2SubscriptionManager.address);
+
+        // Get Link contract
+        // const link = await hre.ethers.getContractAt("LinkTokenInterface", "0x326C977E6efc84E512bB9C30f76E30c160eD06FB");
+        
+        // console.log("Sending Link to vRFv2SubscriptionManager contract");
+        // const amount = 1; // smallest possible amount of link, needed to be able to top up
+        // await link.transfer(vRFv2SubscriptionManager.address, amount);
+        // console.log("Link sent to vRFv2SubscriptionManager contract");
+
+        // await new Promise(r => setTimeout(r, 20000)); // wait 20 seconds before topping up
+        // const testTopUp = BigNumber.from("8000000000000000000"); // 8 Link
+        // await vRFv2SubscriptionManager.topUpSubscription(amount);
 
         console.log("Compose contract deployed to address:", compose.address);
         console.log("Metadata contract deployed to address:", metadata.address);
+        console.log("TokenSwap contract deployed to address:", tokenSwap.address);
         console.log("Clifford contract deployed to address:", clifford.address);
-        console.log("VRFv2Consumer contract deployed to address:", vrfv2consumer.address);
+        console.log("VRFv2SubscriptionManager contract deployed to address:", vRFv2SubscriptionManager.address);
         
         if (taskArgs.verify === 'true') {
             console.log("Waiting 5 block confirmations...");
@@ -43,8 +61,16 @@ task("deploy", "Deploy contract to testnet and mainnet")
 
             // Verify the contract using the verify-etherscan subtask
             await hre.run("verify-etherscan", {
+                address: vRFv2SubscriptionManager.address,
+                clifford: clifford.address,
+                metadata: metadata.address
+            });
+
+            // Verify the contract using the verify-etherscan subtask
+            await hre.run("verify-etherscan", {
                 address: clifford.address,
-                constructorArguments: metadata.address
+                clifford: metadata.address,
+                metadata: tokenSwap.address
             });
         };
     });
@@ -63,7 +89,8 @@ task("verify", "Verify a deployed contract")
 // By default Etherscan validation will fail if contract is already validated so we override this behaviour
 subtask("verify-etherscan", "Verifies the deployed contract. ")
     .addParam("address", "The address of the contract")
-    .addParam("constructorArguments", "The construction arguments of the contract")
+    .addOptionalParam("clifford", "The construction arguments of the contract")
+    .addParam("metadata", "The construction arguments of the contract")
     .setAction(async(taskArgs, hre) => {
         if (hre.network.config.chainId === 31337 || !hre.config.etherscan.apiKey) {
             return; // contract is deployed on local network or no apiKey is configured
@@ -73,10 +100,17 @@ subtask("verify-etherscan", "Verifies the deployed contract. ")
             console.log("Verifying contract at address:", taskArgs.address);
 
             // As per https://hardhat.org/plugins/nomiclabs-hardhat-etherscan
-            await hre.run("verify:verify", {
-                address: taskArgs.address,
-                constructorArguments: [taskArgs.constructorArguments],
-            });
+            if (taskArgs.clifford) {
+                await hre.run("verify:verify", {
+                    address: taskArgs.address,
+                    constructorArguments: [taskArgs.clifford, taskArgs.metadata]
+                });
+            } else {
+                await hre.run("verify:verify", {
+                    address: taskArgs.address,
+                    constructorArguments: [taskArgs.metadata]
+                });
+            }
         } catch (err) {
             if (err.message.includes("Reason: Already Verified")) {
                 console.log("Contract is already verified!");

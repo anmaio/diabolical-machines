@@ -3,6 +3,7 @@ const { ethers } = require("hardhat");
 
 const CONTRACT_NAME_PRE = "Compose"
 const CONTRACT_NAME = "Clifford"
+const TOKEN_SWAP = "TokenSwap"
 
 const TOKEN_NAME = "Clifford";
 const TOKEN_SYMBOL = "o";
@@ -15,8 +16,10 @@ let signer;
 beforeEach(async () => {
     const Compose = await ethers.getContractFactory(CONTRACT_NAME_PRE);
     const compose = await Compose.deploy();
+    const TokenSwap = await ethers.getContractFactory(TOKEN_SWAP);
+    const tokenSwap = await TokenSwap.deploy();
     const factory = await ethers.getContractFactory(CONTRACT_NAME);
-    contract = await factory.deploy(compose.address);
+    contract = await factory.deploy(compose.address, tokenSwap.address);
     await contract.deployTransaction.wait();
 
     provider = ethers.provider;
