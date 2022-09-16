@@ -16,13 +16,16 @@ library Helper {
         string header;
         string baseURI;
         string script;
-        string functionFloorOpen;
-        string functionRightWallOpen;
-        string functionLeftWallOpen;
-        string functionShellOpen;
-        string functionArgSeparator;
+        string id;
+        string quotation;
+        string prePosition;
+        string postPosition;
+        string functionShell;
+        string functionRightWall;
+        string functionLeftWall;
+        string functionFloor;
         string fileExtension;
-        string functionClose;
+        string arrayClose;
         string footer;
     }
 }
