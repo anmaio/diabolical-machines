@@ -13,20 +13,11 @@ contract TokenSwap {
     address public constant WETH9 = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6;
 
     /// @notice Swaps a fixed amount of WETH for a maximum possible amount of LINK
-    function swapExactInputSingle(uint amountIn)
-        external
-        returns (uint amountOut)
-    {
-        TransferHelper.safeTransferFrom(
-            WETH9,
-            msg.sender,
-            address(this),
-            amountIn
-        );
+    function swapExactInputSingle(uint256 amountIn) external returns (uint256 amountOut) {
+        TransferHelper.safeTransferFrom(WETH9, msg.sender, address(this), amountIn);
         TransferHelper.safeApprove(WETH9, address(swapRouter), amountIn);
 
-        ISwapRouter.ExactInputSingleParams memory params = ISwapRouter
-        .ExactInputSingleParams({
+        ISwapRouter.ExactInputSingleParams memory params = ISwapRouter.ExactInputSingleParams({
             tokenIn: WETH9,
             tokenOut: LINK,
             // pool fee 0.3%
@@ -44,29 +35,20 @@ contract TokenSwap {
     }
 
     /// @notice swaps a minimum possible amount of WETH for a fixed amount of LINK.
-    function swapExactOutputSingle(uint amountOut, uint amountInMaximum)
-        external
-        returns (uint amountIn)
-    {
-        TransferHelper.safeTransferFrom(
-            WETH9,
-            msg.sender,
-            address(this),
-            amountInMaximum
-        );
+    function swapExactOutputSingle(uint256 amountOut, uint256 amountInMaximum) external returns (uint256 amountIn) {
+        TransferHelper.safeTransferFrom(WETH9, msg.sender, address(this), amountInMaximum);
         TransferHelper.safeApprove(WETH9, address(swapRouter), amountInMaximum);
 
-        ISwapRouter.ExactOutputSingleParams memory params = ISwapRouter
-            .ExactOutputSingleParams({
-                tokenIn: WETH9,
-                tokenOut: LINK,
-                fee: 3000,
-                recipient: msg.sender,
-                deadline: block.timestamp,
-                amountOut: amountOut,
-                amountInMaximum: amountInMaximum,
-                sqrtPriceLimitX96: 0
-            });
+        ISwapRouter.ExactOutputSingleParams memory params = ISwapRouter.ExactOutputSingleParams({
+            tokenIn: WETH9,
+            tokenOut: LINK,
+            fee: 3000,
+            recipient: msg.sender,
+            deadline: block.timestamp,
+            amountOut: amountOut,
+            amountInMaximum: amountInMaximum,
+            sqrtPriceLimitX96: 0
+        });
 
         amountIn = swapRouter.exactOutputSingle(params);
 
@@ -74,11 +56,7 @@ contract TokenSwap {
             // Reset approval on router
             TransferHelper.safeApprove(WETH9, address(swapRouter), 0);
             // Refund WETH to user
-            TransferHelper.safeTransfer(
-                WETH9,
-                msg.sender,
-                amountInMaximum - amountIn
-            );
+            TransferHelper.safeTransfer(WETH9, msg.sender, amountInMaximum - amountIn);
         }
     }
 }

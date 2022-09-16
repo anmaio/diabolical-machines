@@ -129,7 +129,7 @@ contract Metadata is Ownable {
         traitPositions[_tokenId].push(rand % NUMBER_OF_SHELLS);
     }
 
-    function generateAllPositions(uint256 _tokenId, uint rand) public {
+    function generateAllPositions(uint256 _tokenId, uint256 rand) public {
         rand = generateFloorPositions(_tokenId, rand);
         rand = generateWall1Positions(_tokenId, rand);
         rand = generateWall2Positions(_tokenId, rand);
