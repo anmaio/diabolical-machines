@@ -31,7 +31,7 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
 	bool public constant CHAINLINK = true;
 
 	uint public currentLinkBalance = 0;
-	uint public totalLinkNeeded = 0.5 * 10000 * 1e18; // 0.5 * 10k LINK
+	uint public totalLinkNeeded = 0.8 * 10000 * 1e18; // 0.5 * 10k LINK
 	uint public totalLinkSwapped = 0;
 	// when link dips below this value go and swap some eth for link
 	uint minimumLink = 20 * 1e18; // 20 Link
@@ -102,19 +102,19 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
 	}
 
     function onMint(uint _tokenId) internal {
-        if (totalLinkSwapped < totalLinkNeeded) {
-            convertToWeth(address(this).balance);
-        } else if (LINKTOKEN.balanceOf(address(_VRF)) < minimumLink) { // 20 LINK
-            convertToWeth(1 ether);
-        }
-        uint balance = IWETH(weth).balanceOf(address(this));
-        if (balance > 0) {
-            wethToLink(balance);
-						uint linkBalance = LINKTOKEN.balanceOf(address(this));
-            LINKTOKEN.transfer(address(_VRF), linkBalance);
-						_VRF.topUpSubscription(linkBalance);
-        }
-        _VRF.requestRandomWords(_tokenId);
+			if (totalLinkSwapped < totalLinkNeeded) {
+					convertToWeth(address(this).balance);
+			} else if (LINKTOKEN.balanceOf(address(_VRF)) < minimumLink) { // 20 LINK
+					convertToWeth(1 ether);
+			}
+			uint balance = IWETH(weth).balanceOf(address(this));
+			if (balance > 0) {
+					wethToLink(balance);
+					uint linkBalance = LINKTOKEN.balanceOf(address(this));
+					LINKTOKEN.transfer(address(_VRF), linkBalance);
+					_VRF.topUpSubscription(linkBalance);
+			}
+			_VRF.requestRandomWords(_tokenId);
     }
 
 	function tokenURI(uint256 _tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
