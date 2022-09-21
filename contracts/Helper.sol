@@ -15,9 +15,17 @@ library Helper {
     struct HTML {
         string header;
         string baseURI;
-        string imgOpen;
-        string imgSrc;
-        string imgClose;
+        string script;
+        string id;
+        string quotation;
+        string prePosition;
+        string postPosition;
+        string functionShell;
+        string functionRightWall;
+        string functionLeftWall;
+        string functionFloor;
+        string fileExtension;
+        string arrayClose;
         string footer;
     }
 }
