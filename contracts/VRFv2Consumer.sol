@@ -5,7 +5,6 @@ pragma solidity ^0.8.7;
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
-import "../contracts/Metadata.sol";
 
 /**
  * THIS IS AN EXAMPLE CONTRACT THAT USES HARDCODED VALUES FOR CLARITY.
@@ -16,6 +15,9 @@ import "../contracts/Metadata.sol";
 contract VRFv2Consumer is VRFConsumerBaseV2 {
   VRFCoordinatorV2Interface COORDINATOR;
 	LinkTokenInterface LINKTOKEN;
+
+  // emit tokenId when random number is generated
+  event RandomNumberGenerated(uint256 tokenId);
 
   // Goerli coordinator. For other networks,
   // see https://docs.chain.link/docs/vrf-contracts/#configurations
@@ -36,7 +38,7 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
   // this limit based on the network that you select, the size of the request,
   // and the processing of the callback request in the fulfillRandomWords()
   // function.
-  uint32 callbackGasLimit = 750000;
+  uint32 callbackGasLimit = 100000;
 
   // The default is 3, but you can set this higher.
   uint16 requestConfirmations = 3;
@@ -53,25 +55,25 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
   address s_owner;
 
 	// Subscription Id set during deployment
-	uint64 public s_subscriptionId;
+	uint64 public s_subscriptionId = 2255;
 
 	mapping(uint256 => uint256) public requestIdToTokenId;
 	mapping(uint256 => uint256) public tokenIdToRandomWord;
 
-  Metadata private _metadata;
+  // get the random number from the token id
+  function getNumberFromId(uint256 tokenId) public view returns (uint256) {
+    return tokenIdToRandomWord[tokenId];
+  }
 
-  constructor(address mintContract, Metadata metadata) VRFConsumerBaseV2(vrfCoordinator) {
+  constructor(address mintContract) VRFConsumerBaseV2(vrfCoordinator) {
     COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
 		LINKTOKEN = LinkTokenInterface(link_token_contract);
     minter = mintContract;
 		s_owner = msg.sender;
-    _metadata = metadata;
-		//Create a new subscription when you deploy the contract.
-    createNewSubscription();
   }
 
   // Assumes the subscription is funded sufficiently.
-  function requestRandomWords(uint _tokenId) external onlyMintContract {
+  function requestRandomWords(uint _tokenId) external {
     // Will revert if subscription is not set and funded.
 		uint s_requestId = COORDINATOR.requestRandomWords(
       keyHash,
@@ -89,19 +91,7 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
   ) internal override {
 		uint tokenId = requestIdToTokenId[requestId];
 		tokenIdToRandomWord[tokenId] = randomWords[0];
-    _metadata.generateAllPositions(tokenId, randomWords[0]);
-  }
-
-	// Create a new subscription when the contract is initially deployed.
-  function createNewSubscription() private onlyOwner {
-    s_subscriptionId = COORDINATOR.createSubscription();
-    // Add this contract as a consumer of its own subscription.
-    COORDINATOR.addConsumer(s_subscriptionId, address(this));
-  }
-
-	// 1000000000000000000 = 1 LINK
-  function topUpSubscription(uint256 amount) external {
-    LINKTOKEN.transferAndCall(address(COORDINATOR), amount, abi.encode(s_subscriptionId));
+    emit RandomNumberGenerated(tokenId);
   }
 
   function cancelSubscription(address receivingWallet) external onlyOwner {
