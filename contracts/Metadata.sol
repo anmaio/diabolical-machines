@@ -73,37 +73,37 @@ contract Metadata is Ownable {
     // probably only worth doing if we get a stack too deep error
 
     // alternative to generateRightWallPositions
-    function getRWPositions(uint256 _tokenId) public view returns (uint[] memory) {
-      uint uintVrf = _VRF.getNumberFromId(_tokenId);
-      bytes memory vrf = uintToBytes(uintVrf);
-      vrf = slice(vrf, 1, rightWallTraits.length * 2);
-      uint256 rand = uint256(keccak256(vrf));
-      // start with an empty grid
-      string[9] memory newGrid = noRow1Grid;
-      uint[] memory viewTraitPositons = new uint[](rightWallTraits.length);
-      for (uint256 i = 0; i < rightWallTraits.length; i++) {
-          uint256 probability = rand % 100;
-          uint256 index = 9;
-          if (probability < rightWallProbabilities[i]) {
-              // cannot go on the bottom row of the wall
-              uint256 position = (rand % 6) + 3;
-              (newGrid, index) = pickPosition(newGrid, rightWallTraits[i], position);
-          }
-          rand = rand / 100;
-          viewTraitPositons[i] = index;
-      }
-      return viewTraitPositons;
+    function getRWPositions(uint256 _tokenId) public view returns (uint256[] memory) {
+        uint256 uintVrf = _VRF.getNumberFromId(_tokenId);
+        bytes memory vrf = uintToBytes(uintVrf);
+        vrf = slice(vrf, 1, rightWallTraits.length * 2);
+        uint256 rand = uint256(keccak256(vrf));
+        // start with an empty grid
+        string[9] memory newGrid = noRow1Grid;
+        uint256[] memory viewTraitPositons = new uint256[](rightWallTraits.length);
+        for (uint256 i = 0; i < rightWallTraits.length; i++) {
+            uint256 probability = rand % 100;
+            uint256 index = 9;
+            if (probability < rightWallProbabilities[i]) {
+                // cannot go on the bottom row of the wall
+                uint256 position = (rand % 6) + 3;
+                (newGrid, index) = pickPosition(newGrid, rightWallTraits[i], position);
+            }
+            rand = rand / 100;
+            viewTraitPositons[i] = index;
+        }
+        return viewTraitPositons;
     }
 
     // alternative to generateLeftWallPositions
-    function getLWPositions(uint256 _tokenId) public view returns (uint[] memory) {
-        uint uintVrf = _VRF.getNumberFromId(_tokenId);
+    function getLWPositions(uint256 _tokenId) public view returns (uint256[] memory) {
+        uint256 uintVrf = _VRF.getNumberFromId(_tokenId);
         bytes memory vrf = uintToBytes(uintVrf);
         vrf = slice(vrf, 1 + rightWallTraits.length * 2, leftWallTraits.length * 2);
         uint256 rand = uint256(keccak256(vrf));
         // start with an empty grid
         string[9] memory newGrid = noRow1Grid;
-        uint[] memory viewTraitPositons = new uint[](leftWallTraits.length);
+        uint256[] memory viewTraitPositons = new uint256[](leftWallTraits.length);
         for (uint256 i = 0; i < leftWallTraits.length; i++) {
             uint256 probability = rand % 100;
             uint256 index = 9;
@@ -119,14 +119,14 @@ contract Metadata is Ownable {
     }
 
     // alternative to generateFloorPositions
-    function getFPositions(uint256 _tokenId) public view returns (uint[] memory) {
-        uint uintVrf = _VRF.getNumberFromId(_tokenId);
+    function getFPositions(uint256 _tokenId) public view returns (uint256[] memory) {
+        uint256 uintVrf = _VRF.getNumberFromId(_tokenId);
         bytes memory vrf = uintToBytes(uintVrf);
         vrf = slice(vrf, 1 + rightWallTraits.length * 2 + leftWallTraits.length * 2, floorTraits.length * 2);
         uint256 rand = uint256(keccak256(vrf));
         // start with an empty grid
         string[9] memory newGrid = emptyGrid;
-        uint[] memory viewTraitPositons = new uint[](floorTraits.length);
+        uint256[] memory viewTraitPositons = new uint256[](floorTraits.length);
         for (uint256 i = 0; i < floorTraits.length; i++) {
             uint256 probability = rand % 100;
             uint256 index = 9;
@@ -141,9 +141,13 @@ contract Metadata is Ownable {
     }
 
     // slice array of bytes
-    function slice(bytes memory data, uint start, uint len) internal pure returns (bytes memory) {
+    function slice(
+        bytes memory data,
+        uint256 start,
+        uint256 len
+    ) internal pure returns (bytes memory) {
         bytes memory b = new bytes(len);
-        for (uint i = 0; i < len; i++) {
+        for (uint256 i = 0; i < len; i++) {
             b[i] = data[i + start];
         }
         return b;
@@ -161,70 +165,72 @@ contract Metadata is Ownable {
 
     function uintToBytes(uint256 x) public pure returns (bytes memory b) {
         b = new bytes(32);
-        assembly { mstore(add(b, 32), x) } //  first 32 bytes = length of the bytes value
+        assembly {
+            mstore(add(b, 32), x)
+        } //  first 32 bytes = length of the bytes value
     }
 
-    function combineUintArrays(uint[] memory a, uint[] memory b) public pure returns (uint[] memory) {
-      uint[] memory c = new uint[](a.length + b.length);
-      for (uint i = 0; i < a.length; i++) {
-              c[i] = a[i];
-      }
-      for (uint i = 0; i < b.length; i++) {
-              c[i + a.length] = b[i];
-      }
-      return c;
+    function combineUintArrays(uint256[] memory a, uint256[] memory b) public pure returns (uint256[] memory) {
+        uint256[] memory c = new uint256[](a.length + b.length);
+        for (uint256 i = 0; i < a.length; i++) {
+            c[i] = a[i];
+        }
+        for (uint256 i = 0; i < b.length; i++) {
+            c[i + a.length] = b[i];
+        }
+        return c;
     }
 
     // alternative selctShell
-    function getShell() public pure returns (uint[] memory shellNumber) {
+    function getShell() public pure returns (uint256[] memory shellNumber) {
         uint256 shell = 8;
-        uint[] memory shellArray = new uint[](1);
+        uint256[] memory shellArray = new uint256[](1);
         shellArray[0] = shell;
         return shellArray;
     }
 
     // get all indexes for a given tokenId by combining arrays
-    function getIndexes(uint256 _tokenId) public view returns (uint[] memory indexes) {
-        uint[] memory allIndexes = combineUintArrays(getShell(), combineUintArrays(getRWPositions(_tokenId), combineUintArrays(getLWPositions(_tokenId), getFPositions(_tokenId))));
+    function getIndexes(uint256 _tokenId) public view returns (uint256[] memory indexes) {
+        uint256[] memory allIndexes = combineUintArrays(
+            getShell(),
+            combineUintArrays(
+                getRWPositions(_tokenId),
+                combineUintArrays(getLWPositions(_tokenId), getFPositions(_tokenId))
+            )
+        );
         return allIndexes;
     }
 
     //["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"]
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
-			string memory jsonInitial = string.concat(
-					'{"name": "Clifford # ',
-					Strings.toString(_tokenId),
-					'", "description": "Clifford nft description", "attributes": [{"trait_type": "Shell", "value":"',
-					Strings.toString(getShell()[0]),
-					'"}, {"trait_type": "Right Frame", "value":"',
-					Strings.toString(getRWPositions(_tokenId)[0]),
-					'"}, {"trait_type": "Right Clock", "value":"',
-					Strings.toString(getRWPositions(_tokenId)[1]),
-					'"}, {"trait_type": "Left Frame", "value":"',
-					Strings.toString(getLWPositions(_tokenId)[0]),
-					'"}, {"trait_type": "Altar", "value":"',
-					Strings.toString(getFPositions(_tokenId)[0]),
-					'"}, {"trait_type": "Props", "value":"',
-					Strings.toString(getFPositions(_tokenId)[1]),
-					'"}],',
-          '"image": "',
-          _imageURI,
-          Strings.toString(_tokenId),
-          '.png", "animation_url": "data:text/html;base64,'
-			);
+        string memory jsonInitial = string.concat(
+            '{"name": "Clifford # ',
+            Strings.toString(_tokenId),
+            '", "description": "Clifford nft description", "attributes": [{"trait_type": "Shell", "value":"',
+            Strings.toString(getShell()[0]),
+            '"}, {"trait_type": "Right Frame", "value":"',
+            Strings.toString(getRWPositions(_tokenId)[0]),
+            '"}, {"trait_type": "Right Clock", "value":"',
+            Strings.toString(getRWPositions(_tokenId)[1]),
+            '"}, {"trait_type": "Left Frame", "value":"',
+            Strings.toString(getLWPositions(_tokenId)[0]),
+            '"}, {"trait_type": "Altar", "value":"',
+            Strings.toString(getFPositions(_tokenId)[0]),
+            '"}, {"trait_type": "Props", "value":"',
+            Strings.toString(getFPositions(_tokenId)[1]),
+            '"}],',
+            '"image": "',
+            _imageURI,
+            Strings.toString(_tokenId),
+            '.png", "animation_url": "data:text/html;base64,'
+        );
 
-			string memory jsonFinal = Base64.encode(
-					bytes(
-							string.concat(
-									jsonInitial,
-									_compose.composeHTML(getIndexes(_tokenId)),
-									'"}'
-							)
-					)
-			);
+        string memory jsonFinal = Base64.encode(
+            bytes(string.concat(jsonInitial, _compose.composeHTML(getIndexes(_tokenId)), '"}'))
+        );
 
-			string memory output = string.concat("data:application/json;base64,", jsonFinal);
-			return output;
-		}
+        string memory output = string.concat("data:application/json;base64,", jsonFinal);
+        return output;
+    }
 }
