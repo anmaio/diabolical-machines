@@ -11,14 +11,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "base64-sol/base64.sol";
 import "./Metadata.sol";
-import "./VRFv2SubscriptionManager.sol";
-import "./TokenSwap.sol";
-
-interface IWETH is IERC20 {
-    function deposit() external payable;
-
-    function withdraw(uint256) external;
-}
+import "./VRFv2Consumer.sol";
 
 contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable, ERC721Burnable {
     using Counters for Counters.Counter;
@@ -28,28 +21,10 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
     // bool public saleComplete = false;
     Metadata private _metadata;
 
-    bool public constant CHAINLINK = true;
+    VRFv2Consumer private _VRF;
 
-    uint256 public currentLinkBalance = 0;
-    uint256 public totalLinkNeeded = 0.8 * 10000 * 1e18; // 0.5 * 10k LINK
-    uint256 public totalLinkSwapped = 0;
-    // when link dips below this value go and swap some eth for link
-    uint256 minimumLink = 20 * 1e18; // 20 Link
-
-    address private weth = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6;
-    address private link = 0x326C977E6efc84E512bB9C30f76E30c160eD06FB;
-
-    address private topUpAddress = msg.sender;
-
-    LinkTokenInterface LINKTOKEN = LinkTokenInterface(link);
-
-    TokenSwap private _tokenSwap;
-
-    VRFv2SubscriptionManager private _VRF;
-
-    constructor(Metadata metadata, TokenSwap tokenswap) ERC721("Clifford", "o") {
+    constructor(Metadata metadata) ERC721("Clifford", "o") {
         _metadata = metadata;
-        _tokenSwap = tokenswap;
     }
 
     function pause() public onlyOwner {
@@ -60,11 +35,7 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
         _unpause();
     }
 
-    function setTopUpAddress(address topUp) public onlyOwner {
-        topUpAddress = topUp;
-    }
-
-    function setSubscriptionManager(VRFv2SubscriptionManager vrf) public onlyOwner {
+    function setVRFConsumer(VRFv2Consumer vrf) public onlyOwner {
         _VRF = vrf;
     }
 
@@ -74,48 +45,11 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
         return number;
     }
 
-    function wethToLink(uint256 balance) public {
-        IWETH(weth).approve(address(_tokenSwap), balance);
-        uint256 linkSwapped = _tokenSwap.swapExactInputSingle(balance);
-        totalLinkSwapped += linkSwapped;
-    }
-
-    function convertToWeth(uint256 amount) public payable {
-        uint256 eth = amount;
-        IWETH(weth).deposit{ value: eth }();
-    }
-
-    function getWethBalance() public view returns (uint256) {
-        return IWETH(weth).balanceOf(address(this));
-    }
-
-    function safeMint(address to) public payable {
+    function safeMint(address to) public {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        if (CHAINLINK) {
-            onMint(tokenId);
-        } else {
-            uint256 rand = randomNumber();
-            _metadata.generateAllPositions(tokenId, rand);
-        }
-    }
-
-    function onMint(uint256 _tokenId) internal {
-        if (totalLinkSwapped < totalLinkNeeded) {
-            convertToWeth(address(this).balance);
-        } else if (LINKTOKEN.balanceOf(address(_VRF)) < minimumLink) {
-            // 20 LINK
-            convertToWeth(1 ether);
-        }
-        uint256 balance = IWETH(weth).balanceOf(address(this));
-        if (balance > 0) {
-            wethToLink(balance);
-            uint256 linkBalance = LINKTOKEN.balanceOf(address(this));
-            LINKTOKEN.transfer(address(_VRF), linkBalance);
-            _VRF.topUpSubscription(linkBalance);
-        }
-        _VRF.requestRandomWords(_tokenId);
+        _VRF.requestRandomWords(tokenId);
     }
 
     function tokenURI(uint256 _tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
