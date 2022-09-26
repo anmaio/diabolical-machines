@@ -21,8 +21,6 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
     // bool public saleComplete = false;
     Metadata private _metadata;
 
-    bool public constant CHAINLINK = true;
-
     VRFv2Consumer private _VRF;
 
     constructor(Metadata metadata) ERC721("Clifford", "o") {

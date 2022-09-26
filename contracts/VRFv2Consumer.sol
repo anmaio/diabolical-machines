@@ -16,6 +16,9 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
     VRFCoordinatorV2Interface COORDINATOR;
     LinkTokenInterface LINKTOKEN;
 
+    // testing variable for local node or to save time on testnet
+    bool public constant PSUEDO_RANDOM = false;
+
     // emit tokenId when random number is generated
     event RandomNumberGenerated(uint256 tokenId);
 
@@ -74,15 +77,22 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
 
     // Assumes the subscription is funded sufficiently.
     function requestRandomWords(uint256 _tokenId) external {
-        // Will revert if subscription is not set and funded.
-        uint256 s_requestId = COORDINATOR.requestRandomWords(
-            keyHash,
-            s_subscriptionId,
-            requestConfirmations,
-            callbackGasLimit,
-            numWords
-        );
-        requestIdToTokenId[s_requestId] = _tokenId;
+        if (!PSUEDO_RANDOM) {
+            // Will revert if subscription is not set and funded.
+            uint256 s_requestId = COORDINATOR.requestRandomWords(
+                keyHash,
+                s_subscriptionId,
+                requestConfirmations,
+                callbackGasLimit,
+                numWords
+            );
+            requestIdToTokenId[s_requestId] = _tokenId;
+        } else {
+            tokenIdToRandomWord[_tokenId] = uint256(
+                keccak256(abi.encodePacked(block.timestamp, msg.sender, block.difficulty))
+            );
+            emit RandomNumberGenerated(_tokenId);
+        }
     }
 
     function fulfillRandomWords(
