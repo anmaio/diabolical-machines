@@ -2,7 +2,6 @@
 pragma solidity ^0.8.12;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "base64-sol/base64.sol";
-import "./Helper.sol";
 import "./SharedAssets.sol";
 
 contract Compose {
@@ -17,13 +16,13 @@ contract Compose {
     // compose SVG
     function composeSVG(uint256[] memory positions) public view returns (string memory) {
       string memory svgStart = _sharedAssets.getSvgStart();
-      string memory data = composeDataSVG(positions);
+      string memory data = composeData(positions);
       string memory svgEnd = _sharedAssets.getSvgEnd();
       // return all svg's concatenated together and base64 encoded
       return Base64.encode(bytes(string.concat(svgStart, data, svgEnd)));
     }
 
-    function composeDataSVG(uint256[] memory positions) public view returns (string memory) {
+    function composeData(uint256[] memory positions) public view returns (string memory) {
       string memory output;
       uint x = 100;
       uint y = 100;
