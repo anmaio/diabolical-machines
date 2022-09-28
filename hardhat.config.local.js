@@ -31,6 +31,15 @@ task("deploy-local", "Deploys contract", async (taskArgs, hre) => {
   const clifford = await Clifford.deploy(metadata.address);
   await clifford.deployed();
 
+  const VRFv2Consumer = await hre.ethers.getContractFactory("VRFv2Consumer");
+  const vrfv2Consumer = await VRFv2Consumer.deploy(clifford.address);
+  await vrfv2Consumer.deployed();
+
+  const tx = await metadata.setVRFConsumer(vrfv2Consumer.address);
+  await tx.wait();
+  const tx2 = await clifford.setVRFConsumer(vrfv2Consumer.address);
+  await tx2.wait();
+
   // Push to Ethernal if enabled
   await hre.ethernal.push({
     name: 'Clifford',

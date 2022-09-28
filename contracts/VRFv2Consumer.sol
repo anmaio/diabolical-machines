@@ -17,7 +17,7 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
     LinkTokenInterface LINKTOKEN;
 
     // testing variable for local node or to save time on testnet
-    bool public constant PSUEDO_RANDOM = false;
+    bool public constant PSUEDO_RANDOM = true;
 
     // emit tokenId when random number is generated
     event RandomNumberGenerated(uint256 tokenId);

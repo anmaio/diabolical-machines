@@ -19,7 +19,7 @@ contract Compose {
 
     constructor() {
         // _html.baseURI = "https://anma.mypinata.cloud/ipfs/QmYSYKJrnZhFB3KUVXvWGimC7n39pscMMcqVWKvgqWqy4a/";
-        _html.baseURI = "https://anma.mypinata.cloud/ipfs/QmRc1mVmmMGaGgzUz8twnfxkQ6BTjib36JN72UW7cSV3Xr/";
+        _html.baseURI = "https://anma.mypinata.cloud/ipfs/QmfXLhvWWb6oA2eY3iCwZewPNJzcDyXKnYmhNo6kjex97o/";
         _html
             .header = "<!DOCTYPE html><html lang=''><head><meta charset='UTF-8'><title>html-ipfs-test</title><style></style></head><body><canvas id='canvas'></canvas>";
         _html
@@ -33,7 +33,7 @@ contract Compose {
         _html.functionRightWall = ", f: 'placeRightWallObject', u: '";
         _html.functionLeftWall = ", f: 'placeLeftWallObject', u: '";
         _html.functionFloor = ", f: 'placeFloorObject', u: '";
-        _html.fileExtension = ".svg";
+        _html.fileExtension = ".png";
         _html.arrayClose = "];";
         _html.footer = "prepare(); </script> </body> </html> ";
     }
