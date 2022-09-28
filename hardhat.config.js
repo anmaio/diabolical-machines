@@ -13,9 +13,13 @@ task("deploy", "Deploy contract to testnet and mainnet")
         console.log("Deploying contracts with the account:", deployer.address);
         console.log("Account balance:", (await deployer.getBalance()).toString())
 
+        const SharedAssets = await hre.ethers.getContractFactory("SharedAssets");
+        const sharedAssets = await SharedAssets.deploy();
+        await sharedAssets.deployed();
+        
         // Deploy contracts
         const Compose = await hre.ethers.getContractFactory("Compose");
-        const compose = await Compose.deploy();
+        const compose = await Compose.deploy(sharedAssets.address);
         await compose.deployed();
 
         const Metadata = await hre.ethers.getContractFactory("Metadata");

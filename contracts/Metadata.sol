@@ -191,13 +191,11 @@ contract Metadata is Ownable {
 
     // get all indexes for a given tokenId by combining arrays
     function getIndexes(uint256 _tokenId) public view returns (uint256[] memory indexes) {
-        uint256[] memory allIndexes = combineUintArrays(
-            getShell(),
+        uint256[] memory allIndexes = 
             combineUintArrays(
                 getRWPositions(_tokenId),
                 combineUintArrays(getLWPositions(_tokenId), getFPositions(_tokenId))
-            )
-        );
+            );
         return allIndexes;
     }
 
@@ -207,9 +205,7 @@ contract Metadata is Ownable {
         string memory jsonInitial = string.concat(
             '{"name": "Clifford # ',
             Strings.toString(_tokenId),
-            '", "description": "Clifford nft description", "attributes": [{"trait_type": "Shell", "value":"',
-            Strings.toString(getShell()[0]),
-            '"}, {"trait_type": "Right Frame", "value":"',
+            '", "description": "Clifford nft description", "attributes": [{"trait_type": "Right Frame", "value":"',
             Strings.toString(getRWPositions(_tokenId)[0]),
             '"}, {"trait_type": "Right Clock", "value":"',
             Strings.toString(getRWPositions(_tokenId)[1]),
@@ -227,7 +223,7 @@ contract Metadata is Ownable {
         );
 
         string memory jsonFinal = Base64.encode(
-            bytes(string.concat(jsonInitial, _compose.composeHTML(getIndexes(_tokenId)), '"}'))
+            bytes(string.concat(jsonInitial, _compose.composeSVG(getIndexes(_tokenId)), '"}'))
         );
 
         string memory output = string.concat("data:application/json;base64,", jsonFinal);
