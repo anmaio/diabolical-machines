@@ -191,11 +191,10 @@ contract Metadata is Ownable {
 
     // get all indexes for a given tokenId by combining arrays
     function getIndexes(uint256 _tokenId) public view returns (uint256[] memory indexes) {
-        uint256[] memory allIndexes = 
-            combineUintArrays(
-                getRWPositions(_tokenId),
-                combineUintArrays(getLWPositions(_tokenId), getFPositions(_tokenId))
-            );
+        uint256[] memory allIndexes = combineUintArrays(
+            getRWPositions(_tokenId),
+            combineUintArrays(getLWPositions(_tokenId), getFPositions(_tokenId))
+        );
         return allIndexes;
     }
 

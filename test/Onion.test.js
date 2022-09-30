@@ -1,6 +1,8 @@
 const assert = require("assert");
 const { ethers } = require("hardhat");
 
+const SHARED_ASSETS_PRE = "SharedAssets";
+
 const CONTRACT_NAME_PRE = "Compose"
 const CONTRACT_NAME = "Clifford"
 
@@ -13,8 +15,10 @@ let contract;
 let signer;
 
 beforeEach(async () => {
+    const SharedAssets = await ethers.getContractFactory(SHARED_ASSETS_PRE);
+    const sharedAssets = await SharedAssets.deploy();
     const Compose = await ethers.getContractFactory(CONTRACT_NAME_PRE);
-    const compose = await Compose.deploy();
+    const compose = await Compose.deploy(sharedAssets.address);
     const factory = await ethers.getContractFactory(CONTRACT_NAME);
     contract = await factory.deploy(compose.address);
     await contract.deployTransaction.wait();
