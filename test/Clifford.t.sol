@@ -19,13 +19,14 @@ contract CliffordTest is Test {
         sharedAssets = new SharedAssets();
         compose = new Compose(sharedAssets);
         metadata = new Metadata(compose);
+        clifford = new Clifford(metadata);
         // vrfV2Consumer = new VRFv2Consumer(address(clifford));
 
         // metadata.setVRFConsumer(vrfV2Consumer);
         // clifford.setVRFConsumer(vrfV2Consumer);
     }
-
-    function testItDeploys() public {
-        clifford = new Clifford(metadata);
+    
+    function testItReturnsRandom() public view {
+        clifford.randomNumber();
     }
 }

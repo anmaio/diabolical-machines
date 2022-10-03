@@ -33,7 +33,7 @@ stages:
               docker compose up dev --build --detach --no-color --quiet-pull
               docker compose exec dev forge install
               docker compose exec dev forge build --names --sizes --via-ir
-              docker compose exec dev forge test --gas-report --via-ir
+              docker compose exec dev forge test --gas-report --via-ir -vvvv
             displayName: Run unit tests
           - template: pipeline/templates/docker-cleanup.yml@self
 
