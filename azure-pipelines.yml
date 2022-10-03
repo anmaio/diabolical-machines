@@ -1,9 +1,15 @@
+# trigger:
+#   branches:
+#     include:
+#     - release/*
+#     exclude:
+#     - feature/*
+
 trigger:
   branches:
     include:
-    - release/*
-    exclude:
     - feature/*
+    - release/*
 
 name: $(Build.SourceBranchName)_$(date:yyyyMMdd)$(rev:.r)
 
@@ -11,18 +17,14 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-- name: dotenvFileDev
-  value: '.dev.env'
-- name: dotenvFileNode
-  value: '.node.env'
-- name: dotenvFileClient
-  value: '.client.env'
+- name: dotenvFile
+  value: '.env'
 
 stages:
 # Run unit tests
 - stage: test
   displayName: 'Test'
-  condition: eq(variables['build.reason'], 'PullRequest')
+  # condition: eq(variables['build.reason'], 'PullRequest')
   jobs:
   - deployment: test
     displayName: Unit tests
@@ -35,8 +37,9 @@ stages:
           - template: pipeline/templates/dotenv-download.yml@self
           - script: |
               docker compose up dev --build --detach --no-color --quiet-pull
-              docker compose exec dev yarn install
-              docker compose exec dev yarn test:local
+              docker compose exec dev forge install
+              docker compose exec dev forge build --names --sizes
+              docker compose exec dev forge test --gas-report
             displayName: Run unit tests
           - template: pipeline/templates/docker-cleanup.yml@self
 
@@ -57,22 +60,13 @@ stages:
           - template: pipeline/templates/dotenv-download.yml@self
           - script: |
               docker compose up dev --build --detach --no-color --quiet-pull
-              docker compose exec dev yarn install
-              docker compose exec dev yarn deploy:goerli
+              docker compose exec dev forge install
+              docker compose exec dev forge build --names --sizes
+              docker compose exec dev forge script script/Composer.s.sol:ComposerScript --rpc-url $GOERLI_RPC_URL --broadcast --verify -vvvv
             name: deploy
             displayName: Run deployment
           - template: pipeline/templates/docker-cleanup.yml@self
           # - Publish ABI to artifact repository
-  # Replace placeholder job with job to deploy test front end
-
-  # - job: downlad abi and inject into source folder
-  #   - checkout: appRepo
-  - job: testApp
-    displayName: Deploy test app
-    dependsOn: testnet
-    steps:
-      - script: |
-          echo "PLACEHOLDER: Deploy your test front end app here..."
 
 # Deploy to mainnet
 - stage: prodution
@@ -90,10 +84,11 @@ stages:
           - checkout: self
           - template: pipeline/templates/dotenv-download.yml@self
           # Replace placeholder with 'docker compose exec dev yarn deploy:mainnet'
+          #   - Replace echo with: docker compose exec dev forge script script/Composer.s.sol:ComposerScript --rpc-url $MAINNET_RPC_URL --broadcast --verify -vvvv
           - script: |
               docker compose up dev --build --detach --no-color --quiet-pull
-              docker compose exec dev yarn install
-              docker compose exec dev yarn compile:local
+              docker compose exec dev forge install
+              docker compose exec dev forge build --names --sizes
               echo "PLACEHOLDER: Successfully deployed to mainnet."
             name: deploy
             displayName: Run deployment
