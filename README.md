@@ -1,15 +1,7 @@
-# Basic Sample Hardhat Project
+forge build --via-ir
+forge test --via-ir -vvvv
+forge script script/Clifford.s.sol:CliffordScript --fork-url http://localhost:8545 --via-ir --broadcast -vvvv
+forge script script/Clifford.s.sol:CliffordScript --fork-url https://goerli.infura.io/v3/63f1a12625cf485cb768cd39a01044da --via-ir --broadcast --verify -vvvv
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+docker compose up build
+docker compose up test
