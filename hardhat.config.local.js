@@ -17,10 +17,14 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 
 task("deploy-local", "Deploys contract", async (taskArgs, hre) => {
+
+  const SharedAssets = await hre.ethers.getContractFactory("SharedAssets");
+  const sharedAssets = await SharedAssets.deploy();
+  await sharedAssets.deployed();
   
   // Deploy contracts
   const Compose = await hre.ethers.getContractFactory("Compose");
-  const compose = await Compose.deploy();
+  const compose = await Compose.deploy(sharedAssets.address);
   await compose.deployed();
 
   const Metadata = await hre.ethers.getContractFactory("Metadata");
