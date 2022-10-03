@@ -78,7 +78,7 @@ contract Compose {
     }
 
     // compose SVG
-    function composeSVG(string[][3] memory objects, uint[] memory indexes) public view returns (string memory) {
+    function composeSVG(string[] memory objects, uint[] memory indexes) public view returns (string memory) {
         string memory svgStart = _sharedAssets.getSvgStart();
         string memory data = composeData(objects, indexes);
         string memory svgEnd = _sharedAssets.getSvgEnd();
@@ -86,7 +86,7 @@ contract Compose {
         return Base64.encode(bytes(string.concat(svgStart, data, svgEnd)));
     }
 
-    function composeData(string[][3] memory objects, uint[] memory indexes) public view returns (string memory) {
+    function composeData(string[] memory objects, uint[] memory indexes) public view returns (string memory) {
       string memory output;
       
       // string[2] memory testRObjects = ["frame", "clock"];
@@ -127,7 +127,7 @@ contract Compose {
         output = string.concat(
           output,
           _sharedAssets.getGMid(),
-          _sharedAssets.getObjects(i),
+          _sharedAssets.getObjects(objects[i]),
           _sharedAssets.getGEnd()
         );
         
