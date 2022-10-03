@@ -3,7 +3,6 @@ pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "base64-sol/base64.sol";
-// import "hardhat/console.sol";
 import "./Compose.sol";
 import "./VRFv2Consumer.sol";
 
@@ -13,9 +12,9 @@ contract Metadata is Ownable {
 
     string[] public floorTraits = ["altar", "props"];
     uint256[] public floorProbabilities = [100, 100];
-    string[] public leftWallTraits = ["frame"];
+    string[] public leftWallTraits = ["lFrame"];
     uint256[] public leftWallProbabilities = [100];
-    string[] public rightWallTraits = ["frame", "clock"];
+    string[] public rightWallTraits = ["rFrame", "rClock"];
     uint256[] public rightWallProbabilities = [100, 100];
 
     uint256 public constant MAX_GRID_INDEX = 8;
@@ -176,6 +175,17 @@ contract Metadata is Ownable {
         return c;
     }
 
+    function combineStringArrays(string[] memory a, string[] memory b) public pure returns (string[] memory) {
+        string[] memory c = new string[](a.length + b.length);
+        for (uint256 i = 0; i < a.length; i++) {
+            c[i] = a[i];
+        }
+        for (uint256 i = 0; i < b.length; i++) {
+            c[i + a.length] = b[i];
+        }
+        return c;
+    }
+
     // // alternative selctShell
     // function getShell() public pure returns (uint256[] memory shellNumber) {
     //     uint256 shell = 8;
@@ -255,9 +265,8 @@ contract Metadata is Ownable {
       );
 
         string memory jsonFinal = Base64.encode(
-            bytes(string.concat(jsonInitial, _compose.composeSVG([getObjectsFromGrid(getRWGrid(_tokenId)), getObjectsFromGrid(getLWGrid(_tokenId)), getObjectsFromGrid(getFGrid(_tokenId))], combineUintArrays(combineUintArrays(getIndexesFromGrid(getRWGrid(_tokenId)), getIndexesFromGrid(getLWGrid(_tokenId))), getIndexesFromGrid(getFGrid(_tokenId)))), '"}'))
+            bytes(string.concat(jsonInitial, _compose.composeSVG(combineStringArrays(getObjectsFromGrid(getRWGrid(_tokenId)), combineStringArrays(getObjectsFromGrid(getLWGrid(_tokenId)), getObjectsFromGrid(getFGrid(_tokenId)))), combineUintArrays(combineUintArrays(getIndexesFromGrid(getRWGrid(_tokenId)), getIndexesFromGrid(getLWGrid(_tokenId))), getIndexesFromGrid(getFGrid(_tokenId)))), '"}'))
         );
-
         string memory output = string.concat("data:application/json;base64,", jsonFinal);
         return output;
     }

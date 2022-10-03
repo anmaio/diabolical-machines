@@ -29,7 +29,8 @@
 				"ms-azure-devops.azure-pipelines",
 				"ms-azuretools.vscode-docker",
 				"JuanBlanco.solidity",
-				"mikestead.dotenv"
+				"mikestead.dotenv",
+				"github.copilot"
 			]
 		}
 	},

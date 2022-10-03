@@ -51,7 +51,7 @@ services:
     build:
       context: .
     container_name: frhtmlipfs_test
-    entrypoint: ["forge", "test", "--via-ir"]
+    entrypoint: ["forge", "test", "--via-ir", "-vvvv"]
     env_file:
       - '.env'
     network_mode: "host"

@@ -56,8 +56,6 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
         return _metadata.buildMetadata(_tokenId);
     }
 
-    // The following functions are overrides required by Solidity.
-
     function _beforeTokenTransfer(
         address from,
         address to,
@@ -65,6 +63,8 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
     ) internal override(ERC721, ERC721Enumerable) whenNotPaused {
         super._beforeTokenTransfer(from, to, tokenId);
     }
+
+    // The following functions are overrides required by Solidity.
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);

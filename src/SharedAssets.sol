@@ -2,6 +2,9 @@
 pragma solidity ^0.8.12;
 
 contract SharedAssets {
+
+    mapping(string => string) internal objectToSVG;
+
     // opening svg start tag and grid
     string public constant SVG_START =
         "<svg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' width='846' height='846'> <path d='M0 178.92 423 0m0 0 423 181.128m0 0v481.536m0 0L423 846m0 0L0 662.664m0-.001V178.92M423 0v474.908m0 .001 423 187.754M423 474.909 0 662.663M141.369 119.28l2.208 479.326M280.527 59.64v479.326M561.055 57.43v481.536M702.423 119.28l2.208 479.326M141.368 724.512l419.686-185.546M280.527 786.36l421.896-187.754m-561.055 0L561.054 786.36M280.527 538.966l421.896 185.546M0 342.376 423 159.04m0 0 423 183.336M0 501.415l423-183.336m0 0 423 183.336' fill='none' stroke='#3f5787' stroke-width='3'/>";
@@ -30,7 +33,13 @@ contract SharedAssets {
     string public constant G_MID = ")'>";
     string public constant G_END = "</g>";
 
-    string[] public objects = [RIGHT_FRAME, RIGHT_CLOCK, LEFT_FRAME, ALTAR, PROPS];
+    constructor() {
+      objectToSVG["altar"] = ALTAR;
+      objectToSVG["props"] = PROPS;
+      objectToSVG["lFrame"] = LEFT_FRAME;
+      objectToSVG["rFrame"] = RIGHT_FRAME;
+      objectToSVG["rClock"] = RIGHT_CLOCK;
+    }
 
     // getters for each string
     function getSvgStart() external pure returns (string memory) {
@@ -61,7 +70,7 @@ contract SharedAssets {
         return G_END;
     }
 
-    function getObjects(uint256 index) external view returns (string memory) {
-        return objects[index];
+    function getObjects(string memory object) external view returns (string memory) {
+        return objectToSVG[object];
     }
 }
