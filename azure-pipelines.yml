@@ -38,8 +38,8 @@ stages:
           - script: |
               docker compose up dev --build --detach --no-color --quiet-pull
               docker compose exec dev forge install
-              docker compose exec dev forge build --names --sizes
-              docker compose exec dev forge test --gas-report
+              docker compose exec dev forge build --names --sizes --via-ir
+              docker compose exec dev forge test --gas-report --via-ir
             displayName: Run unit tests
           - template: pipeline/templates/docker-cleanup.yml@self
 
@@ -61,8 +61,8 @@ stages:
           - script: |
               docker compose up dev --build --detach --no-color --quiet-pull
               docker compose exec dev forge install
-              docker compose exec dev forge build --names --sizes
-              docker compose exec dev forge script script/Composer.s.sol:ComposerScript --rpc-url $GOERLI_RPC_URL --broadcast --verify -vvvv
+              docker compose exec dev forge build --names --sizes --via-ir
+              docker compose exec dev forge script script/Composer.s.sol:ComposerScript  --via-ir --rpc-url $GOERLI_RPC_URL --broadcast --verify -vvvv
             name: deploy
             displayName: Run deployment
           - template: pipeline/templates/docker-cleanup.yml@self
@@ -88,7 +88,7 @@ stages:
           - script: |
               docker compose up dev --build --detach --no-color --quiet-pull
               docker compose exec dev forge install
-              docker compose exec dev forge build --names --sizes
+              docker compose exec dev forge build --names --sizes --via-ir
               echo "PLACEHOLDER: Successfully deployed to mainnet."
             name: deploy
             displayName: Run deployment
