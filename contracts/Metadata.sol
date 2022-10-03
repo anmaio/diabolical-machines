@@ -20,9 +20,9 @@ contract Metadata is Ownable {
 
     uint256 public constant MAX_GRID_INDEX = 8;
 
-    uint public constant MAX_RIGHT_WALL_OBJECTS = 2;
-    uint public constant MAX_LEFT_WALL_OBJECTS = 1;
-    uint public constant MAX_FLOOR_OBJECTS = 2;    
+    uint256 public constant MAX_RIGHT_WALL_OBJECTS = 2;
+    uint256 public constant MAX_LEFT_WALL_OBJECTS = 1;
+    uint256 public constant MAX_FLOOR_OBJECTS = 2;
 
     // tokenId -> [position]
     mapping(uint256 => uint256[]) public traitPositions;
@@ -30,7 +30,7 @@ contract Metadata is Ownable {
     string[9] public emptyGrid;
 
     string[9] public noRow1Grid = ["x", "x", "x", "", "", "", "", "", ""];
-    
+
     // A grid might look like this:
     // string[9] public exampleGrid = [
     //     "x", "x", "x",
@@ -104,11 +104,11 @@ contract Metadata is Ownable {
         for (uint256 i = 0; i < leftWallTraits.length; i++) {
             uint256 probability = rand % 100;
             uint256 index = 9;
-            
+
             if (probability < leftWallProbabilities[i]) {
-              // cannot go on the bottom row of the wall
-              uint256 position = (rand % 6) + 3;
-              (newGrid, index) = pickPosition(newGrid, leftWallTraits[i], position);
+                // cannot go on the bottom row of the wall
+                uint256 position = (rand % 6) + 3;
+                (newGrid, index) = pickPosition(newGrid, leftWallTraits[i], position);
             }
             rand = rand / 100;
         }
@@ -196,45 +196,51 @@ contract Metadata is Ownable {
     // }
 
     function getObjectsFromGrid(string[9] memory grid) public pure returns (string[] memory objects) {
-      uint count = 0;
-      string[] memory tempArray = new string[](9);
-      for (uint256 i = 0; i < grid.length; i++) {
-        if (keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("")) && keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("x"))) {
-            tempArray[count] = grid[i];
-            count++;
+        uint256 count = 0;
+        string[] memory tempArray = new string[](9);
+        for (uint256 i = 0; i < grid.length; i++) {
+            if (
+                keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("")) &&
+                keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("x"))
+            ) {
+                tempArray[count] = grid[i];
+                count++;
+            }
         }
-      }
-      string[] memory objectArray = new string[](count);
-      for (uint256 i = 0; i < count; i++) {
-        objectArray[i] = tempArray[i];
-      }
-      return objectArray;
+        string[] memory objectArray = new string[](count);
+        for (uint256 i = 0; i < count; i++) {
+            objectArray[i] = tempArray[i];
+        }
+        return objectArray;
     }
 
     function getIndexesFromGrid(string[9] memory grid) public pure returns (uint256[] memory indexes) {
-      uint count = 0;
-      uint256[] memory tempArray = new uint256[](9);
-      for (uint256 i = 0; i < grid.length; i++) {
-        if (keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("")) && keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("x"))) {
-          tempArray[count] = i;
-          count++;
+        uint256 count = 0;
+        uint256[] memory tempArray = new uint256[](9);
+        for (uint256 i = 0; i < grid.length; i++) {
+            if (
+                keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("")) &&
+                keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("x"))
+            ) {
+                tempArray[count] = i;
+                count++;
+            }
         }
-      }
-      uint[] memory indexArray = new uint[](count);
-      for (uint256 i = 0; i < count; i++) {
-        indexArray[i] = tempArray[i];
-      }
-      return indexArray;
+        uint256[] memory indexArray = new uint256[](count);
+        for (uint256 i = 0; i < count; i++) {
+            indexArray[i] = tempArray[i];
+        }
+        return indexArray;
     }
 
-    function padGrid(string[] memory grid, uint finalSize) public pure returns (string[] memory newGrid) {
+    function padGrid(string[] memory grid, uint256 finalSize) public pure returns (string[] memory newGrid) {
         newGrid = new string[](finalSize);
         for (uint256 i = 0; i < newGrid.length; i++) {
-          if (i < grid.length) {
-            newGrid[i] = grid[i];
-          } else {
-            newGrid[i] = "None";
-          }
+            if (i < grid.length) {
+                newGrid[i] = grid[i];
+            } else {
+                newGrid[i] = "None";
+            }
         }
         return newGrid;
     }
@@ -242,31 +248,52 @@ contract Metadata is Ownable {
     //["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"]
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
-      // string[] memory rwObjects = getObjectsFromGrid(getRWGrid(_tokenId));
-      // string[] memory lwObjects = getObjectsFromGrid(getLWGrid(_tokenId));
-      // string[] memory fObjects = getObjectsFromGrid(getFGrid(_tokenId));
-      string memory jsonInitial = string.concat(
-          '{"name": "Clifford # ',
-          Strings.toString(_tokenId),
-          '", "description": "Clifford nft description", "attributes": [{"trait_type": "Right Wall 1", "value":"',
-          padGrid(getObjectsFromGrid(getRWGrid(_tokenId)), MAX_RIGHT_WALL_OBJECTS)[0],
-          '"}, {"trait_type": "Right Wall 2", "value":"',
-          padGrid(getObjectsFromGrid(getRWGrid(_tokenId)), MAX_RIGHT_WALL_OBJECTS)[1],
-          '"}, {"trait_type": "Left Wall 1", "value":"',
-          padGrid(getObjectsFromGrid(getLWGrid(_tokenId)), MAX_LEFT_WALL_OBJECTS)[0],
-          '"}, {"trait_type": "Floor 1", "value":"',
-          padGrid(getObjectsFromGrid(getFGrid(_tokenId)), MAX_FLOOR_OBJECTS)[0],
-          '"}, {"trait_type": "Floor 2", "value":"',
-          padGrid(getObjectsFromGrid(getFGrid(_tokenId)), MAX_FLOOR_OBJECTS)[1],
-          '"}],',
-          '"image": "',
-          _imageURI,
-          Strings.toString(_tokenId),
-          '.png", "animation_url": "data:text/html;base64,'
-      );
+        // string[] memory rwObjects = getObjectsFromGrid(getRWGrid(_tokenId));
+        // string[] memory lwObjects = getObjectsFromGrid(getLWGrid(_tokenId));
+        // string[] memory fObjects = getObjectsFromGrid(getFGrid(_tokenId));
+        string memory jsonInitial = string.concat(
+            '{"name": "Clifford # ',
+            Strings.toString(_tokenId),
+            '", "description": "Clifford nft description", "attributes": [{"trait_type": "Right Wall 1", "value":"',
+            padGrid(getObjectsFromGrid(getRWGrid(_tokenId)), MAX_RIGHT_WALL_OBJECTS)[0],
+            '"}, {"trait_type": "Right Wall 2", "value":"',
+            padGrid(getObjectsFromGrid(getRWGrid(_tokenId)), MAX_RIGHT_WALL_OBJECTS)[1],
+            '"}, {"trait_type": "Left Wall 1", "value":"',
+            padGrid(getObjectsFromGrid(getLWGrid(_tokenId)), MAX_LEFT_WALL_OBJECTS)[0],
+            '"}, {"trait_type": "Floor 1", "value":"',
+            padGrid(getObjectsFromGrid(getFGrid(_tokenId)), MAX_FLOOR_OBJECTS)[0],
+            '"}, {"trait_type": "Floor 2", "value":"',
+            padGrid(getObjectsFromGrid(getFGrid(_tokenId)), MAX_FLOOR_OBJECTS)[1],
+            '"}],',
+            '"image": "',
+            _imageURI,
+            Strings.toString(_tokenId),
+            '.png", "animation_url": "data:text/html;base64,'
+        );
 
         string memory jsonFinal = Base64.encode(
-            bytes(string.concat(jsonInitial, _compose.composeSVG(combineStringArrays(getObjectsFromGrid(getRWGrid(_tokenId)), combineStringArrays(getObjectsFromGrid(getLWGrid(_tokenId)), getObjectsFromGrid(getFGrid(_tokenId)))), combineUintArrays(combineUintArrays(getIndexesFromGrid(getRWGrid(_tokenId)), getIndexesFromGrid(getLWGrid(_tokenId))), getIndexesFromGrid(getFGrid(_tokenId)))), '"}'))
+            bytes(
+                string.concat(
+                    jsonInitial,
+                    _compose.composeSVG(
+                        combineStringArrays(
+                            getObjectsFromGrid(getRWGrid(_tokenId)),
+                            combineStringArrays(
+                                getObjectsFromGrid(getLWGrid(_tokenId)),
+                                getObjectsFromGrid(getFGrid(_tokenId))
+                            )
+                        ),
+                        combineUintArrays(
+                            combineUintArrays(
+                                getIndexesFromGrid(getRWGrid(_tokenId)),
+                                getIndexesFromGrid(getLWGrid(_tokenId))
+                            ),
+                            getIndexesFromGrid(getFGrid(_tokenId))
+                        )
+                    ),
+                    '"}'
+                )
+            )
         );
         string memory output = string.concat("data:application/json;base64,", jsonFinal);
         return output;
