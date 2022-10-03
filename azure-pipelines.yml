@@ -1,15 +1,9 @@
-# trigger:
-#   branches:
-#     include:
-#     - release/*
-#     exclude:
-#     - feature/*
-
 trigger:
   branches:
     include:
-    - feature/*
     - release/*
+    exclude:
+    - feature/*
 
 name: $(Build.SourceBranchName)_$(date:yyyyMMdd)$(rev:.r)
 
@@ -24,7 +18,7 @@ stages:
 # Run unit tests
 - stage: test
   displayName: 'Test'
-  # condition: eq(variables['build.reason'], 'PullRequest')
+  condition: eq(variables['build.reason'], 'PullRequest')
   jobs:
   - deployment: test
     displayName: Unit tests
