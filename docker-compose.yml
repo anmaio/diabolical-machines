@@ -5,6 +5,8 @@ services:
   # Binds lcoal source dir and docker daemon as volumes
   node:
     build:
+      args:
+        - SOLC_VERSION=0.8.17
       context: .
     container_name: frhtmlipfs_anvil
     entrypoint: ["anvil"]
@@ -21,6 +23,8 @@ services:
   # Binds local source dir. docker daemon and git credential manager as volumes  
   dev:
     build:
+      args:
+        - SOLC_VERSION=0.8.17
       context: .
     container_name: frhtmlipfs_forge
     entrypoint: ["/docker/entrypoint.sh"]
