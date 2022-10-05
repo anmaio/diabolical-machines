@@ -8,7 +8,7 @@ import "../src/Metadata.sol";
 import "../src/VRFv2Consumer.sol";
 import "../src/SharedAssets.sol";
 
-contract CliffordTest is Test {
+contract SharedAssetsTest is Test {
     SharedAssets public sharedAssets;
     Compose public compose;
     Metadata public metadata;
@@ -25,14 +25,9 @@ contract CliffordTest is Test {
         metadata.setVRFConsumer(vrfV2Consumer);
         clifford.setVRFConsumer(vrfV2Consumer);
     }
-    
-    function testItReturnsRandom() public view {
-        clifford.randomNumber();
-    }
 
-    function testSafeMint() public {
-      address to = address(1337);
-      clifford.safeMint(to);
-      console.log(clifford.tokenURI(0));
+    function testGetSvgEnd() public {
+        string memory svgEnd = sharedAssets.getSvgEnd();
+        return assertEq(svgEnd, "</svg>");
     }
 }

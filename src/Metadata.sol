@@ -26,7 +26,7 @@ contract Metadata is Ownable {
     // tokenId -> [position]
     mapping(uint256 => uint256[]) public traitPositions;
 
-    string[9] public emptyGrid;
+    string[9] public emptyGrid = ["", "", "", "", "", "", "", "", ""];
 
     string[9] public noRow1Grid = ["x", "x", "x", "", "", "", "", "", ""];
     
