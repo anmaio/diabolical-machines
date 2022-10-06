@@ -149,10 +149,12 @@ contract Compose {
     // compose SVG
     function composeSVG(string[] memory objects, uint256[] memory indexes) public view returns (string memory) {
         string memory svgStart = _sharedAssets.getSvgStart();
+        string memory style = _sharedAssets.getStyle();
+        string memory shell = _sharedAssets.getObjects("shell");
         string memory data = composeData(objects, indexes);
         string memory svgEnd = _sharedAssets.getSvgEnd();
         // return all svg's concatenated together and base64 encoded
-        return Base64.encode(bytes(string.concat(svgStart, data, svgEnd)));
+        return Base64.encode(bytes(string.concat(svgStart, style, shell, data, svgEnd)));
     }
 
     function composeData(string[] memory objects, uint256[] memory indexes) internal view returns (string memory) {

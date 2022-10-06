@@ -261,7 +261,7 @@ contract Metadata is Ownable {
           '"image": "',
           _imageURI,
           Strings.toString(_tokenId),
-          '.png", "animation_url": "data:text/html;base64,'
+          '.png", "animation_url": "data:image/svg+xml;base64,'
       );
 
         string memory jsonFinal = Base64.encode(
