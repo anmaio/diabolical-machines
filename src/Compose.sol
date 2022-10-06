@@ -150,7 +150,7 @@ contract Compose {
     function composeSVG(string[] memory objects, uint256[] memory indexes) public view returns (string memory) {
         string memory svgStart = _sharedAssets.getSvgStart();
         string memory style = _sharedAssets.getStyle();
-        string memory shell = _sharedAssets.getObjects("shell");
+        string memory shell = _sharedAssets.getShell();
         string memory data = composeData(objects, indexes);
         string memory svgEnd = _sharedAssets.getSvgEnd();
         // return all svg's concatenated together and base64 encoded
@@ -165,7 +165,7 @@ contract Compose {
         // string[2] memory testFObjects = ["props", "altar"];
 
         for (uint256 i = 0; i < indexes.length; i++) {
-            output = string.concat(output, _sharedAssets.getGStart());
+            output = string.concat(output, _sharedAssets.getGTransform());
             // rw
             if (i < 2) {
                 output = string.concat(
@@ -190,7 +190,7 @@ contract Compose {
             output = string.concat(
                 output,
                 _sharedAssets.getGMid(),
-                _sharedAssets.getObjects(objects[i]),
+                _sharedAssets.getObject(objects[i], indexes[i]),
                 _sharedAssets.getGEnd()
             );
         }

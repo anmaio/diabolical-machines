@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract SharedAssets {
-    mapping(string => string) internal objectToSVG;
+    mapping(string => string[]) internal objectToSVG;
 
     // opening svg start tag and grid
     string internal constant SVG_START =
@@ -14,38 +15,57 @@ contract SharedAssets {
 
     // Floor Altar
     string internal constant ALTAR =
-        "<g id='props0'> <g id='bu-t'><svg width='312' height='360'><polygon class='g1' points='156,0 312,90 156,180 0,90' /></svg></g> <g id='bu-l'><svg width='312' height='360'><polygon class='g2' points='156,180 312,90 312,270 156,360' /></svg></g><g id='bu-r'><svg width='312' height='360'><polygon class='g3' points='156,180 156,360 0,270 0,90' /></svg><text class='bla'  x='156' y='85'><tspan>0</tspan></text></g></g>";
+        "<g id='props0'> <g id='bu-t'><svg width='312' height='360'><polygon class='g1' points='156,0 312,90 156,180 0,90' /></svg></g> <g id='bu-l'><svg width='312' height='360'><polygon class='g2' points='156,180 312,90 312,270 156,360' /></svg></g><g id='bu-r'><svg width='312' height='360'><polygon class='g3' points='156,180 156,360 0,270 0,90' /></svg>";
+    string internal constant ALTAR_TEXT_OPEN = "<text class='bla'  x='156' y='85'>";
+    // string internal constant ALTAR_TEXT_CLOSE = "</text>";
+    string internal constant ALTAR_END = "</g></g>";
+
 
     // Floor Props
     string internal constant PROPS =
-        "<g id='props0'> <g id='bu-t'><svg width='312' height='360'><polygon class='g1' points='156,0 312,90 156,180 0,90' /></svg></g> <g id='bu-l'><svg width='312' height='360'><polygon class='g2' points='156,180 312,90 312,270 156,360' /></svg></g><g id='bu-r'><svg width='312' height='360'><polygon class='g3' points='156,180 156,360 0,270 0,90' /></svg><text class='bla'  x='156' y='85'><tspan>0</tspan></text></g></g>";
+        "<g id='props0'> <g id='bu-t'><svg width='312' height='360'><polygon class='g1' points='156,0 312,90 156,180 0,90' /></svg></g> <g id='bu-l'><svg width='312' height='360'><polygon class='g2' points='156,180 312,90 312,270 156,360' /></svg></g><g id='bu-r'><svg width='312' height='360'><polygon class='g3' points='156,180 156,360 0,270 0,90' /></svg>";
+    string internal constant PROPS_TEXT_OPEN = "<text class='bla'  x='156' y='85'>";
+    string internal constant PROPS_END = "</g></g>";
+
 
     string internal constant LEFT_FRAME =
-        "<g id='frameL-2'> <g id='fr-t'> <svg width='312' height='360'> <polygon class='g1' points='156,0 181,18 25,108 0,90' /> <polygon class='g2' points='181,18 181,195 26,289 25,108' /> <polygon class='g3' points='0,90 25,108 26,289 0,270' /> </svg> <text class='bla' x='110' y='155'><tspan>2</tspan></text> </g> </g>";
+        "<g id='frameL-2'> <g id='fr-t'> <svg width='312' height='360'> <polygon class='g1' points='156,0 181,18 25,108 0,90' /> <polygon class='g2' points='181,18 181,195 26,289 25,108' /> <polygon class='g3' points='0,90 25,108 26,289 0,270' /> </svg>";
+    string internal constant LEFT_FRAME_TEXT_OPEN = "<text class='bla' x='110' y='155'>";
+    string internal constant LEFT_FRAME_END = "</g></g>";
+
 
     string internal constant RIGHT_FRAME =
-        "<g id='frameR-0'> <g id='bu-t'><svg width='312' height='360'> <polygon class='g3' points='156,180 156,0 312,90 312,270' /></svg></g> <text class='bla' x='235' y='145'> <tspan>0</tspan> </text></g>";
+        "<g id='frameR-0'> <g id='bu-t'><svg width='312' height='360'> <polygon class='g3' points='156,180 156,0 312,90 312,270' /></svg></g>";
+    string internal constant RIGHT_FRAME_TEXT_OPEN = "<text class='bla' x='235' y='145'>";
+    string internal constant RIGHT_FRAME_END = "</g>";
+
 
     string internal constant RIGHT_CLOCK =
-        "<g id='frameR-0'> <g id='bu-t'><svg width='312' height='360'> <polygon class='g3' points='156,180 156,0 312,90 312,270' /></svg></g> <text class='bla' x='235' y='145'> <tspan>0</tspan> </text></g>";
+        "<g id='frameR-0'> <g id='bu-t'><svg width='312' height='360'> <polygon class='g3' points='156,180 156,0 312,90 312,270' /></svg></g>";
+    string internal constant RIGHT_CLOCK_TEXT_OPEN = "<text class='bla' x='235' y='145'>";
+    string internal constant RIGHT_CLOCK_END = "</g>";
+
 
     // closing svg tag
     string internal constant SVG_END = "</svg>";
 
-    string internal constant G_START = "  <g transform='translate(";
+    string internal constant TEXT_CLOSE = "</text>";
+
+    string internal constant G_START = "<g>";
+    string internal constant G_TRANSFORM = "  <g transform='translate(";
     string internal constant G_MID = ")'>";
     string internal constant G_END = "</g>";
 
     constructor() {
-        objectToSVG["shell"] = SHELL;
-        objectToSVG["altar"] = ALTAR;
-        objectToSVG["props"] = PROPS;
-        objectToSVG["lFrame"] = LEFT_FRAME;
-        objectToSVG["rFrame"] = RIGHT_FRAME;
-        objectToSVG["rClock"] = RIGHT_CLOCK;
+        objectToSVG["altar"] = [ALTAR, ALTAR_TEXT_OPEN, ALTAR_END];
+        objectToSVG["props"] = [PROPS, PROPS_TEXT_OPEN, PROPS_END];
+        objectToSVG["lFrame"] = [LEFT_FRAME, LEFT_FRAME_TEXT_OPEN, LEFT_FRAME_END];
+        objectToSVG["rFrame"] = [RIGHT_FRAME, RIGHT_FRAME_TEXT_OPEN, RIGHT_FRAME_END];
+        objectToSVG["rClock"] = [RIGHT_CLOCK, RIGHT_CLOCK_TEXT_OPEN, RIGHT_CLOCK_END];
     }
 
-    // getters for each string
+    // EXTERNAL FUNCTIONS
+
     function getSvgStart() external pure returns (string memory) {
         return SVG_START;
     }
@@ -54,12 +74,16 @@ contract SharedAssets {
         return STYLE;
     }
 
+    function getShell() external pure returns (string memory) {
+        return SHELL;
+    }
+
     function getSvgEnd() external pure returns (string memory) {
         return SVG_END;
     }
 
-    function getGStart() external pure returns (string memory) {
-        return G_START;
+    function getGTransform() external pure returns (string memory) {
+        return G_TRANSFORM;
     }
 
     function getGMid() external pure returns (string memory) {
@@ -70,7 +94,27 @@ contract SharedAssets {
         return G_END;
     }
 
-    function getObjects(string memory object) external view returns (string memory) {
-        return objectToSVG[object];
+    // INTERNAL FUNCTIONS
+
+    function positionText(string memory name, uint position) internal pure returns (string memory) {
+        string memory text = string.concat(
+            "<tspan>",
+            name,
+            Strings.toString(position),
+            "</tspan>"
+        );
+        return text;
+    }
+
+    // Get an object's SVG
+    function getObject(string memory object, uint position) external view returns (string memory) {
+      string memory svg = string.concat(
+          objectToSVG[object][0],
+          objectToSVG[object][1], // open text
+          positionText(object, position),
+          TEXT_CLOSE,
+          objectToSVG[object][2]
+      );
+      return svg;
     }
 }
