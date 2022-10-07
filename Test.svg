@@ -1,0 +1,59 @@
+<svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .g1 {
+      stroke-width: 1;
+        fill: white;
+        stroke: rgb(0, 0, 0, 1);
+    }
+    .g2 {
+      stroke-width: 1;
+      fill: dimgrey;
+      stroke: rgb(0, 0, 0, 1);
+    }
+    .g3 {
+      stroke-width: 1;
+      fill: lightgrey;
+      stroke: rgb(0, 0, 0, 1); 
+    }            .hl {
+        stroke: rgb(0, 0, 0, 0.12);
+        stroke-width: 1
+    }
+    .hm {
+        stroke: rgb(0, 0, 0, 0.22);
+        stroke-width: 1
+    }
+    .hd {
+        stroke: rgb(0, 0, 0, 0.75);
+        stroke-width: 1
+    }
+    .hw {
+        stroke: rgb(255, 255, 255, 0.75);
+        stroke-width: 1
+    }
+    .whi {
+        fill: white;
+    }
+    .floor {
+        fill: white;
+        stroke:black;
+        stroke-width:1;                
+    }
+    .wall-l {
+        fill: darkgrey;
+        stroke:black;
+        stroke-width:1;                
+    }
+    .wall-r {
+        fill: lightgrey;
+        stroke:black;
+        stroke-width:1;                
+    }
+    .bla {
+        fill: black;
+        x: 369;
+        y: 360;
+        text-anchor: middle;
+        font: bold 1rem sans-serif;
+    }
+  </style>
+</svg>
