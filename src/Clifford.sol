@@ -39,7 +39,7 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
         _VRF = vrf;
     }
 
-    // Function to generate pseudo random number
+    // Test function to generate pseudo random number
     function randomNumber() public view returns (uint256) {
         uint256 number = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender)));
         return number;

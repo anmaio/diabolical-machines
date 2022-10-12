@@ -147,36 +147,41 @@ contract Metadata is Ownable {
         return machine;
     }
 
-    function getMachinePositions(uint _tokenId) public view returns (uint[] memory) {
+    function getMachinePosition(uint _tokenId) public view returns (uint[] memory) {
         uint256 uintVrf = _VRF.getNumberFromId(_tokenId);
         bytes memory vrf = uintToBytes(uintVrf);
         vrf = slice(vrf, 1, 2);
         uint256 rand = uint256(keccak256(vrf));
 
-        uint[] memory positions = _machine.getMachinePositions(getMachine(_tokenId), rand);
+        uint[] memory positions = _machine.getMachinePosition(getMachine(_tokenId), rand);
         return positions;
     }
 
     function preFloorGrid(uint _tokenId) public view returns (string[9] memory) {
-      uint[] memory positions = getMachinePositions(_tokenId);
+      uint[] memory positions = getMachinePosition(_tokenId);
       string[9] memory grid = emptyGrid;
       for (uint i = 0; i < positions.length; i++) {
-        grid[positions[i]] = "x";
+        if (i == 0) {
+          grid[positions[i]] = getMachine(_tokenId);
+        } else {
+          grid[positions[i]] = "x";
+        }
       }
       return grid;
     }
 
     function preLWGrid(uint _tokenId) public view returns (string[9] memory) {
-      uint[] memory positions = getMachinePositions(_tokenId);
+      uint[] memory positions = getMachinePosition(_tokenId);
       string[9] memory grid = emptyGrid;
-      // get the PW height of the machine
-      uint height = _machine.getMachineHeight(getMachine(_tokenId))[0];
+      // get the grid if the machine is touching the wall
+      string memory machine = getMachine(_tokenId);
+      string[9] memory machineGrid = _machine.getMachineLWGrid(machine);
       // check if the positions next to the wall are taken(0, 1, 2)
       for (uint i = 0; i < positions.length; i++) {
         if (positions[i] == 0 || positions[i] == 1 || positions[i] == 2) {
           // second loop will rule out bottom row if the machine is 2 or 3 high
-          for (uint j = 1; j < height; j++) {
-            grid[positions[i] + j * 3] = "x";
+          for (uint j = 0; j < 3; j++) {
+            grid[positions[i] + j * 3] = machineGrid[positions[i] + j * 3];
           }
         }
       }
@@ -184,8 +189,8 @@ contract Metadata is Ownable {
       string[9] memory floorGrid = getFGrid(_tokenId);
       // bottom row in grid
       for (uint i = 0; i < 3; i++) {
-        // if not empty and touching the wall
-        if (keccak256(abi.encodePacked(floorGrid[i])) != keccak256(abi.encodePacked(""))) {
+        // if not empty and not a machine
+        if (keccak256(abi.encodePacked(floorGrid[i])) != keccak256(abi.encodePacked("")) && keccak256(abi.encodePacked(floorGrid[i])) != keccak256(abi.encodePacked(machine))) {
           grid[i] = "x";
         }
       }
@@ -193,10 +198,10 @@ contract Metadata is Ownable {
     }
 
     function preRWGrid(uint _tokenId) public view returns (string[9] memory) {
-      uint[] memory positions = getMachinePositions(_tokenId);
+      uint[] memory positions = getMachinePosition(_tokenId);
       string[9] memory grid = emptyGrid;
       // get the SW height of the machine
-      uint height = _machine.getMachineHeight(getMachine(_tokenId))[1];
+      uint height = _machine.getMachineSWHeight(getMachine(_tokenId));
       // check if the positions next to the wall are taken(0, 3, 6)
       for (uint i = 0; i < positions.length; i++) {
         if (positions[i] == 0 || positions[i] == 3 || positions[i] == 6) {
@@ -313,6 +318,18 @@ contract Metadata is Ownable {
         return newGrid;
     }
 
+    function leftAlign(uint _tokenId) public view returns (bool) {
+      uint256 uintVrf = _VRF.getNumberFromId(_tokenId);
+      bytes memory vrf = uintToBytes(uintVrf);
+      vrf = slice(vrf, 10, 2);
+      uint256 rand = uint256(keccak256(vrf));
+      if (rand < 50) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     //["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"]
     // Function build metadata for a given token
     function buildMetadata(uint256 _tokenId) public view returns (string memory) {
@@ -340,7 +357,7 @@ contract Metadata is Ownable {
       );
 
         string memory jsonFinal = Base64.encode(
-            bytes(string.concat(jsonInitial, _compose.composeSVG(combineStringArrays(getObjectsFromGrid(getRWGrid(_tokenId)), combineStringArrays(getObjectsFromGrid(getLWGrid(_tokenId)), getObjectsFromGrid(getFGrid(_tokenId)))), combineUintArrays(combineUintArrays(getIndexesFromGrid(getRWGrid(_tokenId)), getIndexesFromGrid(getLWGrid(_tokenId))), getIndexesFromGrid(getFGrid(_tokenId)))), '"}'))
+            bytes(string.concat(jsonInitial, _compose.composeSVG(combineStringArrays(getObjectsFromGrid(getRWGrid(_tokenId)), combineStringArrays(getObjectsFromGrid(getLWGrid(_tokenId)), getObjectsFromGrid(getFGrid(_tokenId)))), combineUintArrays(combineUintArrays(getIndexesFromGrid(getRWGrid(_tokenId)), getIndexesFromGrid(getLWGrid(_tokenId))), getIndexesFromGrid(getFGrid(_tokenId))), getMachine(_tokenId), leftAlign(_tokenId)), '"}'))
         );
         string memory output = string.concat("data:application/json;base64,", jsonFinal);
         return output;

@@ -19,8 +19,8 @@ contract MetadataTest is Test {
 
     function setUp() public {
         sharedAssets = new SharedAssets();
-        compose = new Compose(sharedAssets);
         machine = new Machine();
+        compose = new Compose(sharedAssets, machine);
         metadata = new Metadata(compose, machine);
         clifford = new Clifford(metadata);
         vrfV2Consumer = new VRFv2Consumer(address(clifford));

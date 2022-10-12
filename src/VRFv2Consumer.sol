@@ -89,7 +89,7 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
             requestIdToTokenId[s_requestId] = _tokenId;
         } else {
             tokenIdToRandomWord[_tokenId] = uint256(
-                keccak256(abi.encodePacked(block.timestamp, msg.sender, block.difficulty))
+                keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))
             );
             // tokenIdToRandomWord[_tokenId] = uint256(
             //     keccak256(abi.encodePacked("12345678901234567891234567890", msg.sender))

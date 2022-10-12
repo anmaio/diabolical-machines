@@ -18,8 +18,8 @@ contract CliffordScript is Script {
         vm.startBroadcast(deployerPrivateKey);
         
         SharedAssets sharedAssets = new SharedAssets();
-        Compose compose = new Compose(sharedAssets);
         Machine machine = new Machine();
+        Compose compose = new Compose(sharedAssets, machine);
         Metadata metadata = new Metadata(compose, machine);
         Clifford clifford = new Clifford(metadata);
         VRFv2Consumer vrfV2Consumer = new VRFv2Consumer(address(clifford));
