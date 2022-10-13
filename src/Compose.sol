@@ -9,7 +9,7 @@ contract Compose {
     SharedAssets private _sharedAssets;
     Machine private _machine;
 
-    bool internal globalFlip = false;
+    bool internal globalFlip = true;
 
     // string[] public folders = ["s/shell", "r/frame", "r/clock", "l/frame", "f/altar", "f/props"];
     // string[] public objects = [RIGHT_FRAME, RIGHT_CLOCK, LEFT_FRAME, ALTAR, PROPS];
@@ -206,9 +206,9 @@ contract Compose {
             output = string.concat(output, _sharedAssets.getGMid());
 
             if (keccak256(abi.encodePacked(objectList[i])) == keccak256(abi.encodePacked(machine))) {
-              output = string.concat(output, _machine.getMachineSVG(machine, indexes[i]));
+              output = string.concat(output, _machine.getMachineSVG(machine, indexes[i], leftAlign));
             } else {
-              output = string.concat(output, _sharedAssets.getObject(objectList[i], indexes[i]));
+              output = string.concat(output, _sharedAssets.getObject(objectList[i], indexes[i], leftAlign));
             }
 
             output = string.concat(output, _sharedAssets.getGEnd());

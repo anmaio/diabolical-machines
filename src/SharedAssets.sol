@@ -9,7 +9,7 @@ contract SharedAssets {
     string internal constant SVG_START =
         "<svg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' width='936' height='1080'>";
 
-    string internal constant STYLE = "<style>.g1,.g2,.g3{stroke-width:1;fill:#fff;stroke:rgb(0,0,0,1)}.g2,.g3{fill:#696969}.g3{fill:#d3d3d3}.hd,.hl,.hm,.hw{stroke:rgb(0,0,0,.12);stroke-width:1}.hd,.hm,.hw{stroke:rgb(0,0,0,.22)}.hd,.hw{stroke:rgb(0,0,0,.75)}.hw{stroke:rgb(255,255,255,.75)}.whi{fill:#fff}.floor,.wall-l,.wall-r{fill:#fff;stroke:#000;stroke-width:1}.wall-l,.wall-r{fill:#a9a9a9}.wall-r{fill:#d3d3d3}.bla{fill:#000;x:369;y:360;text-anchor:middle;font:700 1rem sans-serif}.ma-mo,.ma-mo-t{fill:pink}.ma-g2,.ma-g3{fill:gray;stroke:pink}.ma-g3{fill:silver}</style>";
+    string internal constant STYLE = "<style>.hd,.hl,.hm,.hw{stroke:rgb(0,0,0,.12);stroke-width:1}.hd,.hm,.hw{stroke:rgb(0,0,0,.22)}.hd,.hw{stroke:rgb(0,0,0,.75)}.hw{stroke:rgb(255,255,255,.75)}.whi{fill:#fff}.floor,.wall-l,.wall-r{fill:#fff;stroke:#000;stroke-width:1}.wall-l,.wall-r{fill:#a9a9a9}.wall-r{fill:#d3d3d3}.cb{fill:orange}.g1,.g2,.g3{stroke-width:1;fill:#fff;stroke:rgb(0,0,0,.9)}.g2,.g3{fill:#696969}.g3{fill:#d3d3d3}.ma-g1,.ma-mo,.ma-mo-t{fill:pink}.ma-g1{stroke:#fff}.ma-g2,.ma-g3{fill:gray;stroke:pink}.ma-g3{fill:silver}.bla{fill:#000;x:369;y:360;text-anchor:middle;font:700 1rem sans-serif}</style>";
 
     string internal constant SHELL = "<g id='shell'> <g id='shell-main' transform='translate(0,0)'> <g id='floor'> <svg height='1080' width='936'> <g> <polygon class='floor' points='0,810 468,1080 936,810 468,540' /> </g> <line class='hd' x1='156' y1='900' x2='624' y2='630'  /> <line class='hd' x1='312' y1='990' x2='780' y2='720'  /> <line class='hd' x1='156' y1='720' x2='624' y2='990'  /> <line class='hd' x1='312' y1='630' x2='780' y2='900'  /> </svg> </g> <g id='wall-l'> <svg class='wall-l' height='1080' width='936'> <polygon points='0,270 468,0 468,540 0,810' /> <line class='hd' x1='0' y1='630' x2='468' y2='360'  /> <line class='hd' x1='0' y1='450' x2='468' y2='180'  /> <line class='hd' x1='156' y1='180' x2='156' y2='720'  /> <line class='hd' x1='312' y1='90' x2='312' y2='630'  /> </svg> </g> <g id='wall-r'> <svg class='wall-r' height='1080' width='936'> <polygon points='468,540 468,0 936,270 936,810' /> <line class='hw' x1='468' y1='180' x2='936' y2='450'  /> <line class='hw' x1='468' y1='360' x2='936' y2='630'  /> <line class='hw' x1='624' y1='90' x2='624' y2='630'  /> <line class='hw' x1='780' y1='180' x2='780' y2='720'  /> </svg> </g> </g> </g>";
 
@@ -17,7 +17,6 @@ contract SharedAssets {
     string internal constant ALTAR =
         "<g id='props0'> <g id='bu-t'><svg width='312' height='360'><polygon class='g1' points='156,0 312,90 156,180 0,90' /></svg></g> <g id='bu-l'><svg width='312' height='360'><polygon class='g2' points='156,180 312,90 312,270 156,360' /></svg></g><g id='bu-r'><svg width='312' height='360'><polygon class='g3' points='156,180 156,360 0,270 0,90' /></svg>";
     string internal constant ALTAR_TEXT_OPEN = "<text class='bla'  x='156' y='85'>";
-    // string internal constant ALTAR_TEXT_CLOSE = "</text>";
     string internal constant ALTAR_END = "</g></g>";
 
 
@@ -35,15 +34,15 @@ contract SharedAssets {
 
 
     string internal constant RIGHT_FRAME =
-        "<g id='frameR-0'> <g id='bu-t'><svg width='312' height='360'> <polygon class='g3' points='156,180 156,0 312,90 312,270' /></svg></g>";
+        "<g id='frameR-0'> <g id='bu-t'><svg width='312' height='360'> <polygon class='g3' points='156,180 156,0 312,90 312,270' /></svg>";
     string internal constant RIGHT_FRAME_TEXT_OPEN = "<text class='bla' x='235' y='145'>";
-    string internal constant RIGHT_FRAME_END = "</g>";
+    string internal constant RIGHT_FRAME_END = "</g></g>";
 
 
     string internal constant RIGHT_CLOCK =
-        "<g id='frameR-0'> <g id='bu-t'><svg width='312' height='360'> <polygon class='g3' points='156,180 156,0 312,90 312,270' /></svg></g>";
+        "<g id='frameR-0'> <g id='bu-t'><svg width='312' height='360'> <polygon class='g3' points='156,180 156,0 312,90 312,270' /></svg>";
     string internal constant RIGHT_CLOCK_TEXT_OPEN = "<text class='bla' x='235' y='145'>";
-    string internal constant RIGHT_CLOCK_END = "</g>";
+    string internal constant RIGHT_CLOCK_END = "</g></g>";
 
 
     // closing svg tag
@@ -57,11 +56,11 @@ contract SharedAssets {
     string internal constant G_END = "</g>";
 
     constructor() {
-        objectToSVG["altar"] = [ALTAR, ALTAR_TEXT_OPEN, ALTAR_END];
-        objectToSVG["props"] = [PROPS, PROPS_TEXT_OPEN, PROPS_END];
-        objectToSVG["lFrame"] = [LEFT_FRAME, LEFT_FRAME_TEXT_OPEN, LEFT_FRAME_END];
-        objectToSVG["rFrame"] = [RIGHT_FRAME, RIGHT_FRAME_TEXT_OPEN, RIGHT_FRAME_END];
-        objectToSVG["rClock"] = [RIGHT_CLOCK, RIGHT_CLOCK_TEXT_OPEN, RIGHT_CLOCK_END];
+        objectToSVG["altar"] = [ALTAR, ALTAR, ALTAR_TEXT_OPEN, ALTAR_END];
+        objectToSVG["props"] = [PROPS, PROPS, PROPS_TEXT_OPEN, PROPS_END];
+        objectToSVG["lFrame"] = [LEFT_FRAME, RIGHT_FRAME, LEFT_FRAME_TEXT_OPEN, LEFT_FRAME_END];
+        objectToSVG["rFrame"] = [RIGHT_FRAME, LEFT_FRAME, RIGHT_FRAME_TEXT_OPEN, RIGHT_FRAME_END];
+        objectToSVG["rClock"] = [RIGHT_CLOCK, LEFT_FRAME, RIGHT_CLOCK_TEXT_OPEN, RIGHT_CLOCK_END];
     }
 
     // EXTERNAL FUNCTIONS
@@ -107,13 +106,19 @@ contract SharedAssets {
     }
 
     // Get an object's SVG
-    function getObject(string memory object, uint position) external view returns (string memory) {
-      string memory svg = string.concat(
-          objectToSVG[object][0],
-          objectToSVG[object][1], // open text
-          positionText(object, position),
-          TEXT_CLOSE,
-          objectToSVG[object][2]
+    function getObject(string memory object, uint position, bool leftAlign) external view returns (string memory) {
+      string memory svg = "";
+      if (leftAlign) {
+        svg = objectToSVG[object][0];
+      } else {
+        svg = objectToSVG[object][1];
+      }
+      svg = string.concat(
+        svg,
+        objectToSVG[object][2], // open text
+        positionText(object, position),
+        TEXT_CLOSE,
+        objectToSVG[object][3]
       );
       return svg;
     }
