@@ -1,0 +1,102 @@
+<svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+  <style>            
+    .hl {
+        stroke: rgb(0, 0, 0, 0.12);
+        stroke-width: 1
+    }
+    .hm {
+        stroke: rgb(0, 0, 0, 0.22);
+        stroke-width: 1
+    }
+    .hd {
+        stroke: rgb(0, 0, 0, 0.75);
+        stroke-width: 1
+    }
+    .hw {
+        stroke: rgb(255, 255, 255, 0.75);
+        stroke-width: 1
+    }
+    .whi {
+        fill: white;
+    }
+    .floor {
+        fill: white;
+        stroke:black;
+        stroke-width:1;                
+    }
+    .wall-l {
+        fill: darkgrey;
+        stroke:black;
+        stroke-width:1;                
+    }
+    .wall-r {
+        fill: lightgrey;
+        stroke:black;
+        stroke-width:1;                
+    }
+    .cb {
+    	fill: orange;
+    	stroke
+    }
+
+    .g1 {
+        stroke-width: 1;
+        fill: white;
+        stroke: rgb(0, 0, 0, 0.9);
+    }
+    .g2 {
+        stroke-width: 1;
+        fill: dimgrey;
+        stroke: rgb(0, 0, 0, 0.9);
+    }
+    .g3 {
+        stroke-width: 1;
+        fill: lightgrey;
+        stroke: rgb(0, 0, 0, 0.9);
+    }
+    .ma {
+    }
+    .ma-mo {
+        fill: pink;
+    }
+    .ma-mo-t {
+        fill: pink
+    }
+    .ma-g1 {
+        fill: pink;
+        stroke: white;
+    }
+    .ma-g2 {
+        fill: grey;
+        stroke: pink;
+    }
+    .ma-g3 {
+        fill: silver;
+        stroke: pink;
+    }
+
+    .bla {
+        fill: black;
+        x: 369;
+        y: 360;
+        text-anchor: middle;
+        font: bold 1rem sans-serif;
+    }
+    .bla2 {
+        fill: black;
+        text-anchor: left;
+        font: bold 1rem sans-serif;
+        opacity: 0.5;
+    }
+    .bla3 {
+        fill: white;
+        x: 369;
+        y: 360;
+        text-anchor: middle;
+        font: bold 1rem sans-serif;
+    }
+    <![CDATA[
+#m-drill-312x720_hole-u-c-drill-btm_to {animation: m-drill-312x720_hole-u-c-drill-btm_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-drill-btm_to__to { 0% {transform: translate(59.535004px,156.514992px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(59.535004px,207.797042px)} 100% {transform: translate(59.535004px,156.514992px)}} #m-drill-312x720_hole-u-c-head-a-holder_to {animation: m-drill-312x720_hole-u-c-head-a-holder_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-head-a-holder_to__to { 0% {transform: translate(58.860001px,96.834999px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.860001px,153.245254px)} 100% {transform: translate(58.860001px,96.834999px)}} #m-drill-312x720_hole-u-c-tube3_to {animation: m-drill-312x720_hole-u-c-tube3_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-tube3_to__to { 0% {transform: translate(58.549999px,33.875001px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.549999px,85.157051px)} 100% {transform: translate(58.549999px,33.875001px)}} #m-drill-312x720_hole-u-c-expander_to {animation: m-drill-312x720_hole-u-c-expander_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-expander_to__to { 0% {transform: translate(58.619999px,11.055px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.619999px,52.08064px)} 100% {transform: translate(58.619999px,11.055px)}}
+]]>
+  </style>
+</svg>

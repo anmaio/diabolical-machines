@@ -7,18 +7,21 @@ import "../src/Compose.sol";
 import "../src/Metadata.sol";
 import "../src/VRFv2Consumer.sol";
 import "../src/SharedAssets.sol";
+import "../src/Machine.sol";
 
 contract SharedAssetsTest is Test {
     SharedAssets public sharedAssets;
     Compose public compose;
+    Machine public machine;
     Metadata public metadata;
     VRFv2Consumer public vrfV2Consumer;
     Clifford public clifford;
 
     function setUp() public {
         sharedAssets = new SharedAssets();
-        compose = new Compose(sharedAssets);
-        metadata = new Metadata(compose);
+        machine = new Machine();
+        compose = new Compose(sharedAssets, machine);
+        metadata = new Metadata(compose, machine);
         clifford = new Clifford(metadata);
         vrfV2Consumer = new VRFv2Consumer(address(clifford));
 
