@@ -177,6 +177,7 @@ contract Compose {
         }
 
         for (uint256 i = 0; i < indexes.length; i++) {
+          if (indexes[i] != 9) {
             output = string.concat(output, _sharedAssets.getGTransform());
             // rw
             if (i < 2) {
@@ -212,6 +213,7 @@ contract Compose {
             }
 
             output = string.concat(output, _sharedAssets.getGEnd());
+          }
         }
         return output;
     }

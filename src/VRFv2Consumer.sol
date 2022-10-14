@@ -91,9 +91,11 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
             // tokenIdToRandomWord[_tokenId] = uint256(
             //     keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))
             // );
-            tokenIdToRandomWord[_tokenId] = uint256(
-                keccak256(abi.encodePacked("12345678901234567891234567890", msg.sender))
-            );
+            // tokenIdToRandomWord[_tokenId] = uint256(
+            //     keccak256(abi.encodePacked("12345678901234567891234567890", msg.sender))
+            // );
+            // emit RandomNumberGenerated(_tokenId);
+            tokenIdToRandomWord[_tokenId] = 4578902430404670493817014783058734520437892473089;
             emit RandomNumberGenerated(_tokenId);
         }
     }

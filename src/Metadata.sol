@@ -57,8 +57,6 @@ contract Metadata is Ownable {
         string memory object,
         uint256 rand
     ) public pure returns (string[9] memory newGrid, uint256 index) {
-        // require the grid not to be full
-        require(!isGridFull(grid), "Grid is full");
         // loop through the grid until a position is found that is not taken
         for (uint256 i = 0; i < grid.length; i++) {
             if (keccak256(abi.encodePacked(grid[rand])) == keccak256(abi.encodePacked(""))) {
@@ -159,12 +157,17 @@ contract Metadata is Ownable {
 
     function preFloorGrid(uint _tokenId) public view returns (string[9] memory) {
       uint[] memory positions = getMachinePosition(_tokenId);
+      string memory machine = getMachine(_tokenId);
       string[9] memory grid = emptyGrid;
       for (uint i = 0; i < positions.length; i++) {
-        if (i == 0) {
-          grid[positions[i]] = getMachine(_tokenId);
-        } else {
-          grid[positions[i]] = "x";
+        if (positions[i] != 9) {
+          if (i == 0) {
+            grid[positions[i]] = machine;
+          } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("drills"))) {
+            grid[positions[i]] = machine;
+          } else {
+            grid[positions[i]] = "x";
+          }
         }
       }
       return grid;
@@ -175,7 +178,7 @@ contract Metadata is Ownable {
       string[9] memory grid = emptyGrid;
       // get the grid if the machine is touching the wall
       string memory machine = getMachine(_tokenId);
-      string[9] memory machineGrid = _machine.getMachineLWGrid(machine);
+      string[9] memory machineGrid = _machine.getMachinePWGrid(machine);
       // check if the positions next to the wall are taken(0, 1, 2)
       for (uint i = 0; i < positions.length; i++) {
         if (positions[i] == 0 || positions[i] == 1 || positions[i] == 2) {
