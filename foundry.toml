@@ -2,7 +2,7 @@
 src = 'src'
 out = 'out'
 libs = ['lib']
-gas_reports = ["SharedAssets", "Clifford", "Compose", "Metadata", "VRFv2Consumer"]
+gas_reports = ["SharedAssets", "Clifford", "Compose", "Metadata", "VRFv2Consumer", "Machine"]
 solc_version = '0.8.12'
 
 [rpc_endpoints]
