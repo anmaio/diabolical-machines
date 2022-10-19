@@ -95,6 +95,10 @@
         text-anchor: middle;
         font: bold 1rem sans-serif;
     }
+    .fs-wb {
+        fill: white;
+        stroke: black;
+    }
     <![CDATA[
 #m-drill-312x720_hole-u-c-drill-btm_to {animation: m-drill-312x720_hole-u-c-drill-btm_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-drill-btm_to__to { 0% {transform: translate(59.535004px,156.514992px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(59.535004px,207.797042px)} 100% {transform: translate(59.535004px,156.514992px)}} #m-drill-312x720_hole-u-c-head-a-holder_to {animation: m-drill-312x720_hole-u-c-head-a-holder_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-head-a-holder_to__to { 0% {transform: translate(58.860001px,96.834999px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.860001px,153.245254px)} 100% {transform: translate(58.860001px,96.834999px)}} #m-drill-312x720_hole-u-c-tube3_to {animation: m-drill-312x720_hole-u-c-tube3_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-tube3_to__to { 0% {transform: translate(58.549999px,33.875001px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.549999px,85.157051px)} 100% {transform: translate(58.549999px,33.875001px)}} #m-drill-312x720_hole-u-c-expander_to {animation: m-drill-312x720_hole-u-c-expander_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-expander_to__to { 0% {transform: translate(58.619999px,11.055px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.619999px,52.08064px)} 100% {transform: translate(58.619999px,11.055px)}}
 ]]>
