@@ -144,11 +144,11 @@ contract Metadata is Ownable {
     uint[] memory positions = getMachinePosition(_tokenId);
     string memory machine = getMachine(_tokenId);
     string[9] memory grid = emptyGrid;
-    for (uint i = 0; i < positions.length; i++) {
+    // render order of machine is the last position it occupies
+    grid[positions[positions.length - 1]] = machine;
+    for (uint i = 0; i < positions.length - 1; i++) {
       if (positions[i] != 9) {
-        if (i == 0) {
-          grid[positions[i]] = machine;
-        } else if (isMultipleMachines(machine)) {
+        if (isMultipleMachines(machine)) {
           grid[positions[i]] = machine;
         } else {
           grid[positions[i]] = "x";

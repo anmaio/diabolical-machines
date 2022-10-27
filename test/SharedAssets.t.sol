@@ -28,9 +28,4 @@ contract SharedAssetsTest is Test {
         metadata.setVRFConsumer(vrfV2Consumer);
         clifford.setVRFConsumer(vrfV2Consumer);
     }
-
-    function testGetSvgEnd() public {
-        string memory svgEnd = sharedAssets.getSvgEnd();
-        return assertEq(svgEnd, "</svg>");
-    }
 }
