@@ -4,6 +4,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "base64-sol/base64.sol";
 import "./SharedAssets.sol";
 import "./Machine.sol";
+import "./CommonSVG.sol";
 
 contract Compose {
     SharedAssets private _sharedAssets;
@@ -150,19 +151,21 @@ contract Compose {
 
     // compose SVG
     function composeSVG(string[] memory objectList, uint256[] memory indexes, string memory machine, bool leftAlign) public view returns (string memory) {
-        string memory svgStart = _sharedAssets.getSvgStart();
-        string memory style = _sharedAssets.getStyle();
-        string memory shell = _sharedAssets.getShell();
-        // objects behind the machine
-        // machine
-        // objects in front of the machine
-        if (globalFlip) {
-          leftAlign = !leftAlign;
-        }
-        string memory objects = composeObjects(objectList, indexes, machine, leftAlign);
-        string memory svgEnd = _sharedAssets.getSvgEnd();
-        // return all svg's concatenated together and base64 encoded
-        return Base64.encode(bytes(string.concat(svgStart, style, shell, objects, svgEnd)));
+      // objects behind the machine
+      // machine
+      // objects in front of the machine
+      string memory svgStart = CommonSVG.SVG_START;
+      string memory style = CommonSVG.STYLE;
+      string memory shell = _sharedAssets.getShell();
+      
+      if (globalFlip) {
+        leftAlign = !leftAlign;
+      }
+      string memory objects = composeObjects(objectList, indexes, machine, leftAlign);
+      string memory closingGTags = CommonSVG.G2_END;
+      string memory svgEnd = CommonSVG.SVG_END;
+      // return all svg's concatenated together and base64 encoded
+      return Base64.encode(bytes(string.concat(svgStart, style, shell, objects, closingGTags, svgEnd)));
     }
 
     function composeObjects(string[] memory objectList, uint256[] memory indexes, string memory machine, bool leftAlign) internal view returns (string memory) {
@@ -178,7 +181,7 @@ contract Compose {
 
         for (uint256 i = 0; i < indexes.length; i++) {
           if (indexes[i] != 9) {
-            output = string.concat(output, _sharedAssets.getGTransform());
+            output = string.concat(output, CommonSVG.G_TRANSFORM);
             // rw
             if (i < 2) {
                 output = string.concat(
@@ -204,15 +207,15 @@ contract Compose {
               }
             }
 
-            output = string.concat(output, _sharedAssets.getGMid());
+            output = string.concat(output, CommonSVG.G_MID);
 
             if (keccak256(abi.encodePacked(objectList[i])) == keccak256(abi.encodePacked(machine))) {
               output = string.concat(output, _machine.getMachineSVG(machine, indexes[i], leftAlign));
             } else {
-              output = string.concat(output, _sharedAssets.getObject(objectList[i], indexes[i], leftAlign));
+              output = string.concat(output, _sharedAssets.getObjectSVG(objectList[i], indexes[i], leftAlign));
             }
 
-            output = string.concat(output, _sharedAssets.getGEnd());
+            output = string.concat(output, CommonSVG.G_END);
           }
         }
         return output;
