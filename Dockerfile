@@ -1,4 +1,4 @@
-FROM ghcr.io/foundry-rs/foundry:latest
+FROM ghcr.io/foundry-rs/foundry:nightly
 ARG SOLC_VERSION
 RUN apk update && apk add --no-cache docker-cli
 RUN apk add --no-cache git
