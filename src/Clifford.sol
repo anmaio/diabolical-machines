@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "base64-sol/base64.sol";
 import "./Metadata.sol";
-import "./VRFv2Consumer.sol";
+import "./HandleRandom.sol";
 
 contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable, ERC721Burnable {
     using Counters for Counters.Counter;
@@ -21,7 +21,7 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
     // bool public saleComplete = false;
     Metadata private _metadata;
 
-    VRFv2Consumer private _VRF;
+    HandleRandom private _handleRandom;
 
     constructor(Metadata metadata) ERC721("Clifford", "o") {
         _metadata = metadata;
@@ -35,8 +35,8 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
         _unpause();
     }
 
-    function setVRFConsumer(VRFv2Consumer vrf) public onlyOwner {
-        _VRF = vrf;
+    function setHandleRandom(HandleRandom handleRandom) public onlyOwner {
+        _handleRandom = handleRandom;
     }
 
     // Test function to generate pseudo random number
@@ -49,7 +49,7 @@ contract Clifford is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownab
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        _VRF.requestRandomWords(tokenId);
+        _handleRandom.requestRandomNumber(tokenId);
     }
 
     function tokenURI(uint256 _tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {

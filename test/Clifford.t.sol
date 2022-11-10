@@ -5,7 +5,7 @@ import "forge-std/Test.sol";
 import "../src/Clifford.sol";
 import "../src/Compose.sol";
 import "../src/Metadata.sol";
-import "../src/VRFv2Consumer.sol";
+import "../src/HandleRandom.sol";
 import "../src/SharedAssets.sol";
 import "../src/Machine.sol";
 
@@ -14,7 +14,7 @@ contract CliffordTest is Test {
     Compose public compose;
     Machine public machine;
     Metadata public metadata;
-    VRFv2Consumer public vrfV2Consumer;
+    HandleRandom public handleRandom;
     Clifford public clifford;
 
     function setUp() public {
@@ -23,10 +23,11 @@ contract CliffordTest is Test {
         compose = new Compose(sharedAssets, machine);
         metadata = new Metadata(compose, machine);
         clifford = new Clifford(metadata);
-        vrfV2Consumer = new VRFv2Consumer(address(clifford));
+        handleRandom = new HandleRandom(clifford);
 
-        metadata.setVRFConsumer(vrfV2Consumer);
-        clifford.setVRFConsumer(vrfV2Consumer);
+        metadata.setHandleRandom(handleRandom);
+        clifford.setHandleRandom(handleRandom);
+        compose.setMetadata(metadata);
     }
     
     function testItReturnsRandom() public view {

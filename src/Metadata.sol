@@ -4,13 +4,13 @@ pragma solidity ^0.8.12;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "base64-sol/base64.sol";
 import "./Compose.sol";
-import "./VRFv2Consumer.sol";
+import "./HandleRandom.sol";
 import "./Machine.sol";
 
 contract Metadata is Ownable {
   Compose private _compose;
   Machine private _machine;
-  VRFv2Consumer private _VRF;
+  HandleRandom private _handleRandom;
 
   string[] public floorTraits = ["altar", "props"];
   uint256[] public floorProbabilities = [100, 100];
@@ -44,9 +44,9 @@ contract Metadata is Ownable {
       _machine = machine;
   }
 
-  // set vrf consumer
-  function setVRFConsumer(VRFv2Consumer vrf) public onlyOwner {
-      _VRF = vrf;
+  // set handle random
+  function setHandleRandom(HandleRandom handleRandom) public onlyOwner {
+      _handleRandom = handleRandom;
   }
 
   // pick the position of a 1x1 object in a given grid
@@ -72,7 +72,7 @@ contract Metadata is Ownable {
 
   // get the postions of the right wall objects
   function getRWGrid(uint256 _tokenId) public view returns (string[9] memory) {
-    uint rand = getVRFandSlice(_tokenId, 1, MAX_RIGHT_WALL_OBJECTS * 2);
+    uint rand = getRandAndSlice(_tokenId, 1, MAX_RIGHT_WALL_OBJECTS * 2);
 
     // start with an empty grid
     string[9] memory newGrid = preRWGrid(_tokenId);
@@ -80,8 +80,7 @@ contract Metadata is Ownable {
       uint256 probability = rand % 100;
       uint256 index = 9;
       if (probability < rightWallProbabilities[i]) {
-          // cannot go on the bottom row of the wall
-          uint256 position = (rand % 6) + 3;
+          uint256 position = rand % 9;
           (newGrid, index) = pickPosition(newGrid, rightWallTraits[i], position);
       }
       rand = rand / 100;
@@ -91,7 +90,7 @@ contract Metadata is Ownable {
 
   // get the postions of the left wall objects
   function getLWGrid(uint256 _tokenId) public view returns (string[9] memory) {
-    uint rand = getVRFandSlice(_tokenId, 1 + MAX_RIGHT_WALL_OBJECTS * 2, MAX_LEFT_WALL_OBJECTS * 2);
+    uint rand = getRandAndSlice(_tokenId, 1 + MAX_RIGHT_WALL_OBJECTS * 2, MAX_LEFT_WALL_OBJECTS * 2);
 
     // start with an empty grid
     string[9] memory newGrid = preLWGrid(_tokenId);
@@ -101,7 +100,7 @@ contract Metadata is Ownable {
       
       if (probability < leftWallProbabilities[i]) {
         // cannot go on the bottom row of the wall
-        uint256 position = (rand % 6) + 3;
+        uint256 position = rand % 9;
         (newGrid, index) = pickPosition(newGrid, leftWallTraits[i], position);
       }
       rand = rand / 100;
@@ -111,7 +110,7 @@ contract Metadata is Ownable {
 
   // get the postions of the floor objects
   function getFGrid(uint256 _tokenId) public view returns (string[9] memory) {
-    uint rand = getVRFandSlice(_tokenId, 1 + MAX_RIGHT_WALL_OBJECTS * 2 + MAX_LEFT_WALL_OBJECTS * 2, MAX_FLOOR_OBJECTS * 2);
+    uint rand = getRandAndSlice(_tokenId, 1 + MAX_RIGHT_WALL_OBJECTS * 2 + MAX_LEFT_WALL_OBJECTS * 2, MAX_FLOOR_OBJECTS * 2);
 
     // start with an empty grid
     string[9] memory newGrid = preFloorGrid(_tokenId);
@@ -128,14 +127,22 @@ contract Metadata is Ownable {
   }
 
   function getMachine(uint _tokenId) public view returns (string memory) {
-    uint rand = getVRFandSlice(_tokenId, 1, 2);
+    uint rand = getRandAndSlice(_tokenId, 1, 2);
 
     string memory machine = _machine.selectMachine(rand);
     return machine;
   }
 
+  // Determine if left aligned
+  function getLeftAligned(uint _tokenId) public view returns (bool) {
+    uint rand = getRandAndSlice(_tokenId, 1, 2); // tokenId, start, length
+
+    bool leftAligned = rand % 2 == 0;
+    return leftAligned;
+  }
+
   function getMachinePosition(uint _tokenId) public view returns (uint[] memory) {
-    uint rand = getVRFandSlice(_tokenId, 1, 2); // tokenId, start, length
+    uint rand = getRandAndSlice(_tokenId, 1, 2); // tokenId, start, length
     uint[] memory positions = _machine.getMachinePosition(getMachine(_tokenId), rand);
     return positions;
   }
@@ -193,7 +200,7 @@ contract Metadata is Ownable {
     // check if the positions next to the wall are taken(0, 3, 6)
     for (uint i = 0; i < positions.length; i++) {
       if (positions[i] == 0 || positions[i] == 3 || positions[i] == 6) {
-        for (uint j = 1; j < height; j++) {
+        for (uint j = 0; j < height; j++) {
           grid[positions[i] / 3 + j * 3] = "x";
         }
       }
@@ -223,12 +230,12 @@ contract Metadata is Ownable {
       return b;
   }
 
-  function getVRFandSlice(uint _tokenId, uint _start, uint _length) public view returns (uint256) {
-      uint256 uintVrf = _VRF.getNumberFromId(_tokenId);
-      bytes memory vrf = uintToBytes(uintVrf);
-      vrf = slice(vrf, _start, _length);
-      uint256 rand = uint256(keccak256(vrf));
-      return rand;
+  function getRandAndSlice(uint _tokenId, uint _start, uint _length) public view returns (uint256) {
+      uint256 uintRand = _handleRandom.getRandomNumber(_tokenId);
+      bytes memory rand = uintToBytes(uintRand);
+      rand = slice(rand, _start, _length);
+      uint256 output = uint256(keccak256(rand));
+      return output;
   }
 
   // check a given grid is not full
@@ -248,28 +255,6 @@ contract Metadata is Ownable {
       } //  first 32 bytes = length of the bytes value
   }
 
-  function combineUintArrays(uint256[] memory a, uint256[] memory b) public pure returns (uint256[] memory) {
-      uint256[] memory c = new uint256[](a.length + b.length);
-      for (uint256 i = 0; i < a.length; i++) {
-          c[i] = a[i];
-      }
-      for (uint256 i = 0; i < b.length; i++) {
-          c[i + a.length] = b[i];
-      }
-      return c;
-  }
-
-  function combineStringArrays(string[] memory a, string[] memory b) public pure returns (string[] memory) {
-      string[] memory c = new string[](a.length + b.length);
-      for (uint256 i = 0; i < a.length; i++) {
-          c[i] = a[i];
-      }
-      for (uint256 i = 0; i < b.length; i++) {
-          c[i + a.length] = b[i];
-      }
-      return c;
-  }
-
   function getObjectsFromGrid(string[9] memory grid) public pure returns (string[] memory objects) {
     uint count = 0;
     string[] memory tempArray = new string[](9);
@@ -286,22 +271,6 @@ contract Metadata is Ownable {
     return objectArray;
   }
 
-  function getIndexesFromGrid(string[9] memory grid) public pure returns (uint256[] memory indexes) {
-    uint count = 0;
-    uint256[] memory tempArray = new uint256[](9);
-    for (uint256 i = 0; i < grid.length; i++) {
-      if (keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("")) && keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("x"))) {
-        tempArray[count] = i;
-        count++;
-      }
-    }
-    uint[] memory indexArray = new uint[](count);
-    for (uint256 i = 0; i < count; i++) {
-      indexArray[i] = tempArray[i];
-    }
-    return indexArray;
-  }
-
   function padGrid(string[] memory grid, uint finalSize) public pure returns (string[] memory newGrid) {
       newGrid = new string[](finalSize);
       for (uint256 i = 0; i < newGrid.length; i++) {
@@ -315,7 +284,7 @@ contract Metadata is Ownable {
   }
 
   function leftAlign(uint _tokenId) public view returns (bool) {
-    uint rand = getVRFandSlice(_tokenId, 10, 2); // tokenId, start, length
+    uint rand = getRandAndSlice(_tokenId, 10, 2); // tokenId, start, length
     if (rand < 50) {
       return true;
     } else {
@@ -358,7 +327,7 @@ contract Metadata is Ownable {
     );
 
       string memory jsonFinal = Base64.encode(
-          bytes(string.concat(jsonInitial, _compose.composeSVG(combineStringArrays(getObjectsFromGrid(getRWGrid(_tokenId)), combineStringArrays(getObjectsFromGrid(getLWGrid(_tokenId)), getObjectsFromGrid(getFGrid(_tokenId)))), combineUintArrays(combineUintArrays(getIndexesFromGrid(getRWGrid(_tokenId)), getIndexesFromGrid(getLWGrid(_tokenId))), getIndexesFromGrid(getFGrid(_tokenId))), getMachine(_tokenId), leftAlign(_tokenId)), '"}'))
+          bytes(string.concat(jsonInitial, _compose.composeSVG(_tokenId), '"}'))
       );
       string memory output = string.concat("data:application/json;base64,", jsonFinal);
       return output;
