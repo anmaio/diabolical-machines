@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "./Metadata.sol";
 import "./CommonSVG.sol";
 import "./Drills.sol";
 import "./Nose.sol";
@@ -14,6 +15,11 @@ import "./CB7.sol";
 import "./CB8.sol";
 
 contract Machine {
+  Metadata private _metadata;
+
+  // Owner of the contract
+  address internal _owner;
+
   // GRIDS
   string[9] internal noRow1Grid = ["x", "x", "x", "", "", "", "", "", ""];
   string[9] internal fullGrid = ["x", "x", "x", "x", "x", "x", "x", "x", "x"];
@@ -37,6 +43,8 @@ contract Machine {
   uint[] internal partsToContract = [0, 1, 2, 3, 4]; // index is which contract 
 
   constructor() {
+    _owner = msg.sender;
+
     // conveyor belt
     machineToPosition["conveyorBelt"] = [[0,1,3,4,5], [3,4,6,7,8]];
     machineToSWHeight["conveyorBelt"] = 2;
@@ -60,6 +68,10 @@ contract Machine {
     machineText["nose"] = "<text class='bla3' x='155' y='180'>";
     machineToLWGrid["nose"] = fullGrid;
     // numMachineParts["nose"] = 1;
+  }
+
+  function setMetadata(Metadata metadata) public onlyOwner {
+    _metadata = metadata;
   }
 
   function selectMachine(uint rand) public view returns (string memory) {
@@ -143,16 +155,21 @@ contract Machine {
     return Drills.getMachinepart();
   }
 
-  function getNose(uint _tokenId) internal pure returns (string memory) {
+  function getNose(uint _tokenId) internal view returns (string memory) {
     uint[6] memory holeDistribution;
     // 0 = 4 holes, 1 = 5 holes, 2 = no holes
     // TODO slice to get a random distribution
     for (uint i = 0; i < 6; i++) {
-      holeDistribution[i] = 0;
+      holeDistribution[i] = _metadata.getRandAndSlice(_tokenId, 10+i, 1) % 3;
     }
     
     string memory holes = Nose.getHoles(holeDistribution);
     // TODO - Add the rest of the workstation
     return holes;
+  }
+
+  modifier onlyOwner() {
+    require(msg.sender == _owner, "Only owner can call this function.");
+    _;
   }
 }
