@@ -102,7 +102,7 @@ contract Machine {
   }
 
   // Get machine's SVG
-  function getMachineSVG(string memory machine, uint position, bool leftAlign, uint _tokenId) external view returns (string memory) {
+  function getMachineSVG(string memory machine, uint position, uint _tokenId) external view returns (string memory) {
     // get the number of parts the main svg is split into
     string memory svg = "";
     // get the svg for each part given the alignment
@@ -147,7 +147,7 @@ contract Machine {
 
   // Machine Getters
 
-  function getConveyorBelt() internal view returns (string memory) {
+  function getConveyorBelt() internal pure returns (string memory) {
     return string.concat(CB1.getMachinepart(), CB2.getMachinepart(), CB3.getMachinepart(), CB4.getMachinepart(), CB5.getMachinepart(), CB6.getMachinepart(), CB7.getMachinepart(), CB8.getMachinepart());
   }
 

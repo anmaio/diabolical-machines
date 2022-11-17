@@ -41,7 +41,7 @@ contract Compose {
   //   "720"
   // ];
 
-  // Uses 1/10th of the gas compared to 2d arrays
+  // Uses 1/10th of the gas compared to 2d
   // Could be combined into one array but readability is already bad enough
   bytes internal constant floorGridArray = "312360156450000540468450312540156630624540468630312720";
 
@@ -193,21 +193,21 @@ contract Compose {
     string[] memory objectList = GridHelper.combineStringArrays(GridHelper.getObjectsFromGrid(_metadata.getRWGrid(_tokenId)), GridHelper.combineStringArrays(GridHelper.getObjectsFromGrid(_metadata.getLWGrid(_tokenId)), GridHelper.getObjectsFromGrid(_metadata.getFGrid(_tokenId))));
     uint[] memory indexes = GridHelper.combineUintArrays(GridHelper.combineUintArrays(GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)), GridHelper.getIndexesFromGrid(_metadata.getLWGrid(_tokenId))), GridHelper.getIndexesFromGrid(_metadata.getFGrid(_tokenId)));
     string memory machine = _metadata.getMachine(_tokenId);
-    bool leftAlign = _metadata.getLeftAligned(_tokenId);
+    // bool leftAlign = _metadata.getLeftAligned(_tokenId);
 
-    if (globalFlip) {
-      leftAlign = !leftAlign;
-    }
+    // if (globalFlip) {
+    //   leftAlign = !leftAlign;
+    // }
 
-    string memory output;
+    string memory output = "";
     uint leftOffset = 0;
     uint rightOffset = 0;
 
-    if (leftAlign) {
-        leftOffset = 54;
-    } else {
-        rightOffset = 54;
-    }
+    // if (leftAlign) {
+    //     leftOffset = 54;
+    // } else {
+    //     rightOffset = 54;
+    // }
 
     for (uint256 i = 0; i < indexes.length; i++) {
       if (indexes[i] != 9) {
@@ -224,27 +224,33 @@ contract Compose {
           output = string.concat(output, floorX, ",", floorY);
         // floor
         } else {
-          if (leftAlign) {
-            // from 0, 6, 12 etc
-            string memory floorX = string(GridHelper.slice(floorGridArray, 6*indexes[i], 3));
-            // from 3, 9, 15 etc
-            string memory floorY = string(GridHelper.slice(floorGridArray, 6*indexes[i] + 3, 3));
-            output = string.concat(output, floorX, ",", floorY);
-          } else {
-            // from 0, 6, 12 etc
-            string memory floorX = string(GridHelper.slice(altFloorGridArray, 6*indexes[i], 3));
-            // from 3, 9, 15 etc
-            string memory floorY = string(GridHelper.slice(altFloorGridArray, 6*indexes[i] + 3, 3));
-            output = string.concat(output, floorX, ",", floorY);
-          }
+          // from 0, 6, 12 etc
+          string memory floorX = string(GridHelper.slice(floorGridArray, 6*indexes[i], 3));
+          // from 3, 9, 15 etc
+          string memory floorY = string(GridHelper.slice(floorGridArray, 6*indexes[i] + 3, 3));
+          output = string.concat(output, floorX, ",", floorY);
+
+          // if (leftAlign) {
+          //   // from 0, 6, 12 etc
+          //   string memory floorX = string(GridHelper.slice(floorGridArray, 6*indexes[i], 3));
+          //   // from 3, 9, 15 etc
+          //   string memory floorY = string(GridHelper.slice(floorGridArray, 6*indexes[i] + 3, 3));
+          //   output = string.concat(output, floorX, ",", floorY);
+          // } else {
+          //   // from 0, 6, 12 etc
+          //   string memory floorX = string(GridHelper.slice(altFloorGridArray, 6*indexes[i], 3));
+          //   // from 3, 9, 15 etc
+          //   string memory floorY = string(GridHelper.slice(altFloorGridArray, 6*indexes[i] + 3, 3));
+          //   output = string.concat(output, floorX, ",", floorY);
+          // }
         }
 
         output = string.concat(output, CommonSVG.G_MID);
 
         if (keccak256(abi.encodePacked(objectList[i])) == keccak256(abi.encodePacked(machine))) {
-          output = string.concat(output, _machine.getMachineSVG(machine, indexes[i], leftAlign, _tokenId));
+          output = string.concat(output, _machine.getMachineSVG(machine, indexes[i], _tokenId));
         } else {
-          output = string.concat(output, _sharedAssets.getObjectSVG(objectList[i], indexes[i], leftAlign));
+          output = string.concat(output, _sharedAssets.getObjectSVG(objectList[i], indexes[i]));
         }
 
         output = string.concat(output, CommonSVG.G_END);

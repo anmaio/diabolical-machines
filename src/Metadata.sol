@@ -200,27 +200,10 @@ contract Metadata is Ownable {
 
   function getRandAndSlice(uint _tokenId, uint _start, uint _length) public view returns (uint256) {
       uint256 uintRand = _handleRandom.getRandomNumber(_tokenId);
-      bytes memory rand = uintToBytes(uintRand);
+      bytes memory rand = GridHelper.uintToBytes(uintRand);
       rand = GridHelper.slice(rand, _start, _length);
       uint256 output = uint256(keccak256(rand));
       return output;
-  }
-
-  // check a given grid is not full
-  function isGridFull(string[9] memory grid) public pure returns (bool) {
-      for (uint256 i = 0; i < grid.length; i++) {
-          if (keccak256(abi.encodePacked(grid[i])) == keccak256(abi.encodePacked(""))) {
-              return false;
-          }
-      }
-      return true;
-  }
-
-  function uintToBytes(uint256 x) public pure returns (bytes memory b) {
-      b = new bytes(32);
-      assembly {
-          mstore(add(b, 32), x)
-      } //  first 32 bytes = length of the bytes value
   }
 
   function leftAlign(uint _tokenId) public view returns (bool) {

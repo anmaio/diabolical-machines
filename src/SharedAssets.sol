@@ -108,8 +108,9 @@ contract SharedAssets {
   // }
 
 
-  function getObjectSVG(string memory object, uint position, bool leftAlign) external view returns (string memory) {
+  function getObjectSVG(string memory object, uint position) external view returns (string memory) {
     // get the number of parts the main svg is split into
+    bool leftAlign = true;
     uint numParts = numObjectParts[object];
     uint offset = 0;
     string memory svg = "";
@@ -129,13 +130,6 @@ contract SharedAssets {
         CommonSVG.TEXT_CLOSE,
         CommonSVG.G2_END
       );
-      if (numParts > 1) {
-        // get the x offset for the part
-        string memory xOffset = partXOffset[object][i];
-        // get the y offset for the part
-        string memory yOffset = partYOffset[object][i];
-        tempSvg = CommonSVG.groupTransform(xOffset, yOffset, tempSvg);
-      }
       svg = string.concat(svg, tempSvg);
     }
 

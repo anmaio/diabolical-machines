@@ -101,4 +101,21 @@ library GridHelper {
     }
     return indexArray;
   }
+
+  // check a given grid is not full
+  function isGridFull(string[9] memory grid) public pure returns (bool) {
+      for (uint256 i = 0; i < grid.length; i++) {
+          if (keccak256(abi.encodePacked(grid[i])) == keccak256(abi.encodePacked(""))) {
+              return false;
+          }
+      }
+      return true;
+  }
+
+  function uintToBytes(uint256 x) public pure returns (bytes memory b) {
+      b = new bytes(32);
+      assembly {
+          mstore(add(b, 32), x)
+      } //  first 32 bytes = length of the bytes value
+  }
 }
