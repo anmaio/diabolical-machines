@@ -6,6 +6,7 @@ import "base64-sol/base64.sol";
 import "./Compose.sol";
 import "./HandleRandom.sol";
 import "./Machine.sol";
+import "./GridHelper.sol";
 
 contract Metadata is Ownable {
   Compose private _compose;
@@ -18,8 +19,6 @@ contract Metadata is Ownable {
   uint256[] public leftWallProbabilities = [100];
   string[] public rightWallTraits = ["rFrame", "rClock"];
   uint256[] public rightWallProbabilities = [100, 100];
-
-  uint256 public constant MAX_GRID_INDEX = 8;
 
   uint public constant MAX_RIGHT_WALL_OBJECTS = 2;
   uint public constant MAX_LEFT_WALL_OBJECTS = 1;
@@ -49,24 +48,6 @@ contract Metadata is Ownable {
       _handleRandom = handleRandom;
   }
 
-  // pick the position of a 1x1 object in a given grid
-  function pickPosition(
-      string[9] memory grid,
-      string memory object,
-      uint256 rand
-  ) public pure returns (string[9] memory newGrid, uint256 index) {
-    // loop through the grid until a position is found that is not taken
-    for (uint256 i = 0; i < grid.length; i++) {
-      if (keccak256(abi.encodePacked(grid[rand])) == keccak256(abi.encodePacked(""))) {
-        grid[rand] = object;
-        return (grid, rand);
-      }
-      rand = (rand + 1) % grid.length;
-    }
-    // return invalid index if no position is found
-    return (grid, MAX_GRID_INDEX + 1);
-  }
-
   // selecting the walls and floor could be moved into the same function
   // probably only worth doing if we get a stack too deep error
 
@@ -81,7 +62,7 @@ contract Metadata is Ownable {
       uint256 index = 9;
       if (probability < rightWallProbabilities[i]) {
           uint256 position = rand % 9;
-          (newGrid, index) = pickPosition(newGrid, rightWallTraits[i], position);
+          (newGrid, index) = GridHelper.pickPosition(newGrid, rightWallTraits[i], position);
       }
       rand = rand / 100;
     }
@@ -101,7 +82,7 @@ contract Metadata is Ownable {
       if (probability < leftWallProbabilities[i]) {
         // cannot go on the bottom row of the wall
         uint256 position = rand % 9;
-        (newGrid, index) = pickPosition(newGrid, leftWallTraits[i], position);
+        (newGrid, index) = GridHelper.pickPosition(newGrid, leftWallTraits[i], position);
       }
       rand = rand / 100;
     }
@@ -119,7 +100,7 @@ contract Metadata is Ownable {
       uint256 index = 9;
       if (probability < floorProbabilities[i]) {
         uint256 position = rand % 9;
-        (newGrid, index) = pickPosition(newGrid, floorTraits[i], position);
+        (newGrid, index) = GridHelper.pickPosition(newGrid, floorTraits[i], position);
       }
       rand = rand / 100;
     }
@@ -217,70 +198,12 @@ contract Metadata is Ownable {
     return grid;
   }
 
-  // slice array of bytes
-  function slice(
-      bytes memory data,
-      uint256 start,
-      uint256 len
-  ) internal pure returns (bytes memory) {
-      bytes memory b = new bytes(len);
-      for (uint256 i = 0; i < len; i++) {
-        b[i] = data[i + start];
-      }
-      return b;
-  }
-
   function getRandAndSlice(uint _tokenId, uint _start, uint _length) public view returns (uint256) {
       uint256 uintRand = _handleRandom.getRandomNumber(_tokenId);
-      bytes memory rand = uintToBytes(uintRand);
-      rand = slice(rand, _start, _length);
+      bytes memory rand = GridHelper.uintToBytes(uintRand);
+      rand = GridHelper.slice(rand, _start, _length);
       uint256 output = uint256(keccak256(rand));
       return output;
-  }
-
-  // check a given grid is not full
-  function isGridFull(string[9] memory grid) public pure returns (bool) {
-      for (uint256 i = 0; i < grid.length; i++) {
-          if (keccak256(abi.encodePacked(grid[i])) == keccak256(abi.encodePacked(""))) {
-              return false;
-          }
-      }
-      return true;
-  }
-
-  function uintToBytes(uint256 x) public pure returns (bytes memory b) {
-      b = new bytes(32);
-      assembly {
-          mstore(add(b, 32), x)
-      } //  first 32 bytes = length of the bytes value
-  }
-
-  function getObjectsFromGrid(string[9] memory grid) public pure returns (string[] memory objects) {
-    uint count = 0;
-    string[] memory tempArray = new string[](9);
-    for (uint256 i = 0; i < grid.length; i++) {
-      if (keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("")) && keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("x"))) {
-          tempArray[count] = grid[i];
-          count++;
-      }
-    }
-    string[] memory objectArray = new string[](count);
-    for (uint256 i = 0; i < count; i++) {
-      objectArray[i] = tempArray[i];
-    }
-    return objectArray;
-  }
-
-  function padGrid(string[] memory grid, uint finalSize) public pure returns (string[] memory newGrid) {
-      newGrid = new string[](finalSize);
-      for (uint256 i = 0; i < newGrid.length; i++) {
-        if (i < grid.length) {
-          newGrid[i] = grid[i];
-        } else {
-          newGrid[i] = "None";
-        }
-      }
-      return newGrid;
   }
 
   function leftAlign(uint _tokenId) public view returns (bool) {
@@ -310,15 +233,15 @@ contract Metadata is Ownable {
         '{"name": "Clifford # ',
         Strings.toString(_tokenId),
         '", "description": "Clifford nft description", "attributes": [{"trait_type": "Right Wall 1", "value":"',
-        padGrid(getObjectsFromGrid(getRWGrid(_tokenId)), MAX_RIGHT_WALL_OBJECTS)[0],
+        GridHelper.padGrid(GridHelper.getObjectsFromGrid(getRWGrid(_tokenId)), MAX_RIGHT_WALL_OBJECTS)[0],
         '"}, {"trait_type": "Right Wall 2", "value":"',
-        padGrid(getObjectsFromGrid(getRWGrid(_tokenId)), MAX_RIGHT_WALL_OBJECTS)[1],
+        GridHelper.padGrid(GridHelper.getObjectsFromGrid(getRWGrid(_tokenId)), MAX_RIGHT_WALL_OBJECTS)[1],
         '"}, {"trait_type": "Left Wall 1", "value":"',
-        padGrid(getObjectsFromGrid(getLWGrid(_tokenId)), MAX_LEFT_WALL_OBJECTS)[0],
+        GridHelper.padGrid(GridHelper.getObjectsFromGrid(getLWGrid(_tokenId)), MAX_LEFT_WALL_OBJECTS)[0],
         '"}, {"trait_type": "Floor 1", "value":"',
-        padGrid(getObjectsFromGrid(getFGrid(_tokenId)), MAX_FLOOR_OBJECTS)[0],
+        GridHelper.padGrid(GridHelper.getObjectsFromGrid(getFGrid(_tokenId)), MAX_FLOOR_OBJECTS)[0],
         '"}, {"trait_type": "Floor 2", "value":"',
-        padGrid(getObjectsFromGrid(getFGrid(_tokenId)), MAX_FLOOR_OBJECTS)[1],
+        GridHelper.padGrid(GridHelper.getObjectsFromGrid(getFGrid(_tokenId)), MAX_FLOOR_OBJECTS)[1],
         '"}],',
         '"image": "',
         _imageURI,

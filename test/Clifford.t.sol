@@ -28,6 +28,7 @@ contract CliffordTest is Test {
         metadata.setHandleRandom(handleRandom);
         clifford.setHandleRandom(handleRandom);
         compose.setMetadata(metadata);
+        machine.setMetadata(metadata);
     }
     
     function testItReturnsRandom() public view {

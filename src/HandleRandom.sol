@@ -21,8 +21,9 @@ contract HandleRandom {
   // Event to be emitted when a random number is received
   event ReceivedRandomNumberEvent(uint256 tokenId, uint256 randomNumber);
 
-  constructor(Clifford clifford) {
+  constructor(Clifford clifford) { 
     _clifford = clifford;
+    _owner = msg.sender;
   }
 
   // Check if the seed has been set for a token
