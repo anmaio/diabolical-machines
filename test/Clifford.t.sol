@@ -37,8 +37,13 @@ contract CliffordTest is Test {
 
     function testSafeMint() public {
       address to = address(1337);
-      
-      clifford.safeMint(to);
-      console.log(clifford.tokenURI(0));
+
+      // repeat roll and mint in a loop
+      for (uint256 i = 1; i <= 5; i++) {
+        vm.roll(i);
+        clifford.safeMint(to);
+      }
+
+      // console.log(clifford.tokenURI(0));
     }
 }

@@ -26,7 +26,7 @@ contract Machine {
   string[9] internal charTouchingWall = ["x", "x", "", "x", "x", "", "", "", ""];
 
   // conveyor belt
-  string[] public machines = ["nose", "conveyorBelt", "drills"];
+  string[] public machines = ["drills", "conveyorBelt", "nose"];
   mapping(string => uint[][]) internal machineToPosition;
   mapping(string => uint) internal machineToSWHeight;
   // mapping(string => uint[]) internal machineToSVGIndex;
