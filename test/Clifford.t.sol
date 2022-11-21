@@ -30,18 +30,15 @@ contract CliffordTest is Test {
         compose.setMetadata(metadata);
         machine.setMetadata(metadata);
     }
-    
-    function testItReturnsRandom() public view {
-        clifford.randomNumber();
-    }
 
-    function testSafeMint() public {
+    function testPublicMint() public {
       address to = address(1337);
 
-      // repeat roll and mint in a loop
+      // ERC721A has the ability to mint multiple tokens at once
+      // Using single mints for now while randomness is Psuedo Random and dependant on block.timestamp
       for (uint256 i = 1; i <= 5; i++) {
         vm.roll(i);
-        clifford.safeMint(to);
+        clifford.publicMint(to, 1);
       }
 
       // console.log(clifford.tokenURI(0));

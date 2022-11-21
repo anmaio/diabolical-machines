@@ -3,16 +3,16 @@ pragma solidity ^0.8.12;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "./Metadata.sol";
 import "./CommonSVG.sol";
-import "./Drills.sol";
-import "./Nose.sol";
-import "./CB1.sol";
-import "./CB2.sol";
-import "./CB3.sol";
-import "./CB4.sol";
-import "./CB5.sol";
-import "./CB6.sol";
-import "./CB7.sol";
-import "./CB8.sol";
+import "./machines/drills/Drills.sol";
+import "./machines/noses//Nose.sol";
+import "./machines/conveyorbelt/CB1.sol";
+import "./machines/conveyorbelt/CB2.sol";
+import "./machines/conveyorbelt/CB3.sol";
+import "./machines/conveyorbelt/CB4.sol";
+import "./machines/conveyorbelt/CB5.sol";
+import "./machines/conveyorbelt/CB6.sol";
+import "./machines/conveyorbelt/CB7.sol";
+import "./machines/conveyorbelt/CB8.sol";
 
 contract Machine {
   Metadata private _metadata;
