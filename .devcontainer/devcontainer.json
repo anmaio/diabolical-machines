@@ -38,5 +38,5 @@
 	// Setup git global config after container is first created
 	// Values are provided as environment variables defined in ./config/.dev.env
 	// Git credential manager is also configured
-	"postCreateCommand": "git config --global user.name \"${GIT_USER}\" && git config --global user.email \"${GIT_EMAIL}\" && git config --global credential.helper \"/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe\" && git config --global credential.https://dev.azure.com.useHttpPath true"
+	"postCreateCommand": "git config --global user.name \"${GIT_USER}\" && git config --global user.email \"${GIT_EMAIL}\" && git config --global credential.helper \"/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe\" && git config --global credential.https://dev.azure.com.useHttpPath true && find /app -name \".git\" -type d -exec bash -c \"git config --global --add safe.directory ${0%/.git}\" {} \\;"
 }
