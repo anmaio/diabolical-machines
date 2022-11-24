@@ -10,6 +10,7 @@ import "../src/SharedAssets.sol";
 import "../src/Machine.sol";
 
 contract CliffordTest is Test {
+
     SharedAssets public sharedAssets;
     Compose public compose;
     Machine public machine;
@@ -41,6 +42,6 @@ contract CliffordTest is Test {
         clifford.publicMint(to, 1);
       }
 
-      // console.log(clifford.tokenURI(0));
+      console.log(clifford.tokenURI(0));
     }
 }

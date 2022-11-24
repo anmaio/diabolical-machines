@@ -118,4 +118,14 @@ library GridHelper {
           mstore(add(b, 32), x)
       } //  first 32 bytes = length of the bytes value
   }
+
+  function getLastValidIndex(uint[] memory gridIndexes) public pure returns (uint256) {
+    uint indexLength = gridIndexes.length;
+    for (uint256 i = 1; i < indexLength; i++) {
+      if (gridIndexes[indexLength - i] != 9) {
+        return gridIndexes[indexLength - i];
+      }
+    }
+    return 0; // first index is always 0
+  }
 }

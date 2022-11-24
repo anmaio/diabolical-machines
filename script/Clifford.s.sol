@@ -28,6 +28,10 @@ contract CliffordScript is Script {
         clifford.setHandleRandom(handleRandom);
         compose.setMetadata(metadata);
 
+        address to = address(1337);
+        clifford.publicMint(to, 1);
+        console.log(clifford.tokenURI(0));
+
         vm.stopBroadcast();
     }
 }

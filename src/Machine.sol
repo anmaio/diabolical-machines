@@ -5,6 +5,7 @@ import "./Metadata.sol";
 import "./CommonSVG.sol";
 import "./machines/drills/Drills.sol";
 import "./machines/noses//Nose.sol";
+import "./machines/beast/Beast.sol";
 import "./machines/conveyorbelt/CB1.sol";
 import "./machines/conveyorbelt/CB2.sol";
 import "./machines/conveyorbelt/CB3.sol";
@@ -26,12 +27,10 @@ contract Machine {
   string[9] internal charTouchingWall = ["x", "x", "", "x", "x", "", "", "", ""];
 
   // conveyor belt
-  string[] public machines = ["drills", "conveyorBelt", "nose"];
+  string[] public machines = ["beast", "conveyorBelt", "nose", "drills"];
   mapping(string => uint[][]) internal machineToPosition;
   mapping(string => uint) internal machineToSWHeight;
-  // mapping(string => uint[]) internal machineToSVGIndex;
   mapping(string => string[9]) internal machineToLWGrid;
-  // mapping(string => uint) internal numMachineParts;
 
   // Used if a machine has repeating parts or parts that occur in other machines
   mapping(string => string[]) internal partXOffset;
@@ -48,26 +47,26 @@ contract Machine {
     // conveyor belt
     machineToPosition["conveyorBelt"] = [[0,1,3,4,5], [3,4,6,7,8]];
     machineToSWHeight["conveyorBelt"] = 2;
-    // machineToSVGIndex["conveyorBelt"] = [0, 0, 1, 1];
     machineText["conveyorBelt"] = "<text class='bla' x='300' y='0'>";
     machineToLWGrid["conveyorBelt"] = charTouchingWall;
-    // numMachineParts["conveyorBelt"] = 1;
 
     // drills
     machineToPosition["drills"] = [[0,1,2,3,4,5], [0,1,2,9,9,9], [9,9,9,3,4,5]];
     machineToSWHeight["drills"] = 3;
-    // machineToSVGIndex["drills"] = [2, 2];
     machineText["drills"] = "<text class='bla3' x='155' y='180'>";
     machineToLWGrid["drills"] = fullGrid;
-    // numMachineParts["drills"] = 1;
 
     // nose
     machineToPosition["nose"] = [[0,1,2,3,4,5,6,7,8]];
     machineToSWHeight["nose"] = 3;
-    // machineToSVGIndex["nose"] = [3, 3];
     machineText["nose"] = "<text class='bla3' x='155' y='180'>";
     machineToLWGrid["nose"] = fullGrid;
-    // numMachineParts["nose"] = 1;
+
+    // beast
+    machineToPosition["beast"] = [[0,1,2,3,4,5,6]];
+    machineToSWHeight["beast"] = 3;
+    machineText["beast"] = "<text class='bla3' x='-150' y='-300'>";
+    machineToLWGrid["beast"] = fullGrid;
   }
 
   function setMetadata(Metadata metadata) public onlyOwner {
@@ -140,6 +139,8 @@ contract Machine {
       return getDrills();
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("nose"))) {
       return getNose(_tokenId);
+    } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("beast"))) {
+      return getBeast(_tokenId);
     } else {
       return "";
     }
@@ -148,11 +149,11 @@ contract Machine {
   // Machine Getters
 
   function getConveyorBelt() internal pure returns (string memory) {
-    return string.concat(CB1.getMachinepart(), CB2.getMachinepart(), CB3.getMachinepart(), CB4.getMachinepart(), CB5.getMachinepart(), CB6.getMachinepart(), CB7.getMachinepart(), CB8.getMachinepart());
+    return string.concat(CB1.getMachine(), CB2.getMachine(), CB3.getMachine(), CB4.getMachine(), CB5.getMachine(), CB6.getMachine(), CB7.getMachine(), CB8.getMachine());
   }
 
   function getDrills() internal pure returns (string memory) {
-    return Drills.getMachinepart();
+    return Drills.getMachine();
   }
 
   function getNose(uint _tokenId) internal view returns (string memory) {
@@ -166,6 +167,12 @@ contract Machine {
     string memory holes = Nose.getHoles(holeDistribution);
     // TODO - Add the rest of the workstation
     return holes;
+  }
+
+  function getBeast(uint _tokenId) internal view returns (string memory) {
+    bytes memory rand = _metadata.getRandBytes(_tokenId);
+    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
+    return Beast.getMachine(bytesNeeded);
   }
 
   modifier onlyOwner() {
