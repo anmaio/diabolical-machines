@@ -3,3 +3,4 @@ forge-std/=lib/forge-std/src/
 @openzeppelin/=lib/openzeppelin-contracts/
 @chainlink/=lib/chainlink/
 base64-sol/=lib/base64/
+ERC721A/=lib/ERC721A/contracts/

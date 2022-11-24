@@ -14,7 +14,7 @@ contract Metadata is Ownable {
   HandleRandom private _handleRandom;
 
   string[] public floorTraits = ["altar", "props"];
-  uint256[] public floorProbabilities = [100, 100];
+  uint256[] public floorProbabilities = [0, 0];
   string[] public leftWallTraits = ["lFrame"];
   uint256[] public leftWallProbabilities = [100];
   string[] public rightWallTraits = ["rFrame", "rClock"];
@@ -133,7 +133,8 @@ contract Metadata is Ownable {
     string memory machine = getMachine(_tokenId);
     string[9] memory grid = emptyGrid;
     // render order of machine is the last position it occupies
-    grid[positions[positions.length - 1]] = machine;
+    grid[GridHelper.getLastValidIndex(positions)] = machine;
+    // grid[positions[positions.length - 1]] = machine; // ERROR HERE
     for (uint i = 0; i < positions.length - 1; i++) {
       if (positions[i] != 9) {
         if (isMultipleMachines(machine)) {
@@ -198,11 +199,15 @@ contract Metadata is Ownable {
     return grid;
   }
 
+  // get the random number for the token
+  function getRandBytes(uint _tokenId) public view returns (bytes memory) {
+    return GridHelper.uintToBytes(_handleRandom.getRandomNumber(_tokenId));
+  }
+
   function getRandAndSlice(uint _tokenId, uint _start, uint _length) public view returns (uint256) {
-      uint256 uintRand = _handleRandom.getRandomNumber(_tokenId);
-      bytes memory rand = GridHelper.uintToBytes(uintRand);
-      rand = GridHelper.slice(rand, _start, _length);
-      uint256 output = uint256(keccak256(rand));
+      bytes memory randBytes = getRandBytes(_tokenId);
+      randBytes = GridHelper.slice(randBytes, _start, _length);
+      uint256 output = uint256(keccak256(randBytes));
       return output;
   }
 

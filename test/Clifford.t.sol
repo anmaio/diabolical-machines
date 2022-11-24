@@ -10,6 +10,7 @@ import "../src/SharedAssets.sol";
 import "../src/Machine.sol";
 
 contract CliffordTest is Test {
+
     SharedAssets public sharedAssets;
     Compose public compose;
     Machine public machine;
@@ -30,15 +31,17 @@ contract CliffordTest is Test {
         compose.setMetadata(metadata);
         machine.setMetadata(metadata);
     }
-    
-    function testItReturnsRandom() public view {
-        clifford.randomNumber();
-    }
 
-    function testSafeMint() public {
+    function testPublicMint() public {
       address to = address(1337);
-      
-      clifford.safeMint(to);
+
+      // ERC721A has the ability to mint multiple tokens at once
+      // Using single mints for now while randomness is Psuedo Random and dependant on block.timestamp
+      for (uint256 i = 1; i <= 5; i++) {
+        vm.roll(i);
+        clifford.publicMint(to, 1);
+      }
+
       console.log(clifford.tokenURI(0));
     }
 }
