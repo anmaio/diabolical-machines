@@ -1,9 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
-import "./styles/beast/BeastCSS1.sol";
-import "./styles/beast/BeastCSS2.sol";
-import "./styles/beast/BeastCSS3.sol";
-import "./defs/beast/BeastDefs.sol";
+// TEMP STYLES
+// BEAST
+// import "./styles/beast/BeastCSS1.sol";
+// import "./styles/beast/BeastCSS2.sol";
+// import "./styles/beast/BeastCSS3.sol";
+// NOSES
+import "./styles/noses/NosesCSS1.sol";
+import "./styles/noses/NosesCSS2.sol";
+import "./styles/noses/NosesCSS3.sol";
+import "./styles/noses/NosesCSS4.sol";
+import "./styles/noses/NosesCSS5.sol";
+
+// TEMP DEFS
+// import "./defs/beast/BeastDefs.sol";
+import "./defs/noses/NosesDefs1.sol";
+import "./defs/noses/NosesDefs2.sol";
+import "./defs/noses/NosesDefs3.sol";
+import "./defs/noses/NosesDefs4.sol";
 
 library CommonSVG {
 
@@ -40,12 +54,21 @@ library CommonSVG {
   function getOpeningSVG() external pure returns (string memory) {
     return string.concat(
       SVG_START,
-      BeastDefs.PART,
+      // BeastDefs.PART,
+      NosesDefs1.PART,
+      NosesDefs2.PART,
+      NosesDefs3.PART,
+      NosesDefs4.PART,
       SCRIPT,
       STYLE,
-      BeastCSS1.PART,
-      BeastCSS2.PART,
-      BeastCSS3.PART,
+      // BeastCSS1.PART,
+      // BeastCSS2.PART,
+      // BeastCSS3.PART,
+      NosesCSS1.PART,
+      NosesCSS2.PART,
+      NosesCSS3.PART,
+      NosesCSS4.PART,
+      NosesCSS5.PART,
       STYLE_CLOSE,
       SHELL
     );
