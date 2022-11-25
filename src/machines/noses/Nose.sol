@@ -90,6 +90,6 @@ library Nose {
 
   function getMachine(uint[6] memory holeDistribution, bytes memory digits) internal pure returns (string memory) {
     string memory output = CommonSVG.groupTransform("-312", "-720", string.concat(MOVING_PANEL, getHoles(holeDistribution, digits)));
-    return output;
+    return string.concat("<g id='m_a_limit33-u-a_to' style='animation-play-state: running;'>", output, "</g>");
   }
 }
