@@ -11,14 +11,18 @@ library Nose {
   string internal constant MOVING_PANEL = "<g id='m_a_limit33-u-panel' style='display: inline-block;'><g id='m_a_limit33-s-g8'><polygon id='m_a_limit33-s-polygon13' points='1.65,271.27 469.02,1.54 467.43,541.83 1.65,811.73 1.65,271.27' fill='#1f3759' stroke='#000' stroke-miterlimit='10'/><polygon id='m_a_limit33-u-f' points='17.3,280.47 484.05,10.74 482.46,551.03 17.3,820.93 17.3,280.47' fill='url(#m_a_limit33-u-f-fill)' stroke='#000' stroke-width='1.01' stroke-miterlimit='10'/><polygon id='m_a_limit33-u-l' points='1.65,811.47 17.3,820.66 17.3,280.47 1.65,271.27 1.65,811.47' fill='#206c8e' stroke='#000' stroke-width='1.01' stroke-miterlimit='10'/><polygon id='m_a_limit33-u-t' points='1.65,271.27 17.3,280.47 484.05,10.74 469.02,1.54 1.65,271.27' fill='url(#m_a_limit33-u-t-fill)' stroke='#000' stroke-width='1.01' stroke-miterlimit='10'/></g></g>";
 
   // EYES
+  // Mid eyes
   string internal constant EYES1 = "";
   string internal constant EYES2 = "";
   string internal constant EYES3 = "";
   string internal constant EYES4 = "";
-  string internal constant EYES5 = "";
 
   // NOSES
-
+  string internal constant NOSE1 = "";
+  string internal constant NOSE2 = "";
+  string internal constant NOSE3 = "";
+  string internal constant NOSE4 = "";
+  string internal constant NOSE5 = "";
 
   bytes internal constant HOLES_OFFSET = "-156-630-312-540-468-450+000-540-156-450-312-360";
 
@@ -32,7 +36,7 @@ library Nose {
       string memory offsetX = string(GridHelper.slice(holes, 2*i*3, 3));
       string memory offsetY = string(GridHelper.slice(holes, (2*i + 1)*3, 3));
 
-      if (keccak256(abi.encodePacked(holes[2*i])) != keccak256(abi.encodePacked("nul"))) {
+      if (keccak256(abi.encodePacked(offsetX)) != keccak256(abi.encodePacked("nul"))) {
         output = string.concat(
           output,
           CommonSVG.groupTransform(offsetX, offsetY, getHole(holeVersion))
