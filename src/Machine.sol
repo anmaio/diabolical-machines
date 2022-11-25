@@ -27,7 +27,7 @@ contract Machine {
   string[9] internal charTouchingWall = ["x", "x", "", "x", "x", "", "", "", ""];
 
   // conveyor belt
-  string[] public machines = ["beast", "conveyorBelt", "nose", "drills"];
+  string[] public machines = ["drills", "conveyorBelt", "beast", "nose"];
   mapping(string => uint[][]) internal machineToPosition;
   mapping(string => uint) internal machineToSWHeight;
   mapping(string => string[9]) internal machineToLWGrid;
@@ -163,8 +163,11 @@ contract Machine {
     for (uint i = 0; i < 6; i++) {
       holeDistribution[i] = _metadata.getRandAndSlice(_tokenId, 10+i, 1) % 3;
     }
+
+    bytes memory rand = _metadata.getRandBytes(_tokenId);
+    bytes memory bytesNeeded = GridHelper.slice(rand, 20, 3);
     
-    string memory holes = Nose.getHoles(holeDistribution);
+    string memory holes = Nose.getMachine(holeDistribution, bytesNeeded);
     // TODO - Add the rest of the workstation
     return holes;
   }
