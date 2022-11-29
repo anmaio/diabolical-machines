@@ -2,6 +2,7 @@
 pragma solidity ^0.8.12;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "./CommonSVG.sol";
+import "./Helper.sol";
 
 contract SharedAssets {
   mapping(string => uint[]) internal objectToSVGIndex;
@@ -128,7 +129,8 @@ contract SharedAssets {
         // machineToSVG[machine][numParts * 2], // open text
         positionText(object, position),
         CommonSVG.TEXT_CLOSE,
-        CommonSVG.G2_END
+        Helper.G_END,
+        Helper.G_END
       );
       svg = string.concat(svg, tempSvg);
     }
