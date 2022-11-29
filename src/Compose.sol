@@ -5,6 +5,7 @@ import "base64-sol/base64.sol";
 import "./SharedAssets.sol";
 import "./Machine.sol";
 import "./CommonSVG.sol";
+import "./Helper.sol";
 import "./Metadata.sol";
 
 contract Compose {
@@ -16,6 +17,8 @@ contract Compose {
   address internal _owner;
 
   bool internal globalFlip = false;
+
+  uint internal constant OFFSET = 54;
 
   // string[] public folders = ["s/shell", "r/frame", "r/clock", "l/frame", "f/altar", "f/props"];
   // string[] public objects = [RIGHT_FRAME, RIGHT_CLOCK, LEFT_FRAME, ALTAR, PROPS];
@@ -45,7 +48,7 @@ contract Compose {
   // Could be combined into one array but readability is already bad enough
   bytes internal constant floorGridArray = "312360156450000540468450312540156630624540468630312720";
 
-  bytes internal constant altFloorGridArray = "312360468450624540156450312540468630000540156630312720";
+  // bytes internal constant altFloorGridArray = "312360468450624540156450312540468630000540156630312720";
 
   bytes internal constant combinedWallArray = "312360468450624540312180468270624360312000468090624180312360156450000540312180156270000360312000156090000180";
 
@@ -178,74 +181,60 @@ contract Compose {
     // string memory style = CommonSVG.STYLE;
     // string memory shell = _sharedAssets.getShell();
     // start, script, style, shell
+
+    // determine if flipped
+
+    bytes memory rand = _metadata.getRandBytes(_tokenId);
+    // 0 if not flipped, 1 if flipped
+    uint isFlipped = GridHelper.bytesToUint(rand) % 2;
+    string memory flip = "";
+    if (isFlipped == 0) {
+      flip = "1";
+    } else {
+      flip = "-1";
+    }
+
     string memory opening = CommonSVG.getOpeningSVG();
     
     string memory objects = composeObjects(_tokenId);
-    string memory closing = CommonSVG.getClosingSVG();
+    string memory closing = Helper.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
-    return Base64.encode(bytes(string.concat(opening, objects, closing)));
+    return Base64.encode(bytes(string.concat(opening, Helper.getShell(flip), objects, closing)));
   }
 
   function composeObjects(uint _tokenId) internal view returns (string memory) {
-    uint rWLength = GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)).length;
-    uint lWLength = GridHelper.getIndexesFromGrid(_metadata.getLWGrid(_tokenId)).length;
+    // uint rWLength = GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)).length;
+    // uint lWLength = GridHelper.getIndexesFromGrid(_metadata.getLWGrid(_tokenId)).length;
 
     string[] memory objectList = GridHelper.combineStringArrays(GridHelper.getObjectsFromGrid(_metadata.getRWGrid(_tokenId)), GridHelper.combineStringArrays(GridHelper.getObjectsFromGrid(_metadata.getLWGrid(_tokenId)), GridHelper.getObjectsFromGrid(_metadata.getFGrid(_tokenId))));
     uint[] memory indexes = GridHelper.combineUintArrays(GridHelper.combineUintArrays(GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)), GridHelper.getIndexesFromGrid(_metadata.getLWGrid(_tokenId))), GridHelper.getIndexesFromGrid(_metadata.getFGrid(_tokenId)));
     string memory machine = _metadata.getMachine(_tokenId);
-    // bool leftAlign = _metadata.getLeftAligned(_tokenId);
-
-    // if (globalFlip) {
-    //   leftAlign = !leftAlign;
-    // }
 
     string memory output = "";
-    uint leftOffset = 0;
-    uint rightOffset = 0;
-
-    // if (leftAlign) {
-    //     leftOffset = 54;
-    // } else {
-    //     rightOffset = 54;
-    // }
 
     for (uint256 i = 0; i < indexes.length; i++) {
       if (indexes[i] != 9) {
-        output = string.concat(output, CommonSVG.G_TRANSFORM);
+        output = string.concat(output, Helper.G_TRANSFORM);
+        string memory floorX = "";
+        string memory floorY = "";
+        
         // rw
-        if (i < rWLength) {
-          string memory floorX = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + rightOffset, 3));
-          string memory floorY = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + rightOffset + 3, 3));
-            output = string.concat(output, floorX, ",", floorY);
+        if (i < GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)).length) {
+          floorX = string(GridHelper.slice(combinedWallArray, 6*indexes[i], 3));
+          floorY = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + 3, 3));
         // lw
-        } else if (i < rWLength + lWLength) {
-          string memory floorX = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + leftOffset, 3));
-          string memory floorY = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + leftOffset + 3, 3));
-          output = string.concat(output, floorX, ",", floorY);
+        } else if (i < GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)).length + GridHelper.getIndexesFromGrid(_metadata.getLWGrid(_tokenId)).length) {
+          floorX = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + OFFSET, 3));
+          floorY = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + OFFSET + 3, 3));
         // floor
         } else {
           // from 0, 6, 12 etc
-          string memory floorX = string(GridHelper.slice(floorGridArray, 6*indexes[i], 3));
+          floorX = string(GridHelper.slice(floorGridArray, 6*indexes[i], 3));
           // from 3, 9, 15 etc
-          string memory floorY = string(GridHelper.slice(floorGridArray, 6*indexes[i] + 3, 3));
-          output = string.concat(output, floorX, ",", floorY);
-
-          // if (leftAlign) {
-          //   // from 0, 6, 12 etc
-          //   string memory floorX = string(GridHelper.slice(floorGridArray, 6*indexes[i], 3));
-          //   // from 3, 9, 15 etc
-          //   string memory floorY = string(GridHelper.slice(floorGridArray, 6*indexes[i] + 3, 3));
-          //   output = string.concat(output, floorX, ",", floorY);
-          // } else {
-          //   // from 0, 6, 12 etc
-          //   string memory floorX = string(GridHelper.slice(altFloorGridArray, 6*indexes[i], 3));
-          //   // from 3, 9, 15 etc
-          //   string memory floorY = string(GridHelper.slice(altFloorGridArray, 6*indexes[i] + 3, 3));
-          //   output = string.concat(output, floorX, ",", floorY);
-          // }
+          floorY = string(GridHelper.slice(floorGridArray, 6*indexes[i] + 3, 3));
         }
 
-        output = string.concat(output, CommonSVG.G_MID);
+        output = string.concat(output, floorX, ",", floorY, Helper.G_MID);
 
         if (keccak256(abi.encodePacked(objectList[i])) == keccak256(abi.encodePacked(machine))) {
           output = string.concat(output, _machine.getMachineSVG(machine, indexes[i], _tokenId));
@@ -253,7 +242,7 @@ contract Compose {
           output = string.concat(output, _sharedAssets.getObjectSVG(objectList[i], indexes[i]));
         }
 
-        output = string.concat(output, CommonSVG.G_END);
+        output = string.concat(output, Helper.G_END);
       }
     }
     return output;

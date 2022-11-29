@@ -34,7 +34,7 @@ contract HandleRandom {
   // Get the random number for a token
   function getRandomNumber(uint _tokenId) external view returns (uint rand) {
     uint seed = _tokenToSeed[_tokenId];
-    uint number = uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender, seed)));
+    uint number = uint(keccak256(abi.encodePacked(msg.sender, seed, block.timestamp, block.difficulty)));
     return number;
   }
 

@@ -38,10 +38,13 @@ contract CliffordTest is Test {
       // ERC721A has the ability to mint multiple tokens at once
       // Using single mints for now while randomness is Psuedo Random and dependant on block.timestamp
       for (uint256 i = 1; i <= 5; i++) {
-        vm.roll(i);
+        vm.roll(i*9999);
+        vm.warp(i*9999);
+        vm.difficulty(i*9999);
+        // to, quantity
         clifford.publicMint(to, 1);
       }
 
-      console.log(clifford.tokenURI(0));
+      console.log(clifford.tokenURI(1));
     }
 }
