@@ -1,6 +1,8 @@
 forge build --via-ir
 <!-- Test without gas report -->
+<!-- Note: Use vv when mass minting -->
 forge test --via-ir -vvvv
+forge test -vvvv
 <!-- Test without optimizer -->
 forge test --via-ir --gas-report  -vvvv
 <!-- Test with optimizer -->

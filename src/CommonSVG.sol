@@ -45,30 +45,38 @@ library CommonSVG {
   
 
   function getOpeningSVG() external pure returns (string memory) {
-    return string.concat(
-      SVG_START,
-      // BeastDefs.PART,
 
-      // NosesDefs1.PART,
-      // NosesDefs2.PART,
-      // NosesDefs3.PART,
-      // NosesDefs4.PART,
+    string memory output = string.concat(
+      SVG_START,
+      BeastDefs.PART,
+
+      NosesDefs1.PART,
+      NosesDefs2.PART,
+      NosesDefs3.PART,
+      NosesDefs4.PART,
 
       AltarDefs1.PART,
       AltarDefs2.PART,
-      AltarDefs3.PART,
+      AltarDefs3.PART
+    );
 
+    output = string.concat(
+      output,
       SCRIPT,
       STYLE,
-      // BeastCSS1.PART,
-      // BeastCSS2.PART,
-      // BeastCSS3.PART,
+      BeastCSS1.PART,
+      BeastCSS2.PART,
+      BeastCSS3.PART
+    );
 
-      // NosesCSS1.PART,
-      // NosesCSS2.PART,
-      // NosesCSS3.PART,
-      // NosesCSS4.PART,
-      // NosesCSS5.PART,
+    return string.concat(
+      output,
+
+      NosesCSS1.PART,
+      NosesCSS2.PART,
+      NosesCSS3.PART,
+      NosesCSS4.PART,
+      NosesCSS5.PART,
 
       AltarCSS1.PART,
       AltarCSS2.PART,
