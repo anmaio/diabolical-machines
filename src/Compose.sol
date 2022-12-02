@@ -172,16 +172,6 @@ contract Compose {
 
   // compose SVG
   function composeSVG(uint _tokenId) public view returns (string memory) {
-    // objects behind the machine
-    // machine
-    // objects in front of the machine
-    // string memory svgStart = CommonSVG.SVG_START;
-    // // string memory script = "";
-    // string memory script = CommonSVG.SCRIPT;
-    // string memory style = CommonSVG.STYLE;
-    // string memory shell = _sharedAssets.getShell();
-    // start, script, style, shell
-
     // determine if flipped
 
     bytes memory rand = _metadata.getRandBytes(_tokenId);
@@ -200,6 +190,27 @@ contract Compose {
     string memory closing = Helper.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
     return Base64.encode(bytes(string.concat(opening, Helper.getShell(flip), objects, closing)));
+  }
+
+  function composeOnlyImage(uint _tokenId) public view returns (string memory) {
+    // determine if flipped
+
+    bytes memory rand = _metadata.getRandBytes(_tokenId);
+    // 0 if not flipped, 1 if flipped
+    uint isFlipped = GridHelper.stringToUint(string(rand)) % 2;
+    string memory flip = "";
+    if (isFlipped == 0) {
+      flip = "1";
+    } else {
+      flip = "-1";
+    }
+
+    string memory opening = CommonSVG.getOpeningSVG();
+    
+    string memory objects = composeObjects(_tokenId);
+    string memory closing = Helper.getClosingSVG();
+    // return all svg's concatenated together and base64 encoded
+    return string.concat(opening, Helper.getShell(flip), objects, closing);
   }
 
   function composeObjects(uint _tokenId) internal view returns (string memory) {
