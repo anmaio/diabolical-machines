@@ -8,6 +8,7 @@ import "../src/Metadata.sol";
 import "../src/HandleRandom.sol";
 import "../src/SharedAssets.sol";
 import "../src/Machine.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract CliffordTest is Test {
 
@@ -37,7 +38,7 @@ contract CliffordTest is Test {
 
       // ERC721A has the ability to mint multiple tokens at once
       // Using single mints for now while randomness is Psuedo Random and dependant on block.timestamp
-      for (uint256 i = 1; i <= 5; i++) {
+      for (uint256 i = 0; i < 5; i++) {
         vm.roll(i*9999);
         vm.warp(i*9999);
         vm.difficulty(i*9999);
@@ -45,6 +46,14 @@ contract CliffordTest is Test {
         clifford.publicMint(to, 1);
       }
 
-      console.log(clifford.tokenURI(1));
+      // for (uint256 i = 0; i < 5; i++) {
+      //   console.log("Minted token: ", i);
+      //   uint rand = handleRandom.getRandomNumber(i);
+      //   console.log("rand: ", rand);
+      //   console.log("metadata slice: ", metadata.getRandAndSlice(i, 8, 8));
+      // }
+
+      console.log(clifford.tokenURI(0));
     }
+
 }

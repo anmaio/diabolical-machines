@@ -186,7 +186,7 @@ contract Compose {
 
     bytes memory rand = _metadata.getRandBytes(_tokenId);
     // 0 if not flipped, 1 if flipped
-    uint isFlipped = GridHelper.bytesToUint(rand) % 2;
+    uint isFlipped = GridHelper.stringToUint(string(rand)) % 2;
     string memory flip = "";
     if (isFlipped == 0) {
       flip = "1";

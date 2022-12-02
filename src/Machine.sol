@@ -6,6 +6,7 @@ import "./CommonSVG.sol";
 import "./machines/drills/Drills.sol";
 import "./machines/noses//Nose.sol";
 import "./machines/beast/Beast.sol";
+import "./machines/altar/Altar.sol";
 import "./machines/conveyorbelt/CB1.sol";
 import "./machines/conveyorbelt/CB2.sol";
 import "./machines/conveyorbelt/CB3.sol";
@@ -27,9 +28,9 @@ contract Machine {
   string[9] internal charTouchingWall = ["x", "x", "", "x", "x", "", "", "", ""];
 
   // conveyor belt
-  // string[] public machines = ["nose", "conveyorBelt", "beast", "drills"];
+  // string[] public machines = ["nose", "conveyorBelt", "beast", "drills", "altar"];
   // TESTING
-  string[] public machines = ["nose"];
+  string[] public machines = ["altar"];
   mapping(string => uint[][]) internal machineToPosition;
   mapping(string => uint) internal machineToSWHeight;
   mapping(string => string[9]) internal machineToLWGrid;
@@ -69,6 +70,12 @@ contract Machine {
     machineToSWHeight["beast"] = 3;
     machineText["beast"] = "<text class='bla3' x='-150' y='-300'>";
     machineToLWGrid["beast"] = fullGrid;
+
+    // altar
+    machineToPosition["altar"] = [[0,1,2,3,4,5,6,7,8]];
+    machineToSWHeight["altar"] = 3;
+    machineText["altar"] = "<text class='bla3' x='155' y='180'>";
+    machineToLWGrid["altar"] = fullGrid;
   }
 
   function setMetadata(Metadata metadata) public onlyOwner {
@@ -143,6 +150,8 @@ contract Machine {
       return getNose(_tokenId);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("beast"))) {
       return getBeast(_tokenId);
+    } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("altar"))) {
+      return getAltar(_tokenId);
     } else {
       return "";
     }
@@ -180,6 +189,13 @@ contract Machine {
     bytes memory rand = _metadata.getRandBytes(_tokenId);
     bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
     return Beast.getMachine(bytesNeeded);
+  }
+
+  function getAltar(uint _tokenId) internal view returns (string memory) {
+    bytes memory rand = _metadata.getRandBytes(_tokenId);
+    // 2 for frame, 2 for orb1, 2 for orb2, 2 for cube, 2 for stairs, 2 for rug
+    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 12);
+    return Altar.getMachine(bytesNeeded);
   }
 
   modifier onlyOwner() {

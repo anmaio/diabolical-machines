@@ -130,10 +130,25 @@ library GridHelper {
   }
 
   function bytesToUint(bytes memory b) internal pure returns (uint256){
-    uint256 number;
-    for(uint i=0;i<b.length;i++){
-      number = number + uint(uint8(b[i]))*(2**(8*(b.length-(i+1))));
+    uint result = 0;
+    for (uint256 i = 0; i < b.length; i++) {
+        uint256 c = uint256(uint8(b[i]));
+        if (c >= 48 && c <= 57) {
+            result = result * 10 + (c - 48);
+        }
     }
-      return number;
+    return result;
   }
+
+  function stringToUint(string memory s) internal pure returns (uint) {
+        bytes memory b = bytes(s);
+        uint result = 0;
+        for (uint256 i = 0; i < b.length; i++) {
+            uint256 c = uint256(uint8(b[i]));
+            if (c >= 48 && c <= 57) {
+                result = result * 10 + (c - 48);
+            }
+        }
+        return result;
+    }
 }

@@ -201,13 +201,13 @@ contract Metadata is Ownable {
 
   // get the random number for the token
   function getRandBytes(uint _tokenId) public view returns (bytes memory) {
-    return GridHelper.uintToBytes(_handleRandom.getRandomNumber(_tokenId));
+    return bytes(Strings.toString(_handleRandom.getRandomNumber(_tokenId)));
   }
 
   function getRandAndSlice(uint _tokenId, uint _start, uint _length) public view returns (uint256) {
       bytes memory randBytes = getRandBytes(_tokenId);
       randBytes = GridHelper.slice(randBytes, _start, _length);
-      uint256 output = uint256(keccak256(randBytes));
+      uint256 output = GridHelper.bytesToUint(randBytes);
       return output;
   }
 
