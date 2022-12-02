@@ -83,11 +83,11 @@ library Beast {
 
     // 1st digit is the connector
     bytes memory connectorBytes = GridHelper.slice(digits, 0, 1);
-    uint connector = uint256(keccak256(connectorBytes)) % 2;
+    uint connector = GridHelper.stringToUint(string(connectorBytes)) % 2;
 
     // 2nd digit is the eyes
     bytes memory eyesBytes = GridHelper.slice(digits, 1, 1);
-    uint eyes = uint256(keccak256(eyesBytes)) % 2;
+    uint eyes = GridHelper.stringToUint(string(eyesBytes)) % 2;
 
     return string.concat(
       "<g id='bst_1-u-c-mineral-face-a' style='display: inline-block;'>",
@@ -101,7 +101,7 @@ library Beast {
 
   function getFace(bytes memory digits) internal pure returns (string memory) {
     bytes memory mouthBytes = GridHelper.slice(digits, 2, 1);
-    uint mouth = uint256(keccak256(mouthBytes)) % 2;
+    uint mouth = GridHelper.stringToUint(string(mouthBytes)) % 2;
     // TESTING
     mouth = 1;
     string memory output = FACE_EYES;
@@ -121,7 +121,7 @@ library Beast {
 
   function getCylinderTop(bytes memory digits) internal pure returns (string memory) {
     bytes memory topBytes = GridHelper.slice(digits, 3, 1);
-    uint top = uint256(keccak256(topBytes)) % 2;
+    uint top = GridHelper.stringToUint(string(topBytes)) % 2;
     // TESTING
     top = 0;
     string memory output = string.concat(

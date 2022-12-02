@@ -8,6 +8,7 @@ contract HandleRandom {
 
   // Random number from oracle
   mapping(uint => uint) internal _tokenToSeed;
+  mapping(uint => uint) internal _tokenToBaseRand;
 
   // Address of oracle
   address internal _oracle = 0x0000000000000000000000000000000000000000;
@@ -34,13 +35,15 @@ contract HandleRandom {
   // Get the random number for a token
   function getRandomNumber(uint _tokenId) external view returns (uint rand) {
     uint seed = _tokenToSeed[_tokenId];
-    uint number = uint(keccak256(abi.encodePacked(msg.sender, seed, block.timestamp, block.difficulty)));
+    uint baseRand = _tokenToBaseRand[_tokenId];
+    uint number = uint(keccak256(abi.encodePacked(seed, baseRand)));
     return number;
   }
 
   // Request a random number from the oracle
   function requestRandomNumber(uint _tokenId) external onlyMintingContract {
     require(_tokenToSeed[_tokenId] == 0, "Seed already set");
+    _tokenToBaseRand[_tokenId] = uint(keccak256(abi.encodePacked(msg.sender, block.timestamp, block.difficulty)));
     // Emit event to be picked up by oracle
     emit RequestRandomNumberEvent(_tokenId);
   }
