@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 import "../../GridHelper.sol";
-import "../../Helper.sol";
 import "../../CommonSVG.sol";
 
 library Nose {
@@ -25,24 +24,24 @@ library Nose {
   string internal constant HOLES_OFFSET = "-156-630-312-540-468-450+000-540-156-450-312-360";
 
   string internal constant HOLES_5 = "+00+00+00-55+00+55-90+00+90+00";
-  string internal constant HOLES_4 = "+50+35+50-35-50+35-50-35nulnul";
+  string internal constant HOLES_4 = "+50+35+50-35-50+35-50-35";
 
-  // get the arrangment for 4-5 holes
-  function getArrangement(string memory xOffset, string memory yOffset, bytes memory holes) internal pure returns (string memory) {
-    string memory output = "";
-    for (uint i = 0; i < 5; i++) {
-      string memory offsetX = string(GridHelper.slice(holes, 2*i*3, 3));
-      string memory offsetY = string(GridHelper.slice(holes, (2*i + 1)*3, 3));
+  // // get the arrangment for 4-5 holes
+  // function getArrangement(string memory xOffset, string memory yOffset, bytes memory holes) internal pure returns (string memory) {
+  //   string memory output = "";
+  //   for (uint i = 0; i < 5; i++) {
+  //     string memory offsetX = string(GridHelper.slice(holes, 2*i*3, 3));
+  //     string memory offsetY = string(GridHelper.slice(holes, (2*i + 1)*3, 3));
 
-      if (keccak256(abi.encodePacked(offsetX)) != keccak256(abi.encodePacked("nul"))) {
-        output = string.concat(
-          output,
-          Helper.groupTransform(offsetX, offsetY, HOLE)
-        );
-      }
-    }
-    return Helper.groupTransform(xOffset, yOffset, output);
-  }
+  //     if (keccak256(abi.encodePacked(offsetX)) != keccak256(abi.encodePacked("nul"))) {
+  //       output = string.concat(
+  //         output,
+  //         CommonSVG.groupTransform(offsetX, offsetY, HOLE)
+  //       );
+  //     }
+  //   }
+  //   return CommonSVG.groupTransform(xOffset, yOffset, output);
+  // }
 
   // get the eyes from the eye number
   function getEyes(uint eyeNumber) internal pure returns (string memory) {
@@ -90,10 +89,12 @@ library Nose {
       // string memory yOffset = HOLE_OFFSET[i * 2 + 1];
       // 5 holes
       if (holeDistribution[i] == 0) {
-        output = string.concat(output, getArrangement(xOffset, yOffset, bytes(HOLES_5)));
+        output = string.concat(output, CommonSVG.groupTransform(xOffset, yOffset, GridHelper.repeatGivenObject(HOLE, 5, bytes(HOLES_5))));
+        // output = string.concat(output, getArrangement(xOffset, yOffset, bytes(HOLES_5)));
       // 4 holes
       } else if (holeDistribution[i] == 1) {
-        output = string.concat(output, getArrangement(xOffset, yOffset, bytes(HOLES_4)));
+        output = string.concat(output, CommonSVG.groupTransform(xOffset, yOffset, GridHelper.repeatGivenObject(HOLE, 4, bytes(HOLES_4))));
+        // output = string.concat(output, getArrangement(xOffset, yOffset, bytes(HOLES_4)));
       }
     }
     return output;
@@ -123,6 +124,6 @@ library Nose {
     );
 
     string memory output = string.concat("<g id='m_a_limit33-u-a_to' style='animation-play-state: running;'><g id='m_a_limit33-u-a' style='transform: transform-origin: center center;'>", MOVING_PANEL, eyes, nose, "</g></g>");
-    return string.concat(Helper.groupTransform("-212", "-240", getHoles(holeDistribution)), output);
+    return string.concat(CommonSVG.groupTransform("-212", "-240", getHoles(holeDistribution)), output);
   }
 }

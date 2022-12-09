@@ -16,9 +16,9 @@ contract Metadata is Ownable {
   string[] public floorTraits = ["altar", "props"];
   uint256[] public floorProbabilities = [0, 0];
   string[] public leftWallTraits = ["lFrame"];
-  uint256[] public leftWallProbabilities = [100];
+  uint256[] public leftWallProbabilities = [0];
   string[] public rightWallTraits = ["rFrame", "rClock"];
-  uint256[] public rightWallProbabilities = [100, 100];
+  uint256[] public rightWallProbabilities = [0, 0];
 
   uint public constant MAX_RIGHT_WALL_OBJECTS = 2;
   uint public constant MAX_LEFT_WALL_OBJECTS = 1;

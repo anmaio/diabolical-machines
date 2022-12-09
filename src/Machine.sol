@@ -7,14 +7,15 @@ import "./machines/drills/Drills.sol";
 import "./machines/noses//Nose.sol";
 import "./machines/beast/Beast.sol";
 import "./machines/altar/Altar.sol";
-import "./machines/conveyorbelt/CB1.sol";
-import "./machines/conveyorbelt/CB2.sol";
-import "./machines/conveyorbelt/CB3.sol";
-import "./machines/conveyorbelt/CB4.sol";
-import "./machines/conveyorbelt/CB5.sol";
-import "./machines/conveyorbelt/CB6.sol";
-import "./machines/conveyorbelt/CB7.sol";
-import "./machines/conveyorbelt/CB8.sol";
+// import "./machines/conveyorbelt/CB1.sol";
+// import "./machines/conveyorbelt/CB2.sol";
+// import "./machines/conveyorbelt/CB3.sol";
+// import "./machines/conveyorbelt/CB4.sol";
+// import "./machines/conveyorbelt/CB5.sol";
+// import "./machines/conveyorbelt/CB6.sol";
+// import "./machines/conveyorbelt/CB7.sol";
+// import "./machines/conveyorbelt/CB8.sol";
+import "./machines/conveyorbelt/Conveyorbelt.sol";
 
 contract Machine {
   Metadata private _metadata;
@@ -28,9 +29,9 @@ contract Machine {
   string[9] internal charTouchingWall = ["x", "x", "", "x", "x", "", "", "", ""];
 
   // conveyor belt
-  string[] public machines = ["nose", "conveyorBelt", "beast", "drills", "altar"];
+  // string[] public machines = ["nose", "conveyorBelt", "beast", "drills", "altar"];
   // TESTING
-  // string[] public machines = ["altar"];
+  string[] public machines = ["drills"];
   mapping(string => uint[][]) internal machineToPosition;
   mapping(string => uint) internal machineToSWHeight;
   mapping(string => string[9]) internal machineToLWGrid;
@@ -48,10 +49,10 @@ contract Machine {
     _owner = msg.sender;
 
     // conveyor belt
-    machineToPosition["conveyorBelt"] = [[0,1,3,4,5], [3,4,6,7,8]];
-    machineToSWHeight["conveyorBelt"] = 2;
-    machineText["conveyorBelt"] = "<text class='bla' x='300' y='0'>";
-    machineToLWGrid["conveyorBelt"] = charTouchingWall;
+    machineToPosition["conveyorbelt"] = [[0,1,2,3,4,5,6,7]];
+    machineToSWHeight["conveyorbelt"] = 2;
+    machineText["conveyorbelt"] = "<text class='bla' x='300' y='0'>";
+    machineToLWGrid["conveyorbelt"] = fullGrid;
 
     // drills
     machineToPosition["drills"] = [[0,1,2,3,4,5], [0,1,2,9,9,9], [9,9,9,3,4,5]];
@@ -142,10 +143,10 @@ contract Machine {
   // }
 
   function machineToGetter(string memory machine, uint _tokenId) internal view returns (string memory) {
-    if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("conveyorBelt"))) {
+    if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("conveyorbelt"))) {
       return getConveyorBelt();
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("drills"))) {
-      return getDrills();
+      return getDrills(_tokenId);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("nose"))) {
       return getNose(_tokenId);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("beast"))) {
@@ -160,11 +161,14 @@ contract Machine {
   // Machine Getters
 
   function getConveyorBelt() internal pure returns (string memory) {
-    return string.concat(CB1.getMachine(), CB2.getMachine(), CB3.getMachine(), CB4.getMachine(), CB5.getMachine(), CB6.getMachine(), CB7.getMachine(), CB8.getMachine());
+    // return string.concat(CB1.getMachine(), CB2.getMachine(), CB3.getMachine(), CB4.getMachine(), CB5.getMachine(), CB6.getMachine(), CB7.getMachine(), CB8.getMachine());
+    return Conveyorbelt.getMachine();
   }
 
-  function getDrills() internal pure returns (string memory) {
-    return Drills.getMachine();
+  function getDrills(uint _tokenId) internal view returns (string memory) {
+    bytes memory rand = _metadata.getRandBytes(_tokenId);
+    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
+    return Drills.getMachine(bytesNeeded);
   }
 
   function getNose(uint _tokenId) internal view returns (string memory) {

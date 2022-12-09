@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 import "../../GridHelper.sol";
-import "../../Helper.sol";
 
 library Altar {
   
@@ -70,9 +69,9 @@ library Altar {
     for (uint i = 0; i < 2; i++) {
       if (orbs[i] < ORB_CHANCE) {
         if (orbs[i] % 2 == 0) {
-          orbArray[i] = Helper.groupTransform(string(GridHelper.slice(bytes(ORB_POSITIONS), 2*i*3, 3)), string(GridHelper.slice(bytes(ORB_POSITIONS), (2*i + 1)*3, 3)), ORB1);
+          orbArray[i] = CommonSVG.groupTransform(string(GridHelper.slice(bytes(ORB_POSITIONS), 2*i*3, 3)), string(GridHelper.slice(bytes(ORB_POSITIONS), (2*i + 1)*3, 3)), ORB1);
         } else {
-          orbArray[i] = Helper.groupTransform(string(GridHelper.slice(bytes(ORB_POSITIONS), 2*i*3, 3)), string(GridHelper.slice(bytes(ORB_POSITIONS), (2*i + 1)*3, 3)), ORB2);
+          orbArray[i] = CommonSVG.groupTransform(string(GridHelper.slice(bytes(ORB_POSITIONS), 2*i*3, 3)), string(GridHelper.slice(bytes(ORB_POSITIONS), (2*i + 1)*3, 3)), ORB2);
         }
       }
     }
@@ -81,6 +80,6 @@ library Altar {
 
   function getMachine(bytes memory digits) external pure returns (string memory) {
     string[] memory orbs = getOrbs(digits);
-    return Helper.groupTransform("-312", "-720", string.concat(getFrame(digits), orbs[0], getSingleVariations(digits), orbs[1]));
+    return CommonSVG.groupTransform("-312", "-720", string.concat(getFrame(digits), orbs[0], getSingleVariations(digits), orbs[1]));
   }
 }
