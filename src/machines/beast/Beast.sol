@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 import "../../GridHelper.sol";
-import "../../Helper.sol";
 import "../../CommonSVG.sol";
 
 library Beast {
@@ -149,7 +148,7 @@ library Beast {
 
   function getMachine(bytes memory digits) external pure returns (string memory) {
 
-    return Helper.groupTransform("-624", "-540", 
+    return CommonSVG.groupTransform("-624", "-540", 
       string.concat(
         CYLINDER,
         WALL_HATCH,

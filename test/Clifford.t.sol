@@ -40,32 +40,20 @@ contract CliffordTest is Test {
 
       // ERC721A has the ability to mint multiple tokens at once
       // Using single mints for now while randomness is Psuedo Random and dependant on block.timestamp
-      for (uint256 i = 0; i < 100; i++) {
+      for (uint256 i = 0; i < 5; i++) {
         vm.roll(i*99);
         vm.warp(i*99);
         vm.difficulty(i*99);
         // to, quantity
         clifford.publicMint(to, 1);
+        string memory path = string.concat("images/", Strings.toString(i), ".svg");
+        // vm.writeFile(path, compose.composeOnlyImage(i));
       }
-
-
-      // for (uint256 i = 0; i < 5; i++) {
-      //   console.log("Minted token: ", i);
-      //   uint rand = handleRandom.getRandomNumber(i);
-      //   console.log("rand: ", rand);
-      //   console.log("metadata slice: ", metadata.getRandAndSlice(i, 8, 8));
-      // }
-
-      // console.log(clifford.tokenURI(0));
-      // console.log(compose.composeOnlyImage(0));
-      // vm.writeFile("images/test.svg", compose.composeOnlyImage(0));
     }
 
-    // function testFileOutput1() public {
-    //   for (uint256 i = 0; i < 40; i++) {
-    //     string memory path = string.concat("images/", Strings.toString(i), ".svg");
-    //     vm.writeFile(path, compose.composeOnlyImage(i));
-    //   }
-    // }
+
+    function testSingleMint() public view {
+      console.log(clifford.tokenURI(2));
+    }
 
 }

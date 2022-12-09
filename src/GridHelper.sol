@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "./CommonSVG.sol";
 
 library GridHelper {
   uint256 public constant MAX_GRID_INDEX = 8;
@@ -141,14 +142,28 @@ library GridHelper {
   }
 
   function stringToUint(string memory s) internal pure returns (uint) {
-        bytes memory b = bytes(s);
-        uint result = 0;
-        for (uint256 i = 0; i < b.length; i++) {
-            uint256 c = uint256(uint8(b[i]));
-            if (c >= 48 && c <= 57) {
-                result = result * 10 + (c - 48);
-            }
-        }
-        return result;
+      bytes memory b = bytes(s);
+      uint result = 0;
+      for (uint256 i = 0; i < b.length; i++) {
+          uint256 c = uint256(uint8(b[i]));
+          if (c >= 48 && c <= 57) {
+              result = result * 10 + (c - 48);
+          }
+      }
+      return result;
+  }
+
+  function repeatGivenObject(string memory object, uint times, bytes memory offsetBytes) internal pure returns (string memory) {
+    uint sliceSize = offsetBytes.length / times / 2; // /2 for x and y
+    string memory output = "";
+    for (uint256 i = 0; i < times; i++) {
+      string memory xOffset = string(slice(offsetBytes, 2*i*sliceSize, sliceSize));
+      string memory yOffset = string(slice(offsetBytes, (2*i + 1)*sliceSize, sliceSize));
+      output = string.concat(
+        output,
+        CommonSVG.groupTransform(xOffset, yOffset, object)
+      );
     }
+    return output;
+  }
 }

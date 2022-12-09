@@ -5,7 +5,6 @@ import "base64-sol/base64.sol";
 import "./SharedAssets.sol";
 import "./Machine.sol";
 import "./CommonSVG.sol";
-import "./Helper.sol";
 import "./Metadata.sol";
 
 contract Compose {
@@ -187,9 +186,9 @@ contract Compose {
     string memory opening = CommonSVG.getOpeningSVG();
     
     string memory objects = composeObjects(_tokenId);
-    string memory closing = Helper.getClosingSVG();
+    string memory closing = CommonSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
-    return Base64.encode(bytes(string.concat(opening, Helper.getShell(flip), objects, closing)));
+    return Base64.encode(bytes(string.concat(opening, CommonSVG.getShell(flip), objects, closing)));
   }
 
   function composeOnlyImage(uint _tokenId) public view returns (string memory) {
@@ -208,9 +207,9 @@ contract Compose {
     string memory opening = CommonSVG.getOpeningSVG();
     
     string memory objects = composeObjects(_tokenId);
-    string memory closing = Helper.getClosingSVG();
+    string memory closing = CommonSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
-    return string.concat(opening, Helper.getShell(flip), objects, closing);
+    return string.concat(opening, CommonSVG.getShell(flip), objects, closing);
   }
 
   function composeObjects(uint _tokenId) internal view returns (string memory) {
@@ -225,7 +224,7 @@ contract Compose {
 
     for (uint256 i = 0; i < indexes.length; i++) {
       if (indexes[i] != 9) {
-        output = string.concat(output, Helper.G_TRANSFORM);
+        output = string.concat(output, CommonSVG.G_TRANSFORM);
         string memory floorX = "";
         string memory floorY = "";
         
@@ -245,7 +244,7 @@ contract Compose {
           floorY = string(GridHelper.slice(floorGridArray, 6*indexes[i] + 3, 3));
         }
 
-        output = string.concat(output, floorX, ",", floorY, Helper.G_MID);
+        output = string.concat(output, floorX, ",", floorY, CommonSVG.G_MID);
 
         if (keccak256(abi.encodePacked(objectList[i])) == keccak256(abi.encodePacked(machine))) {
           output = string.concat(output, _machine.getMachineSVG(machine, indexes[i], _tokenId));
@@ -253,7 +252,7 @@ contract Compose {
           output = string.concat(output, _sharedAssets.getObjectSVG(objectList[i], indexes[i]));
         }
 
-        output = string.concat(output, Helper.G_END);
+        output = string.concat(output, CommonSVG.G_END);
       }
     }
     return output;

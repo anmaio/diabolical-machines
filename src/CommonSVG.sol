@@ -15,6 +15,11 @@ import "./styles/noses/NosesCSS5.sol";
 import "./styles/altar/AltarCSS1.sol";
 import "./styles/altar/AltarCSS2.sol";
 
+import "./styles/conveyorbelt/ConveyorbeltCSS1.sol";
+import "./styles/conveyorbelt/ConveyorbeltCSS2.sol";
+
+import "./styles/drills/DrillsCSS.sol";
+
 // TEMP DEFS
 import "./defs/beast/BeastDefs.sol";
 
@@ -27,6 +32,17 @@ import "./defs/altar/AltarDefs1.sol";
 import "./defs/altar/AltarDefs2.sol";
 import "./defs/altar/AltarDefs3.sol";
 
+import "./defs/conveyorbelt/ConveyorbeltDefs.sol";
+
+import "./defs/drills/DrillsDefs1.sol";
+import "./defs/drills/DrillsDefs2.sol";
+import "./defs/drills/DrillsDefs3.sol";
+import "./defs/drills/DrillsDefs4.sol";
+import "./defs/drills/DrillsDefs5.sol";
+import "./defs/drills/DrillsDefs6.sol";
+import "./defs/drills/DrillsDefs7.sol";
+import "./defs/drills/DrillsDefs8.sol";
+
 library CommonSVG {
 
   // opening svg start tag
@@ -36,13 +52,50 @@ library CommonSVG {
 
   string internal constant STYLE = "<style>.hd,.hl,.hm,.hw{stroke:rgb(0,0,0,.12);stroke-width:1}.hd,.hm,.hw{stroke:rgb(0,0,0,.22)}.hd,.hw{stroke:rgb(0,0,0,.75)}.hw{stroke:rgb(255,255,255,.75)}.whi{fill:#fff}.floor,.wall-l,.wall-r{fill:#fff;stroke:#000;stroke-width:1}.wall-l,.wall-r{fill:#a9a9a9}.wall-r{fill:#d3d3d3}.cb{fill:orange}.g1,.g2,.g3{stroke-width:1;fill:#fff;stroke:rgb(0,0,0,.9)}.g2,.g3{fill:#696969}.g3{fill:#d3d3d3}.ma-g1,.ma-mo,.ma-mo-t{fill:pink}.ma-g1{stroke:#fff}.ma-g2,.ma-g3{fill:gray;stroke:pink}.ma-g3{fill:silver}.bla{fill:#000;x:369;y:360;text-anchor:middle}.bla,.bla2,.bla3{font:700 1rem sans-serif}.bla2{fill:#000;text-anchor:left;opacity:.5}.bla3{fill:#fff;x:369;y:360;text-anchor:middle}.fs-wb{fill:#fff;stroke:#000}<![CDATA[#m-drill-312x720_hole-u-c-drill-btm_to {animation: m-drill-312x720_hole-u-c-drill-btm_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-drill-btm_to__to { 0% {transform: translate(59.535004px,156.514992px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(59.535004px,207.797042px)} 100% {transform: translate(59.535004px,156.514992px)}} #m-drill-312x720_hole-u-c-head-a-holder_to {animation: m-drill-312x720_hole-u-c-head-a-holder_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-head-a-holder_to__to { 0% {transform: translate(58.860001px,96.834999px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.860001px,153.245254px)} 100% {transform: translate(58.860001px,96.834999px)}} #m-drill-312x720_hole-u-c-tube3_to {animation: m-drill-312x720_hole-u-c-tube3_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-tube3_to__to { 0% {transform: translate(58.549999px,33.875001px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.549999px,85.157051px)} 100% {transform: translate(58.549999px,33.875001px)}} #m-drill-312x720_hole-u-c-expander_to {animation: m-drill-312x720_hole-u-c-expander_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-expander_to__to { 0% {transform: translate(58.619999px,11.055px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.619999px,52.08064px)} 100% {transform: translate(58.619999px,11.055px)}}]]><![CDATA[#conveyor-all-2-s-path63_to {animation: conveyor-all-2-s-path63_to__to 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-s-path63_to__to { 0% {transform: translate(705.573364px,216.065804px)} 30% {transform: translate(705.573364px,216.065804px)} 35% {transform: translate(705.573364px,366.065804px)} 40% {transform: translate(705.573364px,216.065804px)} 100% {transform: translate(705.573364px,216.065804px)}} #conveyor-all-2-s-path64_to {animation: conveyor-all-2-s-path64_to__to 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-s-path64_to__to { 0% {transform: translate(705.409729px,216.288437px)} 30% {transform: translate(705.409729px,216.288437px)} 35% {transform: translate(705.450638px,366.232779px)} 40% {transform: translate(705.573364px,216.065804px)} 100% {transform: translate(705.573364px,216.065804px)}} #conveyor-all-2-u-p-cube_to {animation: conveyor-all-2-u-p-cube_to__to 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-p-cube_to__to { 0% {transform: translate(513.550101px,113.193444px)} 35% {transform: translate(513.550101px,113.193444px)} 72% {transform: translate(513.550101px,113.193444px)} 76% {transform: translate(459.550101px,142.193444px)} 100% {transform: translate(459.550101px,142.193444px)}} #conveyor-all-2-u-c-hole_ts {animation: conveyor-all-2-u-c-hole_ts__ts 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-c-hole_ts__ts { 0% {transform: translate(298.5px,898.309998px) scale(1,1)} 60% {transform: translate(298.5px,898.309998px) scale(1,1)} 68% {transform: translate(298.5px,898.309998px) scale(6,6)} 76% {transform: translate(298.5px,898.309998px) scale(6,6)} 82% {transform: translate(298.5px,898.309998px) scale(1,1)} 100% {transform: translate(298.5px,898.309998px) scale(1,1)}} #conveyor-all-2-u-c-lever2_tr {animation: conveyor-all-2-u-c-lever2_tr__tr 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-c-lever2_tr__tr { 0% {transform: translate(555.8px,329.03px) rotate(0deg)} 10% {transform: translate(555.8px,329.03px) rotate(0deg);animation-timing-function: cubic-bezier(0.445,0.05,0.55,0.95)} 15% {transform: translate(555.8px,329.03px) rotate(-91.069929deg)} 20% {transform: translate(555.8px,329.03px) rotate(0deg)} 100% {transform: translate(555.8px,329.03px) rotate(0deg)}} #conveyor-all-2-u-orb_ts {animation: conveyor-all-2-u-orb_ts__ts 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-orb_ts__ts { 0% {transform: translate(657.150024px,337.330017px) scale(1,1)} 20% {transform: translate(657.150024px,337.330017px) scale(1,1)} 25% {transform: translate(657.150024px,337.330017px) scale(1.25,1.25)} 30% {transform: translate(657.150024px,337.330017px) scale(1,1)} 100% {transform: translate(657.150024px,337.330017px) scale(1,1)}} #conveyor-all-2-u-orb2_ts {animation: conveyor-all-2-u-orb2_ts__ts 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-orb2_ts__ts { 0% {transform: translate(734.900024px,381.470001px) scale(1,1)} 20% {transform: translate(734.900024px,381.470001px) scale(1,1)} 25% {transform: translate(734.900024px,381.470001px) scale(1.25,1.25)} 30% {transform: translate(734.900024px,381.470001px) scale(1,1)} 100% {transform: translate(734.900024px,381.470001px) scale(1,1)}} #conveyor-all-2-u-p-cube3_to {animation: conveyor-all-2-u-p-cube3_to__to 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-p-cube3_to__to { 0% {offset-distance: 0%} 4% {offset-distance: 20.107638%} 35% {offset-distance: 20.107638%} 60% {offset-distance: 61.769019%;animation-timing-function: cubic-bezier(0.32,0.015,1,1)} 67% {offset-distance: 92.68158%} 69% {offset-distance: 93.567074%} 72% {offset-distance: 94.452569%} 76% {offset-distance: 94.452569%} 82% {offset-distance: 100%} 100% {offset-distance: 100%}} #conveyor-all-2-u-p-cube3_ts {animation: conveyor-all-2-u-p-cube3_ts__ts 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-p-cube3_ts__ts { 0% {transform: scale(1.5,1.5)} 76% {transform: scale(1.5,1.5)} 82% {transform: scale(0,0)} 100% {transform: scale(0,0)}}]]>";
 
+  // string internal constant STYLE = "<style>";
+
   string internal constant STYLE_CLOSE = "</style>";
 
   string internal constant TEXT_CLOSE = "</text>";
 
   string internal constant G_START = "<g>";
 
-  
+  string internal constant FLIPPED = "<g style='transform:scaleX(-1);transform-origin:50% 50%;'>";
+
+  string internal constant NOT_FLIPPED = "<g style='transform:scaleX(1);transform-origin:50% 50%;'>";
+
+  string internal constant G_END = "</g>";
+
+  string internal constant G_TRANSFORM = "<g transform='translate(";
+
+  string internal constant G_MID = ")'>";
+
+  string internal constant SHELL_OPEN = "<g style='transform:scaleX(";
+
+  string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell-clip' clip-path='url(#shell-clip)'><g id='diorama-filters' filter='url(#chromatic-aberration)'><g id='shell'> <g id='shell-main' transform='translate(0,0)'> <g id='floor'> <svg height='1080' width='936'> <g> <polygon class='floor' points='0,810 468,1080 936,810 468,540' /> </g> <line class='hd' x1='156' y1='900' x2='624' y2='630'  /> <line class='hd' x1='312' y1='990' x2='780' y2='720'  /> <line class='hd' x1='156' y1='720' x2='624' y2='990'  /> <line class='hd' x1='312' y1='630' x2='780' y2='900'  /> </svg> </g> <g id='wall-l'> <svg class='wall-l' height='1080' width='936'> <polygon points='0,270 468,0 468,540 0,810' /> <line class='hd' x1='0' y1='630' x2='468' y2='360'  /> <line class='hd' x1='0' y1='450' x2='468' y2='180'  /> <line class='hd' x1='156' y1='180' x2='156' y2='720'  /> <line class='hd' x1='312' y1='90' x2='312' y2='630'  /> </svg> </g> <g id='wall-r'> <svg class='wall-r' height='1080' width='936'> <polygon points='468,540 468,0 936,270 936,810' /> <line class='hw' x1='468' y1='180' x2='936' y2='450'  /> <line class='hw' x1='468' y1='360' x2='936' y2='630'  /> <line class='hw' x1='624' y1='90' x2='624' y2='630'  /> <line class='hw' x1='780' y1='180' x2='780' y2='720'  /> </svg> </g> </g> </g>";
+
+  // closing svg tag
+  string internal constant SVG_END = "</svg>";
+
+  function groupTransform(string memory x, string memory y, string memory data) internal pure returns (string memory) {
+    return string.concat(G_TRANSFORM, x, ",", y, G_MID, data, G_END);
+  }
+
+  function getClosingSVG() external pure returns (string memory) {
+    return string.concat(
+      G_END,
+      G_END,
+      SVG_END
+    );
+  }
+
+  function getShell(string memory flip) external pure returns (string memory) {
+    return string.concat(
+      SHELL_OPEN,
+      flip,
+      SHELL_CLOSE
+    );
+  }
 
   function getOpeningSVG() external pure returns (string memory) {
 
@@ -61,6 +114,23 @@ library CommonSVG {
     );
 
     output = string.concat(
+      output, 
+      ConveyorbeltDefs.PART
+    );
+
+    output = string.concat(
+      output,
+      DrillsDefs1.PART,
+      DrillsDefs2.PART,
+      DrillsDefs3.PART,
+      DrillsDefs4.PART,
+      DrillsDefs5.PART,
+      DrillsDefs6.PART,
+      DrillsDefs7.PART,
+      DrillsDefs8.PART
+    );
+
+    output = string.concat(
       output,
       SCRIPT,
       STYLE,
@@ -69,7 +139,7 @@ library CommonSVG {
       BeastCSS3.PART
     );
 
-    return string.concat(
+    output = string.concat(
       output,
 
       NosesCSS1.PART,
@@ -79,7 +149,14 @@ library CommonSVG {
       NosesCSS5.PART,
 
       AltarCSS1.PART,
-      AltarCSS2.PART,
+      AltarCSS2.PART
+    );
+
+    return string.concat(
+      output,
+      ConveyorbeltCSS1.PART,
+      ConveyorbeltCSS2.PART,
+      DrillsCSS.PART,
       STYLE_CLOSE
     );
   }
