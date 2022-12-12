@@ -16,6 +16,7 @@ import "./machines/altar/Altar.sol";
 // import "./machines/conveyorbelt/CB7.sol";
 // import "./machines/conveyorbelt/CB8.sol";
 import "./machines/conveyorbelt/Conveyorbelt.sol";
+import "./machines/cypherRoom/CypherRoom.sol";
 
 contract Machine {
   Metadata private _metadata;
@@ -29,9 +30,9 @@ contract Machine {
   string[9] internal charTouchingWall = ["x", "x", "", "x", "x", "", "", "", ""];
 
   // conveyor belt
-  string[] public machines = ["nose", "conveyorbelt", "beast", "drills", "altar"];
+  // string[] public machines = ["nose", "conveyorbelt", "beast", "drills", "altar", "cypherRoom"];
   // TESTING
-  // string[] public machines = ["drills"];
+  string[] public machines = ["cypherRoom"];
   mapping(string => uint[][]) internal machineToPosition;
   mapping(string => uint) internal machineToSWHeight;
   mapping(string => string[9]) internal machineToLWGrid;
@@ -77,6 +78,12 @@ contract Machine {
     machineToSWHeight["altar"] = 3;
     machineText["altar"] = "<text class='bla3' x='155' y='180'>";
     machineToLWGrid["altar"] = fullGrid;
+
+    // cypherRoom
+    machineToPosition["cypherRoom"] = [[0,1,2,3,4,5,6,7,8]];
+    machineToSWHeight["cypherRoom"] = 3;
+    machineText["cypherRoom"] = "<text class='bla3' x='155' y='180'>";
+    machineToLWGrid["cypherRoom"] = fullGrid;
   }
 
   function setMetadata(Metadata metadata) public onlyOwner {
@@ -153,6 +160,8 @@ contract Machine {
       return getBeast(_tokenId);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("altar"))) {
       return getAltar(_tokenId);
+    } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("cypherRoom"))) {
+      return getCypherRoom(_tokenId);
     } else {
       return "";
     }
@@ -200,6 +209,13 @@ contract Machine {
     // 2 for frame, 2 for orb1, 2 for orb2, 2 for cube, 2 for stairs, 2 for rug
     bytes memory bytesNeeded = GridHelper.slice(rand, 16, 12);
     return Altar.getMachine(bytesNeeded);
+  }
+
+  function getCypherRoom(uint _tokenId) internal view returns (string memory) {
+    bytes memory rand = _metadata.getRandBytes(_tokenId);
+    // 2 for frame, 2 for orb1, 2 for orb2, 2 for cube, 2 for stairs, 2 for rug
+    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 12);
+    return CypherRoom.getMachine(bytesNeeded);
   }
 
   modifier onlyOwner() {
