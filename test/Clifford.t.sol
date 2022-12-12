@@ -47,7 +47,7 @@ contract CliffordTest is Test {
         // to, quantity
         clifford.publicMint(to, 1);
         string memory path = string.concat("images/", Strings.toString(i), ".svg");
-        vm.writeFile(path, compose.composeOnlyImage(i));
+        // vm.writeFile(path, compose.composeOnlyImage(i));
       }
     }
 
