@@ -46,14 +46,20 @@ contract CliffordTest is Test {
         vm.difficulty(i*99);
         // to, quantity
         clifford.publicMint(to, 1);
-        string memory path = string.concat("images/", Strings.toString(i), ".svg");
-        // vm.writeFile(path, compose.composeOnlyImage(i));
+      }
+    }
+
+    // test writing 5 images to a file
+    function testWriteImages() public {
+      for (uint256 i = 0; i < 5; i++) {
+        string memory path = string.concat("outputImages/", Strings.toString(i), ".svg");
+        vm.writeFile(path, compose.composeOnlyImage(i));
       }
     }
 
 
     function testSingleMint() public view {
-      console.log(clifford.tokenURI(2));
+      // console.log(clifford.tokenURI(2));
     }
 
 }

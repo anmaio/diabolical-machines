@@ -32,7 +32,7 @@ contract Machine {
   // conveyor belt
   // string[] public machines = ["nose", "conveyorbelt", "beast", "drills", "altar", "cypherRoom"];
   // TESTING
-  string[] public machines = ["cypherRoom"];
+  string[] public machines = ["beast"];
   mapping(string => uint[][]) internal machineToPosition;
   mapping(string => uint) internal machineToSWHeight;
   mapping(string => string[9]) internal machineToLWGrid;
