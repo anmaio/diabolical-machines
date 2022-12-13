@@ -32,8 +32,9 @@ stages:
           - script: |
               docker compose up dev --build --detach --no-color --quiet-pull
               docker compose exec dev forge install
-              docker compose exec dev forge build --names --sizes --via-ir
-              docker compose exec dev forge test --gas-report --via-ir -vvvv
+              docker compose exec dev forge build --names --sizes
+              docker compose exec dev forge test --gas-report -vvvv
+              docker compose exec dev slither ./src/Clifford.sol --print human-summary
             displayName: Run unit tests
           - template: pipeline/templates/docker-cleanup.yml@self
 
