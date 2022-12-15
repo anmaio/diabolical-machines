@@ -6,11 +6,13 @@ import "./SharedAssets.sol";
 import "./Machine.sol";
 import "./CommonSVG.sol";
 import "./Metadata.sol";
+import "./GlobalSVG.sol";
 
 contract Compose {
   SharedAssets private _sharedAssets;
   Machine private _machine;
   Metadata private _metadata;
+  GlobalSVG private _globalSVG;
 
   // Owner of the contract
   address internal _owner;
@@ -51,27 +53,7 @@ contract Compose {
 
   bytes internal constant combinedWallArray = "312360468450624540312180468270624360312000468090624180312360156450000540312180156270000360312000156090000180";
 
-  // string[18] internal altFloorGridArray2 = [
-  //   "312", // 0
-  //   "360",
-  //   "468", // 1
-  //   "450",
-  //   "624", // 2
-  //   "540",
-  //   "156", // 3
-  //   "450",
-  //   "312", // 4
-  //   "540",
-  //   "468", // 5
-  //   "630",
-  //   "0", // 6
-  //   "540",
-  //   "156", // 7
-  //   "630",
-  //   "312", // 8
-  //   "720"
-  // ];
-
+  
   // string[18] internal leftWallGridArray = [
   //   "312", // 2
   //   "360",
@@ -154,10 +136,11 @@ contract Compose {
   //   "180"
   // ];
 
-  constructor(SharedAssets sharedAssets, Machine machine) {
+  constructor(SharedAssets sharedAssets, Machine machine, GlobalSVG globalSVG) {
       _owner = msg.sender;
       _sharedAssets = sharedAssets;
       _machine = machine;
+      _globalSVG = globalSVG;
   }
 
   function setMetadata(Metadata metadata) public onlyOwner {
@@ -183,12 +166,12 @@ contract Compose {
       flip = "-1";
     }
 
-    string memory opening = CommonSVG.getOpeningSVG();
+    string memory opening = _globalSVG.getOpeningSVG();
     
     string memory objects = composeObjects(_tokenId);
-    string memory closing = CommonSVG.getClosingSVG();
+    string memory closing = _globalSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
-    return Base64.encode(bytes(string.concat(opening, CommonSVG.getShell(flip), objects, closing)));
+    return Base64.encode(bytes(string.concat(opening, _globalSVG.getShell(flip), objects, closing)));
   }
 
   function composeOnlyImage(uint _tokenId) public view returns (string memory) {
@@ -204,12 +187,12 @@ contract Compose {
       flip = "-1";
     }
 
-    string memory opening = CommonSVG.getOpeningSVG();
+    string memory opening = _globalSVG.getOpeningSVG();
     
     string memory objects = composeObjects(_tokenId);
-    string memory closing = CommonSVG.getClosingSVG();
+    string memory closing = _globalSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
-    return string.concat(opening, CommonSVG.getShell(flip), objects, closing);
+    return string.concat(opening, _globalSVG.getShell(flip), objects, closing);
   }
 
   function composeObjects(uint _tokenId) internal view returns (string memory) {

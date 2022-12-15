@@ -1,48 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 
-// TEMP STYLES
-import "./styles/beast/BeastCSS1.sol";
-import "./styles/beast/BeastCSS2.sol";
-import "./styles/beast/BeastCSS3.sol";
-
-import "./styles/noses/NosesCSS1.sol";
-import "./styles/noses/NosesCSS2.sol";
-import "./styles/noses/NosesCSS3.sol";
-import "./styles/noses/NosesCSS4.sol";
-import "./styles/noses/NosesCSS5.sol";
-
-import "./styles/altar/AltarCSS1.sol";
-import "./styles/altar/AltarCSS2.sol";
-
-import "./styles/conveyorbelt/ConveyorbeltCSS1.sol";
-import "./styles/conveyorbelt/ConveyorbeltCSS2.sol";
-
-import "./styles/drills/DrillsCSS.sol";
-
-// TEMP DEFS
-import "./defs/beast/BeastDefs.sol";
-
-import "./defs/noses/NosesDefs1.sol";
-import "./defs/noses/NosesDefs2.sol";
-import "./defs/noses/NosesDefs3.sol";
-import "./defs/noses/NosesDefs4.sol";
-
-import "./defs/altar/AltarDefs1.sol";
-import "./defs/altar/AltarDefs2.sol";
-import "./defs/altar/AltarDefs3.sol";
-
-import "./defs/conveyorbelt/ConveyorbeltDefs.sol";
-
-import "./defs/drills/DrillsDefs1.sol";
-import "./defs/drills/DrillsDefs2.sol";
-import "./defs/drills/DrillsDefs3.sol";
-import "./defs/drills/DrillsDefs4.sol";
-import "./defs/drills/DrillsDefs5.sol";
-import "./defs/drills/DrillsDefs6.sol";
-import "./defs/drills/DrillsDefs7.sol";
-import "./defs/drills/DrillsDefs8.sol";
-
 library CommonSVG {
 
   // opening svg start tag
@@ -50,9 +8,7 @@ library CommonSVG {
 
   string internal constant SCRIPT = "<script type='text/javascript' href='https://demowebdevukssa2.z33.web.core.windows.net/html-svg/pocs/3110/anma.js' xlink:actuate='onLoad' xlink:show='other' xlink:type='simple' />";
 
-  string internal constant STYLE = "<style>.hd,.hl,.hm,.hw{stroke:rgb(0,0,0,.12);stroke-width:1}.hd,.hm,.hw{stroke:rgb(0,0,0,.22)}.hd,.hw{stroke:rgb(0,0,0,.75)}.hw{stroke:rgb(255,255,255,.75)}.whi{fill:#fff}.floor,.wall-l,.wall-r{fill:#fff;stroke:#000;stroke-width:1}.wall-l,.wall-r{fill:#a9a9a9}.wall-r{fill:#d3d3d3}.cb{fill:orange}.g1,.g2,.g3{stroke-width:1;fill:#fff;stroke:rgb(0,0,0,.9)}.g2,.g3{fill:#696969}.g3{fill:#d3d3d3}.ma-g1,.ma-mo,.ma-mo-t{fill:pink}.ma-g1{stroke:#fff}.ma-g2,.ma-g3{fill:gray;stroke:pink}.ma-g3{fill:silver}.bla{fill:#000;x:369;y:360;text-anchor:middle}.bla,.bla2,.bla3{font:700 1rem sans-serif}.bla2{fill:#000;text-anchor:left;opacity:.5}.bla3{fill:#fff;x:369;y:360;text-anchor:middle}.fs-wb{fill:#fff;stroke:#000}<![CDATA[#m-drill-312x720_hole-u-c-drill-btm_to {animation: m-drill-312x720_hole-u-c-drill-btm_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-drill-btm_to__to { 0% {transform: translate(59.535004px,156.514992px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(59.535004px,207.797042px)} 100% {transform: translate(59.535004px,156.514992px)}} #m-drill-312x720_hole-u-c-head-a-holder_to {animation: m-drill-312x720_hole-u-c-head-a-holder_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-head-a-holder_to__to { 0% {transform: translate(58.860001px,96.834999px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.860001px,153.245254px)} 100% {transform: translate(58.860001px,96.834999px)}} #m-drill-312x720_hole-u-c-tube3_to {animation: m-drill-312x720_hole-u-c-tube3_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-tube3_to__to { 0% {transform: translate(58.549999px,33.875001px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.549999px,85.157051px)} 100% {transform: translate(58.549999px,33.875001px)}} #m-drill-312x720_hole-u-c-expander_to {animation: m-drill-312x720_hole-u-c-expander_to__to 1000ms linear infinite normal forwards}@keyframes m-drill-312x720_hole-u-c-expander_to__to { 0% {transform: translate(58.619999px,11.055px);animation-timing-function: cubic-bezier(0,0,0.58,1)} 30% {transform: translate(58.619999px,52.08064px)} 100% {transform: translate(58.619999px,11.055px)}}]]><![CDATA[#conveyor-all-2-s-path63_to {animation: conveyor-all-2-s-path63_to__to 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-s-path63_to__to { 0% {transform: translate(705.573364px,216.065804px)} 30% {transform: translate(705.573364px,216.065804px)} 35% {transform: translate(705.573364px,366.065804px)} 40% {transform: translate(705.573364px,216.065804px)} 100% {transform: translate(705.573364px,216.065804px)}} #conveyor-all-2-s-path64_to {animation: conveyor-all-2-s-path64_to__to 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-s-path64_to__to { 0% {transform: translate(705.409729px,216.288437px)} 30% {transform: translate(705.409729px,216.288437px)} 35% {transform: translate(705.450638px,366.232779px)} 40% {transform: translate(705.573364px,216.065804px)} 100% {transform: translate(705.573364px,216.065804px)}} #conveyor-all-2-u-p-cube_to {animation: conveyor-all-2-u-p-cube_to__to 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-p-cube_to__to { 0% {transform: translate(513.550101px,113.193444px)} 35% {transform: translate(513.550101px,113.193444px)} 72% {transform: translate(513.550101px,113.193444px)} 76% {transform: translate(459.550101px,142.193444px)} 100% {transform: translate(459.550101px,142.193444px)}} #conveyor-all-2-u-c-hole_ts {animation: conveyor-all-2-u-c-hole_ts__ts 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-c-hole_ts__ts { 0% {transform: translate(298.5px,898.309998px) scale(1,1)} 60% {transform: translate(298.5px,898.309998px) scale(1,1)} 68% {transform: translate(298.5px,898.309998px) scale(6,6)} 76% {transform: translate(298.5px,898.309998px) scale(6,6)} 82% {transform: translate(298.5px,898.309998px) scale(1,1)} 100% {transform: translate(298.5px,898.309998px) scale(1,1)}} #conveyor-all-2-u-c-lever2_tr {animation: conveyor-all-2-u-c-lever2_tr__tr 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-c-lever2_tr__tr { 0% {transform: translate(555.8px,329.03px) rotate(0deg)} 10% {transform: translate(555.8px,329.03px) rotate(0deg);animation-timing-function: cubic-bezier(0.445,0.05,0.55,0.95)} 15% {transform: translate(555.8px,329.03px) rotate(-91.069929deg)} 20% {transform: translate(555.8px,329.03px) rotate(0deg)} 100% {transform: translate(555.8px,329.03px) rotate(0deg)}} #conveyor-all-2-u-orb_ts {animation: conveyor-all-2-u-orb_ts__ts 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-orb_ts__ts { 0% {transform: translate(657.150024px,337.330017px) scale(1,1)} 20% {transform: translate(657.150024px,337.330017px) scale(1,1)} 25% {transform: translate(657.150024px,337.330017px) scale(1.25,1.25)} 30% {transform: translate(657.150024px,337.330017px) scale(1,1)} 100% {transform: translate(657.150024px,337.330017px) scale(1,1)}} #conveyor-all-2-u-orb2_ts {animation: conveyor-all-2-u-orb2_ts__ts 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-orb2_ts__ts { 0% {transform: translate(734.900024px,381.470001px) scale(1,1)} 20% {transform: translate(734.900024px,381.470001px) scale(1,1)} 25% {transform: translate(734.900024px,381.470001px) scale(1.25,1.25)} 30% {transform: translate(734.900024px,381.470001px) scale(1,1)} 100% {transform: translate(734.900024px,381.470001px) scale(1,1)}} #conveyor-all-2-u-p-cube3_to {animation: conveyor-all-2-u-p-cube3_to__to 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-p-cube3_to__to { 0% {offset-distance: 0%} 4% {offset-distance: 20.107638%} 35% {offset-distance: 20.107638%} 60% {offset-distance: 61.769019%;animation-timing-function: cubic-bezier(0.32,0.015,1,1)} 67% {offset-distance: 92.68158%} 69% {offset-distance: 93.567074%} 72% {offset-distance: 94.452569%} 76% {offset-distance: 94.452569%} 82% {offset-distance: 100%} 100% {offset-distance: 100%}} #conveyor-all-2-u-p-cube3_ts {animation: conveyor-all-2-u-p-cube3_ts__ts 10000ms linear infinite normal forwards}@keyframes conveyor-all-2-u-p-cube3_ts__ts { 0% {transform: scale(1.5,1.5)} 76% {transform: scale(1.5,1.5)} 82% {transform: scale(0,0)} 100% {transform: scale(0,0)}}]]>";
-
-  // string internal constant STYLE = "<style>";
+  string internal constant STYLE = "<style>";
 
   string internal constant STYLE_CLOSE = "</style>";
 
@@ -79,85 +35,5 @@ library CommonSVG {
 
   function groupTransform(string memory x, string memory y, string memory data) internal pure returns (string memory) {
     return string.concat(G_TRANSFORM, x, ",", y, G_MID, data, G_END);
-  }
-
-  function getClosingSVG() external pure returns (string memory) {
-    return string.concat(
-      G_END,
-      G_END,
-      SVG_END
-    );
-  }
-
-  function getShell(string memory flip) external pure returns (string memory) {
-    return string.concat(
-      SHELL_OPEN,
-      flip,
-      SHELL_CLOSE
-    );
-  }
-
-  function getOpeningSVG() external pure returns (string memory) {
-
-    string memory output = string.concat(
-      SVG_START,
-      BeastDefs.PART,
-
-      NosesDefs1.PART,
-      NosesDefs2.PART,
-      NosesDefs3.PART,
-      NosesDefs4.PART,
-
-      AltarDefs1.PART,
-      AltarDefs2.PART,
-      AltarDefs3.PART
-    );
-
-    output = string.concat(
-      output, 
-      ConveyorbeltDefs.PART
-    );
-
-    output = string.concat(
-      output,
-      DrillsDefs1.PART,
-      DrillsDefs2.PART,
-      DrillsDefs3.PART,
-      DrillsDefs4.PART,
-      DrillsDefs5.PART,
-      DrillsDefs6.PART,
-      DrillsDefs7.PART,
-      DrillsDefs8.PART
-    );
-
-    output = string.concat(
-      output,
-      SCRIPT,
-      STYLE,
-      BeastCSS1.PART,
-      BeastCSS2.PART,
-      BeastCSS3.PART
-    );
-
-    output = string.concat(
-      output,
-
-      NosesCSS1.PART,
-      NosesCSS2.PART,
-      NosesCSS3.PART,
-      NosesCSS4.PART,
-      NosesCSS5.PART,
-
-      AltarCSS1.PART,
-      AltarCSS2.PART
-    );
-
-    return string.concat(
-      output,
-      ConveyorbeltCSS1.PART,
-      ConveyorbeltCSS2.PART,
-      DrillsCSS.PART,
-      STYLE_CLOSE
-    );
   }
 }
