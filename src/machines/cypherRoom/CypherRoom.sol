@@ -12,7 +12,7 @@ interface ICypher {
   function generate(uint tokenId) external view returns (string memory);
 }
 
-library CypherRoom {
+contract CypherRoom {
   address internal constant CYPHER_CONTRACT = 0xdDA32aabBBB6c44eFC567baC5F7C35f185338456;
 
   string internal constant SIZE_OPEN = "<g transform='scale(0.2)'>";
@@ -109,8 +109,8 @@ library CypherRoom {
     return string.concat(SIZE_OPEN, cypher, "</g>");
   }
 
-  function getMachine(bytes memory digits) external pure returns (string memory) {
-    string memory baseCypher = string.concat(TestCypher1.PART, TestCypher2.PART, TestCypher3.PART, TestCypher4.PART, TestCypher5.PART);
+  function getMachine() external pure returns (string memory) {
+    string memory baseCypher = string.concat(TestCypher1.getPart(), TestCypher2.getPart(), TestCypher3.getPart(), TestCypher4.getPart(), TestCypher5.getPart());
     baseCypher = removeCypherBackground(baseCypher, background);
     baseCypher = pauseAnimations(baseCypher);
     string memory reSized = string.concat(SIZE_OPEN, baseCypher, "</g>");
