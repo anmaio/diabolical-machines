@@ -1,8 +1,8 @@
 {
-  "exclude_informational": false,
+  "exclude_informational": true,
   "exclude_low": false,
-  "exclude_medium": false,
-  "exclude_high": false,
+  "exclude_medium": true,
+  "exclude_high": true,
   "disable_color": false,
   "filter_paths": "(mocks/|test/|lib/)",
   "legacy_ast": false,

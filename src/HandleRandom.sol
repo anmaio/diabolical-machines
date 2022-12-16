@@ -22,6 +22,9 @@ contract HandleRandom {
   // Event to be emitted when a random number is received
   event ReceivedRandomNumberEvent(uint256 tokenId, uint256 randomNumber);
 
+  // Event to be emitted when the oracle is set
+  event OracleSetEvent(address oracle);
+
   constructor(Clifford clifford) { 
     _clifford = clifford;
     _owner = msg.sender;
@@ -29,7 +32,7 @@ contract HandleRandom {
 
   // Check if the seed has been set for a token
   function seedSet(uint256 tokenId) public view returns (bool) {
-    return _tokenToSeed[tokenId] != 0;
+    return _tokenToSeed[tokenId] != 0 && _tokenToSeed[tokenId] != 1;
   }
 
   // Get the random number for a token
@@ -44,6 +47,9 @@ contract HandleRandom {
   function requestRandomNumber(uint _tokenId) external onlyMintingContract {
     require(_tokenToSeed[_tokenId] == 0, "Seed already set");
     _tokenToBaseRand[_tokenId] = uint(keccak256(abi.encodePacked(msg.sender, block.timestamp, block.difficulty)));
+    // change seed to 1 to indicate that it has been requested
+    // also will save us gas when writing the seed back to the contract from the oracle, non-zero->non-zero
+    _tokenToSeed[_tokenId] = 1;
     // Emit event to be picked up by oracle
     emit RequestRandomNumberEvent(_tokenId);
   }
@@ -54,9 +60,18 @@ contract HandleRandom {
     emit ReceivedRandomNumberEvent(_tokenId, _tokenToSeed[_tokenId]);
   }
 
+  function fullfillMultipleRandomNumbers(uint[] memory _tokenIds, uint[] memory _randomNumbers) external onlyOracle {
+    require(_tokenIds.length == _randomNumbers.length, "TokenIds and RandomNumbers must be the same length");
+    for (uint i = 0; i < _tokenIds.length; i++) {
+      _tokenToSeed[_tokenIds[i]] = _randomNumbers[i];
+      emit ReceivedRandomNumberEvent(_tokenIds[i], _tokenToSeed[_tokenIds[i]]);
+    }
+  }
+
   // set the oracle
   function setOracle(address oracle) external onlyOwner {
     _oracle = oracle;
+    emit OracleSetEvent(_oracle);
   }
 
   // Modifier to check if the caller is the oracle

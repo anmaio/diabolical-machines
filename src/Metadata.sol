@@ -204,7 +204,7 @@ contract Metadata is Ownable {
     return bytes(Strings.toString(_handleRandom.getRandomNumber(_tokenId)));
   }
 
-  function getRandAndSlice(uint _tokenId, uint _start, uint _length) public view returns (uint256) {
+  function getRandAndSlice(uint _tokenId, uint _start, uint _length) internal view returns (uint256) {
       bytes memory randBytes = getRandBytes(_tokenId);
       randBytes = GridHelper.slice(randBytes, _start, _length);
       uint256 output = GridHelper.bytesToUint(randBytes);
@@ -248,10 +248,10 @@ contract Metadata is Ownable {
         '"}, {"trait_type": "Floor 2", "value":"',
         GridHelper.padGrid(GridHelper.getObjectsFromGrid(getFGrid(_tokenId)), MAX_FLOOR_OBJECTS)[1],
         '"}],',
-        '"image": "',
-        _imageURI,
-        Strings.toString(_tokenId),
-        '.png", "animation_url": "data:image/svg+xml;base64,'
+        '"image": "data:image/svg+xml;base64,'
+        // _imageURI,
+        // Strings.toString(_tokenId),
+        // '.png", "animation_url": "data:image/svg+xml;base64,'
     );
 
       string memory jsonFinal = Base64.encode(

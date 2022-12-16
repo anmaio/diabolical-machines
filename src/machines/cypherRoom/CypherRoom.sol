@@ -109,7 +109,7 @@ contract CypherRoom {
     return string.concat(SIZE_OPEN, cypher, "</g>");
   }
 
-  function getMachine() external pure returns (string memory) {
+  function getMachine(bytes memory digits) external pure returns (string memory) {
     string memory baseCypher = string.concat(TestCypher1.getPart(), TestCypher2.getPart(), TestCypher3.getPart(), TestCypher4.getPart(), TestCypher5.getPart());
     baseCypher = removeCypherBackground(baseCypher, background);
     baseCypher = pauseAnimations(baseCypher);

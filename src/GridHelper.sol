@@ -154,11 +154,12 @@ library GridHelper {
   }
 
   function repeatGivenObject(string memory object, uint times, bytes memory offsetBytes) internal pure returns (string memory) {
-    uint sliceSize = offsetBytes.length / times / 2; // /2 for x and y
+    // uint sliceSize = offsetBytes.length / (times * 2); // /2 for x and y
+    require(offsetBytes.length % (times * 2) == 0, "offsetBytes length must be divisible by times * 2");
     string memory output = "";
     for (uint256 i = 0; i < times; i++) {
-      string memory xOffset = string(slice(offsetBytes, 2*i*sliceSize, sliceSize));
-      string memory yOffset = string(slice(offsetBytes, (2*i + 1)*sliceSize, sliceSize));
+      string memory xOffset = string(slice(offsetBytes, 2*i * offsetBytes.length / (times * 2), offsetBytes.length / (times * 2)));
+      string memory yOffset = string(slice(offsetBytes, (2*i + 1) * offsetBytes.length / (times * 2), offsetBytes.length / (times * 2)));
       output = string.concat(
         output,
         CommonSVG.groupTransform(xOffset, yOffset, object)

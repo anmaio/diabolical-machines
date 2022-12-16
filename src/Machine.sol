@@ -1,26 +1,37 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "./Metadata.sol";
-import "./CommonSVG.sol";
-import "./machines/drills/Drills.sol";
-import "./machines/nose/Nose.sol";
-import "./machines/beast/Beast.sol";
-import "./machines/altar/Altar.sol";
-import "./machines/conveyorbelt/Conveyorbelt.sol";
-import "./machines/tubes/Tubes.sol";
-import "./machines/cypherRoom/CypherRoom.sol";
+// import "./Metadata.sol";
+// import "./CommonSVG.sol";
+import "./GridHelper.sol";
+// import "./machines/drills/Drills.sol";
+// import "./machines/nose/Nose.sol";
+// import "./machines/beast/Beast.sol";
+// import "./machines/altar/Altar.sol";
+// import "./machines/conveyorbelt/Conveyorbelt.sol";
+// import "./machines/tubes/Tubes.sol";
+// import "./machines/cypherRoom/CypherRoom.sol";
+
+interface IMachine {
+  function getMachine(bytes memory bytesNeeded) external view returns (string memory);
+}
+
+interface IMetadata {
+  function getRandBytes(uint256 tokenId) external view returns (bytes memory);
+}
 
 contract Machine {
-  Metadata private _metadata;
+  IMetadata private _metadata;
 
-  Drills private _drills;
-  Nose private _nose;
-  Beast private _beast;
-  Altar private _altar;
-  Conveyorbelt private _conveyorbelt;
-  Tubes private _tubes;
-  CypherRoom private _cypherRoom;
+  // IMachine private _drills;
+  // IMachine private _nose;
+  // IMachine private _beast;
+  // IMachine private _altar;
+  // IMachine private _conveyorbelt;
+  // IMachine private _tubes;
+  // IMachine private _cypherRoom;
+
+  address[] private _workstations;
 
   // Owner of the contract
   address internal _owner;
@@ -31,7 +42,7 @@ contract Machine {
   string[9] internal charTouchingWall = ["x", "x", "", "x", "x", "", "", "", ""];
 
   // conveyor belt
-  string[] public machines = ["nose", "conveyorbelt", "beast", "drills", "altar", "tubes", "cypherRoom"];
+  string[] public machines = ["conveyorbelt", "drills", "nose", "beast", "altar", "tubes", "cypherRoom"];
   // TESTING
   // string[] public machines = ["tubes"];
   mapping(string => uint[][]) internal machineToPosition;
@@ -39,8 +50,8 @@ contract Machine {
   mapping(string => string[9]) internal machineToLWGrid;
 
   // Used if a machine has repeating parts or parts that occur in other machines
-  mapping(string => string[]) internal partXOffset;
-  mapping(string => string[]) internal partYOffset;
+  // mapping(string => string[]) internal partXOffset;
+  // mapping(string => string[]) internal partYOffset;
 
   // TESTING labels index of machines position
   mapping(string => string) internal machineText;
@@ -93,36 +104,40 @@ contract Machine {
     machineToLWGrid["cypherRoom"] = fullGrid;
   }
 
-  function setMetadata(Metadata metadata) external onlyOwner {
-    _metadata = metadata;
+  function setMetadata(address metadata) external onlyOwner {
+    _metadata = IMetadata(metadata);
   }
 
-  function setDrills(Drills drills) external onlyOwner {
-    _drills = drills;
-  }
+  // function setDrills(address drills) external onlyOwner {
+  //   _drills = IMachine(drills);
+  // }
 
-  function setNose(Nose nose) external onlyOwner {
-    _nose = nose;
-  }
+  // function setNose(address nose) external onlyOwner {
+  //   _nose = IMachine(nose);
+  // }
 
-  function setBeast(Beast beast) external onlyOwner {
-    _beast = beast;
-  }
+  // function setBeast(address beast) external onlyOwner {
+  //   _beast = IMachine(beast);
+  // }
 
-  function setAltar(Altar altar) external onlyOwner {
-    _altar = altar;
-  }
+  // function setAltar(address altar) external onlyOwner {
+  //   _altar = IMachine(altar);
+  // }
 
-  function setConveyorbelt(Conveyorbelt conveyorbelt) external onlyOwner {
-    _conveyorbelt = conveyorbelt;
-  }
+  // function setConveyorbelt(address conveyorbelt) external onlyOwner {
+  //   _conveyorbelt = IMachine(conveyorbelt);
+  // }
 
-  function setTubes(Tubes tubes) external onlyOwner {
-    _tubes = tubes;
-  }
+  // function setTubes(address tubes) external onlyOwner {
+  //   _tubes = IMachine(tubes);
+  // }
 
-  function setCypherRoom(CypherRoom cypherRoom) external onlyOwner {
-    _cypherRoom = cypherRoom;
+  // function setCypherRoom(address cypherRoom) external onlyOwner {
+  //   _cypherRoom = IMachine(cypherRoom);
+  // }
+
+  function setAllWorkstations(address[7] memory workstations) external onlyOwner {
+    _workstations = workstations;
   }
 
   function selectMachine(uint rand) public view returns (string memory) {
@@ -186,7 +201,7 @@ contract Machine {
 
   function machineToGetter(string memory machine, uint _tokenId) internal view returns (string memory) {
     if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("conveyorbelt"))) {
-      return getConveyorBelt();
+      return getConveyorBelt(_tokenId);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("drills"))) {
       return getDrills(_tokenId);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("nose"))) {
@@ -195,10 +210,10 @@ contract Machine {
       return getBeast(_tokenId);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("altar"))) {
       return getAltar(_tokenId);
-    } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("cypherRoom"))) {
-      return getCypherRoom();
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("tubes"))) {
       return getTubes(_tokenId);
+    } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("cypherRoom"))) {
+      return getCypherRoom(_tokenId);
     } else {
       return "";
     }
@@ -206,60 +221,54 @@ contract Machine {
 
   // Machine Getters
 
-  function getConveyorBelt() internal view returns (string memory) {
-    // return string.concat(CB1.getMachine(), CB2.getMachine(), CB3.getMachine(), CB4.getMachine(), CB5.getMachine(), CB6.getMachine(), CB7.getMachine(), CB8.getMachine());
-    return _conveyorbelt.getMachine();
+  function getConveyorBelt(uint _tokenId) internal view returns (string memory) {
+    bytes memory rand = _metadata.getRandBytes(_tokenId);
+    
+    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
+    return IMachine(_workstations[0]).getMachine(bytesNeeded);
   }
 
   function getDrills(uint _tokenId) internal view returns (string memory) {
     bytes memory rand = _metadata.getRandBytes(_tokenId);
     bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
-    return _drills.getMachine(bytesNeeded);
+    return IMachine(_workstations[1]).getMachine(bytesNeeded);
   }
 
   function getNose(uint _tokenId) internal view returns (string memory) {
-    uint[6] memory holeDistribution;
-    // 0 = 4 holes, 1 = 5 holes, 2 = no holes
-    // TODO slice to get a random distribution
-    for (uint i = 0; i < 6; i++) {
-      holeDistribution[i] = _metadata.getRandAndSlice(_tokenId, 10+i, 1) % 3;
-    }
 
     bytes memory rand = _metadata.getRandBytes(_tokenId);
 
     // 2 for eyes, 2 for nose
-    bytes memory bytesNeeded = GridHelper.slice(rand, 20, 4);
+    bytes memory bytesNeeded = GridHelper.slice(rand, 10, 12);
     
-    string memory holes = _nose.getMachine(holeDistribution, bytesNeeded);
-
-    return holes;
+    return IMachine(_workstations[2]).getMachine(bytesNeeded);
   }
 
   function getBeast(uint _tokenId) internal view returns (string memory) {
     bytes memory rand = _metadata.getRandBytes(_tokenId);
     bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
-    return _beast.getMachine(bytesNeeded);
+    return IMachine(_workstations[3]).getMachine(bytesNeeded);
   }
 
   function getAltar(uint _tokenId) internal view returns (string memory) {
     bytes memory rand = _metadata.getRandBytes(_tokenId);
     // 2 for frame, 2 for orb1, 2 for orb2, 2 for cube, 2 for stairs, 2 for rug
     bytes memory bytesNeeded = GridHelper.slice(rand, 16, 12);
-    return _altar.getMachine(bytesNeeded);
+    return IMachine(_workstations[4]).getMachine(bytesNeeded);
   }
 
   function getTubes(uint _tokenId) internal view returns (string memory) {
     bytes memory rand = _metadata.getRandBytes(_tokenId);
     
     bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
-    return _tubes.getMachine(bytesNeeded);
+    return IMachine(_workstations[5]).getMachine(bytesNeeded);
   }
 
-  function getCypherRoom() internal view returns (string memory) {
-    // bytes memory rand = _metadata.getRandBytes(_tokenId);
+  function getCypherRoom(uint _tokenId) internal view returns (string memory) {
+    bytes memory rand = _metadata.getRandBytes(_tokenId);
     
-    // bytes memory bytesNeeded = GridHelper.slice(rand, 16, 12);
-    return _cypherRoom.getMachine();
+    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 12);
+    return IMachine(_workstations[6]).getMachine(bytesNeeded);
   }
 
   modifier onlyOwner() {

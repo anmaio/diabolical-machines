@@ -63,18 +63,20 @@ contract CliffordScript is Script {
         clifford = new Clifford(metadata);
         handleRandom = new HandleRandom(clifford);
 
-        machine.setCypherRoom(cypherRoom);
-        machine.setAltar(altar);
-        machine.setBeast(beast);
-        machine.setDrills(drills);
-        machine.setNose(nose);
-        machine.setTubes(tubes);
-        machine.setConveyorbelt(conveyorbelt);
+        // machine.setCypherRoom(address(cypherRoom));
+        // machine.setAltar(address(altar));
+        // machine.setBeast(address(beast));
+        // machine.setDrills(address(drills));
+        // machine.setNose(address(nose));
+        // machine.setTubes(address(tubes));
+        // machine.setConveyorbelt(address(conveyorbelt));
+
+        machine.setAllWorkstations([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes), address(cypherRoom)]);
 
         metadata.setHandleRandom(handleRandom);
         clifford.setHandleRandom(handleRandom);
         compose.setMetadata(metadata);
-        machine.setMetadata(metadata);
+        machine.setMetadata(address(metadata));
 
         // setUp();
 
