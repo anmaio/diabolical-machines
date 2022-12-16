@@ -16,7 +16,7 @@ import "./HandleRandom.sol";
 
 contract Clifford is ERC721A, Ownable {
     // Counters.Counter private _tokenIdCounter;
-    uint256 public maxSupply = 10_000;
+    uint256 public constant MAX_SUPPLY = 10_000;
     // bool public saleComplete = false;
     Metadata private _metadata;
 
@@ -32,7 +32,7 @@ contract Clifford is ERC721A, Ownable {
 
     function publicMint(address _to, uint _quantity) public {
       uint startingSupply = totalSupply();
-      require(startingSupply + _quantity <= maxSupply, "Max supply reached");
+      require(startingSupply + _quantity <= MAX_SUPPLY, "Max supply reached");
       _safeMint(_to, _quantity);
       for (uint i = 0; i < _quantity; i++) {
           _handleRandom.requestRandomNumber(startingSupply + i);

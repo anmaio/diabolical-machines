@@ -33,7 +33,7 @@ library CommonSVG {
   // closing svg tag
   string internal constant SVG_END = "</svg>";
 
-  function groupTransform(string memory x, string memory y, string memory data) internal pure returns (string memory) {
+  function groupTransform(string memory x, string memory y, string memory data) external pure returns (string memory) {
     return string.concat(G_TRANSFORM, x, ",", y, G_MID, data, G_END);
   }
 }

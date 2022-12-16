@@ -69,10 +69,17 @@ contract Nose {
     return output;
   }
 
-  function getMachine(uint[6] memory holeDistribution, bytes memory digits) external pure returns (string memory) {
+  function getMachine(bytes memory digits) external pure returns (string memory) {
+    uint[6] memory holeDistribution;
+    // 0 = 4 holes, 1 = 5 holes, 2 = no holes
+    // TODO put hole logic in nose contract
+    for (uint i = 0; i < 6; i++) {
+      holeDistribution[i] = GridHelper.bytesToUint(GridHelper.slice(digits, 0+i, 1)) % 3;
+    }
+
     // get the eyes
     bytes memory eyesBytes = GridHelper.slice(digits, 0, 2);
-    uint eyesVersion = GridHelper.stringToUint(string(eyesBytes)) % 3;
+    uint eyesVersion = GridHelper.bytesToUint(eyesBytes) % 3;
     string memory eyes = getEyes(eyesVersion);
     // wrap the eyes
     eyes = string.concat(

@@ -47,11 +47,11 @@ contract Compose {
 
   // Uses 1/10th of the gas compared to 2d
   // Could be combined into one array but readability is already bad enough
-  bytes internal constant floorGridArray = "312360156450000540468450312540156630624540468630312720";
+  bytes internal constant FLOOR_GRID_ARRAY = "312360156450000540468450312540156630624540468630312720";
 
   // bytes internal constant altFloorGridArray = "312360468450624540156450312540468630000540156630312720";
 
-  bytes internal constant combinedWallArray = "312360468450624540312180468270624360312000468090624180312360156450000540312180156270000360312000156090000180";
+  bytes internal constant COMBINED_WALL_ARRAY = "312360468450624540312180468270624360312000468090624180312360156450000540312180156270000360312000156090000180";
 
   
   // string[18] internal leftWallGridArray = [
@@ -213,18 +213,18 @@ contract Compose {
         
         // rw
         if (i < GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)).length) {
-          floorX = string(GridHelper.slice(combinedWallArray, 6*indexes[i], 3));
-          floorY = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + 3, 3));
+          floorX = string(GridHelper.slice(COMBINED_WALL_ARRAY, 6*indexes[i], 3));
+          floorY = string(GridHelper.slice(COMBINED_WALL_ARRAY, 6*indexes[i] + 3, 3));
         // lw
         } else if (i < GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)).length + GridHelper.getIndexesFromGrid(_metadata.getLWGrid(_tokenId)).length) {
-          floorX = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + OFFSET, 3));
-          floorY = string(GridHelper.slice(combinedWallArray, 6*indexes[i] + OFFSET + 3, 3));
+          floorX = string(GridHelper.slice(COMBINED_WALL_ARRAY, 6*indexes[i] + OFFSET, 3));
+          floorY = string(GridHelper.slice(COMBINED_WALL_ARRAY, 6*indexes[i] + OFFSET + 3, 3));
         // floor
         } else {
           // from 0, 6, 12 etc
-          floorX = string(GridHelper.slice(floorGridArray, 6*indexes[i], 3));
+          floorX = string(GridHelper.slice(FLOOR_GRID_ARRAY, 6*indexes[i], 3));
           // from 3, 9, 15 etc
-          floorY = string(GridHelper.slice(floorGridArray, 6*indexes[i] + 3, 3));
+          floorY = string(GridHelper.slice(FLOOR_GRID_ARRAY, 6*indexes[i] + 3, 3));
         }
 
         output = string.concat(output, floorX, ",", floorY, CommonSVG.G_MID);
