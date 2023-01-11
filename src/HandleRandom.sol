@@ -44,7 +44,7 @@ contract HandleRandom {
   }
 
   // Request a random number from the oracle
-  function requestRandomNumber(uint _tokenId) external onlyMintingContract {
+  function requestSingleRandomNumber(uint _tokenId) internal onlyMintingContract {
     require(_tokenToSeed[_tokenId] == 0, "Seed already set");
     _tokenToBaseRand[_tokenId] = uint(keccak256(abi.encodePacked(msg.sender, block.timestamp, block.difficulty)));
     // change seed to 1 to indicate that it has been requested
@@ -52,6 +52,13 @@ contract HandleRandom {
     _tokenToSeed[_tokenId] = 1;
     // Emit event to be picked up by oracle
     emit RequestRandomNumberEvent(_tokenId);
+  }
+
+  function requestRandomNumbers(uint startingTokenId, uint amount) external onlyMintingContract {
+    uint i = 0;
+    for (i; i < amount; ++i) {
+      requestSingleRandomNumber(startingTokenId + i);
+    }
   }
 
   // Fullfill the random number request from the oracle
@@ -62,7 +69,8 @@ contract HandleRandom {
 
   function fullfillMultipleRandomNumbers(uint[] memory _tokenIds, uint[] memory _randomNumbers) external onlyOracle {
     require(_tokenIds.length == _randomNumbers.length, "TokenIds and RandomNumbers must be the same length");
-    for (uint i = 0; i < _tokenIds.length; i++) {
+    uint i = 0;
+    for (i; i < _tokenIds.length; ++i) {
       _tokenToSeed[_tokenIds[i]] = _randomNumbers[i];
       emit ReceivedRandomNumberEvent(_tokenIds[i], _tokenToSeed[_tokenIds[i]]);
     }
@@ -70,6 +78,7 @@ contract HandleRandom {
 
   // set the oracle
   function setOracle(address oracle) external onlyOwner {
+    require(oracle != address(0), "Oracle cannot be the zero address");
     _oracle = oracle;
     emit OracleSetEvent(_oracle);
   }

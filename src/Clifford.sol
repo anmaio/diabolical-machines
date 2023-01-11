@@ -31,12 +31,11 @@ contract Clifford is ERC721A, Ownable {
     }
 
     function publicMint(address _to, uint _quantity) public {
+      require(_quantity <= 30, "Quantity too high"); // To prevent excessive first-time token transfer costs, please limit the quantity to a reasonable number (e.g. 30).
       uint startingSupply = totalSupply();
       require(startingSupply + _quantity <= MAX_SUPPLY, "Max supply reached");
-      _safeMint(_to, _quantity);
-      for (uint i = 0; i < _quantity; i++) {
-          _handleRandom.requestRandomNumber(startingSupply + i);
-      }
+      _safeMint(_to, _quantity); //Safe minting is reentrancy safe since V3.
+      _handleRandom.requestRandomNumbers(startingSupply, _quantity);
     }
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {

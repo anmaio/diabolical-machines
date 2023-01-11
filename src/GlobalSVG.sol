@@ -56,9 +56,10 @@ contract GlobalSVG {
   function getClosingSVG() external pure returns (string memory) {
     return string.concat(
       CommonSVG.G_END,
-      CommonSVG.G_END,
+      // CommonSVG.G_END,
       CommonSVG.SVG_END
     );
+    // return CommonSVG.SVG_END;
   }
 
   function getShell(string memory flip) external pure returns (string memory) {
@@ -69,24 +70,28 @@ contract GlobalSVG {
     );
   }
 
-  function getOpeningSVG() external pure returns (string memory) {
+  function getOpeningSVG(string memory machine, bytes memory digits) external pure returns (string memory) {
 
     string memory output = string.concat(
       CommonSVG.SVG_START,
+      CommonSVG.DEFS,
+      CommonSVG.getshellColours(machine, digits),
+      CommonSVG.FILTERS,
       BeastDefs.getPart(),
 
       NosesDefs1.getPart(),
       NosesDefs2.getPart(),
       NosesDefs3.getPart(),
-      NosesDefs4.getPart(),
-
-      AltarDefs1.getPart(),
-      AltarDefs2.getPart(),
-      AltarDefs3.getPart()
+      NosesDefs4.getPart()
     );
 
     output = string.concat(
       output, 
+
+      AltarDefs1.getPart(),
+      AltarDefs2.getPart(),
+      AltarDefs3.getPart(),
+
       ConveyorbeltDefs.getPart(),
       TubesDefs1.getPart(),
       TubesDefs2.getPart(),
@@ -108,6 +113,7 @@ contract GlobalSVG {
     output = string.concat(
       output,
       CommonSVG.SCRIPT,
+      "<div id='styles container'>",
       CommonSVG.STYLE,
       TubesCSS1.getPart(),
       BeastCSS1.getPart(),
@@ -133,7 +139,8 @@ contract GlobalSVG {
       ConveyorbeltCSS1.getPart(),
       ConveyorbeltCSS2.getPart(),
       DrillsCSS.getPart(),
-      CommonSVG.STYLE_CLOSE
+      CommonSVG.STYLE_CLOSE,
+      "</div>"
     );
   }
 }

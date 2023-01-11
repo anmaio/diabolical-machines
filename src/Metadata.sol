@@ -36,7 +36,7 @@ contract Metadata is Ownable {
   // ];
 
   // storage image base uri
-  string private _imageURI = "https://bepocdevukssaoutput.blob.core.windows.net/output/";
+  // string private constant _imageURI = "https://bepocdevukssaoutput.blob.core.windows.net/output/";
 
   constructor(Compose compose, Machine machine) {
       _compose = compose;

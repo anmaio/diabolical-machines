@@ -154,26 +154,11 @@ contract Compose {
 
   // compose SVG
   function composeSVG(uint _tokenId) public view returns (string memory) {
-    // determine if flipped
-
-    bytes memory rand = _metadata.getRandBytes(_tokenId);
-    // 0 if not flipped, 1 if flipped
-    uint isFlipped = GridHelper.stringToUint(string(rand)) % 2;
-    string memory flip = "";
-    if (isFlipped == 0) {
-      flip = "1";
-    } else {
-      flip = "-1";
-    }
-
-    string memory opening = _globalSVG.getOpeningSVG();
-    
-    string memory objects = composeObjects(_tokenId);
-    string memory closing = _globalSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
-    return Base64.encode(bytes(string.concat(opening, _globalSVG.getShell(flip), objects, closing)));
+    return Base64.encode(bytes(composeOnlyImage(_tokenId)));
   }
 
+  
   function composeOnlyImage(uint _tokenId) public view returns (string memory) {
     // determine if flipped
 
@@ -187,7 +172,7 @@ contract Compose {
       flip = "-1";
     }
 
-    string memory opening = _globalSVG.getOpeningSVG();
+    string memory opening = _globalSVG.getOpeningSVG(_metadata.getMachine(_tokenId), rand);
     
     string memory objects = composeObjects(_tokenId);
     string memory closing = _globalSVG.getClosingSVG();

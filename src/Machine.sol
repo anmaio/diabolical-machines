@@ -42,9 +42,9 @@ contract Machine {
   string[9] internal charTouchingWall = ["x", "x", "", "x", "x", "", "", "", ""];
 
   // conveyor belt
-  string[] public machines = ["conveyorbelt", "drills", "nose", "beast", "altar", "tubes", "cypherRoom"];
+  // string[] public machines = ["conveyorbelt", "drills", "nose", "beast", "altar", "tubes", "cypherRoom"];
   // TESTING
-  // string[] public machines = ["tubes"];
+  string[] public machines = ["altar"];
   mapping(string => uint[][]) internal machineToPosition;
   mapping(string => uint) internal machineToSWHeight;
   mapping(string => string[9]) internal machineToLWGrid;
