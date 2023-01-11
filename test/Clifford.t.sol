@@ -105,7 +105,7 @@ contract CliffordTest is Test {
 
     // ERC721A has the ability to mint multiple tokens at once
     // Using single mints for now while randomness is Psuedo Random and dependant on block.timestamp
-    for (uint256 i = 0; i < 5; i++) {
+    for (uint256 i = 0; i < 10; i++) {
       vm.roll(i*99);
       vm.warp(i*99);
       vm.difficulty(i*99);
@@ -116,7 +116,7 @@ contract CliffordTest is Test {
 
   // test writing 5 images to a file
   function testWriteImages() public {
-    for (uint256 i = 0; i < 5; i++) {
+    for (uint256 i = 0; i < 10; i++) {
       string memory path = string.concat("outputImages/", Strings.toString(i), ".svg");
       vm.writeFile(path, compose.composeOnlyImage(i));
     }

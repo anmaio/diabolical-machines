@@ -30,7 +30,8 @@
 				"ms-azuretools.vscode-docker",
 				"JuanBlanco.solidity",
 				"mikestead.dotenv",
-				"github.copilot"
+				"github.copilot",
+        "github.copilot-labs"
 			]
 		}
 	},
