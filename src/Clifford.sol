@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 
 // import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 // import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -30,16 +30,16 @@ contract Clifford is ERC721A, Ownable {
         _handleRandom = handleRandom;
     }
 
-    function publicMint(address _to, uint _quantity) public {
-      require(_quantity <= 30, "Quantity too high"); // To prevent excessive first-time token transfer costs, please limit the quantity to a reasonable number (e.g. 30).
+    function publicMint(address to, uint quantity) public {
+      require(quantity <= 30, "Quantity too high"); // To prevent excessive first-time token transfer costs, please limit the quantity to a reasonable number (e.g. 30).
       uint startingSupply = totalSupply();
-      require(startingSupply + _quantity <= MAX_SUPPLY, "Max supply reached");
-      _safeMint(_to, _quantity); //Safe minting is reentrancy safe since V3.
-      _handleRandom.requestRandomNumbers(startingSupply, _quantity);
+      require(startingSupply + quantity <= MAX_SUPPLY, "Max supply reached");
+      _safeMint(to, quantity); //Safe minting is reentrancy safe since V3.
+      _handleRandom.requestRandomNumbers(startingSupply, quantity);
     }
 
-    function tokenURI(uint256 _tokenId) public view override returns (string memory) {
-        return _metadata.buildMetadata(_tokenId);
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        return _metadata.buildMetadata(tokenId);
     }
 
     function withdrawMoney() external onlyOwner {

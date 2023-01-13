@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "../../GridHelper.sol";
 import "./ConveyorbeltAdditional1.sol";
 import "./ConveyorbeltAdditional2.sol";

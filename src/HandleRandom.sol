@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "./Clifford.sol";
 
 contract HandleRandom {
@@ -7,14 +7,14 @@ contract HandleRandom {
   Clifford private _clifford;
 
   // Random number from oracle
-  mapping(uint => uint) internal _tokenToSeed;
-  mapping(uint => uint) internal _tokenToBaseRand;
+  mapping(uint => uint) private _tokenToSeed;
+  mapping(uint => uint) private _tokenToBaseRand;
 
   // Address of oracle
-  address internal _oracle = 0x0000000000000000000000000000000000000000;
+  address private _oracle = 0x0000000000000000000000000000000000000000;
 
   // Owner of the contract
-  address internal _owner;
+  address private _owner;
 
   // Event to be emitted when a random number is requested
   event RequestRandomNumberEvent(uint256 tokenId);
@@ -36,43 +36,47 @@ contract HandleRandom {
   }
 
   // Get the random number for a token
-  function getRandomNumber(uint _tokenId) external view returns (uint rand) {
-    uint seed = _tokenToSeed[_tokenId];
-    uint baseRand = _tokenToBaseRand[_tokenId];
+  function getRandomNumber(uint tokenId) external view returns (uint rand) {
+    uint seed = _tokenToSeed[tokenId];
+    uint baseRand = _tokenToBaseRand[tokenId];
     uint number = uint(keccak256(abi.encodePacked(seed, baseRand)));
     return number;
   }
 
   // Request a random number from the oracle
-  function requestSingleRandomNumber(uint _tokenId) internal onlyMintingContract {
-    require(_tokenToSeed[_tokenId] == 0, "Seed already set");
-    _tokenToBaseRand[_tokenId] = uint(keccak256(abi.encodePacked(msg.sender, block.timestamp, block.difficulty)));
+  function requestSingleRandomNumber(uint tokenId) internal onlyMintingContract {
+    require(_tokenToSeed[tokenId] == 0, "Seed already set");
+    _tokenToBaseRand[tokenId] = uint(keccak256(abi.encodePacked(msg.sender, block.timestamp, block.difficulty)));
     // change seed to 1 to indicate that it has been requested
     // also will save us gas when writing the seed back to the contract from the oracle, non-zero->non-zero
-    _tokenToSeed[_tokenId] = 1;
+    _tokenToSeed[tokenId] = 1;
     // Emit event to be picked up by oracle
-    emit RequestRandomNumberEvent(_tokenId);
+    emit RequestRandomNumberEvent(tokenId);
   }
 
   function requestRandomNumbers(uint startingTokenId, uint amount) external onlyMintingContract {
-    uint i = 0;
-    for (i; i < amount; ++i) {
+    for (uint i = 0; i < amount;) {
       requestSingleRandomNumber(startingTokenId + i);
+      unchecked {
+        ++i;
+      }
     }
   }
 
   // Fullfill the random number request from the oracle
-  function fulfillRandomNumber(uint _tokenId, uint _randomNumber) external onlyOracle {
-    _tokenToSeed[_tokenId] = _randomNumber;
-    emit ReceivedRandomNumberEvent(_tokenId, _tokenToSeed[_tokenId]);
+  function fulfillRandomNumber(uint tokenId, uint randomNumber) external onlyOracle {
+    _tokenToSeed[tokenId] = randomNumber;
+    emit ReceivedRandomNumberEvent(tokenId, randomNumber);
   }
 
-  function fullfillMultipleRandomNumbers(uint[] memory _tokenIds, uint[] memory _randomNumbers) external onlyOracle {
-    require(_tokenIds.length == _randomNumbers.length, "TokenIds and RandomNumbers must be the same length");
-    uint i = 0;
-    for (i; i < _tokenIds.length; ++i) {
-      _tokenToSeed[_tokenIds[i]] = _randomNumbers[i];
-      emit ReceivedRandomNumberEvent(_tokenIds[i], _tokenToSeed[_tokenIds[i]]);
+  function fullfillMultipleRandomNumbers(uint[] memory tokenIds, uint[] memory randomNumbers) external onlyOracle {
+    require(tokenIds.length == randomNumbers.length, "TokenIds and RandomNumbers must be the same length");
+    for (uint i = 0; i < tokenIds.length;) {
+      _tokenToSeed[tokenIds[i]] = randomNumbers[i];
+      emit ReceivedRandomNumberEvent(tokenIds[i], _tokenToSeed[tokenIds[i]]);
+      unchecked {
+        ++i;
+      }
     }
   }
 

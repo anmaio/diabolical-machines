@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 
 import "./Environment.sol";
 import "./GridHelper.sol";
@@ -37,7 +37,7 @@ library CommonSVG {
 
   string internal constant SHELL_OPEN = "<g style='transform:scaleX(";
 
-  // string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell-clip' clip-path='url(#shell-clip)'><g id='diorama-filters' filter='url(#chromatic-aberration)'><g id='shell'> <g id='shell-main' transform='translate(0,0)'> <g id='floor'> <svg height='1080' width='936'> <g> <polygon class='floor' points='0,810 468,1080 936,810 468,540' /> </g> <line class='hd' x1='156' y1='900' x2='624' y2='630'  /> <line class='hd' x1='312' y1='990' x2='780' y2='720'  /> <line class='hd' x1='156' y1='720' x2='624' y2='990'  /> <line class='hd' x1='312' y1='630' x2='780' y2='900'  /> </svg> </g> <g id='wall-l'> <svg class='wall-l' height='1080' width='936'> <polygon points='0,270 468,0 468,540 0,810' /> <line class='hd' x1='0' y1='630' x2='468' y2='360'  /> <line class='hd' x1='0' y1='450' x2='468' y2='180'  /> <line class='hd' x1='156' y1='180' x2='156' y2='720'  /> <line class='hd' x1='312' y1='90' x2='312' y2='630'  /> </svg> </g> <g id='wall-r'> <svg class='wall-r' height='1080' width='936'> <polygon points='468,540 468,0 936,270 936,810' /> <line class='hw' x1='468' y1='180' x2='936' y2='450'  /> <line class='hw' x1='468' y1='360' x2='936' y2='630'  /> <line class='hw' x1='624' y1='90' x2='624' y2='630'  /> <line class='hw' x1='780' y1='180' x2='780' y2='720'  /> </svg> </g> </g> </g>";
+  // string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell-clip' clip-path='url(#shell-clip)'><g id='diorama-filters' filter='url(#zzzzzchromaticzzzzz-aberration)'><g id='shell'> <g id='shell-main' transform='translate(0,0)'> <g id='floor'> <svg height='1080' width='936'> <g> <polygon class='floor' points='0,810 468,1080 936,810 468,540' /> </g> <line class='hd' x1='156' y1='900' x2='624' y2='630'  /> <line class='hd' x1='312' y1='990' x2='780' y2='720'  /> <line class='hd' x1='156' y1='720' x2='624' y2='990'  /> <line class='hd' x1='312' y1='630' x2='780' y2='900'  /> </svg> </g> <g id='wall-l'> <svg class='wall-l' height='1080' width='936'> <polygon points='0,270 468,0 468,540 0,810' /> <line class='hd' x1='0' y1='630' x2='468' y2='360'  /> <line class='hd' x1='0' y1='450' x2='468' y2='180'  /> <line class='hd' x1='156' y1='180' x2='156' y2='720'  /> <line class='hd' x1='312' y1='90' x2='312' y2='630'  /> </svg> </g> <g id='wall-r'> <svg class='wall-r' height='1080' width='936'> <polygon points='468,540 468,0 936,270 936,810' /> <line class='hw' x1='468' y1='180' x2='936' y2='450'  /> <line class='hw' x1='468' y1='360' x2='936' y2='630'  /> <line class='hw' x1='624' y1='90' x2='624' y2='630'  /> <line class='hw' x1='780' y1='180' x2='780' y2='720'  /> </svg> </g> </g> </g>";
 
   string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell' clip-path='url(#clipPathShell)'><g id='leftWall'><polygon points='0,270 468,0 468,540 0,810' fill='url(#lwg)' stroke='black'></polygon></g><g id='rightWall'><polygon points='468,540 468,0 936,270 936,810' fill='url(#rwg)' stroke='black'></polygon></g><g id='floor'><polygon id='polygon-floor-border' points='0,810 468,1080 936,810 468,540' fill='url(#flg)' stroke='black'></polygon></g>";
 
@@ -46,7 +46,7 @@ library CommonSVG {
 
   string internal constant IDS = "lwgrwgflg";
 
-  string internal constant ROTATIONS = "045-45-45";
+  string internal constant ROTATIONS = "-40-45-45";
 
   function groupTransform(string memory x, string memory y, string memory data) external pure returns (string memory) {
     return string.concat(G_TRANSFORM, x, ",", y, G_MID, data, G_END);
@@ -58,23 +58,23 @@ library CommonSVG {
       id,
       "' gradientTransform='rotate(",
       rotation,
-      ")'><stop offset='0' stop-color='rgb(",
+      ")'><stop offset='0' stop-color='hsl(",
       Strings.toString(uint(colours[0])),
       ",",
       Strings.toString(uint(colours[1])),
-      ","
+      "%,"
     );
 
     output = string.concat(
       output,
       Strings.toString(uint(colours[2])),
-      ")'/><stop offset='1' stop-color='rgb(",
+      "%)'/><stop offset='1' stop-color='hsl(",
       Strings.toString(uint(colours[3])),
       ",",
       Strings.toString(uint(colours[4])),
-      ",",
+      "%,",
       Strings.toString(uint(colours[5])),
-      ")'/></linearGradient>"
+      "%)'/></linearGradient>"
     );
 
     return output;

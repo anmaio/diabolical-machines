@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.4;
+pragma solidity 0.8.16;
 
 /// @title ColourConverter
 /// @author @codingwithmanny & @mannynarang
@@ -14,7 +14,7 @@ library ColourConverter {
     bytes1 constant zero = bytes1('0');
     bytes1 constant nine = bytes1('9');
 
-    int internal constant multiplyFactor = 10e18;
+    int internal constant MULTIPLY_FACTOR = 10e18;
 
     /**
      * Code provided by github.com/themandalore - https://ethereum.stackexchange.com/questions/52847/parse-string-into-multiple-variables/53115#53115
@@ -136,32 +136,32 @@ library ColourConverter {
     }
 
     function rgbToHsl(int pR, int pG, int pB) public pure returns (int, int, int) {
-        int r = pR * multiplyFactor / 255;
-        int g = pG * multiplyFactor / 255;
-        int b = pB * multiplyFactor / 255;
+        int r = pR * MULTIPLY_FACTOR / 255;
+        int g = pG * MULTIPLY_FACTOR / 255;
+        int b = pB * MULTIPLY_FACTOR / 255;
 
         int max = (r > g && r > b) ? r : (g > b) ? g : b;
         int min = (r < g && r < b) ? r : (g < b) ? g : b;
 
-        int h;
-        int s;
+        int h = 0;
+        int s = 0;
         int l = (max + min) / 2;
 
         if (max != min) {
             int d = max - min;
-            s = (l > multiplyFactor/2) ? d*multiplyFactor / (2*multiplyFactor - max - min) : d*multiplyFactor / (max + min);
+            s = (l > MULTIPLY_FACTOR/2) ? d*MULTIPLY_FACTOR / (2*MULTIPLY_FACTOR - max - min) : d*MULTIPLY_FACTOR / (max + min);
             
             if (r > g && r > b) {
                 if (g < b) {
-                    h = multiplyFactor * (g - b) / d + 6 * multiplyFactor;
+                    h = MULTIPLY_FACTOR * (g - b) / d + 6 * MULTIPLY_FACTOR;
                 } else {
-                    h = multiplyFactor * (g - b) / d; //x
+                    h = MULTIPLY_FACTOR * (g - b) / d; //x
                 }
             } else if (g > b) {
                 // h = (b - r) / d + 2.0f;
-                h = multiplyFactor * (b - r) / d + 2*multiplyFactor; //x
+                h = MULTIPLY_FACTOR * (b - r) / d + 2*MULTIPLY_FACTOR; //x
             } else {
-                h = multiplyFactor * (r - g) / d + 4*multiplyFactor; //x
+                h = MULTIPLY_FACTOR * (r - g) / d + 4*MULTIPLY_FACTOR; //x
             }
             h /= 6;
         }
@@ -170,43 +170,43 @@ library ColourConverter {
     }
 
     function hslToRgb(int h, int s, int l) public pure returns (int, int, int) {
-        int r;
-        int g;
-        int b;
+        int r = 0;
+        int g = 0;
+        int b = 0;
 
         if (s == 0) {
             r = g = b = l; //x
         } else {
-            int q = (l < multiplyFactor / 2) ? l * (multiplyFactor + s) / multiplyFactor : l + s - (l * s)/multiplyFactor; //x
+            int q = (l < MULTIPLY_FACTOR / 2) ? l * (MULTIPLY_FACTOR + s) / MULTIPLY_FACTOR : l + s - (l * s)/MULTIPLY_FACTOR; //x
             int p = 2 * l - q; //x
 
-            r = hue2rgb(p, q, h + multiplyFactor/3); //x
+            r = hue2rgb(p, q, h + MULTIPLY_FACTOR/3); //x
             g = hue2rgb(p, q, h); //x
-            b = hue2rgb(p, q, h - multiplyFactor/3); //x
+            b = hue2rgb(p, q, h - MULTIPLY_FACTOR/3); //x
         }
 
-        r = r * 255*10/multiplyFactor;
-        g = g * 255*10/multiplyFactor;
-        b = b * 255*10/multiplyFactor;
+        r = r * 255*10/MULTIPLY_FACTOR;
+        g = g * 255*10/MULTIPLY_FACTOR;
+        b = b * 255*10/MULTIPLY_FACTOR;
 
         return (roundValue(r), roundValue(g), roundValue(b));
     }
 
     function hue2rgb(int p, int q, int t) public pure returns (int) {
         if (t < 0) {
-            t += multiplyFactor;
+            t += MULTIPLY_FACTOR;
         } 
-        if (t > multiplyFactor) {
-            t -= multiplyFactor;
+        if (t > MULTIPLY_FACTOR) {
+            t -= MULTIPLY_FACTOR;
         } 
-        if (t < multiplyFactor/6) {
-            return p + (q - p) * 6 * t / multiplyFactor; //x
+        if (t < MULTIPLY_FACTOR/6) {
+            return p + (q - p) * 6 * t / MULTIPLY_FACTOR; //x
         } 
-        if (t < multiplyFactor/2) {
+        if (t < MULTIPLY_FACTOR/2) {
             return q; //x
         }
-        if (t < 2*multiplyFactor/3) {
-            return p + (q - p) * (2*multiplyFactor/3 - t) * 6 / multiplyFactor; //x
+        if (t < 2*MULTIPLY_FACTOR/3) {
+            return p + (q - p) * (2*MULTIPLY_FACTOR/3 - t) * 6 / MULTIPLY_FACTOR; //x
         }
         return p;
     }
@@ -236,9 +236,14 @@ library ColourConverter {
         // int256 newColour1Int = startInt + (diff * percentages[0] / 100);
         // int256 newColour2Int = startInt + (diff * percentages[1] / 100);
 
-        int256 newColour1Int = startInt + (diff * smallestGradient / 100);
-        int256 newColour2Int = startInt + (diff * largestGradient / 100);
+        int256 newColourOneInt = startInt + (diff * smallestGradient / 100);
+        int256 newColourTwoInt = startInt + (diff * largestGradient / 100);
 
-        return (newColour1Int, newColour2Int);
+        return (newColourOneInt, newColourTwoInt);
+    }
+
+    function increaseColourLightness(int baseLightness, int percentage) internal pure returns(int) {
+      int remainder = 100 - baseLightness;
+      return baseLightness + (remainder * percentage / 100);
     }
 }

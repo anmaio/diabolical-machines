@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 
 // TEMP STYLES
 import "./styles/beast/BeastCSS1.sol";

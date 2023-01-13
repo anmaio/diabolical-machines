@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "./CommonSVG.sol";
 
@@ -166,5 +166,22 @@ library GridHelper {
       );
     }
     return output;
+  }
+
+  function setIntArrayFromString(string memory values, uint numOfValues, uint lengthOfValue) internal pure returns (int[] memory) {
+    int[] memory output = new int[](numOfValues);
+    for (uint256 i = 0; i < numOfValues; i++) {
+      output[i] = int(stringToUint(string(slice(bytes(values), i*lengthOfValue, lengthOfValue))));
+    }
+    return output;
+  }
+
+  function shiftToEndIntArray(uint index, int[] memory arr) internal pure returns (int[] memory) {
+    require(index < arr.length, "index out of bound");
+
+    for (uint i = index; i < arr.length - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    return arr;
   }
 }
