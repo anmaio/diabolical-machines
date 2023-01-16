@@ -30,7 +30,8 @@ library Environment {
   string internal constant LAB_COLOUR_PERCENTAGES = "040020020000070020"; // CHANGE THIS
 
   // int[] internal altarDegradedHsl = [2, 47, 49, 41, 100, 65];
-  string internal constant ALTAR_DEGRADED_HSL = "002047049019058048";
+  // string internal constant ALTAR_DEGRADED_HSL = "002047049019058048";
+  string internal constant ALTAR_DEGRADED_HSL = "002047049019058048120001061120001035120001015";
   string internal constant ALTAR_COLOURS_HSL = "041100050022100050354100060354058048240004013240003029271042044"; // 7 colours, 3*3 values each
   // int[] internal labDegradedHsl = [2, 47, 49, 41, 100, 65];
   string internal constant LAB_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
@@ -40,7 +41,7 @@ library Environment {
   function getState(bytes memory digits) public pure returns (uint) {
     uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 20, 2));
     // return stateDigits % 3;
-    return 1;
+    return 0;
   }
 
   function getShellPercentages(bytes memory digits) public pure returns (int[2] memory) {
@@ -99,7 +100,7 @@ library Environment {
 
     if (keccak256(bytes(machine)) == keccak256(bytes("altar"))) { // executive
       for (uint i = 0; i < 3; i++) {
-        singleColour[i] = int(GridHelper.stringToUint(string(GridHelper.slice(bytes(ALTAR_DEGRADED_HSL), (randomColourDigits%2)*9 + 3*i, 3)))); // 9 = h,s,l to 3 significant digits
+        singleColour[i] = int(GridHelper.stringToUint(string(GridHelper.slice(bytes(ALTAR_DEGRADED_HSL), (randomColourDigits%5)*9 + 3*i, 3)))); // 9 = h,s,l to 3 significant digits
       }
       colourPercentages = GridHelper.setIntArrayFromString(EXECUTIVE_COLOUR_PERCENTAGES, 6, 3);
 
