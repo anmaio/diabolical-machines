@@ -51,6 +51,14 @@ services:
   #     # - /var/run/docker.sock:/var/run/docker.sock
   #     # - /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe:/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe
 
+  echidna:
+    build:
+      context: ./echidna
+    container_name: frhtmlipfs_echidna
+    network_mode: "host"
+    volumes:
+      - .:/app
+
   # Container for running build and test 
   build:
     build:

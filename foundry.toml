@@ -5,6 +5,15 @@ libs = ['lib']
 gas_reports = ["SharedAssets", "Clifford", "Compose", "Metadata", "VRFv2Consumer", "Machine", "CB1", "CB2", "CB3", "CB4"]
 solc_version = '0.8.12'
 
+[profile.default.optimizer_details]
+constantOptimizer = true
+yul = true
+
+[profile.default.optimizer_details.yulDetails]
+stackAllocation = true
+optimizerSteps = ''
+
+
 [rpc_endpoints]
 goerli = "${GOERLI_RPC_URL}"
 
