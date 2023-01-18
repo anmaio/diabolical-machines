@@ -5,7 +5,10 @@ import "./AltarAdditional1.sol";
 import "./AltarAdditional2.sol";
 import "./AltarAdditional3.sol";
 
+import "../../AssetRetriever.sol";
+
 contract Altar {
+  AssetRetriever internal _assetRetriever;
 
   // Each position is represented by 6 bytes, 3 for x and 3 for y
   string internal constant ORB_POSITIONS = "000000312180";
@@ -15,6 +18,10 @@ contract Altar {
   uint internal constant CUBE_CHANCE = 100;
   uint internal constant STAIRS_CHANCE = 50;
   uint internal constant RUG_CHANCE = 50;
+
+  constructor(address assetRetriever) {
+    _assetRetriever = AssetRetriever(assetRetriever);
+  }
 
   function getSingleVariations(bytes memory digits) internal pure returns (string memory) {
     uint cubeDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 6, 2));

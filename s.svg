@@ -1,1 +1,1 @@
-<linearGradient id='leftWallGradient' gradientTransform='rotate(45)'><stop offset='0' stop-color='#FF3246'/><stop offset='1' stop-color='#202023'/></linearGradient>
+<linearGradient id='fDT' gradientTransform='rotate(90)'><stop offset='0' stop-color='hsla(0, 0%, 0%, 1)'></stop><stop offset='0.5' stop-color='hsla(0, 0%, 0%, 0.25)'></stop></linearGradient>

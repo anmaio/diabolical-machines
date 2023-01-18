@@ -4,14 +4,14 @@ pragma solidity 0.8.16;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "base64-sol/base64.sol";
 import "./Compose.sol";
-import "./HandleRandom.sol";
+import "./Clifford.sol";
 import "./Machine.sol";
 import "./GridHelper.sol";
 
 contract Metadata is Ownable {
   Compose private _compose;
   Machine private _machine;
-  HandleRandom private _handleRandom;
+  Clifford private _clifford;
 
   string[] public floorTraits = ["altar", "props"];
   uint256[] public floorProbabilities = [0, 0];
@@ -44,8 +44,8 @@ contract Metadata is Ownable {
   }
 
   // set handle random
-  function setHandleRandom(HandleRandom handleRandom) public onlyOwner {
-      _handleRandom = handleRandom;
+  function setClifford(Clifford clifford) public onlyOwner {
+    _clifford = clifford;
   }
 
   // selecting the walls and floor could be moved into the same function
@@ -114,13 +114,13 @@ contract Metadata is Ownable {
     return machine;
   }
 
-  // Determine if left aligned
-  function getLeftAligned(uint tokenId) public view returns (bool) {
-    uint rand = getRandAndSlice(tokenId, 1, 2); // tokenId, start, length
+  // // Determine if left aligned
+  // function getLeftAligned(uint tokenId) public view returns (bool) {
+  //   uint rand = getRandAndSlice(tokenId, 1, 2); // tokenId, start, length
 
-    bool leftAligned = rand % 2 == 0;
-    return leftAligned;
-  }
+  //   bool leftAligned = rand % 2 == 0;
+  //   return leftAligned;
+  // }
 
   function getMachinePosition(uint tokenId) public view returns (uint[] memory) {
     uint rand = getRandAndSlice(tokenId, 1, 2); // tokenId, start, length
@@ -150,7 +150,7 @@ contract Metadata is Ownable {
   function preLWGrid(uint tokenId) public view returns (string[9] memory) {
     uint[] memory positions = getMachinePosition(tokenId);
     string[9] memory grid = emptyGrid;
-    // get the grid if the machine is touching the wall
+    // get the grid for if the machine is touching the wall
     string memory machine = getMachine(tokenId);
     string[9] memory machineGrid = _machine.getMachinePWGrid(machine);
     // check if the positions next to the wall are taken(0, 1, 2)
@@ -201,7 +201,7 @@ contract Metadata is Ownable {
 
   // get the random number for the token
   function getRandBytes(uint tokenId) public view returns (bytes memory) {
-    return bytes(Strings.toString(_handleRandom.getRandomNumber(tokenId)));
+    return bytes(Strings.toString(_clifford.getSeed(tokenId)));
   }
 
   function getRandAndSlice(uint tokenId, uint start, uint length) internal view returns (uint256) {
@@ -211,14 +211,14 @@ contract Metadata is Ownable {
       return output;
   }
 
-  function leftAlign(uint tokenId) public view returns (bool) {
-    uint rand = getRandAndSlice(tokenId, 10, 2); // tokenId, start, length
-    if (rand < 50) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // function leftAlign(uint tokenId) public view returns (bool) {
+  //   uint rand = getRandAndSlice(tokenId, 10, 2); // tokenId, start, length
+  //   if (rand < 50) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   // check if machine can appear multiple times
   function isMultipleMachines(string memory machine) internal view returns (bool) {
