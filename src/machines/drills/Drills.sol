@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
-import "../../CommonSVG.sol";
 import "../../GridHelper.sol";
 import "./DrillsAdditional1.sol";
 import "./DrillsAdditional2.sol";
@@ -38,6 +37,6 @@ contract Drills {
 
   function getMachine(bytes memory digits) external pure returns (string memory) {
     string memory output = string.concat(DrillsAdditional1.getLowerTube(), getDrillBit(digits), getHead(digits), DrillsAdditional1.getEyes());
-    return CommonSVG.groupTransform("-312", "-360", string.concat(DrillsAdditional1.getUpperTube(), DrillsAdditional1.getTopRing(), DrillsAdditional2.getHole(), WRAPPER_START, output, WRAPPER_CLOSE));
+    return GridHelper.groupTransform("-312", "-360", string.concat(DrillsAdditional1.getUpperTube(), DrillsAdditional1.getTopRing(), DrillsAdditional2.getHole(), WRAPPER_START, output, WRAPPER_CLOSE));
   }
 }

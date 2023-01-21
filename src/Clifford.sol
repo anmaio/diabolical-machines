@@ -104,7 +104,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
       uint _genSeed = genSeed[tokenIdToGenId[tokenId]];
       require(_genSeed != 0, "Seed not set");
 
-      return uint256(keccak256(abi.encode(_genSeed, tokenId)));
+      return uint256(keccak256(abi.encodePacked(_genSeed, tokenId)));
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {

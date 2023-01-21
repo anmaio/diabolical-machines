@@ -242,8 +242,5 @@ library ColourConverter {
         return (newColourOneInt, newColourTwoInt);
     }
 
-    function increaseColourLightness(int baseLightness, int percentage) internal pure returns(int) {
-      int remainder = 100 - baseLightness;
-      return baseLightness + (remainder * percentage / 100);
-    }
+    
 }

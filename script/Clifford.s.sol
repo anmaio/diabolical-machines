@@ -70,12 +70,7 @@ contract CliffordScript is Script {
         machineDevicesImpsAds[0] = address(machineDevicesImp1);
         machineDevicesImpsAds[1] = address(machineDevicesImp2);
         machineDevicesImpsAds[2] = address(machineDevicesImp3);
-        uint[] memory machineDevicesImpsIndexes = new uint[](4);
-        machineDevicesImpsIndexes[0] = 0;
-        machineDevicesImpsIndexes[1] = 5;
-        machineDevicesImpsIndexes[2] = 10;
-        machineDevicesImpsIndexes[3] = 18;
-        machineDevices = new TraitBase(machineDevicesImpsAds, machineDevicesImpsIndexes);
+        machineDevices = new TraitBase(machineDevicesImpsAds);
 
         // Asset Retriever
         address[] memory traitBases = new address[](1);

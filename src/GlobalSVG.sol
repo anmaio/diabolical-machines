@@ -55,9 +55,9 @@ contract GlobalSVG {
 
   function getClosingSVG() external pure returns (string memory) {
     return string.concat(
-      CommonSVG.G_END,
+      "</g>",
       // CommonSVG.G_END,
-      CommonSVG.SVG_END
+      "</svg>"
     );
     // return CommonSVG.SVG_END;
   }
@@ -76,7 +76,6 @@ contract GlobalSVG {
       CommonSVG.SVG_START,
       CommonSVG.DEFS,
       CommonSVG.getshellColours(machine, digits),
-      CommonSVG.FILTERS,
       BeastDefs.getPart(),
 
       NosesDefs1.getPart(),

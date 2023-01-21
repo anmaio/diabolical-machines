@@ -4,7 +4,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "base64-sol/base64.sol";
 import "./SharedAssets.sol";
 import "./Machine.sol";
-import "./CommonSVG.sol";
+import "./GridHelper.sol";
 import "./Metadata.sol";
 import "./GlobalSVG.sol";
 
@@ -192,7 +192,7 @@ contract Compose {
 
     for (uint256 i = 0; i < indexes.length; i++) {
       if (indexes[i] != 9) {
-        output = string.concat(output, CommonSVG.G_TRANSFORM);
+        output = string.concat(output, "<g transform='translate(");
         string memory floorX = "";
         string memory floorY = "";
         
@@ -212,7 +212,7 @@ contract Compose {
           floorY = string(GridHelper.slice(FLOOR_GRID_ARRAY, 6*indexes[i] + 3, 3));
         }
 
-        output = string.concat(output, floorX, ",", floorY, CommonSVG.G_MID);
+        output = string.concat(output, floorX, ",", floorY, ")'>");
 
         if (keccak256(abi.encodePacked(objectList[i])) == keccak256(abi.encodePacked(machine))) {
           output = string.concat(output, _machine.getMachineSVG(machine, indexes[i], tokenId));
@@ -220,7 +220,7 @@ contract Compose {
           output = string.concat(output, _sharedAssets.getObjectSVG(objectList[i], indexes[i]));
         }
 
-        output = string.concat(output, CommonSVG.G_END);
+        output = string.concat(output, "</g>");
       }
     }
     return output;

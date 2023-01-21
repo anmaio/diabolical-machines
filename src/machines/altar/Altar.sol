@@ -11,7 +11,7 @@ contract Altar {
   AssetRetriever internal _assetRetriever;
 
   // Each position is represented by 6 bytes, 3 for x and 3 for y
-  string internal constant ORB_POSITIONS = "000000312180";
+  string internal constant ORB_OFFSETS = "00000000-312-180";
 
   uint internal constant ORB_CHANCE = 50;
 
@@ -19,61 +19,98 @@ contract Altar {
   uint internal constant STAIRS_CHANCE = 50;
   uint internal constant RUG_CHANCE = 50;
 
+  string internal constant BASE_NUMBERS = "700070017002";
+  string internal constant FRAME_NUMBERS = "700370047012";
+  string internal constant ORB_BASE_NUMBERS = "700570067007700870097010";
+  string internal constant STEPS_RUNNERS_NUMBERS = "701370147015";
+
   constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
   }
 
-  function getSingleVariations(bytes memory digits) internal pure returns (string memory) {
-    uint cubeDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 6, 2));
-    uint stairsDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 8, 2));
-    uint rugDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 10, 2));
-
-    string memory output = "";
-
-    if (cubeDigits < CUBE_CHANCE) {
-      output = string.concat(output, AltarAdditional2.getCube());
-    }
-    if (stairsDigits < STAIRS_CHANCE) {
-      output = string.concat(output, AltarAdditional2.getStairs());
-    }
-    if (rugDigits < RUG_CHANCE) {
-      output = string.concat(output, AltarAdditional3.getRug());
-    }
-    return output;
-  }
-
-  function getFrame(bytes memory digits) internal pure returns (string memory) {
-    uint frameDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2));
-
-    if (frameDigits < 50) {
-      return AltarAdditional3.getFrame1();
+  function getCube(bytes memory digits) internal view returns (string memory) {
+    uint[] memory baseNumbersArray = GridHelper.setUintArrayFromString(BASE_NUMBERS, 3, 4);
+    uint baseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12, 2));
+    // 3 possible bases, can appear in any state
+    if (baseDigits < 33) {
+      return _assetRetriever.getAsset(baseNumbersArray[0]);
+    } else if (baseDigits < 66) {
+      return _assetRetriever.getAsset(baseNumbersArray[1]);
     } else {
-      return AltarAdditional3.getFrame2();
+      return _assetRetriever.getAsset(baseNumbersArray[2]);
     }
   }
 
-  // determine if there is an orb is either position, if so select an orb
-  function getOrbs(bytes memory digits) internal pure returns (string[] memory) {
-    uint orb1Digits = GridHelper.bytesToUint(GridHelper.slice(digits, 2, 2));
-    uint orb2Digits = GridHelper.bytesToUint(GridHelper.slice(digits, 4, 2));
+  function getFrame(bytes memory digits, uint state) internal view returns (string memory) {
+    uint[] memory frameNumbersArray = GridHelper.setUintArrayFromString(FRAME_NUMBERS, 3, 4);
+    uint frameDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 14, 2));
+    if (state == 2) {
+      return _assetRetriever.getAsset(frameNumbersArray[2]);
+    } else {
+      if (frameDigits < 50) {
+        return _assetRetriever.getAsset(frameNumbersArray[0]);
+      } else {
+        return _assetRetriever.getAsset(frameNumbersArray[1]);
+      }
+    }
+  }
 
-    uint[2] memory orbs = [orb1Digits, orb2Digits];
+  function getStepsRunner(bytes memory digits, uint state) internal view returns (string memory) {
+    uint[] memory stepsRunnersNumbersArray = GridHelper.setUintArrayFromString(STEPS_RUNNERS_NUMBERS, 3, 4);
+    uint stepsRunnersDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 20, 2));
+    string memory stepsRunner = "";
+    if (state == 2) {
+      if (stepsRunnersDigits < 20) {
+        stepsRunner = string.concat(stepsRunner, _assetRetriever.getAsset(stepsRunnersNumbersArray[2]));
+      }
+      stepsRunner = string.concat(stepsRunner, _assetRetriever.getAsset(stepsRunnersNumbersArray[0]));
+      if (stepsRunnersDigits < 50) {
+        stepsRunner = string.concat(stepsRunner, _assetRetriever.getAsset(stepsRunnersNumbersArray[1]));
+      }
+    }
+    return stepsRunner;
+  }
 
-    string[] memory orbArray = new string[](2);
-    for (uint i = 0; i < 2; i++) {
-      if (orbs[i] < ORB_CHANCE) {
-        if (orbs[i] % 2 == 0) {
-          orbArray[i] = CommonSVG.groupTransform(string(GridHelper.slice(bytes(ORB_POSITIONS), 2*i*3, 3)), string(GridHelper.slice(bytes(ORB_POSITIONS), (2*i + 1)*3, 3)), AltarAdditional1.getOrb1());
+  function getOrbBases(bytes memory digits, uint state) internal view returns (string[] memory) {
+    uint[] memory orbBaseNumbersArray = GridHelper.setUintArrayFromString(ORB_BASE_NUMBERS, 6, 4);
+    uint orbBaseOneDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 16, 2));
+    uint orbBaseTwoDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 18, 2));
+    uint[2] memory orbBaseDigits = [orbBaseOneDigits, orbBaseTwoDigits];
+    string[] memory orbBaseArray = new string[](2);
+    for (uint i = 0; i < 2; ++i) {
+      if (state == 2) {
+        if (orbBaseDigits[i] < 10) { // 10% chance and must be embellished = very rare
+          orbBaseArray[i] = GridHelper.groupTransform(string(GridHelper.slice(bytes(ORB_OFFSETS), 2*i*4, 4)), string(GridHelper.slice(bytes(ORB_OFFSETS), (2*i + 1)*4, 4)), _assetRetriever.getAsset(orbBaseNumbersArray[2]));
+        }
+      }
+      if (state != 0) { // 1,2 = basic or embellished
+        // 5 possible bases equally weighted
+        if (orbBaseDigits[i] < 20) { // 20% chance in basic, 10% chance in embellished
+          orbBaseArray[i] = GridHelper.groupTransform(string(GridHelper.slice(bytes(ORB_OFFSETS), 2*i*4, 4)), string(GridHelper.slice(bytes(ORB_OFFSETS), (2*i + 1)*4, 4)), _assetRetriever.getAsset(orbBaseNumbersArray[0]));
+        } else if (orbBaseDigits[i] < 40) {
+          orbBaseArray[i] = GridHelper.groupTransform(string(GridHelper.slice(bytes(ORB_OFFSETS), 2*i*4, 4)), string(GridHelper.slice(bytes(ORB_OFFSETS), (2*i + 1)*4, 4)), _assetRetriever.getAsset(orbBaseNumbersArray[1]));
+        } else if (orbBaseDigits[i] < 60) {
+          orbBaseArray[i] = GridHelper.groupTransform(string(GridHelper.slice(bytes(ORB_OFFSETS), 2*i*4, 4)), string(GridHelper.slice(bytes(ORB_OFFSETS), (2*i + 1)*4, 4)), _assetRetriever.getAsset(orbBaseNumbersArray[3]));
+        } else if (orbBaseDigits[i] < 80) {
+          orbBaseArray[i] = GridHelper.groupTransform(string(GridHelper.slice(bytes(ORB_OFFSETS), 2*i*4, 4)), string(GridHelper.slice(bytes(ORB_OFFSETS), (2*i + 1)*4, 4)), _assetRetriever.getAsset(orbBaseNumbersArray[4]));
         } else {
-          orbArray[i] = CommonSVG.groupTransform(string(GridHelper.slice(bytes(ORB_POSITIONS), 2*i*3, 3)), string(GridHelper.slice(bytes(ORB_POSITIONS), (2*i + 1)*3, 3)), AltarAdditional1.getOrb2());
+          orbBaseArray[i] = GridHelper.groupTransform(string(GridHelper.slice(bytes(ORB_OFFSETS), 2*i*4, 4)), string(GridHelper.slice(bytes(ORB_OFFSETS), (2*i + 1)*4, 4)), _assetRetriever.getAsset(orbBaseNumbersArray[5]));
         }
       }
     }
-    return orbArray;
+    return orbBaseArray;
   }
 
-  function getMachine(bytes memory digits) external pure returns (string memory) {
-    string[] memory orbs = getOrbs(digits);
-    return CommonSVG.groupTransform("-312", "-720", string.concat(getFrame(digits), orbs[0], getSingleVariations(digits), orbs[1]));
+  function getMachine(bytes memory digits) external view returns (string memory) {
+    // uint state = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2)) % 3;
+    uint state = 2;
+    string[] memory orbBases = getOrbBases(digits, state);
+    return GridHelper.groupTransform("-312", "-720", string.concat(
+      getFrame(digits, state),
+      orbBases[1],
+      getCube(digits),
+      orbBases[0],
+      getStepsRunner(digits, state)
+    ));
   }
 }

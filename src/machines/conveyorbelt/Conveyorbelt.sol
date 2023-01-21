@@ -20,7 +20,7 @@ contract Conveyorbelt {
       conveyorbeltAdditional1.getBeltOpen()
     );
 
-    return CommonSVG.groupTransform("-468", "-630", 
+    return GridHelper.groupTransform("-468", "-630", 
       string.concat(
         output,
         GridHelper.repeatGivenObject(conveyorbeltAdditional1.getBeltDisc(), 10, DISC_POSITIONS), 

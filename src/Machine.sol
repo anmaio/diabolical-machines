@@ -182,7 +182,7 @@ contract Machine {
       machineText[machine], // open text
       // machineToSVG[machine][numParts * 2], // open text
       positionText(machine, position),
-      CommonSVG.TEXT_CLOSE
+      "</text>"
       // CommonSVG.G2_END
     );
     svg = string.concat(svg, tempSvg);
@@ -200,20 +200,21 @@ contract Machine {
   // }
 
   function machineToGetter(string memory machine, uint tokenId) internal view returns (string memory) {
+    bytes memory rand = _metadata.getRandBytes(tokenId);
     if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("conveyorbelt"))) {
-      return getConveyorBelt(tokenId);
+      return getConveyorBelt(rand);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("drills"))) {
-      return getDrills(tokenId);
+      return getDrills(rand);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("nose"))) {
-      return getNose(tokenId);
+      return getNose(rand);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("beast"))) {
-      return getBeast(tokenId);
+      return getBeast(rand);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("altar"))) {
-      return getAltar(tokenId);
+      return getAltar(rand);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("tubes"))) {
-      return getTubes(tokenId);
+      return getTubes(rand);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("cypherRoom"))) {
-      return getCypherRoom(tokenId);
+      return getCypherRoom(rand);
     } else {
       return "";
     }
@@ -221,54 +222,32 @@ contract Machine {
 
   // Machine Getters
 
-  function getConveyorBelt(uint tokenId) internal view returns (string memory) {
-    bytes memory rand = _metadata.getRandBytes(tokenId);
-    
-    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
-    return IMachine(_workstations[0]).getMachine(bytesNeeded);
+  function getConveyorBelt(bytes memory rand) internal view returns (string memory) {
+    return IMachine(_workstations[0]).getMachine(rand);
   }
 
-  function getDrills(uint tokenId) internal view returns (string memory) {
-    bytes memory rand = _metadata.getRandBytes(tokenId);
-    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
-    return IMachine(_workstations[1]).getMachine(bytesNeeded);
+  function getDrills(bytes memory rand) internal view returns (string memory) {
+    return IMachine(_workstations[1]).getMachine(rand);
   }
 
-  function getNose(uint tokenId) internal view returns (string memory) {
-
-    bytes memory rand = _metadata.getRandBytes(tokenId);
-
-    // 2 for eyes, 2 for nose
-    bytes memory bytesNeeded = GridHelper.slice(rand, 10, 12);
-    
-    return IMachine(_workstations[2]).getMachine(bytesNeeded);
+  function getNose(bytes memory rand) internal view returns (string memory) {
+    return IMachine(_workstations[2]).getMachine(rand);
   }
 
-  function getBeast(uint tokenId) internal view returns (string memory) {
-    bytes memory rand = _metadata.getRandBytes(tokenId);
-    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
-    return IMachine(_workstations[3]).getMachine(bytesNeeded);
+  function getBeast(bytes memory rand) internal view returns (string memory) {
+    return IMachine(_workstations[3]).getMachine(rand);
   }
 
-  function getAltar(uint tokenId) internal view returns (string memory) {
-    bytes memory rand = _metadata.getRandBytes(tokenId);
-    // 2 for frame, 2 for orb1, 2 for orb2, 2 for cube, 2 for stairs, 2 for rug
-    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 12);
-    return IMachine(_workstations[4]).getMachine(bytesNeeded);
+  function getAltar(bytes memory rand) internal view returns (string memory) {
+    return IMachine(_workstations[4]).getMachine(rand);
   }
 
-  function getTubes(uint tokenId) internal view returns (string memory) {
-    bytes memory rand = _metadata.getRandBytes(tokenId);
-    
-    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 4);
-    return IMachine(_workstations[5]).getMachine(bytesNeeded);
+  function getTubes(bytes memory rand) internal view returns (string memory) {
+    return IMachine(_workstations[5]).getMachine(rand);
   }
 
-  function getCypherRoom(uint tokenId) internal view returns (string memory) {
-    bytes memory rand = _metadata.getRandBytes(tokenId);
-    
-    bytes memory bytesNeeded = GridHelper.slice(rand, 16, 12);
-    return IMachine(_workstations[6]).getMachine(bytesNeeded);
+  function getCypherRoom(bytes memory rand) internal view returns (string memory) {
+    return IMachine(_workstations[6]).getMachine(rand);
   }
 
   modifier onlyOwner() {
