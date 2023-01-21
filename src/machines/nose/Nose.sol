@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "../../GridHelper.sol";
-import "../../CommonSVG.sol";
 import "./NoseAdditional1.sol";
 import "./NoseAdditional2.sol";
 
@@ -58,11 +57,11 @@ contract Nose {
       // string memory yOffset = HOLE_OFFSET[i * 2 + 1];
       // 5 holes
       if (holeDistribution[i] == 0) {
-        output = string.concat(output, CommonSVG.groupTransform(xOffset, yOffset, GridHelper.repeatGivenObject(NoseAdditional1.getHole(), 5, bytes(HOLES_5))));
+        output = string.concat(output, GridHelper.groupTransform(xOffset, yOffset, GridHelper.repeatGivenObject(NoseAdditional1.getHole(), 5, bytes(HOLES_5))));
         // output = string.concat(output, getArrangement(xOffset, yOffset, bytes(HOLES_5)));
       // 4 holes
       } else if (holeDistribution[i] == 1) {
-        output = string.concat(output, CommonSVG.groupTransform(xOffset, yOffset, GridHelper.repeatGivenObject(NoseAdditional1.getHole(), 4, bytes(HOLES_4))));
+        output = string.concat(output, GridHelper.groupTransform(xOffset, yOffset, GridHelper.repeatGivenObject(NoseAdditional1.getHole(), 4, bytes(HOLES_4))));
         // output = string.concat(output, getArrangement(xOffset, yOffset, bytes(HOLES_4)));
       }
     }
@@ -100,6 +99,6 @@ contract Nose {
     );
 
     string memory output = string.concat("<g id='m_a_limit33-u-a_to' style='animation-play-state: running;'><g id='m_a_limit33-u-a' style='transform: transform-origin: center center;'>", NoseAdditional1.getMovingPanel(), eyes, nose, "</g></g>");
-    return string.concat(CommonSVG.groupTransform("-212", "-240", getHoles(holeDistribution)), output);
+    return string.concat(GridHelper.groupTransform("-212", "-240", getHoles(holeDistribution)), output);
   }
 }

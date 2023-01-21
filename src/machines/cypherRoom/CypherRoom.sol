@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "../../GridHelper.sol";
-import "../../CommonSVG.sol";
 import "./TestCypher1.sol";
 import "./TestCypher2.sol";
 import "./TestCypher3.sol";
@@ -114,7 +113,7 @@ contract CypherRoom {
     baseCypher = removeCypherBackground(baseCypher, background);
     baseCypher = pauseAnimations(baseCypher);
     string memory reSized = string.concat(SIZE_OPEN, baseCypher, "</g>");
-    string memory output = CommonSVG.groupTransform("-252", "-558", reSized);
+    string memory output = GridHelper.groupTransform("-252", "-558", reSized);
     output = GridHelper.repeatGivenObject(output, 9, floorGridArray);
     return output;
   }

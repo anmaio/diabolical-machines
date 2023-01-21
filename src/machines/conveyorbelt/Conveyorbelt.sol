@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "../../GridHelper.sol";
 import "./ConveyorbeltAdditional1.sol";
 import "./ConveyorbeltAdditional2.sol";
@@ -20,7 +20,7 @@ contract Conveyorbelt {
       conveyorbeltAdditional1.getBeltOpen()
     );
 
-    return CommonSVG.groupTransform("-468", "-630", 
+    return GridHelper.groupTransform("-468", "-630", 
       string.concat(
         output,
         GridHelper.repeatGivenObject(conveyorbeltAdditional1.getBeltDisc(), 10, DISC_POSITIONS), 

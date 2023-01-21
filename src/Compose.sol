@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "base64-sol/base64.sol";
 import "./SharedAssets.sol";
 import "./Machine.sol";
-import "./CommonSVG.sol";
+import "./GridHelper.sol";
 import "./Metadata.sol";
 import "./GlobalSVG.sol";
 
@@ -15,11 +15,11 @@ contract Compose {
   GlobalSVG private _globalSVG;
 
   // Owner of the contract
-  address internal _owner;
+  address private _owner;
 
-  bool internal globalFlip = false;
+  bool private globalFlip = false;
 
-  uint internal constant OFFSET = 54;
+  uint private constant OFFSET = 54;
 
   // string[] public folders = ["s/shell", "r/frame", "r/clock", "l/frame", "f/altar", "f/props"];
   // string[] public objects = [RIGHT_FRAME, RIGHT_CLOCK, LEFT_FRAME, ALTAR, PROPS];
@@ -153,16 +153,16 @@ contract Compose {
   }
 
   // compose SVG
-  function composeSVG(uint _tokenId) public view returns (string memory) {
+  function composeSVG(uint tokenId) public view returns (string memory) {
     // return all svg's concatenated together and base64 encoded
-    return Base64.encode(bytes(composeOnlyImage(_tokenId)));
+    return Base64.encode(bytes(composeOnlyImage(tokenId)));
   }
 
   
-  function composeOnlyImage(uint _tokenId) public view returns (string memory) {
+  function composeOnlyImage(uint tokenId) public view returns (string memory) {
     // determine if flipped
 
-    bytes memory rand = _metadata.getRandBytes(_tokenId);
+    bytes memory rand = _metadata.getRandBytes(tokenId);
     // 0 if not flipped, 1 if flipped
     uint isFlipped = GridHelper.stringToUint(string(rand)) % 2;
     string memory flip = "";
@@ -172,36 +172,36 @@ contract Compose {
       flip = "-1";
     }
 
-    string memory opening = _globalSVG.getOpeningSVG(_metadata.getMachine(_tokenId), rand);
+    string memory opening = _globalSVG.getOpeningSVG(_metadata.getMachine(tokenId), rand);
     
-    string memory objects = composeObjects(_tokenId);
+    string memory objects = composeObjects(tokenId);
     string memory closing = _globalSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
     return string.concat(opening, _globalSVG.getShell(flip), objects, closing);
   }
 
-  function composeObjects(uint _tokenId) internal view returns (string memory) {
-    // uint rWLength = GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)).length;
-    // uint lWLength = GridHelper.getIndexesFromGrid(_metadata.getLWGrid(_tokenId)).length;
+  function composeObjects(uint tokenId) internal view returns (string memory) {
+    // uint rWLength = GridHelper.getIndexesFromGrid(_metadata.getRWGrid(tokenId)).length;
+    // uint lWLength = GridHelper.getIndexesFromGrid(_metadata.getLWGrid(tokenId)).length;
 
-    string[] memory objectList = GridHelper.combineStringArrays(GridHelper.getObjectsFromGrid(_metadata.getRWGrid(_tokenId)), GridHelper.combineStringArrays(GridHelper.getObjectsFromGrid(_metadata.getLWGrid(_tokenId)), GridHelper.getObjectsFromGrid(_metadata.getFGrid(_tokenId))));
-    uint[] memory indexes = GridHelper.combineUintArrays(GridHelper.combineUintArrays(GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)), GridHelper.getIndexesFromGrid(_metadata.getLWGrid(_tokenId))), GridHelper.getIndexesFromGrid(_metadata.getFGrid(_tokenId)));
-    string memory machine = _metadata.getMachine(_tokenId);
+    string[] memory objectList = GridHelper.combineStringArrays(GridHelper.getObjectsFromGrid(_metadata.getRWGrid(tokenId)), GridHelper.combineStringArrays(GridHelper.getObjectsFromGrid(_metadata.getLWGrid(tokenId)), GridHelper.getObjectsFromGrid(_metadata.getFGrid(tokenId))));
+    uint[] memory indexes = GridHelper.combineUintArrays(GridHelper.combineUintArrays(GridHelper.getIndexesFromGrid(_metadata.getRWGrid(tokenId)), GridHelper.getIndexesFromGrid(_metadata.getLWGrid(tokenId))), GridHelper.getIndexesFromGrid(_metadata.getFGrid(tokenId)));
+    string memory machine = _metadata.getMachine(tokenId);
 
     string memory output = "";
 
     for (uint256 i = 0; i < indexes.length; i++) {
       if (indexes[i] != 9) {
-        output = string.concat(output, CommonSVG.G_TRANSFORM);
+        output = string.concat(output, "<g transform='translate(");
         string memory floorX = "";
         string memory floorY = "";
         
         // rw
-        if (i < GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)).length) {
+        if (i < GridHelper.getIndexesFromGrid(_metadata.getRWGrid(tokenId)).length) {
           floorX = string(GridHelper.slice(COMBINED_WALL_ARRAY, 6*indexes[i], 3));
           floorY = string(GridHelper.slice(COMBINED_WALL_ARRAY, 6*indexes[i] + 3, 3));
         // lw
-        } else if (i < GridHelper.getIndexesFromGrid(_metadata.getRWGrid(_tokenId)).length + GridHelper.getIndexesFromGrid(_metadata.getLWGrid(_tokenId)).length) {
+        } else if (i < GridHelper.getIndexesFromGrid(_metadata.getRWGrid(tokenId)).length + GridHelper.getIndexesFromGrid(_metadata.getLWGrid(tokenId)).length) {
           floorX = string(GridHelper.slice(COMBINED_WALL_ARRAY, 6*indexes[i] + OFFSET, 3));
           floorY = string(GridHelper.slice(COMBINED_WALL_ARRAY, 6*indexes[i] + OFFSET + 3, 3));
         // floor
@@ -212,15 +212,15 @@ contract Compose {
           floorY = string(GridHelper.slice(FLOOR_GRID_ARRAY, 6*indexes[i] + 3, 3));
         }
 
-        output = string.concat(output, floorX, ",", floorY, CommonSVG.G_MID);
+        output = string.concat(output, floorX, ",", floorY, ")'>");
 
         if (keccak256(abi.encodePacked(objectList[i])) == keccak256(abi.encodePacked(machine))) {
-          output = string.concat(output, _machine.getMachineSVG(machine, indexes[i], _tokenId));
+          output = string.concat(output, _machine.getMachineSVG(machine, indexes[i], tokenId));
         } else {
           output = string.concat(output, _sharedAssets.getObjectSVG(objectList[i], indexes[i]));
         }
 
-        output = string.concat(output, CommonSVG.G_END);
+        output = string.concat(output, "</g>");
       }
     }
     return output;

@@ -1,85 +1,154 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 
 import "./GridHelper.sol";
 import "./ColourConverter.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 library Environment {
+  uint internal constant TOTAL_COLOURS = 6;
+  uint internal constant TOTAL_DEGRADED_COLOURS = 6; // includes grey
 
-  // string internal constant ALTAR_LW_COLOURS = "D5918EC0595648484C2E2E30";
-  // string internal constant ALTAR_RW_COLOURS = "C05956B947432E2E30202023";
-  // string internal constant ALTAR_FLOOR_COLOURS = "EAC8C7C05956FF3246202023";
-  string internal constant ALTAR_SHELL_COLOURS = "D5918EC0595648484C2E2E30C05956B947432E2E30202023EAC8C7C05956FF3246202023";
+  // LW, RW, FLOOR
+  string internal constant EXECUTIVE_COLOUR_PERCENTAGES = "040020025000070000";
+  string internal constant LAB_COLOUR_PERCENTAGES = "040020020000070020"; // CHANGE THIS
+  string internal constant FACTORY_COLOUR_PERCENTAGES = "040020020000070020"; // CHANGE THIS
+  string internal constant MINING_COLOUR_PERCENTAGES = "040020020000070020"; // CHANGE THIS
+  string internal constant LOGISTICS_COLOUR_PERCENTAGES = "040020020000070020"; // CHANGE THIS
+  
+  string internal constant EXECUTIVE_DEGRADED_HSL = "002047049019058048120002088120001061120001035120001015";
+  string internal constant LAB_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
+  string internal constant FACTORY_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
+  string internal constant MINING_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
+  string internal constant LOGISTICS_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
 
-  string internal constant TEST_ALTAR_COLOURS = "D5918E4C231F48484C2E2E30C059564C231F2E2E30202023EAC8C74C231FFF3246202023";
+  string internal constant EXECUTIVE_COLOURS_HSL = "041100050022100050354100060240004013240003029271042044"; // 6 colours, 3*3 values each
+  string internal constant LAB_COLOURS_HSL = "041100050022100050354100060354058048240004013240003029271042044"; // CHANGE THIS
+  string internal constant FACTORY_COLOURS_HSL = "041100050022100050354100060354058048240004013240003029271042044"; // CHANGE THIS
+  string internal constant MINING_COLOURS_HSL = "041100050022100050354100060354058048240004013240003029271042044"; // CHANGE THIS
+  string internal constant LOGISTICS_COLOURS_HSL = "041100050022100050354100060354058048240004013240003029271042044"; // CHANGE THIS
 
-  // string internal constant LAB_LW_COLOURS = "DFEFE9BFDFD3EAF9F691D8C4";
-  // string internal constant LAB_RW_COLOURS = "BFDFD35EB090C5F7F966DDDD";
-  // string internal constant LAB_FLOOR_COLOURS = "BFDFD3C059568AFFD55BC5B2";
-  string internal constant LAB_SHELL_COLOURS = "DFEFE9BFDFD3EAF9F691D8C4BFDFD35EB090C5F7F966DDDDBFDFD3C059568AFFD55BC5B2";
-
-  string internal constant TEST_LAB_COLOURS = "DFEFE94EA885EAF9F666DDDDDFEFE95EB090DBFCFC78E4EFDFEFE98EC8B178E4EF2B3977";
+  string internal constant EXECUTIVE_COLOURS_HSL_SHADE = "041100045013090048354079054240024019240004013270042030"; // 6 colours, 3*3 values each
+  string internal constant LAB_COLOURS_HSL_SHADE = "041100045013090048354079054240024019240004013270042030"; // CHANGE THIS
+  string internal constant FACTORY_COLOURS_HSL_SHADE = "041100045013090048354079054240024019240004013270042030"; // CHANGE THIS
+  string internal constant MINING_COLOURS_HSL_SHADE = "041100045013090048354079054240024019240004013270042030"; // CHANGE THIS
+  string internal constant LOGISTICS_COLOURS_HSL_SHADE = "041100045013090048354079054240024019240004013270042030"; // CHANGE THIS
 
   // 0 = degraded, 1 = basic, 2 = embellished
   function getState(bytes memory digits) public pure returns (uint) {
-    uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 20, 2));
+    uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2));
     // return stateDigits % 3;
     return 2;
   }
 
-  function getShellPercentages(bytes memory digits) public pure returns (int[2] memory) {
-    int percentage1 = int(GridHelper.bytesToUint(GridHelper.slice(digits, 22, 2)));
-    int percentage2 = int(GridHelper.bytesToUint(GridHelper.slice(digits, 24, 2)));
-    return [percentage1, percentage2];
+  function increaseColourLightness(uint baseLightness, uint percentage) internal pure returns(uint) {
+    return baseLightness + (baseLightness * percentage / 100);
   }
 
-  function interpolateBetweenColours(string memory colours, int[2] memory percentages, int state) public pure returns (int[] memory) {
+  function decreaseColourLightness(uint baseLightness, uint percentage) internal pure returns(uint) {
+    return baseLightness - (baseLightness * percentage / 100);
+  }
 
-        // hex to int
-        uint[] memory colourIntArray = new uint[](2);
-        for (uint i = 0; i < 2; i++) {
-            colourIntArray[i] = ColourConverter.hexToUint(string(GridHelper.slice(bytes(colours), i*6, 6)));
-        }
-        
-        // int to rgb to hsl
-        int[] memory hslArray = new int[](6);
-        for (uint i = 0; i < 2; i++) {
-            (hslArray[i*3], hslArray[i*3+1], hslArray[i*3+2]) = ColourConverter.rgbToHsl(ColourConverter.intToRGBRed(colourIntArray[i]), ColourConverter.intToRGBGreen(colourIntArray[i]), ColourConverter.intToRGBBlue(colourIntArray[i]));
-        }
+  // // combination of increase and decrease functions
+  // function changeColourLightness(int baseLightness, int percentage) internal pure returns(int) {
+  //   if (percentage > 0) {
+  //     return baseLightness + ((100 - baseLightness) * percentage / 100);
+  //   } else {
+  //     return baseLightness - (baseLightness * percentage / 100);
+  //   }
+  // }
 
-        // TODO: interpolate
-        int[] memory newHslArray = new int[](6);
-        for (uint i = 0; i < 3; i++) {
-            (newHslArray[i], newHslArray[i+3]) = ColourConverter.interpolatebetweenTwovalues(hslArray[i], hslArray[i+3], percentages, state);
-        }
-
-        // hsl to rgb
-        int[] memory newRgbArray = new int[](6);
-        for (uint i = 0; i < 2; i++) {
-            (newRgbArray[i*3], newRgbArray[i*3+1], newRgbArray[i*3+2]) = ColourConverter.hslToRgb(newHslArray[i*3], newHslArray[i*3+1], newHslArray[i*3+2]);
-        }
-
-        return newRgbArray;
-
-    }
-
-  function getShellColours(string memory machine, bytes memory digits) external pure returns (int[] memory) {
+  function getColours(string memory machine, bytes memory digits) external pure returns (uint[] memory) {
     uint state = getState(digits);
-    int[2] memory percentages = getShellPercentages(digits);
+    uint[] memory colourArray = new uint[](36); // 6 colours, 3*2 values each
 
-    int[] memory colourArray = new int[](18); // 6 colours, 3 values each
-    string memory colours = "";
+    if (state == 0) { // degraded
+      colourArray = getDegradedShell(colourArray, machine, digits);
+    } else { // basic or embellished
+      colourArray = getBasicEmbelishedShell(colourArray, machine, digits, state);
+    }
+    return colourArray;
+  }
 
-    if (keccak256(bytes(machine)) == keccak256(bytes("altar"))) {
-      colours = TEST_ALTAR_COLOURS;
+  function getDegradedShell(uint[] memory colourArray, string memory machine, bytes memory digits) internal pure returns (uint[] memory) {
+
+    uint randomColourDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 2, 8));
+
+    string memory degradedHsl = LOGISTICS_DEGRADED_HSL;
+    string memory degradedPercentages = LOGISTICS_COLOUR_PERCENTAGES;
+
+    if (keccak256(bytes(machine)) == keccak256(bytes("altar"))) { // executive
+      degradedHsl = EXECUTIVE_DEGRADED_HSL;
+      degradedPercentages = EXECUTIVE_COLOUR_PERCENTAGES;
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("lab"))) { // lab
+      degradedHsl = LAB_DEGRADED_HSL;
+      degradedPercentages = LAB_COLOUR_PERCENTAGES;
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("factory"))) { // factory
+      degradedHsl = FACTORY_DEGRADED_HSL;
+      degradedPercentages = FACTORY_COLOUR_PERCENTAGES;
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("mining"))) { // mining
+      degradedHsl = MINING_DEGRADED_HSL;
+      degradedPercentages = MINING_COLOUR_PERCENTAGES;
     }
 
-    for (uint i = 0; i < 3; i++) {
-      string memory colourPart = string(GridHelper.slice(bytes(colours), state*6 + i*24, 12));
-      int[] memory colourArrayPart = interpolateBetweenColours(colourPart, percentages, int(state));
-      for (uint j = 0; j < 6; j++) {
-        colourArray[i*6 + j] = colourArrayPart[j];
+    uint[] memory singleColour = new uint[](3); // h, s, l
+    for (uint i = 0; i < 3; ++i) {
+      singleColour[i] = GridHelper.stringToUint(string(GridHelper.slice(bytes(degradedHsl), (randomColourDigits%TOTAL_DEGRADED_COLOURS)*9 + 3*i, 3))); // 9 = h,s,l to 3 significant digits
+    }
+    uint[] memory colourPercentages = GridHelper.setUintArrayFromString(degradedPercentages, 6, 3);
+    
+    for (uint i = 0; i < 12; ++i) { // 12 = 6 colours, 2 values each
+      colourArray[i*3] = singleColour[0];
+      colourArray[i*3+1] = singleColour[1];
+      colourArray[i*3+2] = increaseColourLightness(singleColour[2], colourPercentages[i%6]);
+    }
+
+    return colourArray;
+  }
+
+  function getBasicEmbelishedShell(uint[] memory colourArray, string memory machine, bytes memory digits, uint state) internal pure returns (uint[] memory) {
+    uint NumColoursDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 2, 8));
+    uint numColours = (NumColoursDigits % 3) + ((state-1) * 3) + 1; // basic = 1, 2, 3; embellished = 4, 5, 6
+
+    uint[] memory coloursAvailable = GridHelper.setUintArrayFromString(LOGISTICS_COLOURS_HSL, TOTAL_COLOURS*3, 3);
+    uint[] memory coloursAvailableShade = GridHelper.setUintArrayFromString(LOGISTICS_COLOURS_HSL_SHADE, TOTAL_COLOURS*3, 3);
+    if (keccak256(bytes(machine)) == keccak256(bytes("altar"))) { // executive
+      coloursAvailable = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_HSL, TOTAL_COLOURS*3, 3);
+      coloursAvailableShade = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_HSL_SHADE, TOTAL_COLOURS*3, 3);
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("lab"))) { // lab
+      coloursAvailable = GridHelper.setUintArrayFromString(LAB_COLOURS_HSL, TOTAL_COLOURS*3, 3);
+      coloursAvailableShade = GridHelper.setUintArrayFromString(LAB_COLOURS_HSL_SHADE, TOTAL_COLOURS*3, 3);
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("factory"))) { // factory
+      coloursAvailable = GridHelper.setUintArrayFromString(FACTORY_COLOURS_HSL, TOTAL_COLOURS*3, 3);
+      coloursAvailableShade = GridHelper.setUintArrayFromString(FACTORY_COLOURS_HSL_SHADE, TOTAL_COLOURS*3, 3);
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("mining"))) { // mining
+      coloursAvailable = GridHelper.setUintArrayFromString(MINING_COLOURS_HSL, TOTAL_COLOURS*3, 3);
+      coloursAvailableShade = GridHelper.setUintArrayFromString(MINING_COLOURS_HSL_SHADE, TOTAL_COLOURS*3, 3);
+    }
+
+    uint[] memory baseColoursUsed = new uint[](numColours*3);
+    uint[] memory baseColoursUsedShade = new uint[](numColours*3);
+
+    // Select all colours that will be used
+    for (uint i = 0; i < numColours; ++i) {
+
+      uint index = (NumColoursDigits % (TOTAL_COLOURS - i)) * 3;
+
+      for (uint j = 0; j < 3; j++) { // j = h, s, l
+        baseColoursUsed[i*3+j] = coloursAvailable[index];
+        coloursAvailable = GridHelper.shiftToEndUintArray(index, coloursAvailable);
+        baseColoursUsedShade[i*3+j] = coloursAvailableShade[index];
+        coloursAvailableShade = GridHelper.shiftToEndUintArray(index, coloursAvailableShade);
+      }
+
+      NumColoursDigits = NumColoursDigits / TOTAL_COLOURS;
+    }
+
+    for (uint i = 0; i < 6; ++i) {
+      for (uint j = 0; j < 3; ++j) { // j = h, s, l
+        // Duplicate colours for linear gradient
+        colourArray[2*i*3+j] = baseColoursUsed[3*(i % numColours) + j];
+        colourArray[(2*i+1)*3+j] = baseColoursUsedShade[3*(i % numColours) + j];
       }
     }
 

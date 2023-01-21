@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "./CommonSVG.sol";
 
 library GridHelper {
   uint256 public constant MAX_GRID_INDEX = 8;
@@ -113,6 +112,10 @@ library GridHelper {
       return true;
   }
 
+  function groupTransform(string memory x, string memory y, string memory data) internal pure returns (string memory) {
+    return string.concat("<g transform='translate(", x, ",", y, ")'>", data, "</g>");
+  }
+
   function uintToBytes(uint256 x) public pure returns (bytes memory b) {
       b = new bytes(32);
       assembly {
@@ -120,7 +123,7 @@ library GridHelper {
       } //  first 32 bytes = length of the bytes value
   }
 
-  function getLastValidIndex(uint[] memory gridIndexes) public pure returns (uint256) {
+  function getLastValidIndex(uint[] memory gridIndexes) internal pure returns (uint256) {
     uint indexLength = gridIndexes.length;
     for (uint256 i = 1; i < indexLength; i++) {
       if (gridIndexes[indexLength - i] != 9) {
@@ -162,9 +165,43 @@ library GridHelper {
       string memory yOffset = string(slice(offsetBytes, (2*i + 1) * offsetBytes.length / (times * 2), offsetBytes.length / (times * 2)));
       output = string.concat(
         output,
-        CommonSVG.groupTransform(xOffset, yOffset, object)
+        groupTransform(xOffset, yOffset, object)
       );
     }
     return output;
+  }
+
+  // function setIntArrayFromString(string memory values, uint numOfValues, uint lengthOfValue) internal pure returns (int[] memory) {
+  //   int[] memory output = new int[](numOfValues);
+  //   for (uint256 i = 0; i < numOfValues; i++) {
+  //     output[i] = int(stringToUint(string(slice(bytes(values), i*lengthOfValue, lengthOfValue))));
+  //   }
+  //   return output;
+  // }
+
+  function setUintArrayFromString(string memory values, uint numOfValues, uint lengthOfValue) internal pure returns (uint[] memory) {
+    uint[] memory output = new uint[](numOfValues);
+    for (uint256 i = 0; i < numOfValues; i++) {
+      output[i] = stringToUint(string(slice(bytes(values), i*lengthOfValue, lengthOfValue)));
+    }
+    return output;
+  }
+
+  // function shiftToEndIntArray(uint index, int[] memory arr) internal pure returns (int[] memory) {
+  //   require(index < arr.length, "index out of bound");
+
+  //   for (uint i = index; i < arr.length - 1; i++) {
+  //       arr[i] = arr[i + 1];
+  //   }
+  //   return arr;
+  // }
+
+  function shiftToEndUintArray(uint index, uint[] memory arr) internal pure returns (uint[] memory) {
+    require(index < arr.length, "index out of bound");
+
+    for (uint i = index; i < arr.length - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    return arr;
   }
 }

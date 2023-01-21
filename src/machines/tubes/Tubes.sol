@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "../../GridHelper.sol";
 import "./TubesAdditional1.sol";
 import "./TubesAdditional2.sol";
@@ -59,7 +59,7 @@ contract Tubes {
       TubesAdditional1.getPumpEntry(),
       TubesAdditional2.getFeedbackMachine(),
       // needed to add separately for the render order
-      CommonSVG.groupTransform("312", "140", TubesAdditional2.getFlatConnector()),
+      GridHelper.groupTransform("312", "140", TubesAdditional2.getFlatConnector()),
       TubesAdditional3.getMidTube(),
       selectGauges(digits),
       getConnectors(),
@@ -67,9 +67,9 @@ contract Tubes {
       TubesAdditional3.getEntryTube()
     );
 
-    output = CommonSVG.groupTransform("-468", "-630", output);
+    output = GridHelper.groupTransform("-468", "-630", output);
 
-    output = string.concat(WRAP, output, CommonSVG.G_END, CommonSVG.G_END);
+    output = string.concat(WRAP, output, "</g>", "</g>");
 
     return output;
   }

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "./CommonSVG.sol";
 
 contract SharedAssets {
   mapping(string => uint[]) internal objectToSVGIndex;
@@ -127,9 +126,9 @@ contract SharedAssets {
         objectText[object], // open text
         // machineToSVG[machine][numParts * 2], // open text
         positionText(object, position),
-        CommonSVG.TEXT_CLOSE,
-        CommonSVG.G_END,
-        CommonSVG.G_END
+        "</text>",
+        "</g>",
+        "</g>"
       );
       svg = string.concat(svg, tempSvg);
     }

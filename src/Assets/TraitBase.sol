@@ -12,9 +12,8 @@ contract TraitBase is Ownable {
   address[] internal implementationAddresses;
   uint[] internal implementationIndexes;
 
-  constructor(address[] memory addresses, uint[] memory indexes) {
+  constructor(address[] memory addresses) {
     implementationAddresses = addresses;
-    implementationIndexes = indexes;
   }
 
   // SETTERS
@@ -32,9 +31,11 @@ contract TraitBase is Ownable {
   // }
 
   function getAssetFromTrait(uint assetID) external view returns (string memory) {
-    for (uint i = 0; i < implementationIndexes.length; i++) {
-      if (assetID >= implementationIndexes[i] && assetID < implementationIndexes[i + 1]) {
-        return IAssetFromID(implementationAddresses[i]).getAssetFromID(assetID);
+    string memory asset = "";
+    for (uint i = 0; i < implementationAddresses.length; i++) {
+      asset = IAssetFromID(implementationAddresses[i]).getAssetFromID(assetID);
+      if (bytes(asset).length > 0) {
+        return asset;
       }
     }
     return "";

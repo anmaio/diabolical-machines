@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 import "../../GridHelper.sol";
-import "../../CommonSVG.sol";
 import "./BeastAdditional1.sol";
 import "./BeastAdditional2.sol";
 import "./BeastAdditional3.sol";
@@ -108,7 +107,7 @@ contract Beast {
 
   function getMachine(bytes memory digits) external pure returns (string memory) {
 
-    return CommonSVG.groupTransform("-624", "-540", 
+    return GridHelper.groupTransform("-624", "-540", 
       string.concat(
         BeastAdditional1.getCylinder(),
         BeastAdditional1.getWallHatch(),

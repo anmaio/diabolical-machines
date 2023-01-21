@@ -6,7 +6,7 @@ services:
   node:
     build:
       args:
-        - SOLC_VERSION=0.8.12
+        - SOLC_VERSION=0.8.16
       context: .
     container_name: frhtmlipfs_anvil
     entrypoint: ["anvil"]
@@ -24,7 +24,7 @@ services:
   dev:
     build:
       args:
-        - SOLC_VERSION=0.8.12
+        - SOLC_VERSION=0.8.16
       context: .
     container_name: frhtmlipfs_forge
     entrypoint: ["/docker/entrypoint.sh"]
