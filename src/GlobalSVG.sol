@@ -14,6 +14,8 @@ import "./styles/nose/NosesCSS5.sol";
 
 import "./styles/altar/AltarCSS1.sol";
 import "./styles/altar/AltarCSS2.sol";
+import "./styles/altar/AltarCSS3.sol";
+import "./styles/altar/AltarCSS4.sol";
 
 import "./styles/conveyorbelt/ConveyorbeltCSS1.sol";
 import "./styles/conveyorbelt/ConveyorbeltCSS2.sol";
@@ -135,6 +137,8 @@ contract GlobalSVG {
 
     return string.concat(
       output,
+      AltarCSS3.getPart(),
+      AltarCSS4.getPart(),
       ConveyorbeltCSS1.getPart(),
       ConveyorbeltCSS2.getPart(),
       DrillsCSS.getPart(),

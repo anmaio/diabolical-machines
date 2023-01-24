@@ -24,6 +24,10 @@ import "../src/Assets/Altar/AltarImp3.sol";
 
 import "../src/Assets/Substances/SubstancesImp1.sol";
 
+import "../src/Assets/Eyes/EyesImp1.sol";
+
+import "../src/Assets/Feedback/FeedbackImp1.sol";
+
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
 
@@ -34,14 +38,22 @@ contract CliffordTest is Test {
   // Substances
   SubstancesImp1 public substancesImp1 = new SubstancesImp1();
 
+  // Feedback
+  FeedbackImp1 public feedbackImp1 = new FeedbackImp1();
+
+  // Eyes
+  EyesImp1 public eyesImp1 = new EyesImp1();
+
   // Altar
   AltarImp1 public altarImp1 = new AltarImp1();
   AltarImp2 public altarImp2 = new AltarImp2();
   AltarImp3 public altarImp3 = new AltarImp3();
 
   // Trait bases
-  TraitBase public altarTB;
   TraitBase public substancesTB;
+  TraitBase public feedbackTB;
+  TraitBase public eyesTB;
+  TraitBase public altarTB;
 
   AssetRetriever public assetRetriever;
 
@@ -67,6 +79,16 @@ contract CliffordTest is Test {
     substancesImpsAds[0] = address(substancesImp1);
     substancesTB = new TraitBase(substancesImpsAds);
 
+    // Feedback
+    address[] memory feedbackImpsAds = new address[](1);
+    feedbackImpsAds[0] = address(feedbackImp1);
+    feedbackTB = new TraitBase(feedbackImpsAds);
+
+    // Eyes
+    address[] memory eyesImpsAds = new address[](1);
+    eyesImpsAds[0] = address(eyesImp1);
+    eyesTB = new TraitBase(eyesImpsAds);
+
     // Altar
     address[] memory altarImpsAds = new address[](3);
     altarImpsAds[0] = address(altarImp1);
@@ -75,9 +97,11 @@ contract CliffordTest is Test {
     altarTB = new TraitBase(altarImpsAds);
 
     // Asset Retriever
-    address[] memory traitBases = new address[](2);
+    address[] memory traitBases = new address[](4);
     traitBases[0] = address(substancesTB);
-    traitBases[1] = address(altarTB);
+    traitBases[1] = address(feedbackTB);
+    traitBases[2] = address(eyesTB);
+    traitBases[3] = address(altarTB);
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
 
     // Logic Contracts for each Workstation
