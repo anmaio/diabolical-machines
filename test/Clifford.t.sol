@@ -35,6 +35,8 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
+  uint internal constant MINT_SIZE = 1000;
+
   // Substances
   SubstancesImp1 public substancesImp1 = new SubstancesImp1();
 
@@ -137,7 +139,7 @@ contract CliffordTest is Test {
 
     // ERC721A has the ability to mint multiple tokens at once
     // Using single mints for now while randomness is Psuedo Random and dependant on block.timestamp
-    for (uint256 i = 0; i < 15; i++) {
+    for (uint256 i = 0; i < MINT_SIZE; i++) {
       vm.roll(i*99);
       vm.warp(i*99);
       vm.difficulty(i*99);
@@ -146,17 +148,60 @@ contract CliffordTest is Test {
     }
   }
 
-  // test writing 5 images to a file
+  // test writing X images to a file
   function testWriteImages() public {
-    for (uint256 i = 0; i < 15; i++) {
+    for (uint256 i = 0; i < MINT_SIZE; i++) {
       string memory path = string.concat("outputImages/", Strings.toString(i), ".svg");
       vm.writeFile(path, compose.composeOnlyImage(i));
     }
   }
 
+  // create a json file with the ids of the images that were created
+  function testWriteJson() public {
 
-  // function testSingleMint() public view {
-  //   console.log(clifford.tokenURI(2));
-  // }
+    string[3] memory states = ["Degraded", "Basic", "Embellished"];
+    
+    string memory output = "[\n  ";
+    string memory closing = "]";
+
+    string memory itemOpen = "{\n    \"id\": ";
+
+    for (uint256 i = 0; i < MINT_SIZE; i++) {
+      string memory id = Strings.toString(i);
+      string memory itemClose = "\n  },\n  ";
+      if (i == MINT_SIZE - 1) {
+        itemClose = "\n  }\n";
+      }
+      string memory randomNumber = metadata.getRandString(i);
+      uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(metadata.getRandBytes(i), 0, 2)) % 3;
+      string memory state = states[stateDigits];
+
+      string memory machine = metadata.getMachine(i);
+
+      string memory item = string.concat(
+        itemOpen, 
+        id, 
+        ",\n    \"Random Number\": ", 
+        randomNumber, 
+        ",\n    \"State\": \"",
+        state, 
+        "\""
+      );
+
+      item = string.concat(
+        item, 
+        ",\n    \"Machine\": \"",
+        machine,
+        "\"",
+        itemClose
+      );
+
+      output = string.concat(output, item);
+    }
+
+    string memory json = string.concat(output, closing);
+    vm.writeFile("outputJson/ids.json", json);
+    
+  }
 
 }

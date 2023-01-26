@@ -204,6 +204,10 @@ contract Metadata is Ownable {
     return bytes(Strings.toString(_clifford.getSeed(tokenId)));
   }
 
+  function getRandString(uint tokenId) public view returns (string memory) {
+    return Strings.toString(_clifford.getSeed(tokenId));
+  }
+
   function getRandAndSlice(uint tokenId, uint start, uint length) internal view returns (uint256) {
       bytes memory randBytes = getRandBytes(tokenId);
       randBytes = GridHelper.slice(randBytes, start, length);

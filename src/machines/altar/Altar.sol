@@ -31,16 +31,19 @@ contract Altar {
     _assetRetriever = AssetRetriever(assetRetriever);
   }
 
-  function getCube(bytes memory digits) internal view returns (string memory) {
+  function getCube(bytes memory digits, uint state) internal view returns (string memory) {
     uint[] memory baseNumbersArray = GridHelper.setUintArrayFromString(BASE_NUMBERS, 3, 4);
     uint baseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12, 2));
-    // 3 possible bases, can appear in any state
-    if (baseDigits < 33) {
+    if (state == 2) { // has to be cube base because there will be stairs
       return _assetRetriever.getAsset(baseNumbersArray[0]);
-    } else if (baseDigits < 66) {
-      return _assetRetriever.getAsset(baseNumbersArray[1]);
-    } else {
-      return _assetRetriever.getAsset(baseNumbersArray[2]);
+    } else { // 3 possible bases, can appear in degraded/embellished
+      if (baseDigits < (66 - (state*50))) { // basic == 16%, degraded == 66%
+        return _assetRetriever.getAsset(baseNumbersArray[0]);
+      } else if (baseDigits < (99 - (state*57))) { // basic == 42%, degraded == 33%
+        return _assetRetriever.getAsset(baseNumbersArray[1]);
+      } else { // basic == 42%, degraded == 1%
+        return _assetRetriever.getAsset(baseNumbersArray[2]);
+      }
     }
   }
 
@@ -180,8 +183,17 @@ contract Altar {
   }
 
   function getMachine(bytes memory digits) external view returns (string memory) {
-    // uint state = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2)) % 3;
-    uint state = 2;
+    uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2));
+    uint state;
+    if (stateDigits < 20) {
+      state = 0;
+    } else if (stateDigits < 70) {
+      state = 1;
+    } else {
+      state = 2;
+    }
+
+    // uint state = 0;
     string[] memory orbBases = getOrbBases(digits, state);
     string[] memory orbs = getOrbs(digits, state);
 
@@ -189,7 +201,7 @@ contract Altar {
       getFrame(digits, state),
       orbBases[1],
       orbs[1],
-      getCube(digits),
+      getCube(digits, state),
       getFloobAnimation(),
       orbBases[0],
       orbs[0]

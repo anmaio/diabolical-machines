@@ -111,6 +111,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
         return _metadata.buildMetadata(tokenId);
     }
 
+    
     function withdrawMoney() external onlyOwner {
       (bool success, ) = msg.sender.call{value: address(this).balance}("");
       require(success, "Transfer failed.");

@@ -6,7 +6,7 @@ import "./ColourConverter.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 library Environment {
-  uint internal constant TOTAL_COLOURS = 4;
+  uint internal constant TOTAL_COLOURS = 5;
   uint internal constant TOTAL_DEGRADED_COLOURS = 6; // includes grey
 
   // LW, RW, FLOOR
@@ -22,98 +22,62 @@ library Environment {
   string internal constant MINING_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
   string internal constant LOGISTICS_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
 
-  // string internal constant EXECUTIVE_COLOURS_HSL = "354100060022100050041100050240004013000000069240003029271042044"; // 6 colours, 3*3 values each
-  // string internal constant LAB_COLOURS_HSL = "354100060022100050041100050240004013000000069240003029271042044"; // CHANGE THIS
-  // string internal constant FACTORY_COLOURS_HSL = "354100060022100050041100050240004013000000069240003029271042044"; // CHANGE THIS
-  // string internal constant MINING_COLOURS_HSL = "354100060022100050041100050240004013000000069240003029271042044"; // CHANGE THIS
-  // string internal constant LOGISTICS_COLOURS_HSL = "354100060022100050041100050240004013000000069240003029271042044"; // CHANGE THIS
-
-  // string internal constant EXECUTIVE_COLOURS_HSL_SHADE = "354079054013090048041100045240024019000000050240004013270042030"; // 6 colours, 3*3 values each
-  // string internal constant LAB_COLOURS_HSL_SHADE = "354079054013090048041100045240024019000000050240004013270042030"; // CHANGE THIS
-  // string internal constant FACTORY_COLOURS_HSL_SHADE = "354079054013090048041100045240024019000000050240004013270042030"; // CHANGE THIS
-  // string internal constant MINING_COLOURS_HSL_SHADE = "354079054013090048041100045240024019000000050240004013270042030"; // CHANGE THIS
-  // string internal constant LOGISTICS_COLOURS_HSL_SHADE = "354079054013090048041100045240024019000000050240004013270042030"; // CHANGE THIS
-
   // EXECUTIVE
-  string internal constant EXECUTIVE_COLOURS_BASIC_ONE = "240003029354100060240004013000000069";
-  string internal constant EXECUTIVE_COLOURS_BASIC_ONE_SHADE = "240004013354079054240024019000000050";
-  string internal constant EXECUTIVE_COLOURS_BASIC_TWO = "240003029271042044240004013000000069";
-  string internal constant EXECUTIVE_COLOURS_BASIC_TWO_SHADE = "240004013270042030240024019000000050";
-  string internal constant EXECUTIVE_COLOURS_BASIC_THREE = "240003029022100050240004013000000069";
-  string internal constant EXECUTIVE_COLOURS_BASIC_THREE_SHADE = "240004013013091043240024019000000050";
-  string internal constant EXECUTIVE_COLOURS_BASIC_FOUR = "240003029041100050240004013000000069";
-  string internal constant EXECUTIVE_COLOURS_BASIC_FOUR_SHADE = "240004013041100045240024019000000050";
   // Combined without shades
-  string internal constant EXECUTIVE_COLOURS_BASIC = "240003029354100060240004013000000069240003029271042044240004013000000069240003029022100050240004013000000069240003029041100050240004013000000069";
+  string internal constant EXECUTIVE_COLOURS_BASIC = "240003029354100060240004013000000069000000069240003029271042044240004013000000069000000069240003029022100050240004013000000069000000069240003029041100050240004013000000069000000069240003029354100060022100050240004013000000069240003029354100060041100050240004013000000069240003029271042044354100060240004013000000069240003029041100050022100050240004013000000069";
+  string internal constant EXECUTIVE_COLOURS_EMBELLISHED = "240003029240003029240003029022100050022100050022100050000000069240003029000000069240003029000000069240003029240003029354100060354100060354100060354100060354100060240003029041100050022100050240004013000000069240003029240003029354100060022100050271042044041100050240004013271042044271042044271042044271042044000000069240003029041100050041100050041100050041100050000000069240003029041100050041100050041100050271042044271042044271042044";
   // Combined with shades
-  string internal constant EXECUTIVE_COLOURS_BASIC_SHADE = "240004013354079054240024019000000050240004013270042030240024019000000050240004013013091043240024019000000050240004013041100045240024019000000050";
-  
-  
+  string internal constant EXECUTIVE_COLOURS_BASIC_SHADE = "240004013354079054240024019000000050000000050240004013270042030240024019000000050000000050240004013013091043240024019000000050000000050240004013041100045240024019000000050000000050240004013354079054013091043240024019000000050240004013354079054041100045240024019000000050240004013270042030354079054240024019000000050240004013041100045013091043240024019000000050";
+  string internal constant EXECUTIVE_COLOURS_EMBELLISHED_SHADE = "240004013240004013240004013013091043013091043013091043000000050240004013000000050240004013000000050240004013240004013354079054354079054354079054354079054354079054240004013041100045013091043240024019000000050240004013240004013354079054013091043270042030041100045240024019270042030270042030270042030270042030000000050240004013041100045041100045041100045041100045000000050240004013041100045041100045041100045270042030270042030270042030";
 
   // LAB
-  string internal constant LAB_COLOURS_BASIC_ONE = "240003029354100060240004013000000069";
-  string internal constant LAB_COLOURS_BASIC_ONE_SHADE = "240004013354079054240024019000000050";
-  string internal constant LAB_COLOURS_BASIC_TWO = "";
-  string internal constant LAB_COLOURS_BASIC_TWO_SHADE = "";
-  string internal constant LAB_COLOURS_BASIC_THREE = "";
-  string internal constant LAB_COLOURS_BASIC_THREE_SHADE = "";
-  string internal constant LAB_COLOURS_BASIC_FOUR = "";
-  string internal constant LAB_COLOURS_BASIC_FOUR_SHADE = "";
   // Combined without shades
   string internal constant LAB_COLOURS_BASIC = "";
+  string internal constant LAB_COLOURS_EMBELLISHED = "";
   // Combined with shades
   string internal constant LAB_COLOURS_BASIC_SHADE = "";
+  string internal constant LAB_COLOURS_EMBELLISHED_SHADE = "";
 
   // FACTORY
-  string internal constant FACTORY_COLOURS_BASIC_ONE = "240003029354100060240004013000000069";
-  string internal constant FACTORY_COLOURS_BASIC_ONE_SHADE = "240004013354079054240024019000000050";
-  string internal constant FACTORY_COLOURS_BASIC_TWO = "";
-  string internal constant FACTORY_COLOURS_BASIC_TWO_SHADE = "";
-  string internal constant FACTORY_COLOURS_BASIC_THREE = "";
-  string internal constant FACTORY_COLOURS_BASIC_THREE_SHADE = "";
-  string internal constant FACTORY_COLOURS_BASIC_FOUR = "";
-  string internal constant FACTORY_COLOURS_BASIC_FOUR_SHADE = "";
   // Combined without shades
   string internal constant FACTORY_COLOURS_BASIC = "";
+  string internal constant FACTORY_COLOURS_EMBELLISHED = "";
   // Combined with shades
   string internal constant FACTORY_COLOURS_BASIC_SHADE = "";
+  string internal constant FACTORY_COLOURS_EMBELLISHED_SHADE = "";
 
   // MINING
-  string internal constant MINING_COLOURS_BASIC_ONE = "240003029354100060240004013000000069";
-  string internal constant MINING_COLOURS_BASIC_ONE_SHADE = "240004013354079054240024019000000050";
-  string internal constant MINING_COLOURS_BASIC_TWO = "";
-  string internal constant MINING_COLOURS_BASIC_TWO_SHADE = "";
-  string internal constant MINING_COLOURS_BASIC_THREE = "";
-  string internal constant MINING_COLOURS_BASIC_THREE_SHADE = "";
-  string internal constant MINING_COLOURS_BASIC_FOUR = "";
-  string internal constant MINING_COLOURS_BASIC_FOUR_SHADE = "";
   // Combined without shades
   string internal constant MINING_COLOURS_BASIC = "";
+  string internal constant MINING_COLOURS_EMBELLISHED = "";
   // Combined with shades
   string internal constant MINING_COLOURS_BASIC_SHADE = "";
+  string internal constant MINING_COLOURS_EMBELLISHED_SHADE = "";
 
   // LOGISTICS
-  string internal constant LOGISTICS_COLOURS_BASIC_ONE = "240003029354100060240004013000000069";
-  string internal constant LOGISTICS_COLOURS_BASIC_ONE_SHADE = "240004013354079054240024019000000050";
-  string internal constant LOGISTICS_COLOURS_BASIC_TWO = "";
-  string internal constant LOGISTICS_COLOURS_BASIC_TWO_SHADE = "";
-  string internal constant LOGISTICS_COLOURS_BASIC_THREE = "";
-  string internal constant LOGISTICS_COLOURS_BASIC_THREE_SHADE = "";
-  string internal constant LOGISTICS_COLOURS_BASIC_FOUR = "";
-  string internal constant LOGISTICS_COLOURS_BASIC_FOUR_SHADE = "";
   // Combined without shades
   string internal constant LOGISTICS_COLOURS_BASIC = "";
+  string internal constant LOGISTICS_COLOURS_EMBELLISHED = "";
   // Combined with shades
   string internal constant LOGISTICS_COLOURS_BASIC_SHADE = "";
+  string internal constant LOGISTICS_COLOURS_EMBELLISHED_SHADE = "";
 
-  string internal constant BASIC_COLOUR_PERCENTAGES = "050005035010";
+  string internal constant BASIC_COLOUR_PERCENTAGES = "4515110210050210";
+  string internal constant EMBELLISHED_COLOUR_PERCENTAGES = "4515110210050210";
 
 
   // 0 = degraded, 1 = basic, 2 = embellished
   function getState(bytes memory digits) public pure returns (uint) {
     uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2));
-    // return stateDigits % 3;
-    return 2;
+    if (stateDigits < 20) {
+      return 0;
+    } else if (stateDigits < 70) {
+      return 1;
+    } else {
+      return 2;
+    }
+    
+    // return 0;
   }
 
   function increaseColourLightness(uint baseLightness, uint percentage) internal pure returns(uint) {
@@ -123,15 +87,6 @@ library Environment {
   function decreaseColourLightness(uint baseLightness, uint percentage) internal pure returns(uint) {
     return baseLightness - (baseLightness * percentage / 100);
   }
-
-  // // combination of increase and decrease functions
-  // function changeColourLightness(int baseLightness, int percentage) internal pure returns(int) {
-  //   if (percentage > 0) {
-  //     return baseLightness + ((100 - baseLightness) * percentage / 100);
-  //   } else {
-  //     return baseLightness - (baseLightness * percentage / 100);
-  //   }
-  // }
 
   function getColours(string memory machine, bytes memory digits) external pure returns (uint[] memory) {
     uint state = getState(digits);
@@ -145,36 +100,68 @@ library Environment {
     return colourArray;
   }
 
-  function selectBasicPalette(string memory machine, uint percentage) internal pure returns (string[] memory) {
-    string[] memory basicPalette = new string[](2);
-    uint[] memory percentages = GridHelper.setUintArrayFromString(BASIC_COLOUR_PERCENTAGES, 4, 3);
-    uint index;
-
-    if (percentage < percentages[0]) {
-      index = 0;
-    } else if (percentage < percentages[0] + percentages[1]) {
-      index = 1;
-    } else if (percentage < percentages[0] + percentages[1] + percentages[2]) {
-      index = 2;
-    } else {
-      index = 3;
+  function getColourIndex(uint percentage, uint state) internal pure returns(uint) {
+    uint[] memory percentages = GridHelper.setUintArrayFromString(BASIC_COLOUR_PERCENTAGES, 8, 2);
+    if (state == 2) {
+      percentages = GridHelper.setUintArrayFromString(EMBELLISHED_COLOUR_PERCENTAGES, 8, 2);
     }
+    uint total = 0;
+    for (uint i = 0; i < percentages.length; i++) {
+      total += percentages[i];
+      if (percentage < total) {
+        return i;
+      }
+    }
+    return 0;
+  }
+
+  function selectBasicPalette(string memory machine, uint percentage, uint state) internal pure returns (string[] memory) {
+    string[] memory basicPalette = new string[](2);
+    uint[] memory percentages = GridHelper.setUintArrayFromString(BASIC_COLOUR_PERCENTAGES, 8, 2);
+    uint index = getColourIndex(percentage, state);
+
+    uint size = TOTAL_COLOURS * 9;
 
     if (keccak256(bytes(machine)) == keccak256(bytes("altar"))) { // executive
-      basicPalette[0] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_BASIC), index * 36, 36));
-      basicPalette[1] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_BASIC_SHADE), index * 36, 36));
+      if (state == 1) {
+        basicPalette[0] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_BASIC), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_BASIC_SHADE), index * size, size));
+      } else {
+        basicPalette[0] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_EMBELLISHED), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_EMBELLISHED_SHADE), index * size, size));
+      }
     } else if (keccak256(bytes(machine)) == keccak256(bytes("lab"))) { // lab
-      basicPalette[0] = string(GridHelper.slice(bytes(LAB_COLOURS_BASIC), index * 36, 36));
-      basicPalette[1] = string(GridHelper.slice(bytes(LAB_COLOURS_BASIC_SHADE), index * 36, 36));
+      if (state == 1) {
+        basicPalette[0] = string(GridHelper.slice(bytes(LAB_COLOURS_BASIC), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(LAB_COLOURS_BASIC_SHADE), index * size, size));
+      } else {
+        basicPalette[0] = string(GridHelper.slice(bytes(LAB_COLOURS_EMBELLISHED), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(LAB_COLOURS_EMBELLISHED_SHADE), index * size, size));
+      }
     } else if (keccak256(bytes(machine)) == keccak256(bytes("factory"))) { // factory
-      basicPalette[0] = string(GridHelper.slice(bytes(FACTORY_COLOURS_BASIC), index * 36, 36));
-      basicPalette[1] = string(GridHelper.slice(bytes(FACTORY_COLOURS_BASIC_SHADE), index * 36, 36));
+      if (state == 1) {
+        basicPalette[0] = string(GridHelper.slice(bytes(FACTORY_COLOURS_BASIC), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(FACTORY_COLOURS_BASIC_SHADE), index * size, size));
+      } else {
+        basicPalette[0] = string(GridHelper.slice(bytes(FACTORY_COLOURS_EMBELLISHED), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(FACTORY_COLOURS_EMBELLISHED_SHADE), index * size, size));
+      }
     } else if (keccak256(bytes(machine)) == keccak256(bytes("mining"))) { // mining
-      basicPalette[0] = string(GridHelper.slice(bytes(MINING_COLOURS_BASIC), index * 36, 36));
-      basicPalette[1] = string(GridHelper.slice(bytes(MINING_COLOURS_BASIC_SHADE), index * 36, 36));
+      if (state == 1) {
+        basicPalette[0] = string(GridHelper.slice(bytes(MINING_COLOURS_BASIC), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(MINING_COLOURS_BASIC_SHADE), index * size, size));
+      } else {
+        basicPalette[0] = string(GridHelper.slice(bytes(MINING_COLOURS_EMBELLISHED), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(MINING_COLOURS_EMBELLISHED_SHADE), index * size, size));
+      }
     } else { // logistics
-      basicPalette[0] = string(GridHelper.slice(bytes(LOGISTICS_COLOURS_BASIC), index * 36, 36));
-      basicPalette[1] = string(GridHelper.slice(bytes(LOGISTICS_COLOURS_BASIC_SHADE), index * 36, 36));
+      if (state == 1) {
+        basicPalette[0] = string(GridHelper.slice(bytes(LOGISTICS_COLOURS_BASIC), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(LOGISTICS_COLOURS_BASIC_SHADE), index * size, size));
+      } else {
+        basicPalette[0] = string(GridHelper.slice(bytes(LOGISTICS_COLOURS_EMBELLISHED), index * size, size));
+        basicPalette[1] = string(GridHelper.slice(bytes(LOGISTICS_COLOURS_EMBELLISHED_SHADE), index * size, size));
+      }
     }
 
     return basicPalette;
@@ -221,26 +208,10 @@ library Environment {
     // uint numColours = (NumColoursDigits % 3) + ((state-1) * 3) + 1; // basic = 1, 2, 3; embellished = 4, 5, 6
     uint numColours = TOTAL_COLOURS;
 
-    uint[] memory coloursAvailable = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE, TOTAL_COLOURS*3, 3);
-    uint[] memory coloursAvailableShade = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE_SHADE, TOTAL_COLOURS*3, 3);
-    // if (keccak256(bytes(machine)) == keccak256(bytes("altar"))) { // executive
-    //   coloursAvailable = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE, TOTAL_COLOURS*3, 3);
-    //   coloursAvailableShade = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE_SHADE, TOTAL_COLOURS*3, 3);
-    // } else if (keccak256(bytes(machine)) == keccak256(bytes("lab"))) { // lab
-    //   coloursAvailable = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE, TOTAL_COLOURS*3, 3);
-    //   coloursAvailableShade = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE_SHADE, TOTAL_COLOURS*3, 3);
-    // } else if (keccak256(bytes(machine)) == keccak256(bytes("factory"))) { // factory
-    //   coloursAvailable = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE, TOTAL_COLOURS*3, 3);
-    //   coloursAvailableShade = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE_SHADE, TOTAL_COLOURS*3, 3);
-    // } else if (keccak256(bytes(machine)) == keccak256(bytes("mining"))) { // mining
-    //   coloursAvailable = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE, TOTAL_COLOURS*3, 3);
-    //   coloursAvailableShade = GridHelper.setUintArrayFromString(EXECUTIVE_COLOURS_BASIC_ONE_SHADE, TOTAL_COLOURS*3, 3);
-    // }
-
     uint percentage = NumColoursDigits % 100;
-    string[] memory colourAvailableStrings = selectBasicPalette(machine, percentage);
-    coloursAvailable = GridHelper.setUintArrayFromString(colourAvailableStrings[0], TOTAL_COLOURS*3, 3);
-    coloursAvailableShade = GridHelper.setUintArrayFromString(colourAvailableStrings[1], TOTAL_COLOURS*3, 3);
+    string[] memory colourAvailableStrings = selectBasicPalette(machine, percentage, state);
+    uint[] memory coloursAvailable = GridHelper.setUintArrayFromString(colourAvailableStrings[0], TOTAL_COLOURS*3, 3);
+    uint[] memory coloursAvailableShade = GridHelper.setUintArrayFromString(colourAvailableStrings[1], TOTAL_COLOURS*3, 3);
 
     uint[] memory baseColoursUsed = new uint[](numColours*3);
     uint[] memory baseColoursUsedShade = new uint[](numColours*3);
