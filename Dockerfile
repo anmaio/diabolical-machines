@@ -18,5 +18,5 @@ RUN solc-select install $SOLC_VERSION \
 COPY ./docker/entrypoint.sh /docker/entrypoint.sh
 RUN chmod +x "/docker/entrypoint.sh"
 WORKDIR /app
-RUN mkdir outputImages
+RUN mkdir images
 ENTRYPOINT [ "/bin/sh" ]
