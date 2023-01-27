@@ -29,7 +29,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 1000;
+  uint internal constant MINT_SIZE = 10;
 
   // Trait bases
   TraitBase public substancesTB;
