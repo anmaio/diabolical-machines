@@ -19,4 +19,5 @@ COPY ./docker/entrypoint.sh /docker/entrypoint.sh
 RUN chmod +x "/docker/entrypoint.sh"
 WORKDIR /app
 RUN mkdir images
+RUN mkdir outputJson
 ENTRYPOINT [ "/bin/sh" ]

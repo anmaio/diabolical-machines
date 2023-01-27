@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 import "../../GridHelper.sol";
-import "./AltarAdditional1.sol";
-import "./AltarAdditional2.sol";
-import "./AltarAdditional3.sol";
 
 import "../../AssetRetriever.sol";
 
@@ -205,5 +202,53 @@ contract Altar {
     );
 
     return output;
+  }
+
+  function getProductivityFromArray(string[] memory productivityArray) internal pure returns(string memory) {
+    // There are 7 productivity levels: Depleted, Very Low, Low, Medium, High, Very High and Max
+    // if the array contains depleted then it is depleted, similarly for Max
+    // else we return the most common productivity level
+    // if there is a tie we return the first one
+    uint8[7] memory productivityCount = [0, 0, 0, 0, 0, 0, 0];
+    for (uint i = 0; i < productivityArray.length; ++i) {
+      if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Depleted"))) {
+        return "Depleted";
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Very Low"))) {
+        productivityCount[1] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Low"))) {
+        productivityCount[2] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Medium"))) {
+        productivityCount[3] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("High"))) {
+        productivityCount[4] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Very High"))) {
+        productivityCount[5] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Max"))) {
+        return "Max";
+      }
+    }
+
+    uint max = 0;
+    uint maxIndex = 0;
+    for (uint i = 0; i < productivityCount.length; ++i) {
+      if (productivityCount[i] > max) {
+        max = productivityCount[i];
+        maxIndex = i;
+      }
+    }
+
+    if (maxIndex == 1) {
+      return "Low";
+    } else if (maxIndex == 2) {
+      return "Medium";
+    } else if (maxIndex == 3) {
+      return "High";
+    } else if (maxIndex == 4) {
+      return "Very High";
+    } else if (maxIndex == 5) {
+      return "Ultra";
+    } else {
+      return "Null"; // should never happen
+    }
   }
 }
