@@ -2,7 +2,6 @@
 pragma solidity 0.8.16;
 
 import "./GridHelper.sol";
-import "./ColourConverter.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 library Environment {

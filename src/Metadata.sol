@@ -3,14 +3,14 @@ pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "base64-sol/base64.sol";
-import "./Clifford.sol";
+// import "./Clifford.sol";
 import "./Machine.sol";
 import "./GridHelper.sol";
 import "./GlobalSVG.sol";
 
 contract Metadata is Ownable {
   Machine private _machine;
-  Clifford private _clifford;
+  // Clifford private _clifford;
   GlobalSVG private _globalSVG;
 
   constructor(Machine machine, GlobalSVG globalSVG) {
@@ -18,31 +18,30 @@ contract Metadata is Ownable {
       _globalSVG = globalSVG;
   }
 
-  // set handle random
-  function setClifford(Clifford clifford) public onlyOwner {
-    _clifford = clifford;
-  }
+  // function setClifford(Clifford clifford) public onlyOwner {
+  //   _clifford = clifford;
+  // }
 
-  function getMachine(uint tokenId) public view returns (string memory) {
-    uint rand = GridHelper.bytesToUint(GridHelper.slice(getRandBytes(tokenId), 10, 2));
+  function getMachine(uint tokenId, bytes memory rand) public view returns (string memory) {
+    uint rand = GridHelper.bytesToUint(GridHelper.slice(rand, 10, 2));
 
     string memory machine = _machine.selectMachine(rand);
     return machine;
   }
 
   // get the random number for the token
-  function getRandBytes(uint tokenId) public view returns (bytes memory) {
-    return bytes(Strings.toString(_clifford.getSeed(tokenId)));
-  }
+  // function getRandBytes(uint tokenId) public view returns (bytes memory) {
+  //   return bytes(Strings.toString(_clifford.getSeed(tokenId)));
+  // }
 
   //["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"]
   // Function build metadata for a given token
-  function buildMetadata(uint256 tokenId) public view returns (string memory) {
+  function buildMetadata(uint256 tokenId, bytes memory rand) public view returns (string memory) {
     string memory jsonInitial = string.concat(
         '{"name": "Clifford # ',
         Strings.toString(tokenId),
         '", "description": "PUT DESCRIPTION HERE", "attributes": [{"trait_type": "Machine", "value":"',
-        getMachine(tokenId),
+        getMachine(tokenId, rand),
         '"}],',
         '"image": "data:image/svg+xml;base64,'
         // _imageURI,
@@ -51,7 +50,7 @@ contract Metadata is Ownable {
     );
 
       string memory jsonFinal = Base64.encode(
-          bytes(string.concat(jsonInitial, composeSVG(tokenId), '"}'))
+          bytes(string.concat(jsonInitial, composeSVG(tokenId, rand), '"}'))
       );
       string memory output = string.concat("data:application/json;base64,", jsonFinal);
       return output;
@@ -72,16 +71,15 @@ contract Metadata is Ownable {
   }
 
   // compose SVG
-  function composeSVG(uint tokenId) public view returns (string memory) {
+  function composeSVG(uint tokenId, bytes memory rand) public view returns (string memory) {
     // return all svg's concatenated together and base64 encoded
-    return Base64.encode(bytes(composeOnlyImage(tokenId)));
+    return Base64.encode(bytes(composeOnlyImage(tokenId, rand)));
   }
 
   
-  function composeOnlyImage(uint tokenId) public view returns (string memory) {
+  function composeOnlyImage(uint tokenId, bytes memory rand) public view returns (string memory) {
     // determine if flipped
 
-    bytes memory rand = getRandBytes(tokenId);
     // 0 if not flipped, 1 if flipped
     uint isFlipped = GridHelper.stringToUint(string(rand)) % 2;
     string memory flip = "";
@@ -92,22 +90,13 @@ contract Metadata is Ownable {
     }
 
     uint state = getState(rand);
+    string memory machine = getMachine(tokenId, rand);
 
-    string memory opening = _globalSVG.getOpeningSVG(getMachine(tokenId), rand, state);
+    string memory opening = _globalSVG.getOpeningSVG(machine, rand, state);
     
-    string memory objects = composeObjects(tokenId);
+    string memory objects = _machine.machineToGetter(machine, rand, state);
     string memory closing = _globalSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
     return string.concat(opening, _globalSVG.getShell(flip), objects, closing);
-  }
-
-  function composeObjects(uint tokenId) internal view returns (string memory) {
-  
-    string memory machine = getMachine(tokenId);
-
-    bytes memory rand = getRandBytes(tokenId);
-    uint state = getState(rand);
-
-    return _machine.machineToGetter(machine, rand, state);
   }
 }

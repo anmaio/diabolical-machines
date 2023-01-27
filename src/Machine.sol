@@ -1,37 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 import "@openzeppelin/contracts/utils/Strings.sol";
-// import "./Metadata.sol";
-// import "./CommonSVG.sol";
 import "./GridHelper.sol";
-// import "./machines/drills/Drills.sol";
-// import "./machines/nose/Nose.sol";
-// import "./machines/beast/Beast.sol";
-// import "./machines/altar/Altar.sol";
-// import "./machines/conveyorbelt/Conveyorbelt.sol";
-// import "./machines/tubes/Tubes.sol";
-// import "./machines/cypherRoom/CypherRoom.sol";
 
 interface IMachine {
   function getMachine(bytes memory bytesNeeded, uint state) external view returns (string memory);
 }
 
-interface IMetadata {
-  function getRandBytes(uint256 tokenId) external view returns (bytes memory);
-}
-
 contract Machine {
-  IMetadata private _metadata;
 
-  // IMachine private _drills;
-  // IMachine private _nose;
-  // IMachine private _beast;
-  // IMachine private _altar;
-  // IMachine private _conveyorbelt;
-  // IMachine private _tubes;
-  // IMachine private _cypherRoom;
-
-  address[] private _workstations;
+  address[6] private _workstations;
 
   // Owner of the contract
   address private _owner;
@@ -104,11 +82,7 @@ contract Machine {
     machineToLWGrid["cypherRoom"] = fullGrid;
   }
 
-  function setMetadata(address metadata) external onlyOwner {
-    _metadata = IMetadata(metadata);
-  }
-
-  function setAllWorkstations(address[7] memory workstations) external onlyOwner {
+  function setAllWorkstations(address[6] memory workstations) external onlyOwner {
     _workstations = workstations;
   }
 
@@ -174,8 +148,6 @@ contract Machine {
       return getAltar(rand, state);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("tubes"))) {
       return getTubes(rand, state);
-    } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("cypherRoom"))) {
-      return getCypherRoom(rand, state);
     } else {
       return "";
     }
@@ -205,10 +177,6 @@ contract Machine {
 
   function getTubes(bytes memory rand, uint state) internal view returns (string memory) {
     return IMachine(_workstations[5]).getMachine(rand, state);
-  }
-
-  function getCypherRoom(bytes memory rand, uint state) internal view returns (string memory) {
-    return IMachine(_workstations[6]).getMachine(rand, state);
   }
 
   modifier onlyOwner() {
