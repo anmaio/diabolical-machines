@@ -5,24 +5,6 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 library GridHelper {
   uint256 public constant MAX_GRID_INDEX = 8;
 
-  // pick the position of a 1x1 object in a given grid
-  function pickPosition(
-      string[9] memory grid,
-      string memory object,
-      uint256 rand
-  ) public pure returns (string[9] memory newGrid, uint256 index) {
-    // loop through the grid until a position is found that is not taken
-    for (uint256 i = 0; i < grid.length; i++) {
-      if (keccak256(abi.encodePacked(grid[rand])) == keccak256(abi.encodePacked(""))) {
-        grid[rand] = object;
-        return (grid, rand);
-      }
-      rand = (rand + 1) % grid.length;
-    }
-    // return invalid index if no position is found
-    return (grid, MAX_GRID_INDEX + 1);
-  }
-
   // slice array of bytes
   function slice(
       bytes memory data,
@@ -34,34 +16,6 @@ library GridHelper {
         b[i] = data[i + start];
       }
       return b;
-  }
-
-  function getObjectsFromGrid(string[9] memory grid) public pure returns (string[] memory objects) {
-    uint count = 0;
-    string[] memory tempArray = new string[](9);
-    for (uint256 i = 0; i < grid.length; i++) {
-      if (keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("")) && keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("x"))) {
-          tempArray[count] = grid[i];
-          count++;
-      }
-    }
-    string[] memory objectArray = new string[](count);
-    for (uint256 i = 0; i < count; i++) {
-      objectArray[i] = tempArray[i];
-    }
-    return objectArray;
-  }
-
-  function padGrid(string[] memory grid, uint finalSize) public pure returns (string[] memory newGrid) {
-      newGrid = new string[](finalSize);
-      for (uint256 i = 0; i < newGrid.length; i++) {
-        if (i < grid.length) {
-          newGrid[i] = grid[i];
-        } else {
-          newGrid[i] = "None";
-        }
-      }
-      return newGrid;
   }
 
   function combineStringArrays(string[] memory a, string[] memory b) public pure returns (string[] memory) {
@@ -86,32 +40,6 @@ library GridHelper {
       return c;
   }
 
-  function getIndexesFromGrid(string[9] memory grid) public pure returns (uint256[] memory indexes) {
-    uint count = 0;
-    uint256[] memory tempArray = new uint256[](9);
-    for (uint256 i = 0; i < grid.length; i++) {
-      if (keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("")) && keccak256(abi.encodePacked(grid[i])) != keccak256(abi.encodePacked("x"))) {
-        tempArray[count] = i;
-        count++;
-      }
-    }
-    uint[] memory indexArray = new uint[](count);
-    for (uint256 i = 0; i < count; i++) {
-      indexArray[i] = tempArray[i];
-    }
-    return indexArray;
-  }
-
-  // check a given grid is not full
-  function isGridFull(string[9] memory grid) public pure returns (bool) {
-      for (uint256 i = 0; i < grid.length; i++) {
-          if (keccak256(abi.encodePacked(grid[i])) == keccak256(abi.encodePacked(""))) {
-              return false;
-          }
-      }
-      return true;
-  }
-
   function groupTransform(string memory x, string memory y, string memory data) internal pure returns (string memory) {
     return string.concat("<g transform='translate(", x, ",", y, ")'>", data, "</g>");
   }
@@ -121,16 +49,6 @@ library GridHelper {
       assembly {
           mstore(add(b, 32), x)
       } //  first 32 bytes = length of the bytes value
-  }
-
-  function getLastValidIndex(uint[] memory gridIndexes) internal pure returns (uint256) {
-    uint indexLength = gridIndexes.length;
-    for (uint256 i = 1; i < indexLength; i++) {
-      if (gridIndexes[indexLength - i] != 9) {
-        return gridIndexes[indexLength - i];
-      }
-    }
-    return 0; // first index is always 0
   }
 
   function bytesToUint(bytes memory b) internal pure returns (uint256){
@@ -171,14 +89,6 @@ library GridHelper {
     return output;
   }
 
-  // function setIntArrayFromString(string memory values, uint numOfValues, uint lengthOfValue) internal pure returns (int[] memory) {
-  //   int[] memory output = new int[](numOfValues);
-  //   for (uint256 i = 0; i < numOfValues; i++) {
-  //     output[i] = int(stringToUint(string(slice(bytes(values), i*lengthOfValue, lengthOfValue))));
-  //   }
-  //   return output;
-  // }
-
   function setUintArrayFromString(string memory values, uint numOfValues, uint lengthOfValue) internal pure returns (uint[] memory) {
     uint[] memory output = new uint[](numOfValues);
     for (uint256 i = 0; i < numOfValues; i++) {
@@ -186,15 +96,6 @@ library GridHelper {
     }
     return output;
   }
-
-  // function shiftToEndIntArray(uint index, int[] memory arr) internal pure returns (int[] memory) {
-  //   require(index < arr.length, "index out of bound");
-
-  //   for (uint i = index; i < arr.length - 1; i++) {
-  //       arr[i] = arr[i + 1];
-  //   }
-  //   return arr;
-  // }
 
   function shiftToEndUintArray(uint index, uint[] memory arr) internal pure returns (uint[] memory) {
     require(index < arr.length, "index out of bound");

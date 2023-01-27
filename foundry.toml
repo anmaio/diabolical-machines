@@ -5,6 +5,7 @@ out = 'out'
 libs = ['lib']
 gas_reports = ["*"]
 solc_version = '0.8.16'
+memory_limit = 1533554432 # 1533.5mb
 
 [profile.default.optimizer_details]
 constantOptimizer = true

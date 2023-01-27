@@ -11,7 +11,6 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "ERC721A/ERC721A.sol";
 import "base64-sol/base64.sol";
 import "./Metadata.sol";
-import "./HandleRandom.sol";
 
 contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     VRFCoordinatorV2Interface COORDINATOR;
@@ -98,7 +97,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
       }
     }
 
-    function getSeed(uint256 tokenId) external view returns (uint256) {
+    function getSeed(uint256 tokenId) public view returns (uint256) {
       require(totalSupply() > tokenId, "Token does not exist");
 
       uint _genSeed = genSeed[tokenIdToGenId[tokenId]];
@@ -107,10 +106,16 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
       return uint256(keccak256(abi.encodePacked(_genSeed, tokenId)));
     }
 
-    function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        return _metadata.buildMetadata(tokenId);
+    // get the random number for the token
+    function getRandBytes(uint tokenId) public view returns (bytes memory) {
+      return bytes(Strings.toString(getSeed(tokenId)));
     }
 
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        return _metadata.buildMetadata(tokenId, getRandBytes(tokenId));
+    }
+
+    
     function withdrawMoney() external onlyOwner {
       (bool success, ) = msg.sender.call{value: address(this).balance}("");
       require(success, "Transfer failed.");

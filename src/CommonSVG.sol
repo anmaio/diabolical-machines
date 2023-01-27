@@ -124,8 +124,8 @@ library CommonSVG {
     );
   }
 
-  function getshellColours(string memory machine, bytes memory digits) external pure returns(string memory) {
-    uint[] memory baseColours = Environment.getColours(machine, digits); // 12 colours, 3 values for each
+  function getshellColours(string memory machine, bytes memory digits, uint state) external pure returns(string memory) {
+    uint[] memory baseColours = Environment.getColours(machine, digits, state); // 12 colours, 3 values for each
     // string[] memory shellGradients = new string[](3);
     // for (uint i = 0; i < 3; ++i) { // lw, rw, fl
     //   shellGradients[i] = createShellGradient([baseColours[i*6], baseColours[i*6+1], baseColours[i*6+2], baseColours[i*6+3], baseColours[i*6+4], baseColours[i*6+5]], string(GridHelper.slice(bytes(SHELL_GRADIENT_IDS), i*3, 3)), string(GridHelper.slice(bytes(ROTATIONS), i*3, 3)));
@@ -148,7 +148,11 @@ library CommonSVG {
         // }
 
         objectGradients[i*3+j] = createObjectGradient([baseColours[i*6], baseColours[i*6+1], baseColours[i*6+2], baseColours[i*6+3], baseColours[i*6+4], baseColours[i*6+5]], string(GridHelper.slice(bytes(OBJECT_GRADIENTS_IDS), i*9+3*j, 3)));
-        gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(OBJECT_GRADIENTS_IDS), i*9+3*j, 3)), baseColours[i*6], baseColours[i*6+1], baseColours[i*6+2]);
+        if (j == 1) {
+          gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(OBJECT_GRADIENTS_IDS), i*9+3*j, 3)), baseColours[i*6], baseColours[i*6+1], baseColours[i*6+2]);
+        } else {
+          gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(OBJECT_GRADIENTS_IDS), i*9+3*j, 3)), baseColours[i*6+3], baseColours[i*6+4], baseColours[i*6+5]);
+        }
       }
     }
 

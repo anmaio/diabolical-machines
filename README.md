@@ -15,6 +15,8 @@ forge script script/Clifford.s.sol:CliffordScript --rpc-url https://goerli.infur
 forge script script/Clifford.s.sol:CliffordScript --private-key $PRIVATE_KEY --rpc-url https://sepolia.infura.io/v3/63f1a12625cf485cb768cd39a01044da --broadcast --verify -vvvv
 <!-- Slither overview -->
 slither ./src/Clifford.sol --print human-summary
+<!-- Forge std update -->
+forge remove foundry-rs/forge-std && forge install foundry-rs/forge-std --no-commit
 
 docker compose up build
 docker compose up test

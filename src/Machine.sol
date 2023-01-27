@@ -1,37 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 import "@openzeppelin/contracts/utils/Strings.sol";
-// import "./Metadata.sol";
-// import "./CommonSVG.sol";
 import "./GridHelper.sol";
-// import "./machines/drills/Drills.sol";
-// import "./machines/nose/Nose.sol";
-// import "./machines/beast/Beast.sol";
-// import "./machines/altar/Altar.sol";
-// import "./machines/conveyorbelt/Conveyorbelt.sol";
-// import "./machines/tubes/Tubes.sol";
-// import "./machines/cypherRoom/CypherRoom.sol";
 
 interface IMachine {
-  function getMachine(bytes memory bytesNeeded) external view returns (string memory);
-}
-
-interface IMetadata {
-  function getRandBytes(uint256 tokenId) external view returns (bytes memory);
+  function getMachine(bytes memory bytesNeeded, uint state) external view returns (string memory);
 }
 
 contract Machine {
-  IMetadata private _metadata;
 
-  // IMachine private _drills;
-  // IMachine private _nose;
-  // IMachine private _beast;
-  // IMachine private _altar;
-  // IMachine private _conveyorbelt;
-  // IMachine private _tubes;
-  // IMachine private _cypherRoom;
-
-  address[] private _workstations;
+  address[6] private _workstations;
 
   // Owner of the contract
   address private _owner;
@@ -104,39 +82,7 @@ contract Machine {
     machineToLWGrid["cypherRoom"] = fullGrid;
   }
 
-  function setMetadata(address metadata) external onlyOwner {
-    _metadata = IMetadata(metadata);
-  }
-
-  // function setDrills(address drills) external onlyOwner {
-  //   _drills = IMachine(drills);
-  // }
-
-  // function setNose(address nose) external onlyOwner {
-  //   _nose = IMachine(nose);
-  // }
-
-  // function setBeast(address beast) external onlyOwner {
-  //   _beast = IMachine(beast);
-  // }
-
-  // function setAltar(address altar) external onlyOwner {
-  //   _altar = IMachine(altar);
-  // }
-
-  // function setConveyorbelt(address conveyorbelt) external onlyOwner {
-  //   _conveyorbelt = IMachine(conveyorbelt);
-  // }
-
-  // function setTubes(address tubes) external onlyOwner {
-  //   _tubes = IMachine(tubes);
-  // }
-
-  // function setCypherRoom(address cypherRoom) external onlyOwner {
-  //   _cypherRoom = IMachine(cypherRoom);
-  // }
-
-  function setAllWorkstations(address[7] memory workstations) external onlyOwner {
+  function setAllWorkstations(address[6] memory workstations) external onlyOwner {
     _workstations = workstations;
   }
 
@@ -158,37 +104,27 @@ contract Machine {
 
   // INTERNAL FUNCTIONS
 
-  function positionText(string memory name, uint position) internal pure returns (string memory) {
-    return string.concat(
-        "<tspan>",
-        name,
-        Strings.toString(position),
-        "</tspan>"
-    );
-  }
-
-  // Get machine's SVG
-  function getMachineSVG(string memory machine, uint position, uint tokenId) external view returns (string memory) {
-    // get the number of parts the main svg is split into
-    string memory svg = "";
-    // get the svg for each part given the alignment
+  // // Get machine's SVG
+  // function getMachineSVG(string memory machine, bytes memory rand, uint state) external view returns (string memory) {
+  //   // // get the number of parts the main svg is split into
+  //   // string memory svg = "";
+  //   // // get the svg for each part given the alignment
   
-    string memory tempSvg = "";
-    tempSvg = string.concat(
-      machineToGetter(machine, tokenId),
-      // machineParts[machineToSVGIndex[machine][i + offset]],
+  //   // string memory tempSvg = "";
+  //   // tempSvg = string.concat(
+  //   //   machineToGetter(machine, rand, state),
+  //   //   // machineParts[machineToSVGIndex[machine][i + offset]],
       
-      // Testing text
-      machineText[machine], // open text
-      // machineToSVG[machine][numParts * 2], // open text
-      positionText(machine, position),
-      "</text>"
-      // CommonSVG.G2_END
-    );
-    svg = string.concat(svg, tempSvg);
+  //   //   // Testing text
+  //   //   machineText[machine], // open text
+  //   //   // machineToSVG[machine][numParts * 2], // open text
+  //   //   "</text>"
+  //   //   // CommonSVG.G2_END
+  //   // );
+  //   // svg = string.concat(svg, tempSvg);
 
-    return svg;
-  }
+  //   return machineToGetter(machine, rand, state);
+  // }
 
   // function matchIndexToContract(uint index, uint currentPosition) internal view {
   //   if (partsToContract[currentPosition] < index) {
@@ -199,22 +135,19 @@ contract Machine {
     
   // }
 
-  function machineToGetter(string memory machine, uint tokenId) internal view returns (string memory) {
-    bytes memory rand = _metadata.getRandBytes(tokenId);
+  function machineToGetter(string memory machine, bytes memory rand, uint state) external view returns (string memory) {
     if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("conveyorbelt"))) {
-      return getConveyorBelt(rand);
+      return getConveyorBelt(rand, state);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("drills"))) {
-      return getDrills(rand);
+      return getDrills(rand, state);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("nose"))) {
-      return getNose(rand);
+      return getNose(rand, state);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("beast"))) {
-      return getBeast(rand);
+      return getBeast(rand, state);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("altar"))) {
-      return getAltar(rand);
+      return getAltar(rand, state);
     } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("tubes"))) {
-      return getTubes(rand);
-    } else if (keccak256(abi.encodePacked(machine)) == keccak256(abi.encodePacked("cypherRoom"))) {
-      return getCypherRoom(rand);
+      return getTubes(rand, state);
     } else {
       return "";
     }
@@ -222,32 +155,28 @@ contract Machine {
 
   // Machine Getters
 
-  function getConveyorBelt(bytes memory rand) internal view returns (string memory) {
-    return IMachine(_workstations[0]).getMachine(rand);
+  function getConveyorBelt(bytes memory rand, uint state) internal view returns (string memory) {
+    return IMachine(_workstations[0]).getMachine(rand, state);
   }
 
-  function getDrills(bytes memory rand) internal view returns (string memory) {
-    return IMachine(_workstations[1]).getMachine(rand);
+  function getDrills(bytes memory rand, uint state) internal view returns (string memory) {
+    return IMachine(_workstations[1]).getMachine(rand, state);
   }
 
-  function getNose(bytes memory rand) internal view returns (string memory) {
-    return IMachine(_workstations[2]).getMachine(rand);
+  function getNose(bytes memory rand, uint state) internal view returns (string memory) {
+    return IMachine(_workstations[2]).getMachine(rand, state);
   }
 
-  function getBeast(bytes memory rand) internal view returns (string memory) {
-    return IMachine(_workstations[3]).getMachine(rand);
+  function getBeast(bytes memory rand, uint state) internal view returns (string memory) {
+    return IMachine(_workstations[3]).getMachine(rand, state);
   }
 
-  function getAltar(bytes memory rand) internal view returns (string memory) {
-    return IMachine(_workstations[4]).getMachine(rand);
+  function getAltar(bytes memory rand, uint state) internal view returns (string memory) {
+    return IMachine(_workstations[4]).getMachine(rand, state);
   }
 
-  function getTubes(bytes memory rand) internal view returns (string memory) {
-    return IMachine(_workstations[5]).getMachine(rand);
-  }
-
-  function getCypherRoom(bytes memory rand) internal view returns (string memory) {
-    return IMachine(_workstations[6]).getMachine(rand);
+  function getTubes(bytes memory rand, uint state) internal view returns (string memory) {
+    return IMachine(_workstations[5]).getMachine(rand, state);
   }
 
   modifier onlyOwner() {

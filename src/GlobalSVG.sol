@@ -72,12 +72,12 @@ contract GlobalSVG {
     );
   }
 
-  function getOpeningSVG(string memory machine, bytes memory digits) external pure returns (string memory) {
+  function getOpeningSVG(string memory machine, bytes memory digits, uint state) external pure returns (string memory) {
 
     string memory output = string.concat(
       CommonSVG.SVG_START,
       CommonSVG.DEFS,
-      CommonSVG.getshellColours(machine, digits),
+      CommonSVG.getshellColours(machine, digits, state),
       BeastDefs.getPart(),
 
       NosesDefs1.getPart(),

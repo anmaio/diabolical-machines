@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 import "../../GridHelper.sol";
-import "./AltarAdditional1.sol";
-import "./AltarAdditional2.sol";
-import "./AltarAdditional3.sol";
 
 import "../../AssetRetriever.sol";
 
@@ -31,16 +28,19 @@ contract Altar {
     _assetRetriever = AssetRetriever(assetRetriever);
   }
 
-  function getCube(bytes memory digits) internal view returns (string memory) {
+  function getCube(bytes memory digits, uint state) internal view returns (string memory) {
     uint[] memory baseNumbersArray = GridHelper.setUintArrayFromString(BASE_NUMBERS, 3, 4);
     uint baseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12, 2));
-    // 3 possible bases, can appear in any state
-    if (baseDigits < 33) {
+    if (state == 2) { // has to be cube base because there will be stairs
       return _assetRetriever.getAsset(baseNumbersArray[0]);
-    } else if (baseDigits < 66) {
-      return _assetRetriever.getAsset(baseNumbersArray[1]);
-    } else {
-      return _assetRetriever.getAsset(baseNumbersArray[2]);
+    } else { // 3 possible bases, can appear in degraded/embellished
+      if (baseDigits < (66 - (state*50))) { // basic == 16%, degraded == 66%
+        return _assetRetriever.getAsset(baseNumbersArray[0]);
+      } else if (baseDigits < (99 - (state*57))) { // basic == 42%, degraded == 33%
+        return _assetRetriever.getAsset(baseNumbersArray[1]);
+      } else { // basic == 42%, degraded == 1%
+        return _assetRetriever.getAsset(baseNumbersArray[2]);
+      }
     }
   }
 
@@ -179,9 +179,9 @@ contract Altar {
     );
   }
 
-  function getMachine(bytes memory digits) external view returns (string memory) {
-    // uint state = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2)) % 3;
-    uint state = 2;
+  function getMachine(bytes memory digits, uint state) external view returns (string memory) {
+
+    // uint state = 0;
     string[] memory orbBases = getOrbBases(digits, state);
     string[] memory orbs = getOrbs(digits, state);
 
@@ -189,18 +189,66 @@ contract Altar {
       getFrame(digits, state),
       orbBases[1],
       orbs[1],
-      getCube(digits),
+      getCube(digits, state),
       getFloobAnimation(),
       orbBases[0],
       orbs[0]
     );
 
-    output = GridHelper.groupTransform("-312", "-720", string.concat(
+    output = string.concat(
       output,
       getRug(digits, state),
       getStepsRunner(digits, state)
-    ));
+    );
 
     return output;
+  }
+
+  function getProductivityFromArray(string[] memory productivityArray) internal pure returns(string memory) {
+    // There are 7 productivity levels: Depleted, Very Low, Low, Medium, High, Very High and Max
+    // if the array contains depleted then it is depleted, similarly for Max
+    // else we return the most common productivity level
+    // if there is a tie we return the first one
+    uint8[7] memory productivityCount = [0, 0, 0, 0, 0, 0, 0];
+    for (uint i = 0; i < productivityArray.length; ++i) {
+      if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Depleted"))) {
+        return "Depleted";
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Very Low"))) {
+        productivityCount[1] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Low"))) {
+        productivityCount[2] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Medium"))) {
+        productivityCount[3] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("High"))) {
+        productivityCount[4] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Very High"))) {
+        productivityCount[5] += 1;
+      } else if (keccak256(abi.encodePacked(productivityArray[i])) == keccak256(abi.encodePacked("Max"))) {
+        return "Max";
+      }
+    }
+
+    uint max = 0;
+    uint maxIndex = 0;
+    for (uint i = 0; i < productivityCount.length; ++i) {
+      if (productivityCount[i] > max) {
+        max = productivityCount[i];
+        maxIndex = i;
+      }
+    }
+
+    if (maxIndex == 1) {
+      return "Low";
+    } else if (maxIndex == 2) {
+      return "Medium";
+    } else if (maxIndex == 3) {
+      return "High";
+    } else if (maxIndex == 4) {
+      return "Very High";
+    } else if (maxIndex == 5) {
+      return "Ultra";
+    } else {
+      return "Null"; // should never happen
+    }
   }
 }
