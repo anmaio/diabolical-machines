@@ -182,16 +182,7 @@ contract Altar {
     );
   }
 
-  function getMachine(bytes memory digits) external view returns (string memory) {
-    uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2));
-    uint state;
-    if (stateDigits < 20) {
-      state = 0;
-    } else if (stateDigits < 70) {
-      state = 1;
-    } else {
-      state = 2;
-    }
+  function getMachine(bytes memory digits, uint state) external view returns (string memory) {
 
     // uint state = 0;
     string[] memory orbBases = getOrbBases(digits, state);
@@ -207,11 +198,11 @@ contract Altar {
       orbs[0]
     );
 
-    output = GridHelper.groupTransform("-312", "-720", string.concat(
+    output = string.concat(
       output,
       getRug(digits, state),
       getStepsRunner(digits, state)
-    ));
+    );
 
     return output;
   }

@@ -3,7 +3,6 @@ pragma solidity ^0.8.12;
 
 import "forge-std/Test.sol";
 import "../src/Clifford.sol";
-import "../src/Compose.sol";
 import "../src/Metadata.sol";
 import "../src/HandleRandom.sol";
 import "../src/SharedAssets.sol";
@@ -68,7 +67,6 @@ contract CliffordTest is Test {
   Conveyorbelt public conveyorbelt;
 
   SharedAssets public sharedAssets;
-  Compose public compose;
   Machine public machine;
   Metadata public metadata;
   HandleRandom public handleRandom;
@@ -118,14 +116,12 @@ contract CliffordTest is Test {
     globalSVG = new GlobalSVG();
     sharedAssets = new SharedAssets();
     machine = new Machine();
-    compose = new Compose(sharedAssets, machine, globalSVG);
-    metadata = new Metadata(compose, machine);
+    metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
     handleRandom = new HandleRandom(clifford);
 
     metadata.setClifford(clifford);
     // clifford.setHandleRandom(handleRandom);
-    compose.setMetadata(metadata);
     machine.setMetadata(address(metadata));
 
     machine.setAllWorkstations([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes), address(cypherRoom)]);
@@ -152,7 +148,7 @@ contract CliffordTest is Test {
   function testWriteImages() public {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       string memory path = string.concat("outputImages/", Strings.toString(i), ".svg");
-      vm.writeFile(path, compose.composeOnlyImage(i));
+      vm.writeFile(path, metadata.composeOnlyImage(i));
     }
   }
 
@@ -172,16 +168,15 @@ contract CliffordTest is Test {
       if (i == MINT_SIZE - 1) {
         itemClose = "\n  }\n";
       }
-      string memory randomNumber = metadata.getRandString(i);
-      uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(metadata.getRandBytes(i), 0, 2)) % 3;
-      string memory state = states[stateDigits];
+      string memory randomNumber = string(metadata.getRandBytes(i));
+      string memory state = Strings.toString(metadata.getState(metadata.getRandBytes(i)));
 
       string memory machine = metadata.getMachine(i);
 
       string memory item = string.concat(
         itemOpen, 
         id, 
-        ",\n    \"Random Number\": ", 
+        ",\n    \"RandomNumber\": ", 
         randomNumber, 
         ",\n    \"State\": \"",
         state, 

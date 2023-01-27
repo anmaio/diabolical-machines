@@ -3,7 +3,6 @@ pragma solidity ^0.8.12;
 
 import "forge-std/Script.sol";
 import "../src/Clifford.sol";
-import "../src/Compose.sol";
 import "../src/Metadata.sol";
 import "../src/HandleRandom.sol";
 import "../src/SharedAssets.sol";
@@ -46,7 +45,6 @@ contract CliffordScript is Script {
     Conveyorbelt public conveyorbelt;
 
     SharedAssets public sharedAssets;
-    Compose public compose;
     Machine public machine;
     Metadata public metadata;
     HandleRandom public handleRandom;
@@ -88,8 +86,7 @@ contract CliffordScript is Script {
         globalSVG = new GlobalSVG();
         sharedAssets = new SharedAssets();
         machine = new Machine();
-        compose = new Compose(sharedAssets, machine, globalSVG);
-        metadata = new Metadata(compose, machine);
+        metadata = new Metadata(machine, globalSVG);
         clifford = new Clifford(metadata);
         handleRandom = new HandleRandom(clifford);
 
@@ -105,7 +102,6 @@ contract CliffordScript is Script {
 
         // metadata.setHandleRandom(handleRandom);
         // clifford.setHandleRandom(handleRandom);
-        compose.setMetadata(metadata);
         machine.setMetadata(address(metadata));
 
         // setUp();

@@ -65,21 +65,6 @@ library Environment {
   string internal constant BASIC_COLOUR_PERCENTAGES = "4515110210050210";
   string internal constant EMBELLISHED_COLOUR_PERCENTAGES = "4515110210050210";
 
-
-  // 0 = degraded, 1 = basic, 2 = embellished
-  function getState(bytes memory digits) public pure returns (uint) {
-    uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2));
-    if (stateDigits < 20) {
-      return 0;
-    } else if (stateDigits < 70) {
-      return 1;
-    } else {
-      return 2;
-    }
-    
-    // return 0;
-  }
-
   function increaseColourLightness(uint baseLightness, uint percentage) internal pure returns(uint) {
     return baseLightness + (baseLightness * percentage / 100);
   }
@@ -88,8 +73,7 @@ library Environment {
     return baseLightness - (baseLightness * percentage / 100);
   }
 
-  function getColours(string memory machine, bytes memory digits) external pure returns (uint[] memory) {
-    uint state = getState(digits);
+  function getColours(string memory machine, bytes memory digits, uint state) external pure returns (uint[] memory) {
     uint[] memory colourArray = new uint[](36); // 6 colours, 3*2 values each
 
     if (state == 0) { // degraded
@@ -122,6 +106,7 @@ library Environment {
 
     uint size = TOTAL_COLOURS * 9;
 
+    // could be simplified by storing every colour in a single string but this is more readable and easier to change
     if (keccak256(bytes(machine)) == keccak256(bytes("altar"))) { // executive
       if (state == 1) {
         basicPalette[0] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_BASIC), index * size, size));
