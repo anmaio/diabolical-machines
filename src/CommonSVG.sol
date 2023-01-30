@@ -55,6 +55,10 @@ library CommonSVG {
 
   string internal constant GRADIENT_STYLE_CLOSE = " } </style>";
 
+  string internal constant GLOBAL_COLOURS = "057100087051093072231032035360096069186079070029092058";
+
+  string internal constant GLOBAL_COLOURS_IDS = "g0g1g2g3g4g5";
+
   function createShellGradient(uint[6] memory colours, string memory id, string memory rotation) internal pure returns (string memory) {
     string memory output = string.concat(
       "<linearGradient id='",
@@ -154,6 +158,12 @@ library CommonSVG {
           gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(OBJECT_GRADIENTS_IDS), i*9+3*j, 3)), baseColours[i*6+3], baseColours[i*6+4], baseColours[i*6+5]);
         }
       }
+    }
+
+    // GLOBAL COLOURS
+    uint[] memory globalColours = GridHelper.setUintArrayFromString(GLOBAL_COLOURS, 9, 3);
+    for (uint i = 0; i < 3; ++i) {
+      gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(GLOBAL_COLOURS_IDS), i*2, 2)), globalColours[i*3], globalColours[i*3+1], globalColours[i*3+2]);
     }
 
     gradientStyle = string.concat(gradientStyle, GRADIENT_STYLE_CLOSE);

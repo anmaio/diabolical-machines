@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface IAssetFromTrait {
   function getAssetFromTrait(uint assetID) external view returns (string memory);
+  function getProductivityFromTrait(uint assetID) external view returns (uint);
 }
 
 contract AssetRetriever is Ownable {
@@ -43,7 +44,7 @@ contract AssetRetriever is Ownable {
   //   traitTypes = addresses;
   // }
 
-  function getAsset(uint assetID) external view returns (string memory) {
+  function getAsset(uint assetID) public view returns (string memory) {
     string memory asset = "";
     for (uint i = 0; i < traitTypes.length; i++) {
       asset = IAssetFromTrait(traitTypes[i]).getAssetFromTrait(assetID);
@@ -52,5 +53,16 @@ contract AssetRetriever is Ownable {
       }
     }
     return asset;
+  }
+
+  function getProductivity(uint assetID) public view returns (uint) {
+    uint productivity = 0;
+    for (uint i = 0; i < traitTypes.length; i++) {
+      productivity = IAssetFromTrait(traitTypes[i]).getProductivityFromTrait(assetID);
+      if (productivity > 0) {
+        return productivity;
+      }
+    }
+    return productivity;
   }
 }

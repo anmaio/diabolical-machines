@@ -29,7 +29,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 10;
+  uint internal constant MINT_SIZE = 1000;
 
   // Trait bases
   TraitBase public substancesTB;
@@ -113,11 +113,11 @@ contract CliffordTest is Test {
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
-    machine = new Machine();
+    machine = new Machine([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
     metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
 
-    machine.setAllWorkstations([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
+    // machine.setAllWorkstations([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
   }
 
   function setUp() public {
@@ -151,12 +151,14 @@ contract CliffordTest is Test {
   function testWriteImages() public {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      vm.writeFile(path, metadata.composeOnlyImage(i, clifford.getRandBytes(i)));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getRandBytes(i)));
     }
   }
 
   // create a json file with the ids of the images that were created
   function testWriteJson() public {
+
+    string[3] memory allStates = ["Degraded", "Basic", "Embellished"];
     
     string memory output = "[\n  ";
     string memory closing = "]";
@@ -168,11 +170,14 @@ contract CliffordTest is Test {
       string memory itemClose = "\n  },\n  ";
       if (i == MINT_SIZE - 1) {
         itemClose = "\n  }\n";
-    }
-      string memory randomNumber = string(clifford.getRandBytes(i));
-      string memory state = Strings.toString(metadata.getState(clifford.getRandBytes(i)));
+      }
 
-      string memory machine = metadata.getMachine(i, clifford.getRandBytes(i));
+      string memory randomNumber = string(clifford.getRandBytes(i));
+      string memory state = allStates[metadata.getState(clifford.getRandBytes(i))];
+
+      string memory machineName = metadata.getMachine(clifford.getRandBytes(i));
+
+      string memory productivity = metadata.getProductivity(clifford.getRandBytes(i));
 
       string memory item = string.concat(
         itemOpen, 
@@ -187,7 +192,10 @@ contract CliffordTest is Test {
       item = string.concat(
         item, 
         ",\n    \"Machine\": \"",
-        machine,
+        machineName,
+        "\""
+        ",\n    \"Productivity\": \"",
+        productivity,
         "\"",
         itemClose
       );

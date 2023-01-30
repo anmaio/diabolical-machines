@@ -83,7 +83,7 @@ library Environment {
     return colourArray;
   }
 
-  function getColourIndex(uint percentage, uint state) internal pure returns(uint) {
+  function getBasicEmbellishedColourIndex(uint percentage, uint state) internal pure returns(uint) {
     uint[] memory percentages = GridHelper.setUintArrayFromString(BASIC_COLOUR_PERCENTAGES, 8, 2);
     if (state == 2) {
       percentages = GridHelper.setUintArrayFromString(EMBELLISHED_COLOUR_PERCENTAGES, 8, 2);
@@ -98,15 +98,14 @@ library Environment {
     return 0;
   }
 
-  function selectBasicPalette(string memory machine, uint percentage, uint state) internal pure returns (string[] memory) {
+  function selectBasicEmbellishedPalette(string memory machine, uint percentage, uint state) internal pure returns (string[] memory) {
     string[] memory basicPalette = new string[](2);
-    uint[] memory percentages = GridHelper.setUintArrayFromString(BASIC_COLOUR_PERCENTAGES, 8, 2);
-    uint index = getColourIndex(percentage, state);
+    uint index = getBasicEmbellishedColourIndex(percentage, state);
 
     uint size = TOTAL_COLOURS * 9;
 
     // could be simplified by storing every colour in a single string but this is more readable and easier to change
-    if (keccak256(bytes(machine)) == keccak256(bytes("altar"))) { // executive
+    if (keccak256(bytes(machine)) == keccak256(bytes("Altar"))) { // executive
       if (state == 1) {
         basicPalette[0] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_BASIC), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_BASIC_SHADE), index * size, size));
@@ -114,7 +113,7 @@ library Environment {
         basicPalette[0] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_EMBELLISHED), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_EMBELLISHED_SHADE), index * size, size));
       }
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("lab"))) { // lab
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Lab"))) { // lab
       if (state == 1) {
         basicPalette[0] = string(GridHelper.slice(bytes(LAB_COLOURS_BASIC), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(LAB_COLOURS_BASIC_SHADE), index * size, size));
@@ -122,7 +121,7 @@ library Environment {
         basicPalette[0] = string(GridHelper.slice(bytes(LAB_COLOURS_EMBELLISHED), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(LAB_COLOURS_EMBELLISHED_SHADE), index * size, size));
       }
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("factory"))) { // factory
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Factory"))) { // factory
       if (state == 1) {
         basicPalette[0] = string(GridHelper.slice(bytes(FACTORY_COLOURS_BASIC), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(FACTORY_COLOURS_BASIC_SHADE), index * size, size));
@@ -130,7 +129,7 @@ library Environment {
         basicPalette[0] = string(GridHelper.slice(bytes(FACTORY_COLOURS_EMBELLISHED), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(FACTORY_COLOURS_EMBELLISHED_SHADE), index * size, size));
       }
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("mining"))) { // mining
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Mining"))) { // mining
       if (state == 1) {
         basicPalette[0] = string(GridHelper.slice(bytes(MINING_COLOURS_BASIC), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(MINING_COLOURS_BASIC_SHADE), index * size, size));
@@ -158,16 +157,16 @@ library Environment {
     string memory degradedHsl = LOGISTICS_DEGRADED_HSL;
     string memory degradedPercentages = LOGISTICS_COLOUR_PERCENTAGES;
 
-    if (keccak256(bytes(machine)) == keccak256(bytes("altar"))) { // executive
+    if (keccak256(bytes(machine)) == keccak256(bytes("Altar"))) { // executive
       degradedHsl = EXECUTIVE_DEGRADED_HSL;
       degradedPercentages = EXECUTIVE_COLOUR_PERCENTAGES;
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("lab"))) { // lab
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Lab"))) { // lab
       degradedHsl = LAB_DEGRADED_HSL;
       degradedPercentages = LAB_COLOUR_PERCENTAGES;
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("factory"))) { // factory
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Factory"))) { // factory
       degradedHsl = FACTORY_DEGRADED_HSL;
       degradedPercentages = FACTORY_COLOUR_PERCENTAGES;
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("mining"))) { // mining
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Mining"))) { // mining
       degradedHsl = MINING_DEGRADED_HSL;
       degradedPercentages = MINING_COLOUR_PERCENTAGES;
     }
@@ -193,7 +192,7 @@ library Environment {
     uint numColours = TOTAL_COLOURS;
 
     uint percentage = NumColoursDigits % 100;
-    string[] memory colourAvailableStrings = selectBasicPalette(machine, percentage, state);
+    string[] memory colourAvailableStrings = selectBasicEmbellishedPalette(machine, percentage, state);
     uint[] memory coloursAvailable = GridHelper.setUintArrayFromString(colourAvailableStrings[0], TOTAL_COLOURS*3, 3);
     uint[] memory coloursAvailableShade = GridHelper.setUintArrayFromString(colourAvailableStrings[1], TOTAL_COLOURS*3, 3);
 

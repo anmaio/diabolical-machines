@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "base64-sol/base64.sol";
 // import "./Clifford.sol";
 import "./Machine.sol";
 import "./GridHelper.sol";
 import "./GlobalSVG.sol";
 
-contract Metadata is Ownable {
+contract Metadata {
   Machine private _machine;
   // Clifford private _clifford;
   GlobalSVG private _globalSVG;
@@ -22,26 +21,26 @@ contract Metadata is Ownable {
   //   _clifford = clifford;
   // }
 
-  function getMachine(uint tokenId, bytes memory rand) public view returns (string memory) {
-    uint rand = GridHelper.bytesToUint(GridHelper.slice(rand, 10, 2));
+  function getMachine(bytes memory rand) public view returns (string memory) {
+    uint randomNumber = GridHelper.bytesToUint(GridHelper.slice(rand, 10, 2));
 
-    string memory machine = _machine.selectMachine(rand);
+    string memory machine = _machine.selectMachine(randomNumber);
     return machine;
   }
-
-  // get the random number for the token
-  // function getRandBytes(uint tokenId) public view returns (bytes memory) {
-  //   return bytes(Strings.toString(_clifford.getSeed(tokenId)));
-  // }
 
   //["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"]
   // Function build metadata for a given token
   function buildMetadata(uint256 tokenId, bytes memory rand) public view returns (string memory) {
+    string[3] memory allStates = ["Degraded", "Basic", "Embellished"];
     string memory jsonInitial = string.concat(
         '{"name": "Clifford # ',
         Strings.toString(tokenId),
         '", "description": "PUT DESCRIPTION HERE", "attributes": [{"trait_type": "Machine", "value":"',
-        getMachine(tokenId, rand),
+        getMachine(rand),
+        '"}, {"trait_type": "State", "value":"',
+        allStates[getState(rand)],
+        '"}, {"trait_type": "Productivity", "value":"',
+        getProductivity(rand),
         '"}],',
         '"image": "data:image/svg+xml;base64,'
         // _imageURI,
@@ -50,10 +49,16 @@ contract Metadata is Ownable {
     );
 
       string memory jsonFinal = Base64.encode(
-          bytes(string.concat(jsonInitial, composeSVG(tokenId, rand), '"}'))
+          bytes(string.concat(jsonInitial, composeSVG(rand), '"}'))
       );
       string memory output = string.concat("data:application/json;base64,", jsonFinal);
       return output;
+  }
+
+  function getProductivity(bytes memory rand) public view returns (string memory) {
+    uint state = getState(rand);
+    string memory machine = getMachine(rand);
+    return _machine.getProductivity(machine, rand, state);
   }
 
   // 0 = degraded, 1 = basic, 2 = embellished
@@ -71,13 +76,13 @@ contract Metadata is Ownable {
   }
 
   // compose SVG
-  function composeSVG(uint tokenId, bytes memory rand) public view returns (string memory) {
+  function composeSVG(bytes memory rand) public view returns (string memory) {
     // return all svg's concatenated together and base64 encoded
-    return Base64.encode(bytes(composeOnlyImage(tokenId, rand)));
+    return Base64.encode(bytes(composeOnlyImage(rand)));
   }
 
   
-  function composeOnlyImage(uint tokenId, bytes memory rand) public view returns (string memory) {
+  function composeOnlyImage(bytes memory rand) public view returns (string memory) {
     // determine if flipped
 
     // 0 if not flipped, 1 if flipped
@@ -90,7 +95,7 @@ contract Metadata is Ownable {
     }
 
     uint state = getState(rand);
-    string memory machine = getMachine(tokenId, rand);
+    string memory machine = getMachine(rand);
 
     string memory opening = _globalSVG.getOpeningSVG(machine, rand, state);
     
