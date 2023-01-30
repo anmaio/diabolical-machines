@@ -110,11 +110,11 @@ contract CliffordScript is Script {
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
-    machine = new Machine();
+    machine = new Machine([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
     metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
 
-    machine.setAllWorkstations([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
+    // machine.setAllWorkstations([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
   }
 
   function run() public {
