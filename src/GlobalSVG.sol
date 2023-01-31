@@ -24,6 +24,8 @@ import "./styles/tubes/TubesCSS1.sol";
 
 import "./styles/drills/DrillsCSS.sol";
 
+import "./styles/assets/AssetsCSS1.sol";
+
 // TEMP DEFS
 import "./defs/beast/BeastDefs.sol";
 
@@ -50,6 +52,11 @@ import "./defs/drills/DrillsDefs5.sol";
 import "./defs/drills/DrillsDefs6.sol";
 import "./defs/drills/DrillsDefs7.sol";
 import "./defs/drills/DrillsDefs8.sol";
+
+import "./defs/assets/AssetsDefs1.sol";
+import "./defs/assets/AssetsDefs2.sol";
+
+import "./defs/props/PropsDefs1.sol";
 
 import "./CommonSVG.sol";
 
@@ -101,6 +108,13 @@ contract GlobalSVG {
 
     output = string.concat(
       output,
+      AssetsDefs1.getPart(),
+      AssetsDefs2.getPart(),
+      PropsDefs1.getPart()
+    );
+
+    output = string.concat(
+      output,
       DrillsDefs1.getPart(),
       DrillsDefs2.getPart(),
       DrillsDefs3.getPart(),
@@ -139,6 +153,7 @@ contract GlobalSVG {
       output,
       AltarCSS3.getPart(),
       AltarCSS4.getPart(),
+      AssetsCSS1.getPart(),
       ConveyorbeltCSS1.getPart(),
       ConveyorbeltCSS2.getPart(),
       DrillsCSS.getPart(),

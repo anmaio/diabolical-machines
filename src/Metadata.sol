@@ -40,25 +40,44 @@ contract Metadata {
         '"}, {"trait_type": "State", "value":"',
         allStates[getState(rand)],
         '"}, {"trait_type": "Productivity", "value":"',
-        getProductivity(rand),
-        '"}],',
-        '"image": "data:image/svg+xml;base64,'
+        getProductivity(rand)
+        
         // _imageURI,
         // Strings.toString(tokenId),
         // '.png", "animation_url": "data:image/svg+xml;base64,'
     );
 
-      string memory jsonFinal = Base64.encode(
-          bytes(string.concat(jsonInitial, composeSVG(rand), '"}'))
-      );
-      string memory output = string.concat("data:application/json;base64,", jsonFinal);
-      return output;
+    jsonInitial = string.concat(
+        jsonInitial,
+        '"}, {"trait_type": "Global Asset:", "value":"',
+        getGlobalAssetName(rand),
+        '"}, {"trait_type": "Expansion Prop:", "value":"',
+        getExpansionPropName(rand),
+        '"}],',
+        '"image": "data:image/svg+xml;base64,'
+    );
+
+    string memory jsonFinal = Base64.encode(
+      bytes(string.concat(jsonInitial, composeSVG(rand), '"}'))
+    );
+    string memory output = string.concat("data:application/json;base64,", jsonFinal);
+    return output;
   }
 
   function getProductivity(bytes memory rand) public view returns (string memory) {
     uint state = getState(rand);
     string memory machine = getMachine(rand);
     return _machine.getProductivity(machine, rand, state);
+  }
+
+  function getGlobalAssetName(bytes memory rand) public view returns (string memory) {
+    uint state = getState(rand);
+    return _machine.getGlobalAssetName(rand, state);
+  }
+
+  function getExpansionPropName(bytes memory rand) public view returns (string memory) {
+    uint state = getState(rand);
+    return _machine.getExpansionPropName(rand, state);
   }
 
   // 0 = degraded, 1 = basic, 2 = embellished
