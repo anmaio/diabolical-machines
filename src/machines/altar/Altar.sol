@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 import "../../GridHelper.sol";
+import "../../GlobalNumbers.sol";
 
 import "../../AssetRetriever.sol";
 
@@ -23,6 +24,22 @@ contract Altar {
   string internal constant RUG_NUMBERS = "70207021";
   string internal constant FLOOB_ANIMATION_NUMBERS = "701970161015";
   string internal constant ORB_NUMBERS = "4035403640374038";
+
+  // Floor
+  string internal constant DEGRADED_FLOOR_OFFSETS = "0156009003120360046802700312018006240180";
+  uint internal constant NUMBER_OF_DEGRADED_FLOOR_POSITIONS = 5;
+  string internal constant BASIC_FLOOR_OFFSETS = "01560090031203600468027003120180";
+  uint internal constant NUMBER_OF_BASIC_FLOOR_POSITIONS = 4;
+  string internal constant EMBELLISHED_FLOOR_OFFSETS = "015600900312036004680270";
+  uint internal constant NUMBER_OF_EMBELLISHED_FLOOR_POSITIONS = 3;
+
+  // Wall
+  string internal constant DEGRADED_WALL_OFFSETS = "0000018001560090015602700312000003120180";
+  uint internal constant NUMBER_OF_DEGRADED_WALL_POSITIONS = 5;
+  string internal constant BASIC_WALL_OFFSETS = "0000018001560090015602700312000003120180";
+  uint internal constant NUMBER_OF_BASIC_WALL_POSITIONS = 5;
+  string internal constant EMBELLISHED_WALL_OFFSETS = "0000018001560090015602700312000003120180";
+  uint internal constant NUMBER_OF_EMBELLISHED_WALL_POSITIONS = 5;
 
   constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
@@ -47,7 +64,7 @@ contract Altar {
   function getFrameNumber(bytes memory digits, uint state) internal pure returns (uint[] memory) {
     uint[] memory numbersUsed = new uint[](3);
     uint[] memory frameNumbersArray = GridHelper.setUintArrayFromString(FRAME_NUMBERS, 6, 4);
-    uint frameDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 14, 2));
+    uint frameDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 13, 2));
     if (state == 2) {
       if (frameDigits < 50) {
         numbersUsed[0] = frameNumbersArray[3];
@@ -86,7 +103,7 @@ contract Altar {
   function getStepsRunnerNumber(bytes memory digits, uint state) internal pure returns (uint[] memory) {
     uint[] memory numbersUsed = new uint[](3);
     uint[] memory stepsRunnersNumbersArray = GridHelper.setUintArrayFromString(STEPS_RUNNERS_NUMBERS, 3, 4);
-    uint stepsRunnersDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 20, 2));
+    uint stepsRunnersDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 16, 2));
     if (state == 2) {
       if (stepsRunnersDigits < 20) {
         numbersUsed[0] = stepsRunnersNumbersArray[2];
@@ -101,7 +118,7 @@ contract Altar {
 
   function getRugNumber(bytes memory digits, uint state) internal pure returns (uint) {
     uint[] memory rugNumbersArray = GridHelper.setUintArrayFromString(RUG_NUMBERS, 2, 4);
-    uint rugDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 22, 2));
+    uint rugDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 17, 2));
     if (state == 2) {
       if (rugDigits < 50) {
         return rugNumbersArray[0];
@@ -115,7 +132,7 @@ contract Altar {
 
   function getOrbBaseNumber(bytes memory digits, uint state, uint version) internal pure returns (uint) {
     uint[] memory orbBaseNumbersArray = GridHelper.setUintArrayFromString(ORB_BASE_NUMBERS, 6, 4);
-    uint orbBaseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 16+(version*2), 2));
+    uint orbBaseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 14+version, 2));
     
     if (state == 2) {
       if (orbBaseDigits < 10) { // 10% chance and must be embellished = very rare
@@ -141,13 +158,11 @@ contract Altar {
 
   function getOrbNumber(bytes memory digits, uint state, uint version) internal pure returns (uint) {
     uint[] memory orbNumbersArray = GridHelper.setUintArrayFromString(ORB_NUMBERS, 4, 4);
-    uint orbDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24+(version*2), 2));
-    uint orbOneDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24, 2));
-    uint orbTwoDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 26, 2));
+    uint orbDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 18+version, 2));
     
     if (state == 0 && orbDigits < 5) { // 5% chance of an orb in degraded = very rare
       return orbNumbersArray[0];
-    } else if (state == 1 && orbOneDigits != orbTwoDigits) { // in very rare cases basic will have no orbs
+    } else if (state == 1 && orbDigits < 98) { // in very rare cases basic will have no orbs(2%)
       if (orbDigits < 50) {
         return orbNumbersArray[0];
       } else {
@@ -168,21 +183,82 @@ contract Altar {
   }
 
   function getFloobAnimationNumber() internal pure returns (uint[] memory) {
-    uint[] memory floobNumbersArray = GridHelper.setUintArrayFromString(FLOOB_ANIMATION_NUMBERS, 3, 4);
-    return floobNumbersArray;
+    return GridHelper.setUintArrayFromString(FLOOB_ANIMATION_NUMBERS, 3, 4);
   }
 
-  function getAllNumbersUsed(bytes memory digits, uint state) internal pure returns (uint[] memory) {
+  function getGlobalAssetPosition(bytes memory digits, uint state) internal pure returns (string memory) {
+    string memory globalAssetOffsets = DEGRADED_FLOOR_OFFSETS;
+    uint numberOfPositions = NUMBER_OF_DEGRADED_FLOOR_POSITIONS;
+    if (state == 1) {
+      globalAssetOffsets = BASIC_FLOOR_OFFSETS;
+      numberOfPositions = NUMBER_OF_BASIC_FLOOR_POSITIONS;
+    } else if (state == 2) {
+      globalAssetOffsets = EMBELLISHED_FLOOR_OFFSETS;
+      numberOfPositions = NUMBER_OF_EMBELLISHED_FLOOR_POSITIONS;
+    }
+
+    uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 21, 2));
+
+    string memory globalAssetOffset = string(GridHelper.slice(bytes(globalAssetOffsets), (globalAssetDigits % numberOfPositions)*8, 8));
+
+    return globalAssetOffset;
+
+  }
+
+  function getExpansionPropPosition(bytes memory digits, uint state) internal pure returns (string memory) {
+    string memory floorOffsets = DEGRADED_FLOOR_OFFSETS;
+    string memory wallOffsets = DEGRADED_WALL_OFFSETS;
+    uint numberOfFloorPositions = NUMBER_OF_DEGRADED_FLOOR_POSITIONS;
+    uint numberOfWallPositions = NUMBER_OF_DEGRADED_WALL_POSITIONS;
+    if (state == 1) {
+      floorOffsets = BASIC_FLOOR_OFFSETS;
+      wallOffsets = BASIC_WALL_OFFSETS;
+      numberOfFloorPositions = NUMBER_OF_BASIC_FLOOR_POSITIONS;
+      numberOfWallPositions = NUMBER_OF_BASIC_WALL_POSITIONS;
+    } else if (state == 2) {
+      floorOffsets = EMBELLISHED_FLOOR_OFFSETS;
+      wallOffsets = EMBELLISHED_WALL_OFFSETS;
+      numberOfFloorPositions = NUMBER_OF_EMBELLISHED_FLOOR_POSITIONS;
+      numberOfWallPositions = NUMBER_OF_EMBELLISHED_WALL_POSITIONS;
+    }
+
+    uint expansionPropDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 23, 2));
+    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(digits, state);
+    if (expansionPropsNumber == 2000 || expansionPropsNumber == 2005 || expansionPropsNumber == 2006 || expansionPropsNumber == 2007) {
+      return string(GridHelper.slice(bytes(wallOffsets), (expansionPropDigits % numberOfWallPositions)*8, 8));
+    } else {
+      // Need to check that the position is not already taken by the global asset
+      string memory globalAssetOffset = getGlobalAssetPosition(digits, state);
+      string memory expansionPropOffset = string(GridHelper.slice(bytes(floorOffsets), (expansionPropDigits % numberOfFloorPositions)*8, 8));
+      if (keccak256(bytes(expansionPropOffset)) == keccak256(bytes(globalAssetOffset))) {
+        return string(GridHelper.slice(bytes(floorOffsets), ((expansionPropDigits+1) % numberOfFloorPositions)*8, 8));
+      } else {
+        return expansionPropOffset;
+      }
+    }
+
+  }
+
+  function getAllNumbersUsed(bytes memory digits, uint state) internal pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](32);
+    string[] memory offsetsUsed = new string[](32);
     uint[] memory frame = getFrameNumber(digits, state);
+
+    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(digits, state);
+    offsetsUsed[count] = getExpansionPropPosition(digits, state);
+    count++;
+
     for (uint i = 0; i < frame.length; ++i) {
       numbersUsed[count] = frame[i];
       count++;
     }
-    numbersUsed[count] = getOrbBaseNumber(digits, state, 0);
+
+    numbersUsed[count] = getOrbBaseNumber(digits, state, 1);
+    offsetsUsed[count] = "-312-180";
     count++;
-    numbersUsed[count] = getOrbNumber(digits, state, 0);
+    numbersUsed[count] = getOrbNumber(digits, state, 1);
+    offsetsUsed[count] = "-312-180";
     count++;
     numbersUsed[count] = getCubeNumber(digits, state);
     count++;
@@ -191,10 +267,12 @@ contract Altar {
       numbersUsed[count] = floobAnimation[i];
       count++;
     }
-    numbersUsed[count] = getOrbBaseNumber(digits, state, 1);
+
+    numbersUsed[count] = getOrbBaseNumber(digits, state, 0);
     count++;
-    numbersUsed[count] = getOrbNumber(digits, state, 1);
+    numbersUsed[count] = getOrbNumber(digits, state, 0);
     count++;
+
     numbersUsed[count] = getRugNumber(digits, state);
     count++;
     uint[] memory stepsRunner = getStepsRunnerNumber(digits, state);
@@ -202,11 +280,16 @@ contract Altar {
       numbersUsed[count] = stepsRunner[i];
       count++;
     }
-    return numbersUsed;
+
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(digits, state, 0);
+    offsetsUsed[count] = getGlobalAssetPosition(digits, state);
+    count++;
+
+    return (numbersUsed, offsetsUsed);
   }
 
   function getProductivityValue(bytes memory digits, uint state) external view returns (uint) {
-    uint[] memory numbersUsed = getAllNumbersUsed(digits, state);
+    (uint[] memory numbersUsed,) = getAllNumbersUsed(digits, state);
     uint productivityValue = 0;
     for (uint i = 0; i < numbersUsed.length; ++i) {
       productivityValue += _assetRetriever.getProductivity(numbersUsed[i]);
@@ -217,31 +300,16 @@ contract Altar {
   function getMachine(bytes memory digits, uint state) external view returns (string memory) {
 
     string memory output = "";
-    uint[] memory frame = getFrameNumber(digits, state);
-    for (uint i = 0; i < frame.length; ++i) {
-      output = string.concat(output, _assetRetriever.getAsset(frame[i]));
-    }
 
-    output = string.concat(output, GridHelper.groupTransform("-312", "-180", _assetRetriever.getAsset(getOrbBaseNumber(digits, state, 1))));
+    // get all numbers used, returns a uint[] and a string[] of offsets
+    (uint[] memory allNumbers, string[] memory allOffsets) = getAllNumbersUsed(digits, state);
 
-    output = string.concat(output, GridHelper.groupTransform("-312", "-180", _assetRetriever.getAsset(getOrbNumber(digits, state, 1))));
-
-    output = string.concat(output, _assetRetriever.getAsset(getCubeNumber(digits, state)));
-
-    uint[] memory floobAnimation = getFloobAnimationNumber();
-    for (uint i = 0; i < floobAnimation.length; ++i) {
-      output = string.concat(output, _assetRetriever.getAsset(floobAnimation[i]));
-    }
-
-    output = string.concat(output, _assetRetriever.getAsset(getOrbBaseNumber(digits, state, 0)));
-
-    output = string.concat(output, _assetRetriever.getAsset(getOrbNumber(digits, state, 0)));
-
-    output = string.concat(output, _assetRetriever.getAsset(getRugNumber(digits, state)));
-
-    uint[] memory stepsRunner = getStepsRunnerNumber(digits, state);
-    for (uint i = 0; i < stepsRunner.length; ++i) {
-      output = string.concat(output, _assetRetriever.getAsset(stepsRunner[i]));
+    for (uint i = 0; i < allNumbers.length; ++i) {
+      if (bytes(allOffsets[i]).length == 0) {
+        output = string.concat(output, _assetRetriever.getAsset(allNumbers[i]));
+      } else {
+        output = string.concat(output, GridHelper.groupTransform(string(GridHelper.slice(bytes(allOffsets[i]), 0, 4)), string(GridHelper.slice(bytes(allOffsets[i]), 4, 4)), _assetRetriever.getAsset(allNumbers[i])));
+      }
     }
 
     return output;
