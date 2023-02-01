@@ -11,29 +11,29 @@
   {
     "id": 1,
     "RandomNumber": "64143990377421066185995435270145211779978516265348977839169497661010486703109",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
     "ExpansionProp": "Ladder"
   },
   {
     "id": 2,
     "RandomNumber": "108251146832298441469338731784741741753293127207546841714730625509318917501002",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 3,
     "RandomNumber": "104572224842216107148280958176203030647705382221058483326977240597641258809241",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 4,
@@ -65,11 +65,11 @@
   {
     "id": 7,
     "RandomNumber": "64011016910033113442012359714901083879114537368082866232075968387353274727303",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 8,
@@ -83,9 +83,9 @@
   {
     "id": 9,
     "RandomNumber": "64862816435203493256580683837480497819721610297565548472387686182855956431769",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
@@ -209,11 +209,11 @@
   {
     "id": 23,
     "RandomNumber": "105704934907517134234153435357495046991337368188581310195424919842266684411834",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 24,
@@ -236,11 +236,11 @@
   {
     "id": 26,
     "RandomNumber": "60550738614240647186677285007922290692717741182730464045792868687132425982494",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess B"
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 27,
@@ -254,18 +254,18 @@
   {
     "id": 28,
     "RandomNumber": "67035679898477398025257021547921484530500927895763006799077040978397523204298",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 29,
     "RandomNumber": "111281804543025380889803711226162354088995485696246631725699144698837255325102",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
     "ExpansionProp": "Crack"
   },
@@ -290,11 +290,11 @@
   {
     "id": 32,
     "RandomNumber": "69033069043726705451046537970645040173539097610193708348405607020808448516480",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 33,
@@ -326,11 +326,11 @@
   {
     "id": 36,
     "RandomNumber": "16738000491033701665785172161138820484593757642492018819640951782961721937611",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 37,
@@ -362,11 +362,11 @@
   {
     "id": 40,
     "RandomNumber": "11481768183993706083635735464199439451533929368232196601054184694248110601930",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 41,
@@ -389,11 +389,11 @@
   {
     "id": 43,
     "RandomNumber": "112273817000549231235648007066737715392533831120049691404873244164813208789409",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Pit"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 44,
@@ -425,20 +425,20 @@
   {
     "id": 47,
     "RandomNumber": "14362941545035188737237183821286062426306867531341252502372638088569528258008",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 48,
     "RandomNumber": "16901008716843631737685999347449179936659179264518909777377215090393903867539",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 49,
@@ -452,9 +452,9 @@
   {
     "id": 50,
     "RandomNumber": "100333866997458983133202665474481347051028157199087803599122739914355071661171",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
@@ -470,10 +470,10 @@
   {
     "id": 52,
     "RandomNumber": "114695574081328843736304665391055893499020322433881033867150294264522521582731",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Crack"
   },
   {
@@ -515,11 +515,11 @@
   {
     "id": 57,
     "RandomNumber": "64183955535401955483016923199774199149652768445389512683339813411337837544171",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 58,
@@ -551,38 +551,38 @@
   {
     "id": 61,
     "RandomNumber": "64678406897994797305741286947104226413643097421138855687804972124379594069199",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Crack"
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Grate"
   },
   {
     "id": 62,
     "RandomNumber": "17058601350961731681114824220835713510654404882439927954147011784960844898623",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 63,
     "RandomNumber": "110509298012197116275813850742279207042601398254437734310221806698531877334718",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
     "id": 64,
     "RandomNumber": "12773892450795971888187812343791916693884833039571926187429484495808492171592",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 65,
@@ -605,19 +605,19 @@
   {
     "id": 67,
     "RandomNumber": "10255553064116588031426746079481496261880668442074775272775448386210122821708",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A"
   },
   {
     "id": 68,
     "RandomNumber": "15998303024449368599561193652213668050758380325846505023618132226710331814622",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
@@ -650,11 +650,11 @@
   {
     "id": 72,
     "RandomNumber": "61839627041875421384713757400434296069477370159597394446635056920446980824977",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 73,
@@ -668,18 +668,18 @@
   {
     "id": 74,
     "RandomNumber": "623175616529218499841836760698999032133355750710280463357368250172867388851",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Stairs"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 75,
     "RandomNumber": "109360326835050559351597942741038627367850539677503585998213464120130759897827",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None"
   },
@@ -695,11 +695,11 @@
   {
     "id": 77,
     "RandomNumber": "10872391015590278449716015383289178330413267389270214021889078992518699513661",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 78,
@@ -758,11 +758,11 @@
   {
     "id": 84,
     "RandomNumber": "107323848550494176418863663366270196159077136199421414452233176261108653750587",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 85,
@@ -794,11 +794,11 @@
   {
     "id": 88,
     "RandomNumber": "61420261455442340902145866258813977050323424526313609501325854658712360764349",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Ladder"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 89,
@@ -812,20 +812,20 @@
   {
     "id": 90,
     "RandomNumber": "14859715079110687451527613302880753597405997059000774709636692541066260906468",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess A"
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 91,
     "RandomNumber": "112330927440344539587058802161770014721579142614590065986799098845096971571370",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 92,
@@ -866,19 +866,19 @@
   {
     "id": 96,
     "RandomNumber": "104045561950205259374129903204074826788682765238519092908689634967841189029384",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 97,
     "RandomNumber": "65938509937383763513724526812005601222083501150422251974858637323139267778416",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Ladder"
   },
   {
@@ -947,11 +947,11 @@
   {
     "id": 105,
     "RandomNumber": "68601779051605461729011079507749673668242824438902050910801838103227656118375",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 106,
@@ -974,11 +974,11 @@
   {
     "id": 108,
     "RandomNumber": "11012587828757643666536087907567416925437760041861025953384647527567544591059",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Ladder"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 109,
@@ -992,11 +992,11 @@
   {
     "id": 110,
     "RandomNumber": "17304449311495519830777821394414675398652214827914811025647663206838472047250",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 111,
@@ -1019,11 +1019,11 @@
   {
     "id": 113,
     "RandomNumber": "68930596801792592690665546695756084113813053475098210268429842589727039252477",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Ladder"
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 114,
@@ -1046,11 +1046,11 @@
   {
     "id": 116,
     "RandomNumber": "105656194938433705148917492099469557504006967864179969198161288502680117391021",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 117,
@@ -1082,20 +1082,20 @@
   {
     "id": 120,
     "RandomNumber": "68859724100487305024144169411421957536410237000976083186831572706012794285552",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Stairs"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 121,
     "RandomNumber": "15463501295258345252014256368356213506812172293182698675060083262359001866418",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 122,
@@ -1109,11 +1109,11 @@
   {
     "id": 123,
     "RandomNumber": "106940795581968551579061194582126856945637156816283217135986863117060028582704",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 124,
@@ -1154,9 +1154,9 @@
   {
     "id": 128,
     "RandomNumber": "107849842911024589860969337152547520564731165881782403019010854742403795380535",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A"
   },
@@ -1181,11 +1181,11 @@
   {
     "id": 131,
     "RandomNumber": "112215080654618162030316836635303828665137350219819344177416053480222168664533",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 132,
@@ -1199,20 +1199,20 @@
   {
     "id": 133,
     "RandomNumber": "103696256751100056241422421349366927629946172301933919183256560361466620756107",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate"
   },
   {
     "id": 134,
     "RandomNumber": "106151662874099926813145441466979344124194180460597789620464199086850935845242",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 135,
@@ -1226,47 +1226,47 @@
   {
     "id": 136,
     "RandomNumber": "1021017534706823741057192785910079490627931915914740231199326082220593692155",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Crack"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Grate"
   },
   {
     "id": 137,
     "RandomNumber": "67800486815767677380814198662624482076320562827783407362768293609821419913097",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 138,
     "RandomNumber": "100906900021562796354819157982214630301291422041128542153705223097579672815822",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Crack"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Grate"
   },
   {
     "id": 139,
     "RandomNumber": "112765334283512453566914873822571375385674124646738796984935715998020438285255",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Crack"
   },
   {
     "id": 140,
     "RandomNumber": "115779844843241655080373250568820324062838020490766654645299974416944241711344",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 141,
@@ -1334,9 +1334,9 @@
   {
     "id": 148,
     "RandomNumber": "1858789670226121582639083472706744414732069068021120407741188919412324503390",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
@@ -1379,10 +1379,10 @@
   {
     "id": 153,
     "RandomNumber": "110551293368580423912792606419393330206929932972429972347788026987086631909430",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Martini",
+    "Productivity": "Medium",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "None"
   },
   {
@@ -1397,29 +1397,29 @@
   {
     "id": 155,
     "RandomNumber": "108535361949094708327523806649615522498888099966186023679799575683667249351351",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate"
   },
   {
     "id": 156,
     "RandomNumber": "15412455394708825180673079882059463535804651405926519585627882238036549034919",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Pit"
   },
   {
     "id": 157,
     "RandomNumber": "14368004847035488649417673371861412814640351082086594283590174053259526538443",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 158,
@@ -1496,11 +1496,11 @@
   {
     "id": 166,
     "RandomNumber": "13820917447571614903278030123320074635203893436031867858414227752481535603601",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess B"
+    "Productivity": "High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 167,
@@ -1523,9 +1523,9 @@
   {
     "id": 169,
     "RandomNumber": "106024978076613467277692429738916482659343672529701606771636776579482226421372",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "None"
   },
@@ -1541,29 +1541,29 @@
   {
     "id": 171,
     "RandomNumber": "63086299294014938232784550983686275217849714958852902188745143766464121706653",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Very High",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder"
   },
   {
     "id": 172,
     "RandomNumber": "10644079103881118950109007971483330110940355021081295625188446928058394884715",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None"
   },
   {
     "id": 173,
     "RandomNumber": "13812361849212031225014178058290380257971326340768694537290551561279215382581",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 174,
@@ -1597,7 +1597,7 @@
     "RandomNumber": "33989191457549519806913835546024552583536643581411003442554950887014663378788",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "None",
     "ExpansionProp": "Stairs"
   },
@@ -1667,20 +1667,20 @@
   {
     "id": 185,
     "RandomNumber": "101252511695066915560213975680608055184703698612669574024207160154437964029427",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Crack"
   },
   {
     "id": 186,
     "RandomNumber": "108298157195068308548379188325326471411782149513783573897821312683930270594554",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 187,
@@ -1694,9 +1694,9 @@
   {
     "id": 188,
     "RandomNumber": "112187359943622076269802631968251530216306793897997848240144362746969247463681",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
     "ExpansionProp": "Crack"
   },
@@ -1721,38 +1721,38 @@
   {
     "id": 191,
     "RandomNumber": "10759336297655761289295564109819018936244245127655716001193909289171284086890",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Stairs"
+    "Productivity": "High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 192,
     "RandomNumber": "100535456788894222448372149183353785175560110211011785598583666778356083568585",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 193,
     "RandomNumber": "103183382843877708375631890095046319665677727329073981661585913941757624066944",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Pit"
   },
   {
     "id": 194,
     "RandomNumber": "68287098675762190833246408832032399948043282484405949123066322504440575371545",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 195,
@@ -1775,20 +1775,20 @@
   {
     "id": 197,
     "RandomNumber": "12274674409991107152866189821205252221413667361963883484861175553027323085430",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 198,
     "RandomNumber": "102282079008293631319048302446211754548175143902791842376226952914980882810505",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "High",
     "GlobalAsset": "None",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 199,
@@ -1829,18 +1829,18 @@
   {
     "id": 203,
     "RandomNumber": "112272282436090721176901417364503661461046456470547195858549342459065958491899",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "High",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Crack"
   },
   {
     "id": 204,
     "RandomNumber": "15962934795567482977350698605496265366963452525829309508515285255785262606811",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
@@ -1858,26 +1858,26 @@
     "RandomNumber": "4276262843815298607713203593191728547325247454594571370009109389477035992612",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate"
   },
   {
     "id": 207,
     "RandomNumber": "61684028549584040023089117269645676824921409449776933646926810663542123842755",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "None"
   },
   {
     "id": 208,
     "RandomNumber": "67291599210088084590169024443806689346832506293015227546311418491103897977164",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "None"
   },
   {
@@ -1937,10 +1937,10 @@
   {
     "id": 215,
     "RandomNumber": "65368395510458902094339914832916673540269011773254021456806660787576312621855",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Martini",
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "None"
   },
   {
@@ -1955,11 +1955,11 @@
   {
     "id": 217,
     "RandomNumber": "113125754340964020870035566859945883204318513729495483398127271594307960984976",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 218,
@@ -1982,10 +1982,10 @@
   {
     "id": 220,
     "RandomNumber": "64282577418632422358367982994270455827506356449888579221433775028922073968270",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C"
   },
   {
@@ -2018,10 +2018,10 @@
   {
     "id": 224,
     "RandomNumber": "69792500300187231788480237921048596549599135811032249757867397085077794670399",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
   {
@@ -2072,20 +2072,20 @@
   {
     "id": 230,
     "RandomNumber": "17846456825534960027226794099878147757144487681797023030845052193462441759190",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A"
   },
   {
     "id": 231,
     "RandomNumber": "17168417764251834592448591381121547328257831268169043135271487986468455358639",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 232,
@@ -2108,20 +2108,20 @@
   {
     "id": 234,
     "RandomNumber": "11706078351673560124355882730047534898126893033731831662815112865617572044516",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 235,
     "RandomNumber": "10299598040082623175733610916679976934069440208039188144284774240254610974265",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 236,
@@ -2135,29 +2135,29 @@
   {
     "id": 237,
     "RandomNumber": "103112975034687537765427727415170960641228868440455356935012213061816226273747",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Grate"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Pit"
   },
   {
     "id": 238,
     "RandomNumber": "12628489187856456085234847171354204198183067697355770190019529375431493483761",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 239,
     "RandomNumber": "14803249722423694464968489542548700713939020576531684983937057417781317483846",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 240,
@@ -2225,18 +2225,18 @@
   {
     "id": 247,
     "RandomNumber": "107090015624130546054290925524064720968490361992361805858128825619736398561444",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
     "ExpansionProp": "None"
   },
   {
     "id": 248,
     "RandomNumber": "60896888819146402635920018841916672907435718376859594177014530200907713852064",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
     "ExpansionProp": "Crack"
   },
@@ -2279,10 +2279,10 @@
   {
     "id": 253,
     "RandomNumber": "69876922752651317136665083374164750004857389426948148272492618516394261497717",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Bong",
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Ladder"
   },
   {
@@ -2315,10 +2315,10 @@
   {
     "id": 257,
     "RandomNumber": "112974052895144673135406332523242302727965969453235329633038276151839025399495",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
@@ -2380,25 +2380,25 @@
     "RandomNumber": "29156558151369168638622507328229120861587870440142254996429759604182137410667",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit"
   },
   {
     "id": 265,
     "RandomNumber": "12546585961614219900863168964693313774955392924195830535195413306780970092111",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit"
   },
   {
     "id": 266,
     "RandomNumber": "65273604942468874497990171765024163552792768588455429502012353319690229447671",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
     "ExpansionProp": "Crack"
   },
@@ -2407,7 +2407,7 @@
     "RandomNumber": "33929030021217361181922317565570289395546619398077681357306674432436993361560",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "None",
     "ExpansionProp": "Grate"
   },
@@ -2432,11 +2432,11 @@
   {
     "id": 270,
     "RandomNumber": "62414349639087110486037423396183886029152757621515458283971744521518886512021",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 271,
@@ -2459,20 +2459,20 @@
   {
     "id": 273,
     "RandomNumber": "107420904482478617863982074733488394804231144405883615955658771526561842854374",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 274,
     "RandomNumber": "19783210305574559027948707074373330151441337566329935931848121362182426924232",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 275,
@@ -2504,38 +2504,38 @@
   {
     "id": 278,
     "RandomNumber": "69941462560105244713884011302571387445940597025282198417514808371442498292616",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 279,
     "RandomNumber": "13829924975176119970751867243789960034760652268608654939848439511770830445768",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 280,
     "RandomNumber": "24969331654251897726877723058084653165114846582386593509057637689775403688378",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B"
   },
   {
     "id": 281,
     "RandomNumber": "10251716825555516220588024237370929636814167486247836943616812403764672457193",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess B"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 282,
@@ -2549,11 +2549,11 @@
   {
     "id": 283,
     "RandomNumber": "60357581913762375411497727609688678844122941710740212661471621436894522091830",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess B"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 284,
@@ -2594,19 +2594,19 @@
   {
     "id": 288,
     "RandomNumber": "105573717590514564458376134208934751639933073803520596434114747119706260905511",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 289,
     "RandomNumber": "114435365731951348845306819489515436970163012845987994487205119352207276525791",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
@@ -2621,20 +2621,20 @@
   {
     "id": 291,
     "RandomNumber": "63555548742588548812411032032073966320901706729361565211655357624131654814655",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Crack"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Grate"
   },
   {
     "id": 292,
     "RandomNumber": "109757817886857641254759926633890686782501566302443269857831319795821106479608",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Stairs"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 293,
@@ -2684,10 +2684,10 @@
   {
     "id": 298,
     "RandomNumber": "108633516047218297604834566190590660922221294529519057483290199395560618804257",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Pit"
   },
   {
@@ -2702,10 +2702,10 @@
   {
     "id": 300,
     "RandomNumber": "111670234028709106986231557689733990951839708736499995387112132352190780796455",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Pit"
   },
   {
@@ -2722,7 +2722,7 @@
     "RandomNumber": "45358911311801883301807229702398350844154796028814518258464993840560510950446",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B"
   },
@@ -2738,18 +2738,18 @@
   {
     "id": 304,
     "RandomNumber": "113152459258633470520323399645517219173337528056962052564225939715562212802659",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate"
   },
   {
     "id": 305,
     "RandomNumber": "12640541844291994285830863104350307260888135618002487060377427952862214375935",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack"
   },
@@ -2783,27 +2783,27 @@
   {
     "id": 309,
     "RandomNumber": "107506768408116419104595547757347800832452090214728351826763671992860660682365",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "None"
   },
   {
     "id": 310,
     "RandomNumber": "66552008844549687135988527685025363705263625375640345770768555498598332619872",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C"
   },
   {
     "id": 311,
     "RandomNumber": "16668425412685476346443246368319228121844615870755224230912524189087343900351",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit"
   },
@@ -2846,11 +2846,11 @@
   {
     "id": 316,
     "RandomNumber": "104373895474657141543872602610397069355777464067629438518233347798753451476686",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 317,
@@ -2891,11 +2891,11 @@
   {
     "id": 321,
     "RandomNumber": "15412367971307880566287093486806459264479704798675413854380300207051501420267",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess A"
+    "Productivity": "High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 322,
@@ -2909,9 +2909,9 @@
   {
     "id": 323,
     "RandomNumber": "12451804056636705416392289901565380560538708210400732773064362755568365520378",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Grate"
   },
@@ -2927,9 +2927,9 @@
   {
     "id": 325,
     "RandomNumber": "100853362930682056303891455011145867865851563883415417815142387299656162181689",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
     "ExpansionProp": "None"
   },
@@ -2963,11 +2963,11 @@
   {
     "id": 329,
     "RandomNumber": "115450424492878018806026926786128177145216789768511711894622425075740830242205",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Grate"
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
+    "ExpansionProp": "Pit"
   },
   {
     "id": 330,
@@ -2990,20 +2990,20 @@
   {
     "id": 332,
     "RandomNumber": "60866871601566186583371287470745770737336610495919915147254965800700609947381",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Crack"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Grate"
   },
   {
     "id": 333,
     "RandomNumber": "105315368196816978028773395134588966246209715176369379933089784408621687497671",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
     "Productivity": "Medium",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 334,
@@ -3017,20 +3017,20 @@
   {
     "id": 335,
     "RandomNumber": "107097620026252434025743187831668261470185384110619814013960479223596322034304",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Pit"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 336,
     "RandomNumber": "106196195315920109278358127937259951533781940172853627694781283179952872286754",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 337,
@@ -3062,38 +3062,38 @@
   {
     "id": 340,
     "RandomNumber": "101630041940673979013081008310315090614113897860451681308685377951656695879980",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 341,
     "RandomNumber": "10503930219106759617883127427125536728423821233790067820538943709107024475787",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit"
   },
   {
     "id": 342,
     "RandomNumber": "115078735058313710128763303309669575143752000506175061106681023195791772466355",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 343,
     "RandomNumber": "107696411471719771079355113911670892631227664602123856793012132994321402002534",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 344,
@@ -3116,11 +3116,11 @@
   {
     "id": 346,
     "RandomNumber": "61601370770759423269525729144433617169269199216161039001928055428008174750674",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Ladder"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 347,
@@ -3136,7 +3136,7 @@
     "RandomNumber": "39889980412100014169230045299084855667606332729564631514818755179897511526004",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
@@ -3233,29 +3233,29 @@
   {
     "id": 359,
     "RandomNumber": "106598572482707824258762466423462676040434679244205990837946203786990379038357",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 360,
     "RandomNumber": "20981116410554353655914823623405892580749900351756011946255002834305335834803",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "None",
     "ExpansionProp": "Ladder"
   },
   {
     "id": 361,
     "RandomNumber": "115786254092489260961040576230796860096881322592834642346725306554598988958087",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 362,
@@ -3287,10 +3287,10 @@
   {
     "id": 365,
     "RandomNumber": "112000670605760071594705095237375992188572242208153210490619704122463960352922",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
@@ -3314,10 +3314,10 @@
   {
     "id": 368,
     "RandomNumber": "105708433041030519465114926578166189358037588052147322117982937467602584158617",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
@@ -3343,7 +3343,7 @@
     "RandomNumber": "5280292741413530642391142938965303385606271344332409578411945006580314801791",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "None",
     "ExpansionProp": "Crack"
   },
@@ -3377,18 +3377,18 @@
   {
     "id": 375,
     "RandomNumber": "15211076182017503538032868464219460495958740556430778324803526093172853091964",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 376,
     "RandomNumber": "45126106110646476580908020924294372865648518402931139888736495597134513753112",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C"
   },
@@ -3404,11 +3404,11 @@
   {
     "id": 378,
     "RandomNumber": "102897401833311440379885071358180582016935767829364049827885574997733946249276",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 379,
@@ -3458,11 +3458,11 @@
   {
     "id": 384,
     "RandomNumber": "113209950661247983534657166974985247421993783608450664953620028521071052820197",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Stairs"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 385,
@@ -3476,11 +3476,11 @@
   {
     "id": 386,
     "RandomNumber": "112514268603978918043057447170089932651404530005453632630024887401546375559523",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 387,
@@ -3503,9 +3503,9 @@
   {
     "id": 389,
     "RandomNumber": "113587049204028392379405760789640475923334756899216730800252551875102201905249",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
     "ExpansionProp": "Crack"
   },
@@ -3530,29 +3530,29 @@
   {
     "id": 392,
     "RandomNumber": "11477434686552296643885455358596158761805729798990136401250541390531035776137",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 393,
     "RandomNumber": "13608072027316863125908402628022667094670259918143310359684235908471385660822",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 394,
     "RandomNumber": "60008426388424773892084339953755330498627231378339916167505916039394004783904",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Stairs"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 395,
@@ -3611,9 +3611,9 @@
   {
     "id": 401,
     "RandomNumber": "108657484477266990878591731034117330775219865858749895350051240284733294660",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "None"
   },
@@ -3665,11 +3665,11 @@
   {
     "id": 407,
     "RandomNumber": "108210272084116478510057260237093332960163610872036372369113489221269765777630",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 408,
@@ -3710,11 +3710,11 @@
   {
     "id": 412,
     "RandomNumber": "62010431099847164981402339565841157441794340211976395844657126892324885484273",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Grate"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Pit"
   },
   {
     "id": 413,
@@ -3764,18 +3764,18 @@
   {
     "id": 418,
     "RandomNumber": "102133057312326297268608445141682169400966363701480029559350876505169304714666",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack"
   },
   {
     "id": 419,
     "RandomNumber": "63434721871151804190909804986827137612166242184059562218715096539200237600962",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
     "ExpansionProp": "None"
   },
@@ -3791,10 +3791,10 @@
   {
     "id": 421,
     "RandomNumber": "1651875678731135434551964251092576696381738578325019094236395163342160408481",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "None"
   },
   {
@@ -3827,11 +3827,11 @@
   {
     "id": 425,
     "RandomNumber": "107649326798102722290970965036097904127112784500648517361931116535291385499683",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 426,
@@ -3863,11 +3863,11 @@
   {
     "id": 429,
     "RandomNumber": "109270688335117297220287735547653674036016478124650056283804351862943533521326",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 430,
@@ -3899,18 +3899,18 @@
   {
     "id": 433,
     "RandomNumber": "104477570100487181911518095093020221461524660139241153653225683322857075920570",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 434,
     "RandomNumber": "16255510891784195743163300915188418180627241103706839790173615093808917210846",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit"
   },
@@ -3953,11 +3953,11 @@
   {
     "id": 439,
     "RandomNumber": "102575910755811008283855101035072630094453952849495811674289449206681732825293",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 440,
@@ -4007,11 +4007,11 @@
   {
     "id": 445,
     "RandomNumber": "103315544107564832575038789543363380129776672607727048461965402181580893781373",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Pit"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 446,
@@ -4043,18 +4043,18 @@
   {
     "id": 449,
     "RandomNumber": "19689089118435969877635984747121014438620723788709994296689099794089051578527",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "Productivity": "High",
+    "GlobalAsset": "Bong",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 450,
     "RandomNumber": "112153439139000184000202204390032645553526986359578914207375112402199276936557",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Crack"
   },
@@ -4106,11 +4106,11 @@
   {
     "id": 456,
     "RandomNumber": "13939743609337401760287779448352971736747203195754127432995994726556356906027",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess A"
+    "Productivity": "High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 457,
@@ -4133,11 +4133,11 @@
   {
     "id": 459,
     "RandomNumber": "15662876914767678920955020801888138396858446543442736537689502386447664779029",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 460,
@@ -4151,10 +4151,10 @@
   {
     "id": 461,
     "RandomNumber": "63866732206530456726109752794369122898532166964890615239763698222298885886413",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "None"
   },
   {
@@ -4214,27 +4214,27 @@
   {
     "id": 468,
     "RandomNumber": "11950282691249310689325049889843087252916430976173808552688527613504970262607",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 469,
     "RandomNumber": "18686313607688383807968280641213198339674745316022871031604271819597159923161",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 470,
     "RandomNumber": "111651172131359682152333480436878788078856963909578242192644878145328470840022",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit"
   },
@@ -4250,38 +4250,38 @@
   {
     "id": 472,
     "RandomNumber": "60443705259212286435820317678551279478467318831583107650786432487697756991381",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack"
   },
   {
     "id": 473,
     "RandomNumber": "107520672205971713891516927642860369752432778567587776123451704282340259435006",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 474,
     "RandomNumber": "1613632498823688937670725437903101696115641378052509474290582009432759842749",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 475,
     "RandomNumber": "100349544655704609077845242247900883453024963118454161807801437973457367710073",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 476,
@@ -4313,9 +4313,9 @@
   {
     "id": 479,
     "RandomNumber": "61809413534865358294558731343692503236938020588529921175691602782001534912415",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C"
   },
@@ -4331,18 +4331,18 @@
   {
     "id": 481,
     "RandomNumber": "111474456729658826926315824744449918833832463556723181129288536311400941463201",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Crack"
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
+    "ExpansionProp": "Grate"
   },
   {
     "id": 482,
     "RandomNumber": "112515738314670978729197762871430067450269977409649531750651926301702220847675",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
     "ExpansionProp": "None"
   },
@@ -4360,16 +4360,16 @@
     "RandomNumber": "3988608222711108389041112987606571237306588886254467603261156708212985384013",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
     "id": 485,
     "RandomNumber": "66524565074360001983938297937585799012881942435127230469574426119516529362760",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C"
   },
@@ -4385,11 +4385,11 @@
   {
     "id": 487,
     "RandomNumber": "10559522660260684980825439144430486460178917278773821563380080530777246680696",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 488,
@@ -4448,36 +4448,36 @@
   {
     "id": 494,
     "RandomNumber": "69071767344659607215053158202161833897445438427349017958046110308215517170603",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 495,
     "RandomNumber": "115301607332757126957492875629315996571734712393010689664684995420638635035923",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "None"
   },
   {
     "id": 496,
     "RandomNumber": "107090074766657770324773605653730031324901899220217475342422907865010417336599",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess A"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 497,
     "RandomNumber": "115436636907868461890313287466033377826285571087699084135611235701209772732",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Crack"
   },
@@ -4495,7 +4495,7 @@
     "RandomNumber": "33496519802350732349232113281785004901383782213047012088790513563687156093977",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate"
   },
@@ -4520,9 +4520,9 @@
   {
     "id": 502,
     "RandomNumber": "16759296935721009195171218493261808287983195238264745694638736032523089244942",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
@@ -4574,11 +4574,11 @@
   {
     "id": 508,
     "RandomNumber": "111240277284531599154219320091980124828309707809575755880490118087433588261437",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 509,
@@ -4601,11 +4601,11 @@
   {
     "id": 511,
     "RandomNumber": "15553602166562075245824017185488673324537577192566271977632979956290037848589",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 512,
@@ -4619,11 +4619,11 @@
   {
     "id": 513,
     "RandomNumber": "100112311068609580919142346136608016751615379858504783980821050324728435845937",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "None",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 514,
@@ -4637,11 +4637,11 @@
   {
     "id": 515,
     "RandomNumber": "112242946269189382851345860128960480421963127383499283990577695269019709269476",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 516,
@@ -4682,9 +4682,9 @@
   {
     "id": 520,
     "RandomNumber": "11212278168799010776376704043642031682599861193275443171769385548186716708425",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A"
   },
@@ -4718,10 +4718,10 @@
   {
     "id": 524,
     "RandomNumber": "114718607883696294696413707686056783942961429132400659163393455557010210270715",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Crack"
   },
   {
@@ -4736,9 +4736,9 @@
   {
     "id": 526,
     "RandomNumber": "10729541590892708960319747365126964753305531187325790155082977300981749567216",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
     "ExpansionProp": "None"
   },
@@ -4754,10 +4754,10 @@
   {
     "id": 528,
     "RandomNumber": "112507929653009941780504755249344189346683087725194955362877278087261402489728",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Medium",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Crack"
   },
   {
@@ -4774,7 +4774,7 @@
     "RandomNumber": "5787193689578335919761694933935268090256452262749797193509037177122615557726",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess A"
   },
@@ -4799,11 +4799,11 @@
   {
     "id": 533,
     "RandomNumber": "104343698427359032383875210530258738329162505018623297997432669732703691698035",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 534,
@@ -4916,11 +4916,11 @@
   {
     "id": 546,
     "RandomNumber": "112887833380040052601784942060387134669967536700264986653980211996489371389542",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 547,
@@ -4979,11 +4979,11 @@
   {
     "id": 553,
     "RandomNumber": "10743068832795500734042823822077177568937802271707990724415818745086115609606",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Grate"
+    "Productivity": "High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Pit"
   },
   {
     "id": 554,
@@ -5024,11 +5024,11 @@
   {
     "id": 558,
     "RandomNumber": "66736955985198148615225625285193964126394018305538298386404818443123846083464",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Ladder"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 559,
@@ -5051,19 +5051,19 @@
   {
     "id": 561,
     "RandomNumber": "17240238395463818349944131408516978102833548152933099083137651174882356494404",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 562,
     "RandomNumber": "114093463560199811286610396765911968646359910864193620296250523313159371396336",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Crack"
   },
   {
@@ -5132,37 +5132,37 @@
   {
     "id": 570,
     "RandomNumber": "113847544917850750582192761213095726208696979040624551356900018892023283098824",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None"
   },
   {
     "id": 571,
     "RandomNumber": "19854618864490892735479998177259722738057856360452359027131021703062821370794",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "None"
   },
   {
     "id": 572,
     "RandomNumber": "63626503178002473921127135414846608820510708505051675975816359458582683490980",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess B"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 573,
     "RandomNumber": "64186005514835264657788854571915307141114001186120210273804158430660154033216",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Very High",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C"
   },
   {
@@ -5177,20 +5177,20 @@
   {
     "id": 575,
     "RandomNumber": "102229504510005333958429659973962281486342623621216296082949897975225693625954",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 576,
     "RandomNumber": "106862644387183479110058811024920028636632839518387469352347818990922719093944",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 577,
@@ -5222,11 +5222,11 @@
   {
     "id": 580,
     "RandomNumber": "107626029825136845199618760195802398141473012893667999760840282862836197618452",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Low",
     "GlobalAsset": "None",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 581,
@@ -5258,11 +5258,11 @@
   {
     "id": 584,
     "RandomNumber": "114436797367395360567582443077641495066208872448882796196012389608765338092445",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 585,
@@ -5285,10 +5285,10 @@
   {
     "id": 587,
     "RandomNumber": "113863313277997682982965692487187325474560291775668308879541547182915496961010",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Martini",
+    "Productivity": "Medium",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A"
   },
   {
@@ -5303,11 +5303,11 @@
   {
     "id": 589,
     "RandomNumber": "108781973826326610467870842292279962067981487861790304899336775256586820707008",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 590,
@@ -5350,7 +5350,7 @@
     "RandomNumber": "53176465190352295577740649142484689500676437214085085646643713098199394835711",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack"
   },
@@ -5359,16 +5359,16 @@
     "RandomNumber": "51906367117905171311997246178279442995432930444060046420658139316735021274442",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B"
   },
   {
     "id": 596,
     "RandomNumber": "19360186067803670043351086557213626461858343159805131942560721828832874257061",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
@@ -5393,9 +5393,9 @@
   {
     "id": 599,
     "RandomNumber": "12746138021354871824959559055025991785623505847907489577554320057436281128167",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
     "ExpansionProp": "None"
   },
@@ -5420,18 +5420,18 @@
   {
     "id": 602,
     "RandomNumber": "19498994947150576369462054877396930778823820535995187995320484339325096669679",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Grate"
   },
   {
     "id": 603,
     "RandomNumber": "11727097602427368818706784167937796415176911504891611818575945251214575447843",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A"
   },
@@ -5467,7 +5467,7 @@
     "RandomNumber": "48642364749108979492951426405429073110830047720066093713891929731935308866376",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "None",
     "ExpansionProp": "Crack"
   },
@@ -5483,11 +5483,11 @@
   {
     "id": 609,
     "RandomNumber": "19256579650139139407597956068082068363636289075528847287825932362389662409304",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess A"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 610,
@@ -5501,27 +5501,27 @@
   {
     "id": 611,
     "RandomNumber": "609602286320572754258791507987987660983288660703767139117122065651259235703",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "None"
   },
   {
     "id": 612,
     "RandomNumber": "12025522090089596893934002884646914264582888613019925096872483030358101424122",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 613,
     "RandomNumber": "13656651803960298202442411761598230345865680703311216854185998471793651003972",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Grate"
   },
@@ -5566,7 +5566,7 @@
     "RandomNumber": "31909802626532717837550121131546174059973029354851948645526792047012037222883",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
@@ -5591,11 +5591,11 @@
   {
     "id": 621,
     "RandomNumber": "14790098619096818058828539827394951362689099215071913988350751217564374005301",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 622,
@@ -5672,27 +5672,27 @@
   {
     "id": 630,
     "RandomNumber": "15473318024366868399590430557007306637416577134530662761457475182372499494892",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
     "id": 631,
     "RandomNumber": "13634915746815476322629675804302944202587714941072883640517098336540860326213",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "None"
   },
   {
     "id": 632,
     "RandomNumber": "10304186880802141368799987533780614733551037584026029764964040106873956075884",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "None"
   },
@@ -5744,11 +5744,11 @@
   {
     "id": 638,
     "RandomNumber": "109781721873857393896146907340533680798681557568235486385065795444890231516919",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
+    "Productivity": "High",
+    "GlobalAsset": "Bong",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 639,
@@ -5827,7 +5827,7 @@
     "RandomNumber": "25491100246667411532029231504939523523277448833718433747653121290444053235344",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "None"
   },
@@ -5843,11 +5843,11 @@
   {
     "id": 649,
     "RandomNumber": "101153031681656470977460018323380597473389359852379487856678391980710091397325",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 650,
@@ -5924,28 +5924,28 @@
   {
     "id": 658,
     "RandomNumber": "1326805195347000132652073196411129309610426199390021520774949175533098654934",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
     "id": 659,
     "RandomNumber": "109004885832370850993727981145905932363625099549323353594368487062579559143469",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 660,
     "RandomNumber": "68762463012607829262140999978688809011220415241210359868526893510607349489382",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Crack"
   },
   {
@@ -5978,18 +5978,18 @@
   {
     "id": 664,
     "RandomNumber": "109612762127439758940524624411732385203745738451160702367120616884027297789228",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Medium",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate"
   },
   {
     "id": 665,
     "RandomNumber": "18391383178593592788853273351924339933278349760198899760378586453148822023075",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit"
   },
@@ -6005,29 +6005,29 @@
   {
     "id": 667,
     "RandomNumber": "103319026131018632492099759714834599487177352092998028382048901959683314281905",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None"
   },
   {
     "id": 668,
     "RandomNumber": "110124002940220641205377820412042149897931112899884369063869353799034442926342",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess A"
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 669,
     "RandomNumber": "101034659500899591468378785256398042352148447786136090609662229701126389653667",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 670,
@@ -6041,10 +6041,10 @@
   {
     "id": 671,
     "RandomNumber": "61488583713305814927168754800878170611275720290385848314601024475409754608641",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C"
   },
   {
@@ -6086,20 +6086,20 @@
   {
     "id": 676,
     "RandomNumber": "61570116208460573633212409412244469952675804583784179264544188867136158177839",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Grate"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Pit"
   },
   {
     "id": 677,
     "RandomNumber": "110798760635798471884936497062563685666206833698228464079240596352910822808165",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Pit"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 678,
@@ -6140,9 +6140,9 @@
   {
     "id": 682,
     "RandomNumber": "65521007036595153884059794625577335137753405448454698407569356128978441347805",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "None"
   },
@@ -6167,18 +6167,18 @@
   {
     "id": 685,
     "RandomNumber": "16404682806422845456021662544207677165389534834928826089530360836765190584793",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 686,
     "RandomNumber": "66837449308720930472835206243321953851290152486107574870205141964906710530283",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Ladder"
   },
@@ -6194,9 +6194,9 @@
   {
     "id": 688,
     "RandomNumber": "10544947509735829642760141316342409169512492262032471191205158374217350837208",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack"
   },
@@ -6221,9 +6221,9 @@
   {
     "id": 691,
     "RandomNumber": "112918910126489384703298885188239370724790645777442161180012820651949165834881",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
     "ExpansionProp": "None"
   },
@@ -6275,19 +6275,19 @@
   {
     "id": 697,
     "RandomNumber": "62682103017007378558490834800816822378544979897712806369164549276049242650245",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
   {
     "id": 698,
     "RandomNumber": "61380091143449925482445117086855142159048349320071547567403066620053045309061",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "Ladder"
   },
   {
@@ -6302,11 +6302,11 @@
   {
     "id": 700,
     "RandomNumber": "104658411174753955147247303654893566405422592616060212437627380219481107111755",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 701,
@@ -6320,11 +6320,11 @@
   {
     "id": 702,
     "RandomNumber": "64718997619723140411422958695645720683261045928035209283078347134823605773096",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Pit"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 703,
@@ -6338,19 +6338,19 @@
   {
     "id": 704,
     "RandomNumber": "18704234695460591972831632010917145416465922372268053295779190002186936158238",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 705,
     "RandomNumber": "65333327729066585818190238571203842209762291031615723222039382366795089078977",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Crack"
   },
   {
@@ -6365,18 +6365,18 @@
   {
     "id": 707,
     "RandomNumber": "13483365251797178950699852451669702648746617166009646213782781284814132890991",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "None"
   },
   {
     "id": 708,
     "RandomNumber": "60082150442736032967948083480312439425167189722394814945809997240314658471664",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C"
   },
@@ -6457,36 +6457,36 @@
     "RandomNumber": "31424074914817783894686541406556730177850624620496414711231574418625059497736",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess A"
   },
   {
     "id": 718,
     "RandomNumber": "103107506570799831551706669762157512216728551412893878128866807763261059313309",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
   {
     "id": 719,
     "RandomNumber": "106953941380947037813331369588817449694335049878795999079326830227029018777089",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit"
   },
   {
     "id": 720,
     "RandomNumber": "60591151540504182523946946138633076904916375411576960010550804731134622260297",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 721,
@@ -6590,20 +6590,20 @@
   {
     "id": 732,
     "RandomNumber": "61856946724922854872584555360909402654540798294583165701155195350712542379995",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Ladder"
   },
   {
     "id": 733,
     "RandomNumber": "64099382209008544690651183596034350824024571648140756533034988923321403265003",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Crack"
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Grate"
   },
   {
     "id": 734,
@@ -6626,9 +6626,9 @@
   {
     "id": 736,
     "RandomNumber": "101965895157773962021200983633498526560765911155101081956176701246331705727830",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
@@ -6662,29 +6662,29 @@
   {
     "id": 740,
     "RandomNumber": "62313369141730805067590238137128111164548623297638349119493088237112341912892",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
     "id": 741,
     "RandomNumber": "10367964176503491985324916854256443493229329872118896976172252809401923085220",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 742,
     "RandomNumber": "101566331391597541313486441060666784265104932211039277924843988899180061564915",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 743,
@@ -6698,18 +6698,18 @@
   {
     "id": 744,
     "RandomNumber": "62059731539098651340927484651458260031195767725038546397041569014807723180330",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 745,
     "RandomNumber": "13498126831516289307309533141923358824170994821261542405500401784637922792653",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
     "ExpansionProp": "None"
   },
@@ -6725,11 +6725,11 @@
   {
     "id": 747,
     "RandomNumber": "67461817702556943973232331230329622670788811920691787418455392115199047949068",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Grate"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Pit"
   },
   {
     "id": 748,
@@ -6743,11 +6743,11 @@
   {
     "id": 749,
     "RandomNumber": "106925479012237750564678689931285831107544419731519488663211415233482266554593",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess A"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 750,
@@ -6770,19 +6770,19 @@
   {
     "id": 752,
     "RandomNumber": "12380550271083669432036015839698688640869751513903194019084136506136507974259",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 753,
     "RandomNumber": "19477245558930030334503305787593506643520022547627882660719813834813268944929",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Pit"
   },
   {
@@ -6797,9 +6797,9 @@
   {
     "id": 755,
     "RandomNumber": "103192097783550657644220548866521110797400718570416480070544488986769255918256",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Grate"
   },
@@ -6815,11 +6815,11 @@
   {
     "id": 757,
     "RandomNumber": "6518727856313508833346671817768837644840837770251666328899646533278693541684",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess A"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 758,
@@ -6860,11 +6860,11 @@
   {
     "id": 762,
     "RandomNumber": "112579830715248089837735236704117389937705872704148973586255633747077747421948",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 763,
@@ -6887,11 +6887,11 @@
   {
     "id": 765,
     "RandomNumber": "15672549652847858369964855894278261505278339239609115933718060228858008179343",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 766,
@@ -6923,11 +6923,11 @@
   {
     "id": 769,
     "RandomNumber": "69499448393522365706741246693645052758524429377074219528696694671881853918706",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Crack"
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Grate"
   },
   {
     "id": 770,
@@ -6950,11 +6950,11 @@
   {
     "id": 772,
     "RandomNumber": "106561392268484301812581306315780914382533748073196477053838847467609052074550",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess B"
+    "Productivity": "High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 773,
@@ -6977,24 +6977,6 @@
   {
     "id": 775,
     "RandomNumber": "108668189730105060050104187548461003555178446934340746997281051567855191792233",
-    "State": "Degraded",
-    "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Crack"
-  },
-  {
-    "id": 776,
-    "RandomNumber": "103149065359962963538548475172431514305760625545883611743658283984608567360305",
-    "State": "Degraded",
-    "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
-  },
-  {
-    "id": 777,
-    "RandomNumber": "41561493534453058777020746727174615336254161829552786657651024636512914174491",
     "State": "Basic",
     "Machine": "Altar",
     "Productivity": "Medium",
@@ -7002,13 +6984,31 @@
     "ExpansionProp": "Crack"
   },
   {
+    "id": 776,
+    "RandomNumber": "103149065359962963538548475172431514305760625545883611743658283984608567360305",
+    "State": "Basic",
+    "Machine": "Altar",
+    "Productivity": "High",
+    "GlobalAsset": "Fridge",
+    "ExpansionProp": "Ladder"
+  },
+  {
+    "id": 777,
+    "RandomNumber": "41561493534453058777020746727174615336254161829552786657651024636512914174491",
+    "State": "Basic",
+    "Machine": "Altar",
+    "Productivity": "High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Crack"
+  },
+  {
     "id": 778,
     "RandomNumber": "11174372250422377354108084837426849067077441491744962851280276036301173019243",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess B"
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 779,
@@ -7040,11 +7040,11 @@
   {
     "id": 782,
     "RandomNumber": "107964335051658420489526994012370665700018202087120640741722707941373886533198",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 783,
@@ -7067,11 +7067,11 @@
   {
     "id": 785,
     "RandomNumber": "15532686591125959206766422054994131100475343127759583830240463773295536016332",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 786,
@@ -7139,9 +7139,9 @@
   {
     "id": 793,
     "RandomNumber": "114935231781266427548832679861311083397799981233007641431092887171118303392098",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit"
   },
@@ -7175,10 +7175,10 @@
   {
     "id": 797,
     "RandomNumber": "68892578073417196601695077198695894065769662833800217889940987959609684415508",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Bong",
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Ladder"
   },
   {
@@ -7222,7 +7222,7 @@
     "RandomNumber": "46628886188026396865627322490011824016375119203506462123161004457090711598405",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B"
   },
@@ -7256,11 +7256,11 @@
   {
     "id": 806,
     "RandomNumber": "105471021199779292571756822492940841874480014646900158617264757307944934086503",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 807,
@@ -7283,11 +7283,11 @@
   {
     "id": 809,
     "RandomNumber": "15138285504387439677387885262534514949458231160890602208523888777872127686408",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 810,
@@ -7310,20 +7310,20 @@
   {
     "id": 812,
     "RandomNumber": "62748898263864037903905504849177664077226609633042124547132027392822942068119",
+    "State": "Embellished",
+    "Machine": "Altar",
+    "Productivity": "Very High",
+    "GlobalAsset": "None",
+    "ExpansionProp": "Recess A"
+  },
+  {
+    "id": 813,
+    "RandomNumber": "112681024944593213269648580417300552982370534022113067535136396168380622379628",
     "State": "Basic",
     "Machine": "Altar",
     "Productivity": "Medium",
     "GlobalAsset": "None",
     "ExpansionProp": "Ladder"
-  },
-  {
-    "id": 813,
-    "RandomNumber": "112681024944593213269648580417300552982370534022113067535136396168380622379628",
-    "State": "Degraded",
-    "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "None",
-    "ExpansionProp": "Pit"
   },
   {
     "id": 814,
@@ -7375,7 +7375,7 @@
     "RandomNumber": "29217337128040839261702433325472067374026175710819015520746639139973188680707",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate"
   },
@@ -7393,7 +7393,7 @@
     "RandomNumber": "42970800077673945257712116077544123784349392251992390975069694225727704566622",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate"
   },
@@ -7427,20 +7427,20 @@
   {
     "id": 825,
     "RandomNumber": "61603849701183661520456953276709306699773641495377224859830945816663005538790",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Recess A"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 826,
     "RandomNumber": "15804684851952413401075052295983131956315106425364838885704763085654240956903",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Stairs"
+    "Productivity": "High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 827,
@@ -7463,11 +7463,11 @@
   {
     "id": 829,
     "RandomNumber": "111416616448733849090272330961678887582731194105780000175056304375213204507030",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 830,
@@ -7490,11 +7490,11 @@
   {
     "id": 832,
     "RandomNumber": "112661828865373454353858349980944047978546380611834973233434552521294452025663",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 833,
@@ -7508,29 +7508,29 @@
   {
     "id": 834,
     "RandomNumber": "17954836520659388813217611100229128045271046671890050593891425647783943591652",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 835,
     "RandomNumber": "3518684134933434563700054850925564808453203329261269089766969832459003954479",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Crack"
   },
   {
     "id": 836,
     "RandomNumber": "105200437540823793597125873748245528427914114220157860038782182463224514889119",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 837,
@@ -7562,9 +7562,9 @@
   {
     "id": 840,
     "RandomNumber": "106323689980623617983724205407958697732009750684078567501241589748581411935648",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Grate"
   },
@@ -7580,11 +7580,11 @@
   {
     "id": 842,
     "RandomNumber": "18628946124042524718344808028491247841006944973569866794091008672105238184259",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 843,
@@ -7634,36 +7634,36 @@
   {
     "id": 848,
     "RandomNumber": "62764986945294291374165408627642100542414432099835859903908492624539680116357",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder"
   },
   {
     "id": 849,
     "RandomNumber": "13184102742956301652346505575102812408052625708573435308305636113110263085831",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A"
   },
   {
     "id": 850,
     "RandomNumber": "63940962663058771205063377409480937943636962966646715101414501120703665829212",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 851,
     "RandomNumber": "60395508413924361096878276548602737983239232350870545149151459942800043374159",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C"
   },
@@ -7688,11 +7688,11 @@
   {
     "id": 854,
     "RandomNumber": "13674331828773867810414233111442252135978000210403729399491623964681208303473",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 855,
@@ -7724,18 +7724,18 @@
   {
     "id": 858,
     "RandomNumber": "108440109912982579444318148100664130548102376478521836014395018137520101131614",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 859,
     "RandomNumber": "19905691635713710393842096064241963209331811622779570996961838400735094999425",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate"
   },
@@ -7760,10 +7760,10 @@
   {
     "id": 862,
     "RandomNumber": "106878752868053282962731948720941319267018560659432725897687204701541616624157",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Martini",
+    "Productivity": "High",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit"
   },
   {
@@ -7778,11 +7778,11 @@
   {
     "id": 864,
     "RandomNumber": "102324085784479388833527759720792280138711440515917330912332930214243726298434",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 865,
@@ -7823,11 +7823,11 @@
   {
     "id": 869,
     "RandomNumber": "11170245433097010848035916506918514722714303030851686298355455597699755540358",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 870,
@@ -7850,27 +7850,27 @@
   {
     "id": 872,
     "RandomNumber": "62260589047719147194301320058703739683213488996179563463809465424457144182627",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Crack"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Grate"
   },
   {
     "id": 873,
     "RandomNumber": "11992612635012198416653168767574033887597482286756125058332394350803049210061",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Pit"
   },
   {
     "id": 874,
     "RandomNumber": "105174506336513314011009383002489027575710190134895733506151252209783453400849",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
@@ -7904,19 +7904,19 @@
   {
     "id": 878,
     "RandomNumber": "18714564084868082704486739884794500131093530756135226509552131870273619188078",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A"
   },
   {
     "id": 879,
     "RandomNumber": "17291183498860809617069164336630321912784153807432584095350989841543774702383",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Medium",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "None"
   },
   {
@@ -7940,9 +7940,9 @@
   {
     "id": 882,
     "RandomNumber": "6962697411123490957396926132866894341543693178256951259668251964815445716326",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "Very High",
     "GlobalAsset": "None",
     "ExpansionProp": "None"
   },
@@ -7958,11 +7958,11 @@
   {
     "id": 884,
     "RandomNumber": "108541220153412472460570092672667754164154860710928780029961011787328035877662",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess A"
+    "Productivity": "Medium",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 885,
@@ -7985,10 +7985,10 @@
   {
     "id": 887,
     "RandomNumber": "105674195996802983694699121737377336635209812800850835836651308383065956295004",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "None"
   },
   {
@@ -8003,20 +8003,20 @@
   {
     "id": 889,
     "RandomNumber": "106184491915385442629508304025918706567433449076677860119291219638486942840328",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
     "ExpansionProp": "Crack"
   },
   {
     "id": 890,
     "RandomNumber": "104265885446886996625575892902805533366945967846704084969714013109999345114218",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess A"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 891,
@@ -8075,27 +8075,27 @@
   {
     "id": 897,
     "RandomNumber": "101095222689196696947903513745802624228914384276644733683784571267769877113027",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack"
   },
   {
     "id": 898,
     "RandomNumber": "102888348141696569192211005409367365509276807647835197674087384127404975224758",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
   {
     "id": 899,
     "RandomNumber": "112451894916661798187792487787567638179628016877415796637194755347965767811788",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "None"
   },
@@ -8111,20 +8111,20 @@
   {
     "id": 901,
     "RandomNumber": "67710500856120168230107586570169697877692563316158153685434517680854837339133",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess B"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 902,
     "RandomNumber": "67384088847976428925826800096422102527159651995746879275927134376879230557142",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 903,
@@ -8138,11 +8138,11 @@
   {
     "id": 904,
     "RandomNumber": "69592044279677963801616884872890634483173839995402676289487012795865708750811",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess A"
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 905,
@@ -8156,20 +8156,20 @@
   {
     "id": 906,
     "RandomNumber": "108411196089713222924318188784542066597583360531406184598951105028116800950401",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 907,
     "RandomNumber": "110034553694917938388257815596015029062708209790178391782795452136172487587908",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 908,
@@ -8183,19 +8183,19 @@
   {
     "id": 909,
     "RandomNumber": "108732163526910126674562624532844699847447829212698045024377586694546996168942",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Ladder"
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 910,
     "RandomNumber": "107537152066502498504814597776130540865885186954669931459932605718436856875471",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "Medium",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
@@ -8255,19 +8255,19 @@
   {
     "id": 917,
     "RandomNumber": "63573144229573010863168138415262068422089939910825228618309798893922402681744",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C"
   },
   {
     "id": 918,
     "RandomNumber": "64133710270006749241698199396334846759113532399594170131108351812091429746986",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Bong",
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C"
   },
   {
@@ -8284,7 +8284,7 @@
     "RandomNumber": "42574491619869381005908944284884019159871199060323228489592410575622408443492",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C"
   },
@@ -8336,29 +8336,29 @@
   {
     "id": 926,
     "RandomNumber": "15982796494196359501500075823664733978552930699908010567420038142682893720009",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Crack"
   },
   {
     "id": 927,
     "RandomNumber": "12340757763904357778443822059149974822720957489250399623015333466746413177514",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 928,
     "RandomNumber": "19223498232578139747517598190480880753363358986516347778650046810414158591907",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Recess A"
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 929,
@@ -8372,19 +8372,19 @@
   {
     "id": 930,
     "RandomNumber": "101464859588652938231070963677432970325481090188767181416852357282914791315400",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 931,
     "RandomNumber": "61817817177896702675748212831571824337637841986907843622752876992877407456809",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C"
   },
   {
@@ -8437,7 +8437,7 @@
     "RandomNumber": "41481816717370222921722223175764174499608130639773123526026042156624468490315",
     "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate"
   },
@@ -8453,11 +8453,11 @@
   {
     "id": 939,
     "RandomNumber": "14117703931086782277737760714225723255047115207017404875386125434142679439646",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess A"
+    "ExpansionProp": "Recess B"
   },
   {
     "id": 940,
@@ -8480,11 +8480,11 @@
   {
     "id": 942,
     "RandomNumber": "115385454278162902208546720665395516090470257465972201541103351238196607180453",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 943,
@@ -8498,11 +8498,11 @@
   {
     "id": 944,
     "RandomNumber": "106055819388514186728944907133458935807833805058925368255508256039287658597155",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 945,
@@ -8525,9 +8525,9 @@
   {
     "id": 947,
     "RandomNumber": "15062511068090168561358801977248640112831029915622554562169123475763077039647",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C"
   },
@@ -8561,28 +8561,28 @@
   {
     "id": 951,
     "RandomNumber": "16948015858222628529871782772158161350369782852582610218536270294891177880165",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 952,
     "RandomNumber": "12199695488198853513412887710683156247440155481986920033868325059177219712036",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 953,
     "RandomNumber": "103542686901320897656466716748506495141660915182596036947429842429274776930473",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
-    "GlobalAsset": "Fridge",
+    "Productivity": "Medium",
+    "GlobalAsset": "Bong",
     "ExpansionProp": "Recess A"
   },
   {
@@ -8597,47 +8597,47 @@
   {
     "id": 955,
     "RandomNumber": "6468482246840101980486827065468947128467969883948735993971270075156030089260",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C"
   },
   {
     "id": 956,
     "RandomNumber": "65466027289193181541085579368167107586849384792203521611813795746513233892480",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Ladder"
+    "Productivity": "Very High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 957,
     "RandomNumber": "17207114094711435210077915065974300148825446389043346150245100475901620839950",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess A"
+    "Productivity": "High",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Recess C"
   },
   {
     "id": 958,
     "RandomNumber": "65754589825360665701485679002525903555727394553734081986575131500753994973572",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
-    "ExpansionProp": "Ladder"
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 959,
     "RandomNumber": "18213753042000242201634338783979286131851428404058264683821295996183643739274",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
     "Productivity": "Medium",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Pit"
+    "GlobalAsset": "Bong",
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 960,
@@ -8660,11 +8660,11 @@
   {
     "id": 962,
     "RandomNumber": "100217624194999480264047201794978770109304922039118426745989413217465176333563",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 963,
@@ -8705,10 +8705,10 @@
   {
     "id": 967,
     "RandomNumber": "6694905966732621477941985926236427136082968621777057456438889088947039406654",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Martini",
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "None"
   },
   {
@@ -8741,11 +8741,11 @@
   {
     "id": 971,
     "RandomNumber": "19093803972408783100983904998623353713252268033971177095466480595001352564217",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "None",
-    "ExpansionProp": "Pit"
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 972,
@@ -8786,36 +8786,36 @@
   {
     "id": 976,
     "RandomNumber": "67966207498789331533265684060690540882875592529600572778773198351209729931434",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Cactus",
-    "ExpansionProp": "Ladder"
+    "ExpansionProp": "Recess A"
   },
   {
     "id": 977,
     "RandomNumber": "63300064760005809249528504419305620974779424758667056456512897159138470661516",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C"
   },
   {
     "id": 978,
     "RandomNumber": "6108422870218175801680813507935304326726821446602001195783028946516680311709",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
+    "Productivity": "Very High",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C"
   },
   {
     "id": 979,
     "RandomNumber": "18856928058657189703231103716319295875520778337592623573096500428444037277596",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
@@ -8831,38 +8831,38 @@
   {
     "id": 981,
     "RandomNumber": "66397303522130661339428054498426537558174159447440641322642597548430173267435",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "High",
-    "GlobalAsset": "Martini",
+    "Productivity": "Very High",
+    "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C"
   },
   {
     "id": 982,
     "RandomNumber": "14085106870222536239593086150553207027079673570264535750920991489747346410365",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Very Low",
-    "GlobalAsset": "Bong",
+    "Productivity": "High",
+    "GlobalAsset": "Martini",
     "ExpansionProp": "Pit"
   },
   {
     "id": 983,
     "RandomNumber": "1200187243216167579815003683272998186732552584713809063304363202789353391008",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "Medium",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack"
   },
   {
     "id": 984,
     "RandomNumber": "111802888367855579708415257736456511926278501549129070687486502287421475840336",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Crack"
+    "ExpansionProp": "Grate"
   },
   {
     "id": 985,
@@ -8876,11 +8876,11 @@
   {
     "id": 986,
     "RandomNumber": "114948756480951374793455692502000518780876341972509582943103831694094882977008",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Martini",
-    "ExpansionProp": "Stairs"
+    "ExpansionProp": "Ladder"
   },
   {
     "id": 987,
@@ -8894,11 +8894,11 @@
   {
     "id": 988,
     "RandomNumber": "106640983546793704467626337161284171679966310631486104668105587366130481522748",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Altar",
-    "Productivity": "Low",
+    "Productivity": "High",
     "GlobalAsset": "Fridge",
-    "ExpansionProp": "Grate"
+    "ExpansionProp": "Pit"
   },
   {
     "id": 989,
@@ -8930,11 +8930,11 @@
   {
     "id": 992,
     "RandomNumber": "67441640032713803216672679314877633079733987874888292829174376374565932016777",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Altar",
-    "Productivity": "Medium",
-    "GlobalAsset": "Bong",
-    "ExpansionProp": "Pit"
+    "Productivity": "Very High",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Stairs"
   },
   {
     "id": 993,

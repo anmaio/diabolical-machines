@@ -87,7 +87,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
       require(quantity <= 30, "Quantity too high"); // To prevent excessive first-time token transfer costs, please limit the quantity to a reasonable number (e.g. 30).
       uint startingSupply = totalSupply();
       require(startingSupply + quantity <= MAX_SUPPLY, "Max supply reached");
-      _safeMint(to, quantity); //Safe minting is reentrancy safe since V3.
       for (uint i = 0; i < quantity;) {
         uint tokenId = startingSupply + i;
         tokenIdToGenId[tokenId] = currentGen;
@@ -95,6 +94,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
           ++i;
         }
       }
+      _safeMint(to, quantity); //Safe minting is reentrancy safe since V3.
     }
 
     function getSeed(uint256 tokenId) public view returns (uint256) {
