@@ -243,9 +243,9 @@ contract CliffordTest is Test {
 
       item = string.concat(
         item, 
-        ",\n    \"Global Asset\": \"",
+        ",\n    \"GlobalAsset\": \"",
         globalAsset,
-        "\",\n    \"Expansion Prop\": \"",
+        "\",\n    \"ExpansionProp\": \"",
         expansionProp,
         "\"",
         itemClose
