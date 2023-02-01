@@ -199,9 +199,9 @@ contract Altar {
 
     uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 21, 2));
 
-    string memory globalAssetOffset = string(GridHelper.slice(bytes(globalAssetOffsets), (globalAssetDigits % numberOfPositions)*8, 8));
+    string memory assetOffset = string(GridHelper.slice(bytes(globalAssetOffsets), (globalAssetDigits % numberOfPositions)*8, 8));
 
-    return globalAssetOffset;
+    return assetOffset;
 
   }
 
