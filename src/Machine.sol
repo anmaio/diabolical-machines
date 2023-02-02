@@ -13,20 +13,21 @@ interface IMachine {
 contract Machine {
 
   // conveyor belt
-  string[] public allMachines = ["Conveyorbelt", "Drills", "Nose", "Beast", "Altar", "Tubes"];
+  // string[] public allMachines = ["Conveyorbelt", "Drills", "Nose", "Beast", "Altar", "Tubes"];
+  string[] public allMachines = ["Altar"];
   // TESTING
   string[] public machines = ["Altar"];
 
   mapping(string => string) public machineToProductivityTiers;
   mapping(string => address) public machineToWorkstation;
 
-  constructor(address[6] memory workstations) {
+  constructor(address[1] memory workstations) {
     // machine.setAllWorkstations([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
     for (uint i = 0; i < allMachines.length; ++i) {
       machineToWorkstation[allMachines[i]] = workstations[i];
     }
 
-    machineToProductivityTiers["Altar"] = "020030040050020030040050020030040050";
+    machineToProductivityTiers["Altar"] = "021024026029037039042045051054056060";
   }
 
   function selectMachine(uint rand) external view returns (string memory) {
@@ -55,6 +56,10 @@ contract Machine {
     } else {
       return "Very High";
     }
+  }
+
+  function getProductivityValue(string memory machine, bytes memory rand, uint state) external view returns (uint) {
+    return IMachine(machineToWorkstation[machine]).getProductivityValue(rand, state);
   }
 
   function getGlobalAssetName(bytes memory rand, uint state) external pure returns (string memory) {

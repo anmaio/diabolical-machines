@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.12;
+pragma solidity 0.8.16;
 
 import "forge-std/Script.sol";
 import "../src/Clifford.sol";
@@ -24,6 +24,15 @@ import "../src/Assets/Eyes/EyesImp1.sol";
 
 import "../src/Assets/Feedback/FeedbackImp1.sol";
 
+import "../src/Assets/Assets/AssetsImp1.sol";
+import "../src/Assets/Assets/AssetsImp2.sol";
+import "../src/Assets/Assets/AssetsImp3.sol";
+import "../src/Assets/Assets/AssetsImp4.sol";
+import "../src/Assets/Assets/AssetsImp5.sol";
+import "../src/Assets/Assets/AssetsImp6.sol";
+
+import "../src/Assets/Props/PropsImp1.sol";
+
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
 
@@ -32,17 +41,19 @@ contract CliffordScript is Script {
   TraitBase public substancesTB;
   TraitBase public feedbackTB;
   TraitBase public eyesTB;
+  TraitBase public assetsTB;
+  TraitBase public propsTB;
   TraitBase public altarTB;
 
   AssetRetriever public assetRetriever;
 
   // Machines
   Altar public altar;
-  Beast public beast;
-  Drills public drills;
-  Nose public nose;
-  Tubes public tubes;
-  Conveyorbelt public conveyorbelt;
+  // Beast public beast;
+  // Drills public drills;
+  // Nose public nose;
+  // Tubes public tubes;
+  // Conveyorbelt public conveyorbelt;
 
   Machine public machine;
   Metadata public metadata;
@@ -56,7 +67,6 @@ contract CliffordScript is Script {
     substancesImpsAds[0] = address(substancesImp1);
     substancesTB = new TraitBase(substancesImpsAds);
   }
-  // SubstancesImp1 public substancesImp1 = new SubstancesImp1();
 
   // Feedback
   function deployFeedback() internal {
@@ -65,7 +75,6 @@ contract CliffordScript is Script {
     feedbackImpsAds[0] = address(feedbackImp1);
     feedbackTB = new TraitBase(feedbackImpsAds);
   }
-  // FeedbackImp1 public feedbackImp1 = new FeedbackImp1();
 
   // Eyes
   function deployEyes() internal {
@@ -74,7 +83,32 @@ contract CliffordScript is Script {
     eyesImpsAds[0] = address(eyesImp1);
     eyesTB = new TraitBase(eyesImpsAds);
   }
-  // EyesImp1 public eyesImp1 = new EyesImp1();
+
+  // Assets
+  function deployAssets() internal {
+    AssetsImp1 assetsImp1 = new AssetsImp1();
+    AssetsImp2 assetsImp2 = new AssetsImp2();
+    AssetsImp3 assetsImp3 = new AssetsImp3();
+    AssetsImp4 assetsImp4 = new AssetsImp4();
+    AssetsImp5 assetsImp5 = new AssetsImp5();
+    AssetsImp6 assetsImp6 = new AssetsImp6();
+    address[] memory assetsImpsAds = new address[](6);
+    assetsImpsAds[0] = address(assetsImp1);
+    assetsImpsAds[1] = address(assetsImp2);
+    assetsImpsAds[2] = address(assetsImp3);
+    assetsImpsAds[3] = address(assetsImp4);
+    assetsImpsAds[4] = address(assetsImp5);
+    assetsImpsAds[5] = address(assetsImp6);
+    assetsTB = new TraitBase(assetsImpsAds);
+  }
+
+  // Props
+  function deployProps() internal {
+    PropsImp1 propsImp1 = new PropsImp1();
+    address[] memory propsImpsAds = new address[](1);
+    propsImpsAds[0] = address(propsImp1);
+    propsTB = new TraitBase(propsImpsAds);
+  }
 
   // Altar
   function deployAltar() internal {
@@ -89,28 +123,30 @@ contract CliffordScript is Script {
   }
 
   function deployAssetRetriever() internal {
-    address[] memory traitBases = new address[](4);
+    address[] memory traitBases = new address[](6);
     traitBases[0] = address(substancesTB);
     traitBases[1] = address(feedbackTB);
     traitBases[2] = address(eyesTB);
-    traitBases[3] = address(altarTB);
+    traitBases[3] = address(assetsTB);
+    traitBases[4] = address(propsTB);
+    traitBases[5] = address(altarTB);
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
   // deploy machines
   function deployMachines() internal {
     altar = new Altar(address(assetRetriever));
-    beast = new Beast();
-    drills = new Drills();
-    nose = new Nose();
-    tubes = new Tubes();
-    conveyorbelt = new Conveyorbelt();
+    // beast = new Beast();
+    // drills = new Drills();
+    // nose = new Nose();
+    // tubes = new Tubes();
+    // conveyorbelt = new Conveyorbelt();
   }
 
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
-    machine = new Machine([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
+    machine = new Machine([address(altar)]);
     metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
 
@@ -126,6 +162,8 @@ contract CliffordScript is Script {
     deploySubstances();
     deployFeedback();
     deployEyes();
+    deployAssets();
+    deployProps();
     deployAltar();
     deployAssetRetriever();
     deployMachines();

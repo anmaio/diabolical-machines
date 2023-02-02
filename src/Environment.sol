@@ -152,7 +152,7 @@ library Environment {
 
   function getDegradedShell(uint[] memory colourArray, string memory machine, bytes memory digits) internal pure returns (uint[] memory) {
 
-    uint randomColourDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 2, 8));
+    uint randomColourDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 3, 7));
 
     string memory degradedHsl = LOGISTICS_DEGRADED_HSL;
     string memory degradedPercentages = LOGISTICS_COLOUR_PERCENTAGES;

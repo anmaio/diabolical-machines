@@ -77,7 +77,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     // current genId for minting
     uint256 private currentGen;
 
-    constructor(Metadata metadata) ERC721A("Clifford", "o") VRFConsumerBaseV2(vrfCoordinator) {
+    constructor(Metadata metadata) ERC721A("Clifford", "Cliff") VRFConsumerBaseV2(vrfCoordinator) {
       COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
       LINKTOKEN = LinkTokenInterface(link_token_contract);
       _metadata = metadata;
@@ -87,7 +87,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
       require(quantity <= 30, "Quantity too high"); // To prevent excessive first-time token transfer costs, please limit the quantity to a reasonable number (e.g. 30).
       uint startingSupply = totalSupply();
       require(startingSupply + quantity <= MAX_SUPPLY, "Max supply reached");
-      _safeMint(to, quantity); //Safe minting is reentrancy safe since V3.
       for (uint i = 0; i < quantity;) {
         uint tokenId = startingSupply + i;
         tokenIdToGenId[tokenId] = currentGen;
@@ -95,6 +94,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
           ++i;
         }
       }
+      _safeMint(to, quantity); //Safe minting is reentrancy safe since V3.
     }
 
     function getSeed(uint256 tokenId) public view returns (uint256) {
@@ -137,7 +137,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
         currentGen++;
 
       } else { // Testing
-        genSeed[currentGen] = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender, totalSupply())));
+        genSeed[currentGen] = uint256(keccak256(abi.encodePacked(block.number, block.timestamp, totalSupply())));
         currentGen++;
       }
     }

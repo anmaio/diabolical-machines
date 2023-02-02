@@ -82,10 +82,10 @@ contract Metadata {
 
   // 0 = degraded, 1 = basic, 2 = embellished
   function getState(bytes memory digits) public pure returns (uint) {
-    uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 0, 2));
-    if (stateDigits < 20) {
+    uint stateDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 1, 2));
+    if (stateDigits < 10) {
       return 0;
-    } else if (stateDigits < 70) {
+    } else if (stateDigits < 60) {
       return 1;
     } else {
       return 2;
