@@ -77,7 +77,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     // current genId for minting
     uint256 private currentGen;
 
-    constructor(Metadata metadata) ERC721A("Clifford", "o") VRFConsumerBaseV2(vrfCoordinator) {
+    constructor(Metadata metadata) ERC721A("Clifford", "Cliff") VRFConsumerBaseV2(vrfCoordinator) {
       COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
       LINKTOKEN = LinkTokenInterface(link_token_contract);
       _metadata = metadata;
@@ -137,7 +137,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
         currentGen++;
 
       } else { // Testing
-        genSeed[currentGen] = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender, totalSupply())));
+        genSeed[currentGen] = uint256(keccak256(abi.encodePacked(block.number, block.timestamp, totalSupply())));
         currentGen++;
       }
     }

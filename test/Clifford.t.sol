@@ -39,6 +39,8 @@ import "../src/AssetRetriever.sol";
 contract CliffordTest is Test {
 
   uint internal constant MINT_SIZE = 1000;
+  string[3] public allStates = ["Degraded", "Basic", "Embellished"];
+  string public output = "[\n  ";
 
   // Trait bases
   TraitBase public substancesTB;
@@ -52,11 +54,11 @@ contract CliffordTest is Test {
 
   // Machines
   Altar public altar;
-  Beast public beast;
-  Drills public drills;
-  Nose public nose;
-  Tubes public tubes;
-  Conveyorbelt public conveyorbelt;
+  // Beast public beast;
+  // Drills public drills;
+  // Nose public nose;
+  // Tubes public tubes;
+  // Conveyorbelt public conveyorbelt;
 
   Machine public machine;
   Metadata public metadata;
@@ -139,17 +141,17 @@ contract CliffordTest is Test {
   // deploy machines
   function deployMachines() internal {
     altar = new Altar(address(assetRetriever));
-    beast = new Beast();
-    drills = new Drills();
-    nose = new Nose();
-    tubes = new Tubes();
-    conveyorbelt = new Conveyorbelt();
+    // beast = new Beast();
+    // drills = new Drills();
+    // nose = new Nose();
+    // tubes = new Tubes();
+    // conveyorbelt = new Conveyorbelt();
   }
 
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
-    machine = new Machine([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
+    machine = new Machine([address(altar)]);
     metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
 
@@ -171,7 +173,6 @@ contract CliffordTest is Test {
 
     // Testing only
     setupMint();
-    clifford.reveal();
   }
 
   function setupMint() public {
@@ -182,6 +183,9 @@ contract CliffordTest is Test {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       // to, quantity
       clifford.publicMint(to, 1);
+      vm.roll(i*69);
+      vm.warp(i*69);
+      clifford.reveal();
     }
   }
 
@@ -196,11 +200,6 @@ contract CliffordTest is Test {
   // create a json file with the ids of the images that were created
   function testWriteJson() public {
 
-    string[3] memory allStates = ["Degraded", "Basic", "Embellished"];
-    
-    string memory output = "[\n  ";
-    string memory closing = "]";
-
     string memory itemOpen = "{\n    \"id\": ";
 
     for (uint256 i = 0; i < MINT_SIZE; i++) {
@@ -210,12 +209,12 @@ contract CliffordTest is Test {
         itemClose = "\n  }\n";
       }
 
-      string memory randomNumber = string(clifford.getRandBytes(i));
       string memory state = allStates[metadata.getState(clifford.getRandBytes(i))];
 
       string memory machineName = metadata.getMachine(clifford.getRandBytes(i));
 
       string memory productivity = metadata.getProductivity(clifford.getRandBytes(i));
+      string memory productivityValue = Strings.toString(machine.getProductivityValue(machineName, clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i))));
 
       string memory globalAsset = metadata.getGlobalAssetName(clifford.getRandBytes(i));
 
@@ -225,7 +224,7 @@ contract CliffordTest is Test {
         itemOpen, 
         id, 
         ",\n    \"RandomNumber\": \"", 
-        randomNumber, 
+        string(clifford.getRandBytes(i)), 
         "\",\n    \"State\": \"",
         state, 
         "\""
@@ -238,12 +237,13 @@ contract CliffordTest is Test {
         "\""
         ",\n    \"Productivity\": \"",
         productivity,
-        "\""
+        "\",\n    \"ProductivityValue\": \"",
+        productivityValue
       );
 
       item = string.concat(
         item, 
-        ",\n    \"GlobalAsset\": \"",
+        "\",\n    \"GlobalAsset\": \"",
         globalAsset,
         "\",\n    \"ExpansionProp\": \"",
         expansionProp,
@@ -254,8 +254,49 @@ contract CliffordTest is Test {
       output = string.concat(output, item);
     }
 
-    string memory json = string.concat(output, closing);
+    string memory json = string.concat(output, "]");
     vm.writeFile("outputJson/ids.json", json);
+    
+  }
+
+  function testWriteMetadata() public {
+    string memory itemOpen = "{\n    \"attributes\": [\n      {\n        \"trait_type\": \"State\",\n        \"value\": \"";
+
+    for (uint256 i = 0; i < MINT_SIZE; i++) {
+      string memory id = Strings.toString(i);
+
+      string memory state = allStates[metadata.getState(clifford.getRandBytes(i))];
+
+      string memory machineName = metadata.getMachine(clifford.getRandBytes(i));
+
+      string memory productivity = metadata.getProductivity(clifford.getRandBytes(i));
+
+      string memory globalAsset = metadata.getGlobalAssetName(clifford.getRandBytes(i));
+
+      string memory expansionProp = metadata.getExpansionPropName(clifford.getRandBytes(i));
+
+      string memory item = string.concat(
+        itemOpen, 
+        state, 
+        "\"\n      },\n      {\n        \"trait_type\": \"Machine\",\n        \"value\": \"",
+        machineName, 
+        "\"\n      },\n      {\n        \"trait_type\": \"Productivity\",\n        \"value\": \"",
+        productivity, 
+        "\"\n      },\n      {\n        \"trait_type\": \"Global Asset\",\n        \"value\": \"",
+        globalAsset
+      );
+
+      item = string.concat(
+        item, 
+        "\"\n      },\n      {\n        \"trait_type\": \"Expansion Prop\",\n        \"value\": \"",
+        expansionProp,
+        "\"\n      }\n    ],\n    \"description\": \"Clifford is a generative art project that explores the relationship between humans and machines. Each Clifford is a unique, one-of-a-kind, generative art piece that is created by a machine. Clifford is a generative art project that explores the relationship between humans and machines. Each Clifford is a unique, one-of-a-kind, generative art piece that is created by a machine.\",\n    \"image\": \"https://gallerydevukssa.blob.core.windows.net/token-image/cliffordImage.jpg\",\n    \"name\": \"Clifford #",
+        id,
+        "\"\n}"
+      );
+
+      vm.writeFile(string.concat("outputMetadata/", id, ".json"), item);
+    }
     
   }
 

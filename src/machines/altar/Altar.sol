@@ -24,7 +24,7 @@ contract Altar {
   string internal constant RUG_NUMBERS = "70207021";
   string internal constant FLOOB_ANIMATION_NUMBERS = "701970161015";
   string internal constant ORB_NUMBERS = "4035403640374038";
-  string internal constant TOP_ROW_NUMBERS = "60146016";
+  string internal constant TOP_ROW_NUMBERS = "601460166012";
 
   // Floor
   string internal constant DEGRADED_FLOOR_OFFSETS = "0156009003120360046802700312018006240180";
@@ -188,7 +188,7 @@ contract Altar {
   }
 
   function getTopRowItemNumber(bytes memory digits, uint state) internal pure returns (uint) {
-    uint[] memory topRowNumbersArray = GridHelper.setUintArrayFromString(TOP_ROW_NUMBERS, 2, 4);
+    uint[] memory topRowNumbersArray = GridHelper.setUintArrayFromString(TOP_ROW_NUMBERS, 3, 4);
     uint topRowDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24, 2));
 
     string memory expansionPropPosition = getExpansionPropPosition(digits, state);
@@ -198,13 +198,19 @@ contract Altar {
     }
 
     if (state == 2 && canFit) {
-      if (topRowDigits < 20) {
+      if (topRowDigits < 5) {
+        return topRowNumbersArray[2];
+      } else if (topRowDigits < 20) {
         return topRowNumbersArray[0];
       } else {
         return topRowNumbersArray[1];
       }
-    } else if (state == 1 && topRowDigits < 50 && canFit) {
-      return topRowNumbersArray[0];
+    } else if (state == 1 && topRowDigits < 80 && canFit) {
+      if (topRowDigits < 40) {
+        return topRowNumbersArray[0];
+      } else {
+        return topRowNumbersArray[2];
+      }
     } else {
       return 0;
     }
@@ -269,11 +275,11 @@ contract Altar {
     string[] memory offsetsUsed = new string[](32);
     uint[] memory frame = getFrameNumber(digits, state);
 
-    numbersUsed[count] = getTopRowItemNumber(digits, state);
-    count++;
-
     numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(digits, state);
     offsetsUsed[count] = getExpansionPropPosition(digits, state);
+    count++;
+
+    numbersUsed[count] = getTopRowItemNumber(digits, state);
     count++;
 
     for (uint i = 0; i < frame.length; ++i) {
