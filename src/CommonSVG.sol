@@ -37,7 +37,7 @@ library CommonSVG {
 
   string internal constant SHELL_OPEN = "<g style='transform:scaleX(";
 
-  string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell' clip-path='url(#clipPathShell)'><g id='leftWall'><polygon points='0,270 468,0 468,540 0,810' fill='url(#c0b)' stroke='black'></polygon><polygon points='0,270 468,0 468,540 0,810' fill='url(#lDT)' stroke='black'></polygon></g><g id='rightWall'><polygon points='468,540 468,0 936,270 936,810' fill='url(#c1b)' stroke='black'></polygon><polygon points='468,540 468,0 936,270 936,810' fill='url(#rDT)' stroke='black'></polygon></g><g id='floor'><polygon id='polygon-floor-border' points='0,810 468,1080 936,810 468,540' fill='url(#c2b)' stroke='black'></polygon><polygon id='polygon-floor-border-DT' points='0,810 468,1080 936,810 468,540' fill='url(#fDT)' stroke='black'></polygon></g>";
+  string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell' clip-path='url(#clipPathShell)'><g id='leftWall'><polygon points='0,270 468,0 468,540 0,810' fill='url(#s0)' stroke='black'></polygon><polygon points='0,270 468,0 468,540 0,810' fill='url(#lDT)' stroke='black'></polygon></g><g id='rightWall'><polygon points='468,540 468,0 936,270 936,810' fill='url(#s1)' stroke='black'></polygon><polygon points='468,540 468,0 936,270 936,810' fill='url(#rDT)' stroke='black'></polygon></g><g id='floor'><polygon id='polygon-floor-border' points='0,810 468,1080 936,810 468,540' fill='url(#s2)' stroke='black'></polygon><polygon id='polygon-floor-border-DT' points='0,810 468,1080 936,810 468,540' fill='url(#fDT)' stroke='black'></polygon></g>";
 
   // closing svg tag
   // string internal constant SVG_END = "</svg>";
@@ -58,6 +58,8 @@ library CommonSVG {
   string internal constant GLOBAL_COLOURS = "057100087051093072231032035360096069186079070029092058";
 
   string internal constant GLOBAL_COLOURS_IDS = "g0g1g2g3g4g5";
+
+  string internal constant SHELL_COLOUR_IDS = "s0s1s2";
 
   function createShellGradient(uint[6] memory colours, string memory id, string memory rotation) internal pure returns (string memory) {
     string memory output = string.concat(
@@ -160,6 +162,12 @@ library CommonSVG {
       }
     }
 
+    // SHELL COLOURS
+    string[] memory shellColours = new string[](3);
+    for (uint i = 0; i < 3; ++i) {
+      shellColours[i] = createObjectGradient([baseColours[i*6], baseColours[i*6+1], baseColours[i*6+2], baseColours[i*6+3], baseColours[i*6+4], baseColours[i*6+5]], string(GridHelper.slice(bytes(SHELL_COLOUR_IDS), i*2, 2)));
+    }
+
     // GLOBAL COLOURS
     uint[] memory globalColours = GridHelper.setUintArrayFromString(GLOBAL_COLOURS, 9, 3);
     for (uint i = 0; i < 3; ++i) {
@@ -179,6 +187,10 @@ library CommonSVG {
 
     for (uint i = 0; i < 18; ++i) {
       returnDefs = string.concat(returnDefs, objectGradients[i]);
+    }
+
+    for (uint i = 0; i < 3; ++i) {
+      returnDefs = string.concat(returnDefs, shellColours[i]);
     }
 
     returnDefs = string.concat(returnDefs, "</defs>");

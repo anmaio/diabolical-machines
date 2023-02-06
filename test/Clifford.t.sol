@@ -31,6 +31,8 @@ import "../src/Assets/Assets/AssetsImp4.sol";
 import "../src/Assets/Assets/AssetsImp5.sol";
 import "../src/Assets/Assets/AssetsImp6.sol";
 
+import "../src/Assets/Misc/MiscImp1.sol";
+
 import "../src/Assets/Props/PropsImp1.sol";
 
 import "../src/Assets/TraitBase.sol";
@@ -49,6 +51,7 @@ contract CliffordTest is Test {
   TraitBase public assetsTB;
   TraitBase public propsTB;
   TraitBase public altarTB;
+  TraitBase public miscTB;
 
   AssetRetriever public assetRetriever;
 
@@ -127,14 +130,23 @@ contract CliffordTest is Test {
     altarTB = new TraitBase(altarImpsAds);
   }
 
+  // Misc
+  function deployMisc() internal {
+    MiscImp1 miscImp1 = new MiscImp1();
+    address[] memory miscImpsAds = new address[](1);
+    miscImpsAds[0] = address(miscImp1);
+    miscTB = new TraitBase(miscImpsAds);
+  }
+
   function deployAssetRetriever() internal {
-    address[] memory traitBases = new address[](6);
+    address[] memory traitBases = new address[](7);
     traitBases[0] = address(substancesTB);
     traitBases[1] = address(feedbackTB);
     traitBases[2] = address(eyesTB);
     traitBases[3] = address(assetsTB);
     traitBases[4] = address(propsTB);
     traitBases[5] = address(altarTB);
+    traitBases[6] = address(miscTB);
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
@@ -167,6 +179,7 @@ contract CliffordTest is Test {
     deployAssets();
     deployProps();
     deployAltar();
+    deployMisc();
     deployAssetRetriever();
     deployMachines();
     deployLogic();
@@ -211,20 +224,19 @@ contract CliffordTest is Test {
 
       string memory state = allStates[metadata.getState(clifford.getRandBytes(i))];
 
-      string memory machineName = metadata.getMachine(clifford.getRandBytes(i));
-
-      string memory productivity = metadata.getProductivity(clifford.getRandBytes(i));
-      string memory productivityValue = Strings.toString(machine.getProductivityValue(machineName, clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i))));
+      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getRandBytes(i)), clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i))));
 
       string memory globalAsset = metadata.getGlobalAssetName(clifford.getRandBytes(i));
 
       string memory expansionProp = metadata.getExpansionPropName(clifford.getRandBytes(i));
 
+      string memory colour = metadata.getColourIndexTier(clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i)));
+
       string memory item = string.concat(
         itemOpen, 
         id, 
         ",\n    \"RandomNumber\": \"", 
-        string(clifford.getRandBytes(i)), 
+        string(clifford.getRandBytes(i)), // random number
         "\",\n    \"State\": \"",
         state, 
         "\""
@@ -233,10 +245,10 @@ contract CliffordTest is Test {
       item = string.concat(
         item, 
         ",\n    \"Machine\": \"",
-        machineName,
+        metadata.getMachine(clifford.getRandBytes(i)), // machine name
         "\""
         ",\n    \"Productivity\": \"",
-        productivity,
+        metadata.getProductivity(clifford.getRandBytes(i)), // productivity
         "\",\n    \"ProductivityValue\": \"",
         productivityValue
       );
@@ -247,6 +259,8 @@ contract CliffordTest is Test {
         globalAsset,
         "\",\n    \"ExpansionProp\": \"",
         expansionProp,
+        "\",\n    \"Colour\": \"",
+        colour,
         "\"",
         itemClose
       );
@@ -275,6 +289,8 @@ contract CliffordTest is Test {
 
       string memory expansionProp = metadata.getExpansionPropName(clifford.getRandBytes(i));
 
+      string memory colour = metadata.getColourIndexTier(clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i)));
+
       string memory item = string.concat(
         itemOpen, 
         state, 
@@ -290,6 +306,8 @@ contract CliffordTest is Test {
         item, 
         "\"\n      },\n      {\n        \"trait_type\": \"Expansion Prop\",\n        \"value\": \"",
         expansionProp,
+        "\"\n      },\n      {\n        \"trait_type\": \"Colour\",\n        \"value\": \"",
+        colour,
         "\"\n      }\n    ],\n    \"description\": \"Clifford is a generative art project that explores the relationship between humans and machines. Each Clifford is a unique, one-of-a-kind, generative art piece that is created by a machine. Clifford is a generative art project that explores the relationship between humans and machines. Each Clifford is a unique, one-of-a-kind, generative art piece that is created by a machine.\",\n    \"image\": \"https://gallerydevukssa.blob.core.windows.net/token-image/cliffordImage.jpg\",\n    \"name\": \"Clifford #",
         id,
         "\"\n}"

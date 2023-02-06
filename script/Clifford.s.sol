@@ -31,6 +31,8 @@ import "../src/Assets/Assets/AssetsImp4.sol";
 import "../src/Assets/Assets/AssetsImp5.sol";
 import "../src/Assets/Assets/AssetsImp6.sol";
 
+import "../src/Assets/Misc/MiscImp1.sol";
+
 import "../src/Assets/Props/PropsImp1.sol";
 
 import "../src/Assets/TraitBase.sol";
@@ -44,6 +46,7 @@ contract CliffordScript is Script {
   TraitBase public assetsTB;
   TraitBase public propsTB;
   TraitBase public altarTB;
+  TraitBase public miscTB;
 
   AssetRetriever public assetRetriever;
 
@@ -122,14 +125,23 @@ contract CliffordScript is Script {
     altarTB = new TraitBase(altarImpsAds);
   }
 
+  // Misc
+  function deployMisc() internal {
+    MiscImp1 miscImp1 = new MiscImp1();
+    address[] memory miscImpsAds = new address[](1);
+    miscImpsAds[0] = address(miscImp1);
+    miscTB = new TraitBase(miscImpsAds);
+  }
+
   function deployAssetRetriever() internal {
-    address[] memory traitBases = new address[](6);
+    address[] memory traitBases = new address[](7);
     traitBases[0] = address(substancesTB);
     traitBases[1] = address(feedbackTB);
     traitBases[2] = address(eyesTB);
     traitBases[3] = address(assetsTB);
     traitBases[4] = address(propsTB);
     traitBases[5] = address(altarTB);
+    traitBases[6] = address(miscTB);
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
