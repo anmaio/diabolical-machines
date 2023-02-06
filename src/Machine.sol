@@ -27,7 +27,7 @@ contract Machine {
       machineToWorkstation[allMachines[i]] = workstations[i];
     }
 
-    machineToProductivityTiers["Altar"] = "021024026029037039042045051054056060";
+    machineToProductivityTiers["Altar"] = "024027030032041045048051056060065069";
   }
 
   function selectMachine(uint rand) external view returns (string memory) {

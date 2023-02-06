@@ -5,8 +5,9 @@ import "./GridHelper.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 library Environment {
-  uint internal constant TOTAL_COLOURS = 5;
-  uint internal constant TOTAL_DEGRADED_COLOURS = 6; // includes grey
+  uint internal constant TOTAL_BASIC_COLOURS = 5;
+  uint internal constant TOTAL_EMBELLISHED_COLOURS = 6;
+  uint internal constant TOTAL_DEGRADED_COLOURS = 8; // includes grey
 
   // LW, RW, FLOOR
   string internal constant EXECUTIVE_COLOUR_PERCENTAGES = "040020025000070000";
@@ -15,7 +16,8 @@ library Environment {
   string internal constant MINING_COLOUR_PERCENTAGES = "040020020000070020"; // CHANGE THIS
   string internal constant LOGISTICS_COLOUR_PERCENTAGES = "040020020000070020"; // CHANGE THIS
   
-  string internal constant EXECUTIVE_DEGRADED_HSL = "002047049019058048120002088120001061120001035120001015";
+  // Red, Lightest Gray, Orange, Light Gray, Red, Dark Gray, Orange, Darker Gray
+  string internal constant EXECUTIVE_DEGRADED_HSL = "002047049120002088019058048120001061002047049120001035019058048120001015";
   string internal constant LAB_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
   string internal constant FACTORY_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
   string internal constant MINING_DEGRADED_HSL = "002047049041100065"; // CHANGE THIS
@@ -61,14 +63,19 @@ library Environment {
   string internal constant LOGISTICS_COLOURS_BASIC_SHADE = "";
   string internal constant LOGISTICS_COLOURS_EMBELLISHED_SHADE = "";
 
-  string internal constant BASIC_COLOUR_PERCENTAGES = "4515110210050210";
-  string internal constant EMBELLISHED_COLOUR_PERCENTAGES = "4515110210050210";
+  string internal constant DEGRADED_COLOUR_PERCENTAGES = "2520151510080502";
+  string internal constant BASIC_COLOUR_PERCENTAGES = "2520151510080502";
+  string internal constant EMBELLISHED_COLOUR_PERCENTAGES = "2520151510080502";
 
-  function increaseColourLightness(uint baseLightness, uint percentage) internal pure returns(uint) {
-    return baseLightness + (baseLightness * percentage / 100);
+  function increaseValueByPercentage(uint baseLightness, uint percentage) internal pure returns(uint) {
+    uint value = baseLightness + (baseLightness * percentage / 100);
+    if (value > 100) {
+      value = 100;
+    }
+    return value;
   }
 
-  function decreaseColourLightness(uint baseLightness, uint percentage) internal pure returns(uint) {
+  function decreaseValueByPercentage(uint baseLightness, uint percentage) internal pure returns(uint) {
     return baseLightness - (baseLightness * percentage / 100);
   }
 
@@ -83,9 +90,12 @@ library Environment {
     return colourArray;
   }
 
-  function getBasicEmbellishedColourIndex(uint percentage, uint state) internal pure returns(uint) {
-    uint[] memory percentages = GridHelper.setUintArrayFromString(BASIC_COLOUR_PERCENTAGES, 8, 2);
-    if (state == 2) {
+  function getColourIndex(bytes memory digits, uint state) internal pure returns(uint) {
+    uint percentage = GridHelper.bytesToUint(GridHelper.slice(digits, 2, 8)) % 100;
+    uint[] memory percentages = GridHelper.setUintArrayFromString(DEGRADED_COLOUR_PERCENTAGES, 8, 2);
+    if (state == 1) {
+      percentages = GridHelper.setUintArrayFromString(BASIC_COLOUR_PERCENTAGES, 8, 2);
+    } else {
       percentages = GridHelper.setUintArrayFromString(EMBELLISHED_COLOUR_PERCENTAGES, 8, 2);
     }
     uint total = 0;
@@ -98,11 +108,16 @@ library Environment {
     return 0;
   }
 
-  function selectBasicEmbellishedPalette(string memory machine, uint percentage, uint state) internal pure returns (string[] memory) {
+  function selectBasicEmbellishedPalette(string memory machine, bytes memory digits, uint state) internal pure returns (string[] memory) {
     string[] memory basicPalette = new string[](2);
-    uint index = getBasicEmbellishedColourIndex(percentage, state);
+    uint index = getColourIndex(digits, state);
 
-    uint size = TOTAL_COLOURS * 9;
+    uint size;
+    if (state == 1) {
+      size = TOTAL_BASIC_COLOURS * 9;
+    } else {
+      size = TOTAL_EMBELLISHED_COLOURS * 9;
+    }
 
     // could be simplified by storing every colour in a single string but this is more readable and easier to change
     if (keccak256(bytes(machine)) == keccak256(bytes("Altar"))) { // executive
@@ -152,8 +167,6 @@ library Environment {
 
   function getDegradedShell(uint[] memory colourArray, string memory machine, bytes memory digits) internal pure returns (uint[] memory) {
 
-    uint randomColourDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 3, 7));
-
     string memory degradedHsl = LOGISTICS_DEGRADED_HSL;
     string memory degradedPercentages = LOGISTICS_COLOUR_PERCENTAGES;
 
@@ -171,16 +184,17 @@ library Environment {
       degradedPercentages = MINING_COLOUR_PERCENTAGES;
     }
 
+    uint index = getColourIndex(digits, 0);
     uint[] memory singleColour = new uint[](3); // h, s, l
     for (uint i = 0; i < 3; ++i) {
-      singleColour[i] = GridHelper.stringToUint(string(GridHelper.slice(bytes(degradedHsl), (randomColourDigits%TOTAL_DEGRADED_COLOURS)*9 + 3*i, 3))); // 9 = h,s,l to 3 significant digits
+      singleColour[i] = GridHelper.stringToUint(string(GridHelper.slice(bytes(degradedHsl), (index)*9 + 3*i, 3))); // 9 = h,s,l to 3 significant digits
     }
     uint[] memory colourPercentages = GridHelper.setUintArrayFromString(degradedPercentages, 6, 3);
     
     for (uint i = 0; i < 12; ++i) { // 12 = 6 colours, 2 values each
       colourArray[i*3] = singleColour[0];
       colourArray[i*3+1] = singleColour[1];
-      colourArray[i*3+2] = increaseColourLightness(singleColour[2], colourPercentages[i%6]);
+      colourArray[i*3+2] = increaseValueByPercentage(singleColour[2], colourPercentages[i%6]);
     }
 
     return colourArray;
@@ -189,12 +203,16 @@ library Environment {
   function getBasicEmbelishedShell(uint[] memory colourArray, string memory machine, bytes memory digits, uint state) internal pure returns (uint[] memory) {
     uint NumColoursDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 2, 8));
     // uint numColours = (NumColoursDigits % 3) + ((state-1) * 3) + 1; // basic = 1, 2, 3; embellished = 4, 5, 6
-    uint numColours = TOTAL_COLOURS;
+    uint numColours;
+    if (state == 1) {
+      numColours = TOTAL_BASIC_COLOURS;
+    } else {
+      numColours = TOTAL_EMBELLISHED_COLOURS;
+    }
 
-    uint percentage = NumColoursDigits % 100;
-    string[] memory colourAvailableStrings = selectBasicEmbellishedPalette(machine, percentage, state);
-    uint[] memory coloursAvailable = GridHelper.setUintArrayFromString(colourAvailableStrings[0], TOTAL_COLOURS*3, 3);
-    uint[] memory coloursAvailableShade = GridHelper.setUintArrayFromString(colourAvailableStrings[1], TOTAL_COLOURS*3, 3);
+    string[] memory colourAvailableStrings = selectBasicEmbellishedPalette(machine, digits, state);
+    uint[] memory coloursAvailable = GridHelper.setUintArrayFromString(colourAvailableStrings[0], numColours*3, 3);
+    uint[] memory coloursAvailableShade = GridHelper.setUintArrayFromString(colourAvailableStrings[1], numColours*3, 3);
 
     uint[] memory baseColoursUsed = new uint[](numColours*3);
     uint[] memory baseColoursUsedShade = new uint[](numColours*3);
@@ -202,7 +220,7 @@ library Environment {
     // Select all colours that will be used
     for (uint i = 0; i < numColours; ++i) {
 
-      uint index = (NumColoursDigits % (TOTAL_COLOURS - i)) * 3;
+      uint index = (NumColoursDigits % (numColours - i)) * 3;
 
       for (uint j = 0; j < 3; j++) { // j = h, s, l
         baseColoursUsed[i*3+j] = coloursAvailable[index];
@@ -211,7 +229,7 @@ library Environment {
         coloursAvailableShade = GridHelper.shiftToEndUintArray(index, coloursAvailableShade);
       }
 
-      NumColoursDigits = NumColoursDigits / TOTAL_COLOURS;
+      NumColoursDigits = NumColoursDigits / numColours;
     }
 
     for (uint i = 0; i < 6; ++i) {
@@ -219,6 +237,11 @@ library Environment {
         // Duplicate colours for linear gradient
         colourArray[2*i*3+j] = baseColoursUsed[3*(i % numColours) + j];
         colourArray[(2*i+1)*3+j] = baseColoursUsedShade[3*(i % numColours) + j];
+        // if (j == 0) {
+        //   uint value = 315;
+        //   colourArray[2*i*3+j] = value;
+        //   colourArray[(2*i+1)*3+j] = value;
+        // }
       }
     }
 

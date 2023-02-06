@@ -16,7 +16,7 @@ contract PropsImp1 {
     if (assetID == 2000) {
       return FX_CRACK;
     } else if (assetID == 2001) {
-      return P_GRATE;
+      return string.concat(P_PIT, P_GRATE);
     } else if (assetID == 2002) {
       return P_PIT;
     } else if (assetID == 2003) {

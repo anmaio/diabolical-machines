@@ -53,6 +53,8 @@ contract Metadata {
         getGlobalAssetName(rand),
         '"}, {"trait_type": "Expansion Prop:", "value":"',
         getExpansionPropName(rand),
+        '"}, {"trait_type": "Colour:", "value":"',
+        getColourIndexTier(rand, getState(rand)),
         '"}],',
         '"image": "data:image/svg+xml;base64,'
     );
@@ -78,6 +80,21 @@ contract Metadata {
   function getExpansionPropName(bytes memory rand) public view returns (string memory) {
     uint state = getState(rand);
     return _machine.getExpansionPropName(rand, state);
+  }
+
+  function getColourIndexTier(bytes memory digits, uint state) public pure returns(string memory) {
+    uint value = Environment.getColourIndex(digits, state) / 2;
+
+    if (value == 0) {
+      return "Common";
+    } else if (value == 1) {
+      return "Uncommon";
+    } else if (value == 2) {
+      return "Rare";
+    } else {
+      return "Epic";
+    }
+    
   }
 
   // 0 = degraded, 1 = basic, 2 = embellished
