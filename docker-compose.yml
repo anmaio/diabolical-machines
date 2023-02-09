@@ -44,6 +44,14 @@ services:
     volumes:
       - .:/app
 
+  mythril:
+    build:
+      context: ./mythril
+    container_name: frhtmlipfs_mythril
+    network_mode: "host"
+    volumes:
+      - .:/app
+
   # Container for running build and test 
   build:
     build:

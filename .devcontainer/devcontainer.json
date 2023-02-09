@@ -11,7 +11,7 @@
 	"service": "dev",
 
 	// Docker compose services to run
-	"runServices": ["dev", "node", "echidna"],
+	"runServices": ["dev", "node", "echidna", "mythril"],
 	// "runServices": ["dev"],
 
 	// The folder to open in the container with Docker compose
@@ -31,7 +31,7 @@
 				"JuanBlanco.solidity",
 				"mikestead.dotenv",
 				"github.copilot",
-        "github.copilot-labs"
+        		"github.copilot-labs"
 			]
 		}
 	},
