@@ -9,9 +9,13 @@ RUN apk add --no-cache --update build-base musl-dev
 RUN apk add --no-cache --update python3-dev
 RUN apk add --no-cache --update py3-pip
 RUN apk add --no-cache --update py3-wheel
+# # Install slither analyzer
+# RUN pip3 install slither-analyzer \
+#     && pip3 install solc-select
 # Install slither analyzer
-RUN pip3 install slither-analyzer \
-    && pip3 install solc-select
+RUN pip3 install solc-select
+RUN git clone --branch dev-yul-constant-variable https://github.com/crytic/slither.git
+RUN cd /slither && python3 setup.py install
 # Configure slither analyzer
 RUN solc-select install $SOLC_VERSION \
     && solc-select use $SOLC_VERSION

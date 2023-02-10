@@ -11,19 +11,13 @@ contract Altar {
   // Each position is represented by 6 bytes, 3 for x and 3 for y
   string internal constant ORB_OFFSETS = "00000000-312-180";
 
-  uint internal constant ORB_CHANCE = 50;
-
-  uint internal constant CUBE_CHANCE = 100;
-  uint internal constant STAIRS_CHANCE = 50;
-  uint internal constant RUG_CHANCE = 50;
-
   string internal constant BASE_NUMBERS = "700070017002";
   string internal constant FRAME_NUMBERS = "700370047012701170185026";
   string internal constant ORB_BASE_NUMBERS = "700570067007700870097010";
   string internal constant STEPS_RUNNERS_NUMBERS = "701370147015";
   string internal constant RUG_NUMBERS = "70207021";
   string internal constant FLOOB_ANIMATION_NUMBERS = "70197016";
-  string internal constant WRAPPER_NUMBERS = "1900019001";
+  string internal constant WRAPPER_NUMBERS = "70237024";
 
   string internal constant FLOOB_NUMBERS = "10101005101310041008100910201017101910161015";
   string internal constant ORB_NUMBERS = "4035403640374038";
@@ -186,11 +180,11 @@ contract Altar {
     return 0;
   }
 
-  function getFloobAnimationNumbers(bytes memory digits, uint state) internal pure returns (uint[] memory) {
+  function getFloobAnimationNumbers(bytes memory digits) internal pure returns (uint[] memory) {
     uint[] memory numbersUsed = new uint[](5);
     uint[] memory floobAnimationNumbersArray = GridHelper.setUintArrayFromString(FLOOB_ANIMATION_NUMBERS, 2, 4);
     uint[] memory floobNumbersArray = GridHelper.setUintArrayFromString(FLOOB_NUMBERS, 11, 4);
-    uint[] memory wrapperNumbersArray = GridHelper.setUintArrayFromString(WRAPPER_NUMBERS, 2, 5);
+    uint[] memory wrapperNumbersArray = GridHelper.setUintArrayFromString(WRAPPER_NUMBERS, 2, 4);
     uint floobDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 25, 2));
     numbersUsed[0] = floobAnimationNumbersArray[0];
     numbersUsed[1] = floobAnimationNumbersArray[1];
@@ -282,11 +276,10 @@ contract Altar {
 
   }
 
-  function getAllNumbersUsed(bytes memory digits, uint state) internal pure returns (uint[] memory, string[] memory) {
+  function getAllNumbersUsed(bytes memory digits, uint state) public pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](32);
     string[] memory offsetsUsed = new string[](32);
-    uint[] memory frame = getFrameNumber(digits, state);
 
     numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(digits, state);
     offsetsUsed[count] = getExpansionPropPosition(digits, state);
@@ -295,6 +288,7 @@ contract Altar {
     numbersUsed[count] = getTopRowItemNumber(digits, state);
     count++;
 
+    uint[] memory frame = getFrameNumber(digits, state);
     for (uint i = 0; i < frame.length; ++i) {
       numbersUsed[count] = frame[i];
       count++;
@@ -308,7 +302,7 @@ contract Altar {
     count++;
     numbersUsed[count] = getCubeNumber(digits, state);
     count++;
-    uint[] memory floobAnimation = getFloobAnimationNumbers(digits, state);
+    uint[] memory floobAnimation = getFloobAnimationNumbers(digits);
     for (uint i = 0; i < floobAnimation.length; ++i) {
       numbersUsed[count] = floobAnimation[i];
       count++;
@@ -332,15 +326,6 @@ contract Altar {
     count++;
 
     return (numbersUsed, offsetsUsed);
-  }
-
-  function getProductivityValue(bytes memory digits, uint state) external view returns (uint) {
-    (uint[] memory numbersUsed,) = getAllNumbersUsed(digits, state);
-    uint productivityValue = 0;
-    for (uint i = 0; i < numbersUsed.length; ++i) {
-      productivityValue += _assetRetriever.getProductivity(numbersUsed[i]);
-    }
-    return productivityValue;
   }
 
   function getMachine(bytes memory digits, uint state) external view returns (string memory) {

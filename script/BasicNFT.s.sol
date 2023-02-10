@@ -11,8 +11,8 @@ contract BasicNFTScript is Script {
 
   function deployAndMintBasicNFT() public {
     basicNFT = new BasicNFT();
-    for (uint i = 0; i < 200;) {
-      basicNFT.mint(5);
+    for (uint i = 0; i < 5;) {
+      basicNFT.mint(20);
       unchecked {
         ++i;
       }

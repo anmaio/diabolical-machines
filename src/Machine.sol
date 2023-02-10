@@ -3,44 +3,59 @@ pragma solidity 0.8.16;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "./GridHelper.sol";
 import "./GlobalNumbers.sol";
+import "./AssetRetriever.sol";
 
 interface IMachine {
   function getMachine(bytes memory digits, uint state) external view returns (string memory);
-  function getProductivityValue(bytes memory digits, uint state) external view returns (uint);
+  function getAllNumbersUsed(bytes memory digits, uint state) external pure returns (uint[] memory, string[] memory);
   function getGlobalAssetNumber(bytes memory digits, uint state, uint version) external pure returns (uint);
 }
 
 contract Machine {
 
+  AssetRetriever internal _assetRetriever;
+
   // conveyor belt
   // string[] public allMachines = ["Conveyorbelt", "Drills", "Nose", "Beast", "Altar", "Tubes"];
-  string[] public allMachines = ["Altar"];
+  string[] public allMachines = ["Altar", "Drills"];
   // TESTING
-  string[] public machines = ["Altar"];
+  string[] public machines = ["Altar", "Drills"];
 
   mapping(string => string) public machineToProductivityTiers;
   mapping(string => address) public machineToWorkstation;
 
-  constructor(address[1] memory workstations) {
-    // machine.setAllWorkstations([address(conveyorbelt), address(drills), address(nose), address(beast), address(altar), address(tubes)]);
+  constructor(address[2] memory workstations, AssetRetriever assetRetriever) {
+    _assetRetriever = assetRetriever;
+
     for (uint i = 0; i < allMachines.length; ++i) {
       machineToWorkstation[allMachines[i]] = workstations[i];
     }
 
     machineToProductivityTiers["Altar"] = "024027030032041045048051056060065069";
+    machineToProductivityTiers["Drills"] = "024027030032041045048051056060065069";
   }
 
   function selectMachine(uint rand) external view returns (string memory) {
-      return machines[rand % machines.length];
+      // return machines[rand % machines.length];
+      return machines[1];
   }
 
   function machineToGetter(string memory machine, bytes memory rand, uint state) external view returns (string memory) {
     return IMachine(machineToWorkstation[machine]).getMachine(rand, state);
   }
 
+  function getProductivityValue(string memory machine, bytes memory digits, uint state) public view returns (uint) {
+    (uint[] memory numbersUsed,) = IMachine(machineToWorkstation[machine]).getAllNumbersUsed(digits, state);
+    uint productivityValue = 0;
+    for (uint i = 0; i < numbersUsed.length; ++i) {
+      productivityValue += _assetRetriever.getProductivity(numbersUsed[i]);
+    }
+    return productivityValue;
+  }
+
   function getProductivity(string memory machine, bytes memory rand, uint state) external view returns(string memory) {
 
-    uint productivity = IMachine(machineToWorkstation[machine]).getProductivityValue(rand, state);
+    uint productivity = getProductivityValue(machine, rand, state);
 
     // slice ALTAR_COMBINED_PRODUCTIVITY_TIERS into 3 parts and cast to uint array
     uint[] memory productivityTiers = GridHelper.setUintArrayFromString(string(GridHelper.slice(bytes(machineToProductivityTiers[machine]), state*12, 12)), 4, 3);
@@ -56,10 +71,6 @@ contract Machine {
     } else {
       return "Very High";
     }
-  }
-
-  function getProductivityValue(string memory machine, bytes memory rand, uint state) external view returns (uint) {
-    return IMachine(machineToWorkstation[machine]).getProductivityValue(rand, state);
   }
 
   function getGlobalAssetName(bytes memory rand, uint state) external pure returns (string memory) {

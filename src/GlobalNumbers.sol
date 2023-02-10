@@ -34,6 +34,14 @@ library GlobalNumbers {
 
   string internal constant EXPANSION_PROPS_PROBABILITIES = "201020100515080215101010151009111010051020051020";
 
+  // Use NatSpec format
+  /**
+    * @dev Returns the global asset number based on the digits and state
+    * @param digits The digits to use
+    * @param state The state to use
+    * @param version The version of the asset big/small
+    * @return The global asset number
+   */
 
   function getGlobalAssetNumber(bytes memory digits, uint state, uint version) external pure returns (uint) {
     uint[] memory globalAssetNumbersArray = GridHelper.setUintArrayFromString(GLOBAL_ASSET_NUMBERS_LARGE, 5, 4);
@@ -43,7 +51,7 @@ library GlobalNumbers {
     uint[] memory globalAssetProbabilitiesArray = GridHelper.setUintArrayFromString(GLOBAL_ASSET_PROBABILITIES, 15, 2);
     uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 20, 2));
 
-    uint assetNumber;
+    uint assetNumber = 0;
 
     uint sum;
     for (uint i = 0; i < globalAssetNumbersArray.length; i++) {
@@ -56,13 +64,20 @@ library GlobalNumbers {
 
     return assetNumber;
   }
+  
+  /**
+    * @dev Returns the expansion prop number based on the digits and state
+    * @param digits The digits to use
+    * @param state The state to use
+    * @return The expansion prop number
+   */
 
   function getExpansionPropsNumber(bytes memory digits, uint state) external pure returns (uint) {
     uint[] memory expansionPropsNumbersArray = GridHelper.setUintArrayFromString(EXPANSION_PROPS_NUMBERS, 8, 4);
     uint[] memory expansionPropsProbabilitiesArray = GridHelper.setUintArrayFromString(EXPANSION_PROPS_PROBABILITIES, 24, 2);
     uint expansionPropsDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 22, 2));
 
-    uint propNumber;
+    uint propNumber = 0;
 
     uint sum;
     for (uint i = 0; i < expansionPropsNumbersArray.length; i++) {

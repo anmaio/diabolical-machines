@@ -115,7 +115,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
         return _metadata.buildMetadata(tokenId, getRandBytes(tokenId));
     }
 
-    
     function withdrawMoney() external onlyOwner {
       (bool success, ) = msg.sender.call{value: address(this).balance}("");
       require(success, "Transfer failed.");
@@ -123,6 +122,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
 
     // Assumes the subscription is funded sufficiently.
     function reveal() external nonReentrant { // TODO: add onlyOwner
+      uint gen = currentGen;
+      currentGen++;
       if (!PSUEDO_RANDOM) {
         // Will revert if subscription is not set and funded.
         uint256 s_requestId = COORDINATOR.requestRandomWords(
@@ -132,13 +133,11 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
           callbackGasLimit,
           numWords
         );
-        requestIdToGenId[s_requestId] = currentGen;
-        emit RandomnessRequested(currentGen);
-        currentGen++;
+        requestIdToGenId[s_requestId] = gen;
+        emit RandomnessRequested(gen);
 
       } else { // Testing
-        genSeed[currentGen] = uint256(keccak256(abi.encodePacked(block.number, block.timestamp, totalSupply())));
-        currentGen++;
+        genSeed[gen] = uint256(keccak256(abi.encodePacked(block.number, block.timestamp, totalSupply())));
       }
     }
 
