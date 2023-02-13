@@ -49,7 +49,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 1000;
+  uint internal constant MINT_SIZE = 10;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
 

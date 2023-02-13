@@ -39,6 +39,10 @@ contract Drills {
 
   string internal constant BIT_PROBABILITIES = "010203183366051530507085103060759095";
 
+  string internal constant CONNECTOR_NUMBERS = "1300413005130061300710026";
+
+  string internal constant EYES_GAUGE_NUMBERS = "50444027402840294030";
+
   string internal constant HEAD_NUMBERS_ONE = "70087009";
   uint internal constant HEAD_NUMBERS_TWO = 13015;
 
@@ -130,6 +134,66 @@ contract Drills {
         return [tubeNumbersArray[1], tubeNumbersArray[2]];
       } else {
         return [tubeNumbersArray[3], tubeNumbersArray[4]];
+      }
+    }
+  }
+
+  function getConnectorNumbers(bytes memory digits, uint state) internal pure returns (uint[] memory) {
+    uint[] memory connectorNumbersArray = GridHelper.setUintArrayFromString(CONNECTOR_NUMBERS, 5, 5);
+    uint connectorDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 15, 2));
+
+    uint[] memory connectorNumbers = new uint[](4);
+    connectorNumbers[3] = connectorNumbersArray[2];
+    connectorNumbers[1] = connectorNumbersArray[3];
+
+    if (connectorDigits < 50) {
+      connectorNumbers[2] = connectorNumbersArray[0];
+    } else {
+      connectorNumbers[2] = connectorNumbersArray[1];
+    }
+
+    if (state == 0 && connectorDigits % 50 == 0) {
+      connectorNumbers[0] = connectorNumbersArray[4];
+    } else if (state == 1 && connectorDigits % 5 == 0) {
+      connectorNumbers[0] = connectorNumbersArray[4];
+    } else if (state == 2 && connectorDigits % 2 == 0) {
+      connectorNumbers[0] = connectorNumbersArray[4];
+    }
+
+    return connectorNumbers;
+  }
+
+  function getEyesGaugeNumber(bytes memory digits, uint state, uint version) internal pure returns (uint) {
+    uint[] memory eyesGaugeNumbersArray = GridHelper.setUintArrayFromString(EYES_GAUGE_NUMBERS, 5, 4);
+    uint eyesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24+version, 2));
+
+    if (state == 0) {
+      return 0;
+    }
+
+    if (eyesDigits < 20) {
+      return eyesGaugeNumbersArray[0];
+    }
+
+    if (state == 1) {
+      if (eyesDigits < 30) {
+        return eyesGaugeNumbersArray[1];
+      } else if (eyesDigits < 40) {
+        return eyesGaugeNumbersArray[2];
+      } else if (eyesDigits < 70) {
+        return eyesGaugeNumbersArray[3];
+      } else {
+        return eyesGaugeNumbersArray[4];
+      }
+    } else {
+      if (eyesDigits < 30) {
+        return eyesGaugeNumbersArray[4];
+      } else if (eyesDigits < 40) {
+        return eyesGaugeNumbersArray[3];
+      } else if (eyesDigits < 70) {
+        return eyesGaugeNumbersArray[2];
+      } else {
+        return eyesGaugeNumbersArray[1];
       }
     }
   }
@@ -281,6 +345,10 @@ contract Drills {
       offsetsUsed[count] = "-312-190";
       count++;
 
+      numbersUsed[count] = getEyesGaugeNumber(digits, state, i);
+      offsetsUsed[count] = "0000-010";
+      count++;
+
       numbersUsed[count] = headNumbers[1];
       count++;
 
@@ -305,6 +373,12 @@ contract Drills {
       count++;
 
       numbersUsed[count] = GROUP_CLOSE_NUMBER;
+      count++;
+    }
+
+    uint[] memory connectorPositions = getConnectorNumbers(digits, state);
+    for (uint i = 0; i < connectorPositions.length; ++i) {
+      numbersUsed[count] = connectorPositions[i];
       count++;
     }
 
