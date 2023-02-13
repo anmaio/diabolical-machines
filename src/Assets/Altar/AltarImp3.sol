@@ -13,6 +13,9 @@ contract AltarImp3 {
   string internal constant C_RUG_B = "<g id='ap-u-c-rug-b'><g id='ap-s-g352'><path id='ap-s-polygon205' fill='url(#c2b)' stroke='#000000' d='m214.6 932.97 309.97-180.39 14.23 8.28-309.97 180.39-14.23-8.28z'/><path id='ap-s-polygon206' fill='url(#c2l)' stroke='#171d35' d='m200.1 924.55 309.97-180.39 14.5 8.42L214.6 932.97l-14.5-8.42z'/><path id='ap-s-polygon207' fill='url(#c2b)' stroke='#000000' d='m243.07 949.52 309.97-180.39 14.2 8.25-309.97 180.39-14.2-8.25z'/><path id='ap-s-polygon208' fill='url(#c2d)' stroke='#000000' d='M228.83 941.25 538.8 760.86l14.24 8.27-309.97 180.39-14.24-8.27z'/><path id='ap-s-polygon209' fill='url(#c2l)' stroke='#171d35' d='m257.27 957.77 309.97-180.39 14.08 8.18-309.97 180.39-14.08-8.18z'/><path id='ap-s-polygon210' fill='url(#c5l)' stroke='#000000' d='m200.1 924.55 309.97-180.39-14.77-8.32-309.97 180.39 14.77 8.32z'/><path id='ap-s-polygon211' fill='url(#c5l)' stroke='#000000' d='m286.46 974.57 309.53-180.46-14.67-8.55-309.97 180.39 15.11 8.62z'/></g></g>";
   string internal constant C_PLATE_A = "";
 
+  string internal constant ALTAR_FLOOB_WRAPPER_OPEN = "<g id='ap-u-floobs-mask-g' mask='url(#ap-u-masks19)'><g id='ap-u-floobs_to' transform='translate(623.385 629.165)' style='animation-play-state: running;'><g id='ap-u-floobs' transform='translate(-624 -380)'>";
+  string internal constant ALTAR_FLOOB_WRAPPER_CLOSE = "</g></g><mask id='ap-u-masks19' width='400%' height='400%' x='-150%' y='-150%' mask-type='alpha'><path id='ap-u-floob-mask3' fill='url(#c5l)' stroke-width='2.16' d='M568.77 544.34c15.4 31.34 90.63 37.04 109.4547 0l64.884-135.518c11.7802-4.7646 19.4434-23.5593 17.4813-36.512-4.0623-86.6755-107.55-140.75-120.69-59.58L521.14 401.2l47.63 143.14Z'/></mask></g>";
+
   // asset id's should increment by 1 and use each of the assets defined above
   function getAssetFromID(uint assetID) external pure returns (string memory) {
     if (assetID == 7014) {
@@ -33,6 +36,10 @@ contract AltarImp3 {
       return C_RUG_B;
     } else if (assetID == 7022) {
       return C_PLATE_A;
+    } else if (assetID == 7023) {
+      return ALTAR_FLOOB_WRAPPER_OPEN;
+    } else if (assetID == 7024) {
+      return ALTAR_FLOOB_WRAPPER_CLOSE;
     } else {
       return "";
     }
@@ -56,6 +63,10 @@ contract AltarImp3 {
     } else if (assetID == 7021) {
       return 5;
     } else if (assetID == 7022) {
+      return 3;
+    } else if (assetID == 7023) {
+      return 3;
+    } else if (assetID == 7024) {
       return 3;
     } else {
       return 0;

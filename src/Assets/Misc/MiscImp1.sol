@@ -3,14 +3,40 @@ pragma solidity 0.8.16;
 
 contract MiscImp1 {
 
-  string internal constant ALTAR_FLOOB_WRAPPER_OPEN = "<g id='ap-u-floobs-mask-g' mask='url(#ap-u-masks19)'><g id='ap-u-floobs_to' transform='translate(623.385 629.165)' style='animation-play-state: running;'><g id='ap-u-floobs' transform='translate(-624 -380)'>";
-  string internal constant ALTAR_FLOOB_WRAPPER_CLOSE = "</g></g><mask id='ap-u-masks19' width='400%' height='400%' x='-150%' y='-150%' mask-type='alpha'><path id='ap-u-floob-mask3' fill='url(#c5l)' stroke-width='2.16' d='M568.77 544.34c15.4 31.34 90.63 37.04 109.4547 0l64.884-135.518c11.7802-4.7646 19.4434-23.5593 17.4813-36.512-4.0623-86.6755-107.55-140.75-120.69-59.58L521.14 401.2l47.63 143.14Z'/></mask></g>";
+  string internal constant GROUP_CLOSE = "</g>";
 
+  string internal constant TRANSFORM_0 = "<g transform='translate(312 0)'>";
+  string internal constant TRANSFORM_1 = "<g transform='translate(156 90)'>";
+  string internal constant TRANSFORM_2 = "<g transform='translate(0 180)'>";
+  string internal constant TRANSFORM_3 = "<g transform='translate(468 90)'>";
+  string internal constant TRANSFORM_4 = "<g transform='translate(312 180)'>";
+  string internal constant TRANSFORM_5 = "<g transform='translate(156 270)'>";
+  string internal constant TRANSFORM_6 = "<g transform='translate(624 180)'>";
+  string internal constant TRANSFORM_7 = "<g transform='translate(468 270)'>";
+  string internal constant TRANSFORM_8 = "<g transform='translate(312 360)'>";
+
+  // transform 0->8
   function getAssetFromID(uint assetID) external pure returns (string memory) {
     if (assetID == 19000) {
-      return ALTAR_FLOOB_WRAPPER_OPEN;
+      return GROUP_CLOSE;
     } else if (assetID == 19001) {
-      return ALTAR_FLOOB_WRAPPER_CLOSE;
+      return TRANSFORM_0;
+    } else if (assetID == 19002) {
+      return TRANSFORM_1;
+    } else if (assetID == 19003) {
+      return TRANSFORM_2;
+    } else if (assetID == 19004) {
+      return TRANSFORM_3;
+    } else if (assetID == 19005) {
+      return TRANSFORM_4;
+    } else if (assetID == 19006) {
+      return TRANSFORM_5;
+    } else if (assetID == 19007) {
+      return TRANSFORM_6;
+    } else if (assetID == 19008) {
+      return TRANSFORM_7;
+    } else if (assetID == 19009) {
+      return TRANSFORM_8;
     } else {
       return "";
     }
@@ -20,6 +46,22 @@ contract MiscImp1 {
     if (assetID == 19000) {
       return 3;
     } else if (assetID == 19001) {
+      return 3;
+    } else if (assetID == 19002) {
+      return 3;
+    } else if (assetID == 19003) {
+      return 3;
+    } else if (assetID == 19004) {
+      return 3;
+    } else if (assetID == 19005) {
+      return 3;
+    } else if (assetID == 19006) {
+      return 3;
+    } else if (assetID == 19007) {
+      return 3;
+    } else if (assetID == 19008) {
+      return 3;
+    } else if (assetID == 19009) {
       return 3;
     } else {
       return 0;
