@@ -40,8 +40,18 @@ import "../src/Assets/Cells/CellsImp1.sol";
 import "../src/Assets/Drills/DrillsImp1.sol";
 import "../src/Assets/Drills/DrillsImp2.sol";
 import "../src/Assets/Drills/DrillsImp3.sol";
+import "../src/Assets/Drills/DrillsImp4.sol";
 
 import "../src/Assets/Tubes/TubesImp1.sol";
+
+import "../src/Assets/Activation/ActivationImp1.sol";
+
+import "../src/Assets/Character/CharacterImp1.sol";
+import "../src/Assets/Character/CharacterImp2.sol";
+import "../src/Assets/Character/CharacterImp3.sol";
+import "../src/Assets/Character/CharacterImp4.sol";
+import "../src/Assets/Character/CharacterImp5.sol";
+
 
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
@@ -58,6 +68,8 @@ contract CliffordScript is Script {
   TraitBase public tubesTB;
   TraitBase public cellsTB;
   TraitBase public miscTB;
+  TraitBase public activationTB;
+  TraitBase public characterTB;
 
   AssetRetriever public assetRetriever;
 
@@ -141,10 +153,12 @@ contract CliffordScript is Script {
     DrillsImp1 drillsImp1 = new DrillsImp1();
     DrillsImp2 drillsImp2 = new DrillsImp2();
     DrillsImp3 drillsImp3 = new DrillsImp3();
-    address[] memory drillsImpsAds = new address[](3);
+    DrillsImp4 drillsImp4 = new DrillsImp4();
+    address[] memory drillsImpsAds = new address[](4);
     drillsImpsAds[0] = address(drillsImp1);
     drillsImpsAds[1] = address(drillsImp2);
     drillsImpsAds[2] = address(drillsImp3);
+    drillsImpsAds[3] = address(drillsImp4);
     drillsTB = new TraitBase(drillsImpsAds);
   }
 
@@ -172,8 +186,32 @@ contract CliffordScript is Script {
     miscTB = new TraitBase(miscImpsAds);
   }
 
+  // Activation
+  function deployActivation() internal {
+    ActivationImp1 activationImp1 = new ActivationImp1();
+    address[] memory activationImpsAds = new address[](1);
+    activationImpsAds[0] = address(activationImp1);
+    activationTB = new TraitBase(activationImpsAds);
+  }
+
+  // Character
+  function deployCharacter() internal {
+    CharacterImp1 characterImp1 = new CharacterImp1();
+    CharacterImp2 characterImp2 = new CharacterImp2();
+    CharacterImp3 characterImp3 = new CharacterImp3();
+    CharacterImp4 characterImp4 = new CharacterImp4();
+    CharacterImp5 characterImp5 = new CharacterImp5();
+    address[] memory characterImpsAds = new address[](5);
+    characterImpsAds[0] = address(characterImp1);
+    characterImpsAds[1] = address(characterImp2);
+    characterImpsAds[2] = address(characterImp3);
+    characterImpsAds[3] = address(characterImp4);
+    characterImpsAds[4] = address(characterImp5);
+    characterTB = new TraitBase(characterImpsAds);
+  }
+
   function deployAssetRetriever() internal {
-    address[] memory traitBases = new address[](10);
+    address[] memory traitBases = new address[](12);
     traitBases[0] = address(substancesTB);
     traitBases[1] = address(feedbackTB);
     traitBases[2] = address(eyesTB);
@@ -184,6 +222,8 @@ contract CliffordScript is Script {
     traitBases[7] = address(tubesTB);
     traitBases[8] = address(cellsTB);
     traitBases[9] = address(miscTB);
+    traitBases[10] = address(activationTB);
+    traitBases[11] = address(characterTB);
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
@@ -221,12 +261,14 @@ contract CliffordScript is Script {
     deployTubes();
     deployCells();
     deployMisc();
+    deployActivation();
+    deployCharacter();
     deployAssetRetriever();
     deployMachines();
     deployLogic();
 
     address to = 0xB2a61F4dE7d8C1985cb5565CFCBD7F1A18CBF123;
-    clifford.publicMint(to, 1);
+    clifford.publicMint(to, 10);
 
     vm.stopBroadcast();
   }

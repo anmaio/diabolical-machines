@@ -5,7 +5,7 @@
     "State": "Degraded",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "147",
+    "ProductivityValue": "146",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Common"
@@ -16,7 +16,7 @@
     "State": "Basic",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "380",
+    "ProductivityValue": "389",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Ladder",
     "Colour": "Common"
@@ -27,7 +27,7 @@
     "State": "Embellished",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "379",
+    "ProductivityValue": "390",
     "GlobalAsset": "Fridge",
     "ExpansionProp": "None",
     "Colour": "Common"
@@ -38,7 +38,7 @@
     "State": "Embellished",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "306",
+    "ProductivityValue": "317",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Ladder",
     "Colour": "Epic"
@@ -49,7 +49,7 @@
     "State": "Embellished",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "303",
+    "ProductivityValue": "313",
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess B",
     "Colour": "Uncommon"
@@ -60,7 +60,7 @@
     "State": "Embellished",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "307",
+    "ProductivityValue": "316",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Stairs",
     "Colour": "Rare"
@@ -71,7 +71,7 @@
     "State": "Basic",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "237",
+    "ProductivityValue": "232",
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Uncommon"
@@ -82,7 +82,7 @@
     "State": "Basic",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "381",
+    "ProductivityValue": "388",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Ladder",
     "Colour": "Common"
@@ -93,7 +93,7 @@
     "State": "Embellished",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "448",
+    "ProductivityValue": "459",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Rare"
@@ -104,7 +104,7 @@
     "State": "Basic",
     "Machine": "Drills",
     "Productivity": "Very High",
-    "ProductivityValue": "230",
+    "ProductivityValue": "240",
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Rare"

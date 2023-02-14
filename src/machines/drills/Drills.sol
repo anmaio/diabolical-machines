@@ -143,6 +143,11 @@ contract Drills {
     uint connectorDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 15, 2));
 
     uint[] memory connectorNumbers = new uint[](4);
+
+    if (state == 0 && connectorDigits % 7 != 0 || state == 1 && connectorDigits % 2 != 0 || state == 2 && connectorDigits == 99) {
+      return connectorNumbers;
+    }
+
     connectorNumbers[3] = connectorNumbersArray[2];
     connectorNumbers[1] = connectorNumbersArray[3];
 
@@ -303,10 +308,6 @@ contract Drills {
     offsetsUsed[count] = getExpansionPropPosition(digits, state);
     count++;
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(digits, state, 1);
-    offsetsUsed[count] = getGlobalAssetPosition(digits, state);
-    count++;
-
     (uint[] memory drillPositions, uint numberOfDrills) = getDrillPositionNumbers(digits, state);
     for (uint i = 0; i < numberOfDrills; ++i) {
       numbersUsed[count] = drillPositions[i];
@@ -346,7 +347,7 @@ contract Drills {
       count++;
 
       numbersUsed[count] = getEyesGaugeNumber(digits, state, i);
-      offsetsUsed[count] = "0000-010";
+      offsetsUsed[count] = "0000-015";
       count++;
 
       numbersUsed[count] = headNumbers[1];
@@ -381,6 +382,28 @@ contract Drills {
       numbersUsed[count] = connectorPositions[i];
       count++;
     }
+
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(digits, state, 1);
+    offsetsUsed[count] = getGlobalAssetPosition(digits, state);
+    count++;
+
+    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(digits, state, false);
+    numbersUsed[count] = characterNumbers[0];
+    count++;
+
+    for (uint i = 1; i <= 2; ++i) {
+      numbersUsed[count] = characterNumbers[i];
+      offsetsUsed[count] = "03120180";
+      count++;
+    }
+
+    numbersUsed[count] = characterNumbers[3];
+    // offsetsUsed[count] = getCharacterPosition(characterNumbers[3], digits, state);
+    offsetsUsed[count] = "03120180";
+    count++;
+
+    numbersUsed[count] = characterNumbers[4];
+    count++;
 
     return (numbersUsed, offsetsUsed);
   }

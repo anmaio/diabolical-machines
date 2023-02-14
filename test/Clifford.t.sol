@@ -44,6 +44,15 @@ import "../src/Assets/Drills/DrillsImp4.sol";
 
 import "../src/Assets/Tubes/TubesImp1.sol";
 
+import "../src/Assets/Activation/ActivationImp1.sol";
+
+import "../src/Assets/Character/CharacterImp1.sol";
+import "../src/Assets/Character/CharacterImp2.sol";
+import "../src/Assets/Character/CharacterImp3.sol";
+import "../src/Assets/Character/CharacterImp4.sol";
+import "../src/Assets/Character/CharacterImp5.sol";
+
+
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
 
@@ -64,6 +73,8 @@ contract CliffordTest is Test {
   TraitBase public tubesTB;
   TraitBase public cellsTB;
   TraitBase public miscTB;
+  TraitBase public activationTB;
+  TraitBase public characterTB;
 
   AssetRetriever public assetRetriever;
 
@@ -180,8 +191,32 @@ contract CliffordTest is Test {
     miscTB = new TraitBase(miscImpsAds);
   }
 
+  // Activation
+  function deployActivation() internal {
+    ActivationImp1 activationImp1 = new ActivationImp1();
+    address[] memory activationImpsAds = new address[](1);
+    activationImpsAds[0] = address(activationImp1);
+    activationTB = new TraitBase(activationImpsAds);
+  }
+
+  // Character
+  function deployCharacter() internal {
+    CharacterImp1 characterImp1 = new CharacterImp1();
+    CharacterImp2 characterImp2 = new CharacterImp2();
+    CharacterImp3 characterImp3 = new CharacterImp3();
+    CharacterImp4 characterImp4 = new CharacterImp4();
+    CharacterImp5 characterImp5 = new CharacterImp5();
+    address[] memory characterImpsAds = new address[](5);
+    characterImpsAds[0] = address(characterImp1);
+    characterImpsAds[1] = address(characterImp2);
+    characterImpsAds[2] = address(characterImp3);
+    characterImpsAds[3] = address(characterImp4);
+    characterImpsAds[4] = address(characterImp5);
+    characterTB = new TraitBase(characterImpsAds);
+  }
+
   function deployAssetRetriever() internal {
-    address[] memory traitBases = new address[](10);
+    address[] memory traitBases = new address[](12);
     traitBases[0] = address(substancesTB);
     traitBases[1] = address(feedbackTB);
     traitBases[2] = address(eyesTB);
@@ -192,6 +227,8 @@ contract CliffordTest is Test {
     traitBases[7] = address(tubesTB);
     traitBases[8] = address(cellsTB);
     traitBases[9] = address(miscTB);
+    traitBases[10] = address(activationTB);
+    traitBases[11] = address(characterTB);
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
@@ -226,6 +263,8 @@ contract CliffordTest is Test {
     deployTubes();
     deployCells();
     deployMisc();
+    deployActivation();
+    deployCharacter();
     deployAssetRetriever();
     deployMachines();
     deployLogic();

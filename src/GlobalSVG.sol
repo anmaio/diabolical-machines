@@ -12,6 +12,9 @@ import "./styles/drills/DrillsCSS1.sol";
 
 import "./styles/assets/AssetsCSS1.sol";
 
+import "./styles/character/CharacterCSS1.sol";
+import "./styles/character/CharacterCSS2.sol";
+
 // TEMP DEFS
 
 import "./defs/altar/AltarDefs1.sol";
@@ -24,6 +27,8 @@ import "./defs/assets/AssetsDefs1.sol";
 import "./defs/assets/AssetsDefs2.sol";
 
 import "./defs/props/PropsDefs1.sol";
+
+import "./defs/character/CharacterDefs1.sol";
 
 import "./CommonSVG.sol";
 
@@ -83,6 +88,7 @@ contract GlobalSVG {
       output,
       AssetsDefs1.getPart(),
       AssetsDefs2.getPart(),
+      CharacterDefs1.getPart(),
       PropsDefs1.getPart()
     );
 
@@ -122,6 +128,8 @@ contract GlobalSVG {
     return string.concat(
       output,
       AssetsCSS1.getPart(),
+      CharacterCSS1.getPart(),
+      CharacterCSS2.getPart(),
       CommonSVG.STYLE_CLOSE
     );
   }

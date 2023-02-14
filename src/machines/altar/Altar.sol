@@ -276,6 +276,25 @@ contract Altar {
 
   }
 
+  function getCharacterPosition(uint characterNumber, bytes memory digits, uint state) internal pure returns(string memory) {
+    if (characterNumber != 20000 && characterNumber != 20004) {
+      return "03120180";
+    } else {
+      uint orbNumber = getOrbNumber(digits, state, 0);
+      string memory globalAssetPossition = getGlobalAssetPosition(digits, state);
+      string memory expansionPropPosition = getExpansionPropPosition(digits, state);
+      if (orbNumber == 0 && keccak256(bytes(globalAssetPossition)) != keccak256(bytes("06240180")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("06240180"))) {
+        return "-3120180";
+      } else if (state == 1 && keccak256(bytes(globalAssetPossition)) != keccak256(bytes("03120180")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("03120180")) && keccak256(bytes(globalAssetPossition)) != keccak256(bytes("03120360"))) {
+        return "00000180";
+      } else if (keccak256(bytes(globalAssetPossition)) != keccak256(bytes("03120360")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("03120360"))) {
+        return "00000360";
+      } else {
+        return "03120180";
+      }
+    }
+  }
+
   function getAllNumbersUsed(bytes memory digits, uint state) public pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](32);
@@ -324,6 +343,24 @@ contract Altar {
     numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(digits, state, 0);
     offsetsUsed[count] = getGlobalAssetPosition(digits, state);
     count++;
+
+    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(digits, state, true);
+    numbersUsed[count] = characterNumbers[0];
+    count++;
+
+    for (uint i = 1; i <= 2; ++i) {
+      numbersUsed[count] = characterNumbers[i];
+      offsetsUsed[count] = "03120180";
+      count++;
+    }
+
+    numbersUsed[count] = characterNumbers[3];
+    offsetsUsed[count] = getCharacterPosition(characterNumbers[3], digits, state);
+    count++;
+
+    numbersUsed[count] = characterNumbers[4];
+    count++;
+    
 
     return (numbersUsed, offsetsUsed);
   }
