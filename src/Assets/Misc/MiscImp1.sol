@@ -15,6 +15,8 @@ contract MiscImp1 {
   string internal constant TRANSFORM_7 = "<g transform='translate(468 270)'>";
   string internal constant TRANSFORM_8 = "<g transform='translate(312 360)'>";
 
+  string internal constant FLIP_WRAPPER = "<g style='transform:scaleX(-1);transform-origin:50% 50%;'>";
+
   // transform 0->8
   function getAssetFromID(uint assetID) external pure returns (string memory) {
     if (assetID == 19000) {
@@ -37,6 +39,8 @@ contract MiscImp1 {
       return TRANSFORM_7;
     } else if (assetID == 19009) {
       return TRANSFORM_8;
+    } else if (assetID == 19010) {
+      return FLIP_WRAPPER;
     } else {
       return "";
     }
@@ -62,6 +66,8 @@ contract MiscImp1 {
     } else if (assetID == 19008) {
       return 3;
     } else if (assetID == 19009) {
+      return 3;
+    } else if (assetID == 19010) {
       return 3;
     } else {
       return 0;
