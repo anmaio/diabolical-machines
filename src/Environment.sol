@@ -144,7 +144,7 @@ library Environment {
         basicPalette[0] = string(GridHelper.slice(bytes(FACTORY_COLOURS_EMBELLISHED), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(FACTORY_COLOURS_EMBELLISHED_SHADE), index * size, size));
       }
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("Drills"))) { // mining
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Drills")) || keccak256(bytes(machine)) == keccak256(bytes("Noses"))) { // mining
       if (state == 1) {
         basicPalette[0] = string(GridHelper.slice(bytes(MINING_COLOURS_BASIC), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(MINING_COLOURS_BASIC_SHADE), index * size, size));
@@ -179,7 +179,7 @@ library Environment {
     } else if (keccak256(bytes(machine)) == keccak256(bytes("Factory"))) { // factory
       degradedHsl = FACTORY_DEGRADED_HSL;
       degradedPercentages = FACTORY_COLOUR_PERCENTAGES;
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("Drills"))) { // mining
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Drills")) || keccak256(bytes(machine)) == keccak256(bytes("Noses"))) { // mining
       degradedHsl = MINING_DEGRADED_HSL;
       degradedPercentages = MINING_COLOUR_PERCENTAGES;
     }

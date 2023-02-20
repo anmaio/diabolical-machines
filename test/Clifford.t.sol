@@ -10,7 +10,7 @@ import "../src/GlobalSVG.sol";
 import "../src/machines/altar/Altar.sol";
 import "../src/machines/beast/Beast.sol";
 import "../src/machines/drills/Drills.sol";
-import "../src/machines/nose/Nose.sol";
+import "../src/machines/noses/Noses.sol";
 import "../src/machines/tubes/Tubes.sol";
 import "../src/machines/conveyorbelt/Conveyorbelt.sol";
 
@@ -21,8 +21,10 @@ import "../src/Assets/Altar/AltarImp3.sol";
 import "../src/Assets/Substances/SubstancesImp1.sol";
 
 import "../src/Assets/Eyes/EyesImp1.sol";
+import "../src/Assets/Eyes/EyesImp2.sol";
 
 import "../src/Assets/Feedback/FeedbackImp1.sol";
+import "../src/Assets/Feedback/FeedbackImp2.sol";
 
 import "../src/Assets/Assets/AssetsImp1.sol";
 import "../src/Assets/Assets/AssetsImp2.sol";
@@ -42,7 +44,11 @@ import "../src/Assets/Drills/DrillsImp2.sol";
 import "../src/Assets/Drills/DrillsImp3.sol";
 import "../src/Assets/Drills/DrillsImp4.sol";
 
+import "../src/Assets/Noses/NosesImp1.sol";
+
 import "../src/Assets/Tubes/TubesImp1.sol";
+
+import "../src/Assets/Apparatus/ApparatusImp1.sol";
 
 import "../src/Assets/Activation/ActivationImp1.sol";
 
@@ -70,7 +76,9 @@ contract CliffordTest is Test {
   TraitBase public propsTB;
   TraitBase public altarTB;
   TraitBase public drillsTB;
+  TraitBase public nosesTB;
   TraitBase public tubesTB;
+  TraitBase public apparatusTB;
   TraitBase public cellsTB;
   TraitBase public miscTB;
   TraitBase public activationTB;
@@ -82,7 +90,7 @@ contract CliffordTest is Test {
   Altar public altar;
   // Beast public beast;
   Drills public drills;
-  // Nose public nose;
+  Noses public noses;
   // Tubes public tubes;
   // Conveyorbelt public conveyorbelt;
 
@@ -102,16 +110,20 @@ contract CliffordTest is Test {
   // Feedback
   function deployFeedback() internal {
     FeedbackImp1 feedbackImp1 = new FeedbackImp1();
-    address[] memory feedbackImpsAds = new address[](1);
+    FeedbackImp2 feedbackImp2 = new FeedbackImp2();
+    address[] memory feedbackImpsAds = new address[](2);
     feedbackImpsAds[0] = address(feedbackImp1);
+    feedbackImpsAds[1] = address(feedbackImp2);
     feedbackTB = new TraitBase(feedbackImpsAds);
   }
 
   // Eyes
   function deployEyes() internal {
     EyesImp1 eyesImp1 = new EyesImp1();
-    address[] memory eyesImpsAds = new address[](1);
+    EyesImp2 eyesImp2 = new EyesImp2();
+    address[] memory eyesImpsAds = new address[](2);
     eyesImpsAds[0] = address(eyesImp1);
+    eyesImpsAds[1] = address(eyesImp2);
     eyesTB = new TraitBase(eyesImpsAds);
   }
 
@@ -167,12 +179,28 @@ contract CliffordTest is Test {
     drillsTB = new TraitBase(drillsImpsAds);
   }
 
+  // Noses
+  function deployNoses() internal {
+    NosesImp1 nosesImp1 = new NosesImp1();
+    address[] memory nosesImpsAds = new address[](1);
+    nosesImpsAds[0] = address(nosesImp1);
+    nosesTB = new TraitBase(nosesImpsAds);
+  }
+
   // Tubes
   function deployTubes() internal {
     TubesImp1 tubesImp1 = new TubesImp1();
     address[] memory tubesImpsAds = new address[](1);
     tubesImpsAds[0] = address(tubesImp1);
     tubesTB = new TraitBase(tubesImpsAds);
+  }
+
+  // Apparatus
+  function deployApparatus() internal {
+    ApparatusImp1 apparatusImp1 = new ApparatusImp1();
+    address[] memory apparatusImpsAds = new address[](1);
+    apparatusImpsAds[0] = address(apparatusImp1);
+    apparatusTB = new TraitBase(apparatusImpsAds);
   }
 
   // Cells
@@ -216,7 +244,7 @@ contract CliffordTest is Test {
   }
 
   function deployAssetRetriever() internal {
-    address[] memory traitBases = new address[](12);
+    address[] memory traitBases = new address[](14);
     traitBases[0] = address(substancesTB);
     traitBases[1] = address(feedbackTB);
     traitBases[2] = address(eyesTB);
@@ -224,11 +252,13 @@ contract CliffordTest is Test {
     traitBases[4] = address(propsTB);
     traitBases[5] = address(altarTB);
     traitBases[6] = address(drillsTB);
-    traitBases[7] = address(tubesTB);
-    traitBases[8] = address(cellsTB);
-    traitBases[9] = address(miscTB);
-    traitBases[10] = address(activationTB);
-    traitBases[11] = address(characterTB);
+    traitBases[7] = address(nosesTB);
+    traitBases[8] = address(tubesTB);
+    traitBases[9] = address(apparatusTB);
+    traitBases[10] = address(cellsTB);
+    traitBases[11] = address(miscTB);
+    traitBases[12] = address(activationTB);
+    traitBases[13] = address(characterTB);
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
@@ -237,7 +267,7 @@ contract CliffordTest is Test {
     altar = new Altar(address(assetRetriever));
     drills = new Drills(address(assetRetriever));
     // beast = new Beast();
-    // nose = new Nose();
+    noses = new Noses(address(assetRetriever));
     // tubes = new Tubes();
     // conveyorbelt = new Conveyorbelt();
   }
@@ -245,7 +275,7 @@ contract CliffordTest is Test {
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
-    machine = new Machine([address(altar), address(drills)], assetRetriever);
+    machine = new Machine([address(altar), address(drills), address(noses)], assetRetriever);
     metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
   }
@@ -260,7 +290,9 @@ contract CliffordTest is Test {
     deployProps();
     deployAltar();
     deployDrills();
+    deployNoses();
     deployTubes();
+    deployApparatus();
     deployCells();
     deployMisc();
     deployActivation();
