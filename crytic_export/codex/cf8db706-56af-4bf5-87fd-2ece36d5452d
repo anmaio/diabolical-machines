@@ -1,0 +1,232 @@
+Q: Create a natpsec documentation for this solidity code with only notice and dev.
+function deploySubstances() internal {
+    SubstancesImp1 substancesImp1 = new SubstancesImp1();
+    address[] memory substancesImpsAds = new address[](1);
+    substancesImpsAds[0] = address(substancesImp1);
+    substancesTB = new TraitBase(substancesImpsAds);
+  }
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n// Natpsec Documentation\n\n/**\n * @notice This function deploys a SubstancesImp1 contract and stores its address in the TraitBase contract.\n * @dev This function should only be called by the contract owner.\n */"
+    }
+  ],
+  "created": 1676897762,
+  "id": "cmpl-6m002bi68UhhVQJfCvDnmHU6cBQc2",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 52,
+    "prompt_tokens": 99,
+    "total_tokens": 151
+  }
+}
+Q: Create a natpsec documentation for this solidity code with only notice and dev.
+function deployFeedback() internal {
+    FeedbackImp1 feedbackImp1 = new FeedbackImp1();
+    FeedbackImp2 feedbackImp2 = new FeedbackImp2();
+    address[] memory feedbackImpsAds = new address[](2);
+    feedbackImpsAds[0] = address(feedbackImp1);
+    feedbackImpsAds[1] = address(feedbackImp2);
+    feedbackTB = new TraitBase(feedbackImpsAds);
+  }
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n// Notice:\nThis function deploys two implementations of the Feedback trait, FeedbackImp1 and FeedbackImp2, and creates a TraitBase contract with them.\n\n// Dev:\nThis function deploys two implementations of the Feedback trait, FeedbackImp1 and FeedbackImp2, and creates a TraitBase contract with them. The function takes no parameters and returns no values. The address of the newly created TraitBase contract is stored in the feedbackTB variable."
+    }
+  ],
+  "created": 1676897765,
+  "id": "cmpl-6m0055Tl72c7cHUWkQ0sKrr92TcWR",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 98,
+    "prompt_tokens": 126,
+    "total_tokens": 224
+  }
+}
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n/**\n * NOTICE:\n * This function deploys two instances of the FeedbackImp1 and FeedbackImp2 contracts, and creates a TraitBase contract with the two instances as parameters.\n * \n * DEV:\n * deployFeedback() is an internal function that creates two instances of the FeedbackImp1 and FeedbackImp2 contracts, and creates a TraitBase contract with the two instances as parameters. The function takes no parameters and returns nothing."
+    }
+  ],
+  "created": 1676897771,
+  "id": "cmpl-6m00B2ZsgnvEjy05STPjs7uNcLoon",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 96,
+    "prompt_tokens": 126,
+    "total_tokens": 222
+  }
+}
+Q: Create a natpsec documentation for this solidity code with only notice and dev.
+function deployEyes() internal {
+    EyesImp1 eyesImp1 = new EyesImp1();
+    EyesImp2 eyesImp2 = new EyesImp2();
+    address[] memory eyesImpsAds = new address[](2);
+    eyesImpsAds[0] = address(eyesImp1);
+    eyesImpsAds[1] = address(eyesImp2);
+    eyesTB = new TraitBase(eyesImpsAds);
+  }
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n// Natpsec Documentation\n/**\n * @notice deployEyes() is an internal function that creates two instances of EyesImp1 and EyesImp2 and stores them in an address array.\n * @dev The address array is then used to create a new TraitBase instance.\n */"
+    }
+  ],
+  "created": 1676897777,
+  "id": "cmpl-6m00HME6JqxcWTWNpovDBOoWWKYaJ",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 62,
+    "prompt_tokens": 123,
+    "total_tokens": 185
+  }
+}
+Q: Create a natpsec documentation for this solidity code with only notice and dev.
+function deployAssets() internal {
+    AssetsImp1 assetsImp1 = new AssetsImp1();
+    AssetsImp2 assetsImp2 = new AssetsImp2();
+    AssetsImp3 assetsImp3 = new AssetsImp3();
+    AssetsImp4 assetsImp4 = new AssetsImp4();
+    AssetsImp5 assetsImp5 = new AssetsImp5();
+    AssetsImp6 assetsImp6 = new AssetsImp6();
+    address[] memory assetsImpsAds = new address[](6);
+    assetsImpsAds[0] = address(assetsImp1);
+    assetsImpsAds[1] = address(assetsImp2);
+    assetsImpsAds[2] = address(assetsImp3);
+    assetsImpsAds[3] = address(assetsImp4);
+    assetsImpsAds[4] = address(assetsImp5);
+    assetsImpsAds[5] = address(assetsImp6);
+    assetsTB = new TraitBase(assetsImpsAds);
+  }
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n//NATPSEC Documentation\n//NOTICE: This function deploys six AssetsImp contracts and creates a TraitBase contract with the addresses of the AssetsImp contracts. \n//DEV: deployAssets() is an internal function and should not be called directly."
+    }
+  ],
+  "created": 1676897781,
+  "id": "cmpl-6m00L6yEXOPlESRDx2p1pr5AZ83Z3",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 56,
+    "prompt_tokens": 247,
+    "total_tokens": 303
+  }
+}
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n//NATPSEC Documentation\n//NOTICE: This function deploys six AssetsImp contracts and creates a TraitBase contract with the addresses of the AssetsImp contracts. \n//DEV: deployAssets() is an internal function that should only be called by the contract owner. It creates six AssetsImp contracts and stores their addresses in an array. It then creates a TraitBase contract with the array of AssetsImp addresses."
+    }
+  ],
+  "created": 1676897785,
+  "id": "cmpl-6m00PptT6rvgV5dJBvvjCDGMVkMF4",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 89,
+    "prompt_tokens": 247,
+    "total_tokens": 336
+  }
+}
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n// Natpsec Documentation\n\n// Notice:\nThis function deploys 6 AssetsImp contracts and creates a TraitBase contract with the addresses of the AssetsImp contracts.\n\n// Dev:\nThis function deploys 6 AssetsImp contracts and creates a TraitBase contract with the addresses of the AssetsImp contracts. The function takes no parameters and is marked as internal. The function creates 6 instances of the AssetsImp contracts and stores their addresses in an array. The array is then passed to the constructor of the TraitBase contract."
+    }
+  ],
+  "created": 1676897790,
+  "id": "cmpl-6m00UBtycqjUioKNxT1rLPlrjba8L",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 111,
+    "prompt_tokens": 247,
+    "total_tokens": 358
+  }
+}
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n//Natpsec Documentation\n//Notice: This function deploys six different AssetsImp contracts and stores their addresses in the TraitBase contract.\n//Dev: deployAssets() is an internal function and should not be called directly."
+    }
+  ],
+  "created": 1676897797,
+  "id": "cmpl-6m00bOXHykNbBB42JxuTF4wNjJx73",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 50,
+    "prompt_tokens": 247,
+    "total_tokens": 297
+  }
+}
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n// Natpsec Documentation\n/*\nNotice: \nThis function deploys AssetsImp1-6 to the blockchain, and creates a TraitBase contract with the addresses of the AssetsImp contracts. \n\nDev: \nThe function deployAssets() is an internal function, meaning it can be called by other functions within the same contract, but not by external contracts. This function creates 6 AssetsImp contracts, and stores their addresses in a memory array. It then creates a TraitBase contract with the memory array as an argument. \n*/"
+    }
+  ],
+  "created": 1676897800,
+  "id": "cmpl-6m00eFq8yhPzCoigrXTvvcMWgrcEm",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 116,
+    "prompt_tokens": 247,
+    "total_tokens": 363
+  }
+}
+A: {
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "text": "\n\n// NATPSEC Documentation\n\n// Notice:\nThis function deploys six different AssetsImp contracts and creates a TraitBase contract that stores the addresses of the AssetsImp contracts.\n\n// Dev:\nThis function creates six instances of AssetsImp contracts and stores their addresses in an array. The array is then passed to the TraitBase contract to store the addresses of the AssetsImp contracts."
+    }
+  ],
+  "created": 1676897807,
+  "id": "cmpl-6m00lmj1AThacy7XbYT1YvsADTFDO",
+  "model": "text-davinci-003",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 83,
+    "prompt_tokens": 247,
+    "total_tokens": 330
+  }
+}

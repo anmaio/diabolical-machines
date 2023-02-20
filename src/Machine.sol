@@ -34,15 +34,31 @@ contract Machine {
     machineToProductivityTiers["Noses"] = "024027030032041045048051056060065069";
   }
 
+  //  @notice This function returns a random machine from the array of machines.
+  //  @dev This function returns a random machine from the array of machines.
+  //  @param rand The random number to be used to select a machine.
+  //  @return The machine selected from the array of machines.
   function selectMachine(uint rand) external view returns (string memory) {
       // return machines[rand % machines.length];
       return allMachines[2];
   }
 
+  // @notice This function returns the machine svg for a given machine.
+  // @dev This function returns the machine svg for a given machine.
+  // @param machine The machine for which the svg is to be returned.
+  // @param rand The random number to be used to select a machine.
+  // @param state The state of the machine.
+  // @return The machine svg for a given machine.
   function machineToGetter(string memory machine, bytes memory rand, uint state) external view returns (string memory) {
     return IMachine(machineToWorkstation[machine]).getMachine(rand, state);
   }
 
+  // @notice This function returns the productivity value for a given machine.
+  // @dev This function returns the productivity value for a given machine.
+  // @param machine The machine for which the productivity value is to be returned.
+  // @param rand The random number to be used to select a machine.
+  // @param state The state of the machine.
+  // @return The productivity value for a given machine.
   function getProductivityValue(string memory machine, bytes memory digits, uint state) public view returns (uint) {
     (uint[] memory numbersUsed,) = IMachine(machineToWorkstation[machine]).getAllNumbersUsed(digits, state);
     uint productivityValue = 0;
@@ -52,6 +68,12 @@ contract Machine {
     return productivityValue;
   }
 
+  // @notice This function returns the productivity tier for a given machine.
+  // @dev This function returns the productivity tier for a given machine.
+  // @param machine The machine for which the productivity tier is to be returned.
+  // @param rand The random number to be used to select a machine.
+  // @param state The state of the machine.
+  // @return The productivity tier for a given machine.
   function getProductivity(string memory machine, bytes memory rand, uint state) external view returns(string memory) {
 
     uint productivity = getProductivityValue(machine, rand, state);
@@ -72,6 +94,12 @@ contract Machine {
     }
   }
 
+  // @notice This function returns the name of the global asset for a given machine.
+  // @dev This function returns the name of the global asset for a given machine.
+  // @param machine The machine for which the name of the global asset is to be returned.
+  // @param rand The random number to be used to select a machine.
+  // @param state The state of the machine.
+  // @return The name of the global asset for a given machine.
   function getGlobalAssetName(bytes memory rand, uint state) external pure returns (string memory) {
     uint assetNumber = GlobalNumbers.getGlobalAssetNumber(rand, state, 0);
 
@@ -90,6 +118,12 @@ contract Machine {
     }
   }
 
+  // @notice This function returns the name of the expansion prop for a given machine.
+  // @dev This function returns the name of the expansion prop for a given machine.
+  // @param machine The machine for which the name of the expansion prop is to be returned.
+  // @param rand The random number to be used to select a machine.
+  // @param state The state of the machine.
+  // @return The name of the expansion prop for a given machine.
   function getExpansionPropName(bytes memory rand, uint state) external pure returns (string memory) {
     uint propNumber = GlobalNumbers.getExpansionPropsNumber(rand, state);
 
