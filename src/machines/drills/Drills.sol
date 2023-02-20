@@ -383,7 +383,7 @@ contract Drills {
       count++;
     }
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(digits, state, 1);
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(digits, state, 0);
     offsetsUsed[count] = getGlobalAssetPosition(digits, state);
     count++;
 

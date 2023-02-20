@@ -10,6 +10,8 @@ import "./styles/altar/AltarCSS4.sol";
 
 import "./styles/drills/DrillsCSS1.sol";
 
+import "./styles/noses/NosesCSS1.sol";
+
 import "./styles/assets/AssetsCSS1.sol";
 
 import "./styles/character/CharacterCSS1.sol";
@@ -22,6 +24,8 @@ import "./defs/altar/AltarDefs2.sol";
 import "./defs/altar/AltarDefs3.sol";
 
 import "./defs/drills/DrillsDefs1.sol";
+
+import "./defs/noses/NosesDefs1.sol";
 
 import "./defs/assets/AssetsDefs1.sol";
 import "./defs/assets/AssetsDefs2.sol";
@@ -86,6 +90,11 @@ contract GlobalSVG {
 
     output = string.concat(
       output,
+      NosesDefs1.getPart()
+    );
+
+    output = string.concat(
+      output,
       AssetsDefs1.getPart(),
       AssetsDefs2.getPart(),
       CharacterDefs1.getPart(),
@@ -122,7 +131,8 @@ contract GlobalSVG {
       AltarCSS2.getPart(),
       AltarCSS3.getPart(),
       AltarCSS4.getPart(),
-      DrillsCSS1.getPart()
+      DrillsCSS1.getPart(),
+      NosesCSS1.getPart()
     );
 
     return string.concat(
