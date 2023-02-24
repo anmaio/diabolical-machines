@@ -45,6 +45,9 @@ import "../src/Assets/Drills/DrillsImp3.sol";
 import "../src/Assets/Drills/DrillsImp4.sol";
 
 import "../src/Assets/Noses/NosesImp1.sol";
+import "../src/Assets/Noses/NosesImp2.sol";
+import "../src/Assets/Noses/NosesImp3.sol";
+import "../src/Assets/Noses/NosesImp4.sol";
 
 import "../src/Assets/Tubes/TubesImp1.sol";
 
@@ -61,6 +64,8 @@ import "../src/Assets/Character/CharacterImp5.sol";
 
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
+
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract CliffordTest is Test {
 
@@ -182,8 +187,14 @@ contract CliffordTest is Test {
   // Noses
   function deployNoses() internal {
     NosesImp1 nosesImp1 = new NosesImp1();
-    address[] memory nosesImpsAds = new address[](1);
+    NosesImp2 nosesImp2 = new NosesImp2();
+    NosesImp3 nosesImp3 = new NosesImp3();
+    NosesImp4 nosesImp4 = new NosesImp4();
+    address[] memory nosesImpsAds = new address[](4);
     nosesImpsAds[0] = address(nosesImp1);
+    nosesImpsAds[1] = address(nosesImp2);
+    nosesImpsAds[2] = address(nosesImp3);
+    nosesImpsAds[3] = address(nosesImp4);
     nosesTB = new TraitBase(nosesImpsAds);
   }
 
@@ -313,8 +324,8 @@ contract CliffordTest is Test {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       // to, quantity
       clifford.publicMint(to, 1);
-      vm.roll(i*69);
-      vm.warp(i*69);
+      vm.roll(i*100);
+      vm.warp(i*100);
       clifford.reveal();
     }
   }
@@ -323,7 +334,7 @@ contract CliffordTest is Test {
   function testWriteImages() public {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getRandBytes(i)));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i)));
     }
   }
 
@@ -339,33 +350,33 @@ contract CliffordTest is Test {
         itemClose = "\n  }\n";
       }
 
-      string memory state = allStates[metadata.getState(clifford.getRandBytes(i))];
+      uint state = metadata.getState(clifford.getSeed(i));
 
-      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getRandBytes(i)), clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i))));
+      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getSeed(i)), clifford.getSeed(i), metadata.getState(clifford.getSeed(i))));
 
-      string memory globalAsset = metadata.getGlobalAssetName(clifford.getRandBytes(i));
+      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), state);
 
-      string memory expansionProp = metadata.getExpansionPropName(clifford.getRandBytes(i));
+      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), state);
 
-      string memory colour = metadata.getColourIndexTier(clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i)));
+      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), metadata.getState(clifford.getSeed(i)));
 
       string memory item = string.concat(
         itemOpen, 
         id, 
         ",\n    \"RandomNumber\": \"", 
-        string(clifford.getRandBytes(i)), // random number
+        Strings.toString(clifford.getSeed(i)), // random number
         "\",\n    \"State\": \"",
-        state, 
+        allStates[state], 
         "\""
       );
 
       item = string.concat(
         item, 
         ",\n    \"Machine\": \"",
-        metadata.getMachine(clifford.getRandBytes(i)), // machine name
+        metadata.getMachine(clifford.getSeed(i)), // machine name
         "\""
         ",\n    \"Productivity\": \"",
-        metadata.getProductivity(clifford.getRandBytes(i)), // productivity
+        metadata.getProductivity(clifford.getSeed(i)), // productivity
         "\",\n    \"ProductivityValue\": \"",
         productivityValue
       );
@@ -377,7 +388,13 @@ contract CliffordTest is Test {
         "\",\n    \"ExpansionProp\": \"",
         expansionProp,
         "\",\n    \"Colour\": \"",
-        colour,
+        colour
+      );
+
+      item = string.concat(
+        item, 
+        "\",\n    \"Character\": \"",
+        machine.getCharacterName(clifford.getSeed(i), state),
         "\"",
         itemClose
       );
@@ -396,21 +413,21 @@ contract CliffordTest is Test {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       string memory id = Strings.toString(i);
 
-      string memory state = allStates[metadata.getState(clifford.getRandBytes(i))];
+      uint state = metadata.getState(clifford.getSeed(i));
 
-      string memory machineName = metadata.getMachine(clifford.getRandBytes(i));
+      string memory machineName = metadata.getMachine(clifford.getSeed(i));
 
-      string memory productivity = metadata.getProductivity(clifford.getRandBytes(i));
+      string memory productivity = metadata.getProductivity(clifford.getSeed(i));
 
-      string memory globalAsset = metadata.getGlobalAssetName(clifford.getRandBytes(i));
+      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), state);
 
-      string memory expansionProp = metadata.getExpansionPropName(clifford.getRandBytes(i));
+      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), state);
 
-      string memory colour = metadata.getColourIndexTier(clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i)));
+      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), metadata.getState(clifford.getSeed(i)));
 
       string memory item = string.concat(
         itemOpen, 
-        state, 
+        allStates[state], 
         "\"\n      },\n      {\n        \"trait_type\": \"Machine\",\n        \"value\": \"",
         machineName, 
         "\"\n      },\n      {\n        \"trait_type\": \"Productivity\",\n        \"value\": \"",

@@ -44,22 +44,29 @@ library GridHelper {
     return string.concat("<g transform='translate(", x, ",", y, ")'>", data, "</g>");
   }
 
-  function uintToBytes(uint256 x) public pure returns (bytes memory b) {
+  function uintToBytes(uint256 x) internal pure returns (bytes memory b) {
       b = new bytes(32);
       assembly {
           mstore(add(b, 32), x)
       } //  first 32 bytes = length of the bytes value
   }
 
-  function bytesToUint(bytes memory b) internal pure returns (uint256){
-    uint result = 0;
-    for (uint256 i = 0; i < b.length; i++) {
-        uint256 c = uint256(uint8(b[i]));
-        if (c >= 48 && c <= 57) {
-            result = result * 10 + (c - 48);
-        }
-    }
-    return result;
+  function bytesToUint(bytes memory value) internal pure returns(uint) {
+    uint256 num = uint256(bytes32(value));
+    return num;
+  }
+
+  function byteSliceToUint (bytes memory a) internal pure returns(uint) {
+    bytes32 padding = bytes32(0);
+    bytes memory formattedSlice = slice(bytes.concat(padding, a), 1, 32);
+
+    return bytesToUint(formattedSlice);
+  }
+
+  function getRandByte(uint rand, uint slicePosition) internal pure returns(uint) {
+    bytes memory bytesRand = uintToBytes(rand);
+    bytes memory part = slice(bytesRand, slicePosition, 1);
+    return byteSliceToUint(part);
   }
 
   function stringToUint(string memory s) internal pure returns (uint) {

@@ -43,9 +43,10 @@ contract Altar {
     _assetRetriever = AssetRetriever(assetRetriever);
   }
 
-  function getCubeNumber(bytes memory digits, uint state) internal pure returns (uint) {
+  function getCubeNumber(uint rand, uint state) internal pure returns (uint) {
     uint[] memory baseNumbersArray = GridHelper.setUintArrayFromString(BASE_NUMBERS, 3, 4);
-    uint baseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12, 2));
+    // uint baseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12, 2));
+    uint baseDigits = GridHelper.getRandByte(rand, 12);
     if (state == 2) { // has to be cube base because there will be stairs
       return baseNumbersArray[0];
     } else { // 3 possible bases, can appear in degraded/embellished
@@ -59,10 +60,12 @@ contract Altar {
     }
   }
 
-  function getFrameNumber(bytes memory digits, uint state) internal pure returns (uint[] memory) {
+  function getFrameNumber(uint rand, uint state) internal pure returns (uint[] memory) {
     uint[] memory numbersUsed = new uint[](3);
     uint[] memory frameNumbersArray = GridHelper.setUintArrayFromString(FRAME_NUMBERS, 6, 4);
-    uint frameDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 13, 2));
+    // uint frameDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 13, 2));
+    uint frameDigits = GridHelper.getRandByte(rand, 13);
+
     if (state == 2) {
       if (frameDigits < 50) {
         numbersUsed[0] = frameNumbersArray[3];
@@ -98,10 +101,12 @@ contract Altar {
     return numbersUsed;
   }
 
-  function getStepsRunnerNumber(bytes memory digits, uint state) internal pure returns (uint[] memory) {
+  function getStepsRunnerNumber(uint rand, uint state) internal pure returns (uint[] memory) {
     uint[] memory numbersUsed = new uint[](3);
     uint[] memory stepsRunnersNumbersArray = GridHelper.setUintArrayFromString(STEPS_RUNNERS_NUMBERS, 3, 4);
-    uint stepsRunnersDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 16, 2));
+    // uint stepsRunnersDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 16, 2));
+    uint stepsRunnersDigits = GridHelper.getRandByte(rand, 16);
+
     if (state == 2) {
       if (stepsRunnersDigits < 20) {
         numbersUsed[0] = stepsRunnersNumbersArray[2];
@@ -114,9 +119,11 @@ contract Altar {
     return numbersUsed;
   }
 
-  function getRugNumber(bytes memory digits, uint state) internal pure returns (uint) {
+  function getRugNumber(uint rand, uint state) internal pure returns (uint) {
     uint[] memory rugNumbersArray = GridHelper.setUintArrayFromString(RUG_NUMBERS, 2, 4);
-    uint rugDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 17, 2));
+    // uint rugDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 17, 2));
+    uint rugDigits = GridHelper.getRandByte(rand, 17);
+
     if (state == 2) {
       if (rugDigits < 50) {
         return rugNumbersArray[0];
@@ -128,9 +135,10 @@ contract Altar {
     }
   }
 
-  function getOrbBaseNumber(bytes memory digits, uint state, uint version) internal pure returns (uint) {
+  function getOrbBaseNumber(uint rand, uint state, uint version) internal pure returns (uint) {
     uint[] memory orbBaseNumbersArray = GridHelper.setUintArrayFromString(ORB_BASE_NUMBERS, 6, 4);
-    uint orbBaseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 14+version, 2));
+    // uint orbBaseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 14+version, 2));
+    uint orbBaseDigits = GridHelper.getRandByte(rand, 14+version);
     
     if (state == 2) {
       if (orbBaseDigits < 10) { // 10% chance and must be embellished = very rare
@@ -154,9 +162,10 @@ contract Altar {
     return 0;
   }
 
-  function getOrbNumber(bytes memory digits, uint state, uint version) internal pure returns (uint) {
+  function getOrbNumber(uint rand, uint state, uint version) internal pure returns (uint) {
     uint[] memory orbNumbersArray = GridHelper.setUintArrayFromString(ORB_NUMBERS, 4, 4);
-    uint orbDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 18+version, 2));
+    // uint orbDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 18+version, 2));
+    uint orbDigits = GridHelper.getRandByte(rand, 18+version);
     
     if (state == 0 && orbDigits < 5) { // 5% chance of an orb in degraded = very rare
       return orbNumbersArray[0];
@@ -180,12 +189,13 @@ contract Altar {
     return 0;
   }
 
-  function getFloobAnimationNumbers(bytes memory digits) internal pure returns (uint[] memory) {
+  function getFloobAnimationNumbers(uint rand) internal pure returns (uint[] memory) {
     uint[] memory numbersUsed = new uint[](5);
     uint[] memory floobAnimationNumbersArray = GridHelper.setUintArrayFromString(FLOOB_ANIMATION_NUMBERS, 2, 4);
     uint[] memory floobNumbersArray = GridHelper.setUintArrayFromString(FLOOB_NUMBERS, 11, 4);
     uint[] memory wrapperNumbersArray = GridHelper.setUintArrayFromString(WRAPPER_NUMBERS, 2, 4);
-    uint floobDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 25, 2));
+    // uint floobDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 25, 2));
+    uint floobDigits = GridHelper.getRandByte(rand, 25);
     numbersUsed[0] = floobAnimationNumbersArray[0];
     numbersUsed[1] = floobAnimationNumbersArray[1];
     numbersUsed[2] = wrapperNumbersArray[0];
@@ -194,11 +204,12 @@ contract Altar {
     return numbersUsed;
   }
 
-  function getTopRowItemNumber(bytes memory digits, uint state) internal pure returns (uint) {
+  function getTopRowItemNumber(uint rand, uint state) internal pure returns (uint) {
     uint[] memory topRowNumbersArray = GridHelper.setUintArrayFromString(TOP_ROW_NUMBERS, 3, 4);
-    uint topRowDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24, 2));
+    // uint topRowDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24, 2));
+    uint topRowDigits = GridHelper.getRandByte(rand, 24);
 
-    string memory expansionPropPosition = getExpansionPropPosition(digits, state);
+    string memory expansionPropPosition = getExpansionPropPosition(rand, state);
     bool canFit;
     if (keccak256(abi.encodePacked(expansionPropPosition)) == keccak256(abi.encodePacked("01560270")) || keccak256(abi.encodePacked(expansionPropPosition)) == keccak256(abi.encodePacked("03120180"))) {
       canFit = true;
@@ -223,7 +234,7 @@ contract Altar {
     }
   }
 
-  function getGlobalAssetPosition(bytes memory digits, uint state) internal pure returns (string memory) {
+  function getGlobalAssetPosition(uint rand, uint state) internal pure returns (string memory) {
     string memory globalAssetOffsets = DEGRADED_FLOOR_OFFSETS;
     uint numberOfPositions = NUMBER_OF_DEGRADED_FLOOR_POSITIONS;
     if (state == 1) {
@@ -234,7 +245,8 @@ contract Altar {
       numberOfPositions = NUMBER_OF_EMBELLISHED_FLOOR_POSITIONS;
     }
 
-    uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 21, 2));
+    // uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 21, 2));
+    uint globalAssetDigits = GridHelper.getRandByte(rand, 21);
 
     string memory assetOffset = string(GridHelper.slice(bytes(globalAssetOffsets), (globalAssetDigits % numberOfPositions)*8, 8));
 
@@ -242,7 +254,7 @@ contract Altar {
 
   }
 
-  function getExpansionPropPosition(bytes memory digits, uint state) internal pure returns (string memory) {
+  function getExpansionPropPosition(uint rand, uint state) internal pure returns (string memory) {
     string memory floorOffsets = DEGRADED_FLOOR_OFFSETS;
     string memory wallOffsets = DEGRADED_WALL_OFFSETS;
     uint numberOfFloorPositions = NUMBER_OF_DEGRADED_FLOOR_POSITIONS;
@@ -259,13 +271,14 @@ contract Altar {
       numberOfWallPositions = NUMBER_OF_EMBELLISHED_WALL_POSITIONS;
     }
 
-    uint expansionPropDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 23, 2));
-    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(digits, state);
+    // uint expansionPropDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 23, 2));
+    uint expansionPropDigits = GridHelper.getRandByte(rand, 23);
+    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(rand, state);
     if (expansionPropsNumber == 2000 || expansionPropsNumber == 2005 || expansionPropsNumber == 2006 || expansionPropsNumber == 2007) {
       return string(GridHelper.slice(bytes(wallOffsets), (expansionPropDigits % numberOfWallPositions)*8, 8));
     } else {
       // Need to check that the position is not already taken by the global asset
-      string memory globalAssetOffset = getGlobalAssetPosition(digits, state);
+      string memory globalAssetOffset = getGlobalAssetPosition(rand, state);
       string memory expansionPropOffset = string(GridHelper.slice(bytes(floorOffsets), (expansionPropDigits % numberOfFloorPositions)*8, 8));
       if (keccak256(bytes(expansionPropOffset)) == keccak256(bytes(globalAssetOffset))) {
         return string(GridHelper.slice(bytes(floorOffsets), ((expansionPropDigits+1) % numberOfFloorPositions)*8, 8));
@@ -276,13 +289,13 @@ contract Altar {
 
   }
 
-  function getCharacterPosition(uint characterNumber, bytes memory digits, uint state) internal pure returns(string memory) {
+  function getCharacterPosition(uint characterNumber, uint rand, uint state) internal pure returns(string memory) {
     if (characterNumber != 20000 && characterNumber != 20004) {
       return "03120180";
     } else {
-      uint orbNumber = getOrbNumber(digits, state, 0);
-      string memory globalAssetPossition = getGlobalAssetPosition(digits, state);
-      string memory expansionPropPosition = getExpansionPropPosition(digits, state);
+      uint orbNumber = getOrbNumber(rand, state, 0);
+      string memory globalAssetPossition = getGlobalAssetPosition(rand, state);
+      string memory expansionPropPosition = getExpansionPropPosition(rand, state);
       if (orbNumber == 0 && keccak256(bytes(globalAssetPossition)) != keccak256(bytes("06240180")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("06240180"))) {
         return "-3120180";
       } else if (state == 1 && keccak256(bytes(globalAssetPossition)) != keccak256(bytes("03120180")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("03120180")) && keccak256(bytes(globalAssetPossition)) != keccak256(bytes("03120360"))) {
@@ -295,56 +308,56 @@ contract Altar {
     }
   }
 
-  function getAllNumbersUsed(bytes memory digits, uint state) public pure returns (uint[] memory, string[] memory) {
+  function getAllNumbersUsed(uint rand, uint state) public pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](32);
     string[] memory offsetsUsed = new string[](32);
 
-    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(digits, state);
-    offsetsUsed[count] = getExpansionPropPosition(digits, state);
+    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, state);
+    offsetsUsed[count] = getExpansionPropPosition(rand, state);
     count++;
 
-    numbersUsed[count] = getTopRowItemNumber(digits, state);
+    numbersUsed[count] = getTopRowItemNumber(rand, state);
     count++;
 
-    uint[] memory frame = getFrameNumber(digits, state);
+    uint[] memory frame = getFrameNumber(rand, state);
     for (uint i = 0; i < frame.length; ++i) {
       numbersUsed[count] = frame[i];
       count++;
     }
 
-    numbersUsed[count] = getOrbBaseNumber(digits, state, 1);
+    numbersUsed[count] = getOrbBaseNumber(rand, state, 1);
     offsetsUsed[count] = "-312-180";
     count++;
-    numbersUsed[count] = getOrbNumber(digits, state, 1);
+    numbersUsed[count] = getOrbNumber(rand, state, 1);
     offsetsUsed[count] = "-312-180";
     count++;
-    numbersUsed[count] = getCubeNumber(digits, state);
+    numbersUsed[count] = getCubeNumber(rand, state);
     count++;
-    uint[] memory floobAnimation = getFloobAnimationNumbers(digits);
+    uint[] memory floobAnimation = getFloobAnimationNumbers(rand);
     for (uint i = 0; i < floobAnimation.length; ++i) {
       numbersUsed[count] = floobAnimation[i];
       count++;
     }
 
-    numbersUsed[count] = getOrbBaseNumber(digits, state, 0);
+    numbersUsed[count] = getOrbBaseNumber(rand, state, 0);
     count++;
-    numbersUsed[count] = getOrbNumber(digits, state, 0);
+    numbersUsed[count] = getOrbNumber(rand, state, 0);
     count++;
 
-    numbersUsed[count] = getRugNumber(digits, state);
+    numbersUsed[count] = getRugNumber(rand, state);
     count++;
-    uint[] memory stepsRunner = getStepsRunnerNumber(digits, state);
+    uint[] memory stepsRunner = getStepsRunnerNumber(rand, state);
     for (uint i = 0; i < stepsRunner.length; ++i) {
       numbersUsed[count] = stepsRunner[i];
       count++;
     }
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(digits, state, 0);
-    offsetsUsed[count] = getGlobalAssetPosition(digits, state);
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, state, 0);
+    offsetsUsed[count] = getGlobalAssetPosition(rand, state);
     count++;
 
-    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(digits, state, true);
+    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, state, true);
     numbersUsed[count] = characterNumbers[0];
     count++;
 
@@ -355,7 +368,7 @@ contract Altar {
     }
 
     numbersUsed[count] = characterNumbers[3];
-    offsetsUsed[count] = getCharacterPosition(characterNumbers[3], digits, state);
+    offsetsUsed[count] = getCharacterPosition(characterNumbers[3], rand, state);
     count++;
 
     numbersUsed[count] = characterNumbers[4];
@@ -365,12 +378,12 @@ contract Altar {
     return (numbersUsed, offsetsUsed);
   }
 
-  function getMachine(bytes memory digits, uint state) external view returns (string memory) {
+  function getMachine(uint rand, uint state) external view returns (string memory) {
 
     string memory output = "";
 
     // get all numbers used, returns a uint[] and a string[] of offsets
-    (uint[] memory allNumbers, string[] memory allOffsets) = getAllNumbersUsed(digits, state);
+    (uint[] memory allNumbers, string[] memory allOffsets) = getAllNumbersUsed(rand, state);
 
     for (uint i = 0; i < allNumbers.length; ++i) {
       if (bytes(allOffsets[i]).length == 0) {

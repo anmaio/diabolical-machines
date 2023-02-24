@@ -18,8 +18,6 @@ library GlobalNumbers {
 
   string internal constant CHARACTER_NUMBERS = "200012000320005200002000220004";
 
-  // probability of each column should add up to 90 for global assets and expansion props
-
   // Global Asset Probabilities - 5 values
   // State    = D, B, E
   // Lavalamp = 4,  8,  24
@@ -27,6 +25,7 @@ library GlobalNumbers {
   // Martini  = 20, 30, 20
   // Bong     = 15, 10, 5
   // Fridge   = 30, 20, 10
+  // None     = 10, 10, 10
 
   string internal constant GLOBAL_ASSET_PROBABILITIES = "042120153008223010202431200510";
 
@@ -40,19 +39,20 @@ library GlobalNumbers {
   // Recess A = 15, 10, 5
   // Recess B = 8,  9,  10
   // Recess C = 2,  11, 20
+  // None     = 10, 10, 10
 
   string internal constant EXPANSION_PROPS_PROBABILITIES = "201020100515080215101010151009111010051020051020";
 
   // Character Lever Probabilities - 8 values
   // State             = D,  B,  E
-  // LEVER A           = 15, 10, 2
-  // LEVER B           = 15, 20, 10
-  // LEVER C           = 30, 15, 5
-  // LEVER D           = 20, 15, 3
-  // DETAILED LEVER A  = 2,  5,  15
-  // DETAILED LEVER B  = 10, 10, 15
-  // DETAILED LEVER C  = 5,  15, 30
-  // DETAILED LEVER D  = 3,  10, 20
+  // LEVER D           = 15, 10, 2
+  // LEVER C           = 15, 20, 10
+  // LEVER B           = 30, 15, 5
+  // LEVER A           = 20, 15, 3
+  // DETAILED LEVER D  = 2,  5,  15
+  // DETAILED LEVER C  = 10, 10, 15
+  // DETAILED LEVER B  = 5,  15, 30
+  // DETAILED LEVER A  = 3,  10, 20
 
   string internal constant CHARACTER_LEVER_PROBABILITIES = "151530200210050310201515051015100210050315153020";
 
@@ -67,22 +67,21 @@ library GlobalNumbers {
 
   string internal constant CHARACTER_PROBABILITIES = "302005102015151510301515152525151010";
 
-  // Use NatSpec format
   /**
     * @dev Returns the global asset number based on the digits and state
-    * @param digits The digits to use
+    * @param rand The digits to use
     * @param state The state to use
     * @param version The version of the asset big/small
     * @return The global asset number
    */
 
-  function getGlobalAssetNumber(bytes memory digits, uint state, uint version) external pure returns (uint) {
+  function getGlobalAssetNumber(uint rand, uint state, uint version) external pure returns (uint) {
     uint[] memory globalAssetNumbersArray = GridHelper.setUintArrayFromString(GLOBAL_ASSET_NUMBERS_LARGE, 5, 4);
     if (version == 1) {
       globalAssetNumbersArray = GridHelper.setUintArrayFromString(GLOBAL_ASSET_NUMBERS_SMALL, 5, 4);
     }
     uint[] memory globalAssetProbabilitiesArray = GridHelper.setUintArrayFromString(GLOBAL_ASSET_PROBABILITIES, 15, 2);
-    uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 20, 2));
+    uint globalAssetDigits = GridHelper.getRandByte(rand, 20);
 
     uint assetNumber = 0;
 
@@ -100,15 +99,15 @@ library GlobalNumbers {
   
   /**
     * @dev Returns the expansion prop number based on the digits and state
-    * @param digits The digits to use
+    * @param rand The digits to use
     * @param state The state to use
     * @return The expansion prop number
    */
 
-  function getExpansionPropsNumber(bytes memory digits, uint state) external pure returns (uint) {
+  function getExpansionPropsNumber(uint rand, uint state) external pure returns (uint) {
     uint[] memory expansionPropsNumbersArray = GridHelper.setUintArrayFromString(EXPANSION_PROPS_NUMBERS, 8, 4);
     uint[] memory expansionPropsProbabilitiesArray = GridHelper.setUintArrayFromString(EXPANSION_PROPS_PROBABILITIES, 24, 2);
-    uint expansionPropsDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 22, 2));
+    uint expansionPropsDigits = GridHelper.getRandByte(rand, 22);
 
     uint propNumber = 0;
 
@@ -126,15 +125,15 @@ library GlobalNumbers {
 
   /**
     * @dev Returns the character lever number based on the digits and state
-    * @param digits The digits to use
+    * @param rand The digits to use
     * @param state The state to use
     * @return The character lever number
    */
 
-  function getCharacterLeverNumber(bytes memory digits, uint state) internal pure returns (uint) {
+  function getCharacterLeverNumber(uint rand, uint state) internal pure returns (uint) {
     uint[] memory characterLeverNumbersArray = GridHelper.setUintArrayFromString(CHARACTER_LEVER_NUMBERS, 8, 4);
     uint[] memory characterLeverProbabilitiesArray = GridHelper.setUintArrayFromString(CHARACTER_LEVER_PROBABILITIES, 24, 2);
-    uint characterLeverDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 30, 2));
+    uint characterLeverDigits = GridHelper.getRandByte(rand, 30);
 
     uint leverNumber = 0;
 
@@ -152,15 +151,15 @@ library GlobalNumbers {
 
   /**
     * @dev Returns the character number based on the digits and state
-    * @param digits The digits to use
+    * @param rand The digits to use
     * @param state The state to use
     * @return The character number
    */
 
-  function getCharacterNumber(bytes memory digits, uint state) internal pure returns (uint) {
+  function getCharacterNumber(uint rand, uint state) internal pure returns (uint) {
     uint[] memory characterNumbersArray = GridHelper.setUintArrayFromString(CHARACTER_NUMBERS, 6, 5);
     uint[] memory characterProbabilitiesArray = GridHelper.setUintArrayFromString(CHARACTER_PROBABILITIES, 18, 2);
-    uint characterDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 32, 2));
+    uint characterDigits = GridHelper.getRandByte(rand, 31);
 
     uint characterNumber = 0;
 
@@ -176,16 +175,23 @@ library GlobalNumbers {
     return characterNumber;
   }
 
-  function getCharacterNumberAndLeverNumber(bytes memory digits, uint state, bool flip) external pure returns (uint[5] memory) {
-    uint characterNumber = getCharacterNumber(digits, state);
-    uint characterLeverNumber = getCharacterLeverNumber(digits, state);
-    uint armMask;
+  /**
+    * @dev Returns the character number and lever number based on the digits and state
+    * @param rand The digits to use
+    * @param state The state to use
+    * @param flip Whether to flip the character
+    * @return The character number and lever numbers
+   */
+  function getCharacterNumberAndLeverNumber(uint rand, uint state, bool flip) external pure returns (uint[5] memory) {
+    uint characterNumber = getCharacterNumber(rand, state);
+    uint characterLeverNumber = getCharacterLeverNumber(rand, state);
+    uint armMask = 0;
     if (characterNumber == 20001 || characterNumber == 20003 || characterNumber == 20005) {
       armMask = CHAR_MASK_GROUP_NUMBER;
     }
 
-    uint flipOpen;
-    uint flipClose;
+    uint flipOpen = 0;
+    uint flipClose = 0;
     if (flip) {
       flipOpen = FLIPPER_WRAPPER_NUMBER;
       flipClose = GROUP_CLOSE_NUMBER;

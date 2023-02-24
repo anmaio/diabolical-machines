@@ -70,10 +70,11 @@ contract Noses {
     _assetRetriever = AssetRetriever(assetRetriever);
   }
 
-  function getNoseNumbers(bytes memory digits, uint state) internal pure returns (uint) {
+  function getNoseNumbers(uint rand, uint state) internal pure returns (uint) {
     uint[] memory noseNumbersArray = GridHelper.setUintArrayFromString(NOSE_NUMBERS, 3, 5);
     uint[] memory noseChanceArray = GridHelper.setUintArrayFromString(NOSE_CHANCE, 6, 2);
-    uint noseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12, 2));
+    // uint noseDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12, 2));
+    uint noseDigits = GridHelper.getRandByte(rand, 12);
 
     if (noseDigits < noseChanceArray[2*state]) {
       return noseNumbersArray[0];
@@ -84,10 +85,11 @@ contract Noses {
     }
   }
 
-  function getGaugeNumber(bytes memory digits, uint state) internal pure returns (uint) {
+  function getGaugeNumber(uint rand, uint state) internal pure returns (uint) {
     uint[] memory gaugeNumbersArray = GridHelper.setUintArrayFromString(GAUGE_NUMBERS, 5, 4);
     uint[] memory gaugeChanceArray = GridHelper.setUintArrayFromString(GAUGE_PROBABILITIES, 15, 2);
-    uint gaugeDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 14, 2));
+    // uint gaugeDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 14, 2));
+    uint gaugeDigits = GridHelper.getRandByte(rand, 14);
 
     if (gaugeDigits < gaugeChanceArray[5*state]) {
       return gaugeNumbersArray[0];
@@ -102,14 +104,24 @@ contract Noses {
     } else {
       return 0;
     }
+    // refactor to for loop
+    // uint sum = 0;
+    // for (uint i = 0; i < 5; i++) {
+    //   sum += gaugeChanceArray[5*state+i];
+    //   if (gaugeDigits < sum) {
+    //     return gaugeNumbersArray[i];
+    //   }
+    // }
+    // return 0;
   }
 
-  function getMidEyesNumber(bytes memory digits, uint state) internal pure returns (uint) {
+  function getMidEyesNumber(uint rand, uint state) internal pure returns (uint) {
     uint[] memory midEyesNumbersArray = GridHelper.setUintArrayFromString(MID_EYE_NUMBERS, 2, 4);
     uint[] memory midEyesChanceArray = GridHelper.setUintArrayFromString(MID_EYE_CHANCE, 6, 2);
-    uint midEyesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 16, 2));
+    // uint midEyesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 15, 2));
+    uint midEyesDigits = GridHelper.getRandByte(rand, 15);
 
-    uint noseNumber = getNoseNumbers(digits, state);
+    uint noseNumber = getNoseNumbers(rand, state);
 
     if (midEyesDigits < midEyesChanceArray[2*state] && noseNumber != 16001) {
       return midEyesNumbersArray[0];
@@ -120,10 +132,11 @@ contract Noses {
     }
   }
 
-  function getTopEyesNumber(bytes memory digits, uint state) internal pure returns (uint) {
+  function getTopEyesNumber(uint rand, uint state) internal pure returns (uint) {
     uint[] memory topEyesNumbersArray = GridHelper.setUintArrayFromString(TOP_EYE_NUMBERS, 2, 4);
     uint[] memory topEyesChanceArray = GridHelper.setUintArrayFromString(TOP_EYE_CHANCE, 6, 2);
-    uint topEyesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 16, 2));
+    // uint topEyesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 16, 2));
+    uint topEyesDigits = GridHelper.getRandByte(rand, 16);
 
     if (topEyesDigits < topEyesChanceArray[2*state]) {
       return topEyesNumbersArray[0];
@@ -134,8 +147,10 @@ contract Noses {
     }
   }
 
-  function IsMultipleHoles(bytes memory digits, uint state) internal pure returns(bool) {
-    uint multipleHolesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 18, 2));
+  function IsMultipleHoles(uint rand, uint state) internal pure returns(bool) {
+    // uint multipleHolesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 18, 2));
+    uint multipleHolesDigits = GridHelper.getRandByte(rand, 18);
+    
     uint multipleHolesChance = 0;
     if (state == 0) {
       multipleHolesChance = 98;
@@ -147,8 +162,9 @@ contract Noses {
     return multipleHolesDigits < multipleHolesChance;
   }
 
-  function getHoleNumbers(bytes memory digits, uint state, uint version) internal pure returns (uint, string memory, uint count) {
-    uint holeDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24+version, 2));
+  function getHoleNumbers(uint rand, uint state, uint version) internal pure returns (uint, string memory, uint count) {
+    // uint holeDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24+version, 2));
+    uint holeDigits = GridHelper.getRandByte(rand, 24+version);
     uint[] memory holeNumbersArray = GridHelper.setUintArrayFromString(HOLE_NUMBERS, 5, 5);
     uint[] memory holeChanceArray = GridHelper.setUintArrayFromString(HOLE_PROBABILITIES, 15, 2);
 
@@ -184,7 +200,7 @@ contract Noses {
 
   }
 
-  function getGlobalAssetPosition(bytes memory digits, uint state) internal pure returns (string memory) {
+  function getGlobalAssetPosition(uint rand, uint state) internal pure returns (string memory) {
     string memory globalAssetOffsets = DEGRADED_FLOOR_OFFSETS;
     uint numberOfPositions = NUMBER_OF_DEGRADED_FLOOR_POSITIONS;
     if (state == 1) {
@@ -195,7 +211,8 @@ contract Noses {
       numberOfPositions = NUMBER_OF_EMBELLISHED_FLOOR_POSITIONS;
     }
 
-    uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 21, 2));
+    // uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 21, 2));
+    uint globalAssetDigits = GridHelper.getRandByte(rand, 21);
 
     string memory assetOffset = string(GridHelper.slice(bytes(globalAssetOffsets), (globalAssetDigits % numberOfPositions)*8, 8));
 
@@ -203,7 +220,7 @@ contract Noses {
 
   }
 
-  function getExpansionPropPosition(bytes memory digits, uint state) internal pure returns (string memory) {
+  function getExpansionPropPosition(uint rand, uint state) internal pure returns (string memory) {
     string memory floorOffsets = DEGRADED_FLOOR_OFFSETS;
     string memory wallOffsets = DEGRADED_WALL_OFFSETS;
     uint numberOfFloorPositions = NUMBER_OF_DEGRADED_FLOOR_POSITIONS;
@@ -220,13 +237,14 @@ contract Noses {
       numberOfWallPositions = NUMBER_OF_EMBELLISHED_WALL_POSITIONS;
     }
 
-    uint expansionPropDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 23, 2));
-    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(digits, state);
+    // uint expansionPropDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 23, 2));
+    uint expansionPropDigits = GridHelper.getRandByte(rand, 23);
+    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(rand, state);
     if (expansionPropsNumber == 2000 || expansionPropsNumber == 2005 || expansionPropsNumber == 2006 || expansionPropsNumber == 2007) {
       return string(GridHelper.slice(bytes(wallOffsets), (expansionPropDigits % numberOfWallPositions)*8, 8));
     } else {
       // Need to check that the position is not already taken by the global asset
-      string memory globalAssetOffset = getGlobalAssetPosition(digits, state);
+      string memory globalAssetOffset = getGlobalAssetPosition(rand, state);
       string memory expansionPropOffset = string(GridHelper.slice(bytes(floorOffsets), (expansionPropDigits % numberOfFloorPositions)*8, 8));
       if (keccak256(bytes(expansionPropOffset)) == keccak256(bytes(globalAssetOffset))) {
         return string(GridHelper.slice(bytes(floorOffsets), ((expansionPropDigits+1) % numberOfFloorPositions)*8, 8));
@@ -237,7 +255,7 @@ contract Noses {
 
   }
 
-  function getAllNumbersUsed(bytes memory digits, uint state) public pure returns (uint[] memory, string[] memory) {
+  function getAllNumbersUsed(uint rand, uint state) public pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](80);
     string[] memory offsetsUsed = new string[](80);
@@ -246,7 +264,7 @@ contract Noses {
       numbersUsed[count] = GridHelper.stringToUint(string(GridHelper.slice(bytes(HOLE_TRANSFORM_NUMBERS), i*5, 5)));
       count++;
 
-      (uint holeNumber, string memory holeOffset, uint holeCount) = getHoleNumbers(digits, state, i);
+      (uint holeNumber, string memory holeOffset, uint holeCount) = getHoleNumbers(rand, state, i);
       for (uint j = 0; j < holeCount; ++j) {
         numbersUsed[count] = holeNumber;
         offsetsUsed[count] = string(GridHelper.slice(bytes(holeOffset), j*8, 8));
@@ -257,8 +275,8 @@ contract Noses {
       count++;
     }
 
-    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(digits, state);
-    offsetsUsed[count] = getExpansionPropPosition(digits, state);
+    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, state);
+    offsetsUsed[count] = getExpansionPropPosition(rand, state);
     count++;
 
     numbersUsed[count] = ALL_NOSES_WRAPPER_NUMBER;
@@ -267,7 +285,7 @@ contract Noses {
     numbersUsed[count] = PANEL_NUMBER;
     count++;
 
-    uint gaugeNumber = getGaugeNumber(digits, state);
+    uint gaugeNumber = getGaugeNumber(rand, state);
     numbersUsed[count] = gaugeNumber;
     offsetsUsed[count] = "-139-076";
     count++;
@@ -276,18 +294,18 @@ contract Noses {
     offsetsUsed[count] = "0174-245";
     count++;
 
-    numbersUsed[count] = getMidEyesNumber(digits, state);
+    numbersUsed[count] = getMidEyesNumber(rand, state);
     offsetsUsed[count] = "-140-079";
     count++;
 
-    numbersUsed[count] = getTopEyesNumber(digits, state);
+    numbersUsed[count] = getTopEyesNumber(rand, state);
     offsetsUsed[count] = "-140-079";
     count++;
 
     numbersUsed[count] = JUST_NOSES_WRAPPER_NUMBER;
     count++;
 
-    numbersUsed[count] = getNoseNumbers(digits, state);
+    numbersUsed[count] = getNoseNumbers(rand, state);
     count++;
 
     numbersUsed[count] = GROUP_CLOSE_NUMBER;
@@ -302,11 +320,11 @@ contract Noses {
     numbersUsed[count] = GROUP_CLOSE_NUMBER;
     count++;
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(digits, state, 0);
-    offsetsUsed[count] = getGlobalAssetPosition(digits, state);
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, state, 0);
+    offsetsUsed[count] = getGlobalAssetPosition(rand, state);
     count++;
 
-    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(digits, state, false);
+    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, state, false);
     numbersUsed[count] = characterNumbers[0];
     count++;
 
@@ -327,12 +345,12 @@ contract Noses {
     return (numbersUsed, offsetsUsed);
   }
 
-  function getMachine(bytes memory digits, uint state) external view returns (string memory) {
+  function getMachine(uint rand, uint state) external view returns (string memory) {
 
     string memory output = "";
 
     // get all numbers used, returns a uint[] and a string[] of offsets
-    (uint[] memory allNumbers, string[] memory allOffsets) = getAllNumbersUsed(digits, state);
+    (uint[] memory allNumbers, string[] memory allOffsets) = getAllNumbersUsed(rand, state);
 
     for (uint i = 0; i < allNumbers.length; ++i) {
       if (bytes(allOffsets[i]).length == 0) {

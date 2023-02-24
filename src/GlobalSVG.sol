@@ -55,12 +55,12 @@ contract GlobalSVG {
     );
   }
 
-  function getOpeningSVG(string memory machine, bytes memory digits, uint state) external pure returns (string memory) {
+  function getOpeningSVG(string memory machine, uint rand, uint state) external pure returns (string memory) {
 
     string memory output = string.concat(
       CommonSVG.SVG_START,
       CommonSVG.DEFS,
-      CommonSVG.getshellColours(machine, digits, state)
+      CommonSVG.getshellColours(machine, rand, state)
     );
 
     // if (keccak256(bytes(machine)) == keccak256(bytes("Altar"))) {

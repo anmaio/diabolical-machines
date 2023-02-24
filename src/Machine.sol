@@ -6,14 +6,14 @@ import "./GlobalNumbers.sol";
 import "./AssetRetriever.sol";
 
 interface IMachine {
-  function getMachine(bytes memory digits, uint state) external view returns (string memory);
-  function getAllNumbersUsed(bytes memory digits, uint state) external pure returns (uint[] memory, string[] memory);
-  function getGlobalAssetNumber(bytes memory digits, uint state, uint version) external pure returns (uint);
+  function getMachine(uint rand, uint state) external view returns (string memory);
+  function getAllNumbersUsed(uint rand, uint state) external pure returns (uint[] memory, string[] memory);
+  function getGlobalAssetNumber(uint rand, uint state, uint version) external pure returns (uint);
 }
 
 contract Machine {
 
-  AssetRetriever internal _assetRetriever;
+  AssetRetriever internal immutable _assetRetriever;
 
   // conveyor belt
   // string[] public allMachines = ["Conveyorbelt", "Drills", "Noses", "Beast", "Altar", "Tubes"];
@@ -29,38 +29,35 @@ contract Machine {
       machineToWorkstation[allMachines[i]] = workstations[i];
     }
 
-    machineToProductivityTiers["Altar"] = "024027030032041045048051056060065069";
-    machineToProductivityTiers["Drills"] = "024027030032041045048051056060065069";
-    machineToProductivityTiers["Noses"] = "024027030032041045048051056060065069";
+    machineToProductivityTiers["Altar"] = "020024027030032035038041045048051053054056060065069072";
+    machineToProductivityTiers["Drills"] = "020024027030032035038041045048051053054056060065069072";
+    machineToProductivityTiers["Noses"] = "020024027030032035038041045048051053054056060065069072";
   }
 
-  //  @notice This function returns a random machine from the array of machines.
   //  @dev This function returns a random machine from the array of machines.
   //  @param rand The random number to be used to select a machine.
   //  @return The machine selected from the array of machines.
   function selectMachine(uint rand) external view returns (string memory) {
-      // return machines[rand % machines.length];
-      return allMachines[2];
+      // return allMachines[rand % allMachines.length];
+      return allMachines[0];
   }
 
-  // @notice This function returns the machine svg for a given machine.
   // @dev This function returns the machine svg for a given machine.
   // @param machine The machine for which the svg is to be returned.
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The machine svg for a given machine.
-  function machineToGetter(string memory machine, bytes memory rand, uint state) external view returns (string memory) {
+  function machineToGetter(string memory machine, uint rand, uint state) external view returns (string memory) {
     return IMachine(machineToWorkstation[machine]).getMachine(rand, state);
   }
 
-  // @notice This function returns the productivity value for a given machine.
   // @dev This function returns the productivity value for a given machine.
   // @param machine The machine for which the productivity value is to be returned.
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The productivity value for a given machine.
-  function getProductivityValue(string memory machine, bytes memory digits, uint state) public view returns (uint) {
-    (uint[] memory numbersUsed,) = IMachine(machineToWorkstation[machine]).getAllNumbersUsed(digits, state);
+  function getProductivityValue(string memory machine, uint rand, uint state) public view returns (uint) {
+    (uint[] memory numbersUsed,) = IMachine(machineToWorkstation[machine]).getAllNumbersUsed(rand, state);
     uint productivityValue = 0;
     for (uint i = 0; i < numbersUsed.length; ++i) {
       productivityValue += _assetRetriever.getProductivity(numbersUsed[i]);
@@ -68,39 +65,52 @@ contract Machine {
     return productivityValue;
   }
 
-  // @notice This function returns the productivity tier for a given machine.
   // @dev This function returns the productivity tier for a given machine.
   // @param machine The machine for which the productivity tier is to be returned.
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The productivity tier for a given machine.
-  function getProductivity(string memory machine, bytes memory rand, uint state) external view returns(string memory) {
+  function getProductivity(string memory machine, uint rand, uint state) external view returns(string memory) {
 
     uint productivity = getProductivityValue(machine, rand, state);
 
     // slice ALTAR_COMBINED_PRODUCTIVITY_TIERS into 3 parts and cast to uint array
-    uint[] memory productivityTiers = GridHelper.setUintArrayFromString(string(GridHelper.slice(bytes(machineToProductivityTiers[machine]), state*12, 12)), 4, 3);
+    uint[] memory productivityTiers = GridHelper.setUintArrayFromString(string(GridHelper.slice(bytes(machineToProductivityTiers[machine]), state*18, 18)), 6, 3);
 
-    if (productivity < productivityTiers[0]) {
+    uint sum = 0;
+    uint index = 6;
+
+    for (uint i = 0; i < productivityTiers.length; ++i) {
+      sum += productivityTiers[i];
+      if (productivity < sum) {
+        index = i;
+        break;
+      }
+    }
+
+    if (index == 0) {
+      return "Obsolete";
+    } else if (index == 1) {
       return "Very Low";
-    } else if (productivity < productivityTiers[1]) {
+    } else if (index == 2) {
       return "Low";
-    } else if (productivity < productivityTiers[2]) {
+    } else if (index == 3) {
       return "Medium";
-    } else if (productivity < productivityTiers[3]) {
+    } else if (index == 4) {
       return "High";
-    } else {
+    } else if (index == 5) {
       return "Very High";
+    } else {
+      return "Unstable";
     }
   }
 
-  // @notice This function returns the name of the global asset for a given machine.
   // @dev This function returns the name of the global asset for a given machine.
   // @param machine The machine for which the name of the global asset is to be returned.
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The name of the global asset for a given machine.
-  function getGlobalAssetName(bytes memory rand, uint state) external pure returns (string memory) {
+  function getGlobalAssetName(uint rand, uint state) external pure returns (string memory) {
     uint assetNumber = GlobalNumbers.getGlobalAssetNumber(rand, state, 0);
 
     if (assetNumber == 6000) {
@@ -118,13 +128,12 @@ contract Machine {
     }
   }
 
-  // @notice This function returns the name of the expansion prop for a given machine.
   // @dev This function returns the name of the expansion prop for a given machine.
   // @param machine The machine for which the name of the expansion prop is to be returned.
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The name of the expansion prop for a given machine.
-  function getExpansionPropName(bytes memory rand, uint state) external pure returns (string memory) {
+  function getExpansionPropName(uint rand, uint state) external pure returns (string memory) {
     uint propNumber = GlobalNumbers.getExpansionPropsNumber(rand, state);
 
     if (propNumber == 2000) {
@@ -146,5 +155,31 @@ contract Machine {
     } else {
       return "None";
     }
+  }
+
+  // @dev This function returns the name of the character for a given machine.
+  // @param machine The machine for which the name of the character is to be returned.
+  // @param rand The random number to be used to select a machine.
+  // @param state The state of the machine.
+  // @return The name of the character for a given machine.
+  function getCharacterName(uint rand, uint state) external pure returns (string memory) {
+    uint characterNumber = GlobalNumbers.getCharacterNumber(rand, state);
+
+    if (characterNumber == 20000) {
+      return "Sitting";
+    } else if (characterNumber == 20001) {
+      return "Standing";
+    } else if (characterNumber == 20002) {
+      return "Collapsed";
+    } else if (characterNumber == 20003) {
+      return "Slouched";
+    } else if (characterNumber == 20004) {
+      return "Meditating";
+    } else if (characterNumber == 20005) {
+      return "Hunched";
+    } else {
+      return "None";
+    }
+
   }
 }

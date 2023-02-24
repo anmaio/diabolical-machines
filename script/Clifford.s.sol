@@ -45,6 +45,9 @@ import "../src/Assets/Drills/DrillsImp3.sol";
 import "../src/Assets/Drills/DrillsImp4.sol";
 
 import "../src/Assets/Noses/NosesImp1.sol";
+import "../src/Assets/Noses/NosesImp2.sol";
+import "../src/Assets/Noses/NosesImp3.sol";
+import "../src/Assets/Noses/NosesImp4.sol";
 
 import "../src/Assets/Tubes/TubesImp1.sol";
 
@@ -177,8 +180,14 @@ contract CliffordScript is Script {
   // Noses
   function deployNoses() internal {
     NosesImp1 nosesImp1 = new NosesImp1();
-    address[] memory nosesImpsAds = new address[](1);
+    NosesImp2 nosesImp2 = new NosesImp2();
+    NosesImp3 nosesImp3 = new NosesImp3();
+    NosesImp4 nosesImp4 = new NosesImp4();
+    address[] memory nosesImpsAds = new address[](4);
     nosesImpsAds[0] = address(nosesImp1);
+    nosesImpsAds[1] = address(nosesImp2);
+    nosesImpsAds[2] = address(nosesImp3);
+    nosesImpsAds[3] = address(nosesImp4);
     nosesTB = new TraitBase(nosesImpsAds);
   }
 

@@ -65,17 +65,18 @@ contract Drills {
     _assetRetriever = AssetRetriever(assetRetriever);
   }
 
-  function getDrillPositionNumbers(bytes memory digits, uint state) internal pure returns (uint[] memory, uint) {
+  function getDrillPositionNumbers(uint rand, uint state) internal pure returns (uint[] memory, uint) {
     // 6 possible positions for the drill
     // Embellished should have more drills and degraded should have less
     // There must be at least one drill
     uint[] memory drillChancesArray = GridHelper.setUintArrayFromString(DRILL_CHANCE, 3, 1);
     uint drillChance = drillChancesArray[state];
-    uint positionsDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12, 14));
+    // uint positionsDigits = GridHelper.bytesToUint(GridHelper.slice(rand, 12, 14));
 
     uint[] memory drillPositions = new uint[](6);
     uint count;
     for (uint i = 0; i < 6; ++i) {
+      uint positionsDigits = GridHelper.getRandByte(rand, 12+i);
       if ((positionsDigits % 4 < drillChance) || (count == 0 && i == 5)) {
         drillPositions[count] = GridHelper.stringToUint(string(GridHelper.slice(bytes(DRILL_POSITION_NUMBERS), i*5, 5)));
         count++;
@@ -86,10 +87,11 @@ contract Drills {
     return (drillPositions, count);
   }
 
-  function getDrillBitNumber(bytes memory digits, uint state, uint version) internal pure returns (uint) {
+  function getDrillBitNumber(uint rand, uint state, uint version) internal pure returns (uint) {
     uint[] memory bitNumbersArrayOne = GridHelper.setUintArrayFromString(BIT_NUMBERS_ONE, 3, 4);
     uint[] memory bitNumbersArrayTwo = GridHelper.setUintArrayFromString(BIT_NUMBERS_TWO, 4, 5);
-    uint bitDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 18+version, 2));
+    // uint bitDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 18+version, 2));
+    uint bitDigits = GridHelper.getRandByte(rand, 18+version);
 
     // 01 02 03 18 33 66
     // 05 15 30 50 70 85
@@ -117,9 +119,10 @@ contract Drills {
 
   }
 
-  function getTubeNumbers(bytes memory digits, uint state, uint version) internal pure returns (uint[2] memory) {
+  function getTubeNumbers(uint rand, uint state, uint version) internal pure returns (uint[2] memory) {
     uint[] memory tubeNumbersArray = GridHelper.setUintArrayFromString(TUBE_NUMBERS, 5, 5);
-    uint tubeDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12+version, 2));
+    // uint tubeDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12+version, 2));
+    uint tubeDigits = GridHelper.getRandByte(rand, 12+version);
 
     if (state == 0) {
       return [tubeNumbersArray[0], 0];
@@ -138,9 +141,10 @@ contract Drills {
     }
   }
 
-  function getConnectorNumbers(bytes memory digits, uint state) internal pure returns (uint[] memory) {
+  function getConnectorNumbers(uint rand, uint state) internal pure returns (uint[] memory) {
     uint[] memory connectorNumbersArray = GridHelper.setUintArrayFromString(CONNECTOR_NUMBERS, 5, 5);
-    uint connectorDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 15, 2));
+    // uint connectorDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 15, 2));
+    uint connectorDigits = GridHelper.getRandByte(rand, 15);
 
     uint[] memory connectorNumbers = new uint[](4);
 
@@ -168,9 +172,10 @@ contract Drills {
     return connectorNumbers;
   }
 
-  function getEyesGaugeNumber(bytes memory digits, uint state, uint version) internal pure returns (uint) {
+  function getEyesGaugeNumber(uint rand, uint state, uint version) internal pure returns (uint) {
     uint[] memory eyesGaugeNumbersArray = GridHelper.setUintArrayFromString(EYES_GAUGE_NUMBERS, 5, 4);
-    uint eyesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24+version, 2));
+    // uint eyesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24+version, 2));
+    uint eyesDigits = GridHelper.getRandByte(rand, 24+version);
 
     if (state == 0) {
       return 0;
@@ -203,9 +208,10 @@ contract Drills {
     }
   }
 
-  function getHeadNumbers(bytes memory digits, uint state, uint version) internal pure returns (uint[2] memory) {
+  function getHeadNumbers(uint rand, uint state, uint version) internal pure returns (uint[2] memory) {
     uint[] memory headNumbersArray = GridHelper.setUintArrayFromString(HEAD_NUMBERS_ONE, 2, 4);
-    uint headDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 2+version, 2));
+    // uint headDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 2+version, 2));
+    uint headDigits = GridHelper.getRandByte(rand, 2+version);
 
     if (state == 0) {
       return [uint(0), 0];
@@ -246,7 +252,7 @@ contract Drills {
     return drillPartsWrapperNumbersArray[version];
   }
 
-  function getGlobalAssetPosition(bytes memory digits, uint state) internal pure returns (string memory) {
+  function getGlobalAssetPosition(uint rand, uint state) internal pure returns (string memory) {
     string memory globalAssetOffsets = DEGRADED_FLOOR_OFFSETS;
     uint numberOfPositions = NUMBER_OF_DEGRADED_FLOOR_POSITIONS;
     if (state == 1) {
@@ -257,7 +263,8 @@ contract Drills {
       numberOfPositions = NUMBER_OF_EMBELLISHED_FLOOR_POSITIONS;
     }
 
-    uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 21, 2));
+    // uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 21, 2));
+    uint globalAssetDigits = GridHelper.getRandByte(rand, 21);
 
     string memory assetOffset = string(GridHelper.slice(bytes(globalAssetOffsets), (globalAssetDigits % numberOfPositions)*8, 8));
 
@@ -265,7 +272,7 @@ contract Drills {
 
   }
 
-  function getExpansionPropPosition(bytes memory digits, uint state) internal pure returns (string memory) {
+  function getExpansionPropPosition(uint rand, uint state) internal pure returns (string memory) {
     string memory floorOffsets = DEGRADED_FLOOR_OFFSETS;
     string memory wallOffsets = DEGRADED_WALL_OFFSETS;
     uint numberOfFloorPositions = NUMBER_OF_DEGRADED_FLOOR_POSITIONS;
@@ -282,13 +289,14 @@ contract Drills {
       numberOfWallPositions = NUMBER_OF_EMBELLISHED_WALL_POSITIONS;
     }
 
-    uint expansionPropDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 23, 2));
-    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(digits, state);
+    // uint expansionPropDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 23, 2));
+    uint expansionPropDigits = GridHelper.getRandByte(rand, 23);
+    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(rand, state);
     if (expansionPropsNumber == 2000 || expansionPropsNumber == 2005 || expansionPropsNumber == 2006 || expansionPropsNumber == 2007) {
       return string(GridHelper.slice(bytes(wallOffsets), (expansionPropDigits % numberOfWallPositions)*8, 8));
     } else {
       // Need to check that the position is not already taken by the global asset
-      string memory globalAssetOffset = getGlobalAssetPosition(digits, state);
+      string memory globalAssetOffset = getGlobalAssetPosition(rand, state);
       string memory expansionPropOffset = string(GridHelper.slice(bytes(floorOffsets), (expansionPropDigits % numberOfFloorPositions)*8, 8));
       if (keccak256(bytes(expansionPropOffset)) == keccak256(bytes(globalAssetOffset))) {
         return string(GridHelper.slice(bytes(floorOffsets), ((expansionPropDigits+1) % numberOfFloorPositions)*8, 8));
@@ -299,16 +307,16 @@ contract Drills {
 
   }
 
-  function getAllNumbersUsed(bytes memory digits, uint state) public pure returns (uint[] memory, string[] memory) {
+  function getAllNumbersUsed(uint rand, uint state) public pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](200);
     string[] memory offsetsUsed = new string[](200);
 
-    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(digits, state);
-    offsetsUsed[count] = getExpansionPropPosition(digits, state);
+    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, state);
+    offsetsUsed[count] = getExpansionPropPosition(rand, state);
     count++;
 
-    (uint[] memory drillPositions, uint numberOfDrills) = getDrillPositionNumbers(digits, state);
+    (uint[] memory drillPositions, uint numberOfDrills) = getDrillPositionNumbers(rand, state);
     for (uint i = 0; i < numberOfDrills; ++i) {
       numbersUsed[count] = drillPositions[i];
       count++;
@@ -334,19 +342,19 @@ contract Drills {
       numbersUsed[count] = getDrillPartsWrapperNumber(i);
       count++;
 
-      numbersUsed[count] = getDrillBitNumber(digits, state, i);
+      numbersUsed[count] = getDrillBitNumber(rand, state, i);
       count++;
 
-      uint[2] memory tubeNumbers = getTubeNumbers(digits, state, i);
+      uint[2] memory tubeNumbers = getTubeNumbers(rand, state, i);
       numbersUsed[count] = tubeNumbers[0];
       count++;
 
-      uint[2] memory headNumbers = getHeadNumbers(digits, state, i);
+      uint[2] memory headNumbers = getHeadNumbers(rand, state, i);
       numbersUsed[count] = headNumbers[0];
       offsetsUsed[count] = "-312-190";
       count++;
 
-      numbersUsed[count] = getEyesGaugeNumber(digits, state, i);
+      numbersUsed[count] = getEyesGaugeNumber(rand, state, i);
       offsetsUsed[count] = "0000-015";
       count++;
 
@@ -377,17 +385,17 @@ contract Drills {
       count++;
     }
 
-    uint[] memory connectorPositions = getConnectorNumbers(digits, state);
+    uint[] memory connectorPositions = getConnectorNumbers(rand, state);
     for (uint i = 0; i < connectorPositions.length; ++i) {
       numbersUsed[count] = connectorPositions[i];
       count++;
     }
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(digits, state, 0);
-    offsetsUsed[count] = getGlobalAssetPosition(digits, state);
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, state, 0);
+    offsetsUsed[count] = getGlobalAssetPosition(rand, state);
     count++;
 
-    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(digits, state, false);
+    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, state, false);
     numbersUsed[count] = characterNumbers[0];
     count++;
 
@@ -408,12 +416,12 @@ contract Drills {
     return (numbersUsed, offsetsUsed);
   }
 
-  function getMachine(bytes memory digits, uint state) external view returns (string memory) {
+  function getMachine(uint rand, uint state) external view returns (string memory) {
 
     string memory output = "";
 
     // get all numbers used, returns a uint[] and a string[] of offsets
-    (uint[] memory allNumbers, string[] memory allOffsets) = getAllNumbersUsed(digits, state);
+    (uint[] memory allNumbers, string[] memory allOffsets) = getAllNumbersUsed(rand, state);
 
     for (uint i = 0; i < allNumbers.length; ++i) {
       if (bytes(allOffsets[i]).length == 0) {

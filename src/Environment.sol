@@ -79,19 +79,19 @@ library Environment {
     return baseLightness - (baseLightness * percentage / 100);
   }
 
-  function getColours(string memory machine, bytes memory digits, uint state) external pure returns (uint[] memory) {
+  function getColours(string memory machine, uint rand, uint state) external pure returns (uint[] memory) {
     uint[] memory colourArray = new uint[](36); // 6 colours, 3*2 values each
 
     if (state == 0) { // degraded
-      colourArray = getDegradedShell(colourArray, machine, digits);
+      colourArray = getDegradedShell(colourArray, machine, rand);
     } else { // basic or embellished
-      colourArray = getBasicEmbelishedShell(colourArray, machine, digits, state);
+      colourArray = getBasicEmbelishedShell(colourArray, machine, rand, state);
     }
     return colourArray;
   }
 
-  function getColourIndex(bytes memory digits, uint state) internal pure returns(uint) {
-    uint percentage = GridHelper.bytesToUint(GridHelper.slice(digits, 2, 8)) % 100;
+  function getColourIndex(uint rand, uint state) internal pure returns(uint) {
+    uint baseValue = GridHelper.getRandByte(rand, 3);
     uint[] memory percentages = GridHelper.setUintArrayFromString(DEGRADED_COLOUR_PERCENTAGES, 8, 2);
     if (state == 1) {
       percentages = GridHelper.setUintArrayFromString(BASIC_COLOUR_PERCENTAGES, 8, 2);
@@ -101,16 +101,16 @@ library Environment {
     uint total = 0;
     for (uint i = 0; i < percentages.length; i++) {
       total += percentages[i];
-      if (percentage < total) {
+      if (baseValue < total) {
         return i;
       }
     }
     return 0;
   }
 
-  function selectBasicEmbellishedPalette(string memory machine, bytes memory digits, uint state) internal pure returns (string[] memory) {
+  function selectBasicEmbellishedPalette(string memory machine, uint rand, uint state) internal pure returns (string[] memory) {
     string[] memory basicPalette = new string[](2);
-    uint index = getColourIndex(digits, state);
+    uint index = getColourIndex(rand, state);
 
     uint size;
     if (state == 1) {
@@ -165,7 +165,7 @@ library Environment {
     return basicPalette;
   }
 
-  function getDegradedShell(uint[] memory colourArray, string memory machine, bytes memory digits) internal pure returns (uint[] memory) {
+  function getDegradedShell(uint[] memory colourArray, string memory machine, uint rand) internal pure returns (uint[] memory) {
 
     string memory degradedHsl = LOGISTICS_DEGRADED_HSL;
     string memory degradedPercentages = LOGISTICS_COLOUR_PERCENTAGES;
@@ -184,7 +184,7 @@ library Environment {
       degradedPercentages = MINING_COLOUR_PERCENTAGES;
     }
 
-    uint index = getColourIndex(digits, 0);
+    uint index = getColourIndex(rand, 0);
     uint[] memory singleColour = new uint[](3); // h, s, l
     for (uint i = 0; i < 3; ++i) {
       singleColour[i] = GridHelper.stringToUint(string(GridHelper.slice(bytes(degradedHsl), (index)*9 + 3*i, 3))); // 9 = h,s,l to 3 significant digits
@@ -200,8 +200,8 @@ library Environment {
     return colourArray;
   }
 
-  function getBasicEmbelishedShell(uint[] memory colourArray, string memory machine, bytes memory digits, uint state) internal pure returns (uint[] memory) {
-    uint NumColoursDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 2, 8));
+  function getBasicEmbelishedShell(uint[] memory colourArray, string memory machine, uint rand, uint state) internal pure returns (uint[] memory) {
+    uint NumColoursDigits = GridHelper.bytesToUint(GridHelper.slice(GridHelper.uintToBytes(rand), 2, 8));
     // uint numColours = (NumColoursDigits % 3) + ((state-1) * 3) + 1; // basic = 1, 2, 3; embellished = 4, 5, 6
     uint numColours;
     if (state == 1) {
@@ -210,7 +210,7 @@ library Environment {
       numColours = TOTAL_EMBELLISHED_COLOURS;
     }
 
-    string[] memory colourAvailableStrings = selectBasicEmbellishedPalette(machine, digits, state);
+    string[] memory colourAvailableStrings = selectBasicEmbellishedPalette(machine, rand, state);
     uint[] memory coloursAvailable = GridHelper.setUintArrayFromString(colourAvailableStrings[0], numColours*3, 3);
     uint[] memory coloursAvailableShade = GridHelper.setUintArrayFromString(colourAvailableStrings[1], numColours*3, 3);
 
