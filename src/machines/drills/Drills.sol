@@ -5,8 +5,13 @@ import "../../GlobalNumbers.sol";
 
 import "../../AssetRetriever.sol";
 
+import "../../Noise.sol";
+
 contract Drills {
+
   AssetRetriever internal _assetRetriever;
+
+  Noise internal _noise;
 
   // Floor
   string internal constant DEGRADED_FLOOR_OFFSETS = "0312036004680270";
@@ -34,10 +39,14 @@ contract Drills {
 
   string internal constant TUBE_NUMBERS = "1304113003130021301413016";
 
-  string internal constant BIT_NUMBERS_ONE = "901290139014";
-  string internal constant BIT_NUMBERS_TWO = "13010130111301213013";
+  string internal constant BIT_NUMBERS = "09012090130901413010130111301213013";
 
-  string internal constant BIT_PROBABILITIES = "010203183366051530507085103060759095";
+  // 003 005 008 046 084 168
+  // 013 038 077 128 179 217
+  // 026 077 153 191 230 242
+  // 003 005 008 046 084 168 013 038 077 128 179 217 026 077 153 191 230 242
+
+  string internal constant BIT_PROBABILITIES = "003005008046084168013038077128179217026077153191230242";
 
   string internal constant CONNECTOR_NUMBERS = "1300413005130061300710026";
 
@@ -61,11 +70,12 @@ contract Drills {
   // likelyhood of a drill appearing in a position for a given state
   string internal constant DRILL_CHANCE = "123";
 
-  constructor(address assetRetriever) {
+  constructor(address assetRetriever, address noise) {
     _assetRetriever = AssetRetriever(assetRetriever);
+    _noise = Noise(noise);
   }
 
-  function getDrillPositionNumbers(uint rand, uint state) internal pure returns (uint[] memory, uint) {
+  function getDrillPositionNumbers(uint rand, uint state, int baseline) internal view returns (uint[] memory, uint) {
     // 6 possible positions for the drill
     // Embellished should have more drills and degraded should have less
     // There must be at least one drill
@@ -77,63 +87,58 @@ contract Drills {
     uint count;
     for (uint i = 0; i < 6; ++i) {
       uint positionsDigits = GridHelper.getRandByte(rand, 12+i);
+      positionsDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[positionsDigits] + baseline);
       if ((positionsDigits % 4 < drillChance) || (count == 0 && i == 5)) {
         drillPositions[count] = GridHelper.stringToUint(string(GridHelper.slice(bytes(DRILL_POSITION_NUMBERS), i*5, 5)));
         count++;
       }
-      positionsDigits /= 100;
     }
 
     return (drillPositions, count);
   }
 
-  function getDrillBitNumber(uint rand, uint state, uint version) internal pure returns (uint) {
-    uint[] memory bitNumbersArrayOne = GridHelper.setUintArrayFromString(BIT_NUMBERS_ONE, 3, 4);
-    uint[] memory bitNumbersArrayTwo = GridHelper.setUintArrayFromString(BIT_NUMBERS_TWO, 4, 5);
+  function getDrillBitNumber(uint rand, uint state, uint version, int baseline) internal view returns (uint) {
+    uint[] memory bitNumbersArrayTwo = GridHelper.setUintArrayFromString(BIT_NUMBERS, 7, 5);
     // uint bitDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 18+version, 2));
     uint bitDigits = GridHelper.getRandByte(rand, 18+version);
+    bitDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[bitDigits] + baseline);
 
-    // 01 02 03 18 33 66
-    // 05 15 30 50 70 85
-    // 10 30 60 75 90 95
-    // 010203183366051530507085103060759095
-
-    string memory bitProbabilitiesPart = string(GridHelper.slice(bytes(BIT_PROBABILITIES), state*12, 12));
-    uint[] memory bitProbabilitiesArray = GridHelper.setUintArrayFromString(bitProbabilitiesPart, 6, 2);
+    string memory bitProbabilitiesPart = string(GridHelper.slice(bytes(BIT_PROBABILITIES), state*18, 18));
+    uint[] memory bitProbabilitiesArray = GridHelper.setUintArrayFromString(bitProbabilitiesPart, 6, 3);
 
     if (bitDigits < bitProbabilitiesArray[0]) {
-      return bitNumbersArrayTwo[1];
+      return bitNumbersArrayTwo[4];
     } else if (bitDigits < bitProbabilitiesArray[1]) {
-      return bitNumbersArrayTwo[2];
+      return bitNumbersArrayTwo[5];
     } else if (bitDigits < bitProbabilitiesArray[2]) {
-      return bitNumbersArrayTwo[3];
+      return bitNumbersArrayTwo[6];
     } else if (bitDigits < bitProbabilitiesArray[3]) {
-      return bitNumbersArrayOne[1];
+      return bitNumbersArrayTwo[1];
     } else if (bitDigits < bitProbabilitiesArray[4]) {
-      return bitNumbersArrayOne[2];
+      return bitNumbersArrayTwo[2];
     } else if (bitDigits < bitProbabilitiesArray[5]) {
-      return bitNumbersArrayOne[0];
-    } else {
       return bitNumbersArrayTwo[0];
+    } else {
+      return bitNumbersArrayTwo[3];
     }
-
   }
 
-  function getTubeNumbers(uint rand, uint state, uint version) internal pure returns (uint[2] memory) {
+  function getTubeNumbers(uint rand, uint state, uint version, int baseline) internal view returns (uint[2] memory) {
     uint[] memory tubeNumbersArray = GridHelper.setUintArrayFromString(TUBE_NUMBERS, 5, 5);
     // uint tubeDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 12+version, 2));
     uint tubeDigits = GridHelper.getRandByte(rand, 12+version);
+    tubeDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[tubeDigits] + baseline);
 
     if (state == 0) {
       return [tubeNumbersArray[0], 0];
     } else if (state == 1) {
-      if (tubeDigits < 70) {
+      if (tubeDigits < 179) {
         return [tubeNumbersArray[1], tubeNumbersArray[2]];
       } else {
         return [tubeNumbersArray[3], tubeNumbersArray[4]];
       }
     } else {
-      if (tubeDigits < 30) {
+      if (tubeDigits < 77) {
         return [tubeNumbersArray[1], tubeNumbersArray[2]];
       } else {
         return [tubeNumbersArray[3], tubeNumbersArray[4]];
@@ -141,66 +146,69 @@ contract Drills {
     }
   }
 
-  function getConnectorNumbers(uint rand, uint state) internal pure returns (uint[] memory) {
+  function getConnectorNumbers(uint rand, uint state, int baseline) internal view returns (uint[] memory) {
     uint[] memory connectorNumbersArray = GridHelper.setUintArrayFromString(CONNECTOR_NUMBERS, 5, 5);
     // uint connectorDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 15, 2));
     uint connectorDigits = GridHelper.getRandByte(rand, 15);
+    connectorDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[connectorDigits] + baseline);
 
     uint[] memory connectorNumbers = new uint[](4);
 
-    if (state == 0 && connectorDigits % 7 != 0 || state == 1 && connectorDigits % 2 != 0 || state == 2 && connectorDigits == 99) {
+    // No connector
+    if (state == 0 && connectorDigits % 7 != 0 || state == 1 && connectorDigits % 2 != 0 || state == 2 && connectorDigits > 252) {
       return connectorNumbers;
     }
 
     connectorNumbers[3] = connectorNumbersArray[2];
     connectorNumbers[1] = connectorNumbersArray[3];
 
-    if (connectorDigits < 50) {
+    if (connectorDigits < 128) {
       connectorNumbers[2] = connectorNumbersArray[0];
     } else {
       connectorNumbers[2] = connectorNumbersArray[1];
     }
 
-    if (state == 0 && connectorDigits % 50 == 0) {
+    if (state == 0 && connectorDigits % 50 == 0) { // very rare
       connectorNumbers[0] = connectorNumbersArray[4];
     } else if (state == 1 && connectorDigits % 5 == 0) {
       connectorNumbers[0] = connectorNumbersArray[4];
-    } else if (state == 2 && connectorDigits % 2 == 0) {
+    } else if (state == 2 && connectorDigits > 100) {
       connectorNumbers[0] = connectorNumbersArray[4];
     }
 
     return connectorNumbers;
   }
 
-  function getEyesGaugeNumber(uint rand, uint state, uint version) internal pure returns (uint) {
+  function getEyesGaugeNumber(uint rand, uint state, uint version, int baseline) internal view returns (uint) {
     uint[] memory eyesGaugeNumbersArray = GridHelper.setUintArrayFromString(EYES_GAUGE_NUMBERS, 5, 4);
     // uint eyesDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 24+version, 2));
     uint eyesDigits = GridHelper.getRandByte(rand, 24+version);
+    eyesDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[eyesDigits] + baseline);
 
     if (state == 0) {
       return 0;
     }
 
-    if (eyesDigits < 20) {
+    if (eyesDigits < 51) {
       return eyesGaugeNumbersArray[0];
     }
 
     if (state == 1) {
-      if (eyesDigits < 30) {
+      if (eyesDigits < 77) {
         return eyesGaugeNumbersArray[1];
-      } else if (eyesDigits < 40) {
+      } else if (eyesDigits < 102) {
         return eyesGaugeNumbersArray[2];
-      } else if (eyesDigits < 70) {
+      } else if (eyesDigits < 179) {
         return eyesGaugeNumbersArray[3];
       } else {
         return eyesGaugeNumbersArray[4];
       }
     } else {
-      if (eyesDigits < 30) {
+      if (eyesDigits < 77) {
         return eyesGaugeNumbersArray[4];
-      } else if (eyesDigits < 40) {
+      } else if (eyesDigits < 102) {
         return eyesGaugeNumbersArray[3];
-      } else if (eyesDigits < 70) {
+      } else if (eyesDigits < 179) {
         return eyesGaugeNumbersArray[2];
       } else {
         return eyesGaugeNumbersArray[1];
@@ -208,16 +216,17 @@ contract Drills {
     }
   }
 
-  function getHeadNumbers(uint rand, uint state, uint version) internal pure returns (uint[2] memory) {
+  function getHeadNumbers(uint rand, uint state, uint version, int baseline) internal view returns (uint[2] memory) {
     uint[] memory headNumbersArray = GridHelper.setUintArrayFromString(HEAD_NUMBERS_ONE, 2, 4);
     // uint headDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 2+version, 2));
     uint headDigits = GridHelper.getRandByte(rand, 2+version);
+    headDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[headDigits] + baseline);
 
     if (state == 0) {
       return [uint(0), 0];
     }
 
-    if (headDigits < 50) {
+    if (headDigits < 128) {
       if ((state == 2 && headDigits % 2 == 0) || (state == 1 && headDigits % 10 == 0)) {
         return [headNumbersArray[0], HEAD_NUMBERS_TWO];
       } else {
@@ -272,7 +281,7 @@ contract Drills {
 
   }
 
-  function getExpansionPropPosition(uint rand, uint state) internal pure returns (string memory) {
+  function getExpansionPropPosition(uint rand, uint state, int baseline) internal pure returns (string memory) {
     string memory floorOffsets = DEGRADED_FLOOR_OFFSETS;
     string memory wallOffsets = DEGRADED_WALL_OFFSETS;
     uint numberOfFloorPositions = NUMBER_OF_DEGRADED_FLOOR_POSITIONS;
@@ -291,7 +300,7 @@ contract Drills {
 
     // uint expansionPropDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 23, 2));
     uint expansionPropDigits = GridHelper.getRandByte(rand, 23);
-    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(rand, state);
+    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(rand, state, baseline);
     if (expansionPropsNumber == 2000 || expansionPropsNumber == 2005 || expansionPropsNumber == 2006 || expansionPropsNumber == 2007) {
       return string(GridHelper.slice(bytes(wallOffsets), (expansionPropDigits % numberOfWallPositions)*8, 8));
     } else {
@@ -307,16 +316,16 @@ contract Drills {
 
   }
 
-  function getAllNumbersUsed(uint rand, uint state) public pure returns (uint[] memory, string[] memory) {
+  function getAllNumbersUsed(uint rand, uint state, int baseline) public view returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](200);
     string[] memory offsetsUsed = new string[](200);
 
-    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, state);
-    offsetsUsed[count] = getExpansionPropPosition(rand, state);
+    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, state, baseline);
+    offsetsUsed[count] = getExpansionPropPosition(rand, state, baseline);
     count++;
 
-    (uint[] memory drillPositions, uint numberOfDrills) = getDrillPositionNumbers(rand, state);
+    (uint[] memory drillPositions, uint numberOfDrills) = getDrillPositionNumbers(rand, state, baseline);
     for (uint i = 0; i < numberOfDrills; ++i) {
       numbersUsed[count] = drillPositions[i];
       count++;
@@ -342,19 +351,19 @@ contract Drills {
       numbersUsed[count] = getDrillPartsWrapperNumber(i);
       count++;
 
-      numbersUsed[count] = getDrillBitNumber(rand, state, i);
+      numbersUsed[count] = getDrillBitNumber(rand, state, i, baseline);
       count++;
 
-      uint[2] memory tubeNumbers = getTubeNumbers(rand, state, i);
+      uint[2] memory tubeNumbers = getTubeNumbers(rand, state, i, baseline);
       numbersUsed[count] = tubeNumbers[0];
       count++;
 
-      uint[2] memory headNumbers = getHeadNumbers(rand, state, i);
+      uint[2] memory headNumbers = getHeadNumbers(rand, state, i, baseline);
       numbersUsed[count] = headNumbers[0];
       offsetsUsed[count] = "-312-190";
       count++;
 
-      numbersUsed[count] = getEyesGaugeNumber(rand, state, i);
+      numbersUsed[count] = getEyesGaugeNumber(rand, state, i, baseline);
       offsetsUsed[count] = "0000-015";
       count++;
 
@@ -385,17 +394,17 @@ contract Drills {
       count++;
     }
 
-    uint[] memory connectorPositions = getConnectorNumbers(rand, state);
+    uint[] memory connectorPositions = getConnectorNumbers(rand, state, baseline);
     for (uint i = 0; i < connectorPositions.length; ++i) {
       numbersUsed[count] = connectorPositions[i];
       count++;
     }
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, state, 0);
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, state, 0, baseline);
     offsetsUsed[count] = getGlobalAssetPosition(rand, state);
     count++;
 
-    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, state, false);
+    uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, state, false, baseline);
     numbersUsed[count] = characterNumbers[0];
     count++;
 
@@ -416,12 +425,12 @@ contract Drills {
     return (numbersUsed, offsetsUsed);
   }
 
-  function getMachine(uint rand, uint state) external view returns (string memory) {
+  function getMachine(uint rand, uint state, int baseline) external view returns (string memory) {
 
     string memory output = "";
 
     // get all numbers used, returns a uint[] and a string[] of offsets
-    (uint[] memory allNumbers, string[] memory allOffsets) = getAllNumbersUsed(rand, state);
+    (uint[] memory allNumbers, string[] memory allOffsets) = getAllNumbersUsed(rand, state, baseline);
 
     for (uint i = 0; i < allNumbers.length; ++i) {
       if (bytes(allOffsets[i]).length == 0) {

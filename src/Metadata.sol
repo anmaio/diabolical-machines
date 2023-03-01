@@ -6,6 +6,7 @@ import "base64-sol/base64.sol";
 import "./Machine.sol";
 import "./GridHelper.sol";
 import "./GlobalSVG.sol";
+// import "./GlobalNumbers.sol";
 
 contract Metadata {
   Machine private immutable _machine;
@@ -19,7 +20,7 @@ contract Metadata {
 
   function getMachine(uint rand) public view returns (string memory) {
     // uint randomNumber = GridHelper.bytesToUint(GridHelper.slice(rand, 10, 2));
-    uint randomNumber = GridHelper.getRandByte(rand, 10);
+    uint randomNumber = uint(GridHelper.getRandByte(rand, 10));
 
     return _machine.selectMachine(randomNumber);
   }
@@ -28,7 +29,8 @@ contract Metadata {
   // Function build metadata for a given token
   function buildMetadata(uint256 tokenId, uint rand) public view returns (string memory) {
     string[3] memory allStates = ["Degraded", "Basic", "Embellished"];
-    uint state = getState(rand);
+    int baseline = getBaselineRarity(rand);
+    uint state = getState(rand, baseline);
     string memory jsonInitial = string.concat(
         '{"name": "Clifford # ',
         Strings.toString(tokenId),
@@ -37,7 +39,7 @@ contract Metadata {
         '"}, {"trait_type": "State", "value":"',
         allStates[state],
         '"}, {"trait_type": "Productivity", "value":"',
-        getProductivity(rand)
+        getProductivity(rand, baseline)
         
         // _imageURI,
         // Strings.toString(tokenId),
@@ -47,28 +49,28 @@ contract Metadata {
     jsonInitial = string.concat(
         jsonInitial,
         '"}, {"trait_type": "Global Asset:", "value":"',
-        _machine.getGlobalAssetName(rand, state),
+        _machine.getGlobalAssetName(rand, state, baseline),
         '"}, {"trait_type": "Expansion Prop:", "value":"',
-        _machine.getExpansionPropName(rand, state),
+        _machine.getExpansionPropName(rand, state, baseline),
         '"}, {"trait_type": "Colour:", "value":"',
         getColourIndexTier(rand, state),
         '"}, {"trait_type": "Character:", "value":"',
-        _machine.getCharacterName(rand, state),
+        _machine.getCharacterName(rand, state, baseline),
         '"}],',
         '"image": "data:image/svg+xml;base64,'
     );
 
     string memory jsonFinal = Base64.encode(
-      bytes(string.concat(jsonInitial, composeSVG(rand), '"}'))
+      bytes(string.concat(jsonInitial, composeSVG(rand, baseline), '"}'))
     );
     string memory output = string.concat("data:application/json;base64,", jsonFinal);
     return output;
   }
 
-  function getProductivity(uint rand) public view returns (string memory) {
-    uint state = getState(rand);
+  function getProductivity(uint rand, int baseline) public view returns (string memory) {
+    uint state = getState(rand, baseline);
     string memory machine = getMachine(rand);
-    return _machine.getProductivity(machine, rand, state);
+    return _machine.getProductivity(machine, rand, state, baseline);
   }
 
   function getColourIndexTier(uint rand, uint state) public pure returns(string memory) {
@@ -97,27 +99,31 @@ contract Metadata {
   }
 
   // 0 = degraded, 1 = basic, 2 = embellished
-  function getState(uint rand) public pure returns (uint) {
+  function getState(uint rand, int baseline) public pure returns (uint) {
     uint stateDigits = GridHelper.getRandByte(rand, 2);
-    if (stateDigits < 10) {
+    // stateDigits = GridHelper.constrainToHex(GlobalNumbers.getGlobalNoiseArray()[stateDigits] + baseline);
+    if (stateDigits < 26) {
       return 0;
-    } else if (stateDigits < 60) {
+    } else if (stateDigits < 153) {
       return 1;
     } else {
       return 2;
     }
-    
-    // return 0;
+  }
+
+  function getBaselineRarity(uint rand) public pure returns (int) {
+    int baselineDigits = int(GridHelper.getRandByte(rand, 1));
+    return baselineDigits;
   }
 
   // compose SVG
-  function composeSVG(uint rand) public view returns (string memory) {
+  function composeSVG(uint rand, int baseline) public view returns (string memory) {
     // return all svg's concatenated together and base64 encoded
-    return Base64.encode(bytes(composeOnlyImage(rand)));
+    return Base64.encode(bytes(composeOnlyImage(rand, baseline)));
   }
 
   
-  function composeOnlyImage(uint rand) public view returns (string memory) {
+  function composeOnlyImage(uint rand, int baseline) public view returns (string memory) {
     // determine if flipped
 
     // 0 if not flipped, 1 if flipped
@@ -129,12 +135,12 @@ contract Metadata {
       flip = "-1";
     }
 
-    uint state = getState(rand);
+    uint state = getState(rand, baseline);
     string memory machine = getMachine(rand);
 
     string memory opening = _globalSVG.getOpeningSVG(machine, rand, state);
     
-    string memory objects = _machine.machineToGetter(machine, rand, state);
+    string memory objects = _machine.machineToGetter(machine, rand, state, baseline);
     string memory closing = _globalSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
     return string.concat(opening, _globalSVG.getShell(flip), objects, closing);

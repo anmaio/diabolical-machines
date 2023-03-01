@@ -6,9 +6,9 @@ import "./GlobalNumbers.sol";
 import "./AssetRetriever.sol";
 
 interface IMachine {
-  function getMachine(uint rand, uint state) external view returns (string memory);
-  function getAllNumbersUsed(uint rand, uint state) external pure returns (uint[] memory, string[] memory);
-  function getGlobalAssetNumber(uint rand, uint state, uint version) external pure returns (uint);
+  function getMachine(uint rand, uint state, int baseline) external view returns (string memory);
+  function getAllNumbersUsed(uint rand, uint state, int baseline) external pure returns (uint[] memory, string[] memory);
+  function getGlobalAssetNumber(uint rand, uint state, uint version, int baseline) external pure returns (uint);
 }
 
 contract Machine {
@@ -47,8 +47,8 @@ contract Machine {
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The machine svg for a given machine.
-  function machineToGetter(string memory machine, uint rand, uint state) external view returns (string memory) {
-    return IMachine(machineToWorkstation[machine]).getMachine(rand, state);
+  function machineToGetter(string memory machine, uint rand, uint state, int baseline) external view returns (string memory) {
+    return IMachine(machineToWorkstation[machine]).getMachine(rand, state, baseline);
   }
 
   // @dev This function returns the productivity value for a given machine.
@@ -56,8 +56,8 @@ contract Machine {
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The productivity value for a given machine.
-  function getProductivityValue(string memory machine, uint rand, uint state) public view returns (uint) {
-    (uint[] memory numbersUsed,) = IMachine(machineToWorkstation[machine]).getAllNumbersUsed(rand, state);
+  function getProductivityValue(string memory machine, uint rand, uint state, int baseline) public view returns (uint) {
+    (uint[] memory numbersUsed,) = IMachine(machineToWorkstation[machine]).getAllNumbersUsed(rand, state, baseline);
     uint productivityValue = 0;
     for (uint i = 0; i < numbersUsed.length; ++i) {
       productivityValue += _assetRetriever.getProductivity(numbersUsed[i]);
@@ -70,9 +70,9 @@ contract Machine {
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The productivity tier for a given machine.
-  function getProductivity(string memory machine, uint rand, uint state) external view returns(string memory) {
+  function getProductivity(string memory machine, uint rand, uint state, int baseline) external view returns(string memory) {
 
-    uint productivity = getProductivityValue(machine, rand, state);
+    uint productivity = getProductivityValue(machine, rand, state, baseline);
 
     // slice ALTAR_COMBINED_PRODUCTIVITY_TIERS into 3 parts and cast to uint array
     uint[] memory productivityTiers = GridHelper.setUintArrayFromString(string(GridHelper.slice(bytes(machineToProductivityTiers[machine]), state*18, 18)), 6, 3);
@@ -110,8 +110,8 @@ contract Machine {
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The name of the global asset for a given machine.
-  function getGlobalAssetName(uint rand, uint state) external pure returns (string memory) {
-    uint assetNumber = GlobalNumbers.getGlobalAssetNumber(rand, state, 0);
+  function getGlobalAssetName(uint rand, uint state, int baseline) external pure returns (string memory) {
+    uint assetNumber = GlobalNumbers.getGlobalAssetNumber(rand, state, 0, baseline);
 
     if (assetNumber == 6000) {
       return "Lavalamp";
@@ -133,8 +133,8 @@ contract Machine {
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The name of the expansion prop for a given machine.
-  function getExpansionPropName(uint rand, uint state) external pure returns (string memory) {
-    uint propNumber = GlobalNumbers.getExpansionPropsNumber(rand, state);
+  function getExpansionPropName(uint rand, uint state, int baseline) external pure returns (string memory) {
+    uint propNumber = GlobalNumbers.getExpansionPropsNumber(rand, state, baseline);
 
     if (propNumber == 2000) {
       return "Crack";
@@ -162,8 +162,8 @@ contract Machine {
   // @param rand The random number to be used to select a machine.
   // @param state The state of the machine.
   // @return The name of the character for a given machine.
-  function getCharacterName(uint rand, uint state) external pure returns (string memory) {
-    uint characterNumber = GlobalNumbers.getCharacterNumber(rand, state);
+  function getCharacterName(uint rand, uint state, int baseline) external pure returns (string memory) {
+    uint characterNumber = GlobalNumbers.getCharacterNumber(rand, state, baseline);
 
     if (characterNumber == 20000) {
       return "Sitting";

@@ -120,4 +120,14 @@ library GridHelper {
     }
     return sum;
   }
+
+  function constrainToHex(int value) internal pure returns (uint) {
+    if (value < 0) {
+      return 0;
+    } else if (value > 255) {
+      return 255;
+    } else {
+      return uint(value);
+    }
+  }
 }

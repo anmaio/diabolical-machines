@@ -69,7 +69,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 10;
+  uint internal constant MINT_SIZE = 1000;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
 
@@ -334,7 +334,8 @@ contract CliffordTest is Test {
   function testWriteImages() public {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i)));
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
     }
   }
 
@@ -350,15 +351,17 @@ contract CliffordTest is Test {
         itemClose = "\n  }\n";
       }
 
-      uint state = metadata.getState(clifford.getSeed(i));
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
 
-      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getSeed(i)), clifford.getSeed(i), metadata.getState(clifford.getSeed(i))));
+      uint state = metadata.getState(clifford.getSeed(i), baseline);
 
-      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), state);
+      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getSeed(i)), clifford.getSeed(i), metadata.getState(clifford.getSeed(i), baseline), baseline));
 
-      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), state);
+      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), state, baseline);
 
-      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), metadata.getState(clifford.getSeed(i)));
+      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), state, baseline);
+
+      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), metadata.getState(clifford.getSeed(i), baseline));
 
       string memory item = string.concat(
         itemOpen, 
@@ -376,7 +379,7 @@ contract CliffordTest is Test {
         metadata.getMachine(clifford.getSeed(i)), // machine name
         "\""
         ",\n    \"Productivity\": \"",
-        metadata.getProductivity(clifford.getSeed(i)), // productivity
+        metadata.getProductivity(clifford.getSeed(i), baseline), // productivity
         "\",\n    \"ProductivityValue\": \"",
         productivityValue
       );
@@ -394,7 +397,7 @@ contract CliffordTest is Test {
       item = string.concat(
         item, 
         "\",\n    \"Character\": \"",
-        machine.getCharacterName(clifford.getSeed(i), state),
+        machine.getCharacterName(clifford.getSeed(i), state, baseline),
         "\"",
         itemClose
       );
@@ -413,17 +416,19 @@ contract CliffordTest is Test {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       string memory id = Strings.toString(i);
 
-      uint state = metadata.getState(clifford.getSeed(i));
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+
+      uint state = metadata.getState(clifford.getSeed(i), baseline);
 
       string memory machineName = metadata.getMachine(clifford.getSeed(i));
 
-      string memory productivity = metadata.getProductivity(clifford.getSeed(i));
+      string memory productivity = metadata.getProductivity(clifford.getSeed(i), baseline);
 
-      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), state);
+      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), state, baseline);
 
-      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), state);
+      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), state, baseline);
 
-      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), metadata.getState(clifford.getSeed(i)));
+      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), metadata.getState(clifford.getSeed(i), baseline));
 
       string memory item = string.concat(
         itemOpen, 
