@@ -2,6 +2,7 @@
 pragma solidity ^0.8.12;
 
 import "forge-std/Test.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "../src/Clifford.sol";
 import "../src/Metadata.sol";
 import "../src/Machine.sol";
@@ -64,8 +65,7 @@ import "../src/Assets/Character/CharacterImp5.sol";
 
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
-
-import "@openzeppelin/contracts/utils/Strings.sol";
+import "../src/Noise.sol";
 
 contract CliffordTest is Test {
 
@@ -90,6 +90,7 @@ contract CliffordTest is Test {
   TraitBase public characterTB;
 
   AssetRetriever public assetRetriever;
+  Noise public noise;
 
   // Machines
   Altar public altar;
@@ -273,12 +274,16 @@ contract CliffordTest is Test {
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
+  function deployNoise() internal {
+    noise = new Noise();
+  }
+
   // deploy machines
   function deployMachines() internal {
-    altar = new Altar(address(assetRetriever));
-    drills = new Drills(address(assetRetriever));
+    altar = new Altar(address(assetRetriever), address(noise));
+    drills = new Drills(address(assetRetriever), address(noise));
     // beast = new Beast();
-    noses = new Noses(address(assetRetriever));
+    noses = new Noses(address(assetRetriever), address(noise));
     // tubes = new Tubes();
     // conveyorbelt = new Conveyorbelt();
   }
@@ -287,7 +292,7 @@ contract CliffordTest is Test {
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
     machine = new Machine([address(altar), address(drills), address(noses)], assetRetriever);
-    metadata = new Metadata(machine, globalSVG);
+    metadata = new Metadata(machine, globalSVG, noise);
     clifford = new Clifford(metadata);
   }
 
@@ -309,6 +314,7 @@ contract CliffordTest is Test {
     deployActivation();
     deployCharacter();
     deployAssetRetriever();
+    deployNoise();
     deployMachines();
     deployLogic();
 
@@ -353,15 +359,15 @@ contract CliffordTest is Test {
 
       int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
 
-      uint state = metadata.getState(clifford.getSeed(i), baseline);
+      uint state = metadata.getState(baseline);
 
-      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getSeed(i)), clifford.getSeed(i), metadata.getState(clifford.getSeed(i), baseline), baseline));
+      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getSeed(i)), clifford.getSeed(i), baseline));
 
-      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), state, baseline);
+      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), baseline);
 
-      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), state, baseline);
+      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), baseline);
 
-      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), metadata.getState(clifford.getSeed(i), baseline));
+      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), baseline);
 
       string memory item = string.concat(
         itemOpen, 
@@ -397,7 +403,7 @@ contract CliffordTest is Test {
       item = string.concat(
         item, 
         "\",\n    \"Character\": \"",
-        machine.getCharacterName(clifford.getSeed(i), state, baseline),
+        machine.getCharacterName(clifford.getSeed(i), baseline),
         "\"",
         itemClose
       );
@@ -418,17 +424,17 @@ contract CliffordTest is Test {
 
       int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
 
-      uint state = metadata.getState(clifford.getSeed(i), baseline);
+      uint state = metadata.getState(baseline);
 
       string memory machineName = metadata.getMachine(clifford.getSeed(i));
 
       string memory productivity = metadata.getProductivity(clifford.getSeed(i), baseline);
 
-      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), state, baseline);
+      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), baseline);
 
-      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), state, baseline);
+      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), baseline);
 
-      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), metadata.getState(clifford.getSeed(i), baseline));
+      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), baseline);
 
       string memory item = string.concat(
         itemOpen, 

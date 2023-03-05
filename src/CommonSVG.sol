@@ -63,7 +63,7 @@ library CommonSVG {
 
   string internal constant CHARACTER_COLOUR_IDS = "r0";
 
-  string internal constant CHARACTER_COLOURS = "206031090";
+  // string internal constant CHARACTER_COLOURS = "206031090";
 
   function createShellGradient(uint[6] memory colours, string memory id, string memory rotation) internal pure returns (string memory) {
     string memory output = string.concat(
@@ -134,8 +134,8 @@ library CommonSVG {
     );
   }
 
-  function getshellColours(string memory machine, uint rand, uint state) external pure returns(string memory) {
-    uint[] memory baseColours = Environment.getColours(machine, rand, state); // 12 colours, 3 values for each
+  function getshellColours(string memory machine, uint colourValue) external pure returns(string memory) {
+    uint[] memory baseColours = Environment.getColours(machine, colourValue); // 12 colours, 3 values for each
     // string[] memory shellGradients = new string[](3);
     // for (uint i = 0; i < 3; ++i) { // lw, rw, fl
     //   shellGradients[i] = createShellGradient([baseColours[i*6], baseColours[i*6+1], baseColours[i*6+2], baseColours[i*6+3], baseColours[i*6+4], baseColours[i*6+5]], string(GridHelper.slice(bytes(SHELL_GRADIENT_IDS), i*3, 3)), string(GridHelper.slice(bytes(ROTATIONS), i*3, 3)));
@@ -179,8 +179,8 @@ library CommonSVG {
     }
 
     // CHARACTER COLOUR
-    uint[] memory characterColour = GridHelper.setUintArrayFromString(CHARACTER_COLOURS, 3, 3);
-    gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(CHARACTER_COLOUR_IDS), 0, 2)), characterColour[0], characterColour[1], characterColour[2]);
+    // uint[] memory characterColour = GridHelper.setUintArrayFromString(CHARACTER_COLOURS, 3, 3);
+    gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(CHARACTER_COLOUR_IDS), 0, 2)), baseColours[0], baseColours[1], 70);
 
     gradientStyle = string.concat(gradientStyle, GRADIENT_STYLE_CLOSE);
 

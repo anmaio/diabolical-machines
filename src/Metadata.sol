@@ -6,16 +6,19 @@ import "base64-sol/base64.sol";
 import "./Machine.sol";
 import "./GridHelper.sol";
 import "./GlobalSVG.sol";
+import "./Noise.sol";
 // import "./GlobalNumbers.sol";
 
 contract Metadata {
   Machine private immutable _machine;
   // Clifford private _clifford;
   GlobalSVG private immutable _globalSVG;
+  Noise private immutable _noise;
 
-  constructor(Machine machine, GlobalSVG globalSVG) {
+  constructor(Machine machine, GlobalSVG globalSVG, Noise noise) {
       _machine = machine;
       _globalSVG = globalSVG;
+      _noise = noise;
   }
 
   function getMachine(uint rand) public view returns (string memory) {
@@ -30,7 +33,7 @@ contract Metadata {
   function buildMetadata(uint256 tokenId, uint rand) public view returns (string memory) {
     string[3] memory allStates = ["Degraded", "Basic", "Embellished"];
     int baseline = getBaselineRarity(rand);
-    uint state = getState(rand, baseline);
+    uint state = getState(baseline);
     string memory jsonInitial = string.concat(
         '{"name": "Clifford # ',
         Strings.toString(tokenId),
@@ -49,13 +52,13 @@ contract Metadata {
     jsonInitial = string.concat(
         jsonInitial,
         '"}, {"trait_type": "Global Asset:", "value":"',
-        _machine.getGlobalAssetName(rand, state, baseline),
+        _machine.getGlobalAssetName(rand, baseline),
         '"}, {"trait_type": "Expansion Prop:", "value":"',
-        _machine.getExpansionPropName(rand, state, baseline),
+        _machine.getExpansionPropName(rand, baseline),
         '"}, {"trait_type": "Colour:", "value":"',
-        getColourIndexTier(rand, state),
+        getColourIndexTier(rand, baseline),
         '"}, {"trait_type": "Character:", "value":"',
-        _machine.getCharacterName(rand, state, baseline),
+        _machine.getCharacterName(rand, baseline),
         '"}],',
         '"image": "data:image/svg+xml;base64,'
     );
@@ -68,51 +71,50 @@ contract Metadata {
   }
 
   function getProductivity(uint rand, int baseline) public view returns (string memory) {
-    uint state = getState(rand, baseline);
     string memory machine = getMachine(rand);
-    return _machine.getProductivity(machine, rand, state, baseline);
+    return _machine.getProductivity(machine, rand, baseline);
   }
 
-  function getColourIndexTier(uint rand, uint state) public pure returns(string memory) {
-    uint value = Environment.getColourIndex(rand, state);
+  function getBaseColourValue(uint rand, int baseline) internal view returns (uint) {
+    return GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 3)] + baseline);
+  }
 
-    if (value == 0) {
-      return "Very Common";
-    } else if (value == 1) {
-      return "Common";
-    } else if (value == 2) {
-      return "Very Uncommon";
-    } else if (value == 3) {
-      return "Uncommon";
-    } else if (value == 4) {
-      return "Rare";
-    } else if (value == 5) {
-      return "Very Rare";
-    } else if (value == 6) {
-      return "Ultra Rare";
-    } else if (value == 7) {
-      return "Legendary";
+  function getColourIndexTier(uint rand, int baseline) public view returns(string memory) {
+    uint value = Environment.getColourIndex(getBaseColourValue(rand, baseline));
+
+    string memory colourTier = "Legendary";
+
+    if (value < 4) {
+      colourTier = "Very Degraded";
+    } else if (value < 8) {
+      colourTier = "Degraded";
+    } else if (value < 16) {
+      colourTier = "Basic";
+    } else if (value < 20) {
+      colourTier = "Embellished";
+    } else if (value < 24) {
+      colourTier = "Very Embellished";
     } else {
-      return "Unknown";
+      colourTier = "Unknown";
     }
+
+    return colourTier;
     
   }
 
   // 0 = degraded, 1 = basic, 2 = embellished
-  function getState(uint rand, int baseline) public pure returns (uint) {
-    uint stateDigits = GridHelper.getRandByte(rand, 2);
-    // stateDigits = GridHelper.constrainToHex(GlobalNumbers.getGlobalNoiseArray()[stateDigits] + baseline);
-    if (stateDigits < 26) {
+  function getState(int baseline) public pure returns (uint) {
+    if (baseline < 85) {
       return 0;
-    } else if (stateDigits < 153) {
+    } else if (baseline < 171) {
       return 1;
     } else {
       return 2;
     }
   }
 
-  function getBaselineRarity(uint rand) public pure returns (int) {
-    int baselineDigits = int(GridHelper.getRandByte(rand, 1));
+  function getBaselineRarity(uint rand) public view returns (int) {
+    int baselineDigits = int(GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 1)]));
     return baselineDigits;
   }
 
@@ -121,7 +123,6 @@ contract Metadata {
     // return all svg's concatenated together and base64 encoded
     return Base64.encode(bytes(composeOnlyImage(rand, baseline)));
   }
-
   
   function composeOnlyImage(uint rand, int baseline) public view returns (string memory) {
     // determine if flipped
@@ -135,12 +136,13 @@ contract Metadata {
       flip = "-1";
     }
 
-    uint state = getState(rand, baseline);
     string memory machine = getMachine(rand);
 
-    string memory opening = _globalSVG.getOpeningSVG(machine, rand, state);
+    uint colourValue = getBaseColourValue(rand, baseline);
+
+    string memory opening = _globalSVG.getOpeningSVG(machine, colourValue);
     
-    string memory objects = _machine.machineToGetter(machine, rand, state, baseline);
+    string memory objects = _machine.machineToGetter(machine, rand, baseline);
     string memory closing = _globalSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
     return string.concat(opening, _globalSVG.getShell(flip), objects, closing);

@@ -122,12 +122,35 @@ library GridHelper {
   }
 
   function constrainToHex(int value) internal pure returns (uint) {
-    if (value < 0) {
-      return 0;
-    } else if (value > 255) {
-      return 255;
-    } else {
-      return uint(value);
+    // if (value < 0) { // if negative, make positive
+    //   value = 0 - value;
+    // }
+    return uint(value % 255); // constrain to 0-255
+  }
+
+  function createEqualProbabilityArray(uint numOfValues) internal pure returns (uint[] memory) {
+    uint oneLess = numOfValues - 1;
+    uint[] memory probabilities = new uint[](oneLess);
+    for (uint256 i = 0; i < oneLess; ++i) {
+      probabilities[i] = 256 / numOfValues * (i + 1);
     }
+    return probabilities;
+  }
+
+  function getSingleObject(string memory objectNumbers, uint channelValue, uint numOfValues) internal pure returns (uint) {
+    
+    // create probability array assuming all objects have equal probability
+    uint[] memory probabilities = createEqualProbabilityArray(numOfValues);
+
+    uint[] memory objectNumbersArray = setUintArrayFromString(objectNumbers, numOfValues, 5);
+
+    uint oneLess = numOfValues - 1;
+
+    for (uint256 i = 0; i < oneLess; ++i) {
+      if (channelValue < probabilities[i]) {
+        return objectNumbersArray[i];
+      }
+    }
+    return objectNumbersArray[oneLess];
   }
 }
