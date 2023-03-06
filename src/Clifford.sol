@@ -106,13 +106,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
       return uint256(keccak256(abi.encodePacked(_genSeed, tokenId)));
     }
 
-    // get the random number for the token
-    function getRandBytes(uint tokenId) public view returns (bytes memory) {
-      return bytes(Strings.toString(getSeed(tokenId)));
-    }
-
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        return _metadata.buildMetadata(tokenId, getRandBytes(tokenId));
+        return _metadata.buildMetadata(tokenId, getSeed(tokenId));
     }
 
     function withdrawMoney() external onlyOwner {

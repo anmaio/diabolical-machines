@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "forge-std/Script.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "../src/Clifford.sol";
 import "../src/Metadata.sol";
 import "../src/Machine.sol";
@@ -45,6 +46,9 @@ import "../src/Assets/Drills/DrillsImp3.sol";
 import "../src/Assets/Drills/DrillsImp4.sol";
 
 import "../src/Assets/Noses/NosesImp1.sol";
+import "../src/Assets/Noses/NosesImp2.sol";
+import "../src/Assets/Noses/NosesImp3.sol";
+import "../src/Assets/Noses/NosesImp4.sol";
 
 import "../src/Assets/Tubes/TubesImp1.sol";
 
@@ -61,6 +65,7 @@ import "../src/Assets/Character/CharacterImp5.sol";
 
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
+import "../src/Noise.sol";
 
 contract CliffordScript is Script {
   // Trait bases
@@ -80,6 +85,7 @@ contract CliffordScript is Script {
   TraitBase public characterTB;
 
   AssetRetriever public assetRetriever;
+  Noise public noise;
 
   // Machines
   Altar public altar;
@@ -177,8 +183,14 @@ contract CliffordScript is Script {
   // Noses
   function deployNoses() internal {
     NosesImp1 nosesImp1 = new NosesImp1();
-    address[] memory nosesImpsAds = new address[](1);
+    NosesImp2 nosesImp2 = new NosesImp2();
+    NosesImp3 nosesImp3 = new NosesImp3();
+    NosesImp4 nosesImp4 = new NosesImp4();
+    address[] memory nosesImpsAds = new address[](4);
     nosesImpsAds[0] = address(nosesImp1);
+    nosesImpsAds[1] = address(nosesImp2);
+    nosesImpsAds[2] = address(nosesImp3);
+    nosesImpsAds[3] = address(nosesImp4);
     nosesTB = new TraitBase(nosesImpsAds);
   }
 
@@ -257,12 +269,16 @@ contract CliffordScript is Script {
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
+  function deployNoise() internal {
+    noise = new Noise();
+  }
+
   // deploy machines
   function deployMachines() internal {
-    altar = new Altar(address(assetRetriever));
-    drills = new Drills(address(assetRetriever));
+    altar = new Altar(address(assetRetriever), address(noise));
+    drills = new Drills(address(assetRetriever), address(noise));
     // beast = new Beast();
-    noses = new Noses(address(assetRetriever));
+    noses = new Noses(address(assetRetriever), address(noise));
     // tubes = new Tubes();
     // conveyorbelt = new Conveyorbelt();
   }
@@ -271,7 +287,7 @@ contract CliffordScript is Script {
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
     machine = new Machine([address(altar), address(drills), address(noses)], assetRetriever);
-    metadata = new Metadata(machine, globalSVG);
+    metadata = new Metadata(machine, globalSVG, noise);
     clifford = new Clifford(metadata);
   }
 
@@ -296,6 +312,7 @@ contract CliffordScript is Script {
     deployActivation();
     deployCharacter();
     deployAssetRetriever();
+    deployNoise();
     deployMachines();
     deployLogic();
 

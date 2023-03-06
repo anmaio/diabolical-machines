@@ -2,6 +2,7 @@
 pragma solidity ^0.8.12;
 
 import "forge-std/Test.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "../src/Clifford.sol";
 import "../src/Metadata.sol";
 import "../src/Machine.sol";
@@ -45,6 +46,9 @@ import "../src/Assets/Drills/DrillsImp3.sol";
 import "../src/Assets/Drills/DrillsImp4.sol";
 
 import "../src/Assets/Noses/NosesImp1.sol";
+import "../src/Assets/Noses/NosesImp2.sol";
+import "../src/Assets/Noses/NosesImp3.sol";
+import "../src/Assets/Noses/NosesImp4.sol";
 
 import "../src/Assets/Tubes/TubesImp1.sol";
 
@@ -61,10 +65,11 @@ import "../src/Assets/Character/CharacterImp5.sol";
 
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
+import "../src/Noise.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 10;
+  uint internal constant MINT_SIZE = 1000;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
 
@@ -85,6 +90,7 @@ contract CliffordTest is Test {
   TraitBase public characterTB;
 
   AssetRetriever public assetRetriever;
+  Noise public noise;
 
   // Machines
   Altar public altar;
@@ -182,8 +188,14 @@ contract CliffordTest is Test {
   // Noses
   function deployNoses() internal {
     NosesImp1 nosesImp1 = new NosesImp1();
-    address[] memory nosesImpsAds = new address[](1);
+    NosesImp2 nosesImp2 = new NosesImp2();
+    NosesImp3 nosesImp3 = new NosesImp3();
+    NosesImp4 nosesImp4 = new NosesImp4();
+    address[] memory nosesImpsAds = new address[](4);
     nosesImpsAds[0] = address(nosesImp1);
+    nosesImpsAds[1] = address(nosesImp2);
+    nosesImpsAds[2] = address(nosesImp3);
+    nosesImpsAds[3] = address(nosesImp4);
     nosesTB = new TraitBase(nosesImpsAds);
   }
 
@@ -262,12 +274,16 @@ contract CliffordTest is Test {
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
+  function deployNoise() internal {
+    noise = new Noise();
+  }
+
   // deploy machines
   function deployMachines() internal {
-    altar = new Altar(address(assetRetriever));
-    drills = new Drills(address(assetRetriever));
+    altar = new Altar(address(assetRetriever), address(noise));
+    drills = new Drills(address(assetRetriever), address(noise));
     // beast = new Beast();
-    noses = new Noses(address(assetRetriever));
+    noses = new Noses(address(assetRetriever), address(noise));
     // tubes = new Tubes();
     // conveyorbelt = new Conveyorbelt();
   }
@@ -276,7 +292,7 @@ contract CliffordTest is Test {
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
     machine = new Machine([address(altar), address(drills), address(noses)], assetRetriever);
-    metadata = new Metadata(machine, globalSVG);
+    metadata = new Metadata(machine, globalSVG, noise);
     clifford = new Clifford(metadata);
   }
 
@@ -298,6 +314,7 @@ contract CliffordTest is Test {
     deployActivation();
     deployCharacter();
     deployAssetRetriever();
+    deployNoise();
     deployMachines();
     deployLogic();
 
@@ -313,17 +330,74 @@ contract CliffordTest is Test {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       // to, quantity
       clifford.publicMint(to, 1);
-      vm.roll(i*69);
-      vm.warp(i*69);
+      vm.roll(i*99);
+      vm.warp(i*99);
       clifford.reveal();
     }
   }
 
   // test writing X images to a file
   function testWriteImages() public {
-    for (uint256 i = 0; i < MINT_SIZE; i++) {
+    // Memory leak causes wsl to crash for me with 1000 images
+    // https://github.com/ethereum/solidity/issues/13885
+    for (uint256 i = 0; i < MINT_SIZE/10; i++) {
       string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getRandBytes(i)));
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE/10; i < MINT_SIZE*2/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*2/10; i < MINT_SIZE*3/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*3/10; i < MINT_SIZE*4/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*4/10; i < MINT_SIZE*5/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*5/10; i < MINT_SIZE*6/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*6/10; i < MINT_SIZE*7/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*7/10; i < MINT_SIZE*8/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*8/10; i < MINT_SIZE*9/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*9/10; i < MINT_SIZE; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
     }
   }
 
@@ -339,33 +413,35 @@ contract CliffordTest is Test {
         itemClose = "\n  }\n";
       }
 
-      string memory state = allStates[metadata.getState(clifford.getRandBytes(i))];
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
 
-      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getRandBytes(i)), clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i))));
+      uint state = metadata.getState(baseline);
 
-      string memory globalAsset = metadata.getGlobalAssetName(clifford.getRandBytes(i));
+      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getSeed(i)), clifford.getSeed(i), baseline));
 
-      string memory expansionProp = metadata.getExpansionPropName(clifford.getRandBytes(i));
+      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), baseline);
 
-      string memory colour = metadata.getColourIndexTier(clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i)));
+      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), baseline);
+
+      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), baseline);
 
       string memory item = string.concat(
         itemOpen, 
         id, 
         ",\n    \"RandomNumber\": \"", 
-        string(clifford.getRandBytes(i)), // random number
+        Strings.toString(clifford.getSeed(i)), // random number
         "\",\n    \"State\": \"",
-        state, 
+        allStates[state], 
         "\""
       );
 
       item = string.concat(
         item, 
         ",\n    \"Machine\": \"",
-        metadata.getMachine(clifford.getRandBytes(i)), // machine name
+        metadata.getMachine(clifford.getSeed(i)), // machine name
         "\""
         ",\n    \"Productivity\": \"",
-        metadata.getProductivity(clifford.getRandBytes(i)), // productivity
+        metadata.getProductivity(clifford.getSeed(i), baseline), // productivity
         "\",\n    \"ProductivityValue\": \"",
         productivityValue
       );
@@ -377,7 +453,13 @@ contract CliffordTest is Test {
         "\",\n    \"ExpansionProp\": \"",
         expansionProp,
         "\",\n    \"Colour\": \"",
-        colour,
+        colour
+      );
+
+      item = string.concat(
+        item, 
+        "\",\n    \"Character\": \"",
+        machine.getCharacterName(clifford.getSeed(i), baseline),
         "\"",
         itemClose
       );
@@ -396,21 +478,23 @@ contract CliffordTest is Test {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       string memory id = Strings.toString(i);
 
-      string memory state = allStates[metadata.getState(clifford.getRandBytes(i))];
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
 
-      string memory machineName = metadata.getMachine(clifford.getRandBytes(i));
+      uint state = metadata.getState(baseline);
 
-      string memory productivity = metadata.getProductivity(clifford.getRandBytes(i));
+      string memory machineName = metadata.getMachine(clifford.getSeed(i));
 
-      string memory globalAsset = metadata.getGlobalAssetName(clifford.getRandBytes(i));
+      string memory productivity = metadata.getProductivity(clifford.getSeed(i), baseline);
 
-      string memory expansionProp = metadata.getExpansionPropName(clifford.getRandBytes(i));
+      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), baseline);
 
-      string memory colour = metadata.getColourIndexTier(clifford.getRandBytes(i), metadata.getState(clifford.getRandBytes(i)));
+      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), baseline);
+
+      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), baseline);
 
       string memory item = string.concat(
         itemOpen, 
-        state, 
+        allStates[state], 
         "\"\n      },\n      {\n        \"trait_type\": \"Machine\",\n        \"value\": \"",
         machineName, 
         "\"\n      },\n      {\n        \"trait_type\": \"Productivity\",\n        \"value\": \"",

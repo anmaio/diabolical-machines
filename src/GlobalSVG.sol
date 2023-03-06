@@ -4,9 +4,6 @@ pragma solidity 0.8.16;
 // TEMP STYLES
 
 import "./styles/altar/AltarCSS1.sol";
-import "./styles/altar/AltarCSS2.sol";
-import "./styles/altar/AltarCSS3.sol";
-import "./styles/altar/AltarCSS4.sol";
 
 import "./styles/drills/DrillsCSS1.sol";
 
@@ -55,29 +52,13 @@ contract GlobalSVG {
     );
   }
 
-  function getOpeningSVG(string memory machine, bytes memory digits, uint state) external pure returns (string memory) {
+  function getOpeningSVG(string memory machine, uint colourValue) external pure returns (string memory) {
 
     string memory output = string.concat(
       CommonSVG.SVG_START,
       CommonSVG.DEFS,
-      CommonSVG.getshellColours(machine, digits, state)
+      CommonSVG.getshellColours(machine, colourValue)
     );
-
-    // if (keccak256(bytes(machine)) == keccak256(bytes("Altar"))) {
-    //   output = string.concat(
-    //     output, 
-
-    //     AltarDefs1.getPart(),
-    //     AltarDefs2.getPart(),
-    //     AltarDefs3.getPart()
-    //   );
-    // } else if (keccak256(bytes(machine)) == keccak256(bytes("Drills"))) {
-    //   output = string.concat(
-    //     output,
-
-    //     DrillsDefs1.getPart()
-    //   );
-    // }
 
     output = string.concat(
       output, 
@@ -107,30 +88,10 @@ contract GlobalSVG {
       CommonSVG.STYLE
     );
 
-    // if (keccak256(bytes(machine)) == keccak256(bytes("Altar"))) {
-    //   output = string.concat(
-    //     output,
-
-    //     AltarCSS1.getPart(),
-    //     AltarCSS2.getPart(),
-    //     AltarCSS3.getPart(),
-    //     AltarCSS4.getPart()
-    //   );
-    // } else if (keccak256(bytes(machine)) == keccak256(bytes("Drills"))) {
-    //   output = string.concat(
-    //     output,
-
-    //     DrillsCSS1.getPart()
-    //   );
-    // }
-
     output = string.concat(
       output,
 
       AltarCSS1.getPart(),
-      AltarCSS2.getPart(),
-      AltarCSS3.getPart(),
-      AltarCSS4.getPart(),
       DrillsCSS1.getPart(),
       NosesCSS1.getPart()
     );
