@@ -20,8 +20,8 @@ contract Altar {
   string internal constant ORB_BASE_NUMBERS = "00000070050700607008070090701007007";
   string internal constant STEPS_RUNNERS_NUMBERS = "070130701407015";
   string internal constant RUG_NUMBERS = "000000702007021";
-  string internal constant FLOOB_ANIMATION_NUMBERS = "0701907016";
-  string internal constant WRAPPER_NUMBERS = "0702307024";
+  string internal constant FLOOB_ANIMATION_NUMBERS = "07019070160702507022";
+  string internal constant WRAPPER_NUMBERS = "07023070240702607027";
 
   string internal constant FLOOB_NUMBERS = "0101001005010130100401008010090102001017010190101601015";
   string internal constant ORB_NUMBERS = "0000004035040360403704038";
@@ -41,13 +41,17 @@ contract Altar {
   }
 
   function getCubeNumber(uint rand, int baseline) internal view returns (uint) {
+    uint baseDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
+
     uint[3] memory stepsNumbers = getStepsNumber(rand, baseline);
     // Only 1 of the bases fit with the steps
     if (stepsNumbers[1] == 7013) {
       return 7000;
     }
 
-    uint baseDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
+    if (stepsNumbers[1] == 0) {
+      return 0;
+    }
 
     return GridHelper.getSingleObject(BASE_NUMBERS, baseDigits, 3);
   }
@@ -81,7 +85,7 @@ contract Altar {
   function getStepsNumber(uint rand, int baseline) internal view returns (uint[3] memory) {
     uint stepsDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
 
-    uint[] memory stepsProbabilitiesArray = GridHelper.createEqualProbabilityArray(5);
+    uint[] memory stepsProbabilitiesArray = GridHelper.createEqualProbabilityArray(4);
 
     uint[] memory stepsRunnersNumbersArray = GridHelper.setUintArrayFromString(STEPS_RUNNERS_NUMBERS, 3, 5);
 
@@ -91,8 +95,6 @@ contract Altar {
       return [0, stepsRunnersNumbersArray[0], 0];
     } else if (stepsDigits < stepsProbabilitiesArray[2]) {
       return [0, stepsRunnersNumbersArray[0], stepsRunnersNumbersArray[1]];
-    } else if (stepsDigits < stepsProbabilitiesArray[3]) {
-      return [stepsRunnersNumbersArray[2], stepsRunnersNumbersArray[0], 0];
     } else {
       return [stepsRunnersNumbersArray[2], stepsRunnersNumbersArray[0], stepsRunnersNumbersArray[1]];
     }
@@ -120,15 +122,28 @@ contract Altar {
     uint floobDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 25)] + baseline);
 
     uint[] memory numbersUsed = new uint[](5);
-    uint[] memory floobAnimationNumbersArray = GridHelper.setUintArrayFromString(FLOOB_ANIMATION_NUMBERS, 2, 5);
-    uint[] memory wrapperNumbersArray = GridHelper.setUintArrayFromString(WRAPPER_NUMBERS, 2, 5);
+    uint[] memory floobAnimationNumbersArray = GridHelper.setUintArrayFromString(FLOOB_ANIMATION_NUMBERS, 4, 5);
+    uint[] memory wrapperNumbersArray = GridHelper.setUintArrayFromString(WRAPPER_NUMBERS, 4, 5);
 
-    numbersUsed[0] = floobAnimationNumbersArray[0];
-    numbersUsed[1] = floobAnimationNumbersArray[1];
-    numbersUsed[2] = wrapperNumbersArray[0];
-    numbersUsed[3] = GridHelper.getSingleObject(FLOOB_NUMBERS, floobDigits, 11);
-    numbersUsed[4] = wrapperNumbersArray[1];
-    return numbersUsed;
+    // get the cube number
+    uint cubeNumber = getCubeNumber(rand, baseline);
+
+    // if the cube number is 0, then we want to use the floob animation that appears from the floor
+    if (cubeNumber == 0) {
+      numbersUsed[0] = floobAnimationNumbersArray[2];
+      numbersUsed[1] = floobAnimationNumbersArray[3];
+      numbersUsed[2] = wrapperNumbersArray[2];
+      numbersUsed[3] = GridHelper.getSingleObject(FLOOB_NUMBERS, floobDigits, 11);
+      numbersUsed[4] = wrapperNumbersArray[3];
+      return numbersUsed;
+    } else {
+      numbersUsed[0] = floobAnimationNumbersArray[0];
+      numbersUsed[1] = floobAnimationNumbersArray[1];
+      numbersUsed[2] = wrapperNumbersArray[0];
+      numbersUsed[3] = GridHelper.getSingleObject(FLOOB_NUMBERS, floobDigits, 11);
+      numbersUsed[4] = wrapperNumbersArray[1];
+      return numbersUsed;
+    }
   }
 
   function getTopRowItemNumber(uint rand, int baseline) internal view returns (uint) {
@@ -189,9 +204,10 @@ contract Altar {
       return "03120180";
     } else {
       uint orbNumber = getOrbNumber(rand, 0, baseline);
+      uint orbBaseNumber = getOrbBaseNumber(rand, 0, baseline);
       string memory globalAssetPossition = getGlobalAssetPosition(rand);
       string memory expansionPropPosition = getExpansionPropPosition(rand, baseline);
-      if (orbNumber == 0 && keccak256(bytes(globalAssetPossition)) != keccak256(bytes("06240180")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("06240180"))) {
+      if (orbNumber == 0 && orbBaseNumber == 0 && keccak256(bytes(globalAssetPossition)) != keccak256(bytes("06240180")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("06240180"))) {
         return "-3120180";
       } else if (keccak256(bytes(globalAssetPossition)) != keccak256(bytes("03120360")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("03120360"))) {
         return "00000360";

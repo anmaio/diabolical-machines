@@ -330,15 +330,71 @@ contract CliffordTest is Test {
     for (uint256 i = 0; i < MINT_SIZE; i++) {
       // to, quantity
       clifford.publicMint(to, 1);
-      vm.roll(i*100);
-      vm.warp(i*100);
+      vm.roll(i*99);
+      vm.warp(i*99);
       clifford.reveal();
     }
   }
 
   // test writing X images to a file
   function testWriteImages() public {
-    for (uint256 i = 0; i < MINT_SIZE; i++) {
+    // Memory leak causes wsl to crash for me with 1000 images
+    // https://github.com/ethereum/solidity/issues/13885
+    for (uint256 i = 0; i < MINT_SIZE/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE/10; i < MINT_SIZE*2/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*2/10; i < MINT_SIZE*3/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*3/10; i < MINT_SIZE*4/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*4/10; i < MINT_SIZE*5/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*5/10; i < MINT_SIZE*6/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*6/10; i < MINT_SIZE*7/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*7/10; i < MINT_SIZE*8/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*8/10; i < MINT_SIZE*9/10; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+    }
+
+    for (uint256 i = MINT_SIZE*9/10; i < MINT_SIZE; i++) {
       string memory path = string.concat("images/", Strings.toString(i), ".svg");
       int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
       vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
