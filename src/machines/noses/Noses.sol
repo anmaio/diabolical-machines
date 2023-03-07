@@ -22,7 +22,6 @@ contract Noses {
   uint internal constant NUMBER_OF_WALL_POSITIONS = 5;
 
   string internal constant NOSE_NUMBERS = "160021600316001";
-  // string internal constant NOSE_PROBABILITIES = "15 32 42 08 41 68 02 61 79";
 
   // c-gauge-a
   // c-feedback-c
@@ -32,13 +31,9 @@ contract Noses {
 
   string internal constant GAUGE_NUMBERS = "0400904002040000400304001";
 
-  // string internal constant GAUGE_PROBABILITIES = "077128153166179051102140204230013051102166252";
-
   string internal constant MID_EYE_NUMBERS = "000000500205006";
-  // string internal constant MID_EYE_PROBABILITIES = "077102102153102230";
 
   string internal constant TOP_EYE_NUMBERS = "000000500005004";
-  // string internal constant TOP_EYE_PROBABILITIES = "077102102153102230";
 
   // None
   // C-HOLE-A
@@ -48,8 +43,6 @@ contract Noses {
   // C-HOLE-FX-D
 
   string internal constant HOLE_NUMBERS = "000000801116004160051600616007";
-
-  // string internal constant HOLE_PROBABILITIES = "051071082087089051089128166179020064110179252";
 
   string internal constant HOLE_TRANSFORM_NUMBERS = "190011900219003190041900519006";
 
