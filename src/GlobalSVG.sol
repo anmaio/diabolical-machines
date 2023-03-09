@@ -11,6 +11,10 @@ import "./styles/noses/NosesCSS1.sol";
 
 import "./styles/assets/AssetsCSS1.sol";
 
+import "./styles/apparatus/ApparatusCSS1.sol";
+import "./styles/apparatus/ApparatusCSS2.sol";
+import "./styles/apparatus/ApparatusCSS3.sol";
+
 import "./styles/character/CharacterCSS1.sol";
 import "./styles/character/CharacterCSS2.sol";
 
@@ -26,6 +30,9 @@ import "./defs/noses/NosesDefs1.sol";
 
 import "./defs/assets/AssetsDefs1.sol";
 import "./defs/assets/AssetsDefs2.sol";
+
+import "./defs/apparatus/ApparatusDefs1.sol";
+import "./defs/apparatus/ApparatusDefs2.sol";
 
 import "./defs/props/PropsDefs1.sol";
 
@@ -61,7 +68,10 @@ contract GlobalSVG {
     );
 
     output = string.concat(
-      output, 
+      output,
+
+      ApparatusDefs1.getPart(),
+      ApparatusDefs2.getPart(),
 
       AltarDefs1.getPart(),
       AltarDefs2.getPart(),
@@ -85,7 +95,10 @@ contract GlobalSVG {
     output = string.concat(
       output,
       CommonSVG.SCRIPT,
-      CommonSVG.STYLE
+      CommonSVG.STYLE,
+      ApparatusCSS1.getPart(),
+      ApparatusCSS2.getPart(),
+      ApparatusCSS3.getPart()
     );
 
     output = string.concat(

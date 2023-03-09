@@ -42,7 +42,7 @@ library CommonSVG {
   // closing svg tag
   // string internal constant SVG_END = "</svg>";
 
-  string internal constant SHELL_GRADIENT_IDS = "lwgrwgflg";
+  // string internal constant SHELL_GRADIENT_IDS = "flgrwglwg";
 
   string internal constant ROTATIONS = "-40-45-45";
 
@@ -59,7 +59,7 @@ library CommonSVG {
 
   string internal constant GLOBAL_COLOURS_IDS = "g0g1g2g3g4g5";
 
-  string internal constant SHELL_COLOUR_IDS = "s0s1s2";
+  string internal constant SHELL_COLOUR_IDS = "s2s1s0";
 
   string internal constant CHARACTER_COLOUR_IDS = "r0";
 
@@ -180,7 +180,7 @@ library CommonSVG {
 
     // CHARACTER COLOUR
     // uint[] memory characterColour = GridHelper.setUintArrayFromString(CHARACTER_COLOURS, 3, 3);
-    gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(CHARACTER_COLOUR_IDS), 0, 2)), baseColours[0], baseColours[1], 70);
+    gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(CHARACTER_COLOUR_IDS), 0, 2)), baseColours[0], baseColours[1], 90);
 
     gradientStyle = string.concat(gradientStyle, GRADIENT_STYLE_CLOSE);
 

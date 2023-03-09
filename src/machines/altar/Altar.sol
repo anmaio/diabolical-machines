@@ -219,8 +219,8 @@ contract Altar {
 
   function getAllNumbersUsed(uint rand, int baseline) public view returns (uint[] memory, string[] memory) {
     uint count;
-    uint[] memory numbersUsed = new uint[](32);
-    string[] memory offsetsUsed = new string[](32);
+    uint[] memory numbersUsed = new uint[](50);
+    string[] memory offsetsUsed = new string[](50);
 
     numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
     offsetsUsed[count] = getExpansionPropPosition(rand, baseline);

@@ -11,6 +11,7 @@ import "../src/GlobalSVG.sol";
 import "../src/machines/altar/Altar.sol";
 import "../src/machines/beast/Beast.sol";
 import "../src/machines/drills/Drills.sol";
+import "../src/machines/apparatus/Apparatus.sol";
 import "../src/machines/noses/Noses.sol";
 import "../src/machines/tubes/Tubes.sol";
 import "../src/machines/conveyorbelt/Conveyorbelt.sol";
@@ -53,6 +54,10 @@ import "../src/Assets/Noses/NosesImp4.sol";
 import "../src/Assets/Tubes/TubesImp1.sol";
 
 import "../src/Assets/Apparatus/ApparatusImp1.sol";
+import "../src/Assets/Apparatus/ApparatusImp2.sol";
+import "../src/Assets/Apparatus/ApparatusImp3.sol";
+import "../src/Assets/Apparatus/ApparatusImp4.sol";
+import "../src/Assets/Apparatus/ApparatusImp5.sol";
 
 import "../src/Assets/Activation/ActivationImp1.sol";
 
@@ -89,11 +94,9 @@ contract CliffordScript is Script {
 
   // Machines
   Altar public altar;
-  // Beast public beast;
   Drills public drills;
   Noses public noses;
-  // Tubes public tubes;
-  // Conveyorbelt public conveyorbelt;
+  Apparatus public apparatus;
 
   Machine public machine;
   Metadata public metadata;
@@ -205,8 +208,16 @@ contract CliffordScript is Script {
   // Apparatus
   function deployApparatus() internal {
     ApparatusImp1 apparatusImp1 = new ApparatusImp1();
-    address[] memory apparatusImpsAds = new address[](1);
+    ApparatusImp2 apparatusImp2 = new ApparatusImp2();
+    ApparatusImp3 apparatusImp3 = new ApparatusImp3();
+    ApparatusImp4 apparatusImp4 = new ApparatusImp4();
+    ApparatusImp5 apparatusImp5 = new ApparatusImp5();
+    address[] memory apparatusImpsAds = new address[](5);
     apparatusImpsAds[0] = address(apparatusImp1);
+    apparatusImpsAds[1] = address(apparatusImp2);
+    apparatusImpsAds[2] = address(apparatusImp3);
+    apparatusImpsAds[3] = address(apparatusImp4);
+    apparatusImpsAds[4] = address(apparatusImp5);
     apparatusTB = new TraitBase(apparatusImpsAds);
   }
 
@@ -277,16 +288,14 @@ contract CliffordScript is Script {
   function deployMachines() internal {
     altar = new Altar(address(assetRetriever), address(noise));
     drills = new Drills(address(assetRetriever), address(noise));
-    // beast = new Beast();
     noses = new Noses(address(assetRetriever), address(noise));
-    // tubes = new Tubes();
-    // conveyorbelt = new Conveyorbelt();
+    apparatus = new Apparatus(address(assetRetriever), address(noise));
   }
 
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
-    machine = new Machine([address(altar), address(drills), address(noses)], assetRetriever);
+    machine = new Machine([address(altar), address(drills), address(noses), address(apparatus)], assetRetriever);
     metadata = new Metadata(machine, globalSVG, noise);
     clifford = new Clifford(metadata);
   }
