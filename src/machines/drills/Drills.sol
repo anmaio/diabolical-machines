@@ -209,7 +209,16 @@ contract Drills {
         return expansionPropOffset;
       }
     }
+  }
 
+  function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal view returns(string memory) {
+    uint characterPositionDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 25)] + baseline);
+
+    if ((characterNumber == 20000 || characterNumber == 20002 || characterNumber == 20004) && keccak256(bytes(getGlobalAssetPosition(rand))) != keccak256(bytes("04680270")) && keccak256(bytes(getExpansionPropPosition(rand, baseline))) != keccak256(bytes("04680270"))) {
+      return "01560270";
+    } else {
+      return "03120180";
+    }
   }
 
   function getAllNumbersUsed(uint rand, int baseline) public view returns (uint[] memory, string[] memory) {
@@ -311,7 +320,7 @@ contract Drills {
     }
 
     numbersUsed[count] = characterNumbers[3];
-    offsetsUsed[count] = "03120180";
+    offsetsUsed[count] = getCharacterPosition(characterNumbers[3], rand, baseline);
     count++;
 
     numbersUsed[count] = characterNumbers[4];

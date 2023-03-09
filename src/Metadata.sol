@@ -2,12 +2,11 @@
 pragma solidity 0.8.16;
 
 import "base64-sol/base64.sol";
-// import "./Clifford.sol";
 import "./Machine.sol";
 import "./GridHelper.sol";
 import "./GlobalSVG.sol";
 import "./Noise.sol";
-// import "./GlobalNumbers.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Metadata {
   Machine private immutable _machine;
@@ -82,18 +81,21 @@ contract Metadata {
   function getColourIndexTier(uint rand, int baseline) public view returns(string memory) {
     uint value = Environment.getColourIndex(getBaseColourValue(rand, baseline));
 
-    string memory colourTier = "Legendary";
+    uint singleStateValue = value % 8;
+    uint doubleStateValue = value % 4;
+
+    string memory colourTier = "";
 
     if (value < 4) {
-      colourTier = "Very Degraded";
+      colourTier = string.concat("Very Degraded ", Strings.toString(doubleStateValue));
     } else if (value < 8) {
-      colourTier = "Degraded";
+      colourTier = string.concat("Degraded ", Strings.toString(doubleStateValue));
     } else if (value < 16) {
-      colourTier = "Basic";
+      colourTier = string.concat("Basic ", Strings.toString(singleStateValue));
     } else if (value < 20) {
-      colourTier = "Embellished";
+      colourTier = string.concat("Embellished ", Strings.toString(doubleStateValue));
     } else if (value < 24) {
-      colourTier = "Very Embellished";
+      colourTier = string.concat("Very Embellished ", Strings.toString(doubleStateValue));
     } else {
       colourTier = "Unknown";
     }

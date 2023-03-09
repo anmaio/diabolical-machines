@@ -13,6 +13,7 @@ RUN apk add --no-cache --update py3-wheel
 # RUN pip3 install slither-analyzer \
 #     && pip3 install solc-select
 # Install slither analyzer
+# RUN pip3 install halmos
 RUN pip3 install solc-select
 RUN git clone --branch dev https://github.com/crytic/slither.git
 RUN cd /slither && python3 setup.py install
