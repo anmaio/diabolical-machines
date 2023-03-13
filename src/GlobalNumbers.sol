@@ -98,7 +98,7 @@ library GlobalNumbers {
     * @return The expansion prop number
    */
 
-  function getExpansionPropsNumber(uint rand, int baseline) external pure returns (uint) {
+  function getExpansionPropsNumber(uint rand, int baseline) public pure returns (uint) {
     uint expansionPropsDigits = GridHelper.constrainToHex(getGlobalNoiseArray1()[GridHelper.getRandByte(rand, 22)] + baseline);
 
     return GridHelper.getSingleObject(EXPANSION_PROPS_NUMBERS, expansionPropsDigits, 9);
@@ -150,5 +150,32 @@ library GlobalNumbers {
     }
 
     return [flipOpen, characterLeverNumber, armMask, characterNumber, flipClose];
+  }
+
+  function getGlobalAssetPosition(uint rand, string memory floorOffsets, uint numberOfFloorPositions) public pure returns (string memory) {
+
+    uint globalAssetDigits = GridHelper.getRandByte(rand, 21);
+
+    string memory assetOffset = string(GridHelper.slice(bytes(floorOffsets), (globalAssetDigits % numberOfFloorPositions)*8, 8));
+
+    return assetOffset;
+  }
+
+  function getExpansionPropPosition(uint rand, int baseline, string memory floorOffsets, uint numberOfFloorPositions, string memory wallOffsets, uint numberOfWallPositions) external pure returns (string memory) {
+
+    uint expansionPropDigits = GridHelper.getRandByte(rand, 23);
+    uint expansionPropsNumber = getExpansionPropsNumber(rand, baseline);
+    if (expansionPropsNumber == 2000 || expansionPropsNumber == 2005 || expansionPropsNumber == 2006 || expansionPropsNumber == 2007) {
+      return string(GridHelper.slice(bytes(wallOffsets), (expansionPropDigits % numberOfWallPositions)*8, 8));
+    } else {
+      // Need to check that the position is not already taken by the global asset
+      string memory globalAssetOffset = getGlobalAssetPosition(rand, floorOffsets, numberOfFloorPositions);
+      string memory expansionPropOffset = string(GridHelper.slice(bytes(floorOffsets), (expansionPropDigits % numberOfFloorPositions)*8, 8));
+      if (keccak256(bytes(expansionPropOffset)) == keccak256(bytes(globalAssetOffset))) {
+        return string(GridHelper.slice(bytes(floorOffsets), ((expansionPropDigits+1) % numberOfFloorPositions)*8, 8));
+      } else {
+        return expansionPropOffset;
+      }
+    }
   }
 }

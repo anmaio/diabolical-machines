@@ -30,7 +30,6 @@ contract Apparatus {
 
   string internal constant MID_TOP_OBJECT_NUMBERS = "080160801308017080180801905038";
 
-// 4000
   string internal constant LEFT_TOP_OBJECT_NUMBERS = "000000400304000040010400408041";
 
   string internal constant POSSIBLE_CHARACTER_POSITIONS = "00000000-1560090-3120180";
@@ -44,8 +43,6 @@ contract Apparatus {
   uint internal constant NUMBER_OF_WALL_POSITIONS = 5;
 
   uint internal constant ALL_DRILL_WRAPPER_NUMBER = 8037;
-
-  uint internal constant GROUP_CLOSE_NUMBER = 19000;
 
   constructor(address assetRetriever, address noise) {
     _assetRetriever = AssetRetriever(assetRetriever);
@@ -216,42 +213,7 @@ contract Apparatus {
       return "00000000";
     }
   }
-
-  function getGlobalAssetPosition(uint rand) internal pure returns (string memory) {
-    string memory globalAssetOffsets = FLOOR_OFFSETS;
-    uint numberOfPositions = NUMBER_OF_FLOOR_POSITIONS;
-
-    uint globalAssetDigits = GridHelper.getRandByte(rand, 21);
-
-    string memory assetOffset = string(GridHelper.slice(bytes(globalAssetOffsets), (globalAssetDigits % numberOfPositions)*8, 8));
-
-    return assetOffset;
-
-  }
-
-  function getExpansionPropPosition(uint rand, int baseline) internal pure returns (string memory) {
-    string memory floorOffsets = FLOOR_OFFSETS;
-    string memory wallOffsets = WALL_OFFSETS;
-    uint numberOfFloorPositions = NUMBER_OF_FLOOR_POSITIONS;
-    uint numberOfWallPositions = NUMBER_OF_WALL_POSITIONS;
-
-    uint expansionPropDigits = GridHelper.getRandByte(rand, 23);
-    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
-    if (expansionPropsNumber == 2000 || expansionPropsNumber == 2005 || expansionPropsNumber == 2006 || expansionPropsNumber == 2007) {
-      return string(GridHelper.slice(bytes(wallOffsets), (expansionPropDigits % numberOfWallPositions)*8, 8));
-    } else {
-      // Need to check that the position is not already taken by the global asset
-      string memory globalAssetOffset = getGlobalAssetPosition(rand);
-      string memory expansionPropOffset = string(GridHelper.slice(bytes(floorOffsets), (expansionPropDigits % numberOfFloorPositions)*8, 8));
-      if (keccak256(bytes(expansionPropOffset)) == keccak256(bytes(globalAssetOffset))) {
-        return string(GridHelper.slice(bytes(floorOffsets), ((expansionPropDigits+1) % numberOfFloorPositions)*8, 8));
-      } else {
-        return expansionPropOffset;
-      }
-    }
-
-  }
-
+ 
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal view returns(string memory) {
     uint characterPositionDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 25)] + baseline);
 
@@ -271,7 +233,7 @@ contract Apparatus {
     string[] memory offsetsUsed = new string[](80);
 
     numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
-    offsetsUsed[count] = getExpansionPropPosition(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
     count++;
 
     uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, false, baseline);
@@ -287,12 +249,6 @@ contract Apparatus {
 
     numbersUsed[count] = characterNumbers[4];
     count++;
-
-    // uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, false, baseline);
-    // for (uint i = 0; i < 5; ++i) {
-    //   numbersUsed[count] = characterNumbers[i];
-    //   count++;
-    // }
 
     uint[] memory subjectNumbers = getSubject(rand, baseline);
 
@@ -361,14 +317,14 @@ contract Apparatus {
     numbersUsed[count] = midTopObjectNumbers[1];
     count++;
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
-    offsetsUsed[count] = getGlobalAssetPosition(rand);
-    count++;
-
     // left top
     uint leftTopObjectNumber = getLeftTopObject(rand, baseline);
     numbersUsed[count] = leftTopObjectNumber;
     offsetsUsed[count] = getLeftTopOffset(leftTopObjectNumber);
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
     count++;
 
     return (numbersUsed, offsetsUsed);

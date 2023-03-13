@@ -28,7 +28,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     // Counters.Counter private _tokenIdCounter;
     uint256 public constant MAX_SUPPLY = 10_000;
     // bool public saleComplete = false;
-    Metadata private _metadata;
+    Metadata private immutable _metadata;
 
     // Goerli coordinator. For other networks,
     // see https://docs.chain.link/docs/vrf-contracts/#configurations
