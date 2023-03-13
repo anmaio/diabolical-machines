@@ -149,7 +149,7 @@ contract Altar {
   function getTopRowItemNumber(uint rand, int baseline) internal view returns (uint) {
     uint topRowDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 24)] + baseline);
 
-    string memory expansionPropPosition = getExpansionPropPosition(rand, baseline);
+    string memory expansionPropPosition = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
     bool canFit;
     if (keccak256(abi.encodePacked(expansionPropPosition)) == keccak256(abi.encodePacked("01560270")) || keccak256(abi.encodePacked(expansionPropPosition)) == keccak256(abi.encodePacked("03120180"))) {
       canFit = true;
@@ -164,49 +164,14 @@ contract Altar {
     }
   }
 
-  function getGlobalAssetPosition(uint rand) internal pure returns (string memory) {
-    string memory globalAssetOffsets = FLOOR_OFFSETS;
-    uint numberOfPositions = NUMBER_OF_FLOOR_POSITIONS;
-
-    // uint globalAssetDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 21, 2));
-    uint globalAssetDigits = GridHelper.getRandByte(rand, 21);
-
-    string memory assetOffset = string(GridHelper.slice(bytes(globalAssetOffsets), (globalAssetDigits % numberOfPositions)*8, 8));
-
-    return assetOffset;
-  }
-
-  function getExpansionPropPosition(uint rand, int baseline) internal pure returns (string memory) {
-    string memory floorOffsets = FLOOR_OFFSETS;
-    string memory wallOffsets = WALL_OFFSETS;
-    uint numberOfFloorPositions = NUMBER_OF_FLOOR_POSITIONS;
-    uint numberOfWallPositions = NUMBER_OF_WALL_POSITIONS;
-
-    // uint expansionPropDigits = GridHelper.bytesToUint(GridHelper.slice(digits, 23, 2));
-    uint expansionPropDigits = GridHelper.getRandByte(rand, 23);
-    uint expansionPropsNumber = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
-    if (expansionPropsNumber == 2000 || expansionPropsNumber == 2005 || expansionPropsNumber == 2006 || expansionPropsNumber == 2007) {
-      return string(GridHelper.slice(bytes(wallOffsets), (expansionPropDigits % numberOfWallPositions)*8, 8));
-    } else {
-      // Need to check that the position is not already taken by the global asset
-      string memory globalAssetOffset = getGlobalAssetPosition(rand);
-      string memory expansionPropOffset = string(GridHelper.slice(bytes(floorOffsets), (expansionPropDigits % numberOfFloorPositions)*8, 8));
-      if (keccak256(bytes(expansionPropOffset)) == keccak256(bytes(globalAssetOffset))) {
-        return string(GridHelper.slice(bytes(floorOffsets), ((expansionPropDigits+1) % numberOfFloorPositions)*8, 8));
-      } else {
-        return expansionPropOffset;
-      }
-    }
-  }
-
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal view returns(string memory) {
     if (characterNumber != 20000 && characterNumber != 20004) {
       return "03120180";
     } else {
       uint orbNumber = getOrbNumber(rand, 0, baseline);
       uint orbBaseNumber = getOrbBaseNumber(rand, 0, baseline);
-      string memory globalAssetPossition = getGlobalAssetPosition(rand);
-      string memory expansionPropPosition = getExpansionPropPosition(rand, baseline);
+      string memory globalAssetPossition = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
+      string memory expansionPropPosition = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
       if (orbNumber == 0 && orbBaseNumber == 0 && keccak256(bytes(globalAssetPossition)) != keccak256(bytes("06240180")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("06240180"))) {
         return "-3120180";
       } else if (keccak256(bytes(globalAssetPossition)) != keccak256(bytes("03120360")) && keccak256(bytes(expansionPropPosition)) != keccak256(bytes("03120360"))) {
@@ -223,7 +188,7 @@ contract Altar {
     string[] memory offsetsUsed = new string[](50);
 
     numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
-    offsetsUsed[count] = getExpansionPropPosition(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
     count++;
 
     numbersUsed[count] = getTopRowItemNumber(rand, baseline);
@@ -263,7 +228,7 @@ contract Altar {
     }
 
     numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
-    offsetsUsed[count] = getGlobalAssetPosition(rand);
+    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
     count++;
 
     uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, true, baseline);

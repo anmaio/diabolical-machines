@@ -116,7 +116,7 @@ contract Metadata {
   }
 
   function getBaselineRarity(uint rand) public view returns (int) {
-    int baselineDigits = int(GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 1)]));
+    int baselineDigits = int(GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 2)]));
     return baselineDigits;
   }
 

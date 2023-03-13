@@ -17,12 +17,12 @@ contract Machine {
 
   // conveyor belt
   // string[] public allMachines = ["Conveyorbelt", "Drills", "Noses", "Beast", "Altar", "Tubes"];
-  string[] public allMachines = ["Altar", "Drills", "Noses", "Apparatus"];
+  string[] public allMachines = ["Altar", "Drills", "Noses", "Apparatus", "Cells"];
 
   mapping(string => string) public machineToProductivityTiers;
   mapping(string => address) public machineToWorkstation;
 
-  constructor(address[4] memory workstations, AssetRetriever assetRetriever) {
+  constructor(address[5] memory workstations, AssetRetriever assetRetriever) {
     _assetRetriever = assetRetriever;
 
     for (uint i = 0; i < allMachines.length; ++i) {
@@ -33,6 +33,7 @@ contract Machine {
     machineToProductivityTiers["Drills"] = "020040060070080090";
     machineToProductivityTiers["Noses"] = "020040060070080090";
     machineToProductivityTiers["Apparatus"] = "020040060070080090";
+    machineToProductivityTiers["Cells"] = "020040060070080090";
   }
 
   function selectMachine(uint rand) external view returns (string memory) {

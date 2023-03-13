@@ -15,6 +15,10 @@ import "./styles/apparatus/ApparatusCSS1.sol";
 import "./styles/apparatus/ApparatusCSS2.sol";
 import "./styles/apparatus/ApparatusCSS3.sol";
 
+import "./styles/cells/CellsCSS1.sol";
+import "./styles/cells/CellsCSS2.sol";
+import "./styles/cells/CellsCSS3.sol";
+
 import "./styles/character/CharacterCSS1.sol";
 import "./styles/character/CharacterCSS2.sol";
 
@@ -33,6 +37,9 @@ import "./defs/assets/AssetsDefs2.sol";
 
 import "./defs/apparatus/ApparatusDefs1.sol";
 import "./defs/apparatus/ApparatusDefs2.sol";
+
+import "./defs/cells/CellsDefs1.sol";
+import "./defs/cells/CellsDefs2.sol";
 
 import "./defs/props/PropsDefs1.sol";
 
@@ -63,7 +70,6 @@ contract GlobalSVG {
 
     string memory output = string.concat(
       CommonSVG.SVG_START,
-      CommonSVG.DEFS,
       CommonSVG.getshellColours(machine, colourValue)
     );
 
@@ -81,7 +87,9 @@ contract GlobalSVG {
 
     output = string.concat(
       output,
-      NosesDefs1.getPart()
+      NosesDefs1.getPart(),
+      CellsDefs1.getPart(),
+      CellsDefs2.getPart()
     );
 
     output = string.concat(
@@ -106,7 +114,10 @@ contract GlobalSVG {
 
       AltarCSS1.getPart(),
       DrillsCSS1.getPart(),
-      NosesCSS1.getPart()
+      NosesCSS1.getPart(),
+      CellsCSS1.getPart(),
+      CellsCSS2.getPart(),
+      CellsCSS3.getPart()
     );
 
     return string.concat(

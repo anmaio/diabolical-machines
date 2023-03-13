@@ -140,7 +140,7 @@ library Environment {
         basicPalette[0] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_EMBELLISHED), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(EXECUTIVE_COLOURS_EMBELLISHED_SHADE), index * size, size));
       }
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("Apparatus"))) { // lab
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Apparatus")) || keccak256(bytes(machine)) == keccak256(bytes("Cells"))) { // lab
       if (state == 1) {
         basicPalette[0] = string(GridHelper.slice(bytes(LAB_COLOURS_BASIC), index * size, size));
         basicPalette[1] = string(GridHelper.slice(bytes(LAB_COLOURS_BASIC_SHADE), index * size, size));
@@ -185,7 +185,7 @@ library Environment {
     if (keccak256(bytes(machine)) == keccak256(bytes("Altar"))) { // executive
       degradedHsl = EXECUTIVE_DEGRADED_HSL;
       degradedPercentages = EXECUTIVE_COLOUR_PERCENTAGES;
-    } else if (keccak256(bytes(machine)) == keccak256(bytes("Apparatus"))) { // lab
+    } else if (keccak256(bytes(machine)) == keccak256(bytes("Apparatus")) || keccak256(bytes(machine)) == keccak256(bytes("Cells"))) { // lab
       degradedHsl = LAB_DEGRADED_HSL;
       degradedPercentages = LAB_COLOUR_PERCENTAGES;
     } else if (keccak256(bytes(machine)) == keccak256(bytes("Factory"))) { // factory
