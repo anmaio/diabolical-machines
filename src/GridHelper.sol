@@ -134,7 +134,7 @@ library GridHelper {
     uint oneLess = numOfValues - 1;
     uint[] memory probabilities = new uint[](oneLess);
     for (uint256 i = 0; i < oneLess; ++i) {
-      probabilities[i] = 256 / (numOfValues * (i + 1));
+      probabilities[i] = 256 / numOfValues * (i + 1);
     }
     return probabilities;
   }
