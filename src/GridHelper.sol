@@ -123,11 +123,13 @@ library GridHelper {
 
   function constrainToHex(int value) internal pure returns (uint) {
     if (value < 0) { // if negative, make positive
-      while (value < 0) {
-        value += 256;
-      }
+      return uint(0 - value);
     }
-    return uint(value % 256); // constrain to 0-255
+    else if (value > 255) { // if greater than 255, count back from 255
+      return uint(255 - (value - 255));
+    } else {
+      return uint(value);
+    }
   }
 
   function createEqualProbabilityArray(uint numOfValues) internal pure returns (uint[] memory) {

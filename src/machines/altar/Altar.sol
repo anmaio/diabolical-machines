@@ -10,8 +10,6 @@ contract Altar {
 
   AssetRetriever internal _assetRetriever;
 
-  Noise internal _noise;
-
   // Each position is represented by 6 bytes, 3 for x and 3 for y
   string internal constant ORB_OFFSETS = "00000000-312-180";
 
@@ -35,13 +33,12 @@ contract Altar {
   string internal constant WALL_OFFSETS = "0000018001560090015602700312000003120180";
   uint internal constant NUMBER_OF_WALL_POSITIONS = 5;
 
-  constructor(address assetRetriever, address noise) {
+  constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
-    _noise = Noise(noise);
   }
 
-  function getCubeNumber(uint rand, int baseline) internal view returns (uint) {
-    uint baseDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
+  function getCubeNumber(uint rand, int baseline) internal pure returns (uint) {
+    uint baseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
 
     uint[3] memory stepsNumbers = getStepsNumber(rand, baseline);
     // Only 1 of the bases fit with the steps
@@ -56,8 +53,8 @@ contract Altar {
     return GridHelper.getSingleObject(BASE_NUMBERS, baseDigits, 3);
   }
 
-  function getFrameNumber(uint rand, int baseline) internal view returns (uint[3] memory) {
-    uint frameDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 13)] + baseline);
+  function getFrameNumber(uint rand, int baseline) internal pure returns (uint[3] memory) {
+    uint frameDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 13)] + baseline);
 
     uint[] memory frameProbabilitiesArray = GridHelper.createEqualProbabilityArray(8);
 
@@ -82,8 +79,8 @@ contract Altar {
     }
   }
 
-  function getStepsNumber(uint rand, int baseline) internal view returns (uint[3] memory) {
-    uint stepsDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
+  function getStepsNumber(uint rand, int baseline) internal pure returns (uint[3] memory) {
+    uint stepsDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
 
     uint[] memory stepsProbabilitiesArray = GridHelper.createEqualProbabilityArray(4);
 
@@ -100,26 +97,26 @@ contract Altar {
     }
   }
 
-  function getRugNumber(uint rand, int baseline) internal view returns (uint) {
-    uint rugDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 17)] + baseline);
+  function getRugNumber(uint rand, int baseline) internal pure returns (uint) {
+    uint rugDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 17)] + baseline);
 
     return GridHelper.getSingleObject(RUG_NUMBERS, rugDigits, 3);
   }
 
-  function getOrbBaseNumber(uint rand, uint version, int baseline) internal view returns (uint) {
-    uint orbBaseDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14+version)] + baseline);
+  function getOrbBaseNumber(uint rand, uint version, int baseline) internal pure returns (uint) {
+    uint orbBaseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14+version)] + baseline);
 
     return GridHelper.getSingleObject(ORB_BASE_NUMBERS, orbBaseDigits, 7);
   }
 
-  function getOrbNumber(uint rand, uint version, int baseline) internal view returns (uint) {
-    uint orbDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18+version)] + baseline);
+  function getOrbNumber(uint rand, uint version, int baseline) internal pure returns (uint) {
+    uint orbDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18+version)] + baseline);
 
     return GridHelper.getSingleObject(ORB_NUMBERS, orbDigits, 5);
   }
 
-  function getFloobAnimationNumbers(uint rand, int baseline) internal view returns (uint[] memory) {
-    uint floobDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 25)] + baseline);
+  function getFloobAnimationNumbers(uint rand, int baseline) internal pure returns (uint[] memory) {
+    uint floobDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 25)] + baseline);
 
     uint[] memory numbersUsed = new uint[](5);
     uint[] memory floobAnimationNumbersArray = GridHelper.setUintArrayFromString(FLOOB_ANIMATION_NUMBERS, 4, 5);
@@ -146,8 +143,8 @@ contract Altar {
     }
   }
 
-  function getTopRowItemNumber(uint rand, int baseline) internal view returns (uint) {
-    uint topRowDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 24)] + baseline);
+  function getTopRowItemNumber(uint rand, int baseline) internal pure returns (uint) {
+    uint topRowDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 24)] + baseline);
 
     string memory expansionPropPosition = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
     bool canFit;
@@ -164,7 +161,7 @@ contract Altar {
     }
   }
 
-  function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal view returns(string memory) {
+  function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
     if (characterNumber != 20000 && characterNumber != 20004) {
       return "03120180";
     } else {
@@ -182,7 +179,7 @@ contract Altar {
     }
   }
 
-  function getAllNumbersUsed(uint rand, int baseline) public view returns (uint[] memory, string[] memory) {
+  function getAllNumbersUsed(uint rand, int baseline) public pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](50);
     string[] memory offsetsUsed = new string[](50);

@@ -11,8 +11,6 @@ contract Apparatus {
   
   AssetRetriever internal _assetRetriever;
 
-  Noise internal _noise;
-
   // 1,2,3 and 4,5
   string internal constant SUBJECT_WRAPPER_NUMBERS = "0802608027080280802908030";
 
@@ -44,13 +42,12 @@ contract Apparatus {
 
   uint internal constant ALL_DRILL_WRAPPER_NUMBER = 8037;
 
-  constructor(address assetRetriever, address noise) {
+  constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
-    _noise = Noise(noise);
   }
 
-  function getSubject(uint rand, int baseline) internal view returns (uint[] memory) {
-    uint subjectDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
+  function getSubject(uint rand, int baseline) internal pure returns (uint[] memory) {
+    uint subjectDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
 
     uint[] memory numbersUsed = new uint[](5);
 
@@ -73,20 +70,20 @@ contract Apparatus {
     return numbersUsed;
   }
 
-  function getRightBase(uint rand, int baseline) internal view returns (uint) {
-    uint rightBaseDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 13)] + baseline);
+  function getRightBase(uint rand, int baseline) internal pure returns (uint) {
+    uint rightBaseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 13)] + baseline);
 
     return GridHelper.getSingleObject(RIGHT_BASE_NUMBERS, rightBaseDigits, 3);
   }
 
-  function getMidBase(uint rand, int baseline) internal view returns (uint) {
-    uint midBaseDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14)] + baseline);
+  function getMidBase(uint rand, int baseline) internal pure returns (uint) {
+    uint midBaseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14)] + baseline);
 
     return GridHelper.getSingleObject(MID_BASE_NUMBERS, midBaseDigits, 4);
   }
 
-  function getLeftBase(uint rand, int baseline) internal view returns (uint[2] memory) {
-    uint leftBaseDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 15)] + baseline);
+  function getLeftBase(uint rand, int baseline) internal pure returns (uint[2] memory) {
+    uint leftBaseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 15)] + baseline);
 
     uint[] memory leftBaseProbabilitiesArray = GridHelper.createEqualProbabilityArray(7);
 
@@ -109,8 +106,8 @@ contract Apparatus {
     }
   }
 
-  function getBox(uint rand, int baseline) internal view returns (uint[3] memory) {
-    uint boxDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
+  function getBox(uint rand, int baseline) internal pure returns (uint[3] memory) {
+    uint boxDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
 
     uint rightCubeNumber = getRightBase(rand, baseline);
     if (rightCubeNumber == 0) {
@@ -134,8 +131,8 @@ contract Apparatus {
     }
   }
 
-  function getBaseRunner(uint rand, int baseline) internal view returns (uint[2] memory) {
-    uint baseRunnerDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 17)] + baseline);
+  function getBaseRunner(uint rand, int baseline) internal pure returns (uint[2] memory) {
+    uint baseRunnerDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 17)] + baseline);
 
     uint[] memory baseRunnerProbabilitiesArray = GridHelper.createEqualProbabilityArray(4);
 
@@ -152,8 +149,8 @@ contract Apparatus {
     }
   }
 
-  function getMidTopObject(uint rand, int baseline) internal view returns (uint[2] memory) {
-    uint midTopObjectDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18)] + baseline);
+  function getMidTopObject(uint rand, int baseline) internal pure returns (uint[2] memory) {
+    uint midTopObjectDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18)] + baseline);
 
     // box number
     uint[3] memory boxNumbers = getBox(rand, baseline);
@@ -188,8 +185,8 @@ contract Apparatus {
     }
   }
 
-  function getLeftTopObject(uint rand, int baseline) internal view returns (uint) {
-    uint leftTopDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 19)] + baseline);
+  function getLeftTopObject(uint rand, int baseline) internal pure returns (uint) {
+    uint leftTopDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 19)] + baseline);
 
     // left base numbers
     uint[2] memory leftBaseNumbers = getLeftBase(rand, baseline);
@@ -214,8 +211,8 @@ contract Apparatus {
     }
   }
  
-  function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal view returns(string memory) {
-    uint characterPositionDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 25)] + baseline);
+  function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
+    uint characterPositionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 23)] + baseline);
 
     if (characterNumber == 20000 || characterNumber == 20004 ) {
       string memory characterOffset = string(GridHelper.slice(bytes(POSSIBLE_CHARACTER_POSITIONS), 8*(characterPositionDigits % 3), 8));
@@ -227,7 +224,7 @@ contract Apparatus {
     }
   }
 
-  function getAllNumbersUsed(uint rand, int baseline) public view returns (uint[] memory, string[] memory) {
+  function getAllNumbersUsed(uint rand, int baseline) public pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](80);
     string[] memory offsetsUsed = new string[](80);

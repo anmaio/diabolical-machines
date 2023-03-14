@@ -2,26 +2,26 @@
   {
     "id": 0,
     "RandomNumber": "107902980979898548990920576554000892204849709403626377894656421886843343448711",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "27",
-    "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "None",
-    "Colour": "Degraded 1",
-    "Character": "Hunched"
+    "ProductivityValue": "50",
+    "GlobalAsset": "None",
+    "ExpansionProp": "Crack",
+    "Colour": "Basic 2",
+    "Character": "Meditating"
   },
   {
     "id": 1,
     "RandomNumber": "74184091349209037196873295705349010716187136276014861404801608593040707343389",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "30",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Recess B",
-    "Colour": "Very Embellished 2",
-    "Character": "Sitting"
+    "ProductivityValue": "53",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Grate",
+    "Colour": "Degraded 1",
+    "Character": "Standing"
   },
   {
     "id": 2,
@@ -29,23 +29,23 @@
     "State": "Degraded",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "24",
-    "GlobalAsset": "None",
-    "ExpansionProp": "Stairs",
-    "Colour": "Embellished 2",
-    "Character": "Standing"
+    "ProductivityValue": "49",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess A",
+    "Colour": "Basic 6",
+    "Character": "Sitting"
   },
   {
     "id": 3,
     "RandomNumber": "36583037007619608410569912523931010894825878532838020000865090410690581383002",
-    "State": "Embellished",
+    "State": "Basic",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "35",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess B",
-    "Colour": "Very Degraded 3",
-    "Character": "Slouched"
+    "ProductivityValue": "45",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Recess A",
+    "Colour": "Embellished 3",
+    "Character": "Collapsed"
   },
   {
     "id": 4,
@@ -53,11 +53,11 @@
     "State": "Degraded",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "27",
-    "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Stairs",
-    "Colour": "Very Degraded 2",
-    "Character": "Collapsed"
+    "ProductivityValue": "52",
+    "GlobalAsset": "Cactus",
+    "ExpansionProp": "Recess B",
+    "Colour": "Degraded 1",
+    "Character": "Hunched"
   },
   {
     "id": 5,
@@ -65,23 +65,23 @@
     "State": "Degraded",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "22",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Recess B",
-    "Colour": "Basic 4",
+    "ProductivityValue": "42",
+    "GlobalAsset": "Bong",
+    "ExpansionProp": "Stairs",
+    "Colour": "Very Embellished 3",
     "Character": "None"
   },
   {
     "id": 6,
     "RandomNumber": "68620254088151564956471903714452099447729049369224389416203995399827947342886",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "30",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Ladder",
-    "Colour": "Embellished 1",
-    "Character": "Sitting"
+    "ProductivityValue": "57",
+    "GlobalAsset": "Lavalamp",
+    "ExpansionProp": "Crack",
+    "Colour": "Embellished 0",
+    "Character": "Standing"
   },
   {
     "id": 7,
@@ -89,34 +89,34 @@
     "State": "Degraded",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "25",
-    "GlobalAsset": "Fridge",
-    "ExpansionProp": "Stairs",
-    "Colour": "Very Embellished 3",
-    "Character": "None"
+    "ProductivityValue": "46",
+    "GlobalAsset": "Bong",
+    "ExpansionProp": "Recess B",
+    "Colour": "Very Degraded 3",
+    "Character": "Collapsed"
   },
   {
     "id": 8,
     "RandomNumber": "18417651989889953814653310511851064833814821473927291455213375833014215101870",
-    "State": "Basic",
+    "State": "Embellished",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "35",
-    "GlobalAsset": "Cactus",
-    "ExpansionProp": "Pit",
-    "Colour": "Basic 6",
+    "ProductivityValue": "58",
+    "GlobalAsset": "Fridge",
+    "ExpansionProp": "Stairs",
+    "Colour": "Very Embellished 3",
     "Character": "Slouched"
   },
   {
     "id": 9,
     "RandomNumber": "49333547161957136198746310901975798825518412998316087146143820095168655712888",
-    "State": "Degraded",
+    "State": "Basic",
     "Machine": "Cells",
     "Productivity": "Very Low",
-    "ProductivityValue": "26",
-    "GlobalAsset": "Lavalamp",
-    "ExpansionProp": "Recess C",
-    "Colour": "Very Degraded 3",
-    "Character": "Collapsed"
+    "ProductivityValue": "59",
+    "GlobalAsset": "Martini",
+    "ExpansionProp": "Ladder",
+    "Colour": "Degraded 2",
+    "Character": "Hunched"
   }
 ]

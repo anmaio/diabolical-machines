@@ -12,12 +12,10 @@ contract Metadata {
   Machine private immutable _machine;
   // Clifford private _clifford;
   GlobalSVG private immutable _globalSVG;
-  Noise private immutable _noise;
 
-  constructor(Machine machine, GlobalSVG globalSVG, Noise noise) {
+  constructor(Machine machine, GlobalSVG globalSVG) {
       _machine = machine;
       _globalSVG = globalSVG;
-      _noise = noise;
   }
 
   function getMachine(uint rand) public view returns (string memory) {
@@ -74,11 +72,11 @@ contract Metadata {
     return _machine.getProductivity(machine, rand, baseline);
   }
 
-  function getBaseColourValue(uint rand, int baseline) internal view returns (uint) {
-    return GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 3)] + baseline);
+  function getBaseColourValue(uint rand, int baseline) internal pure returns (uint) {
+    return GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 3)] + baseline);
   }
 
-  function getColourIndexTier(uint rand, int baseline) public view returns(string memory) {
+  function getColourIndexTier(uint rand, int baseline) public pure returns(string memory) {
     uint value = Environment.getColourIndex(getBaseColourValue(rand, baseline));
 
     uint singleStateValue = value % 8;
@@ -115,8 +113,8 @@ contract Metadata {
     }
   }
 
-  function getBaselineRarity(uint rand) public view returns (int) {
-    int baselineDigits = int(GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 2)]));
+  function getBaselineRarity(uint rand) public pure returns (int) {
+    int baselineDigits = int(GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 2)]));
     return baselineDigits;
   }
 

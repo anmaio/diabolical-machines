@@ -38,6 +38,12 @@ import "../src/Assets/Misc/MiscImp1.sol";
 import "../src/Assets/Props/PropsImp1.sol";
 
 import "../src/Assets/Cells/CellsImp1.sol";
+import "../src/Assets/Cells/CellsImp2.sol";
+import "../src/Assets/Cells/CellsImp3.sol";
+import "../src/Assets/Cells/CellsImp4.sol";
+import "../src/Assets/Cells/CellsImp5.sol";
+import "../src/Assets/Cells/CellsImp6.sol";
+import "../src/Assets/Cells/CellsImp7.sol";
 
 import "../src/Assets/Drills/DrillsImp1.sol";
 import "../src/Assets/Drills/DrillsImp2.sol";
@@ -66,10 +72,8 @@ import "../src/Assets/Character/CharacterImp3.sol";
 import "../src/Assets/Character/CharacterImp4.sol";
 import "../src/Assets/Character/CharacterImp5.sol";
 
-
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
-import "../src/Noise.sol";
 
 contract CliffordTest is Test {
 
@@ -94,7 +98,6 @@ contract CliffordTest is Test {
   TraitBase public characterTB;
 
   AssetRetriever public assetRetriever;
-  Noise public noise;
 
   // Machines
   Altar public altar;
@@ -231,8 +234,20 @@ contract CliffordTest is Test {
   // Cells
   function deployCells() internal {
     CellsImp1 cellsImp1 = new CellsImp1();
-    address[] memory cellsImpsAds = new address[](1);
+    CellsImp2 cellsImp2 = new CellsImp2();
+    CellsImp3 cellsImp3 = new CellsImp3();
+    CellsImp4 cellsImp4 = new CellsImp4();
+    CellsImp5 cellsImp5 = new CellsImp5();
+    CellsImp6 cellsImp6 = new CellsImp6();
+    CellsImp7 cellsImp7 = new CellsImp7();
+    address[] memory cellsImpsAds = new address[](7);
     cellsImpsAds[0] = address(cellsImp1);
+    cellsImpsAds[1] = address(cellsImp2);
+    cellsImpsAds[2] = address(cellsImp3);
+    cellsImpsAds[3] = address(cellsImp4);
+    cellsImpsAds[4] = address(cellsImp5);
+    cellsImpsAds[5] = address(cellsImp6);
+    cellsImpsAds[6] = address(cellsImp7);
     cellsTB = new TraitBase(cellsImpsAds);
   }
 
@@ -287,24 +302,20 @@ contract CliffordTest is Test {
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
-  function deployNoise() internal {
-    noise = new Noise();
-  }
-
   // deploy machines
   function deployMachines() internal {
-    altar = new Altar(address(assetRetriever), address(noise));
-    drills = new Drills(address(assetRetriever), address(noise));
-    noses = new Noses(address(assetRetriever), address(noise));
-    apparatus = new Apparatus(address(assetRetriever), address(noise));
-    cells = new Cells(address(assetRetriever), address(noise));
+    altar = new Altar(address(assetRetriever));
+    drills = new Drills(address(assetRetriever));
+    noses = new Noses(address(assetRetriever));
+    apparatus = new Apparatus(address(assetRetriever));
+    cells = new Cells(address(assetRetriever));
   }
 
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
     machine = new Machine([address(altar), address(drills), address(noses), address(apparatus), address(cells)], assetRetriever);
-    metadata = new Metadata(machine, globalSVG, noise);
+    metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
   }
 
@@ -326,7 +337,6 @@ contract CliffordTest is Test {
     deployActivation();
     deployCharacter();
     deployAssetRetriever();
-    deployNoise();
     deployMachines();
     deployLogic();
 
