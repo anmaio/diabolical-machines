@@ -11,8 +11,6 @@ contract Noses {
   
   AssetRetriever internal _assetRetriever;
 
-  Noise internal _noise;
-
   // Floor
   string internal constant FLOOR_OFFSETS = "0312036004680270";
   uint internal constant NUMBER_OF_FLOOR_POSITIONS = 2;
@@ -55,25 +53,24 @@ contract Noses {
 
   uint internal constant GROUP_CLOSE_NUMBER = 19000;
 
-  constructor(address assetRetriever, address noise) {
+  constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
-    _noise = Noise(noise);
   }
 
-  function getNoseNumbers(uint rand, int baseline) internal view returns (uint) {
-    uint noseDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
+  function getNoseNumbers(uint rand, int baseline) internal pure returns (uint) {
+    uint noseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
 
     return GridHelper.getSingleObject(NOSE_NUMBERS, noseDigits, 3);
   }
 
-  function getGaugeNumber(uint rand, int baseline) internal view returns (uint) {
-    uint gaugeDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14)] + baseline);
+  function getGaugeNumber(uint rand, int baseline) internal pure returns (uint) {
+    uint gaugeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14)] + baseline);
 
     return GridHelper.getSingleObject(GAUGE_NUMBERS, gaugeDigits, 5);
   }
 
-  function getMidEyesNumber(uint rand, int baseline) internal view returns (uint) {
-    uint midEyesDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 15)] + baseline);
+  function getMidEyesNumber(uint rand, int baseline) internal pure returns (uint) {
+    uint midEyesDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 15)] + baseline);
 
     uint noseNumber = getNoseNumbers(rand, baseline);
 
@@ -85,14 +82,14 @@ contract Noses {
     return GridHelper.getSingleObject(MID_EYE_NUMBERS, midEyesDigits, 3);
   }
 
-  function getTopEyesNumber(uint rand, int baseline) internal view returns (uint) {
-    uint topEyesDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
+  function getTopEyesNumber(uint rand, int baseline) internal pure returns (uint) {
+    uint topEyesDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
 
     return GridHelper.getSingleObject(TOP_EYE_NUMBERS, topEyesDigits, 3);
   }
 
-  function getHoleNumbers(uint rand, uint version, int baseline) internal view returns (uint, string memory, uint count) {
-    uint holeDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 24+version)] + baseline);
+  function getHoleNumbers(uint rand, uint version, int baseline) internal pure returns (uint, string memory, uint count) {
+    uint holeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 24+version)] + baseline);
 
     uint holeNumber = GridHelper.getSingleObject(HOLE_NUMBERS, holeDigits, 6);
 
@@ -122,7 +119,7 @@ contract Noses {
     }
   }
 
-  function getAllNumbersUsed(uint rand, int baseline) public view returns (uint[] memory, string[] memory) {
+  function getAllNumbersUsed(uint rand, int baseline) public pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](80);
     string[] memory offsetsUsed = new string[](80);

@@ -37,8 +37,8 @@ contract Machine {
   }
 
   function selectMachine(uint rand) external view returns (string memory) {
-      // return allMachines[rand % allMachines.length];
-      return allMachines[4];
+      return allMachines[rand % allMachines.length];
+      // return allMachines[4];
   }
 
   function machineToGetter(string memory machine, uint rand, int baseline) external view returns (string memory) {

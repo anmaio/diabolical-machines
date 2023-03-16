@@ -22,11 +22,14 @@ contract SubstancesImp1 {
   string internal constant C_FLOOBLRGPK_A = "<g id='ap-u-c-flooblrgpk-a'><g id='ap-s-g23'><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-polygon39'/><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-polygon40' stroke-width='.5'/><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-polygon41' stroke-width='.5'/><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-polygon42' stroke-width='.5'/></g><g id='ap-u-detail'><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-line11' stroke-width='.5'/><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-line12' stroke-width='.5'/><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-path197' stroke-width='.5'/></g></g>";
   string internal constant C_FLOOB_DISCLRGPK_A = "<g id='ap-u-c-floob-disclrgpk-a'><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-path191' stroke-width='.5'/><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-path192' stroke-width='.5'/><g id='ap-u-detail-13'><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-path193' stroke-width='.5'/><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#ap-s-line10' stroke-width='.5'/></g></g>";
 
-  string internal constant CELLS_GLOOP_OPEN = "";
-  string internal constant CELLS_GLOOP_CLOSE = "";
-
   function getAssetFromID(uint assetID) external pure returns (string memory) {
-    if (assetID == 1004) {
+    if (assetID == 1000) {
+      return C_FLOOB_GLOOP_A;
+    } else if (assetID == 1001) {
+      return C_FLOOB_GLOOP_B;
+    } else if (assetID == 1002) {
+      return C_FLOOB_GLOOP_C;
+    } else if (assetID == 1004) {
       return C_JAR_MINERAL_DRY;
     } else if (assetID == 1005) {
       return C_FLOOB_SLIMY;
@@ -54,7 +57,13 @@ contract SubstancesImp1 {
   }
 
   function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 1004) {
+    if (assetID == 1000) {
+      return 3;
+    } else if (assetID == 1001) {
+      return 3;
+    } else if (assetID == 1002) {
+      return 3;
+    } else if (assetID == 1004) {
       return 1;
     } else if (assetID == 1005) {
       return 1;

@@ -11,8 +11,6 @@ contract Drills {
 
   AssetRetriever internal _assetRetriever;
 
-  Noise internal _noise;
-
   // Floor
   string internal constant FLOOR_OFFSETS = "0312036004680270";
   uint internal constant NUMBER_OF_FLOOR_POSITIONS = 2;
@@ -52,12 +50,11 @@ contract Drills {
 
   uint internal constant GROUP_CLOSE_NUMBER = 19000;
 
-  constructor(address assetRetriever, address noise) {
+  constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
-    _noise = Noise(noise);
   }
 
-  function getDrillPositionNumbers(uint rand, int baseline) internal view returns (uint[] memory, uint) {
+  function getDrillPositionNumbers(uint rand, int baseline) internal pure returns (uint[] memory, uint) {
     // 6 possible positions for the drill
     // Embellished should have more drills and degraded should have less
     // There must be at least one drill
@@ -67,7 +64,7 @@ contract Drills {
     uint[] memory drillPositions = new uint[](6);
     uint count;
     for (uint i = 0; i < 6; ++i) {
-      uint positionsDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12+i)] + baseline);
+      uint positionsDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12+i)] + baseline);
       if ((positionsDigits < drillChance) || (count == 0 && i == 5)) {
         drillPositions[count] = GridHelper.stringToUint(string(GridHelper.slice(bytes(DRILL_POSITION_NUMBERS), i*5, 5)));
         count++;
@@ -77,14 +74,14 @@ contract Drills {
     return (drillPositions, count);
   }
 
-  function getDrillBitNumber(uint rand, uint version, int baseline) internal view returns (uint) {
-    uint bitDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18+version)] + baseline);
+  function getDrillBitNumber(uint rand, uint version, int baseline) internal pure returns (uint) {
+    uint bitDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18+version)] + baseline);
 
     return GridHelper.getSingleObject(BIT_NUMBERS, bitDigits, 7);
   }
 
-  function getTubeNumbers(uint rand, uint version, int baseline) internal view returns (uint[2] memory) {
-    uint tubeDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12+version)] + baseline);
+  function getTubeNumbers(uint rand, uint version, int baseline) internal pure returns (uint[2] memory) {
+    uint tubeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12+version)] + baseline);
 
     uint[] memory bitProbabilitiesArray = GridHelper.createEqualProbabilityArray(3);
 
@@ -99,8 +96,8 @@ contract Drills {
     }
   }
 
-  function getConnectorNumbers(uint rand, int baseline) internal view returns (uint[4] memory) {
-    uint connectorDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 15)] + baseline);
+  function getConnectorNumbers(uint rand, int baseline) internal pure returns (uint[4] memory) {
+    uint connectorDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 15)] + baseline);
 
     uint[] memory connectorprobabilitiesArray = GridHelper.createEqualProbabilityArray(5);
 
@@ -119,8 +116,8 @@ contract Drills {
     }
   }
 
-  function getEyesGaugeNumber(uint rand, uint version, int baseline) internal view returns (uint) {
-    uint eyesDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 24+version)] + baseline);
+  function getEyesGaugeNumber(uint rand, uint version, int baseline) internal pure returns (uint) {
+    uint eyesDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 24+version)] + baseline);
 
     // This tube does not work with the heads
     if (getTubeNumbers(rand, version, baseline)[0] == 13041) {
@@ -130,8 +127,8 @@ contract Drills {
     return GridHelper.getSingleObject(EYES_GAUGE_NUMBERS, eyesDigits, 5);
   }
 
-  function getHeadNumbers(uint rand, uint version, int baseline) internal view returns (uint[2] memory) {
-    uint headDigits = GridHelper.constrainToHex(_noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 2+version)] + baseline);
+  function getHeadNumbers(uint rand, uint version, int baseline) internal pure returns (uint[2] memory) {
+    uint headDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 2+version)] + baseline);
 
     // This tube does not work with the heads
     if (getTubeNumbers(rand, version, baseline)[0] == 13041) {
@@ -184,7 +181,7 @@ contract Drills {
     }
   }
 
-  function getAllNumbersUsed(uint rand, int baseline) public view returns (uint[] memory, string[] memory) {
+  function getAllNumbersUsed(uint rand, int baseline) public pure returns (uint[] memory, string[] memory) {
     uint count;
     uint[] memory numbersUsed = new uint[](200);
     string[] memory offsetsUsed = new string[](200);

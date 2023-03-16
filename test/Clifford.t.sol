@@ -38,6 +38,12 @@ import "../src/Assets/Misc/MiscImp1.sol";
 import "../src/Assets/Props/PropsImp1.sol";
 
 import "../src/Assets/Cells/CellsImp1.sol";
+import "../src/Assets/Cells/CellsImp2.sol";
+import "../src/Assets/Cells/CellsImp3.sol";
+import "../src/Assets/Cells/CellsImp4.sol";
+import "../src/Assets/Cells/CellsImp5.sol";
+import "../src/Assets/Cells/CellsImp6.sol";
+import "../src/Assets/Cells/CellsImp7.sol";
 
 import "../src/Assets/Drills/DrillsImp1.sol";
 import "../src/Assets/Drills/DrillsImp2.sol";
@@ -66,14 +72,12 @@ import "../src/Assets/Character/CharacterImp3.sol";
 import "../src/Assets/Character/CharacterImp4.sol";
 import "../src/Assets/Character/CharacterImp5.sol";
 
-
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
-import "../src/Noise.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 10;
+  uint internal constant MINT_SIZE = 256;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
 
@@ -94,7 +98,6 @@ contract CliffordTest is Test {
   TraitBase public characterTB;
 
   AssetRetriever public assetRetriever;
-  Noise public noise;
 
   // Machines
   Altar public altar;
@@ -231,8 +234,20 @@ contract CliffordTest is Test {
   // Cells
   function deployCells() internal {
     CellsImp1 cellsImp1 = new CellsImp1();
-    address[] memory cellsImpsAds = new address[](1);
+    CellsImp2 cellsImp2 = new CellsImp2();
+    CellsImp3 cellsImp3 = new CellsImp3();
+    CellsImp4 cellsImp4 = new CellsImp4();
+    CellsImp5 cellsImp5 = new CellsImp5();
+    CellsImp6 cellsImp6 = new CellsImp6();
+    CellsImp7 cellsImp7 = new CellsImp7();
+    address[] memory cellsImpsAds = new address[](7);
     cellsImpsAds[0] = address(cellsImp1);
+    cellsImpsAds[1] = address(cellsImp2);
+    cellsImpsAds[2] = address(cellsImp3);
+    cellsImpsAds[3] = address(cellsImp4);
+    cellsImpsAds[4] = address(cellsImp5);
+    cellsImpsAds[5] = address(cellsImp6);
+    cellsImpsAds[6] = address(cellsImp7);
     cellsTB = new TraitBase(cellsImpsAds);
   }
 
@@ -287,24 +302,20 @@ contract CliffordTest is Test {
     assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
   }
 
-  function deployNoise() internal {
-    noise = new Noise();
-  }
-
   // deploy machines
   function deployMachines() internal {
-    altar = new Altar(address(assetRetriever), address(noise));
-    drills = new Drills(address(assetRetriever), address(noise));
-    noses = new Noses(address(assetRetriever), address(noise));
-    apparatus = new Apparatus(address(assetRetriever), address(noise));
-    cells = new Cells(address(assetRetriever), address(noise));
+    altar = new Altar(address(assetRetriever));
+    drills = new Drills(address(assetRetriever));
+    noses = new Noses(address(assetRetriever));
+    apparatus = new Apparatus(address(assetRetriever));
+    cells = new Cells(address(assetRetriever));
   }
 
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
     machine = new Machine([address(altar), address(drills), address(noses), address(apparatus), address(cells)], assetRetriever);
-    metadata = new Metadata(machine, globalSVG, noise);
+    metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
   }
 
@@ -326,7 +337,6 @@ contract CliffordTest is Test {
     deployActivation();
     deployCharacter();
     deployAssetRetriever();
-    deployNoise();
     deployMachines();
     deployLogic();
 
@@ -348,79 +358,121 @@ contract CliffordTest is Test {
     }
   }
 
+  function writeImagesInRange(uint start, uint stop) public {
+    for (uint i = start; i < stop; i++) {
+      string memory path = string.concat("images/", Strings.toString(i), ".svg");
+      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
+      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
+      console.log("wrote image ", i);
+    }
+  }
+
   // test writing X images to a file
   function testWriteImages() public {
     // Memory leak causes wsl to crash for me with 1000 images
     // https://github.com/ethereum/solidity/issues/13885
-    for (uint256 i = 0; i < MINT_SIZE/10; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
 
-    for (uint256 i = MINT_SIZE/10; i < MINT_SIZE*2/10; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
+    writeImagesInRange(0, MINT_SIZE/100);
+    writeImagesInRange(MINT_SIZE/100, 2*MINT_SIZE/100);
+    writeImagesInRange(2*MINT_SIZE/100, 3*MINT_SIZE/100);
+    writeImagesInRange(3*MINT_SIZE/100, 4*MINT_SIZE/100);
+    writeImagesInRange(4*MINT_SIZE/100, 5*MINT_SIZE/100);
+    writeImagesInRange(5*MINT_SIZE/100, 6*MINT_SIZE/100);
+    writeImagesInRange(6*MINT_SIZE/100, 7*MINT_SIZE/100);
+    writeImagesInRange(7*MINT_SIZE/100, 8*MINT_SIZE/100);
+    writeImagesInRange(8*MINT_SIZE/100, 9*MINT_SIZE/100);
+    writeImagesInRange(9*MINT_SIZE/100, 10*MINT_SIZE/100);
+    writeImagesInRange(10*MINT_SIZE/100, 11*MINT_SIZE/100);
+    writeImagesInRange(11*MINT_SIZE/100, 12*MINT_SIZE/100);
+    writeImagesInRange(12*MINT_SIZE/100, 13*MINT_SIZE/100);
+    writeImagesInRange(13*MINT_SIZE/100, 14*MINT_SIZE/100);
+    writeImagesInRange(14*MINT_SIZE/100, 15*MINT_SIZE/100);
+    writeImagesInRange(15*MINT_SIZE/100, 16*MINT_SIZE/100);
+    writeImagesInRange(16*MINT_SIZE/100, 17*MINT_SIZE/100);
+    writeImagesInRange(17*MINT_SIZE/100, 18*MINT_SIZE/100);
+    writeImagesInRange(18*MINT_SIZE/100, 19*MINT_SIZE/100);
+    writeImagesInRange(19*MINT_SIZE/100, 20*MINT_SIZE/100);
+    writeImagesInRange(20*MINT_SIZE/100, 21*MINT_SIZE/100);
+    writeImagesInRange(21*MINT_SIZE/100, 22*MINT_SIZE/100);
+    writeImagesInRange(22*MINT_SIZE/100, 23*MINT_SIZE/100);
+    writeImagesInRange(23*MINT_SIZE/100, 24*MINT_SIZE/100);
+    writeImagesInRange(24*MINT_SIZE/100, 25*MINT_SIZE/100);
+    writeImagesInRange(25*MINT_SIZE/100, 26*MINT_SIZE/100);
+    writeImagesInRange(26*MINT_SIZE/100, 27*MINT_SIZE/100);
+    writeImagesInRange(27*MINT_SIZE/100, 28*MINT_SIZE/100);
+    writeImagesInRange(28*MINT_SIZE/100, 29*MINT_SIZE/100);
+    writeImagesInRange(29*MINT_SIZE/100, 30*MINT_SIZE/100);
+    writeImagesInRange(30*MINT_SIZE/100, 31*MINT_SIZE/100);
+    writeImagesInRange(31*MINT_SIZE/100, 32*MINT_SIZE/100);
+    writeImagesInRange(32*MINT_SIZE/100, 33*MINT_SIZE/100);
+    writeImagesInRange(33*MINT_SIZE/100, 34*MINT_SIZE/100);
+    writeImagesInRange(34*MINT_SIZE/100, 35*MINT_SIZE/100);
+    writeImagesInRange(35*MINT_SIZE/100, 36*MINT_SIZE/100);
+    writeImagesInRange(36*MINT_SIZE/100, 37*MINT_SIZE/100);
+    writeImagesInRange(37*MINT_SIZE/100, 38*MINT_SIZE/100);
+    writeImagesInRange(38*MINT_SIZE/100, 39*MINT_SIZE/100);
+    writeImagesInRange(39*MINT_SIZE/100, 40*MINT_SIZE/100);
+    writeImagesInRange(40*MINT_SIZE/100, 41*MINT_SIZE/100);
+    writeImagesInRange(41*MINT_SIZE/100, 42*MINT_SIZE/100);
+    writeImagesInRange(42*MINT_SIZE/100, 43*MINT_SIZE/100);
+    writeImagesInRange(43*MINT_SIZE/100, 44*MINT_SIZE/100);
+    writeImagesInRange(44*MINT_SIZE/100, 45*MINT_SIZE/100);
+    writeImagesInRange(45*MINT_SIZE/100, 46*MINT_SIZE/100);
+    writeImagesInRange(46*MINT_SIZE/100, 47*MINT_SIZE/100);
+    writeImagesInRange(47*MINT_SIZE/100, 48*MINT_SIZE/100);
+    writeImagesInRange(48*MINT_SIZE/100, 49*MINT_SIZE/100);
+    writeImagesInRange(49*MINT_SIZE/100, 50*MINT_SIZE/100);
+    writeImagesInRange(50*MINT_SIZE/100, 51*MINT_SIZE/100);
+    writeImagesInRange(51*MINT_SIZE/100, 52*MINT_SIZE/100);
+    writeImagesInRange(52*MINT_SIZE/100, 53*MINT_SIZE/100);
+    writeImagesInRange(53*MINT_SIZE/100, 54*MINT_SIZE/100);
+    writeImagesInRange(54*MINT_SIZE/100, 55*MINT_SIZE/100);
+    writeImagesInRange(55*MINT_SIZE/100, 56*MINT_SIZE/100);
+    writeImagesInRange(56*MINT_SIZE/100, 57*MINT_SIZE/100);
+    writeImagesInRange(57*MINT_SIZE/100, 58*MINT_SIZE/100);
+    writeImagesInRange(58*MINT_SIZE/100, 59*MINT_SIZE/100);
+    writeImagesInRange(59*MINT_SIZE/100, 60*MINT_SIZE/100);
+    writeImagesInRange(60*MINT_SIZE/100, 61*MINT_SIZE/100);
+    writeImagesInRange(61*MINT_SIZE/100, 62*MINT_SIZE/100);
+    writeImagesInRange(62*MINT_SIZE/100, 63*MINT_SIZE/100);
+    writeImagesInRange(63*MINT_SIZE/100, 64*MINT_SIZE/100);
+    writeImagesInRange(64*MINT_SIZE/100, 65*MINT_SIZE/100);
+    writeImagesInRange(65*MINT_SIZE/100, 66*MINT_SIZE/100);
+    writeImagesInRange(66*MINT_SIZE/100, 67*MINT_SIZE/100);
+    writeImagesInRange(67*MINT_SIZE/100, 68*MINT_SIZE/100);
+    writeImagesInRange(68*MINT_SIZE/100, 69*MINT_SIZE/100);
+    writeImagesInRange(69*MINT_SIZE/100, 70*MINT_SIZE/100);
+    writeImagesInRange(70*MINT_SIZE/100, 71*MINT_SIZE/100);
+    writeImagesInRange(71*MINT_SIZE/100, 72*MINT_SIZE/100);
+    writeImagesInRange(72*MINT_SIZE/100, 73*MINT_SIZE/100);
+    writeImagesInRange(73*MINT_SIZE/100, 74*MINT_SIZE/100);
+    writeImagesInRange(74*MINT_SIZE/100, 75*MINT_SIZE/100);
+    writeImagesInRange(75*MINT_SIZE/100, 76*MINT_SIZE/100);
+    writeImagesInRange(76*MINT_SIZE/100, 77*MINT_SIZE/100);
+    writeImagesInRange(77*MINT_SIZE/100, 78*MINT_SIZE/100);
+    writeImagesInRange(78*MINT_SIZE/100, 79*MINT_SIZE/100);
+    writeImagesInRange(79*MINT_SIZE/100, 80*MINT_SIZE/100);
+    writeImagesInRange(80*MINT_SIZE/100, 81*MINT_SIZE/100);
+    writeImagesInRange(81*MINT_SIZE/100, 82*MINT_SIZE/100);
+    writeImagesInRange(82*MINT_SIZE/100, 83*MINT_SIZE/100);
+    writeImagesInRange(83*MINT_SIZE/100, 84*MINT_SIZE/100);
+    writeImagesInRange(84*MINT_SIZE/100, 85*MINT_SIZE/100);
+    writeImagesInRange(85*MINT_SIZE/100, 86*MINT_SIZE/100);
+    writeImagesInRange(86*MINT_SIZE/100, 87*MINT_SIZE/100);
+    writeImagesInRange(87*MINT_SIZE/100, 88*MINT_SIZE/100);
+    writeImagesInRange(88*MINT_SIZE/100, 89*MINT_SIZE/100);
+    writeImagesInRange(89*MINT_SIZE/100, 90*MINT_SIZE/100);
+    writeImagesInRange(90*MINT_SIZE/100, 91*MINT_SIZE/100);
+    writeImagesInRange(91*MINT_SIZE/100, 92*MINT_SIZE/100);
+    writeImagesInRange(92*MINT_SIZE/100, 93*MINT_SIZE/100);
+    writeImagesInRange(93*MINT_SIZE/100, 94*MINT_SIZE/100);
+    writeImagesInRange(94*MINT_SIZE/100, 95*MINT_SIZE/100);
+    writeImagesInRange(95*MINT_SIZE/100, 96*MINT_SIZE/100);
+    writeImagesInRange(96*MINT_SIZE/100, 97*MINT_SIZE/100);
+    writeImagesInRange(97*MINT_SIZE/100, 98*MINT_SIZE/100);
+    writeImagesInRange(98*MINT_SIZE/100, 99*MINT_SIZE/100);
+    writeImagesInRange(99*MINT_SIZE/100, MINT_SIZE);
 
-    for (uint256 i = MINT_SIZE*2/10; i < MINT_SIZE*3/10; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
-
-    for (uint256 i = MINT_SIZE*3/10; i < MINT_SIZE*4/10; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
-
-    for (uint256 i = MINT_SIZE*4/10; i < MINT_SIZE*5/10; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
-
-    for (uint256 i = MINT_SIZE*5/10; i < MINT_SIZE*6/10; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
-
-    for (uint256 i = MINT_SIZE*6/10; i < MINT_SIZE*7/10; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
-
-    for (uint256 i = MINT_SIZE*7/10; i < MINT_SIZE*8/10; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
-
-    for (uint256 i = MINT_SIZE*8/10; i < MINT_SIZE*9/10; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
-
-    for (uint256 i = MINT_SIZE*9/10; i < MINT_SIZE; i++) {
-      string memory path = string.concat("images/", Strings.toString(i), ".svg");
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-      vm.writeFile(path, metadata.composeOnlyImage(clifford.getSeed(i), baseline));
-      console.log("wrote image ", i);
-    }
   }
 
   // create a json file with the ids of the images that were created

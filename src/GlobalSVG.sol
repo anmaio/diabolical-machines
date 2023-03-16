@@ -43,8 +43,6 @@ import "./defs/cells/CellsDefs2.sol";
 
 import "./defs/props/PropsDefs1.sol";
 
-import "./defs/character/CharacterDefs1.sol";
-
 import "./CommonSVG.sol";
 
 contract GlobalSVG {
@@ -96,7 +94,6 @@ contract GlobalSVG {
       output,
       AssetsDefs1.getPart(),
       AssetsDefs2.getPart(),
-      CharacterDefs1.getPart(),
       PropsDefs1.getPart()
     );
 
