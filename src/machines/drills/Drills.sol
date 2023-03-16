@@ -65,7 +65,7 @@ contract Drills {
     uint count;
     for (uint i = 0; i < 6; ++i) {
       uint positionsDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12+i)] + baseline);
-      if ((positionsDigits < drillChance) || (count == 0 && i == 5)) {
+      if ((positionsDigits >= drillChance) || (count == 0 && i == 5)) {
         drillPositions[count] = GridHelper.stringToUint(string(GridHelper.slice(bytes(DRILL_POSITION_NUMBERS), i*5, 5)));
         count++;
       }
