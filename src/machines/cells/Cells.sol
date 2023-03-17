@@ -13,7 +13,7 @@ contract Cells {
 
   string internal constant SHELF_CUSHION_NUMBERS = "000000902609017";
 
-  string internal constant CELL_NUMBERS = "0000009030090320903109021090190902009018";
+  string internal constant CELL_NUMBERS = "09030090320903109021090190902009018";
 
   string internal constant POSSIBLE_CHARACTER_POSITIONS = "015600900312018000000180";
 
@@ -70,7 +70,13 @@ contract Cells {
   function getCell(uint rand, int baseline, uint version) internal pure returns (uint) {
     uint cellDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16+version)] + baseline);
 
-    return GridHelper.getSingleObject(CELL_NUMBERS, cellDigits, 8);
+    uint[] memory cellPositions = getPositionOfCells(rand, baseline);
+
+    if (cellPositions[version] == 0) {
+      return 0;
+    }
+
+    return GridHelper.getSingleObject(CELL_NUMBERS, cellDigits, 7);
   }
 
   function getShadow(uint rand, int baseline) internal pure returns (uint) {
@@ -141,6 +147,38 @@ contract Cells {
     uint feedbackDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 27)] + baseline);
 
     return GridHelper.getSingleObject(FEEDBACK_NUMBERS, feedbackDigits, 7);
+  }
+
+  function getPositionOfCells(uint rand, int baseline) internal pure returns (uint[] memory) {
+    uint numberOfCellsDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 28)] + baseline);
+
+    uint[] memory numberOfCellsProbabilitiesArray = GridHelper.createEqualProbabilityArray(4);
+
+    uint numOfCells;
+
+    for (uint i = 0; i < 3; i++) {
+      if (numberOfCellsDigits < numberOfCellsProbabilitiesArray[i]) {
+        numOfCells = i + 1;
+        break;
+      }
+    }
+
+    if (numOfCells == 0) {
+      numOfCells = 4;
+    }
+
+    // distribute the cells randomly
+    uint[] memory cellNumbers = new uint[](4);
+    for (uint i = 0; i < numOfCells; i++) {
+      uint cellDigit = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 20+i)] + baseline) % 4;
+      // check if the cell is already used and if so, find the next available one
+      while (cellNumbers[cellDigit] != 0) {
+        cellDigit = (cellDigit + 1) % 4;
+      }
+      cellNumbers[cellDigit] = 1;
+    }
+
+    return cellNumbers;
   }
 
   function getPipeOrMachine(uint rand, int baseline) internal pure returns (uint[] memory) {
