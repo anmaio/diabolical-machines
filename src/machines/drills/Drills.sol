@@ -58,20 +58,19 @@ contract Drills {
     // 6 possible positions for the drill
     // Embellished should have more drills and degraded should have less
     // There must be at least one drill
-    uint drillChance = 128; // 50%
-    // uint positionsDigits = GridHelper.bytesToUint(GridHelper.slice(rand, 12, 14));
+    uint[] memory drillPositions = getPositionOfDrills(rand, baseline);
 
-    uint[] memory drillPositions = new uint[](6);
+    uint[] memory drillNumbers = new uint[](6);
+
     uint count;
     for (uint i = 0; i < 6; ++i) {
-      uint positionsDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12+i)] + baseline);
-      if ((positionsDigits >= drillChance) || (count == 0 && i == 5)) {
-        drillPositions[count] = GridHelper.stringToUint(string(GridHelper.slice(bytes(DRILL_POSITION_NUMBERS), i*5, 5)));
+      if (drillPositions[i] != 0) {
+        drillNumbers[count] = GridHelper.stringToUint(string(GridHelper.slice(bytes(DRILL_POSITION_NUMBERS), i*5, 5)));
         count++;
       }
     }
 
-    return (drillPositions, count);
+    return (drillNumbers, count);
   }
 
   function getDrillBitNumber(uint rand, uint version, int baseline) internal pure returns (uint) {
@@ -146,6 +145,38 @@ contract Drills {
     } else {
       return [headNumbersArray[0], headNumbersArray[2]];
     }
+  }
+
+  function getPositionOfDrills(uint rand, int baseline) internal pure returns (uint[] memory) {
+    uint numberOfDrillsDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 28)] + baseline);
+
+    uint[] memory numberOfDrillsProbabilitiesArray = GridHelper.createEqualProbabilityArray(6);
+
+    uint numOfDrills;
+
+    for (uint i = 0; i < 5; i++) {
+      if (numberOfDrillsDigits < numberOfDrillsProbabilitiesArray[i]) {
+        numOfDrills = i + 1;
+        break;
+      }
+    }
+
+    if (numOfDrills == 0) {
+      numOfDrills = 6;
+    }
+
+    // distribute the drills randomly
+    uint[] memory drillNumbers = new uint[](6);
+    for (uint i = 0; i < numOfDrills; i++) {
+      uint drillDigit = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12+i)] + baseline) % 6;
+      // check if the drill is already used and if so, find the next available one
+      while (drillNumbers[drillDigit] != 0) {
+        drillDigit = (drillDigit + 1) % 6;
+      }
+      drillNumbers[drillDigit] = 1;
+    }
+
+    return drillNumbers;
   }
 
   function getHoleAndWrinkleNumbers(uint version) internal pure returns (uint[] memory) {
