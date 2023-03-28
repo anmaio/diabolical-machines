@@ -15,14 +15,12 @@ contract Machine {
 
   AssetRetriever internal immutable _assetRetriever;
 
-  // conveyor belt
-  // string[] public allMachines = ["Conveyorbelt", "Drills", "Noses", "Beast", "Altar", "Tubes"];
-  string[] public allMachines = ["Altar", "Drills", "Noses", "Apparatus", "Cells"];
+  string[] public allMachines = ["Altar", "Drills", "Noses", "Apparatus", "Cells", "Tubes"];
 
   mapping(string => string) public machineToProductivityTiers;
   mapping(string => address) public machineToWorkstation;
 
-  constructor(address[5] memory workstations, AssetRetriever assetRetriever) {
+  constructor(address[6] memory workstations, AssetRetriever assetRetriever) {
     _assetRetriever = assetRetriever;
 
     for (uint i = 0; i < allMachines.length; ++i) {
@@ -34,11 +32,12 @@ contract Machine {
     machineToProductivityTiers["Noses"] = "020040060070080090";
     machineToProductivityTiers["Apparatus"] = "020040060070080090";
     machineToProductivityTiers["Cells"] = "020040060070080090";
+    machineToProductivityTiers["Tubes"] = "020040060070080090";
   }
 
   function selectMachine(uint rand) external view returns (string memory) {
       // return allMachines[rand % allMachines.length];
-      return allMachines[3];
+      return allMachines[5];
   }
 
   function machineToGetter(string memory machine, uint rand, int baseline) external view returns (string memory) {

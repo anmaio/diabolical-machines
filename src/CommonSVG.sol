@@ -53,9 +53,9 @@ library CommonSVG {
 
   string internal constant GRADIENT_STYLE_CLOSE = " } </style>";
 
-  string internal constant GLOBAL_COLOURS = "085092060082067051";
+  string internal constant GLOBAL_COLOURS = "085092060082067051085092060082067051085092060082067051085092060082067051";
 
-  string internal constant GLOBAL_COLOURS_IDS = "g0g1g2g3g4g5";
+  string internal constant GLOBAL_COLOURS_IDS = "g0g1g2g3g4g5g6g7";
 
   string internal constant SHELL_COLOUR_IDS = "s2s1s0";
 
@@ -171,8 +171,8 @@ library CommonSVG {
     }
 
     // GLOBAL COLOURS
-    uint[] memory globalColours = GridHelper.setUintArrayFromString(GLOBAL_COLOURS, 6, 3);
-    for (uint i = 0; i < 2; ++i) {
+    uint[] memory globalColours = GridHelper.setUintArrayFromString(GLOBAL_COLOURS, 24, 3);
+    for (uint i = 0; i < 8; ++i) {
       gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(GLOBAL_COLOURS_IDS), i*2, 2)), globalColours[i*3], globalColours[i*3+1], globalColours[i*3+2]);
     }
 

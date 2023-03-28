@@ -19,6 +19,9 @@ import "./styles/cells/CellsCSS1.sol";
 import "./styles/cells/CellsCSS2.sol";
 import "./styles/cells/CellsCSS3.sol";
 
+import "./styles/tubes/TubesCSS1.sol";
+import "./styles/tubes/TubesCSS2.sol";
+
 import "./styles/character/CharacterCSS1.sol";
 import "./styles/character/CharacterCSS2.sol";
 
@@ -41,6 +44,8 @@ import "./defs/apparatus/ApparatusDefs2.sol";
 import "./defs/cells/CellsDefs1.sol";
 import "./defs/cells/CellsDefs2.sol";
 
+import "./defs/tubes/TubesDefs1.sol";
+
 import "./defs/props/PropsDefs1.sol";
 
 import "./CommonSVG.sol";
@@ -50,10 +55,8 @@ contract GlobalSVG {
   function getClosingSVG() external pure returns (string memory) {
     return string.concat(
       "</g>",
-      // CommonSVG.G_END,
       "</svg>"
     );
-    // return CommonSVG.SVG_END;
   }
 
   function getShell(string memory flip) external pure returns (string memory) {
@@ -87,7 +90,8 @@ contract GlobalSVG {
       output,
       NosesDefs1.getPart(),
       CellsDefs1.getPart(),
-      CellsDefs2.getPart()
+      CellsDefs2.getPart(),
+      TubesDefs1.getPart()
     );
 
     output = string.concat(
@@ -115,6 +119,12 @@ contract GlobalSVG {
       CellsCSS1.getPart(),
       CellsCSS2.getPart(),
       CellsCSS3.getPart()
+    );
+
+    output = string.concat(
+      output,
+      TubesCSS1.getPart(),
+      TubesCSS2.getPart()
     );
 
     return string.concat(

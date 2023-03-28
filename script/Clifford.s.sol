@@ -13,6 +13,8 @@ import "../src/machines/drills/Drills.sol";
 import "../src/machines/apparatus/Apparatus.sol";
 import "../src/machines/noses/Noses.sol";
 import "../src/machines/cells/Cells.sol";
+import "../src/machines/tubes/Tubes.sol";
+import "../src/machines/beast/Beast.sol";
 
 import "../src/Assets/Altar/AltarImp1.sol";
 import "../src/Assets/Altar/AltarImp2.sol";
@@ -56,6 +58,12 @@ import "../src/Assets/Noses/NosesImp3.sol";
 import "../src/Assets/Noses/NosesImp4.sol";
 
 import "../src/Assets/Tubes/TubesImp1.sol";
+import "../src/Assets/Tubes/TubesImp2.sol";
+import "../src/Assets/Tubes/TubesImp3.sol";
+import "../src/Assets/Tubes/TubesImp4.sol";
+import "../src/Assets/Tubes/TubesImp5.sol";
+
+import "../src/Assets/Beast/BeastImp1.sol";
 
 import "../src/Assets/Apparatus/ApparatusImp1.sol";
 import "../src/Assets/Apparatus/ApparatusImp2.sol";
@@ -72,40 +80,42 @@ import "../src/Assets/Character/CharacterImp3.sol";
 import "../src/Assets/Character/CharacterImp4.sol";
 import "../src/Assets/Character/CharacterImp5.sol";
 
-
 import "../src/Assets/TraitBase.sol";
 import "../src/AssetRetriever.sol";
 
 contract CliffordScript is Script {
   // Trait bases
-  TraitBase public substancesTB;
-  TraitBase public feedbackTB;
-  TraitBase public eyesTB;
-  TraitBase public assetsTB;
-  TraitBase public propsTB;
-  TraitBase public altarTB;
-  TraitBase public drillsTB;
-  TraitBase public nosesTB;
-  TraitBase public tubesTB;
-  TraitBase public apparatusTB;
-  TraitBase public cellsTB;
-  TraitBase public miscTB;
-  TraitBase public activationTB;
-  TraitBase public characterTB;
+  TraitBase private substancesTB;
+  TraitBase private feedbackTB;
+  TraitBase private eyesTB;
+  TraitBase private assetsTB;
+  TraitBase private propsTB;
+  TraitBase private altarTB;
+  TraitBase private drillsTB;
+  TraitBase private nosesTB;
+  TraitBase private tubesTB;
+  TraitBase private apparatusTB;
+  TraitBase private cellsTB;
+  TraitBase private beastTB;
+  TraitBase private miscTB;
+  TraitBase private activationTB;
+  TraitBase private characterTB;
 
-  AssetRetriever public assetRetriever;
+  AssetRetriever private assetRetriever;
 
   // Machines
-  Altar public altar;
-  Drills public drills;
-  Noses public noses;
-  Apparatus public apparatus;
-  Cells public cells;
+  Altar private altar;
+  Drills private drills;
+  Noses private noses;
+  Apparatus private apparatus;
+  Cells private cells;
+  Tubes private tubes;
+  Beast private beast;
 
-  Machine public machine;
-  Metadata public metadata;
-  Clifford public clifford;
-  GlobalSVG public globalSVG;
+  Machine private machine;
+  Metadata private metadata;
+  Clifford private clifford;
+  GlobalSVG private globalSVG;
 
   // Substances
   function deploySubstances() internal {
@@ -204,8 +214,16 @@ contract CliffordScript is Script {
   // Tubes
   function deployTubes() internal {
     TubesImp1 tubesImp1 = new TubesImp1();
-    address[] memory tubesImpsAds = new address[](1);
+    TubesImp2 tubesImp2 = new TubesImp2();
+    TubesImp3 tubesImp3 = new TubesImp3();
+    TubesImp4 tubesImp4 = new TubesImp4();
+    TubesImp5 tubesImp5 = new TubesImp5();
+    address[] memory tubesImpsAds = new address[](5);
     tubesImpsAds[0] = address(tubesImp1);
+    tubesImpsAds[1] = address(tubesImp2);
+    tubesImpsAds[2] = address(tubesImp3);
+    tubesImpsAds[3] = address(tubesImp4);
+    tubesImpsAds[4] = address(tubesImp5);
     tubesTB = new TraitBase(tubesImpsAds);
   }
 
@@ -245,6 +263,14 @@ contract CliffordScript is Script {
     cellsImpsAds[5] = address(cellsImp6);
     cellsImpsAds[6] = address(cellsImp7);
     cellsTB = new TraitBase(cellsImpsAds);
+  }
+
+  // Beast
+  function deployBeast() internal {
+    BeastImp1 beastImp1 = new BeastImp1();
+    address[] memory beastImpsAds = new address[](1);
+    beastImpsAds[0] = address(beastImp1);
+    beastTB = new TraitBase(beastImpsAds);
   }
 
   // Misc
@@ -292,6 +318,7 @@ contract CliffordScript is Script {
     traitBases[8] = address(tubesTB);
     traitBases[9] = address(apparatusTB);
     traitBases[10] = address(cellsTB);
+    // traitBases[11] = address(beastTB);
     traitBases[11] = address(miscTB);
     traitBases[12] = address(activationTB);
     traitBases[13] = address(characterTB);
@@ -305,12 +332,14 @@ contract CliffordScript is Script {
     noses = new Noses(address(assetRetriever));
     apparatus = new Apparatus(address(assetRetriever));
     cells = new Cells(address(assetRetriever));
+    tubes = new Tubes(address(assetRetriever));
+    beast = new Beast(address(assetRetriever));
   }
 
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
-    machine = new Machine([address(altar), address(drills), address(noses), address(apparatus), address(cells)], assetRetriever);
+    machine = new Machine([address(altar), address(drills), address(noses), address(apparatus), address(cells), address(tubes)], assetRetriever);
     metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
   }

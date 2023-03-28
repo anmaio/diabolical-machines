@@ -184,10 +184,6 @@ contract Noses {
     numbersUsed[count] = GROUP_CLOSE_NUMBER;
     count++;
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
-    count++;
-
     uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, false, baseline);
     numbersUsed[count] = characterNumbers[0];
     count++;
@@ -203,6 +199,10 @@ contract Noses {
     count++;
 
     numbersUsed[count] = characterNumbers[4];
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
     count++;
 
     return (numbersUsed, offsetsUsed);
