@@ -30,7 +30,7 @@ contract Apparatus {
 
   string internal constant LEFT_TOP_OBJECT_NUMBERS = "000000400304000040010400408041";
 
-  string internal constant POSSIBLE_CHARACTER_POSITIONS = "00000000-1560090-3120180";
+  string internal constant POSSIBLE_CHARACTER_POSITIONS = "00000000-1560090-312018003120180";
 
   // Floor
   string internal constant FLOOR_OFFSETS = "0312036004680270";
@@ -214,10 +214,10 @@ contract Apparatus {
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
     uint characterPositionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 23)] + baseline);
 
-    if (characterNumber == 20000 || characterNumber == 20004 ) {
-      string memory characterOffset = string(GridHelper.slice(bytes(POSSIBLE_CHARACTER_POSITIONS), 8*(characterPositionDigits % 3), 8));
+    if (characterNumber == 20004 ) {
+      string memory characterOffset = string(GridHelper.slice(bytes(POSSIBLE_CHARACTER_POSITIONS), 8*(characterPositionDigits % 4), 8));
       return characterOffset;
-    } else if (characterNumber == 20002) {
+    } else if (characterNumber == 20000 || characterNumber == 20002) {
       return "03120180";
     } else {
       return "00000000";
@@ -240,9 +240,11 @@ contract Apparatus {
       count++;
     }
 
-    numbersUsed[count] = characterNumbers[3];
-    offsetsUsed[count] = getCharacterPosition(characterNumbers[3], rand, baseline);
-    count++;
+    if (keccak256(bytes(getCharacterPosition(characterNumbers[3], rand, baseline))) != keccak256(bytes("03120180"))) {
+      numbersUsed[count] = characterNumbers[3];
+      offsetsUsed[count] = getCharacterPosition(characterNumbers[3], rand, baseline);
+      count++;
+    }
 
     numbersUsed[count] = characterNumbers[4];
     count++;
@@ -315,10 +317,15 @@ contract Apparatus {
     count++;
 
     // left top
-    uint leftTopObjectNumber = getLeftTopObject(rand, baseline);
-    numbersUsed[count] = leftTopObjectNumber;
-    offsetsUsed[count] = getLeftTopOffset(leftTopObjectNumber);
+    numbersUsed[count] = getLeftTopObject(rand, baseline);
+    offsetsUsed[count] = getLeftTopOffset(getLeftTopObject(rand, baseline));
     count++;
+
+    if (keccak256(bytes(getCharacterPosition(characterNumbers[3], rand, baseline))) == keccak256(bytes("03120180"))) {
+      numbersUsed[count] = characterNumbers[3];
+      offsetsUsed[count] = getCharacterPosition(characterNumbers[3], rand, baseline);
+      count++;
+    }
 
     numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
     offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);

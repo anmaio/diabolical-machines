@@ -19,6 +19,8 @@ contract MiscImp1 {
 
   string internal constant NEGATIVE_156 = "<g transform='translate(-156 0)'>";
 
+  string internal constant NO_TRANSFORM = "<g transform='translate(0 0)'>";
+
   // transform 0->8
   function getAssetFromID(uint assetID) external pure returns (string memory) {
     if (assetID == 19000) {
@@ -45,6 +47,8 @@ contract MiscImp1 {
       return FLIP_WRAPPER;
     } else if (assetID == 19011) {
       return NEGATIVE_156;
+    } else if (assetID == 19012) {
+      return NO_TRANSFORM;
     } else {
       return "";
     }
@@ -74,6 +78,8 @@ contract MiscImp1 {
     } else if (assetID == 19010) {
       return 3;
     } else if (assetID == 19011) {
+      return 3;
+    } else if (assetID == 19012) {
       return 3;
     } else {
       return 0;
