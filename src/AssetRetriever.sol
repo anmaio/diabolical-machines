@@ -16,7 +16,7 @@ contract AssetRetriever is Ownable {
     traitTypes = addresses;
   }
 
-  function getAsset(uint assetID) public view returns (string memory) {
+  function getAsset(uint assetID) public view returns (string memory) { // todo: refactor using %1k and /1k to remove the loop
     string memory asset = "";
     for (uint i = 0; i < traitTypes.length; i++) {
       asset = IAssetFromTrait(traitTypes[i]).getAssetFromTrait(assetID);

@@ -24,6 +24,8 @@ import "../src/Assets/Substances/SubstancesImp1.sol";
 
 import "../src/Assets/Eyes/EyesImp1.sol";
 import "../src/Assets/Eyes/EyesImp2.sol";
+import "../src/Assets/Eyes/EyesImp3.sol";
+import "../src/Assets/Eyes/EyesImp4.sol";
 
 import "../src/Assets/Feedback/FeedbackImp1.sol";
 import "../src/Assets/Feedback/FeedbackImp2.sol";
@@ -63,14 +65,14 @@ import "../src/Assets/Tubes/TubesImp3.sol";
 import "../src/Assets/Tubes/TubesImp4.sol";
 import "../src/Assets/Tubes/TubesImp5.sol";
 
-import "../src/Assets/Beast/BeastImp1.sol";
-
 import "../src/Assets/Apparatus/ApparatusImp1.sol";
 import "../src/Assets/Apparatus/ApparatusImp2.sol";
 import "../src/Assets/Apparatus/ApparatusImp3.sol";
 import "../src/Assets/Apparatus/ApparatusImp4.sol";
 import "../src/Assets/Apparatus/ApparatusImp5.sol";
 import "../src/Assets/Apparatus/ApparatusImp6.sol";
+
+import "../src/Assets/Beast/BeastImp1.sol";
 
 import "../src/Assets/Activation/ActivationImp1.sol";
 
@@ -139,9 +141,13 @@ contract CliffordScript is Script {
   function deployEyes() internal {
     EyesImp1 eyesImp1 = new EyesImp1();
     EyesImp2 eyesImp2 = new EyesImp2();
-    address[] memory eyesImpsAds = new address[](2);
+    EyesImp3 eyesImp3 = new EyesImp3();
+    EyesImp4 eyesImp4 = new EyesImp4();
+    address[] memory eyesImpsAds = new address[](4);
     eyesImpsAds[0] = address(eyesImp1);
     eyesImpsAds[1] = address(eyesImp2);
+    eyesImpsAds[2] = address(eyesImp3);
+    eyesImpsAds[3] = address(eyesImp4);
     eyesTB = new TraitBase(eyesImpsAds);
   }
 
@@ -318,7 +324,6 @@ contract CliffordScript is Script {
     traitBases[8] = address(tubesTB);
     traitBases[9] = address(apparatusTB);
     traitBases[10] = address(cellsTB);
-    // traitBases[11] = address(beastTB);
     traitBases[11] = address(miscTB);
     traitBases[12] = address(activationTB);
     traitBases[13] = address(characterTB);
@@ -339,7 +344,7 @@ contract CliffordScript is Script {
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
-    machine = new Machine([address(altar), address(drills), address(noses), address(apparatus), address(cells), address(tubes)], assetRetriever);
+    machine = new Machine([address(altar), address(drills), address(noses), address(apparatus), address(cells), address(tubes), address(beast)], assetRetriever);
     metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
   }
@@ -361,6 +366,7 @@ contract CliffordScript is Script {
     deployTubes();
     deployApparatus();
     deployCells();
+    deployBeast();
     deployMisc();
     deployActivation();
     deployCharacter();
