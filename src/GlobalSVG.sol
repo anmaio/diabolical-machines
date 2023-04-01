@@ -22,6 +22,10 @@ import "./styles/cells/CellsCSS3.sol";
 import "./styles/tubes/TubesCSS1.sol";
 import "./styles/tubes/TubesCSS2.sol";
 
+import "./styles/beast/BeastCSS1.sol";
+import "./styles/beast/BeastCSS2.sol";
+import "./styles/beast/BeastCSS3.sol";
+
 import "./styles/character/CharacterCSS1.sol";
 import "./styles/character/CharacterCSS2.sol";
 
@@ -45,6 +49,9 @@ import "./defs/cells/CellsDefs1.sol";
 import "./defs/cells/CellsDefs2.sol";
 
 import "./defs/tubes/TubesDefs1.sol";
+
+import "./defs/beast/BeastDefs1.sol";
+import "./defs/beast/BeastDefs2.sol";
 
 import "./defs/props/PropsDefs1.sol";
 
@@ -98,7 +105,9 @@ contract GlobalSVG {
       output,
       AssetsDefs1.getPart(),
       AssetsDefs2.getPart(),
-      PropsDefs1.getPart()
+      PropsDefs1.getPart(),
+      BeastDefs1.getPart(),
+      BeastDefs2.getPart()
     );
 
     output = string.concat(
@@ -124,7 +133,10 @@ contract GlobalSVG {
     output = string.concat(
       output,
       TubesCSS1.getPart(),
-      TubesCSS2.getPart()
+      TubesCSS2.getPart(),
+      BeastCSS1.getPart(),
+      BeastCSS2.getPart(),
+      BeastCSS3.getPart()
     );
 
     return string.concat(
