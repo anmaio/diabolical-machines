@@ -73,6 +73,15 @@ import "../src/Assets/Apparatus/ApparatusImp5.sol";
 import "../src/Assets/Apparatus/ApparatusImp6.sol";
 
 import "../src/Assets/Beast/BeastImp1.sol";
+import "../src/Assets/Beast/BeastImp2.sol";
+import "../src/Assets/Beast/BeastImp3.sol";
+import "../src/Assets/Beast/BeastImp4.sol";
+import "../src/Assets/Beast/BeastImp5.sol";
+import "../src/Assets/Beast/BeastImp6.sol";
+import "../src/Assets/Beast/BeastImp7.sol";
+import "../src/Assets/Beast/BeastImp8.sol";
+import "../src/Assets/Beast/BeastImp9.sol";
+import "../src/Assets/Beast/BeastImp10.sol";
 
 import "../src/Assets/Activation/ActivationImp1.sol";
 
@@ -87,7 +96,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 1000;
+  uint internal constant MINT_SIZE = 10;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
 
@@ -279,8 +288,26 @@ contract CliffordTest is Test {
   // Beast
   function deployBeast() internal {
     BeastImp1 beastImp1 = new BeastImp1();
-    address[] memory beastImpsAds = new address[](1);
+    BeastImp2 beastImp2 = new BeastImp2();
+    BeastImp3 beastImp3 = new BeastImp3();
+    BeastImp4 beastImp4 = new BeastImp4();
+    BeastImp5 beastImp5 = new BeastImp5();
+    BeastImp6 beastImp6 = new BeastImp6();
+    BeastImp7 beastImp7 = new BeastImp7();
+    BeastImp8 beastImp8 = new BeastImp8();
+    BeastImp9 beastImp9 = new BeastImp9();
+    BeastImp10 beastImp10 = new BeastImp10();
+    address[] memory beastImpsAds = new address[](10);
     beastImpsAds[0] = address(beastImp1);
+    beastImpsAds[1] = address(beastImp2);
+    beastImpsAds[2] = address(beastImp3);
+    beastImpsAds[3] = address(beastImp4);
+    beastImpsAds[4] = address(beastImp5);
+    beastImpsAds[5] = address(beastImp6);
+    beastImpsAds[6] = address(beastImp7);
+    beastImpsAds[7] = address(beastImp8);
+    beastImpsAds[8] = address(beastImp9);
+    beastImpsAds[9] = address(beastImp10);
     beastTB = new TraitBase(beastImpsAds);
   }
 
