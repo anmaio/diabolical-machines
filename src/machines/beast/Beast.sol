@@ -253,10 +253,6 @@ contract Beast {
       count++;
     }
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
-    count++;
-
     uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, true, baseline);
     numbersUsed[count] = characterNumbers[0];
     count++;
@@ -273,7 +269,10 @@ contract Beast {
 
     numbersUsed[count] = characterNumbers[4];
     count++;
-    
+
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
+    count++;
 
     return (numbersUsed, offsetsUsed);
   }

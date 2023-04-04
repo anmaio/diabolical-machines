@@ -245,7 +245,6 @@ contract Altar {
     numbersUsed[count] = characterNumbers[4];
     count++;
     
-
     return (numbersUsed, offsetsUsed);
   }
 
