@@ -64,7 +64,7 @@ contract Machine {
 
     uint productivity = getProductivityValue(machine, rand, baseline);
 
-    // slice ALTAR_COMBINED_PRODUCTIVITY_TIERS into 3 parts and cast to uint array
+    // slice COMBINED_PRODUCTIVITY_TIERS into 3 parts and cast to uint array
     uint[] memory productivityTiers = GridHelper.setUintArrayFromString(string(GridHelper.slice(bytes(machineToProductivityTiers[machine]), 0, 18)), 6, 3);
 
     uint sum = 0;

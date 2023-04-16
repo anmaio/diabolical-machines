@@ -21,6 +21,36 @@ contract ConveyorBelt {
 
   string internal constant FLOOB_NUMBERS = "1203212031120301202812028120311202912030120291202812028";
 
+  string internal constant PIPE_OFFSETS = "00000000000000600000012000000180000002400000030000000360";
+
+  string internal constant SAW_A_OFFSETS = "120401204112042";
+
+  string internal constant SAW_C_OFFSETS = "120431204412045";
+
+  string internal constant HATCH_DECORATION_NUMBERS = "1204612047";
+
+  string internal constant SHELF_ITEM_NUMBERS = "0600106003";
+
+  uint internal constant CB_OFFSETS = 19014;
+
+  uint internal constant WALL_PIPES = 12036;
+
+  uint internal constant HATCH_A = 12037;
+
+  uint internal constant HATCH_C = 12038;
+
+  uint internal constant FHOLE_NUMBER = 12039;
+
+  uint internal constant SHELF_NUMBER = 6015;
+
+  // EYES
+  string internal constant EYES_NUMBERS = "0000012048120491205012051";
+  uint internal constant WIDE_EYES_NUMBER = 5004;
+
+  string internal constant FEEDBACK_NUMBERS = "000000400004001040020400309000";
+
+  uint internal constant TRANSFORM_1_NEGATIVE = 19013;
+
   uint internal constant GROUP_CLOSE_NUMBER = 19000;
 
   // Floor
@@ -35,8 +65,8 @@ contract ConveyorBelt {
     _assetRetriever = AssetRetriever(assetRetriever);
   }
 
-  function getVersion(uint rand, int baseline) internal pure returns (uint[3] memory) {
-    uint versionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
+  function getVersion(uint rand, int baseline, uint version) internal pure returns (uint[3] memory) {
+    uint versionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12 + version)] + baseline);
 
     uint[] memory versionProbabilitiesArray = GridHelper.createEqualProbabilityArray(NUM_OF_VERSIONS);
 
@@ -45,7 +75,7 @@ contract ConveyorBelt {
     uint sum = 0;
     uint index = 0;
     uint lengthOfItems = 0;
-    for (uint i = 0; i < 11; ++i) {
+    for (uint i = 0; i < 10; ++i) {
       if (versionDigits > versionProbabilitiesArray[i]) {
         sum += versionLengthsArray[i];
       } else {
@@ -55,11 +85,16 @@ contract ConveyorBelt {
       }
     }
 
+    if (lengthOfItems == 0) {
+      index = 10;
+      lengthOfItems = versionLengthsArray[10];
+    }
+
     return [index, sum, lengthOfItems];
   }
 
-  function getPlatforms(uint rand, int baseline) internal pure returns (uint[] memory) {
-    uint[3] memory versionNumbersArray = getVersion(rand, baseline);
+  function getPlatforms(uint rand, int baseline, uint version) internal pure returns (uint[] memory) {
+    uint[3] memory versionNumbersArray = getVersion(rand, baseline, version);
     uint sum = versionNumbersArray[1];
     uint lenghtOfItems = versionNumbersArray[2];
 
@@ -70,20 +105,96 @@ contract ConveyorBelt {
     return platformNumbersArray;
   }
 
-  function getHole(uint rand, int baseline) internal pure returns (uint) {
-    uint index = getVersion(rand, baseline)[0];
+  function getHole(uint rand, int baseline, uint version) internal pure returns (uint) {
+    uint index = getVersion(rand, baseline, version)[0];
 
     uint[] memory holeNumbersArray = GridHelper.setUintArrayFromString(HOLES_NUMBERS, 11, 5);
 
     return holeNumbersArray[index];
   }
 
-  function getFloob(uint rand, int baseline) internal pure returns (uint) {
-    uint index = getVersion(rand, baseline)[0];
+  function getFloob(uint rand, int baseline, uint version) internal pure returns (uint) {
+    uint index = getVersion(rand, baseline, version)[0];
 
     uint[] memory floobNumbersArray = GridHelper.setUintArrayFromString(FLOOB_NUMBERS, 11, 5);
 
     return floobNumbersArray[index];
+  }
+
+  function getWallPipes(uint rand, int baseline, uint version) internal pure returns (uint) {
+    uint wallDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14 + version)] + baseline);
+
+    if (wallDigits % 2 == 0) {
+      return WALL_PIPES;
+    } else {
+      return 0;
+    }
+  }
+
+  function getHatch(uint rand, int baseline) internal pure returns (uint) {
+    uint hatchDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 25)] + baseline);
+
+    if (hatchDigits % 2 == 0) {
+      return HATCH_A;
+    } else {
+      return HATCH_C;
+    }
+  }
+
+  function getSaw(uint rand, int baseline) internal pure returns (uint) {
+    uint sawDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 26)] + baseline);
+
+    if (getHatch(rand, baseline) == HATCH_A) {
+      return GridHelper.getSingleObject(SAW_A_OFFSETS, sawDigits, 3);
+    } else {
+      return GridHelper.getSingleObject(SAW_C_OFFSETS, sawDigits, 3);
+    }
+  }
+
+  function getHatchDecoration(uint rand, int baseline) internal pure returns (uint) {
+    uint hatchDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 27)] + baseline);
+
+    return GridHelper.getSingleObject(HATCH_DECORATION_NUMBERS, hatchDigits, 2);
+  }
+
+  function getShelfItem(uint rand, int baseline) internal pure returns (uint[2] memory) {
+    uint shelfDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 28)] + baseline);
+
+    uint[] memory shelfNumbersArray = GridHelper.setUintArrayFromString(SHELF_ITEM_NUMBERS, 2, 5);
+
+    uint[] memory shelfProbabilitiesArray = GridHelper.createEqualProbabilityArray(4);
+
+    if (shelfDigits < shelfProbabilitiesArray[0]) {
+      return [uint(0), 0];
+    } else if (shelfDigits < shelfProbabilitiesArray[1]) {
+      return [shelfNumbersArray[0], 0];
+    } else if (shelfDigits < shelfProbabilitiesArray[2]) {
+      return [shelfNumbersArray[1], 0];
+    } else {
+      return [shelfNumbersArray[0], shelfNumbersArray[1]];
+    }
+  }
+
+  function getEyes(uint rand, int baseline) internal pure returns (uint) {
+    uint eyesDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 29)] + baseline);
+
+    return GridHelper.getSingleObject(EYES_NUMBERS, eyesDigits, 5);
+  }
+
+  function getWideEyes(uint rand, int baseline) internal pure returns (uint) {
+    uint wideEyesDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 20)] + baseline);
+
+    if (rand % 2 != 0) {
+      return WIDE_EYES_NUMBER;
+    } else {
+      return 0;
+    }
+  }
+
+  function getFeedback(uint rand, int baseline) internal pure returns (uint) {
+    uint feedbackDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 30)] + baseline);
+
+    return GridHelper.getSingleObject(FEEDBACK_NUMBERS, feedbackDigits, 6);
   }
 
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
@@ -97,27 +208,105 @@ contract ConveyorBelt {
 
   function getAllNumbersUsed(uint rand, int baseline) public pure returns (uint[] memory, string[] memory) {
     uint count;
-    uint[] memory numbersUsed = new uint[](50);
-    string[] memory offsetsUsed = new string[](50);
+    uint[] memory numbersUsed = new uint[](80);
+    string[] memory offsetsUsed = new string[](80);
 
     numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
     offsetsUsed[count] = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
     count++;
 
-    // get the hole number
-    numbersUsed[count] = getHole(rand, baseline);
-    count++;
-
-    // get the platform numbers
-    uint[] memory platformNumbers = getPlatforms(rand, baseline);
-    for (uint i = 0; i < platformNumbers.length; ++i) {
-      numbersUsed[count] = platformNumbers[i];
+    for (uint i = 0; i < 6; ++i) {
+      numbersUsed[count] = getWallPipes(rand, baseline, i);
+      offsetsUsed[count] = string(GridHelper.slice(bytes(PIPE_OFFSETS), i*8, 8));
       count++;
     }
 
-    // get the floob number
-    numbersUsed[count] = getFloob(rand, baseline);
+    numbersUsed[count] = CB_OFFSETS;
     count++;
+
+    for (uint i = 0; i < 2; ++i) {
+
+      if (i == 0 && rand % 2 == 0) {
+        numbersUsed[count] = TRANSFORM_1_NEGATIVE;
+        count++;
+      } else {
+        i++;
+      }
+
+      // get the hole number
+      numbersUsed[count] = getHole(rand, baseline, i);
+      count++;
+
+      // get the platform numbers
+      uint[] memory platformNumbers = getPlatforms(rand, baseline, i);
+      for (uint j = 0; j < platformNumbers.length; ++j) {
+        numbersUsed[count] = platformNumbers[j];
+        count++;
+      }
+
+      // get the hatch number
+
+      numbersUsed[count] = getHatch(rand, baseline);
+      count++;
+
+      // fhole
+      numbersUsed[count] = FHOLE_NUMBER;
+      count++;
+
+      // get the saw number
+      numbersUsed[count] = getSaw(rand, baseline);
+      count++;
+
+      // get the hatch decoration number
+      numbersUsed[count] = getHatchDecoration(rand, baseline);
+      count++;
+
+
+      // get the floob number
+      numbersUsed[count] = getFloob(rand, baseline, i);
+      count++;
+
+      // get the eyes number
+      numbersUsed[count] = getEyes(rand, baseline);
+      count++;
+
+      if (i == 0 && rand % 2 == 0) {
+        numbersUsed[count] = GROUP_CLOSE_NUMBER;
+        count++;
+      }
+    }
+
+    numbersUsed[count] = GROUP_CLOSE_NUMBER;
+    count++;
+
+    // get the wide eyes number
+    numbersUsed[count] = getWideEyes(rand, baseline);
+    count++;
+
+    // get the shelf number
+    numbersUsed[count] = SHELF_NUMBER;
+    offsetsUsed[count] = "-0200046";
+    count++;
+
+    // TEST
+
+    numbersUsed[count] = 19010;
+    count++;
+
+    // get the feedback number
+    numbersUsed[count] = getFeedback(rand, baseline);
+    offsetsUsed[count] = "-020-540";
+    count++;
+
+    numbersUsed[count] = GROUP_CLOSE_NUMBER;
+    count++;
+
+    // get the shelf item numbers
+    uint[2] memory shelfItemNumbers = getShelfItem(rand, baseline);
+    for (uint i = 0; i < 2; ++i) {
+      numbersUsed[count] = shelfItemNumbers[i];
+      count++;
+    }
 
     uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, false, baseline);
     numbersUsed[count] = characterNumbers[0];

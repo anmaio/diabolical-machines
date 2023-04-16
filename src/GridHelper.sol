@@ -104,14 +104,14 @@ library GridHelper {
     return output;
   }
 
-  function shiftToEndUintArray(uint index, uint[] memory arr) internal pure returns (uint[] memory) {
-    require(index < arr.length, "index out of bound");
+  // function shiftToEndUintArray(uint index, uint[] memory arr) internal pure returns (uint[] memory) {
+  //   require(index < arr.length, "index out of bound");
 
-    for (uint i = index; i < arr.length - 1; i++) {
-        arr[i] = arr[i + 1];
-    }
-    return arr;
-  }
+  //   for (uint i = index; i < arr.length - 1; i++) {
+  //       arr[i] = arr[i + 1];
+  //   }
+  //   return arr;
+  // }
 
   function getSumOfUintArray(uint[] memory arr) internal pure returns (uint) {
     uint sum = 0;

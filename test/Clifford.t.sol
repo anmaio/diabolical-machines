@@ -36,7 +36,6 @@ import "../src/Assets/Assets/AssetsImp2.sol";
 import "../src/Assets/Assets/AssetsImp3.sol";
 import "../src/Assets/Assets/AssetsImp4.sol";
 import "../src/Assets/Assets/AssetsImp5.sol";
-import "../src/Assets/Assets/AssetsImp6.sol";
 
 import "../src/Assets/Misc/MiscImp1.sol";
 
@@ -85,6 +84,15 @@ import "../src/Assets/Beast/BeastImp9.sol";
 import "../src/Assets/Beast/BeastImp10.sol";
 
 import "../src/Assets/Conveyor/ConveyorImp1.sol";
+import "../src/Assets/Conveyor/ConveyorImp2.sol";
+import "../src/Assets/Conveyor/ConveyorImp3.sol";
+import "../src/Assets/Conveyor/ConveyorImp4.sol";
+import "../src/Assets/Conveyor/ConveyorImp5.sol";
+import "../src/Assets/Conveyor/ConveyorImp6.sol";
+import "../src/Assets/Conveyor/ConveyorImp7.sol";
+import "../src/Assets/Conveyor/ConveyorImp8.sol";
+import "../src/Assets/Conveyor/ConveyorImp9.sol";
+import "../src/Assets/Conveyor/ConveyorImp10.sol";
 
 import "../src/Assets/Activation/ActivationImp1.sol";
 
@@ -177,14 +185,12 @@ contract CliffordTest is Test {
     AssetsImp3 assetsImp3 = new AssetsImp3();
     AssetsImp4 assetsImp4 = new AssetsImp4();
     AssetsImp5 assetsImp5 = new AssetsImp5();
-    AssetsImp6 assetsImp6 = new AssetsImp6();
-    address[] memory assetsImpsAds = new address[](6);
+    address[] memory assetsImpsAds = new address[](5);
     assetsImpsAds[0] = address(assetsImp1);
     assetsImpsAds[1] = address(assetsImp2);
     assetsImpsAds[2] = address(assetsImp3);
     assetsImpsAds[3] = address(assetsImp4);
     assetsImpsAds[4] = address(assetsImp5);
-    assetsImpsAds[5] = address(assetsImp6);
     assetsTB = new TraitBase(assetsImpsAds);
   }
 
@@ -319,8 +325,26 @@ contract CliffordTest is Test {
   // Conveyor
   function deployConveyor() internal {
     ConveyorImp1 conveyorImp1 = new ConveyorImp1();
-    address[] memory conveyorImpsAds = new address[](1);
+    ConveyorImp2 conveyorImp2 = new ConveyorImp2();
+    ConveyorImp3 conveyorImp3 = new ConveyorImp3();
+    ConveyorImp4 conveyorImp4 = new ConveyorImp4();
+    ConveyorImp5 conveyorImp5 = new ConveyorImp5();
+    ConveyorImp6 conveyorImp6 = new ConveyorImp6();
+    ConveyorImp7 conveyorImp7 = new ConveyorImp7();
+    ConveyorImp8 conveyorImp8 = new ConveyorImp8();
+    ConveyorImp9 conveyorImp9 = new ConveyorImp9();
+    ConveyorImp10 conveyorImp10 = new ConveyorImp10();
+    address[] memory conveyorImpsAds = new address[](10);
     conveyorImpsAds[0] = address(conveyorImp1);
+    conveyorImpsAds[1] = address(conveyorImp2);
+    conveyorImpsAds[2] = address(conveyorImp3);
+    conveyorImpsAds[3] = address(conveyorImp4);
+    conveyorImpsAds[4] = address(conveyorImp5);
+    conveyorImpsAds[5] = address(conveyorImp6);
+    conveyorImpsAds[6] = address(conveyorImp7);
+    conveyorImpsAds[7] = address(conveyorImp8);
+    conveyorImpsAds[8] = address(conveyorImp9);
+    conveyorImpsAds[9] = address(conveyorImp10);
     conveyorTB = new TraitBase(conveyorImpsAds);
   }
 
@@ -967,14 +991,6 @@ contract CliffordTest is Test {
       vm.writeFile(string.concat("outputMetadata/", id, ".json"), item);
     }
     
-  }
-
-  // Used to test Halmos symbolic execution
-  function testHalmos(uint96 price, uint32 quantity) public pure {
-    unchecked {
-      uint128 total = uint120(price) * quantity; // buggy type casting: uint120 vs uint128
-      assert(quantity == 0 || total >= price);
-    }
   }
 
 }

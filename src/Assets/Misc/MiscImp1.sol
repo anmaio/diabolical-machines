@@ -21,6 +21,10 @@ contract MiscImp1 {
 
   string internal constant NO_TRANSFORM = "<g transform='translate(0 0)'>";
 
+  string internal constant TRANSFORM_1_NEGATIVE = "<g transform='translate(-156 -90)'>";
+
+  string internal constant CB_TRANSFORM = "<g transform='translate(27 0)'>";
+
   // transform 0->8
   function getAssetFromID(uint assetID) external pure returns (string memory) {
     if (assetID == 19000) {
@@ -49,6 +53,10 @@ contract MiscImp1 {
       return NEGATIVE_156;
     } else if (assetID == 19012) {
       return NO_TRANSFORM;
+    } else if (assetID == 19013) {
+      return TRANSFORM_1_NEGATIVE;
+    } else if (assetID == 19014) {
+      return CB_TRANSFORM;
     } else {
       return "";
     }
@@ -80,6 +88,10 @@ contract MiscImp1 {
     } else if (assetID == 19011) {
       return 3;
     } else if (assetID == 19012) {
+      return 3;
+    } else if (assetID == 19013) {
+      return 3;
+    } else if (assetID == 19014) {
       return 3;
     } else {
       return 0;
