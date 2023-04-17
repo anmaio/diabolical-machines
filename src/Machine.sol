@@ -38,8 +38,8 @@ contract Machine {
   }
 
   function selectMachine(uint rand) external view returns (string memory) {
-      // // return allMachines[rand % allMachines.length];
-      return allMachines[7];
+      return allMachines[rand % allMachines.length];
+      // return allMachines[7];
       // if (rand % 2 == 0) {
       //   return allMachines[5];
       // } else {

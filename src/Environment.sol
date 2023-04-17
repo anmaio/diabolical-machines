@@ -213,8 +213,6 @@ library Environment {
   }
 
   function getBasicEmbelishedShell(uint[] memory colourArray, string memory machine, uint baseValue) internal pure returns (uint[] memory) {
-    // uint NumColoursDigits = GridHelper.bytesToUint(GridHelper.slice(GridHelper.uintToBytes(rand), 2, 8));
-    // uint numColours = (NumColoursDigits % 3) + ((state-1) * 3) + 1; // basic = 1, 2, 3; embellished = 4, 5, 6
 
     uint index = getColourIndex(baseValue);
 
@@ -234,34 +232,11 @@ library Environment {
     uint[] memory coloursAvailable = GridHelper.setUintArrayFromString(colourAvailableStrings[0], numColours*3, 3);
     uint[] memory coloursAvailableShade = GridHelper.setUintArrayFromString(colourAvailableStrings[1], numColours*3, 3);
 
-    // uint[] memory baseColoursUsed = new uint[](numColours*3);
-    // uint[] memory baseColoursUsedShade = new uint[](numColours*3);
-
-    // // Select all colours that will be used
-    // for (uint i = 0; i < numColours; ++i) {
-
-    //   uint index = (NumColoursDigits % (numColours - i)) * 3;
-
-    //   for (uint j = 0; j < 3; j++) { // j = h, s, l
-    //     baseColoursUsed[i*3+j] = coloursAvailable[index];
-    //     // coloursAvailable = GridHelper.shiftToEndUintArray(index, coloursAvailable);
-    //     baseColoursUsedShade[i*3+j] = coloursAvailableShade[index];
-    //     // coloursAvailableShade = GridHelper.shiftToEndUintArray(index, coloursAvailableShade);
-    //   }
-
-    //   NumColoursDigits = NumColoursDigits / numColours;
-    // }
-
     for (uint i = 0; i < 6; ++i) {
       for (uint j = 0; j < 3; ++j) { // j = h, s, l
         // Duplicate colours for linear gradient
         colourArray[2*i*3+j] = coloursAvailable[3*(i % numColours) + j];
         colourArray[(2*i+1)*3+j] = coloursAvailableShade[3*(i % numColours) + j];
-        // if (j == 0) {
-        //   uint value = 315;
-        //   colourArray[2*i*3+j] = value;
-        //   colourArray[(2*i+1)*3+j] = value;
-        // }
       }
     }
 

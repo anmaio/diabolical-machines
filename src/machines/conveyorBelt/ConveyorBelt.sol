@@ -27,7 +27,7 @@ contract ConveyorBelt {
 
   string internal constant SAW_C_OFFSETS = "120431204412045";
 
-  string internal constant HATCH_DECORATION_NUMBERS = "1204612047";
+  string internal constant HATCH_DECORATION_NUMBERS = "000001204712046";
 
   string internal constant SHELF_ITEM_NUMBERS = "0600106003";
 
@@ -50,6 +50,8 @@ contract ConveyorBelt {
   string internal constant FEEDBACK_NUMBERS = "000000400004001040020400309000";
 
   uint internal constant TRANSFORM_1_NEGATIVE = 19013;
+
+  uint internal constant FLIP_WRAPPER_NUMBER = 19010;
 
   uint internal constant GROUP_CLOSE_NUMBER = 19000;
 
@@ -154,47 +156,53 @@ contract ConveyorBelt {
   function getHatchDecoration(uint rand, int baseline) internal pure returns (uint) {
     uint hatchDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 27)] + baseline);
 
-    return GridHelper.getSingleObject(HATCH_DECORATION_NUMBERS, hatchDigits, 2);
+    if (getHatch(rand, baseline) == HATCH_C) {
+      return 0;
+    } else {
+      return GridHelper.getSingleObject(HATCH_DECORATION_NUMBERS, hatchDigits, 3);
+    }
   }
 
-  function getShelfItem(uint rand, int baseline) internal pure returns (uint[2] memory) {
+  function getShelfItem(uint rand, int baseline) internal pure returns (uint[3] memory) {
     uint shelfDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 28)] + baseline);
+
+    if (shelfDigits % 5 != 0) {
+      return [uint(0), 0, 0];
+    }
 
     uint[] memory shelfNumbersArray = GridHelper.setUintArrayFromString(SHELF_ITEM_NUMBERS, 2, 5);
 
     uint[] memory shelfProbabilitiesArray = GridHelper.createEqualProbabilityArray(4);
 
     if (shelfDigits < shelfProbabilitiesArray[0]) {
-      return [uint(0), 0];
+      return [SHELF_NUMBER, 0, 0];
     } else if (shelfDigits < shelfProbabilitiesArray[1]) {
-      return [shelfNumbersArray[0], 0];
+      return [SHELF_NUMBER, shelfNumbersArray[0], 0];
     } else if (shelfDigits < shelfProbabilitiesArray[2]) {
-      return [shelfNumbersArray[1], 0];
+      return [SHELF_NUMBER, shelfNumbersArray[1], 0];
     } else {
-      return [shelfNumbersArray[0], shelfNumbersArray[1]];
+      return [SHELF_NUMBER, shelfNumbersArray[0], shelfNumbersArray[1]];
     }
   }
 
   function getEyes(uint rand, int baseline) internal pure returns (uint) {
     uint eyesDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 29)] + baseline);
 
-    return GridHelper.getSingleObject(EYES_NUMBERS, eyesDigits, 5);
-  }
-
-  function getWideEyes(uint rand, int baseline) internal pure returns (uint) {
-    uint wideEyesDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 20)] + baseline);
-
-    if (rand % 2 != 0) {
-      return WIDE_EYES_NUMBER;
-    } else {
+    if (eyesDigits % 2 == 0) {
       return 0;
+    } else {
+      return GridHelper.getSingleObject(EYES_NUMBERS, eyesDigits, 5);
     }
   }
 
   function getFeedback(uint rand, int baseline) internal pure returns (uint) {
-    uint feedbackDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 30)] + baseline);
+    uint feedbackDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 29)] + baseline);
 
-    return GridHelper.getSingleObject(FEEDBACK_NUMBERS, feedbackDigits, 6);
+    if (feedbackDigits % 2 != 0) {
+      return 0;
+    } else {
+      return GridHelper.getSingleObject(FEEDBACK_NUMBERS, feedbackDigits, 6);
+    }
   }
 
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
@@ -226,7 +234,7 @@ contract ConveyorBelt {
 
     for (uint i = 0; i < 2; ++i) {
 
-      if (i == 0 && rand % 2 == 0) {
+      if (i == 0 && rand % 2 != 0) {
         numbersUsed[count] = TRANSFORM_1_NEGATIVE;
         count++;
       } else {
@@ -270,7 +278,7 @@ contract ConveyorBelt {
       numbersUsed[count] = getEyes(rand, baseline);
       count++;
 
-      if (i == 0 && rand % 2 == 0) {
+      if (i == 0 && rand % 2 != 0) {
         numbersUsed[count] = GROUP_CLOSE_NUMBER;
         count++;
       }
@@ -280,17 +288,12 @@ contract ConveyorBelt {
     count++;
 
     // get the wide eyes number
-    numbersUsed[count] = getWideEyes(rand, baseline);
-    count++;
+    if (rand % 4 == 0) {
+      numbersUsed[count] = WIDE_EYES_NUMBER;
+      count++;
+    }
 
-    // get the shelf number
-    numbersUsed[count] = SHELF_NUMBER;
-    offsetsUsed[count] = "-0200046";
-    count++;
-
-    // TEST
-
-    numbersUsed[count] = 19010;
+    numbersUsed[count] = FLIP_WRAPPER_NUMBER;
     count++;
 
     // get the feedback number
@@ -302,8 +305,9 @@ contract ConveyorBelt {
     count++;
 
     // get the shelf item numbers
-    uint[2] memory shelfItemNumbers = getShelfItem(rand, baseline);
-    for (uint i = 0; i < 2; ++i) {
+    offsetsUsed[count] = "-0200046"; // shelf offset
+    uint[3] memory shelfItemNumbers = getShelfItem(rand, baseline);
+    for (uint i = 0; i < 3; ++i) {
       numbersUsed[count] = shelfItemNumbers[i];
       count++;
     }

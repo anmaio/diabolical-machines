@@ -22,6 +22,34 @@ contract EnvironmentTest is Test{
 
     uint result = Environment.decreaseValueByPercentage(baseLightness, percentage);
 
+    // result is a uint so it can't be negative
     assertLt(result, 101);
+  }
+
+
+  function testGetColours(uint baseValue) public {
+    vm.assume(baseValue <= 255);
+
+    uint[] memory result = Environment.getColours("Altar", baseValue);
+
+    assertEq(result.length, 36);
+
+    // every 1st element is a hue, every 2nd element is a saturation, every 3rd element is a lightness
+    // hue is a uint between 0 and 360, saturation and lightness are uints between 0 and 100
+    for (uint i = 0; i < result.length; i++) {
+      if (i % 3 == 0) {
+        assertLt(result[i], 361);
+      } else {
+        assertLt(result[i], 101);
+      }
+    }
+  }
+
+  function testGetColourIndex(uint baseValue) public {
+    vm.assume(baseValue <= 255);
+
+    uint result = Environment.getColourIndex(baseValue);
+
+    assertLt(result, 24);
   }
 }
