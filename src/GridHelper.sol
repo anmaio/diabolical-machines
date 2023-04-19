@@ -141,12 +141,12 @@ library GridHelper {
     return probabilities;
   }
 
-  function getSingleObject(string memory objectNumbers, uint channelValue, uint numOfValues) internal pure returns (uint) {
+  function getSingleObject(string memory objectNumbers, uint channelValue, uint numOfValues, uint valueLength) internal pure returns (uint) {
     
     // create probability array assuming all objects have equal probability
     uint[] memory probabilities = createEqualProbabilityArray(numOfValues);
 
-    uint[] memory objectNumbersArray = setUintArrayFromString(objectNumbers, numOfValues, 5);
+    uint[] memory objectNumbersArray = setUintArrayFromString(objectNumbers, numOfValues, valueLength);
 
     uint oneLess = numOfValues - 1;
 

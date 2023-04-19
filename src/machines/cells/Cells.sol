@@ -33,7 +33,7 @@ contract Cells {
   string internal constant WALL_OFFSETS = "0000018000000360000005400156009003120000";
   uint internal constant NUMBER_OF_WALL_POSITIONS = 5;
 
-  uint internal constant ALL_CELL_WRAPPER_NUMBER = 19011;
+  uint internal constant ALL_CELL_WRAPPER_NUMBER = 13011;
 
   uint internal constant CELL_HOLE_NUMBER = 9038;
 
@@ -45,9 +45,9 @@ contract Cells {
 
   uint internal constant SHADOW_NUMBER = 9033;
 
-  uint internal constant FLIP_NUMBER = 19010;
+  uint internal constant FLIP_NUMBER = 13010;
 
-  uint internal constant GROUP_CLOSE_NUMBER = 19000;
+  uint internal constant GROUP_CLOSE_NUMBER = 13000;
 
   constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
@@ -64,7 +64,7 @@ contract Cells {
       return 0;
     }
 
-    return GridHelper.getSingleObject(SHELF_CUSHION_NUMBERS, shelfCushionDigits, 3);
+    return GridHelper.getSingleObject(SHELF_CUSHION_NUMBERS, shelfCushionDigits, 3, 5);
   }
 
   function getCell(uint rand, int baseline, uint version) internal pure returns (uint) {
@@ -76,7 +76,7 @@ contract Cells {
       return 0;
     }
 
-    return GridHelper.getSingleObject(CELL_NUMBERS, cellDigits, 7);
+    return GridHelper.getSingleObject(CELL_NUMBERS, cellDigits, 7, 5);
   }
 
   function getShadow(uint rand, int baseline) internal pure returns (uint) {
@@ -146,7 +146,7 @@ contract Cells {
   function getFeedback(uint rand, int baseline) internal pure returns (uint) {
     uint feedbackDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 27)] + baseline);
 
-    return GridHelper.getSingleObject(FEEDBACK_NUMBERS, feedbackDigits, 7);
+    return GridHelper.getSingleObject(FEEDBACK_NUMBERS, feedbackDigits, 7, 5);
   }
 
   function getPositionOfCells(uint rand, int baseline) internal pure returns (uint[] memory) {
@@ -214,7 +214,7 @@ contract Cells {
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
     uint characterPositionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 23)] + baseline);
 
-    if (characterNumber == 20000 || characterNumber == 20004 || characterNumber == 20002) {
+    if (characterNumber == 14000 || characterNumber == 14004 || characterNumber == 14002) {
       string memory characterOffset = string(GridHelper.slice(bytes(POSSIBLE_CHARACTER_POSITIONS), 8*(characterPositionDigits % 3), 8));
       return characterOffset;
     } else {

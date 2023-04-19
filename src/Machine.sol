@@ -15,12 +15,13 @@ contract Machine {
 
   AssetRetriever internal immutable _assetRetriever;
 
-  string[] public allMachines = ["Altar", "Drills", "Noses", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
+  // string[] public allMachines = ["Altar", "Drills", "Noses", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
+  string[] public allMachines = ["Altar", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
 
   mapping(string => string) public machineToProductivityTiers;
   mapping(string => address) public machineToWorkstation;
 
-  constructor(address[8] memory workstations, AssetRetriever assetRetriever) {
+  constructor(address[6] memory workstations, AssetRetriever assetRetriever) {
     _assetRetriever = assetRetriever;
 
     for (uint i = 0; i < allMachines.length; ++i) {
@@ -28,8 +29,8 @@ contract Machine {
     }
 
     machineToProductivityTiers["Altar"] = "020040060070080090";
-    machineToProductivityTiers["Drills"] = "020040060070080090";
-    machineToProductivityTiers["Noses"] = "020040060070080090";
+    // machineToProductivityTiers["Drills"] = "020040060070080090";
+    // machineToProductivityTiers["Noses"] = "020040060070080090";
     machineToProductivityTiers["Apparatus"] = "020040060070080090";
     machineToProductivityTiers["Cells"] = "020040060070080090";
     machineToProductivityTiers["Tubes"] = "020040060070080090";

@@ -8,7 +8,7 @@ contract CharacterImp2 {
   
 
   function getAssetFromID(uint assetID) external pure returns (string memory) {
-    if (assetID == 20001) {
+    if (assetID == 14001) {
       return CHAR_STANDING;
     } else {
       return "";
@@ -16,7 +16,7 @@ contract CharacterImp2 {
   }
 
   function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 20001) {
+    if (assetID == 14001) {
       return 3;
     } else {
       return 0;

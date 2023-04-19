@@ -19,7 +19,7 @@ contract Noses {
   string internal constant WALL_OFFSETS = "0000018001560090015602700312000003120180";
   uint internal constant NUMBER_OF_WALL_POSITIONS = 5;
 
-  string internal constant NOSE_NUMBERS = "160021600316001";
+  string internal constant NOSE_NUMBERS = "180021800318001";
 
   // c-gauge-a
   // c-feedback-c
@@ -40,18 +40,18 @@ contract Noses {
   // C-HOLE-FX-C
   // C-HOLE-FX-D
 
-  string internal constant HOLE_NUMBERS = "000000801116004160051600616007";
+  string internal constant HOLE_NUMBERS = "000000801118004180051800618007";
 
-  string internal constant HOLE_TRANSFORM_NUMBERS = "190011900219003190041900519006";
+  string internal constant HOLE_TRANSFORM_NUMBERS = "130011300213003130041300513006";
 
-  uint internal constant PANEL_NUMBER = 16000;
+  uint internal constant PANEL_NUMBER = 18000;
 
-  uint internal constant FLIP_WRAPPER_NUMBER = 19010;
+  uint internal constant FLIP_WRAPPER_NUMBER = 13010;
 
-  uint internal constant ALL_NOSES_WRAPPER_NUMBER = 16012;
-  uint internal constant JUST_NOSES_WRAPPER_NUMBER = 16013;
+  uint internal constant ALL_NOSES_WRAPPER_NUMBER = 18012;
+  uint internal constant JUST_NOSES_WRAPPER_NUMBER = 18013;
 
-  uint internal constant GROUP_CLOSE_NUMBER = 19000;
+  uint internal constant GROUP_CLOSE_NUMBER = 13000;
 
   constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
@@ -60,13 +60,13 @@ contract Noses {
   function getNoseNumbers(uint rand, int baseline) internal pure returns (uint) {
     uint noseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
 
-    return GridHelper.getSingleObject(NOSE_NUMBERS, noseDigits, 3);
+    return GridHelper.getSingleObject(NOSE_NUMBERS, noseDigits, 3, 5);
   }
 
   function getGaugeNumber(uint rand, int baseline) internal pure returns (uint) {
     uint gaugeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14)] + baseline);
 
-    return GridHelper.getSingleObject(GAUGE_NUMBERS, gaugeDigits, 5);
+    return GridHelper.getSingleObject(GAUGE_NUMBERS, gaugeDigits, 5, 5);
   }
 
   function getMidEyesNumber(uint rand, int baseline) internal pure returns (uint) {
@@ -75,23 +75,23 @@ contract Noses {
     uint noseNumber = getNoseNumbers(rand, baseline);
 
     // this nose does not work with midEyesNumbersArray[0]
-    if (noseNumber == 16001) {
+    if (noseNumber == 18001) {
       return 0;
     }
 
-    return GridHelper.getSingleObject(MID_EYE_NUMBERS, midEyesDigits, 3);
+    return GridHelper.getSingleObject(MID_EYE_NUMBERS, midEyesDigits, 3, 5);
   }
 
   function getTopEyesNumber(uint rand, int baseline) internal pure returns (uint) {
     uint topEyesDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
 
-    return GridHelper.getSingleObject(TOP_EYE_NUMBERS, topEyesDigits, 3);
+    return GridHelper.getSingleObject(TOP_EYE_NUMBERS, topEyesDigits, 3, 5);
   }
 
   function getHoleNumbers(uint rand, uint version, int baseline) internal pure returns (uint, string memory, uint count) {
     uint holeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 24+version)] + baseline);
 
-    uint holeNumber = GridHelper.getSingleObject(HOLE_NUMBERS, holeDigits, 6);
+    uint holeNumber = GridHelper.getSingleObject(HOLE_NUMBERS, holeDigits, 6, 5);
 
     // Only relevant if hole is not none
     uint numOfHoles = holeDigits % 5 + 1;
@@ -112,7 +112,7 @@ contract Noses {
 
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
 
-    if ((characterNumber == 20000 || characterNumber == 20002 || characterNumber == 20004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
+    if ((characterNumber == 14000 || characterNumber == 14002 || characterNumber == 14004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
       return "01560270";
     } else {
       return "03120180";
@@ -225,4 +225,8 @@ contract Noses {
 
     return output;
   }
+
+  // add this to be excluded from coverage report
+  // Not used in release 1 so should be excluded from coverage report
+  function test() public {}
 }

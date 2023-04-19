@@ -12,15 +12,15 @@ contract NosesImp1 {
 
 
   function getAssetFromID(uint assetID) external pure returns (string memory) {
-    if (assetID == 16000) {
+    if (assetID == 18000) {
       return C_PANEL;
-    } else if (assetID == 16001) {
+    } else if (assetID == 18001) {
       return C_NOSE_C;
-    } else if (assetID == 16002) {
+    } else if (assetID == 18002) {
       return C_NOSE_A;
-    } else if (assetID == 16003) {
+    } else if (assetID == 18003) {
       return C_NOSE_B;
-    } else if (assetID == 16004) {
+    } else if (assetID == 18004) {
       return C_HOLE_FX_A;
     } else {
       return "";
@@ -28,18 +28,22 @@ contract NosesImp1 {
   }
 
   function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 16000) {
+    if (assetID == 18000) {
       return 3;
-    } else if (assetID == 16001) {
+    } else if (assetID == 18001) {
       return 1;
-    } else if (assetID == 16002) {
+    } else if (assetID == 18002) {
       return 3;
-    } else if (assetID == 16003) {
+    } else if (assetID == 18003) {
       return 5;
-    } else if (assetID == 16004) {
+    } else if (assetID == 18004) {
       return 3;
     } else {
       return 0;
     }
   }
+
+  // add this to be excluded from coverage report
+  // Not used in release 1 so should be excluded from coverage report
+  function test() public {}
 }

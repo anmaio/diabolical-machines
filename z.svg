@@ -1,3 +1,7 @@
-string internal constant C_BASE_D = "<g id='ap-u-c-base-d'><path id='ap-s-path144' fill='url(#c1l)' stroke='#000000' d='M468.3 540.35v179.96l155.89 89.99V630.32L468.3 540.36Z'/><path id='ap-s-polygon36' fill='url(#ap-s-polygon36-fill)' stroke='#000000' d='m468.3 540.35 155.89-90 155.86 89.98-155.86 90-155.89-89.98z'/><path id='ap-s-path145' fill='url(#ap-s-path145-fill)' stroke='#000000' d='M624.17 630.33v179.98l155.89-89.99V540.36l-155.89 89.96Z'/><path id='ap-s-line9' fill='none' stroke='#ffffff' stroke-width='3' d='M471.7 546.01v168.61'/></g>";
-  string internal constant C_BASE_F = "<g id='ap-u-c-base-f'><path id='ap-s-path146' fill='url(#ap-s-path146-fill)' stroke='#000000' d='m623.9 611.8.27 198.51 155.89-89.99-32.18-179.75L623.9 611.8Z'/><path id='ap-s-path147' fill='url(#c1l)' stroke='#000000' d='M500.51 540.57 468.3 720.3l155.89 89.99-.29-198.51-123.39-71.21Z'/><path id='ap-s-polygon37' fill='url(#ap-s-polygon37-fill)' stroke='#000000' d='m500.31 540.35 123.88-71.52 123.86 71.5L623.9 611.8l-123.59-71.45z'/></g>";
-  string internal constant C_BASE_G = "<g id='ap-u-c-base-g'><g id='ap-u-m-altar-b'><path id='ap-s-path148' fill='url(#ap-s-path148-fill)' stroke='#000000' d='m624.17 630.33-.32 153.54 110.16-63.63 46.05-179.88-155.89 89.96Z'/><path id='ap-s-path149' fill='url(#c1b)' stroke='#000000' d='m468.3 540.35 45.95 180.07 109.62 63.43.32-153.54-155.89-89.96Z'/><path id='ap-s-polygon38' fill='url(#ap-s-polygon36-fill)' stroke='#000000' d='m468.3 540.35 155.89-90 155.86 89.98-155.86 90-155.89-89.98z'/></g></g>";
+<g id='floorPat' transform='translate(234 135) rotate(60)' transform-origin='0 540'><g transform='skewY(-30)' transform-origin='0 0'><rect id='floorPatRect' x='0' y='270' width='468' height='540' opacity='
+1
+' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g></g><g id='rightWallPat' transform='skewY(30)'><rect x='468' y='-270' width='468' height='540' opacity='
+1
+' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g><g id='leftWallPat' transform='skewY(-30)'><rect x='0' y='270' width='468' height='540' opacity='
+1
+' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g>

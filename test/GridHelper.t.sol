@@ -179,7 +179,7 @@ contract GridHelperTest is Test{
   function testGetSingleObject() public {
     string memory testString = "000010000200003001230045600789";
 
-    uint result = GridHelper.getSingleObject(testString, 150, 6);
+    uint result = GridHelper.getSingleObject(testString, 150, 6, 5);
 
     assertEq(result, 123);
   }

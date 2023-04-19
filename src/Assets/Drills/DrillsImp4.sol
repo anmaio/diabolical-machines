@@ -33,51 +33,51 @@ contract DrillsImp4 {
   string internal constant DRL_U_C_TUBE_FULL_HEIGHT = "<g id='drl-u-c-tube-full-height'> <path id='drl-s-path58' fill='url(#drl-s-path163-fill)' stroke='#000' stroke-miterlimit='10' stroke-width='1.01' d='M487.42 724.79c0 5.53-8.55 10-19.09 10s-19.09-4.48-19.09-10V279.34c0-5.53 8.55-10 19.09-10s19.09 4.48 19.09 10v445.45Z'/> <path id='drl-s-line2' fill='none' stroke='#fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M456.74 277.63v449.64'/> </g>";
 
   function getAssetFromID(uint assetID) external pure returns (string memory) {
-    if (assetID == 13019) {
+    if (assetID == 15019) {
       return HOLE_WRAPPER_1;
-    } else if (assetID == 13020) {
+    } else if (assetID == 15020) {
       return HOLE_WRAPPER_2;
-    } else if (assetID == 13021) {
+    } else if (assetID == 15021) {
       return HOLE_WRAPPER_3;
-    } else if (assetID == 13022) {
+    } else if (assetID == 15022) {
       return HOLE_WRAPPER_4;
-    } else if (assetID == 13023) {
+    } else if (assetID == 15023) {
       return HOLE_WRAPPER_5;
-    } else if (assetID == 13024) {
+    } else if (assetID == 15024) {
       return HOLE_WRAPPER_6;
-    } else if (assetID == 13025) {
+    } else if (assetID == 15025) {
       return WRINKLE_WRAPPER_1;
-    } else if (assetID == 13026) {
+    } else if (assetID == 15026) {
       return WRINKLE_WRAPPER_2;
-    } else if (assetID == 13027) {
+    } else if (assetID == 15027) {
       return WRINKLE_WRAPPER_3;
-    } else if (assetID == 13028) {
+    } else if (assetID == 15028) {
       return WRINKLE_WRAPPER_4;
-    } else if (assetID == 13029) {
+    } else if (assetID == 15029) {
       return WRINKLE_WRAPPER_5;
-    } else if (assetID == 13030) {
+    } else if (assetID == 15030) {
       return WRINKLE_WRAPPER_6;
-    } else if (assetID == 13031) {
+    } else if (assetID == 15031) {
       return HOLE_AND_WRINKLE_WRAPPER;
-    } else if (assetID == 13032) {
+    } else if (assetID == 15032) {
       return ALL_DRILL_WRAPPER;
-    } else if (assetID == 13033) {
+    } else if (assetID == 15033) {
       return DRILL_MASK_WRAPPER;
-    } else if (assetID == 13034) {
+    } else if (assetID == 15034) {
       return DRILL_MASK;
-    } else if (assetID == 13035) {
+    } else if (assetID == 15035) {
       return DRILL_PARTS_WRAPPER_1;
-    } else if (assetID == 13036) {
+    } else if (assetID == 15036) {
       return DRILL_PARTS_WRAPPER_2;
-    } else if (assetID == 13037) {
+    } else if (assetID == 15037) {
       return DRILL_PARTS_WRAPPER_3;
-    } else if (assetID == 13038) {
+    } else if (assetID == 15038) {
       return DRILL_PARTS_WRAPPER_4;
-    } else if (assetID == 13039) {
+    } else if (assetID == 15039) {
       return DRILL_PARTS_WRAPPER_5;
-    } else if (assetID == 13040) {
+    } else if (assetID == 15040) {
       return DRILL_PARTS_WRAPPER_6;
-    } else if (assetID == 13041) {
+    } else if (assetID == 15041) {
       return DRL_U_C_TUBE_FULL_HEIGHT;
     } else {
       return "";
@@ -85,62 +85,66 @@ contract DrillsImp4 {
   }
 
   function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 13015) {
+    if (assetID == 15015) {
       return 1;
-    } else if (assetID == 13016) {
+    } else if (assetID == 15016) {
       return 3;
-    } else if (assetID == 13017) {
+    } else if (assetID == 15017) {
       return 3;
-    } else if (assetID == 13018) {
+    } else if (assetID == 15018) {
       return 3;
-    } else if (assetID == 13019) {
+    } else if (assetID == 15019) {
       return 3;
-    } else if (assetID == 13020) {
+    } else if (assetID == 15020) {
       return 3;
-    } else if (assetID == 13021) {
+    } else if (assetID == 15021) {
       return 3;
-    } else if (assetID == 13022) {
+    } else if (assetID == 15022) {
       return 3;
-    } else if (assetID == 13023) {
+    } else if (assetID == 15023) {
       return 3;
-    } else if (assetID == 13024) {
+    } else if (assetID == 15024) {
       return 3;
-    } else if (assetID == 13025) {
+    } else if (assetID == 15025) {
       return 3;
-    } else if (assetID == 13026) {
+    } else if (assetID == 15026) {
       return 3;
-    } else if (assetID == 13027) {
+    } else if (assetID == 15027) {
       return 3;
-    } else if (assetID == 13028) {
+    } else if (assetID == 15028) {
       return 3;
-    } else if (assetID == 13029) {
+    } else if (assetID == 15029) {
       return 3;
-    } else if (assetID == 13030) {
+    } else if (assetID == 15030) {
       return 3;
-    } else if (assetID == 13031) {
+    } else if (assetID == 15031) {
       return 3;
-    } else if (assetID == 13032) {
+    } else if (assetID == 15032) {
       return 3;
-    } else if (assetID == 13033) {
+    } else if (assetID == 15033) {
       return 3;
-    } else if (assetID == 13034) {
+    } else if (assetID == 15034) {
       return 3;
-    } else if (assetID == 13035) {
+    } else if (assetID == 15035) {
       return 3;
-    } else if (assetID == 13036) {
+    } else if (assetID == 15036) {
       return 3;
-    } else if (assetID == 13037) {
+    } else if (assetID == 15037) {
       return 3;
-    } else if (assetID == 13038) {
+    } else if (assetID == 15038) {
       return 3;
-    } else if (assetID == 13039) {
+    } else if (assetID == 15039) {
       return 3;
-    } else if (assetID == 13040) {
+    } else if (assetID == 15040) {
       return 3;
-    } else if (assetID == 13041) {
+    } else if (assetID == 15041) {
       return 3;
     } else {
       return 0;
     }
   }
+
+  // add this to be excluded from coverage report
+  // Not used in release 1 so should be excluded from coverage report
+  function test() public {}
 }

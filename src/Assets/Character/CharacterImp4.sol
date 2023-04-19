@@ -7,7 +7,7 @@ contract CharacterImp4 {
 
   
   function getAssetFromID(uint assetID) external pure returns (string memory) {
-    if (assetID == 20004) {
+    if (assetID == 14004) {
       return CHAR_MEDITATING;
     } else {
       return "";
@@ -15,7 +15,7 @@ contract CharacterImp4 {
   }
 
   function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 20004) {
+    if (assetID == 14004) {
       return 5;
     } else {
       return 0;

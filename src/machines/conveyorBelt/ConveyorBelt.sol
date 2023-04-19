@@ -31,7 +31,7 @@ contract ConveyorBelt {
 
   string internal constant SHELF_ITEM_NUMBERS = "0600106003";
 
-  uint internal constant CB_OFFSETS = 19014;
+  uint internal constant CB_OFFSETS = 13014;
 
   uint internal constant WALL_PIPES = 12036;
 
@@ -49,11 +49,11 @@ contract ConveyorBelt {
 
   string internal constant FEEDBACK_NUMBERS = "000000400004001040020400309000";
 
-  uint internal constant TRANSFORM_1_NEGATIVE = 19013;
+  uint internal constant TRANSFORM_1_NEGATIVE = 13013;
 
-  uint internal constant FLIP_WRAPPER_NUMBER = 19010;
+  uint internal constant FLIP_WRAPPER_NUMBER = 13010;
 
-  uint internal constant GROUP_CLOSE_NUMBER = 19000;
+  uint internal constant GROUP_CLOSE_NUMBER = 13000;
 
   // Floor
   string internal constant FLOOR_OFFSETS = "0312036004680270";
@@ -147,9 +147,9 @@ contract ConveyorBelt {
     uint sawDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 26)] + baseline);
 
     if (getHatch(rand, baseline) == HATCH_A) {
-      return GridHelper.getSingleObject(SAW_A_OFFSETS, sawDigits, 3);
+      return GridHelper.getSingleObject(SAW_A_OFFSETS, sawDigits, 3, 5);
     } else {
-      return GridHelper.getSingleObject(SAW_C_OFFSETS, sawDigits, 3);
+      return GridHelper.getSingleObject(SAW_C_OFFSETS, sawDigits, 3, 5);
     }
   }
 
@@ -159,7 +159,7 @@ contract ConveyorBelt {
     if (getHatch(rand, baseline) == HATCH_C) {
       return 0;
     } else {
-      return GridHelper.getSingleObject(HATCH_DECORATION_NUMBERS, hatchDigits, 3);
+      return GridHelper.getSingleObject(HATCH_DECORATION_NUMBERS, hatchDigits, 3, 5);
     }
   }
 
@@ -191,7 +191,7 @@ contract ConveyorBelt {
     if (eyesDigits % 2 == 0) {
       return 0;
     } else {
-      return GridHelper.getSingleObject(EYES_NUMBERS, eyesDigits, 5);
+      return GridHelper.getSingleObject(EYES_NUMBERS, eyesDigits, 5, 5);
     }
   }
 
@@ -201,13 +201,13 @@ contract ConveyorBelt {
     if (feedbackDigits % 2 != 0) {
       return 0;
     } else {
-      return GridHelper.getSingleObject(FEEDBACK_NUMBERS, feedbackDigits, 6);
+      return GridHelper.getSingleObject(FEEDBACK_NUMBERS, feedbackDigits, 6, 5);
     }
   }
 
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
 
-    if ((characterNumber == 20000 || characterNumber == 20002 || characterNumber == 20004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
+    if ((characterNumber == 14000 || characterNumber == 14002 || characterNumber == 14004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
       return "01560270";
     } else {
       return "03120180";

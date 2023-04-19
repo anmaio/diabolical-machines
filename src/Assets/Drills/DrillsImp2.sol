@@ -10,13 +10,13 @@ contract DrillsImp2 {
   
 
   function getAssetFromID(uint assetID) external pure returns (string memory) {
-    if (assetID == 13011) {
+    if (assetID == 15011) {
       return C_BIT_E;
-    } else if (assetID == 13012) {
+    } else if (assetID == 15012) {
       return C_BIT_F;
-    } else if (assetID == 13013) {
+    } else if (assetID == 15013) {
       return C_BIT_G;
-    } else if (assetID == 13014) {
+    } else if (assetID == 15014) {
       return C_TUBE_ROCK;
     } else {
       return "";
@@ -24,16 +24,20 @@ contract DrillsImp2 {
   }
 
   function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 13011) {
+    if (assetID == 15011) {
       return 1;
-    } else if (assetID == 13012) {
+    } else if (assetID == 15012) {
       return 1;
-    } else if (assetID == 13013) {
+    } else if (assetID == 15013) {
       return 1;
-    } else if (assetID == 13014) {
+    } else if (assetID == 15014) {
       return 1;
     } else {
       return 0;
     }
   }
+
+  // add this to be excluded from coverage report
+  // Not used in release 1 so should be excluded from coverage report
+  function test() public {}
 }

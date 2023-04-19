@@ -58,11 +58,11 @@ contract Apparatus {
     if (rightCubeNumber == 0) {
       numbersUsed[0] = subjectWrapperNumbersArray[0];
       numbersUsed[1] = subjectWrapperNumbersArray[1];
-      numbersUsed[2] = GridHelper.getSingleObject(SUBJECT_NUMBERS, subjectDigits, 5);
+      numbersUsed[2] = GridHelper.getSingleObject(SUBJECT_NUMBERS, subjectDigits, 5, 5);
       numbersUsed[3] = subjectWrapperNumbersArray[2];
     } else {
       numbersUsed[0] = subjectWrapperNumbersArray[3];
-      numbersUsed[1] = GridHelper.getSingleObject(SUBJECT_NUMBERS, subjectDigits, 5);
+      numbersUsed[1] = GridHelper.getSingleObject(SUBJECT_NUMBERS, subjectDigits, 5, 5);
       numbersUsed[2] = subjectWrapperNumbersArray[4];
       numbersUsed[3] = 0;
     }
@@ -73,13 +73,13 @@ contract Apparatus {
   function getRightBase(uint rand, int baseline) internal pure returns (uint) {
     uint rightBaseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 13)] + baseline);
 
-    return GridHelper.getSingleObject(RIGHT_BASE_NUMBERS, rightBaseDigits, 3);
+    return GridHelper.getSingleObject(RIGHT_BASE_NUMBERS, rightBaseDigits, 3, 5);
   }
 
   function getMidBase(uint rand, int baseline) internal pure returns (uint) {
     uint midBaseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14)] + baseline);
 
-    return GridHelper.getSingleObject(MID_BASE_NUMBERS, midBaseDigits, 4);
+    return GridHelper.getSingleObject(MID_BASE_NUMBERS, midBaseDigits, 4, 5);
   }
 
   function getLeftBase(uint rand, int baseline) internal pure returns (uint[2] memory) {
@@ -194,7 +194,7 @@ contract Apparatus {
       return 0;
     }
 
-    return GridHelper.getSingleObject(LEFT_TOP_OBJECT_NUMBERS, leftTopDigits, 6);
+    return GridHelper.getSingleObject(LEFT_TOP_OBJECT_NUMBERS, leftTopDigits, 6, 5);
   }
 
   function getLeftTopOffset(uint objectNumber) internal pure returns (string memory) {
@@ -214,10 +214,10 @@ contract Apparatus {
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
     uint characterPositionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 23)] + baseline);
 
-    if (characterNumber == 20004 ) {
+    if (characterNumber == 14004 ) {
       string memory characterOffset = string(GridHelper.slice(bytes(POSSIBLE_CHARACTER_POSITIONS), 8*(characterPositionDigits % 4), 8));
       return characterOffset;
-    } else if (characterNumber == 20000 || characterNumber == 20002) {
+    } else if (characterNumber == 14000 || characterNumber == 14002) {
       return "03120180";
     } else {
       return "00000000";
