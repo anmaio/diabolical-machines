@@ -19,13 +19,9 @@ contract Metadata {
   }
 
   function getMachine(uint rand) public view returns (string memory) {
-    // uint randomNumber = GridHelper.bytesToUint(GridHelper.slice(rand, 10, 2));
-    uint randomNumber = uint(GridHelper.getRandByte(rand, 10));
-
-    return _machine.selectMachine(randomNumber);
+    return _machine.selectMachine(rand);
   }
 
-  //["f/altar", "f/props", "l/frame", "r/frame", "r/clock", "s/shell"]
   // Function build metadata for a given token
   function buildMetadata(uint256 tokenId, uint rand) public view returns (string memory) {
     string[3] memory allStates = ["Degraded", "Basic", "Embellished"];
@@ -40,10 +36,6 @@ contract Metadata {
         allStates[state],
         '"}, {"trait_type": "Productivity", "value":"',
         getProductivity(rand, baseline)
-        
-        // _imageURI,
-        // Strings.toString(tokenId),
-        // '.png", "animation_url": "data:image/svg+xml;base64,'
     );
 
     jsonInitial = string.concat(
@@ -140,11 +132,11 @@ contract Metadata {
 
     uint colourValue = getBaseColourValue(rand, baseline);
 
-    string memory opening = _globalSVG.getOpeningSVG(machine, colourValue);
+    string memory opening = _globalSVG.getOpeningSVG(machine, colourValue, rand, baseline);
     
     string memory objects = _machine.machineToGetter(machine, rand, baseline);
     string memory closing = _globalSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
-    return string.concat(opening, _globalSVG.getShell(flip), objects, closing);
+    return string.concat(opening, _globalSVG.getShell(flip, rand, baseline), objects, closing);
   }
 }

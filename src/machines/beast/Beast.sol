@@ -53,13 +53,13 @@ contract Beast {
   function getBaseNumber(uint rand, int baseline) internal pure returns (uint) {
     uint baseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline + 64);
 
-    return GridHelper.getSingleObject(BASE_NUMBERS, baseDigits, 2);
+    return GridHelper.getSingleObject(BASE_NUMBERS, baseDigits, 2, 5);
   }
 
   function getTopPipeNumber(uint rand, int baseline) internal pure returns (uint) {
     uint topPipeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 13)] + baseline);
 
-    return GridHelper.getSingleObject(TOP_PIPE_NUMBERS, topPipeDigits, 4);
+    return GridHelper.getSingleObject(TOP_PIPE_NUMBERS, topPipeDigits, 4, 5);
   }
 
   function getLeftItems(uint rand, int baseline) internal pure returns (uint[] memory) {
@@ -83,9 +83,9 @@ contract Beast {
     numbersUsed[0] = LEFT_BODY;
     numbersUsed[1] = LEFT_PANEL;
 
-    numbersUsed[2] = GridHelper.getSingleObject(LEFT_BODY_EYE_NUMBERS, leftWithBodyDigits1, 3);
+    numbersUsed[2] = GridHelper.getSingleObject(LEFT_BODY_EYE_NUMBERS, leftWithBodyDigits1, 3, 5);
 
-    numbersUsed[3] = GridHelper.getSingleObject(LEFT_BODY_PIPE_NUMBERS, leftWithBodyDigits2, 2);
+    numbersUsed[3] = GridHelper.getSingleObject(LEFT_BODY_PIPE_NUMBERS, leftWithBodyDigits2, 2, 5);
 
     return numbersUsed;
   }
@@ -96,9 +96,9 @@ contract Beast {
 
     uint[] memory numbersUsed = new uint[](2);
 
-    numbersUsed[0] = GridHelper.getSingleObject(LEFT_NO_BODY_NUMBERS, leftNoBodyDigits1, 4);
+    numbersUsed[0] = GridHelper.getSingleObject(LEFT_NO_BODY_NUMBERS, leftNoBodyDigits1, 4, 5);
 
-    numbersUsed[1] = GridHelper.getSingleObject(LEFT_MID_EYE, leftNoBodyDigits2, 2);
+    numbersUsed[1] = GridHelper.getSingleObject(LEFT_MID_EYE, leftNoBodyDigits2, 2, 5);
 
     return numbersUsed;
   }
@@ -107,9 +107,9 @@ contract Beast {
     uint rightDigits1 = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
     uint rightDigits2 = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 17)] + baseline);
 
-    uint gloop = GridHelper.getSingleObject(GLOOP_NUMBERS, rightDigits1, 3);
+    uint gloop = GridHelper.getSingleObject(GLOOP_NUMBERS, rightDigits1, 3, 5);
 
-    uint rightPipe = GridHelper.getSingleObject(RIGHT_PIPE_NUMBERS, rightDigits2, 4);
+    uint rightPipe = GridHelper.getSingleObject(RIGHT_PIPE_NUMBERS, rightDigits2, 4, 5);
 
     return [gloop, rightPipe];
   }
@@ -133,29 +133,29 @@ contract Beast {
   function getTopEyes(uint rand, int baseline) internal pure returns (uint) {
     uint topEyeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 17)] + baseline);
 
-    return GridHelper.getSingleObject(TOP_EYE_NUMBERS, topEyeDigits, 4);
+    return GridHelper.getSingleObject(TOP_EYE_NUMBERS, topEyeDigits, 4, 5);
   }
 
   function getRightEyes(uint rand, int baseline) internal pure returns (uint) {
     uint rightEyeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18)] + baseline);
 
-    return GridHelper.getSingleObject(RIGHT_EYE_NUMBERS, rightEyeDigits, 3);
+    return GridHelper.getSingleObject(RIGHT_EYE_NUMBERS, rightEyeDigits, 3, 5);
   }
 
   function getGauge(uint rand, int baseline) internal pure returns (uint) {
     uint gaugeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 19)] + baseline);
 
-    return GridHelper.getSingleObject(GAUGE_NUMBERS, gaugeDigits, 5);
+    return GridHelper.getSingleObject(GAUGE_NUMBERS, gaugeDigits, 5, 5);
   }
 
   function getFloob(uint rand, int baseline) internal pure returns (uint) {
     uint floobDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 26)] + baseline);
 
-    return GridHelper.getSingleObject(FLOOB_NUMBERS, floobDigits, 5);
+    return GridHelper.getSingleObject(FLOOB_NUMBERS, floobDigits, 5, 5);
   }
 
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
-    if (characterNumber != 20000 && characterNumber != 20004) {
+    if (characterNumber != 14000 && characterNumber != 14004) {
       return "03120180";
     } else {
       string memory globalAssetPossition = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
@@ -253,10 +253,6 @@ contract Beast {
       count++;
     }
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
-    count++;
-
     uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, true, baseline);
     numbersUsed[count] = characterNumbers[0];
     count++;
@@ -273,7 +269,10 @@ contract Beast {
 
     numbersUsed[count] = characterNumbers[4];
     count++;
-    
+
+    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
+    count++;
 
     return (numbersUsed, offsetsUsed);
   }

@@ -15,12 +15,13 @@ contract Machine {
 
   AssetRetriever internal immutable _assetRetriever;
 
-  string[] public allMachines = ["Altar", "Drills", "Noses", "Apparatus", "Cells", "Tubes", "Beast"];
+  // string[] public allMachines = ["Altar", "Drills", "Noses", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
+  string[] public allMachines = ["Altar", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
 
   mapping(string => string) public machineToProductivityTiers;
   mapping(string => address) public machineToWorkstation;
 
-  constructor(address[7] memory workstations, AssetRetriever assetRetriever) {
+  constructor(address[6] memory workstations, AssetRetriever assetRetriever) {
     _assetRetriever = assetRetriever;
 
     for (uint i = 0; i < allMachines.length; ++i) {
@@ -28,17 +29,23 @@ contract Machine {
     }
 
     machineToProductivityTiers["Altar"] = "020040060070080090";
-    machineToProductivityTiers["Drills"] = "020040060070080090";
-    machineToProductivityTiers["Noses"] = "020040060070080090";
+    // machineToProductivityTiers["Drills"] = "020040060070080090";
+    // machineToProductivityTiers["Noses"] = "020040060070080090";
     machineToProductivityTiers["Apparatus"] = "020040060070080090";
     machineToProductivityTiers["Cells"] = "020040060070080090";
     machineToProductivityTiers["Tubes"] = "020040060070080090";
     machineToProductivityTiers["Beast"] = "020040060070080090";
+    machineToProductivityTiers["ConveyorBelt"] = "020040060070080090";
   }
 
   function selectMachine(uint rand) external view returns (string memory) {
-      // return allMachines[rand % allMachines.length];
-      return allMachines[6];
+      return allMachines[rand % allMachines.length];
+      // return allMachines[7];
+      // if (rand % 2 == 0) {
+      //   return allMachines[5];
+      // } else {
+      //   return allMachines[6];
+      // }
   }
 
   function machineToGetter(string memory machine, uint rand, int baseline) external view returns (string memory) {
@@ -58,7 +65,7 @@ contract Machine {
 
     uint productivity = getProductivityValue(machine, rand, baseline);
 
-    // slice ALTAR_COMBINED_PRODUCTIVITY_TIERS into 3 parts and cast to uint array
+    // slice COMBINED_PRODUCTIVITY_TIERS into 3 parts and cast to uint array
     uint[] memory productivityTiers = GridHelper.setUintArrayFromString(string(GridHelper.slice(bytes(machineToProductivityTiers[machine]), 0, 18)), 6, 3);
 
     uint sum = 0;

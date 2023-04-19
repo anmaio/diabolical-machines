@@ -50,7 +50,7 @@ contract Altar {
       return 0;
     }
 
-    return GridHelper.getSingleObject(BASE_NUMBERS, baseDigits, 3);
+    return GridHelper.getSingleObject(BASE_NUMBERS, baseDigits, 3, 5);
   }
 
   function getFrameNumber(uint rand, int baseline) internal pure returns (uint[3] memory) {
@@ -100,19 +100,19 @@ contract Altar {
   function getRugNumber(uint rand, int baseline) internal pure returns (uint) {
     uint rugDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 17)] + baseline);
 
-    return GridHelper.getSingleObject(RUG_NUMBERS, rugDigits, 3);
+    return GridHelper.getSingleObject(RUG_NUMBERS, rugDigits, 3, 5);
   }
 
   function getOrbBaseNumber(uint rand, uint version, int baseline) internal pure returns (uint) {
     uint orbBaseDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14+version)] + baseline);
 
-    return GridHelper.getSingleObject(ORB_BASE_NUMBERS, orbBaseDigits, 7);
+    return GridHelper.getSingleObject(ORB_BASE_NUMBERS, orbBaseDigits, 7, 5);
   }
 
   function getOrbNumber(uint rand, uint version, int baseline) internal pure returns (uint) {
     uint orbDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18+version)] + baseline);
 
-    return GridHelper.getSingleObject(ORB_NUMBERS, orbDigits, 5);
+    return GridHelper.getSingleObject(ORB_NUMBERS, orbDigits, 5, 5);
   }
 
   function getFloobAnimationNumbers(uint rand, int baseline) internal pure returns (uint[] memory) {
@@ -130,14 +130,14 @@ contract Altar {
       numbersUsed[0] = floobAnimationNumbersArray[2];
       numbersUsed[1] = floobAnimationNumbersArray[3];
       numbersUsed[2] = wrapperNumbersArray[2];
-      numbersUsed[3] = GridHelper.getSingleObject(FLOOB_NUMBERS, floobDigits, 11);
+      numbersUsed[3] = GridHelper.getSingleObject(FLOOB_NUMBERS, floobDigits, 11, 5);
       numbersUsed[4] = wrapperNumbersArray[3];
       return numbersUsed;
     } else {
       numbersUsed[0] = floobAnimationNumbersArray[0];
       numbersUsed[1] = floobAnimationNumbersArray[1];
       numbersUsed[2] = wrapperNumbersArray[0];
-      numbersUsed[3] = GridHelper.getSingleObject(FLOOB_NUMBERS, floobDigits, 11);
+      numbersUsed[3] = GridHelper.getSingleObject(FLOOB_NUMBERS, floobDigits, 11, 5);
       numbersUsed[4] = wrapperNumbersArray[1];
       return numbersUsed;
     }
@@ -157,12 +157,12 @@ contract Altar {
     }
 
     else {
-      return GridHelper.getSingleObject(TOP_ROW_NUMBERS, topRowDigits, 4);
+      return GridHelper.getSingleObject(TOP_ROW_NUMBERS, topRowDigits, 4, 5);
     }
   }
 
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
-    if (characterNumber != 20000 && characterNumber != 20004) {
+    if (characterNumber != 14000 && characterNumber != 14004) {
       return "03120180";
     } else {
       uint orbNumber = getOrbNumber(rand, 0, baseline);
@@ -245,7 +245,6 @@ contract Altar {
     numbersUsed[count] = characterNumbers[4];
     count++;
     
-
     return (numbersUsed, offsetsUsed);
   }
 

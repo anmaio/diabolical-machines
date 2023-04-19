@@ -7,10 +7,10 @@ import "./Noise.sol";
 
 library GlobalNumbers {
 
-  uint internal constant FLIPPER_WRAPPER_NUMBER = 19010;
-  uint internal constant CHAR_MASK_GROUP_NUMBER = 20006;
+  uint internal constant FLIPPER_WRAPPER_NUMBER = 13010;
+  uint internal constant CHAR_MASK_GROUP_NUMBER = 14006;
 
-  uint internal constant GROUP_CLOSE_NUMBER = 19000;
+  uint internal constant GROUP_CLOSE_NUMBER = 13000;
 
   // Global Asset - 6 values
   // None
@@ -56,7 +56,7 @@ library GlobalNumbers {
   // SITTING
   // MEDITATING
 
-  string internal constant CHARACTER_NUMBERS = "00000200022000120005200032000020004";
+  string internal constant CHARACTER_NUMBERS = "00000140021400114005140031400014004";
 
   /**
     * @dev Returns the global asset number based on the digits
@@ -67,7 +67,7 @@ library GlobalNumbers {
   function getGlobalAssetNumber(uint rand, int baseline) external pure returns (uint) {
     uint globalAssetDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 20)] + baseline);
 
-    return GridHelper.getSingleObject(GLOBAL_ASSET_NUMBERS, globalAssetDigits, 6);
+    return GridHelper.getSingleObject(GLOBAL_ASSET_NUMBERS, globalAssetDigits, 6, 5);
   }
   
   /**
@@ -79,7 +79,7 @@ library GlobalNumbers {
   function getExpansionPropsNumber(uint rand, int baseline) public pure returns (uint) {
     uint expansionPropsDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 22)] + baseline);
 
-    return GridHelper.getSingleObject(EXPANSION_PROPS_NUMBERS, expansionPropsDigits, 9);
+    return GridHelper.getSingleObject(EXPANSION_PROPS_NUMBERS, expansionPropsDigits, 9, 5);
   }
 
   /**
@@ -91,7 +91,7 @@ library GlobalNumbers {
   function getCharacterLeverNumber(uint rand, int baseline) internal pure returns (uint) {
     uint characterLeverDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 30)] + baseline);
 
-    return GridHelper.getSingleObject(CHARACTER_LEVER_NUMBERS, characterLeverDigits, 8);
+    return GridHelper.getSingleObject(CHARACTER_LEVER_NUMBERS, characterLeverDigits, 8, 5);
   }
 
   /**
@@ -103,7 +103,7 @@ library GlobalNumbers {
   function getCharacterNumber(uint rand, int baseline) internal pure returns (uint) {
     uint characterDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 31)] + baseline);
 
-    return GridHelper.getSingleObject(CHARACTER_NUMBERS, characterDigits, 7);
+    return GridHelper.getSingleObject(CHARACTER_NUMBERS, characterDigits, 7, 5);
   }
 
   /**
@@ -116,7 +116,7 @@ library GlobalNumbers {
     uint characterNumber = getCharacterNumber(rand, baseline);
     uint characterLeverNumber = getCharacterLeverNumber(rand, baseline);
     uint armMask = 0;
-    if (characterNumber == 20001 || characterNumber == 20003 || characterNumber == 20005) {
+    if (characterNumber == 14001 || characterNumber == 14003 || characterNumber == 14005) {
       armMask = CHAR_MASK_GROUP_NUMBER;
     }
 
@@ -130,6 +130,13 @@ library GlobalNumbers {
     return [flipOpen, characterLeverNumber, armMask, characterNumber, flipClose];
   }
 
+  /** 
+    * @dev Returns the global asset position based on the digits
+    * @param rand The digits to use
+    * @param floorOffsets The floor offsets
+    * @param numberOfFloorPositions The number of floor positions
+    * @return The global asset position
+   */
   function getGlobalAssetPosition(uint rand, string memory floorOffsets, uint numberOfFloorPositions) public pure returns (string memory) {
 
     uint globalAssetDigits = GridHelper.getRandByte(rand, 21);
@@ -139,6 +146,16 @@ library GlobalNumbers {
     return assetOffset;
   }
 
+  /** 
+    * @dev Returns the expansion prop position based on the digits
+    * @param rand The digits to use
+    * @param baseline The baseline number
+    * @param floorOffsets The floor offsets
+    * @param numberOfFloorPositions The number of floor positions
+    * @param wallOffsets The wall offsets
+    * @param numberOfWallPositions The number of wall positions
+    * @return The expansion prop position
+   */
   function getExpansionPropPosition(uint rand, int baseline, string memory floorOffsets, uint numberOfFloorPositions, string memory wallOffsets, uint numberOfWallPositions) external pure returns (string memory) {
 
     uint expansionPropDigits = GridHelper.getRandByte(rand, 23);

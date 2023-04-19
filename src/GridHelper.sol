@@ -104,14 +104,14 @@ library GridHelper {
     return output;
   }
 
-  function shiftToEndUintArray(uint index, uint[] memory arr) internal pure returns (uint[] memory) {
-    require(index < arr.length, "index out of bound");
+  // function shiftToEndUintArray(uint index, uint[] memory arr) internal pure returns (uint[] memory) {
+  //   require(index < arr.length, "index out of bound");
 
-    for (uint i = index; i < arr.length - 1; i++) {
-        arr[i] = arr[i + 1];
-    }
-    return arr;
-  }
+  //   for (uint i = index; i < arr.length - 1; i++) {
+  //       arr[i] = arr[i + 1];
+  //   }
+  //   return arr;
+  // }
 
   function getSumOfUintArray(uint[] memory arr) internal pure returns (uint) {
     uint sum = 0;
@@ -141,12 +141,12 @@ library GridHelper {
     return probabilities;
   }
 
-  function getSingleObject(string memory objectNumbers, uint channelValue, uint numOfValues) internal pure returns (uint) {
+  function getSingleObject(string memory objectNumbers, uint channelValue, uint numOfValues, uint valueLength) internal pure returns (uint) {
     
     // create probability array assuming all objects have equal probability
     uint[] memory probabilities = createEqualProbabilityArray(numOfValues);
 
-    uint[] memory objectNumbersArray = setUintArrayFromString(objectNumbers, numOfValues, 5);
+    uint[] memory objectNumbersArray = setUintArrayFromString(objectNumbers, numOfValues, valueLength);
 
     uint oneLess = numOfValues - 1;
 

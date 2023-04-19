@@ -21,65 +21,77 @@ contract MiscImp1 {
 
   string internal constant NO_TRANSFORM = "<g transform='translate(0 0)'>";
 
+  string internal constant TRANSFORM_1_NEGATIVE = "<g transform='translate(-156 -90)'>";
+
+  string internal constant CB_TRANSFORM = "<g transform='translate(27 0)'>";
+
   // transform 0->8
   function getAssetFromID(uint assetID) external pure returns (string memory) {
-    if (assetID == 19000) {
+    if (assetID == 13000) {
       return GROUP_CLOSE;
-    } else if (assetID == 19001) {
+    } else if (assetID == 13001) {
       return TRANSFORM_0;
-    } else if (assetID == 19002) {
+    } else if (assetID == 13002) {
       return TRANSFORM_1;
-    } else if (assetID == 19003) {
+    } else if (assetID == 13003) {
       return TRANSFORM_2;
-    } else if (assetID == 19004) {
+    } else if (assetID == 13004) {
       return TRANSFORM_3;
-    } else if (assetID == 19005) {
+    } else if (assetID == 13005) {
       return TRANSFORM_4;
-    } else if (assetID == 19006) {
+    } else if (assetID == 13006) {
       return TRANSFORM_5;
-    } else if (assetID == 19007) {
+    } else if (assetID == 13007) {
       return TRANSFORM_6;
-    } else if (assetID == 19008) {
+    } else if (assetID == 13008) {
       return TRANSFORM_7;
-    } else if (assetID == 19009) {
+    } else if (assetID == 13009) {
       return TRANSFORM_8;
-    } else if (assetID == 19010) {
+    } else if (assetID == 13010) {
       return FLIP_WRAPPER;
-    } else if (assetID == 19011) {
+    } else if (assetID == 13011) {
       return NEGATIVE_156;
-    } else if (assetID == 19012) {
+    } else if (assetID == 13012) {
       return NO_TRANSFORM;
+    } else if (assetID == 13013) {
+      return TRANSFORM_1_NEGATIVE;
+    } else if (assetID == 13014) {
+      return CB_TRANSFORM;
     } else {
       return "";
     }
   }
 
   function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 19000) {
+    if (assetID == 13000) {
       return 3;
-    } else if (assetID == 19001) {
+    } else if (assetID == 13001) {
       return 3;
-    } else if (assetID == 19002) {
+    } else if (assetID == 13002) {
       return 3;
-    } else if (assetID == 19003) {
+    } else if (assetID == 13003) {
       return 3;
-    } else if (assetID == 19004) {
+    } else if (assetID == 13004) {
       return 3;
-    } else if (assetID == 19005) {
+    } else if (assetID == 13005) {
       return 3;
-    } else if (assetID == 19006) {
+    } else if (assetID == 13006) {
       return 3;
-    } else if (assetID == 19007) {
+    } else if (assetID == 13007) {
       return 3;
-    } else if (assetID == 19008) {
+    } else if (assetID == 13008) {
       return 3;
-    } else if (assetID == 19009) {
+    } else if (assetID == 13009) {
       return 3;
-    } else if (assetID == 19010) {
+    } else if (assetID == 13010) {
       return 3;
-    } else if (assetID == 19011) {
+    } else if (assetID == 13011) {
       return 3;
-    } else if (assetID == 19012) {
+    } else if (assetID == 13012) {
+      return 3;
+    } else if (assetID == 13013) {
+      return 3;
+    } else if (assetID == 13014) {
       return 3;
     } else {
       return 0;

@@ -49,10 +49,10 @@ contract Tubes {
   string internal constant WALL_OFFSETS = "0000018001560090015602700312000003120180";
   uint internal constant NUMBER_OF_WALL_POSITIONS = 5;
 
-  uint internal constant NO_TRANSFORM = 19012;
-  uint internal constant TRANSFORM_ONE = 19002;
+  uint internal constant NO_TRANSFORM = 13012;
+  uint internal constant TRANSFORM_ONE = 13002;
 
-  uint internal constant GROUP_CLOSE_NUMBER = 19000;
+  uint internal constant GROUP_CLOSE_NUMBER = 13000;
 
   uint internal constant C_CONNECTOR7 = 10046;
   uint internal constant C_CONNECTOR8 = 10047;
@@ -117,25 +117,25 @@ contract Tubes {
   function getMachineFour(uint rand, int baseline, uint version) public pure returns (uint) {
     uint machineFourDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 25+version)] + baseline);
 
-    return GridHelper.getSingleObject(MACHINE_FOUR_NUMBERS, machineFourDigits, 3);
+    return GridHelper.getSingleObject(MACHINE_FOUR_NUMBERS, machineFourDigits, 3, 5);
   }
 
   function getTopRightPipe(uint rand, int baseline, uint version) internal pure returns (uint) {
     uint topRightPipeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 19+version)] + baseline);
 
-    return GridHelper.getSingleObject(PIPE_TOP_RIGHT_NUMBERS, topRightPipeDigits, 2);
+    return GridHelper.getSingleObject(PIPE_TOP_RIGHT_NUMBERS, topRightPipeDigits, 2, 5);
   }
 
   function getBottomRightPipe(uint rand, int baseline, uint version) internal pure returns (uint) {
     uint bottomRightPipeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18+version)] + baseline);
 
-    return GridHelper.getSingleObject(PIPE_BOTTOM_RIGHT_NUMBERS, bottomRightPipeDigits, 2);
+    return GridHelper.getSingleObject(PIPE_BOTTOM_RIGHT_NUMBERS, bottomRightPipeDigits, 2, 5);
   }
 
   function getMiddlePipe(uint rand, int baseline, uint version) internal pure returns (uint) {
     uint middlePipeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 17+version)] + baseline);
 
-    return GridHelper.getSingleObject(PIPE_MIDDLE_NUMBERS, middlePipeDigits, 2);
+    return GridHelper.getSingleObject(PIPE_MIDDLE_NUMBERS, middlePipeDigits, 2, 5);
   }
 
   function getMachineOneEyes(uint rand, int baseline, uint version) internal pure returns (uint) {
@@ -144,19 +144,19 @@ contract Tubes {
     }
     uint machineOneEyeDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16+version)] + baseline);
 
-    return GridHelper.getSingleObject(MACHINE_ONE_EYES_NUMBERS, machineOneEyeDigits, 2);
+    return GridHelper.getSingleObject(MACHINE_ONE_EYES_NUMBERS, machineOneEyeDigits, 2, 5);
   }
 
   function getMachineOneFeedback(uint rand, int baseline, uint version) internal pure returns (uint) {
     uint machineOneFeedbackDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 15+version)] + baseline);
 
-    return GridHelper.getSingleObject(MACHINE_ONE_FEEDBACK_NUMBERS, machineOneFeedbackDigits, 5);
+    return GridHelper.getSingleObject(MACHINE_ONE_FEEDBACK_NUMBERS, machineOneFeedbackDigits, 5, 5);
   }
 
   function getMachineOne(uint rand, int baseline, uint version) internal pure returns (uint) {
     uint machineOneDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 14+version)] + baseline);
 
-    return GridHelper.getSingleObject(MACHINE_ONE_NUMBERS, machineOneDigits, 2);
+    return GridHelper.getSingleObject(MACHINE_ONE_NUMBERS, machineOneDigits, 2, 5);
   }
 
   function getNormalPipe(uint rand, int baseline, uint version) internal pure returns (uint[] memory) {
@@ -306,7 +306,7 @@ contract Tubes {
 
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
 
-    if ((characterNumber == 20000 || characterNumber == 20002 || characterNumber == 20004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
+    if ((characterNumber == 14000 || characterNumber == 14002 || characterNumber == 14004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
       return "01560270";
     } else {
       return "03120180";

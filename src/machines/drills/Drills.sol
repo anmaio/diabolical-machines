@@ -19,36 +19,36 @@ contract Drills {
   string internal constant WALL_OFFSETS = "01560090015602700312000003120180";
   uint internal constant NUMBER_OF_WALL_POSITIONS = 4;
 
-  string internal constant DRILL_POSITION_NUMBERS = "190011900219003190041900519006";
+  string internal constant DRILL_POSITION_NUMBERS = "130011300213003130041300513006";
 
-  string internal constant HOLE_WRINKLE_NUMBERS = "1300813018";
+  string internal constant HOLE_WRINKLE_NUMBERS = "1500815018";
 
-  string internal constant HOLE_WRINKLE_WRAPPER_NUMBERS = "130191302013021130221302313024130251302613027130281302913030";
+  string internal constant HOLE_WRINKLE_WRAPPER_NUMBERS = "150191502015021150221502315024150251502615027150281502915030";
 
-  string internal constant DRILL_PARTS_WRAPPER_NUMBERS = "130351303613037130381303913040";
+  string internal constant DRILL_PARTS_WRAPPER_NUMBERS = "150351503615037150381503915040";
 
-  string internal constant TUBE_NUMBERS = "1304113003130021301413016";
+  string internal constant TUBE_NUMBERS = "1504115003150021501415016";
 
-  string internal constant BIT_NUMBERS = "09012090130901413010130111301213013";
+  string internal constant BIT_NUMBERS = "09012090150901415010150111501215013";
 
-  string internal constant CONNECTOR_NUMBERS = "1300413005130061300710026";
+  string internal constant CONNECTOR_NUMBERS = "1500415005150061500710026";
 
   string internal constant EYES_GAUGE_NUMBERS = "0402704029040300504404028";
 
-  string internal constant HEAD_NUMBERS = "070080700913015";
-  // uint internal constant HEAD_NUMBERS_TWO = 13015;
+  string internal constant HEAD_NUMBERS = "070080700915015";
+  // uint internal constant HEAD_NUMBERS_TWO = 15015;
 
-  uint internal constant HOLE_AND_WRINKLE_WRAPPER_NUMBER = 13031;
+  uint internal constant HOLE_AND_WRINKLE_WRAPPER_NUMBER = 15031;
 
-  uint internal constant ALL_DRILL_WRAPPER_NUMBER = 13032;
+  uint internal constant ALL_DRILL_WRAPPER_NUMBER = 15032;
 
-  uint internal constant FIXTURE_NUMBER = 13000;
+  uint internal constant FIXTURE_NUMBER = 15000;
 
-  uint internal constant DRILL_MASK_WRAPPER_NUMBER = 13033;
+  uint internal constant DRILL_MASK_WRAPPER_NUMBER = 15033;
 
-  uint internal constant DRILL_MASK_NUMBER = 13034;
+  uint internal constant DRILL_MASK_NUMBER = 15034;
 
-  uint internal constant GROUP_CLOSE_NUMBER = 19000;
+  uint internal constant GROUP_CLOSE_NUMBER = 13000;
 
   constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
@@ -76,7 +76,7 @@ contract Drills {
   function getDrillBitNumber(uint rand, uint version, int baseline) internal pure returns (uint) {
     uint bitDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 18+version)] + baseline);
 
-    return GridHelper.getSingleObject(BIT_NUMBERS, bitDigits, 7);
+    return GridHelper.getSingleObject(BIT_NUMBERS, bitDigits, 7, 5);
   }
 
   function getTubeNumbers(uint rand, uint version, int baseline) internal pure returns (uint[2] memory) {
@@ -119,18 +119,18 @@ contract Drills {
     uint eyesDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 24+version)] + baseline);
 
     // This tube does not work with the heads
-    if (getTubeNumbers(rand, version, baseline)[0] == 13041) {
+    if (getTubeNumbers(rand, version, baseline)[0] == 15041) {
       return 0;
     }
 
-    return GridHelper.getSingleObject(EYES_GAUGE_NUMBERS, eyesDigits, 5);
+    return GridHelper.getSingleObject(EYES_GAUGE_NUMBERS, eyesDigits, 5, 5);
   }
 
   function getHeadNumbers(uint rand, uint version, int baseline) internal pure returns (uint[2] memory) {
     uint headDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 2+version)] + baseline);
 
     // This tube does not work with the heads
-    if (getTubeNumbers(rand, version, baseline)[0] == 13041) {
+    if (getTubeNumbers(rand, version, baseline)[0] == 15041) {
       return [uint(0), 0];
     }
 
@@ -205,7 +205,7 @@ contract Drills {
 
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
 
-    if ((characterNumber == 20000 || characterNumber == 20002 || characterNumber == 20004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
+    if ((characterNumber == 14000 || characterNumber == 14002 || characterNumber == 14004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
       return "01560270";
     } else {
       return "03120180";
@@ -337,4 +337,8 @@ contract Drills {
 
     return output;
   }
+
+  // add this to be excluded from coverage report
+  // Not used in release 1 so should be excluded from coverage report
+  function test() public {}
 }

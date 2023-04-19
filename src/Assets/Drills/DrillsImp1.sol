@@ -16,27 +16,27 @@ contract DrillsImp1 {
   string internal constant C_BIT_D = "<g id='drl-u-c-bit-d-2' transform='translate(-155 92)'><path id='drl-s-path42' fill='url(#drl-s-path42-fill)' stroke='#000' stroke-width='1.01' d='M642.67 631.06v4.04c0 5.53-8.55 10-19.09 10s-19.09-4.48-19.09-10v-3.68c-4.05 2.53-6.51 5.86-6.51 9.5v103.02c0 7.92 5.43 29.68 25.91 29.68 21.72 0 25.91-21.76 25.91-29.68V640.92c0-3.82-2.71-7.29-7.12-9.87Z'/><path id='drl-s-path43' fill='url(#c2b)' stroke='#000' stroke-width='.94' d='M643 741.7c-1.96-.49-2.79-3.91-1.86-7.65s3.27-6.37 5.23-5.88l4.43 1.11c1.96.49 7.06 2.92 5.65 8.59-1.33 5.34-7.06 5.42-9.02 4.93l-4.43-1.11Z'/><path id='drl-s-path44' fill='url(#c2b)' stroke='#000' stroke-width='.94' d='M647.42 667.4c-2.02-.02-3.62-3.16-3.58-7.01s1.71-6.95 3.73-6.93l4.57.05c2.02.02 7.55 1.21 7.48 7.05-.06 5.51-5.62 6.91-7.63 6.89l-4.57-.05Z'/><path id='drl-s-path45' fill='url(#c2b)' stroke='#000' stroke-width='.94' d='M599.71 692.29c2.02-.02 3.62-3.16 3.58-7.01s-1.71-6.95-3.73-6.93l-4.57.05c-2.02.02-7.55 1.21-7.48 7.05.06 5.51 5.62 6.91 7.63 6.89l4.57-.05Z'/><g id='drl-s-g10'><path id='drl-s-path46' fill='url(#c0l)' d='M626.67 680.98c2.32 1.11 3.92 3.46 3.92 6.2 0 3.8-3.08 6.88-6.88 6.88-.27 0-.54-.02-.8-.05.9.43 1.9.68 2.96.68 3.8 0 6.88-3.08 6.88-6.88 0-3.53-2.66-6.43-6.08-6.83Z' opacity='.3' style='mix-blend-mode:color-burn'/><circle id='drl-s-circle5' r='6.88' fill='url(#c2b)' stroke='#000' stroke-width='.94' transform='translate(623.71 687.19)'/></g></g>";
   
   function getAssetFromID(uint assetID) external pure returns (string memory) {
-    if (assetID == 13000) {
+    if (assetID == 15000) {
       return C_FIXTURE;
-    } else if (assetID == 13001) {
+    } else if (assetID == 15001) {
       return C_TUBE_G;
-    } else if (assetID == 13002) {
+    } else if (assetID == 15002) {
       return C_TUBE_E;
-    } else if (assetID == 13003) {
+    } else if (assetID == 15003) {
       return C_TUBE_F;
-    } else if (assetID == 13004) {
+    } else if (assetID == 15004) {
       return C_PIPE_MINE_A;
-    } else if (assetID == 13005) {
+    } else if (assetID == 15005) {
       return C_PIPE_MINE_A2;
-    } else if (assetID == 13006) {
+    } else if (assetID == 15006) {
       return C_CONNECTOR_B;
-    } else if (assetID == 13007) {
+    } else if (assetID == 15007) {
       return C_CONNECTORR_B;
-    } else if (assetID == 13008) {
+    } else if (assetID == 15008) {
       return C_HOLE_A_A1;
-    } else if (assetID == 13009) {
+    } else if (assetID == 15009) {
       return C_HOLE_A_A4;
-    } else if (assetID == 13010) {
+    } else if (assetID == 15010) {
       return C_BIT_D;
     } else {
       return "";
@@ -70,4 +70,8 @@ contract DrillsImp1 {
       return 0;
     }
   }
+
+  // add this to be excluded from coverage report
+  // Not used in release 1 so should be excluded from coverage report
+  function test() public {}
 }

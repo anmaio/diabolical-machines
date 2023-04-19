@@ -15,6 +15,7 @@ import "../src/machines/noses/Noses.sol";
 import "../src/machines/cells/Cells.sol";
 import "../src/machines/tubes/Tubes.sol";
 import "../src/machines/beast/Beast.sol";
+import "../src/machines/conveyorBelt/ConveyorBelt.sol";
 
 import "../src/Assets/Altar/AltarImp1.sol";
 import "../src/Assets/Altar/AltarImp2.sol";
@@ -35,7 +36,6 @@ import "../src/Assets/Assets/AssetsImp2.sol";
 import "../src/Assets/Assets/AssetsImp3.sol";
 import "../src/Assets/Assets/AssetsImp4.sol";
 import "../src/Assets/Assets/AssetsImp5.sol";
-import "../src/Assets/Assets/AssetsImp6.sol";
 
 import "../src/Assets/Misc/MiscImp1.sol";
 
@@ -83,6 +83,17 @@ import "../src/Assets/Beast/BeastImp8.sol";
 import "../src/Assets/Beast/BeastImp9.sol";
 import "../src/Assets/Beast/BeastImp10.sol";
 
+import "../src/Assets/Conveyor/ConveyorImp1.sol";
+import "../src/Assets/Conveyor/ConveyorImp2.sol";
+import "../src/Assets/Conveyor/ConveyorImp3.sol";
+import "../src/Assets/Conveyor/ConveyorImp4.sol";
+import "../src/Assets/Conveyor/ConveyorImp5.sol";
+import "../src/Assets/Conveyor/ConveyorImp6.sol";
+import "../src/Assets/Conveyor/ConveyorImp7.sol";
+import "../src/Assets/Conveyor/ConveyorImp8.sol";
+import "../src/Assets/Conveyor/ConveyorImp9.sol";
+import "../src/Assets/Conveyor/ConveyorImp10.sol";
+
 import "../src/Assets/Activation/ActivationImp1.sol";
 
 import "../src/Assets/Character/CharacterImp1.sol";
@@ -102,12 +113,13 @@ contract CliffordScript is Script {
   TraitBase private assetsTB;
   TraitBase private propsTB;
   TraitBase private altarTB;
-  TraitBase private drillsTB;
-  TraitBase private nosesTB;
+  // TraitBase private drillsTB;
+  // TraitBase private nosesTB;
   TraitBase private tubesTB;
   TraitBase private apparatusTB;
   TraitBase private cellsTB;
   TraitBase private beastTB;
+  TraitBase private conveyorTB;
   TraitBase private miscTB;
   TraitBase private activationTB;
   TraitBase private characterTB;
@@ -116,12 +128,13 @@ contract CliffordScript is Script {
 
   // Machines
   Altar private altar;
-  Drills private drills;
-  Noses private noses;
+  // Drills private drills;
+  // Noses private noses;
   Apparatus private apparatus;
   Cells private cells;
   Tubes private tubes;
   Beast private beast;
+  ConveyorBelt private conveyorBelt;
 
   Machine private machine;
   Metadata private metadata;
@@ -167,14 +180,12 @@ contract CliffordScript is Script {
     AssetsImp3 assetsImp3 = new AssetsImp3();
     AssetsImp4 assetsImp4 = new AssetsImp4();
     AssetsImp5 assetsImp5 = new AssetsImp5();
-    AssetsImp6 assetsImp6 = new AssetsImp6();
-    address[] memory assetsImpsAds = new address[](6);
+    address[] memory assetsImpsAds = new address[](5);
     assetsImpsAds[0] = address(assetsImp1);
     assetsImpsAds[1] = address(assetsImp2);
     assetsImpsAds[2] = address(assetsImp3);
     assetsImpsAds[3] = address(assetsImp4);
     assetsImpsAds[4] = address(assetsImp5);
-    assetsImpsAds[5] = address(assetsImp6);
     assetsTB = new TraitBase(assetsImpsAds);
   }
 
@@ -199,32 +210,32 @@ contract CliffordScript is Script {
   }
 
   // Drills
-  function deployDrills() internal {
-    DrillsImp1 drillsImp1 = new DrillsImp1();
-    DrillsImp2 drillsImp2 = new DrillsImp2();
-    DrillsImp3 drillsImp3 = new DrillsImp3();
-    DrillsImp4 drillsImp4 = new DrillsImp4();
-    address[] memory drillsImpsAds = new address[](4);
-    drillsImpsAds[0] = address(drillsImp1);
-    drillsImpsAds[1] = address(drillsImp2);
-    drillsImpsAds[2] = address(drillsImp3);
-    drillsImpsAds[3] = address(drillsImp4);
-    drillsTB = new TraitBase(drillsImpsAds);
-  }
+  // function deployDrills() internal {
+  //   DrillsImp1 drillsImp1 = new DrillsImp1();
+  //   DrillsImp2 drillsImp2 = new DrillsImp2();
+  //   DrillsImp3 drillsImp3 = new DrillsImp3();
+  //   DrillsImp4 drillsImp4 = new DrillsImp4();
+  //   address[] memory drillsImpsAds = new address[](4);
+  //   drillsImpsAds[0] = address(drillsImp1);
+  //   drillsImpsAds[1] = address(drillsImp2);
+  //   drillsImpsAds[2] = address(drillsImp3);
+  //   drillsImpsAds[3] = address(drillsImp4);
+  //   drillsTB = new TraitBase(drillsImpsAds);
+  // }
 
   // Noses
-  function deployNoses() internal {
-    NosesImp1 nosesImp1 = new NosesImp1();
-    NosesImp2 nosesImp2 = new NosesImp2();
-    NosesImp3 nosesImp3 = new NosesImp3();
-    NosesImp4 nosesImp4 = new NosesImp4();
-    address[] memory nosesImpsAds = new address[](4);
-    nosesImpsAds[0] = address(nosesImp1);
-    nosesImpsAds[1] = address(nosesImp2);
-    nosesImpsAds[2] = address(nosesImp3);
-    nosesImpsAds[3] = address(nosesImp4);
-    nosesTB = new TraitBase(nosesImpsAds);
-  }
+  // function deployNoses() internal {
+  //   NosesImp1 nosesImp1 = new NosesImp1();
+  //   NosesImp2 nosesImp2 = new NosesImp2();
+  //   NosesImp3 nosesImp3 = new NosesImp3();
+  //   NosesImp4 nosesImp4 = new NosesImp4();
+  //   address[] memory nosesImpsAds = new address[](4);
+  //   nosesImpsAds[0] = address(nosesImp1);
+  //   nosesImpsAds[1] = address(nosesImp2);
+  //   nosesImpsAds[2] = address(nosesImp3);
+  //   nosesImpsAds[3] = address(nosesImp4);
+  //   nosesTB = new TraitBase(nosesImpsAds);
+  // }
 
   // Tubes
   function deployTubes() internal {
@@ -306,6 +317,32 @@ contract CliffordScript is Script {
     beastTB = new TraitBase(beastImpsAds);
   }
 
+  // Conveyor
+  function deployConveyor() internal {
+    ConveyorImp1 conveyorImp1 = new ConveyorImp1();
+    ConveyorImp2 conveyorImp2 = new ConveyorImp2();
+    ConveyorImp3 conveyorImp3 = new ConveyorImp3();
+    ConveyorImp4 conveyorImp4 = new ConveyorImp4();
+    ConveyorImp5 conveyorImp5 = new ConveyorImp5();
+    ConveyorImp6 conveyorImp6 = new ConveyorImp6();
+    ConveyorImp7 conveyorImp7 = new ConveyorImp7();
+    ConveyorImp8 conveyorImp8 = new ConveyorImp8();
+    ConveyorImp9 conveyorImp9 = new ConveyorImp9();
+    ConveyorImp10 conveyorImp10 = new ConveyorImp10();
+    address[] memory conveyorImpsAds = new address[](10);
+    conveyorImpsAds[0] = address(conveyorImp1);
+    conveyorImpsAds[1] = address(conveyorImp2);
+    conveyorImpsAds[2] = address(conveyorImp3);
+    conveyorImpsAds[3] = address(conveyorImp4);
+    conveyorImpsAds[4] = address(conveyorImp5);
+    conveyorImpsAds[5] = address(conveyorImp6);
+    conveyorImpsAds[6] = address(conveyorImp7);
+    conveyorImpsAds[7] = address(conveyorImp8);
+    conveyorImpsAds[8] = address(conveyorImp9);
+    conveyorImpsAds[9] = address(conveyorImp10);
+    conveyorTB = new TraitBase(conveyorImpsAds);
+  }
+
   // Misc
   function deployMisc() internal {
     MiscImp1 miscImp1 = new MiscImp1();
@@ -339,40 +376,43 @@ contract CliffordScript is Script {
   }
 
   function deployAssetRetriever() internal {
-    address[] memory traitBases = new address[](15);
+    // Order of traitBases must match the order of TraitBases in AssetRetriever
+    address[] memory traitBases = new address[](14);
     traitBases[0] = address(substancesTB);
-    traitBases[1] = address(feedbackTB);
-    traitBases[2] = address(eyesTB);
-    traitBases[3] = address(assetsTB);
-    traitBases[4] = address(propsTB);
-    traitBases[5] = address(altarTB);
-    traitBases[6] = address(drillsTB);
-    traitBases[7] = address(nosesTB);
-    traitBases[8] = address(tubesTB);
-    traitBases[9] = address(apparatusTB);
-    traitBases[10] = address(cellsTB);
-    traitBases[11] = address(beastTB);
+    traitBases[1] = address(propsTB);
+    traitBases[2] = address(activationTB);
+    traitBases[3] = address(feedbackTB);
+    traitBases[4] = address(eyesTB);
+    traitBases[5] = address(assetsTB);
+    traitBases[6] = address(altarTB);
+    traitBases[7] = address(apparatusTB);
+    traitBases[8] = address(cellsTB);
+    traitBases[9] = address(tubesTB);
+    traitBases[10] = address(beastTB);
+    traitBases[11] = address(conveyorTB);
     traitBases[12] = address(miscTB);
-    traitBases[13] = address(activationTB);
-    traitBases[14] = address(characterTB);
-    assetRetriever = new AssetRetriever(traitBases); // Add the address of each TraitBase
+    traitBases[13] = address(characterTB);
+    // Add the address of each TraitBase
+    assetRetriever = new AssetRetriever(traitBases);
   }
 
   // deploy machines
   function deployMachines() internal {
     altar = new Altar(address(assetRetriever));
-    drills = new Drills(address(assetRetriever));
-    noses = new Noses(address(assetRetriever));
+    // drills = new Drills(address(assetRetriever));
+    // noses = new Noses(address(assetRetriever));
     apparatus = new Apparatus(address(assetRetriever));
     cells = new Cells(address(assetRetriever));
     tubes = new Tubes(address(assetRetriever));
     beast = new Beast(address(assetRetriever));
+    conveyorBelt = new ConveyorBelt(address(assetRetriever));
   }
 
   // deploy logic
   function deployLogic() internal {
     globalSVG = new GlobalSVG();
-    machine = new Machine([address(altar), address(drills), address(noses), address(apparatus), address(cells), address(tubes), address(beast)], assetRetriever);
+    // machine = new Machine([address(altar), address(drills), address(noses), address(apparatus), address(cells), address(tubes), address(beast), address(conveyorBelt)], assetRetriever);
+    machine = new Machine([address(altar), address(apparatus), address(cells), address(tubes), address(beast), address(conveyorBelt)], assetRetriever);
     metadata = new Metadata(machine, globalSVG);
     clifford = new Clifford(metadata);
   }
@@ -389,12 +429,13 @@ contract CliffordScript is Script {
     deployAssets();
     deployProps();
     deployAltar();
-    deployDrills();
-    deployNoses();
+    // deployDrills();
+    // deployNoses();
     deployTubes();
     deployApparatus();
     deployCells();
     deployBeast();
+    deployConveyor();
     deployMisc();
     deployActivation();
     deployCharacter();
@@ -407,4 +448,7 @@ contract CliffordScript is Script {
 
     vm.stopBroadcast();
   }
+
+  // add this to be excluded from coverage report
+  function test() public {}
 }
