@@ -1,7 +1,7 @@
-<g id='floorPat' transform='translate(234 135) rotate(60)' transform-origin='0 540'><g transform='skewY(-30)' transform-origin='0 0'><rect id='floorPatRect' x='0' y='270' width='468' height='540' opacity='
-1
-' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g></g><g id='rightWallPat' transform='skewY(30)'><rect x='468' y='-270' width='468' height='540' opacity='
-1
-' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g><g id='leftWallPat' transform='skewY(-30)'><rect x='0' y='270' width='468' height='540' opacity='
-1
-' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g>
+<g id='leftWall'><polygon points='0,270 468,0 468,540 0,810' fill='url(#s0)' stroke='black'/><g id='leftWallPat' transform='skewY(-30)'><rect x='0' y='270' width='468' height='540' opacity='
+0
+%' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g><polygon points='0,270 468,0 468,540 0,810' fill='url(#lDT)' stroke='black'/></g><g id='rightWall'><polygon points='468,540 468,0 936,270 936,810' fill='url(#s1)' stroke='black'/><g id='rightWallPat' transform='skewY(30)'><rect x='468' y='-270' width='468' height='540' opacity='
+59
+%' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g><polygon points='468,540 468,0 936,270 936,810' fill='url(#rDT)' stroke='black'/></g><g id='floor'><polygon id='polygon-floor-border' points='0,810 468,1080 936,810 468,540' fill='url(#s2)' stroke='black'/><g id='floorPat' transform='translate(234 135) rotate(60)' transform-origin='0 540'><g transform='skewY(-30)' transform-origin='0 0'><rect id='floorPatRect' x='0' y='270' width='468' height='540' opacity='
+59
+%' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g></g><polygon id='polygon-floor-border-DT' points='0,810 468,1080 936,810 468,540' fill='url(#fDT)' stroke='black'/></g>

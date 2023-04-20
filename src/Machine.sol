@@ -29,8 +29,6 @@ contract Machine {
     }
 
     machineToProductivityTiers["Altar"] = "020040060070080090";
-    // machineToProductivityTiers["Drills"] = "020040060070080090";
-    // machineToProductivityTiers["Noses"] = "020040060070080090";
     machineToProductivityTiers["Apparatus"] = "020040060070080090";
     machineToProductivityTiers["Cells"] = "020040060070080090";
     machineToProductivityTiers["Tubes"] = "020040060070080090";
@@ -38,19 +36,34 @@ contract Machine {
     machineToProductivityTiers["ConveyorBelt"] = "020040060070080090";
   }
 
+  /**
+    * @dev Returns the machine based on the random number
+    * @param rand The digits to use
+    * @return The machine
+   */
+
   function selectMachine(uint rand) external view returns (string memory) {
       return allMachines[rand % allMachines.length];
       // return allMachines[7];
-      // if (rand % 2 == 0) {
-      //   return allMachines[5];
-      // } else {
-      //   return allMachines[6];
-      // }
   }
+
+  /**
+    * @dev Get a machine based on the random number
+    * @param machine The machine to get
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+   */
 
   function machineToGetter(string memory machine, uint rand, int baseline) external view returns (string memory) {
     return IMachine(machineToWorkstation[machine]).getMachine(rand, baseline);
   }
+
+  /**
+    * @dev Get the productivity value of a machine
+    * @param machine The machine to get
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+   */
 
   function getProductivityValue(string memory machine, uint rand, int baseline) public view returns (uint) {
     (uint[] memory numbersUsed,) = IMachine(machineToWorkstation[machine]).getAllNumbersUsed(rand, baseline);
@@ -60,6 +73,14 @@ contract Machine {
     }
     return productivityValue;
   }
+
+  /**
+    * @dev Get the productivity tier of a machine
+    * @param machine The machine to get
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The productivity tier
+   */
 
   function getProductivity(string memory machine, uint rand, int baseline) external view returns(string memory) {
 
@@ -96,6 +117,13 @@ contract Machine {
     }
   }
 
+  /**
+    * @dev Get the global asset name based on the random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The global asset name
+   */
+
   function getGlobalAssetName(uint rand, int baseline) external pure returns (string memory) {
     uint assetNumber = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
 
@@ -113,6 +141,13 @@ contract Machine {
       return "None";
     }
   }
+
+  /**
+    * @dev Get the expansion prop name based on the random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The expansion prop name
+   */
 
   function getExpansionPropName(uint rand, int baseline) external pure returns (string memory) {
     uint propNumber = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
@@ -138,24 +173,30 @@ contract Machine {
     }
   }
 
+  /**
+    * @dev Get the character name based on the random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The character name
+   */
+
   function getCharacterName(uint rand, int baseline) external pure returns (string memory) {
     uint characterNumber = GlobalNumbers.getCharacterNumber(rand, baseline);
 
-    if (characterNumber == 20000) {
+    if (characterNumber == 14000) {
       return "Sitting";
-    } else if (characterNumber == 20001) {
+    } else if (characterNumber == 14001) {
       return "Standing";
-    } else if (characterNumber == 20002) {
+    } else if (characterNumber == 14002) {
       return "Collapsed";
-    } else if (characterNumber == 20003) {
+    } else if (characterNumber == 14003) {
       return "Slouched";
-    } else if (characterNumber == 20004) {
+    } else if (characterNumber == 14004) {
       return "Meditating";
-    } else if (characterNumber == 20005) {
+    } else if (characterNumber == 14005) {
       return "Hunched";
     } else {
       return "None";
     }
-
   }
 }

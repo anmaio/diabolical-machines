@@ -14,7 +14,7 @@ contract AssetRetriever {
     traitTypes = addresses;
   }
 
-  function getAsset(uint assetID) public view returns (string memory) { // todo: refactor using %1k and /1k to remove the loop
+  function getAsset(uint assetID) public view returns (string memory) {
     if (assetID == 0) {
       return "";
     }

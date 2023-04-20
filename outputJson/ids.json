@@ -9,7 +9,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 1,
@@ -21,7 +21,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 2,
@@ -33,7 +33,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 3,
@@ -45,7 +45,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 4,
@@ -57,7 +57,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 5,
@@ -69,7 +69,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 6,
@@ -81,7 +81,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 7,
@@ -93,7 +93,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 8,
@@ -117,7 +117,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 10,
@@ -129,7 +129,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "None",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 11,
@@ -141,7 +141,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 12,
@@ -153,7 +153,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Crack",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 13,
@@ -165,7 +165,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 14,
@@ -177,7 +177,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 15,
@@ -189,7 +189,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 16,
@@ -201,7 +201,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 17,
@@ -213,7 +213,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 18,
@@ -225,7 +225,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 19,
@@ -237,7 +237,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 20,
@@ -249,7 +249,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 21,
@@ -261,7 +261,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 22,
@@ -273,7 +273,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 23,
@@ -285,7 +285,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 24,
@@ -297,7 +297,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 25,
@@ -309,7 +309,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 26,
@@ -321,7 +321,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 27,
@@ -345,7 +345,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 29,
@@ -357,7 +357,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 30,
@@ -369,7 +369,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 31,
@@ -381,7 +381,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 32,
@@ -393,7 +393,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 33,
@@ -405,7 +405,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 34,
@@ -417,7 +417,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 35,
@@ -429,7 +429,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 36,
@@ -441,7 +441,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 37,
@@ -453,7 +453,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 38,
@@ -465,7 +465,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 39,
@@ -477,7 +477,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 40,
@@ -489,7 +489,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Ladder",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 41,
@@ -501,7 +501,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 42,
@@ -513,7 +513,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 43,
@@ -525,7 +525,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 44,
@@ -537,7 +537,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 45,
@@ -549,7 +549,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 46,
@@ -561,7 +561,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 47,
@@ -573,7 +573,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 48,
@@ -585,7 +585,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 49,
@@ -597,7 +597,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 50,
@@ -609,7 +609,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 51,
@@ -621,7 +621,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 52,
@@ -633,7 +633,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 53,
@@ -645,7 +645,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 54,
@@ -657,7 +657,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 55,
@@ -669,7 +669,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 56,
@@ -681,7 +681,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 57,
@@ -693,7 +693,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 58,
@@ -705,7 +705,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 59,
@@ -717,7 +717,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 60,
@@ -729,7 +729,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 61,
@@ -741,7 +741,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 62,
@@ -753,7 +753,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 63,
@@ -765,7 +765,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 64,
@@ -777,7 +777,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 65,
@@ -801,7 +801,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 67,
@@ -813,7 +813,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 68,
@@ -825,7 +825,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 69,
@@ -837,7 +837,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 70,
@@ -861,7 +861,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 72,
@@ -873,7 +873,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 73,
@@ -885,7 +885,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 74,
@@ -897,7 +897,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 75,
@@ -909,7 +909,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 76,
@@ -921,7 +921,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 77,
@@ -933,7 +933,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 78,
@@ -945,7 +945,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 79,
@@ -957,7 +957,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "None",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 80,
@@ -969,7 +969,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 81,
@@ -993,7 +993,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 83,
@@ -1005,7 +1005,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 84,
@@ -1017,7 +1017,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 85,
@@ -1029,7 +1029,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 86,
@@ -1053,7 +1053,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 88,
@@ -1065,7 +1065,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 89,
@@ -1077,7 +1077,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 90,
@@ -1089,7 +1089,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 91,
@@ -1101,7 +1101,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 92,
@@ -1125,7 +1125,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 94,
@@ -1137,7 +1137,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 95,
@@ -1149,7 +1149,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 96,
@@ -1161,7 +1161,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 97,
@@ -1173,7 +1173,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 98,
@@ -1185,7 +1185,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 99,
@@ -1197,7 +1197,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 100,
@@ -1209,7 +1209,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 101,
@@ -1221,7 +1221,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 102,
@@ -1233,7 +1233,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 103,
@@ -1245,7 +1245,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 104,
@@ -1257,7 +1257,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 105,
@@ -1281,7 +1281,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 107,
@@ -1293,7 +1293,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 108,
@@ -1305,7 +1305,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 109,
@@ -1317,7 +1317,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 110,
@@ -1329,7 +1329,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 111,
@@ -1341,7 +1341,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 112,
@@ -1353,7 +1353,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 113,
@@ -1365,7 +1365,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 114,
@@ -1377,7 +1377,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 115,
@@ -1389,7 +1389,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 116,
@@ -1401,7 +1401,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 117,
@@ -1413,7 +1413,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 118,
@@ -1425,7 +1425,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 119,
@@ -1437,7 +1437,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 120,
@@ -1449,7 +1449,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 121,
@@ -1461,7 +1461,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 122,
@@ -1473,7 +1473,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 123,
@@ -1485,7 +1485,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 124,
@@ -1509,7 +1509,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 126,
@@ -1521,7 +1521,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 127,
@@ -1533,7 +1533,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 128,
@@ -1545,7 +1545,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 129,
@@ -1557,7 +1557,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 130,
@@ -1569,7 +1569,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 131,
@@ -1581,7 +1581,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 132,
@@ -1593,7 +1593,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 133,
@@ -1605,7 +1605,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess B",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 134,
@@ -1617,7 +1617,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 135,
@@ -1629,7 +1629,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 136,
@@ -1641,7 +1641,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 137,
@@ -1653,7 +1653,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 138,
@@ -1665,7 +1665,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 139,
@@ -1677,7 +1677,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 140,
@@ -1689,7 +1689,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 141,
@@ -1701,7 +1701,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 142,
@@ -1713,7 +1713,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 143,
@@ -1725,7 +1725,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 144,
@@ -1737,7 +1737,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 145,
@@ -1749,7 +1749,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 146,
@@ -1761,7 +1761,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 147,
@@ -1773,7 +1773,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 148,
@@ -1785,7 +1785,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 149,
@@ -1797,7 +1797,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 150,
@@ -1821,7 +1821,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 152,
@@ -1833,7 +1833,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 153,
@@ -1845,7 +1845,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 154,
@@ -1857,7 +1857,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 155,
@@ -1869,7 +1869,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 156,
@@ -1881,7 +1881,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 157,
@@ -1893,7 +1893,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 158,
@@ -1905,7 +1905,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 159,
@@ -1917,7 +1917,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 160,
@@ -1929,7 +1929,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 161,
@@ -1941,7 +1941,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 162,
@@ -1953,7 +1953,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 163,
@@ -1977,7 +1977,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 165,
@@ -1989,7 +1989,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 2",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 166,
@@ -2001,7 +2001,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 167,
@@ -2013,7 +2013,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 168,
@@ -2025,7 +2025,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 169,
@@ -2037,7 +2037,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 170,
@@ -2049,7 +2049,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 171,
@@ -2061,7 +2061,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 172,
@@ -2073,7 +2073,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 173,
@@ -2085,7 +2085,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 174,
@@ -2097,7 +2097,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 175,
@@ -2109,7 +2109,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 176,
@@ -2121,7 +2121,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 177,
@@ -2133,7 +2133,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 178,
@@ -2145,7 +2145,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 179,
@@ -2157,7 +2157,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 180,
@@ -2181,7 +2181,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 182,
@@ -2193,7 +2193,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 183,
@@ -2217,7 +2217,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 185,
@@ -2229,7 +2229,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 186,
@@ -2241,7 +2241,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 187,
@@ -2253,7 +2253,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 188,
@@ -2265,7 +2265,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 189,
@@ -2277,7 +2277,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 190,
@@ -2289,7 +2289,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 191,
@@ -2301,7 +2301,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 192,
@@ -2313,7 +2313,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 193,
@@ -2325,7 +2325,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 194,
@@ -2337,7 +2337,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 195,
@@ -2349,7 +2349,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 196,
@@ -2361,7 +2361,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 197,
@@ -2373,7 +2373,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 198,
@@ -2385,7 +2385,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 199,
@@ -2397,7 +2397,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 200,
@@ -2409,7 +2409,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 201,
@@ -2421,7 +2421,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 202,
@@ -2433,7 +2433,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 203,
@@ -2445,7 +2445,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 204,
@@ -2457,7 +2457,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 205,
@@ -2469,7 +2469,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 206,
@@ -2481,7 +2481,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 207,
@@ -2493,7 +2493,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 208,
@@ -2505,7 +2505,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 209,
@@ -2517,7 +2517,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 210,
@@ -2529,7 +2529,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 211,
@@ -2541,7 +2541,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 212,
@@ -2553,7 +2553,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 213,
@@ -2565,7 +2565,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 214,
@@ -2577,7 +2577,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 215,
@@ -2589,7 +2589,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 216,
@@ -2601,7 +2601,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 217,
@@ -2613,7 +2613,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 218,
@@ -2625,7 +2625,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 219,
@@ -2637,7 +2637,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 220,
@@ -2649,7 +2649,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 221,
@@ -2661,7 +2661,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 222,
@@ -2673,7 +2673,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 223,
@@ -2685,7 +2685,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 224,
@@ -2697,7 +2697,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 225,
@@ -2709,7 +2709,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 226,
@@ -2733,7 +2733,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 228,
@@ -2745,7 +2745,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 229,
@@ -2757,7 +2757,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 230,
@@ -2769,7 +2769,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 231,
@@ -2781,7 +2781,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 232,
@@ -2793,7 +2793,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 233,
@@ -2805,7 +2805,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 234,
@@ -2817,7 +2817,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 235,
@@ -2829,7 +2829,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 236,
@@ -2841,7 +2841,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 237,
@@ -2853,7 +2853,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 238,
@@ -2865,7 +2865,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 239,
@@ -2889,7 +2889,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 241,
@@ -2901,7 +2901,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 242,
@@ -2913,7 +2913,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 243,
@@ -2925,7 +2925,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 244,
@@ -2937,7 +2937,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 245,
@@ -2949,7 +2949,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 246,
@@ -2961,7 +2961,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 247,
@@ -2973,7 +2973,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 248,
@@ -2985,7 +2985,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "None",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 249,
@@ -2997,7 +2997,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 250,
@@ -3009,7 +3009,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 251,
@@ -3021,7 +3021,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 252,
@@ -3033,7 +3033,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 253,
@@ -3045,7 +3045,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 254,
@@ -3057,7 +3057,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 255,
@@ -3069,7 +3069,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 256,
@@ -3081,7 +3081,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 257,
@@ -3093,7 +3093,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 258,
@@ -3105,7 +3105,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 259,
@@ -3117,7 +3117,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 260,
@@ -3129,7 +3129,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 261,
@@ -3141,7 +3141,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 262,
@@ -3153,7 +3153,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 263,
@@ -3165,7 +3165,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 264,
@@ -3177,7 +3177,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 265,
@@ -3189,7 +3189,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 266,
@@ -3201,7 +3201,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 267,
@@ -3213,7 +3213,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 268,
@@ -3225,7 +3225,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 269,
@@ -3237,7 +3237,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 270,
@@ -3249,7 +3249,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 271,
@@ -3261,7 +3261,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 272,
@@ -3273,7 +3273,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 273,
@@ -3285,7 +3285,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 274,
@@ -3297,7 +3297,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 275,
@@ -3309,7 +3309,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 276,
@@ -3321,7 +3321,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 277,
@@ -3333,7 +3333,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess A",
     "Colour": "Very Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 278,
@@ -3345,7 +3345,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 279,
@@ -3357,7 +3357,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 280,
@@ -3369,7 +3369,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Very Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 281,
@@ -3381,7 +3381,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 282,
@@ -3393,7 +3393,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 283,
@@ -3405,7 +3405,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 284,
@@ -3417,7 +3417,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 285,
@@ -3429,7 +3429,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 286,
@@ -3441,7 +3441,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 287,
@@ -3453,7 +3453,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 288,
@@ -3477,7 +3477,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 290,
@@ -3489,7 +3489,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 291,
@@ -3501,7 +3501,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 292,
@@ -3513,7 +3513,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 293,
@@ -3525,7 +3525,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 294,
@@ -3537,7 +3537,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 295,
@@ -3549,7 +3549,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 296,
@@ -3561,7 +3561,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 297,
@@ -3573,7 +3573,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 298,
@@ -3585,7 +3585,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 299,
@@ -3597,7 +3597,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 300,
@@ -3609,7 +3609,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 301,
@@ -3621,7 +3621,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 302,
@@ -3645,7 +3645,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 304,
@@ -3657,7 +3657,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 305,
@@ -3669,7 +3669,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 306,
@@ -3681,7 +3681,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 307,
@@ -3693,7 +3693,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 308,
@@ -3717,7 +3717,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 310,
@@ -3729,7 +3729,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 311,
@@ -3741,7 +3741,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 312,
@@ -3753,7 +3753,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 313,
@@ -3765,7 +3765,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 314,
@@ -3777,7 +3777,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 315,
@@ -3789,7 +3789,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 316,
@@ -3801,7 +3801,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 317,
@@ -3813,7 +3813,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 318,
@@ -3825,7 +3825,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 319,
@@ -3837,7 +3837,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 320,
@@ -3849,7 +3849,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 321,
@@ -3861,7 +3861,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 322,
@@ -3873,7 +3873,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 323,
@@ -3885,7 +3885,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 324,
@@ -3897,7 +3897,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 325,
@@ -3909,7 +3909,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 326,
@@ -3921,7 +3921,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 327,
@@ -3933,7 +3933,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 328,
@@ -3945,7 +3945,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 329,
@@ -3957,7 +3957,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 330,
@@ -3969,7 +3969,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 331,
@@ -3981,7 +3981,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 332,
@@ -3993,7 +3993,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 333,
@@ -4005,7 +4005,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 334,
@@ -4017,7 +4017,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 335,
@@ -4029,7 +4029,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 336,
@@ -4041,7 +4041,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 337,
@@ -4053,7 +4053,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 338,
@@ -4065,7 +4065,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 339,
@@ -4077,7 +4077,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 340,
@@ -4089,7 +4089,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 341,
@@ -4101,7 +4101,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 342,
@@ -4113,7 +4113,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 343,
@@ -4125,7 +4125,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 344,
@@ -4137,7 +4137,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 345,
@@ -4149,7 +4149,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 346,
@@ -4161,7 +4161,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 347,
@@ -4173,7 +4173,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 348,
@@ -4185,7 +4185,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 349,
@@ -4197,7 +4197,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 350,
@@ -4209,7 +4209,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Very Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 351,
@@ -4221,7 +4221,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 352,
@@ -4233,7 +4233,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 353,
@@ -4245,7 +4245,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 354,
@@ -4257,7 +4257,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 355,
@@ -4269,7 +4269,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 356,
@@ -4281,7 +4281,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 357,
@@ -4293,7 +4293,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 358,
@@ -4305,7 +4305,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 359,
@@ -4317,7 +4317,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 360,
@@ -4329,7 +4329,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 361,
@@ -4341,7 +4341,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 362,
@@ -4353,7 +4353,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 363,
@@ -4377,7 +4377,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 365,
@@ -4389,7 +4389,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 366,
@@ -4401,7 +4401,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 367,
@@ -4413,7 +4413,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 368,
@@ -4425,7 +4425,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 369,
@@ -4437,7 +4437,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 370,
@@ -4449,7 +4449,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 371,
@@ -4461,7 +4461,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 372,
@@ -4473,7 +4473,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 373,
@@ -4485,7 +4485,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 374,
@@ -4497,7 +4497,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 375,
@@ -4509,7 +4509,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 376,
@@ -4521,7 +4521,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 377,
@@ -4533,7 +4533,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 378,
@@ -4545,7 +4545,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 379,
@@ -4557,7 +4557,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 380,
@@ -4569,7 +4569,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Very Degraded 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 381,
@@ -4581,7 +4581,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 382,
@@ -4593,7 +4593,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 383,
@@ -4605,7 +4605,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 384,
@@ -4617,7 +4617,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 385,
@@ -4629,7 +4629,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 386,
@@ -4641,7 +4641,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 387,
@@ -4653,7 +4653,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 388,
@@ -4665,7 +4665,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 389,
@@ -4689,7 +4689,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 391,
@@ -4701,7 +4701,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 392,
@@ -4713,7 +4713,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 393,
@@ -4725,7 +4725,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 394,
@@ -4737,7 +4737,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 395,
@@ -4749,7 +4749,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 396,
@@ -4761,7 +4761,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 397,
@@ -4773,7 +4773,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 398,
@@ -4785,7 +4785,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 399,
@@ -4797,7 +4797,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 400,
@@ -4809,7 +4809,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 401,
@@ -4821,7 +4821,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 402,
@@ -4833,7 +4833,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 403,
@@ -4845,7 +4845,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 404,
@@ -4857,7 +4857,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 405,
@@ -4869,7 +4869,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 406,
@@ -4881,7 +4881,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 407,
@@ -4893,7 +4893,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 408,
@@ -4905,7 +4905,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 409,
@@ -4917,7 +4917,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 410,
@@ -4929,7 +4929,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 411,
@@ -4941,7 +4941,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 412,
@@ -4953,7 +4953,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 413,
@@ -4965,7 +4965,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 414,
@@ -4977,7 +4977,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 415,
@@ -4989,7 +4989,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess A",
     "Colour": "Very Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 416,
@@ -5001,7 +5001,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 417,
@@ -5013,7 +5013,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "None",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 418,
@@ -5025,7 +5025,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 419,
@@ -5037,7 +5037,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 420,
@@ -5049,7 +5049,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 421,
@@ -5061,7 +5061,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 422,
@@ -5073,7 +5073,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 423,
@@ -5085,7 +5085,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 424,
@@ -5097,7 +5097,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 425,
@@ -5109,7 +5109,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 426,
@@ -5121,7 +5121,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 427,
@@ -5133,7 +5133,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 428,
@@ -5145,7 +5145,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 429,
@@ -5157,7 +5157,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 430,
@@ -5169,7 +5169,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 431,
@@ -5181,7 +5181,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 432,
@@ -5193,7 +5193,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 433,
@@ -5205,7 +5205,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 434,
@@ -5217,7 +5217,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 435,
@@ -5229,7 +5229,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 436,
@@ -5253,7 +5253,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 438,
@@ -5265,7 +5265,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 439,
@@ -5277,7 +5277,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "None",
     "Colour": "Very Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 440,
@@ -5301,7 +5301,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 442,
@@ -5313,7 +5313,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 443,
@@ -5325,7 +5325,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 444,
@@ -5337,7 +5337,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 445,
@@ -5349,7 +5349,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 446,
@@ -5361,7 +5361,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 447,
@@ -5385,7 +5385,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 449,
@@ -5397,7 +5397,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 450,
@@ -5409,7 +5409,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 451,
@@ -5421,7 +5421,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 452,
@@ -5433,7 +5433,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 453,
@@ -5445,7 +5445,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 454,
@@ -5457,7 +5457,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 455,
@@ -5469,7 +5469,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 456,
@@ -5481,7 +5481,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 457,
@@ -5493,7 +5493,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 458,
@@ -5505,7 +5505,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 459,
@@ -5517,7 +5517,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 460,
@@ -5529,7 +5529,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 461,
@@ -5541,7 +5541,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 462,
@@ -5553,7 +5553,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 463,
@@ -5565,7 +5565,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 464,
@@ -5577,7 +5577,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 465,
@@ -5589,7 +5589,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 466,
@@ -5601,7 +5601,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 467,
@@ -5613,7 +5613,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 468,
@@ -5625,7 +5625,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 469,
@@ -5637,7 +5637,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 470,
@@ -5649,7 +5649,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 471,
@@ -5661,7 +5661,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 472,
@@ -5673,7 +5673,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 473,
@@ -5685,7 +5685,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 474,
@@ -5697,7 +5697,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 475,
@@ -5709,7 +5709,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 476,
@@ -5721,7 +5721,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 477,
@@ -5733,7 +5733,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 478,
@@ -5745,7 +5745,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 479,
@@ -5757,7 +5757,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 480,
@@ -5769,7 +5769,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 481,
@@ -5781,7 +5781,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 482,
@@ -5793,7 +5793,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 483,
@@ -5805,7 +5805,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 484,
@@ -5817,7 +5817,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 485,
@@ -5829,7 +5829,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 486,
@@ -5841,7 +5841,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 487,
@@ -5853,7 +5853,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 488,
@@ -5865,7 +5865,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 489,
@@ -5877,7 +5877,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 490,
@@ -5901,7 +5901,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 492,
@@ -5913,7 +5913,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 493,
@@ -5925,7 +5925,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 494,
@@ -5937,7 +5937,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 495,
@@ -5949,7 +5949,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 496,
@@ -5961,7 +5961,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 497,
@@ -5973,7 +5973,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 498,
@@ -5985,7 +5985,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 499,
@@ -5997,7 +5997,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 500,
@@ -6009,7 +6009,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 501,
@@ -6021,7 +6021,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 502,
@@ -6033,7 +6033,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 503,
@@ -6045,7 +6045,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 504,
@@ -6057,7 +6057,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 505,
@@ -6069,7 +6069,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 506,
@@ -6081,7 +6081,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "None",
     "Colour": "Very Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 507,
@@ -6093,7 +6093,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 508,
@@ -6105,7 +6105,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 509,
@@ -6117,7 +6117,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 510,
@@ -6129,7 +6129,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 511,
@@ -6141,7 +6141,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 512,
@@ -6153,7 +6153,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 513,
@@ -6165,7 +6165,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 514,
@@ -6177,7 +6177,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 515,
@@ -6189,7 +6189,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 516,
@@ -6201,7 +6201,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 517,
@@ -6213,7 +6213,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 518,
@@ -6225,7 +6225,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 519,
@@ -6237,7 +6237,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 520,
@@ -6249,7 +6249,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 521,
@@ -6261,7 +6261,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 522,
@@ -6273,7 +6273,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 523,
@@ -6285,7 +6285,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 524,
@@ -6297,7 +6297,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 525,
@@ -6309,7 +6309,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 526,
@@ -6321,7 +6321,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 527,
@@ -6333,7 +6333,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 528,
@@ -6357,7 +6357,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Very Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 530,
@@ -6369,7 +6369,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 531,
@@ -6381,7 +6381,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 532,
@@ -6393,7 +6393,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 533,
@@ -6405,7 +6405,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 534,
@@ -6417,7 +6417,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 535,
@@ -6429,7 +6429,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 536,
@@ -6453,7 +6453,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 538,
@@ -6465,7 +6465,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 539,
@@ -6477,7 +6477,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 540,
@@ -6489,7 +6489,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 541,
@@ -6501,7 +6501,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 542,
@@ -6513,7 +6513,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 543,
@@ -6525,7 +6525,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 544,
@@ -6537,7 +6537,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 545,
@@ -6561,7 +6561,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 547,
@@ -6573,7 +6573,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 548,
@@ -6585,7 +6585,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 549,
@@ -6597,7 +6597,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 550,
@@ -6609,7 +6609,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 551,
@@ -6621,7 +6621,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 552,
@@ -6633,7 +6633,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 553,
@@ -6645,7 +6645,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 554,
@@ -6657,7 +6657,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 555,
@@ -6669,7 +6669,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 556,
@@ -6681,7 +6681,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 557,
@@ -6693,7 +6693,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 558,
@@ -6705,7 +6705,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 559,
@@ -6717,7 +6717,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 560,
@@ -6729,7 +6729,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 561,
@@ -6741,7 +6741,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 562,
@@ -6753,7 +6753,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 563,
@@ -6765,7 +6765,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 564,
@@ -6777,7 +6777,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 565,
@@ -6789,7 +6789,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 566,
@@ -6801,7 +6801,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 567,
@@ -6813,7 +6813,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 568,
@@ -6825,7 +6825,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 569,
@@ -6837,7 +6837,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 570,
@@ -6849,7 +6849,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 571,
@@ -6861,7 +6861,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 572,
@@ -6873,7 +6873,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 573,
@@ -6885,7 +6885,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 574,
@@ -6897,7 +6897,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 575,
@@ -6909,7 +6909,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 576,
@@ -6921,7 +6921,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 577,
@@ -6933,7 +6933,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 578,
@@ -6945,7 +6945,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 579,
@@ -6957,7 +6957,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 580,
@@ -6969,7 +6969,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Grate",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 581,
@@ -6981,7 +6981,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 582,
@@ -6993,7 +6993,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 583,
@@ -7005,7 +7005,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 584,
@@ -7017,7 +7017,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 585,
@@ -7041,7 +7041,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 587,
@@ -7053,7 +7053,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 588,
@@ -7065,7 +7065,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 589,
@@ -7077,7 +7077,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 590,
@@ -7089,7 +7089,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 591,
@@ -7101,7 +7101,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 592,
@@ -7113,7 +7113,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 593,
@@ -7125,7 +7125,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 594,
@@ -7137,7 +7137,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 595,
@@ -7149,7 +7149,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 596,
@@ -7161,7 +7161,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 597,
@@ -7173,7 +7173,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 598,
@@ -7185,7 +7185,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 599,
@@ -7197,7 +7197,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 600,
@@ -7209,7 +7209,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 601,
@@ -7221,7 +7221,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 602,
@@ -7233,7 +7233,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 603,
@@ -7245,7 +7245,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 604,
@@ -7257,7 +7257,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 605,
@@ -7269,7 +7269,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 606,
@@ -7281,7 +7281,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 607,
@@ -7293,7 +7293,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 608,
@@ -7305,7 +7305,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 609,
@@ -7317,7 +7317,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 610,
@@ -7329,7 +7329,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 611,
@@ -7341,7 +7341,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 612,
@@ -7353,7 +7353,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 613,
@@ -7365,7 +7365,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 614,
@@ -7377,7 +7377,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 615,
@@ -7401,7 +7401,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 617,
@@ -7413,7 +7413,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 618,
@@ -7425,7 +7425,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C",
     "Colour": "Very Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 619,
@@ -7437,7 +7437,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 620,
@@ -7449,7 +7449,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 621,
@@ -7461,7 +7461,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 622,
@@ -7473,7 +7473,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 623,
@@ -7485,7 +7485,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 624,
@@ -7497,7 +7497,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 625,
@@ -7509,7 +7509,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 626,
@@ -7521,7 +7521,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "None",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 627,
@@ -7533,7 +7533,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 628,
@@ -7545,7 +7545,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 629,
@@ -7557,7 +7557,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 630,
@@ -7569,7 +7569,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 631,
@@ -7581,7 +7581,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 632,
@@ -7593,7 +7593,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 633,
@@ -7605,7 +7605,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "None",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 634,
@@ -7617,7 +7617,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 635,
@@ -7629,7 +7629,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 636,
@@ -7641,7 +7641,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 637,
@@ -7653,7 +7653,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 638,
@@ -7665,7 +7665,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 639,
@@ -7677,7 +7677,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 640,
@@ -7689,7 +7689,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 641,
@@ -7701,7 +7701,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 642,
@@ -7713,7 +7713,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Crack",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 643,
@@ -7725,7 +7725,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 644,
@@ -7737,7 +7737,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 645,
@@ -7749,7 +7749,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 2",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 646,
@@ -7761,7 +7761,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 647,
@@ -7773,7 +7773,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 648,
@@ -7785,7 +7785,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 649,
@@ -7797,7 +7797,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 650,
@@ -7809,7 +7809,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 651,
@@ -7821,7 +7821,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 652,
@@ -7833,7 +7833,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 653,
@@ -7845,7 +7845,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 654,
@@ -7857,7 +7857,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 655,
@@ -7869,7 +7869,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 656,
@@ -7881,7 +7881,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 657,
@@ -7893,7 +7893,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 658,
@@ -7905,7 +7905,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 659,
@@ -7917,7 +7917,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 660,
@@ -7929,7 +7929,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 661,
@@ -7941,7 +7941,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 662,
@@ -7953,7 +7953,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 663,
@@ -7965,7 +7965,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 664,
@@ -7977,7 +7977,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 665,
@@ -7989,7 +7989,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Very Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 666,
@@ -8001,7 +8001,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 667,
@@ -8013,7 +8013,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 668,
@@ -8025,7 +8025,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Grate",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 669,
@@ -8037,7 +8037,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 670,
@@ -8049,7 +8049,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 671,
@@ -8061,7 +8061,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 672,
@@ -8073,7 +8073,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 673,
@@ -8085,7 +8085,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 674,
@@ -8097,7 +8097,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 675,
@@ -8109,7 +8109,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 676,
@@ -8121,7 +8121,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 677,
@@ -8133,7 +8133,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 678,
@@ -8145,7 +8145,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 679,
@@ -8157,7 +8157,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 680,
@@ -8169,7 +8169,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 681,
@@ -8181,7 +8181,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 682,
@@ -8193,7 +8193,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 683,
@@ -8205,7 +8205,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 684,
@@ -8217,7 +8217,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 685,
@@ -8229,7 +8229,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 686,
@@ -8241,7 +8241,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 687,
@@ -8253,7 +8253,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 688,
@@ -8265,7 +8265,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 689,
@@ -8277,7 +8277,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 690,
@@ -8289,7 +8289,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 691,
@@ -8301,7 +8301,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 692,
@@ -8313,7 +8313,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 693,
@@ -8325,7 +8325,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 694,
@@ -8337,7 +8337,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 695,
@@ -8349,7 +8349,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 696,
@@ -8361,7 +8361,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 697,
@@ -8373,7 +8373,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 698,
@@ -8385,7 +8385,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 699,
@@ -8397,7 +8397,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 700,
@@ -8409,7 +8409,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 701,
@@ -8421,7 +8421,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 702,
@@ -8433,7 +8433,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 703,
@@ -8445,7 +8445,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 704,
@@ -8457,7 +8457,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 705,
@@ -8469,7 +8469,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 706,
@@ -8481,7 +8481,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 707,
@@ -8493,7 +8493,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 708,
@@ -8505,7 +8505,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 709,
@@ -8517,7 +8517,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 710,
@@ -8529,7 +8529,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 711,
@@ -8541,7 +8541,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 712,
@@ -8553,7 +8553,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 713,
@@ -8565,7 +8565,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 714,
@@ -8577,7 +8577,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "None",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 715,
@@ -8589,7 +8589,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 716,
@@ -8601,7 +8601,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 717,
@@ -8613,7 +8613,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 718,
@@ -8625,7 +8625,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 719,
@@ -8637,7 +8637,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 720,
@@ -8649,7 +8649,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 721,
@@ -8661,7 +8661,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 722,
@@ -8673,7 +8673,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 723,
@@ -8685,7 +8685,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 724,
@@ -8697,7 +8697,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 725,
@@ -8709,7 +8709,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 726,
@@ -8733,7 +8733,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 728,
@@ -8745,7 +8745,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 729,
@@ -8757,7 +8757,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 2",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 730,
@@ -8769,7 +8769,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 731,
@@ -8793,7 +8793,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 733,
@@ -8805,7 +8805,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 734,
@@ -8817,7 +8817,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 735,
@@ -8829,7 +8829,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 736,
@@ -8841,7 +8841,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 737,
@@ -8853,7 +8853,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 738,
@@ -8865,7 +8865,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 739,
@@ -8877,7 +8877,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 740,
@@ -8889,7 +8889,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 741,
@@ -8901,7 +8901,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 742,
@@ -8913,7 +8913,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 743,
@@ -8925,7 +8925,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 744,
@@ -8937,7 +8937,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 745,
@@ -8949,7 +8949,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 746,
@@ -8961,7 +8961,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 747,
@@ -8973,7 +8973,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 748,
@@ -8985,7 +8985,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 749,
@@ -8997,7 +8997,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 750,
@@ -9009,7 +9009,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "None",
     "Colour": "Very Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 751,
@@ -9021,7 +9021,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 752,
@@ -9033,7 +9033,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 753,
@@ -9045,7 +9045,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 754,
@@ -9057,7 +9057,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 755,
@@ -9069,7 +9069,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 756,
@@ -9081,7 +9081,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 757,
@@ -9093,7 +9093,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 758,
@@ -9105,7 +9105,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 759,
@@ -9117,7 +9117,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 760,
@@ -9129,7 +9129,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 761,
@@ -9141,7 +9141,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 762,
@@ -9153,7 +9153,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 763,
@@ -9165,7 +9165,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "None",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 764,
@@ -9177,7 +9177,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 765,
@@ -9189,7 +9189,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 766,
@@ -9201,7 +9201,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 767,
@@ -9213,7 +9213,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 768,
@@ -9225,7 +9225,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 769,
@@ -9237,7 +9237,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 770,
@@ -9249,7 +9249,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "None",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 771,
@@ -9261,7 +9261,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 772,
@@ -9273,7 +9273,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 773,
@@ -9285,7 +9285,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 774,
@@ -9297,7 +9297,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 775,
@@ -9309,7 +9309,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 776,
@@ -9321,7 +9321,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 777,
@@ -9333,7 +9333,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 778,
@@ -9345,7 +9345,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None",
     "Colour": "Very Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 779,
@@ -9357,7 +9357,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 780,
@@ -9369,7 +9369,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 781,
@@ -9381,7 +9381,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 782,
@@ -9393,7 +9393,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 783,
@@ -9417,7 +9417,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 785,
@@ -9429,7 +9429,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 786,
@@ -9441,7 +9441,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 787,
@@ -9453,7 +9453,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 788,
@@ -9465,7 +9465,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 789,
@@ -9477,7 +9477,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 790,
@@ -9489,7 +9489,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 791,
@@ -9501,7 +9501,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 792,
@@ -9513,7 +9513,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 793,
@@ -9525,7 +9525,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 794,
@@ -9537,7 +9537,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 795,
@@ -9549,7 +9549,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 796,
@@ -9561,7 +9561,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 797,
@@ -9573,7 +9573,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 798,
@@ -9585,7 +9585,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 799,
@@ -9597,7 +9597,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 800,
@@ -9609,7 +9609,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 801,
@@ -9621,7 +9621,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 802,
@@ -9633,7 +9633,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 803,
@@ -9645,7 +9645,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 804,
@@ -9657,7 +9657,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 805,
@@ -9669,7 +9669,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 806,
@@ -9681,7 +9681,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "None",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 807,
@@ -9693,7 +9693,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 808,
@@ -9717,7 +9717,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 810,
@@ -9729,7 +9729,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 811,
@@ -9753,7 +9753,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 813,
@@ -9765,7 +9765,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 814,
@@ -9777,7 +9777,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 815,
@@ -9789,7 +9789,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 816,
@@ -9801,7 +9801,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 817,
@@ -9813,7 +9813,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 818,
@@ -9825,7 +9825,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 819,
@@ -9837,7 +9837,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 820,
@@ -9849,7 +9849,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 821,
@@ -9861,7 +9861,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 822,
@@ -9873,7 +9873,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 823,
@@ -9897,7 +9897,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 825,
@@ -9909,7 +9909,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 826,
@@ -9921,7 +9921,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 827,
@@ -9933,7 +9933,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Ladder",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 828,
@@ -9945,7 +9945,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 829,
@@ -9957,7 +9957,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 830,
@@ -9969,7 +9969,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 831,
@@ -9981,7 +9981,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 832,
@@ -9993,7 +9993,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 833,
@@ -10005,7 +10005,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 834,
@@ -10017,7 +10017,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 835,
@@ -10029,7 +10029,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 836,
@@ -10041,7 +10041,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 837,
@@ -10053,7 +10053,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 838,
@@ -10065,7 +10065,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 839,
@@ -10077,7 +10077,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 840,
@@ -10089,7 +10089,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 841,
@@ -10101,7 +10101,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 842,
@@ -10113,7 +10113,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Crack",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 843,
@@ -10125,7 +10125,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 844,
@@ -10137,7 +10137,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 845,
@@ -10149,7 +10149,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 846,
@@ -10161,7 +10161,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 847,
@@ -10173,7 +10173,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 848,
@@ -10185,7 +10185,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 849,
@@ -10197,7 +10197,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 850,
@@ -10209,7 +10209,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 851,
@@ -10221,7 +10221,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 852,
@@ -10233,7 +10233,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 853,
@@ -10245,7 +10245,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 854,
@@ -10257,7 +10257,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 855,
@@ -10269,7 +10269,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 856,
@@ -10281,7 +10281,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 857,
@@ -10293,7 +10293,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 858,
@@ -10305,7 +10305,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "None",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 859,
@@ -10317,7 +10317,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 860,
@@ -10329,7 +10329,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 861,
@@ -10341,7 +10341,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 862,
@@ -10353,7 +10353,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 863,
@@ -10365,7 +10365,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 864,
@@ -10377,7 +10377,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 865,
@@ -10389,7 +10389,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 866,
@@ -10401,7 +10401,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 867,
@@ -10413,7 +10413,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 868,
@@ -10425,7 +10425,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 869,
@@ -10437,7 +10437,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 870,
@@ -10449,7 +10449,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 871,
@@ -10461,7 +10461,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 872,
@@ -10473,7 +10473,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 873,
@@ -10485,7 +10485,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 874,
@@ -10497,7 +10497,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 875,
@@ -10509,7 +10509,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 876,
@@ -10521,7 +10521,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 877,
@@ -10533,7 +10533,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 878,
@@ -10545,7 +10545,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 879,
@@ -10557,7 +10557,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 880,
@@ -10569,7 +10569,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 881,
@@ -10581,7 +10581,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 882,
@@ -10593,7 +10593,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 883,
@@ -10617,7 +10617,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 885,
@@ -10629,7 +10629,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 886,
@@ -10641,7 +10641,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 887,
@@ -10653,7 +10653,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 888,
@@ -10665,7 +10665,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 889,
@@ -10677,7 +10677,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 890,
@@ -10689,7 +10689,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 891,
@@ -10701,7 +10701,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 892,
@@ -10713,7 +10713,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 893,
@@ -10725,7 +10725,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 894,
@@ -10749,7 +10749,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 896,
@@ -10761,7 +10761,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 897,
@@ -10773,7 +10773,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 898,
@@ -10785,7 +10785,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 899,
@@ -10797,7 +10797,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 900,
@@ -10809,7 +10809,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 901,
@@ -10821,7 +10821,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 902,
@@ -10833,7 +10833,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 903,
@@ -10857,7 +10857,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess A",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 905,
@@ -10869,7 +10869,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 906,
@@ -10893,7 +10893,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 908,
@@ -10905,7 +10905,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 909,
@@ -10917,7 +10917,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 910,
@@ -10929,7 +10929,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 911,
@@ -10941,7 +10941,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 912,
@@ -10953,7 +10953,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 913,
@@ -10965,7 +10965,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 914,
@@ -10977,7 +10977,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Ladder",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 915,
@@ -10989,7 +10989,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 916,
@@ -11001,7 +11001,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 917,
@@ -11013,7 +11013,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 918,
@@ -11025,7 +11025,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 919,
@@ -11037,7 +11037,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 920,
@@ -11049,7 +11049,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 921,
@@ -11061,7 +11061,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Ladder",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 922,
@@ -11073,7 +11073,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 923,
@@ -11085,7 +11085,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 924,
@@ -11097,7 +11097,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 925,
@@ -11109,7 +11109,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 926,
@@ -11121,7 +11121,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 927,
@@ -11133,7 +11133,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 928,
@@ -11145,7 +11145,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 929,
@@ -11157,7 +11157,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 930,
@@ -11169,7 +11169,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 931,
@@ -11181,7 +11181,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 932,
@@ -11193,7 +11193,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 933,
@@ -11205,7 +11205,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 934,
@@ -11217,7 +11217,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 935,
@@ -11229,7 +11229,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 936,
@@ -11241,7 +11241,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 937,
@@ -11253,7 +11253,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 938,
@@ -11265,7 +11265,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 939,
@@ -11277,7 +11277,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 940,
@@ -11289,7 +11289,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 941,
@@ -11301,7 +11301,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Grate",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 942,
@@ -11313,7 +11313,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 943,
@@ -11325,7 +11325,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Crack",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 944,
@@ -11337,7 +11337,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Embellished 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 945,
@@ -11349,7 +11349,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 946,
@@ -11361,7 +11361,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 947,
@@ -11373,7 +11373,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 948,
@@ -11385,7 +11385,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 949,
@@ -11397,7 +11397,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Stairs",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 950,
@@ -11409,7 +11409,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 951,
@@ -11421,7 +11421,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 952,
@@ -11433,7 +11433,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 953,
@@ -11445,7 +11445,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 954,
@@ -11457,7 +11457,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 955,
@@ -11469,7 +11469,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 956,
@@ -11481,7 +11481,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 957,
@@ -11493,7 +11493,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 5",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 958,
@@ -11505,7 +11505,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 959,
@@ -11517,7 +11517,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 960,
@@ -11529,7 +11529,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Grate",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 961,
@@ -11541,7 +11541,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 962,
@@ -11553,7 +11553,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Crack",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 963,
@@ -11565,7 +11565,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 964,
@@ -11577,7 +11577,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Basic 6",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 965,
@@ -11589,7 +11589,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 966,
@@ -11601,7 +11601,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 967,
@@ -11613,7 +11613,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 1",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 968,
@@ -11625,7 +11625,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 969,
@@ -11637,7 +11637,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Very Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 970,
@@ -11649,7 +11649,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 971,
@@ -11661,7 +11661,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 972,
@@ -11673,7 +11673,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 973,
@@ -11685,7 +11685,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 974,
@@ -11697,7 +11697,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Grate",
     "Colour": "Embellished 2",
-    "Character": "None"
+    "Character": "Meditating"
   },
   {
     "id": 975,
@@ -11709,7 +11709,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 976,
@@ -11721,7 +11721,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 977,
@@ -11733,7 +11733,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 978,
@@ -11745,7 +11745,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 979,
@@ -11757,7 +11757,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Very Degraded 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 980,
@@ -11769,7 +11769,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess B",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 981,
@@ -11781,7 +11781,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 982,
@@ -11793,7 +11793,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 2",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 983,
@@ -11805,7 +11805,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 3",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 984,
@@ -11817,7 +11817,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 4",
-    "Character": "None"
+    "Character": "Hunched"
   },
   {
     "id": 985,
@@ -11829,7 +11829,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Crack",
     "Colour": "Basic 1",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 986,
@@ -11841,7 +11841,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Pit",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 987,
@@ -11853,7 +11853,7 @@
     "GlobalAsset": "Bong",
     "ExpansionProp": "Stairs",
     "Colour": "Embellished 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 988,
@@ -11865,7 +11865,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 989,
@@ -11877,7 +11877,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Pit",
     "Colour": "Degraded 2",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 990,
@@ -11889,7 +11889,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Very Embellished 0",
-    "Character": "None"
+    "Character": "Slouched"
   },
   {
     "id": 991,
@@ -11901,7 +11901,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Recess C",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 992,
@@ -11913,7 +11913,7 @@
     "GlobalAsset": "Martini",
     "ExpansionProp": "None",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 993,
@@ -11925,7 +11925,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "None",
     "Colour": "Very Degraded 0",
-    "Character": "None"
+    "Character": "Standing"
   },
   {
     "id": 994,
@@ -11937,7 +11937,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess B",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 995,
@@ -11949,7 +11949,7 @@
     "GlobalAsset": "None",
     "ExpansionProp": "Recess B",
     "Colour": "Very Degraded 1",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 996,
@@ -11961,7 +11961,7 @@
     "GlobalAsset": "Fridge",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 0",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 997,
@@ -11973,7 +11973,7 @@
     "GlobalAsset": "Lavalamp",
     "ExpansionProp": "Grate",
     "Colour": "Basic 7",
-    "Character": "None"
+    "Character": "Sitting"
   },
   {
     "id": 998,
@@ -11985,7 +11985,7 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Basic 3",
-    "Character": "None"
+    "Character": "Collapsed"
   },
   {
     "id": 999,
@@ -11997,6 +11997,6 @@
     "GlobalAsset": "Cactus",
     "ExpansionProp": "Recess A",
     "Colour": "Degraded 1",
-    "Character": "None"
+    "Character": "Standing"
   }
 ]
