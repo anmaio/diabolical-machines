@@ -18,11 +18,23 @@ contract Metadata {
       _globalSVG = globalSVG;
   }
 
+  /**
+    * @dev Returns the machine based on the random number
+    * @param rand The digits to use
+    * @return The machine
+   */
+
   function getMachine(uint rand) public view returns (string memory) {
     return _machine.selectMachine(rand);
   }
 
-  // Function build metadata for a given token
+  /**
+   * @dev build entire metadata for a given token
+    * @param tokenId The token to build metadata for
+    * @param rand The digits to use
+    * @return The metadata
+  */
+
   function buildMetadata(uint256 tokenId, uint rand) public view returns (string memory) {
     string[3] memory allStates = ["Degraded", "Basic", "Embellished"];
     int baseline = getBaselineRarity(rand);
@@ -59,14 +71,35 @@ contract Metadata {
     return output;
   }
 
+  /**
+    * @dev Get the productivity based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The productivity as a string
+   */
+
   function getProductivity(uint rand, int baseline) public view returns (string memory) {
     string memory machine = getMachine(rand);
     return _machine.getProductivity(machine, rand, baseline);
   }
 
+  /**
+    * @dev Get the colour index based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The colour index as a string
+   */
+
   function getBaseColourValue(uint rand, int baseline) internal pure returns (uint) {
     return GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 3)] + baseline);
   }
+
+  /**
+    * @dev Get the colour index tier based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The colour index tier as a string
+   */
 
   function getColourIndexTier(uint rand, int baseline) public pure returns(string memory) {
     uint value = Environment.getColourIndex(getBaseColourValue(rand, baseline));
@@ -89,13 +122,17 @@ contract Metadata {
     } else {
       colourTier = "Unknown";
     }
-
     return colourTier;
-    
   }
 
-  // 0 = degraded, 1 = basic, 2 = embellished
+  /**
+    * @dev Get the state based on the baseline rarity
+    * @param baseline The baseline rarity
+    * @return The state as an integer
+   */
+  
   function getState(int baseline) public pure returns (uint) {
+    // 0 = degraded, 1 = basic, 2 = embellished
     if (baseline < 85) {
       return 0;
     } else if (baseline < 171) {
@@ -105,16 +142,35 @@ contract Metadata {
     }
   }
 
+  /**
+    * @dev Get the baseline rarity based on the random number
+    * @param rand The digits to use
+    * @return The baseline rarity as an integer
+   */
+
   function getBaselineRarity(uint rand) public pure returns (int) {
     int baselineDigits = int(GridHelper.constrainToHex(Noise.getNoiseArrayZero()[GridHelper.getRandByte(rand, 2)]));
     return baselineDigits;
   }
 
-  // compose SVG
+  /**
+    * @dev Get the SVG for a given token base64 encoded
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The SVG as a string
+   */
+  
   function composeSVG(uint rand, int baseline) public view returns (string memory) {
     // return all svg's concatenated together and base64 encoded
     return Base64.encode(bytes(composeOnlyImage(rand, baseline)));
   }
+
+  /**
+    * @dev Get the SVG for a given token not base64 encoded
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The SVG as a string
+   */
   
   function composeOnlyImage(uint rand, int baseline) public view returns (string memory) {
     // determine if flipped

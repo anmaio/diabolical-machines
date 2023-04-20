@@ -28,7 +28,7 @@ library CommonSVG {
 
   string internal constant SHELL_OPEN = "<g style='transform:scaleX(";
 
-  string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell' clip-path='url(#clipPathShell)'><g id='leftWall'><polygon points='0,270 468,0 468,540 0,810' fill='url(#s0)' stroke='black'></polygon><polygon points='0,270 468,0 468,540 0,810' fill='url(#lDT)' stroke='black'></polygon></g><g id='rightWall'><polygon points='468,540 468,0 936,270 936,810' fill='url(#s1)' stroke='black'></polygon><polygon points='468,540 468,0 936,270 936,810' fill='url(#rDT)' stroke='black'></polygon></g><g id='floor'><polygon id='polygon-floor-border' points='0,810 468,1080 936,810 468,540' fill='url(#s2)' stroke='black'></polygon><polygon id='polygon-floor-border-DT' points='0,810 468,1080 936,810 468,540' fill='url(#fDT)' stroke='black'></polygon></g>";
+  string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell' clip-path='url(#clipPathShell)'>";
 
   string internal constant ROTATIONS = "-40-45-45";
 
@@ -60,13 +60,13 @@ library CommonSVG {
 
   string internal constant PATTERNS_END = "' id='shell-pattern-use'/></pattern>";
 
-  string internal constant OPACITY_START = "<g id='floorPat' transform='translate(234 135) rotate(60)' transform-origin='0 540'><g transform='skewY(-30)' transform-origin='0 0'><rect id='floorPatRect' x='0' y='270' width='468' height='540' opacity='";
+  string internal constant OPACITY_START = "<g id='leftWall'><polygon points='0,270 468,0 468,540 0,810' fill='url(#s0)' stroke='black'/><g id='leftWallPat' transform='skewY(-30)'><rect x='0' y='270' width='468' height='540' opacity='";
 
-  string internal constant OPACITY_MID_ONE = "' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g></g><g id='rightWallPat' transform='skewY(30)'><rect x='468' y='-270' width='468' height='540' opacity='";
+  string internal constant OPACITY_MID_ONE = "%' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g><polygon points='0,270 468,0 468,540 0,810' fill='url(#lDT)' stroke='black'/></g><g id='rightWall'><polygon points='468,540 468,0 936,270 936,810' fill='url(#s1)' stroke='black'/><g id='rightWallPat' transform='skewY(30)'><rect x='468' y='-270' width='468' height='540' opacity='";
 
-  string internal constant OPACITY_MID_TWO = "' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g><g id='leftWallPat' transform='skewY(-30)'><rect x='0' y='270' width='468' height='540' opacity='";
+  string internal constant OPACITY_MID_TWO = "%' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g><polygon points='468,540 468,0 936,270 936,810' fill='url(#rDT)' stroke='black'/></g><g id='floor'><polygon id='polygon-floor-border' points='0,810 468,1080 936,810 468,540' fill='url(#s2)' stroke='black'/><g id='floorPat' transform='translate(234 135) rotate(60)' transform-origin='0 540'><g transform='skewY(-30)' transform-origin='0 0'><rect id='floorPatRect' x='0' y='270' width='468' height='540' opacity='";
 
-  string internal constant OPACITY_END = "' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g>";
+  string internal constant OPACITY_END = "%' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g></g><polygon id='polygon-floor-border-DT' points='0,810 468,1080 936,810 468,540' fill='url(#fDT)' stroke='black'/></g>";
 
   function createShellGradient(uint[6] memory colours, string memory id, string memory rotation) internal pure returns (string memory) {
     string memory output = string.concat(

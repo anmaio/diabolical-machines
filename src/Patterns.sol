@@ -17,11 +17,25 @@ library Patterns {
 
   string internal constant PATTERNS_NAMES = "cdrqbaiosekgpfnjlm";
 
+  /**
+    * @dev Get if the pattern is a texture or not based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return If the pattern is a texture or not
+   */
+
   function getIsTexture(uint rand, int baseline) public pure returns (bool) {
     uint textureDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 4)] + baseline);
 
-    return textureDigits % 2 == 0;
+    return textureDigits < 128;
   }
+
+  /**
+    * @dev Get the pattern name based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The pattern name
+   */
 
   function getPatternName(uint rand, int baseline) public pure returns (string memory) {
     uint patternDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 5)] + baseline);
@@ -55,6 +69,13 @@ library Patterns {
     return string(GridHelper.slice(bytes(names), oneLess * nameLength, nameLength));
   }
 
+  /**
+    * @dev Get the surface quantity based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The surface quantity
+   */
+
   function getSurfaceQuantity(uint rand, int baseline) public pure returns (bool[3] memory) {
     uint surfaceDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 6)] + baseline);
 
@@ -71,6 +92,13 @@ library Patterns {
       return [true, true, true];
     }
   }
+
+  /**
+    * @dev Get the pattern scale based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The pattern scale
+   */
 
   function getScale(uint rand, int baseline) public pure returns (string memory) {
     uint scaleDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 7)] + baseline);
@@ -104,6 +132,14 @@ library Patterns {
     return string(GridHelper.slice(bytes(scales), oneLess * scaleLength, scaleLength));
   }
 
+  /**
+    * @dev Get the pattern opacity based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @param surfaceNumber The surface number 0 is left wall, 1 is right wall, 2 is floor
+    * @return The pattern opacity as a string
+   */
+
   function getOpacity(uint rand, int baseline, uint surfaceNumber) public pure returns (string memory) {
     uint opacityDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 8)] + baseline);
 
@@ -124,6 +160,13 @@ library Patterns {
     }
   }
 
+  /**
+    * @dev Get the pattern rotation based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The pattern rotation in degrees from 0 to 45
+   */
+
   // Only used for textures
   function getRotate(uint rand, int baseline) public pure returns (uint) {
     uint rotateDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 9)] + baseline);
@@ -131,6 +174,14 @@ library Patterns {
     // 0 -> 45
     return rotateDigits * 45 / 255;
   }
+
+  /**
+    * @dev Get the pattern width and height based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @param part The part of the random number to use
+    * @return The pattern width or height as a string
+   */
 
   function getWidthHeight(uint rand, int baseline, uint part) public pure returns (string memory) {
     uint digits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, part)] + baseline);
@@ -152,9 +203,23 @@ library Patterns {
     }
   }
 
+  /**
+    * @dev Get the pattern width based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The pattern width as a string
+   */
+
   function getWidth(uint rand, int baseline) public pure returns (string memory) {
     return getWidthHeight(rand, baseline, 9);
   }
+
+  /**
+    * @dev Get the pattern height based on the baseline rarity and random number
+    * @param rand The digits to use
+    * @param baseline The baseline rarity
+    * @return The pattern height as a string
+   */
 
   function getHeight(uint rand, int baseline) public pure returns (string memory) {
     return getWidthHeight(rand, baseline, 10);

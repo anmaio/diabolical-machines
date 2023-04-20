@@ -5,10 +5,6 @@ pragma solidity 0.8.16;
 
 import "./styles/altar/AltarCSS1.sol";
 
-// import "./styles/drills/DrillsCSS1.sol";
-
-// import "./styles/noses/NosesCSS1.sol";
-
 import "./styles/assets/AssetsCSS1.sol";
 
 import "./styles/apparatus/ApparatusCSS1.sol";
@@ -168,7 +164,7 @@ contract GlobalSVG {
 
     output = string.concat(
       output,
-      // CommonSVG.SCRIPT,
+      CommonSVG.SCRIPT,
       CommonSVG.STYLE,
       ApparatusCSS1.getPart(),
       ApparatusCSS2.getPart(),

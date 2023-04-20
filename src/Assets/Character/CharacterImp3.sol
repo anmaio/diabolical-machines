@@ -10,7 +10,7 @@ contract CharacterImp3 {
   function getAssetFromID(uint assetID) external pure returns (string memory) {
     if (assetID == 14002) {
       return CHAR_LAYING;
-    } else if (assetID == 20003) {
+    } else if (assetID == 14003) {
       return CHAR_SLOUCHED;
     } else {
       return "";
