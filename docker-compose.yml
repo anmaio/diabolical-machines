@@ -8,7 +8,7 @@ services:
       args:
         - SOLC_VERSION=0.8.16
       context: .
-    container_name: frhtmlipfs_anvil
+    container_name: diabolical_anvil
     entrypoint: ["anvil"]
     env_file:
       - '.env'
@@ -26,7 +26,7 @@ services:
       args:
         - SOLC_VERSION=0.8.16
       context: .
-    container_name: frhtmlipfs_forge
+    container_name: diabolical_forge
     entrypoint: ["/docker/entrypoint.sh"]
     env_file:
       - '.env'
@@ -39,7 +39,7 @@ services:
   echidna:
     build:
       context: ./echidna
-    container_name: frhtmlipfs_echidna
+    container_name: diabolical_echidna
     network_mode: "host"
     volumes:
       - .:/app
@@ -47,7 +47,7 @@ services:
   mythril:
     build:
       context: ./mythril
-    container_name: frhtmlipfs_mythril
+    container_name: diabolical_mythril
     network_mode: "host"
     volumes:
       - .:/app
@@ -57,7 +57,7 @@ services:
   build:
     build:
       context: .
-    container_name: frhtmlipfs_build
+    container_name: diabolical_build
     entrypoint: ["forge", "build", "--via-ir"]
     env_file:
       - '.env'
@@ -71,7 +71,7 @@ services:
   test:
     build:
       context: .
-    container_name: frhtmlipfs_test
+    container_name: diabolical_test
     entrypoint: ["forge", "test", "--via-ir", "-vvvv"]
     env_file:
       - '.env'

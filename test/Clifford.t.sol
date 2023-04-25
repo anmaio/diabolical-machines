@@ -107,11 +107,32 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 1000;
+  uint internal constant MINT_SIZE = 0;
   // string[] public allMachines = ["Altar", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
   string[] public allMachines = ["Altar"];
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
+
+  // CUSTOM ERRORS
+
+  error InvalidTokenId(uint tokenId);
+  error SeedNotSet(uint genId);
+  error TransferFailed();
+
+  error NotOwnerOfCypher(uint tokenId);
+  error CypherAlreadyClaimed(uint tokenId);
+	error CypherClaimNotActive();
+
+  error CannotBidZero();
+  error IncorrectBidIncrement(uint amount);
+  error AuctionNotActive();
+  error BidTooSmall(uint amount);
+  error AuctionAlreadyStarted();
+  error CypherClaimNotStarted();
+  error NftsAlreadyDistributed();
+
+	error AuctionNotOver();
+  error NftsNotAllMinted();
 
   // Trait bases
   TraitBase private substancesTB;
@@ -133,8 +154,6 @@ contract CliffordTest is Test {
 
   // Machines
   Altar private altar;
-  // Drills private drills;
-  // Noses private noses;
   Apparatus private apparatus;
   Cells private cells;
   Tubes private tubes;
@@ -213,34 +232,6 @@ contract CliffordTest is Test {
     altarImpsAds[2] = address(altarImp3);
     altarTB = new TraitBase(altarImpsAds);
   }
-
-  // Drills
-  // function deployDrills() internal {
-  //   DrillsImp1 drillsImp1 = new DrillsImp1();
-  //   DrillsImp2 drillsImp2 = new DrillsImp2();
-  //   DrillsImp3 drillsImp3 = new DrillsImp3();
-  //   DrillsImp4 drillsImp4 = new DrillsImp4();
-  //   address[] memory drillsImpsAds = new address[](4);
-  //   drillsImpsAds[0] = address(drillsImp1);
-  //   drillsImpsAds[1] = address(drillsImp2);
-  //   drillsImpsAds[2] = address(drillsImp3);
-  //   drillsImpsAds[3] = address(drillsImp4);
-  //   drillsTB = new TraitBase(drillsImpsAds);
-  // }
-
-  // Noses
-  // function deployNoses() internal {
-  //   NosesImp1 nosesImp1 = new NosesImp1();
-  //   NosesImp2 nosesImp2 = new NosesImp2();
-  //   NosesImp3 nosesImp3 = new NosesImp3();
-  //   NosesImp4 nosesImp4 = new NosesImp4();
-  //   address[] memory nosesImpsAds = new address[](4);
-  //   nosesImpsAds[0] = address(nosesImp1);
-  //   nosesImpsAds[1] = address(nosesImp2);
-  //   nosesImpsAds[2] = address(nosesImp3);
-  //   nosesImpsAds[3] = address(nosesImp4);
-  //   nosesTB = new TraitBase(nosesImpsAds);
-  // }
 
   // Tubes
   function deployTubes() internal {
@@ -474,406 +465,45 @@ contract CliffordTest is Test {
 
   // test writing X images to a file
   function testWriteImages1() public {
-    // Memory leak causes wsl to crash for me with 1000 images
+    // Memory leak causes wsl to crash for me with large amount of images
     // https://github.com/ethereum/solidity/issues/13885
-
-    writeImagesInRange(0, MINT_SIZE/100);
+    writeImagesInRange(0, MINT_SIZE/10);
   }
 
   function testWriteImages2() public {
-    writeImagesInRange(MINT_SIZE/100, 2*MINT_SIZE/100);
+    writeImagesInRange(MINT_SIZE/10, 2*MINT_SIZE/10);
   }
 
   function testWriteImages3() public {
-    writeImagesInRange(2*MINT_SIZE/100, 3*MINT_SIZE/100);
+    writeImagesInRange(2*MINT_SIZE/10, 3*MINT_SIZE/10);
   }
 
   function testWriteImages4() public {
-    writeImagesInRange(3*MINT_SIZE/100, 4*MINT_SIZE/100);
+    writeImagesInRange(3*MINT_SIZE/10, 4*MINT_SIZE/10);
   }
 
   function testWriteImages5() public {
-    writeImagesInRange(4*MINT_SIZE/100, 5*MINT_SIZE/100);
+    writeImagesInRange(4*MINT_SIZE/10, 5*MINT_SIZE/10);
   }
 
   function testWriteImages6() public {
-    writeImagesInRange(5*MINT_SIZE/100, 6*MINT_SIZE/100);
+    writeImagesInRange(5*MINT_SIZE/10, 6*MINT_SIZE/10);
   }
 
   function testWriteImages7() public {
-    writeImagesInRange(6*MINT_SIZE/100, 7*MINT_SIZE/100);
+    writeImagesInRange(6*MINT_SIZE/10, 7*MINT_SIZE/10);
   }
 
   function testWriteImages8() public {
-    writeImagesInRange(7*MINT_SIZE/100, 8*MINT_SIZE/100);
+    writeImagesInRange(7*MINT_SIZE/10, 8*MINT_SIZE/10);
   }
 
   function testWriteImages9() public {
-    writeImagesInRange(8*MINT_SIZE/100, 9*MINT_SIZE/100);
+    writeImagesInRange(8*MINT_SIZE/10, 9*MINT_SIZE/10);
   }
 
   function testWriteImages10() public {
-    writeImagesInRange(9*MINT_SIZE/100, 10*MINT_SIZE/100);
-  }
-
-  function testWriteImages11() public {
-    writeImagesInRange(10*MINT_SIZE/100, 11*MINT_SIZE/100);
-  }
-
-  function testWriteImages12() public {
-    writeImagesInRange(11*MINT_SIZE/100, 12*MINT_SIZE/100);
-  }
-
-  function testWriteImages13() public {
-    writeImagesInRange(12*MINT_SIZE/100, 13*MINT_SIZE/100);
-  }
-
-  function testWriteImages14() public {
-    writeImagesInRange(13*MINT_SIZE/100, 14*MINT_SIZE/100);
-  }
-
-  function testWriteImages15() public {
-    writeImagesInRange(14*MINT_SIZE/100, 15*MINT_SIZE/100);
-  }
-
-  function testWriteImages16() public {
-    writeImagesInRange(15*MINT_SIZE/100, 16*MINT_SIZE/100);
-  }
-
-  function testWriteImages17() public {
-    writeImagesInRange(16*MINT_SIZE/100, 17*MINT_SIZE/100);
-  }
-
-  function testWriteImages18() public {
-    writeImagesInRange(17*MINT_SIZE/100, 18*MINT_SIZE/100);
-  }
-
-  function testWriteImages19() public {
-    writeImagesInRange(18*MINT_SIZE/100, 19*MINT_SIZE/100);
-  }
-
-  function testWriteImages20() public {
-    writeImagesInRange(19*MINT_SIZE/100, 20*MINT_SIZE/100);
-  }
-
-  function testWriteImages21() public {
-    writeImagesInRange(20*MINT_SIZE/100, 21*MINT_SIZE/100);
-  }
-
-  function testWriteImages22() public {
-    writeImagesInRange(21*MINT_SIZE/100, 22*MINT_SIZE/100);
-  }
-
-  function testWriteImages23() public {
-    writeImagesInRange(22*MINT_SIZE/100, 23*MINT_SIZE/100);
-  }
-
-  function testWriteImages24() public {
-    writeImagesInRange(23*MINT_SIZE/100, 24*MINT_SIZE/100);
-  }
-
-  function testWriteImages25() public {
-    writeImagesInRange(24*MINT_SIZE/100, 25*MINT_SIZE/100);
-  }
-
-  function testWriteImages26() public {
-    writeImagesInRange(25*MINT_SIZE/100, 26*MINT_SIZE/100);
-  }
-
-  function testWriteImages27() public {
-    writeImagesInRange(26*MINT_SIZE/100, 27*MINT_SIZE/100);
-  }
-
-  function testWriteImages28() public {
-    writeImagesInRange(27*MINT_SIZE/100, 28*MINT_SIZE/100);
-  }
-
-  function testWriteImages29() public {
-    writeImagesInRange(28*MINT_SIZE/100, 29*MINT_SIZE/100);
-  }
-
-  function testWriteImages30() public {
-    writeImagesInRange(29*MINT_SIZE/100, 30*MINT_SIZE/100);
-  }
-
-  function testWriteImages31() public {
-    writeImagesInRange(30*MINT_SIZE/100, 31*MINT_SIZE/100);
-  }
-
-  function testWriteImages32() public {
-    writeImagesInRange(31*MINT_SIZE/100, 32*MINT_SIZE/100);
-  }
-
-  function testWriteImages33() public {
-    writeImagesInRange(32*MINT_SIZE/100, 33*MINT_SIZE/100);
-  }
-
-  function testWriteImages34() public {
-    writeImagesInRange(33*MINT_SIZE/100, 34*MINT_SIZE/100);
-  }
-
-  function testWriteImages35() public {
-    writeImagesInRange(34*MINT_SIZE/100, 35*MINT_SIZE/100);
-  }
-
-  function testWriteImages36() public {
-    writeImagesInRange(35*MINT_SIZE/100, 36*MINT_SIZE/100);
-  }
-
-  function testWriteImages37() public {
-    writeImagesInRange(36*MINT_SIZE/100, 37*MINT_SIZE/100);
-  }
-
-  function testWriteImages38() public {
-    writeImagesInRange(37*MINT_SIZE/100, 38*MINT_SIZE/100);
-  }
-
-  function testWriteImages39() public {
-    writeImagesInRange(38*MINT_SIZE/100, 39*MINT_SIZE/100);
-  }
-
-  function testWriteImages40() public {
-    writeImagesInRange(39*MINT_SIZE/100, 40*MINT_SIZE/100);
-  }
-
-  function testWriteImages41() public {
-    writeImagesInRange(40*MINT_SIZE/100, 41*MINT_SIZE/100);
-  }
-
-  function testWriteImages42() public {
-    writeImagesInRange(41*MINT_SIZE/100, 42*MINT_SIZE/100);
-  }
-
-  function testWriteImages43() public {
-    writeImagesInRange(42*MINT_SIZE/100, 43*MINT_SIZE/100);
-  }
-
-  function testWriteImages44() public {
-    writeImagesInRange(43*MINT_SIZE/100, 44*MINT_SIZE/100);
-  }
-
-  function testWriteImages45() public {
-    writeImagesInRange(44*MINT_SIZE/100, 45*MINT_SIZE/100);
-  }
-
-  function testWriteImages46() public {
-    writeImagesInRange(45*MINT_SIZE/100, 46*MINT_SIZE/100);
-  }
-
-  function testWriteImages47() public {
-    writeImagesInRange(46*MINT_SIZE/100, 47*MINT_SIZE/100);
-  }
-
-  function testWriteImages48() public {
-    writeImagesInRange(47*MINT_SIZE/100, 48*MINT_SIZE/100);
-  }
-
-  function testWriteImages49() public {
-    writeImagesInRange(48*MINT_SIZE/100, 49*MINT_SIZE/100);
-  }
-
-  function testWriteImages50() public {
-    writeImagesInRange(49*MINT_SIZE/100, 50*MINT_SIZE/100);
-  }
-
-  function testWriteImages51() public {
-    writeImagesInRange(50*MINT_SIZE/100, 51*MINT_SIZE/100);
-  }
-
-  function testWriteImages52() public {
-    writeImagesInRange(51*MINT_SIZE/100, 52*MINT_SIZE/100);
-  }
-
-  function testWriteImages53() public {
-    writeImagesInRange(52*MINT_SIZE/100, 53*MINT_SIZE/100);
-  }
-
-  function testWriteImages54() public {
-    writeImagesInRange(53*MINT_SIZE/100, 54*MINT_SIZE/100);
-  }
-
-  function testWriteImages55() public {
-    writeImagesInRange(54*MINT_SIZE/100, 55*MINT_SIZE/100);
-  }
-
-  function testWriteImages56() public {
-    writeImagesInRange(55*MINT_SIZE/100, 56*MINT_SIZE/100);
-  }
-
-  function testWriteImages57() public {
-    writeImagesInRange(56*MINT_SIZE/100, 57*MINT_SIZE/100);
-  }
-
-  function testWriteImages58() public {
-    writeImagesInRange(57*MINT_SIZE/100, 58*MINT_SIZE/100);
-  }
-
-  function testWriteImages59() public {
-    writeImagesInRange(58*MINT_SIZE/100, 59*MINT_SIZE/100);
-  }
-
-  function testWriteImages60() public {
-    writeImagesInRange(59*MINT_SIZE/100, 60*MINT_SIZE/100);
-  }
-
-  function testWriteImages61() public {
-    writeImagesInRange(60*MINT_SIZE/100, 61*MINT_SIZE/100);
-  }
-
-  function testWriteImages62() public {
-    writeImagesInRange(61*MINT_SIZE/100, 62*MINT_SIZE/100);
-  }
-
-  function testWriteImages63() public {
-    writeImagesInRange(62*MINT_SIZE/100, 63*MINT_SIZE/100);
-  }
-
-  function testWriteImages64() public {
-    writeImagesInRange(63*MINT_SIZE/100, 64*MINT_SIZE/100);
-  }
-
-  function testWriteImages65() public {
-    writeImagesInRange(64*MINT_SIZE/100, 65*MINT_SIZE/100);
-  }
-
-  function testWriteImages66() public {
-    writeImagesInRange(65*MINT_SIZE/100, 66*MINT_SIZE/100);
-  }
-
-  function testWriteImages67() public {
-    writeImagesInRange(66*MINT_SIZE/100, 67*MINT_SIZE/100);
-  }
-
-  function testWriteImages68() public {
-    writeImagesInRange(67*MINT_SIZE/100, 68*MINT_SIZE/100);
-  }
-
-  function testWriteImages69() public {
-    writeImagesInRange(68*MINT_SIZE/100, 69*MINT_SIZE/100);
-  }
-
-  function testWriteImages70() public {
-    writeImagesInRange(69*MINT_SIZE/100, 70*MINT_SIZE/100);
-  }
-
-  function testWriteImages71() public {
-    writeImagesInRange(70*MINT_SIZE/100, 71*MINT_SIZE/100);
-  }
-
-  function testWriteImages72() public {
-    writeImagesInRange(71*MINT_SIZE/100, 72*MINT_SIZE/100);
-  }
-
-  function testWriteImages73() public {
-    writeImagesInRange(72*MINT_SIZE/100, 73*MINT_SIZE/100);
-  }
-
-  function testWriteImages74() public {
-    writeImagesInRange(73*MINT_SIZE/100, 74*MINT_SIZE/100);
-  }
-
-  function testWriteImages75() public {
-    writeImagesInRange(74*MINT_SIZE/100, 75*MINT_SIZE/100);
-  }
-
-  function testWriteImages76() public {
-    writeImagesInRange(75*MINT_SIZE/100, 76*MINT_SIZE/100);
-  }
-
-  function testWriteImages77() public {
-    writeImagesInRange(76*MINT_SIZE/100, 77*MINT_SIZE/100);
-  }
-
-  function testWriteImages78() public {
-    writeImagesInRange(77*MINT_SIZE/100, 78*MINT_SIZE/100);
-  }
-
-  function testWriteImages79() public {
-    writeImagesInRange(78*MINT_SIZE/100, 79*MINT_SIZE/100);
-  }
-
-  function testWriteImages80() public {
-    writeImagesInRange(79*MINT_SIZE/100, 80*MINT_SIZE/100);
-  }
-
-  function testWriteImages81() public {
-    writeImagesInRange(80*MINT_SIZE/100, 81*MINT_SIZE/100);
-  }
-
-  function testWriteImages82() public {
-    writeImagesInRange(81*MINT_SIZE/100, 82*MINT_SIZE/100);
-  }
-
-  function testWriteImages83() public {
-    writeImagesInRange(82*MINT_SIZE/100, 83*MINT_SIZE/100);
-  }
-
-  function testWriteImages84() public {
-    writeImagesInRange(83*MINT_SIZE/100, 84*MINT_SIZE/100);
-  }
-
-  function testWriteImages85() public {
-    writeImagesInRange(84*MINT_SIZE/100, 85*MINT_SIZE/100);
-  }
-
-  function testWriteImages86() public {
-    writeImagesInRange(85*MINT_SIZE/100, 86*MINT_SIZE/100);
-  }
-
-  function testWriteImages87() public {
-    writeImagesInRange(86*MINT_SIZE/100, 87*MINT_SIZE/100);
-  }
-
-  function testWriteImages88() public {
-    writeImagesInRange(87*MINT_SIZE/100, 88*MINT_SIZE/100);
-  }
-
-  function testWriteImages89() public {
-    writeImagesInRange(88*MINT_SIZE/100, 89*MINT_SIZE/100);
-  }
-
-  function testWriteImages90() public {
-    writeImagesInRange(89*MINT_SIZE/100, 90*MINT_SIZE/100);
-  }
-
-  function testWriteImages91() public {
-    writeImagesInRange(90*MINT_SIZE/100, 91*MINT_SIZE/100);
-  }
-
-  function testWriteImages92() public {
-    writeImagesInRange(91*MINT_SIZE/100, 92*MINT_SIZE/100);
-  }
-
-  function testWriteImages93() public {
-    writeImagesInRange(92*MINT_SIZE/100, 93*MINT_SIZE/100);
-  }
-
-  function testWriteImages94() public {
-    writeImagesInRange(93*MINT_SIZE/100, 94*MINT_SIZE/100);
-  }
-
-  function testWriteImages95() public {
-    writeImagesInRange(94*MINT_SIZE/100, 95*MINT_SIZE/100);
-  }
-
-  function testWriteImages96() public {
-    writeImagesInRange(95*MINT_SIZE/100, 96*MINT_SIZE/100);
-  }
-
-  function testWriteImages97() public {
-    writeImagesInRange(96*MINT_SIZE/100, 97*MINT_SIZE/100);
-  }
-
-  function testWriteImages98() public {
-    writeImagesInRange(97*MINT_SIZE/100, 98*MINT_SIZE/100);
-  }
-
-  function testWriteImages99() public {
-    writeImagesInRange(98*MINT_SIZE/100, 99*MINT_SIZE/100);
-  }
-
-  function testWriteImages100() public {
-    writeImagesInRange(99*MINT_SIZE/100, MINT_SIZE);
+    writeImagesInRange(9*MINT_SIZE/10, 10*MINT_SIZE/10);
   }
 
   // create a json file with the ids of the images that were created
@@ -932,7 +562,9 @@ contract CliffordTest is Test {
       );
 
       item = string.concat(
-        item, 
+        item,
+        "\",\n    \"Pattern\": \"",
+        metadata.getPatternName(clifford.getSeed(i), baseline),
         "\",\n    \"Character\": \"",
         machine.getCharacterName(clifford.getSeed(i), baseline),
         "\"",
@@ -947,50 +579,83 @@ contract CliffordTest is Test {
     
   }
 
-  function testWriteMetadata() public {
-    string memory itemOpen = "{\n    \"attributes\": [\n      {\n        \"trait_type\": \"State\",\n        \"value\": \"";
+  // Simple tests to simulate the auction process
 
-    for (uint256 i = 0; i < MINT_SIZE; i++) {
-      string memory id = Strings.toString(i);
-
-      int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
-
-      uint state = metadata.getState(baseline);
-
-      string memory machineName = metadata.getMachine(clifford.getSeed(i));
-
-      string memory productivity = metadata.getProductivity(clifford.getSeed(i), baseline);
-
-      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), baseline);
-
-      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), baseline);
-
-      string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), baseline);
-
-      string memory item = string.concat(
-        itemOpen, 
-        allStates[state], 
-        "\"\n      },\n      {\n        \"trait_type\": \"Machine\",\n        \"value\": \"",
-        machineName, 
-        "\"\n      },\n      {\n        \"trait_type\": \"Productivity\",\n        \"value\": \"",
-        productivity, 
-        "\"\n      },\n      {\n        \"trait_type\": \"Global Asset\",\n        \"value\": \"",
-        globalAsset
-      );
-
-      item = string.concat(
-        item, 
-        "\"\n      },\n      {\n        \"trait_type\": \"Expansion Prop\",\n        \"value\": \"",
-        expansionProp,
-        "\"\n      },\n      {\n        \"trait_type\": \"Colour\",\n        \"value\": \"",
-        colour,
-        "\"\n      }\n    ],\n    \"description\": \"Clifford is a generative art project that explores the relationship between humans and machines. Each Clifford is a unique, one-of-a-kind, generative art piece that is created by a machine. Clifford is a generative art project that explores the relationship between humans and machines. Each Clifford is a unique, one-of-a-kind, generative art piece that is created by a machine.\",\n    \"image\": \"https://gallerydevukssa.blob.core.windows.net/token-image/cliffordImage.jpg\",\n    \"name\": \"Clifford #",
-        id,
-        "\"\n}"
-      );
-
-      vm.writeFile(string.concat("outputMetadata/", id, ".json"), item);
-    }
-    
+  function testInitialCypherClaimState() public {
+    // Check if the state is correct
+    assertEq(clifford.getIfCypherClaimStarted() , false, "Cypher claim should not be started");
   }
+
+  function testStartCypherClaim() public {
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+    // Check if the state is correct
+    assertEq(clifford.getIfCypherClaimStarted() , true, "Cypher claim should be started");
+  }
+
+  
+
+  // Test calling functions out of order to ensure they revert
+
+  function testStartAuctionBeforeCypherClaim() public {
+    // We should not be able to start the auction before the cypher claim
+    // Trying to start the auction
+    vm.expectRevert(CypherClaimNotStarted.selector);
+    clifford.startAuction();
+  }
+
+  function testDevClaimBeforeCypherClaim() public {
+    // We should not be able to claim dev before the cypher claim
+    // Trying to start the dev claim
+    vm.expectRevert(AuctionNotOver.selector);
+    clifford.devClaim();
+  }
+
+  function testWithdrawBeforeCypherClaim() public {
+    // We should not be able to withdraw before the cypher claim
+    // Trying to withdraw
+    vm.expectRevert(NftsNotAllMinted.selector);
+    clifford.withdraw();
+  }
+
+  function testDevClaimBeforeAuctionOver() public {
+    // We should not be able to claim dev before the auction is over
+    // start the dev claim
+    clifford.startCypherClaimPeriod();
+    // start the auction
+    clifford.startAuction();
+    // Trying to start the dev claim
+    vm.expectRevert(AuctionNotOver.selector);
+    clifford.devClaim();
+  }
+
+  function testWithdrawBeforeAuctionOver() public {
+    // We should not be able to withdraw before the auction is over
+    // start the dev claim
+    clifford.startCypherClaimPeriod();
+    // start the auction
+    clifford.startAuction();
+    // Trying to withdraw
+    vm.expectRevert(NftsNotAllMinted.selector);
+    clifford.withdraw();
+  }
+
+  function testWithdrawBeforeDevClaim() public {
+    // We should not be able to withdraw before the dev claim
+    // start the dev claim
+    clifford.startCypherClaimPeriod();
+    // start the auction
+    clifford.startAuction();
+    // Get when the auction ends
+    uint256 auctionEnd = clifford.getEndTimestamp();
+    // Fast forward to the end of the auction
+    vm.warp(auctionEnd);
+    // Trying to withdraw
+    vm.expectRevert(NftsNotAllMinted.selector);
+    clifford.withdraw();
+  }
+
+
+
+  
 }

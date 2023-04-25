@@ -47,17 +47,19 @@ contract Metadata {
         '"}, {"trait_type": "State", "value":"',
         allStates[state],
         '"}, {"trait_type": "Productivity", "value":"',
-        getProductivity(rand, baseline)
+        getProductivity(rand, baseline),
+        '"}, {"trait_type": "Global Asset:", "value":"',
+        _machine.getGlobalAssetName(rand, baseline)
     );
 
     jsonInitial = string.concat(
         jsonInitial,
-        '"}, {"trait_type": "Global Asset:", "value":"',
-        _machine.getGlobalAssetName(rand, baseline),
         '"}, {"trait_type": "Expansion Prop:", "value":"',
         _machine.getExpansionPropName(rand, baseline),
         '"}, {"trait_type": "Colour:", "value":"',
         getColourIndexTier(rand, baseline),
+        '"}, {"trait_type": "Pattern:", "value":"',
+        getPatternName(rand, baseline),
         '"}, {"trait_type": "Character:", "value":"',
         _machine.getCharacterName(rand, baseline),
         '"}],',
@@ -123,6 +125,19 @@ contract Metadata {
       colourTier = "Unknown";
     }
     return colourTier;
+  }
+
+  function getPatternName(uint rand, int baseline) public pure returns(string memory) {
+    bool isTexture = Patterns.getIsTexture(rand, baseline);
+
+    string memory pattern = "Pattern ";
+    if (isTexture) {
+      pattern = "Texture ";
+    }
+
+    string memory patternName = Patterns.getPatternName(rand, baseline);
+
+    return string.concat(pattern, patternName);
   }
 
   /**
