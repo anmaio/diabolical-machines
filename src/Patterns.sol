@@ -13,7 +13,7 @@ library Patterns {
   // 15 to 0.3 inclusive in 0.3 decriments
   string internal constant PATTERNS_SCALE_NUMBERS = "15.014.714.414.113.813.513.212.912.612.312.011.711.411.110.810.510.209.909.609.309.008.708.408.107.807.507.206.906.606.306.005.705.405.104.804.504.203.903.603.303.002.702.402.101.801.501.200.900.600.3";
 
-  string internal constant TEXTURE_NAMES = "g-1a-1a-2f-2d-1f-3b-1b-2e-1";
+  string internal constant TEXTURE_NAMES = "g-1a-2f-2d-1f-3b-1b-2e-1";
 
   string internal constant PATTERNS_NAMES = "cdrqbaiosekgpfnjlm";
 
@@ -48,7 +48,7 @@ library Patterns {
 
     if (isTexture) {
       nameLength = 3;
-      nameCount = 9;
+      nameCount = 8;
       names = TEXTURE_NAMES;
     } else {
       nameLength = 1;

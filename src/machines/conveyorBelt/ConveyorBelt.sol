@@ -67,8 +67,8 @@ contract ConveyorBelt {
     _assetRetriever = AssetRetriever(assetRetriever);
   }
 
-  function getVersion(uint rand, int baseline, uint version) internal pure returns (uint[3] memory) {
-    uint versionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12 + version)] + baseline);
+  function getVersion(uint rand, int baseline) internal pure returns (uint[3] memory) {
+    uint versionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 12)] + baseline);
 
     uint[] memory versionProbabilitiesArray = GridHelper.createEqualProbabilityArray(NUM_OF_VERSIONS);
 
@@ -95,8 +95,8 @@ contract ConveyorBelt {
     return [index, sum, lengthOfItems];
   }
 
-  function getPlatforms(uint rand, int baseline, uint version) internal pure returns (uint[] memory) {
-    uint[3] memory versionNumbersArray = getVersion(rand, baseline, version);
+  function getPlatforms(uint rand, int baseline) internal pure returns (uint[] memory) {
+    uint[3] memory versionNumbersArray = getVersion(rand, baseline);
     uint sum = versionNumbersArray[1];
     uint lenghtOfItems = versionNumbersArray[2];
 
@@ -107,16 +107,16 @@ contract ConveyorBelt {
     return platformNumbersArray;
   }
 
-  function getHole(uint rand, int baseline, uint version) internal pure returns (uint) {
-    uint index = getVersion(rand, baseline, version)[0];
+  function getHole(uint rand, int baseline) internal pure returns (uint) {
+    uint index = getVersion(rand, baseline)[0];
 
     uint[] memory holeNumbersArray = GridHelper.setUintArrayFromString(HOLES_NUMBERS, 11, 5);
 
     return holeNumbersArray[index];
   }
 
-  function getFloob(uint rand, int baseline, uint version) internal pure returns (uint) {
-    uint index = getVersion(rand, baseline, version)[0];
+  function getFloob(uint rand, int baseline) internal pure returns (uint) {
+    uint index = getVersion(rand, baseline)[0];
 
     uint[] memory floobNumbersArray = GridHelper.setUintArrayFromString(FLOOB_NUMBERS, 11, 5);
 
@@ -229,62 +229,41 @@ contract ConveyorBelt {
       count++;
     }
 
-    numbersUsed[count] = CB_OFFSETS;
+    // get the hole number
+    numbersUsed[count] = getHole(rand, baseline);
     count++;
 
-    for (uint i = 0; i < 2; ++i) {
-
-      if (i == 0 && rand % 2 != 0) {
-        numbersUsed[count] = TRANSFORM_1_NEGATIVE;
-        count++;
-      } else {
-        i++;
-      }
-
-      // get the hole number
-      numbersUsed[count] = getHole(rand, baseline, i);
+    // get the platform numbers
+    uint[] memory platformNumbers = getPlatforms(rand, baseline);
+    for (uint j = 0; j < platformNumbers.length; ++j) {
+      numbersUsed[count] = platformNumbers[j];
       count++;
-
-      // get the platform numbers
-      uint[] memory platformNumbers = getPlatforms(rand, baseline, i);
-      for (uint j = 0; j < platformNumbers.length; ++j) {
-        numbersUsed[count] = platformNumbers[j];
-        count++;
-      }
-
-      // get the hatch number
-
-      numbersUsed[count] = getHatch(rand, baseline);
-      count++;
-
-      // fhole
-      numbersUsed[count] = FHOLE_NUMBER;
-      count++;
-
-      // get the saw number
-      numbersUsed[count] = getSaw(rand, baseline);
-      count++;
-
-      // get the hatch decoration number
-      numbersUsed[count] = getHatchDecoration(rand, baseline);
-      count++;
-
-
-      // get the floob number
-      numbersUsed[count] = getFloob(rand, baseline, i);
-      count++;
-
-      // get the eyes number
-      numbersUsed[count] = getEyes(rand, baseline);
-      count++;
-
-      if (i == 0 && rand % 2 != 0) {
-        numbersUsed[count] = GROUP_CLOSE_NUMBER;
-        count++;
-      }
     }
 
-    numbersUsed[count] = GROUP_CLOSE_NUMBER;
+    // get the hatch number
+
+    numbersUsed[count] = getHatch(rand, baseline);
+    count++;
+
+    // fhole
+    numbersUsed[count] = FHOLE_NUMBER;
+    count++;
+
+    // get the saw number
+    numbersUsed[count] = getSaw(rand, baseline);
+    count++;
+
+    // get the hatch decoration number
+    numbersUsed[count] = getHatchDecoration(rand, baseline);
+    count++;
+
+
+    // get the floob number
+    numbersUsed[count] = getFloob(rand, baseline);
+    count++;
+
+    // get the eyes number
+    numbersUsed[count] = getEyes(rand, baseline);
     count++;
 
     // get the wide eyes number
