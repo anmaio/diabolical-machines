@@ -102,7 +102,7 @@ import "../src/Assets/Character/CharacterImp3.sol";
 import "../src/Assets/Character/CharacterImp4.sol";
 import "../src/Assets/Character/CharacterImp5.sol";
 
-import "../src/Assets/TraitBase.sol";
+import "../src/TraitBase.sol";
 import "../src/AssetRetriever.sol";
 
 contract CliffordScript is Script {
@@ -377,21 +377,21 @@ contract CliffordScript is Script {
 
   function deployAssetRetriever() internal {
     // Order of traitBases must match the order of TraitBases in AssetRetriever
-    address[] memory traitBases = new address[](14);
-    traitBases[0] = address(substancesTB);
-    traitBases[1] = address(propsTB);
-    traitBases[2] = address(activationTB);
-    traitBases[3] = address(feedbackTB);
-    traitBases[4] = address(eyesTB);
-    traitBases[5] = address(assetsTB);
-    traitBases[6] = address(altarTB);
-    traitBases[7] = address(apparatusTB);
-    traitBases[8] = address(cellsTB);
-    traitBases[9] = address(tubesTB);
-    traitBases[10] = address(beastTB);
-    traitBases[11] = address(conveyorTB);
-    traitBases[12] = address(miscTB);
-    traitBases[13] = address(characterTB);
+    TraitBase[] memory traitBases = new TraitBase[](14);
+    traitBases[0] = substancesTB;
+    traitBases[1] = propsTB;
+    traitBases[2] = activationTB;
+    traitBases[3] = feedbackTB;
+    traitBases[4] = eyesTB;
+    traitBases[5] = assetsTB;
+    traitBases[6] = altarTB;
+    traitBases[7] = apparatusTB;
+    traitBases[8] = cellsTB;
+    traitBases[9] = tubesTB;
+    traitBases[10] = beastTB;
+    traitBases[11] = conveyorTB;
+    traitBases[12] = miscTB;
+    traitBases[13] = characterTB;
     // Add the address of each TraitBase
     assetRetriever = new AssetRetriever(traitBases);
   }
@@ -442,9 +442,6 @@ contract CliffordScript is Script {
     deployAssetRetriever();
     deployMachines();
     deployLogic();
-
-    address to = 0xB2a61F4dE7d8C1985cb5565CFCBD7F1A18CBF123;
-    clifford.publicMint(to, 10);
 
     vm.stopBroadcast();
   }
