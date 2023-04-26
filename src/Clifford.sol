@@ -85,7 +85,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
   mapping(uint256 => uint256) private tokenIdToGenId;
 
   // current genId for minting
-  uint256 private currentGen;
+  uint private currentGen;
 
   // Cypher claims
 
@@ -93,9 +93,13 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
 
   bool private cypherClaimStarted;
 
-  LibBitmap.Bitmap cypherClaims;
+  LibBitmap.Bitmap private cypherClaims;
 
   uint private constant BID_INCREMENT = 0.01 ether;
+
+  uint private constant AUCTION_LENGTH = 5 days;
+
+  uint private constant BID_EXTENSION_LENGTH = 15 minutes;
 
   // Note: subtract Cypher claims and team amount
   uint private saleCount;
@@ -136,20 +140,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     _metadata = metadata;
   }
 
-  function publicMint(address to, uint quantity) public {
-    require(quantity <= 30, "Quantity too high"); // To prevent excessive first-time token transfer costs, please limit the quantity to a reasonable number (e.g. 30).
-    uint startingSupply = totalSupply();
-    require(startingSupply + quantity <= MAX_SUPPLY, "Max supply reached");
-    for (uint i = 0; i < quantity;) {
-      uint tokenId = startingSupply + i;
-      tokenIdToGenId[tokenId] = currentGen;
-      unchecked {
-        ++i;
-      }
-    }
-    _safeMint(to, quantity); //Safe minting is reentrancy safe since V3.
-  }
-
   function withdraw() external onlyOwner {
     if (MAX_SUPPLY != totalSupply()) revert NftsNotAllMinted();
     (bool success, ) = msg.sender.call{value: address(this).balance}("");
@@ -188,13 +178,25 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     emit RandomNumberGenerated(genId, randomness);
   }
 
+  function _validMint(address to, uint quantity) internal {
+    uint startingSupply = totalSupply();
+    for (uint i = 0; i < quantity;) {
+      uint tokenId = startingSupply + i;
+      tokenIdToGenId[tokenId] = currentGen;
+      unchecked {
+        ++i;
+      }
+    }
+    _mint(to, quantity);
+  }
+
 	// Step 1 - Cypher Claim
 
   function startCypherClaimPeriod() external onlyOwner {
 		cypherClaimStarted = true;
 	}
 
-  function validateCypherClaim(uint tokenId) internal {
+  function _validateCypherClaim(uint tokenId) internal {
       // Check sender owns the cypher they are claiming for
       if (msg.sender != CYPHER_CONTRACT.ownerOf(tokenId)) revert NotOwnerOfCypher(tokenId);
 
@@ -209,12 +211,12 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     if (!cypherClaimStarted || startedAt != 0) revert CypherClaimNotActive();
     uint numOfCyphers = tokenIds.length;
     for (uint i = 0; i < numOfCyphers;) {
-      validateCypherClaim(tokenIds[i]);
+      _validateCypherClaim(tokenIds[i]);
       unchecked {
           ++i;
       }
     }
-    _mint(msg.sender, numOfCyphers);
+    _validMint(msg.sender, numOfCyphers);
   }
 
 	// Step 2 - Auction
@@ -227,7 +229,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     saleCount = MAX_SUPPLY - totalSupply();
 
     startedAt = block.timestamp;
-    endAt = block.timestamp + 7 days;
+    endAt = block.timestamp + AUCTION_LENGTH;
   }
 
   function placeBid() public payable {
@@ -250,8 +252,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     if (totalBidsFromBidder <= currentPricePerUnit) revert BidTooSmall(bidAmount);
 
     // reset the timer to 15mins if less than 15mins is remaining
-    if (block.timestamp + 15 minutes > endAt) {
-        endAt = block.timestamp + 15 minutes;
+    if (block.timestamp + BID_EXTENSION_LENGTH > endAt) {
+        endAt = block.timestamp + BID_EXTENSION_LENGTH;
     }
 
     // keeptrack of all bidders for distributing NFT's and refunds
@@ -276,7 +278,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
       uint quantityToMint = amount / pricePerUnit;
       if (quantityToMint > 0) {
         // not using safemint for same reason as the transfer comment below
-        _mint(bidder, quantityToMint);
+        _validMint(bidder, quantityToMint);
       }
       uint remainder = amount % pricePerUnit;
       // We don't want to fail if the transfer is not successful otherwise a malicious bidder could...
@@ -293,7 +295,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
 		if (startedAt == 0 || block.timestamp < endAt) revert AuctionNotOver();
 
     // After the first call to devClaim, this will always revert
-		_mint(msg.sender, MAX_SUPPLY - totalSupply());
+		_validMint(owner(), MAX_SUPPLY - totalSupply());
 	}
 
 	// Getters/ View Functions
@@ -332,6 +334,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
   }
 
   function getIfCypherClaimStarted() external view returns(bool) {
-    return cypherClaimStarted && startedAt == 0;
+    return cypherClaimStarted && startedAt >= endAt;
   }
 }

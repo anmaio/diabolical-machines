@@ -3,6 +3,7 @@ pragma solidity 0.8.16;
 
 import "forge-std/Test.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
 import "../src/Clifford.sol";
 import "../src/Metadata.sol";
 import "../src/Machine.sol";
@@ -102,16 +103,25 @@ import "../src/Assets/Character/CharacterImp3.sol";
 import "../src/Assets/Character/CharacterImp4.sol";
 import "../src/Assets/Character/CharacterImp5.sol";
 
-import "../src/Assets/TraitBase.sol";
+import "../src/TraitBase.sol";
 import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 0;
+  uint internal constant MINT_SIZE = 1000;
   // string[] public allMachines = ["Altar", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
   string[] public allMachines = ["Altar"];
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
+
+  address internal constant CYPHER_CONTRACT = 0xdDA32aabBBB6c44eFC567baC5F7C35f185338456;
+  address internal constant TOP_CYPHER_HOLDER = 0x0aD0b792A54704dc7b6f85CBB774106d22E814d9;
+
+  uint private constant BID_INCREMENT = 0.01 ether;
+
+  uint private constant AUCTION_LENGTH = 5 days;
+
+  uint private constant BID_EXTENSION_LENGTH = 15 minutes;
 
   // CUSTOM ERRORS
 
@@ -133,6 +143,8 @@ contract CliffordTest is Test {
 
 	error AuctionNotOver();
   error NftsNotAllMinted();
+
+  error MintZeroQuantity();
 
   // Trait bases
   TraitBase private substancesTB;
@@ -373,21 +385,21 @@ contract CliffordTest is Test {
 
   function deployAssetRetriever() internal {
     // Order of traitBases must match the order of TraitBases in AssetRetriever
-    address[] memory traitBases = new address[](14);
-    traitBases[0] = address(substancesTB);
-    traitBases[1] = address(propsTB);
-    traitBases[2] = address(activationTB);
-    traitBases[3] = address(feedbackTB);
-    traitBases[4] = address(eyesTB);
-    traitBases[5] = address(assetsTB);
-    traitBases[6] = address(altarTB);
-    traitBases[7] = address(apparatusTB);
-    traitBases[8] = address(cellsTB);
-    traitBases[9] = address(tubesTB);
-    traitBases[10] = address(beastTB);
-    traitBases[11] = address(conveyorTB);
-    traitBases[12] = address(miscTB);
-    traitBases[13] = address(characterTB);
+    TraitBase[] memory traitBases = new TraitBase[](14);
+    traitBases[0] = substancesTB;
+    traitBases[1] = propsTB;
+    traitBases[2] = activationTB;
+    traitBases[3] = feedbackTB;
+    traitBases[4] = eyesTB;
+    traitBases[5] = assetsTB;
+    traitBases[6] = altarTB;
+    traitBases[7] = apparatusTB;
+    traitBases[8] = cellsTB;
+    traitBases[9] = tubesTB;
+    traitBases[10] = beastTB;
+    traitBases[11] = conveyorTB;
+    traitBases[12] = miscTB;
+    traitBases[13] = characterTB;
     // Add the address of each TraitBase
     assetRetriever = new AssetRetriever(traitBases);
   }
@@ -422,8 +434,6 @@ contract CliffordTest is Test {
     deployAssets();
     deployProps();
     deployAltar();
-    // deployDrills();
-    // deployNoses();
     deployTubes();
     deployApparatus();
     deployCells();
@@ -441,20 +451,34 @@ contract CliffordTest is Test {
   }
 
   function setupMint() public {
-    address to = address(1337);
+    // address to = address(1337);
 
-    // ERC721A has the ability to mint multiple tokens at once
-    // Using single mints for now for convenience
-    for (uint256 i = 0; i < MINT_SIZE; i++) {
-      // to, quantity
-      clifford.publicMint(to, 1);
-      vm.roll(i*99);
-      vm.warp(i*99);
-      clifford.reveal();
-    }
+    // // ERC721A has the ability to mint multiple tokens at once
+    // // Using single mints for now for convenience
+    // for (uint256 i = 0; i < MINT_SIZE; i++) {
+    //   // to, quantity
+    //   clifford.publicMint(to, 1);
+    //   vm.roll(i*99);
+    //   vm.warp(i*99);
+    //   clifford.reveal();
+    // }
+  }
+
+  function preWriteImages() internal {
+    // start the cypher claim period
+    clifford.startCypherClaimPeriod();
+    // start the auction
+    clifford.startAuction();
+    // Get when the auction ends
+    uint256 auctionEnd = clifford.getEndTimestamp();
+    // Fast forward to the end of the auction
+    vm.warp(auctionEnd);
+    // mint entire supply to dev
+    clifford.devClaim();
   }
 
   function writeImagesInRange(uint start, uint stop) public {
+    preWriteImages();
     for (uint i = start; i < stop; i++) {
       string memory path = string.concat("images/", Strings.toString(i), ".svg");
       int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
@@ -593,7 +617,129 @@ contract CliffordTest is Test {
     assertEq(clifford.getIfCypherClaimStarted() , true, "Cypher claim should be started");
   }
 
-  
+  function testSingleCypherClaim() public {
+    // Will only work with mainnet fork
+    if (block.chainid != 1) {
+      return;
+    }
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+    // Get the token id of a cypher we know that TOP_CYPHER_HOLDER owns
+    uint256 cypherId = IERC721Enumerable(CYPHER_CONTRACT).tokenOfOwnerByIndex(TOP_CYPHER_HOLDER, 0);
+
+    vm.prank(TOP_CYPHER_HOLDER);
+
+    uint[] memory cypherIds = new uint[](1);
+    cypherIds[0] = cypherId;
+
+    // Claiming a single cypher
+    clifford.claimCyphers(cypherIds);
+
+    // user should now own one clifford NFT
+    assertEq(clifford.balanceOf(TOP_CYPHER_HOLDER), 1, "User should own one clifford NFT");
+    
+  }
+
+  function testMultipleCypherClaim(uint amount) public {
+    // Will only work with mainnet fork
+    if (block.chainid != 1) {
+      return;
+    }
+
+    // Get the balance of the top cypher holder
+    uint256 balance = IERC721Enumerable(CYPHER_CONTRACT).balanceOf(TOP_CYPHER_HOLDER);
+
+    vm.assume(amount <= balance && amount > 0);
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+    
+    uint[] memory cypherIds = new uint[](amount);
+
+    for (uint i = 0; i < amount; i++) {
+      // Get the token id of a cypher we know that TOP_CYPHER_HOLDER owns
+      cypherIds[i] = IERC721Enumerable(CYPHER_CONTRACT).tokenOfOwnerByIndex(TOP_CYPHER_HOLDER, i);
+    }
+
+    vm.prank(TOP_CYPHER_HOLDER);
+
+    // Claiming multiple cyphers
+    clifford.claimCyphers(cypherIds);
+
+    // user should now own two clifford NFTs
+    assertEq(clifford.balanceOf(TOP_CYPHER_HOLDER), amount, string.concat("User should own ", Strings.toString(amount), " clifford NFTs"));
+  }
+
+  // User claims against some of their cyphers then decides to claim against the rest
+  function testSplitClaimCyphers(uint amount) public {
+    // Will only work with mainnet fork
+    if (block.chainid != 1) {
+      return;
+    }
+
+    // Get the balance of the top cypher holder
+    uint256 balance = IERC721Enumerable(CYPHER_CONTRACT).balanceOf(TOP_CYPHER_HOLDER);
+
+    // must own at least 2 cyphers
+    vm.assume(amount <= balance && amount > 1);
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+
+    uint claimOne = amount / 2;
+    
+    uint[] memory cypherIdsOne = new uint[](claimOne);
+    uint[] memory cypherIdsTwo = new uint[](amount - claimOne);
+
+    for (uint i = 0; i < claimOne; i++) {
+      // Get the token id of a cypher we know that TOP_CYPHER_HOLDER owns
+      cypherIdsOne[i] = IERC721Enumerable(CYPHER_CONTRACT).tokenOfOwnerByIndex(TOP_CYPHER_HOLDER, i);
+    }
+
+    for (uint i = claimOne; i < amount; i++) {
+      // Get the token id of a cypher we know that TOP_CYPHER_HOLDER owns
+      cypherIdsTwo[i - claimOne] = IERC721Enumerable(CYPHER_CONTRACT).tokenOfOwnerByIndex(TOP_CYPHER_HOLDER, i);
+    }
+
+    vm.startPrank(TOP_CYPHER_HOLDER);
+
+    // claim one
+    clifford.claimCyphers(cypherIdsOne);
+
+    // claim two
+    clifford.claimCyphers(cypherIdsTwo);
+
+    vm.stopPrank();
+
+    // user should now own amount clifford NFTs
+    assertEq(clifford.balanceOf(TOP_CYPHER_HOLDER), amount, string.concat("User should own ", Strings.toString(amount), " clifford NFTs"));
+  }
+
+  // Test the auction process
+
+  function testInitialAuctionState() public {
+    // Check if the state is correct
+    assertEq(clifford.getStartTimestamp() , 0, "Auction should not be started");
+    assertEq(clifford.getEndTimestamp() , 0, "Auction should not be started");
+  }
+
+  function testStartAuction() public {
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+    // Starting the auction
+    clifford.startAuction();
+    // Check if the state is correct
+    assertEq(clifford.getStartTimestamp() , block.timestamp, "Auction should be started");
+    assertEq(clifford.getEndTimestamp() , block.timestamp + AUCTION_LENGTH, "Auction should be started");
+  }
+
+  function testAuctionEndIsGreaterThanStart() public {
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+    // Starting the auction
+    clifford.startAuction();
+    // Check if the end timestamp is greater than the start timestamp
+    assertGt(clifford.getEndTimestamp(), clifford.getStartTimestamp(), "Auction end should be greater than start");
+  }
+
 
   // Test calling functions out of order to ensure they revert
 
@@ -655,7 +801,105 @@ contract CliffordTest is Test {
     clifford.withdraw();
   }
 
+  // User tries actions that should revert
 
+  function testClaimNotOwnedCypher() public {
+    // Will only work with mainnet fork
+    if (block.chainid != 1) {
+      return;
+    }
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
 
+    uint[] memory cypherIds = new uint[](1);
+    cypherIds[0] = 0;
+
+    // Trying to claim a cypher we don't own
+    vm.expectRevert(abi.encodeWithSelector(NotOwnerOfCypher.selector, cypherIds[0]));
+    clifford.claimCyphers(cypherIds);
+  }
+
+  // user claims a cypher then tries to claim it again
+  function testClaimCypherAlreadyClaimed() public {
+    // Will only work with mainnet fork
+    if (block.chainid != 1) {
+      return;
+    }
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+
+    // Get the token id of a cypher we know that TOP_CYPHER_HOLDER owns
+    uint256 cypherId = IERC721Enumerable(CYPHER_CONTRACT).tokenOfOwnerByIndex(TOP_CYPHER_HOLDER, 0);
+
+    uint[] memory cypherIds = new uint[](1);
+    cypherIds[0] = cypherId;
+
+    vm.startPrank(TOP_CYPHER_HOLDER);
+
+    // Claiming a single cypher
+    clifford.claimCyphers(cypherIds);
+
+    // Trying to claim a cypher we already claimed
+    vm.expectRevert(abi.encodeWithSelector(CypherAlreadyClaimed.selector, cypherIds[0]));
+    clifford.claimCyphers(cypherIds);
+
+    vm.stopPrank();
+  }
+
+  // user tries to claim some cyphers they own and some they don't
+  // expected behavior is to revert
+  function testClaimMixOfClaimedCyphers() public {
+    // Will only work with mainnet fork
+    if (block.chainid != 1) {
+      return;
+    }
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+
+    uint[] memory cypherIds = new uint[](3);
+    cypherIds[0] = IERC721Enumerable(CYPHER_CONTRACT).tokenOfOwnerByIndex(TOP_CYPHER_HOLDER, 0);
+    cypherIds[1] = IERC721Enumerable(CYPHER_CONTRACT).tokenOfOwnerByIndex(TOP_CYPHER_HOLDER, 1);
+    cypherIds[2] = 0; // cypher we don't own
+
+    vm.prank(TOP_CYPHER_HOLDER);
+
+    // We don't own cypherIds[2] so this should revert
+    vm.expectRevert(abi.encodeWithSelector(NotOwnerOfCypher.selector, cypherIds[2]));
+    clifford.claimCyphers(cypherIds);
+  }
+
+  // user tries to claim a cypher that doesn't exist
+  function testClaimNonExistentCypher() public {
+    // Will only work with mainnet fork
+    if (block.chainid != 1) {
+      return;
+    }
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+
+    uint[] memory cypherIds = new uint[](1);
+    cypherIds[0] = 6969; // cypher that doesn't exist
+
+    vm.expectRevert("ERC721: owner query for nonexistent token");
+
+    // No cypher with id 6969 so this should revert
+    clifford.claimCyphers(cypherIds);
+  }
+
+  // user tries to claim zero cyphers
+  function testClaimZeroCyphers() public {
+    // Will only work with mainnet fork
+    if (block.chainid != 1) {
+      return;
+    }
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+
+    uint[] memory cypherIds = new uint[](0);
+
+    // Trying to claim zero cyphers
+    vm.expectRevert(MintZeroQuantity.selector);
+    clifford.claimCyphers(cypherIds);
+  }
   
 }

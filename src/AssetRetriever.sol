@@ -1,17 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-interface IAssetFromTrait {
-  function getAssetFromTrait(uint assetID) external view returns (string memory);
-  function getProductivityFromTrait(uint assetID) external view returns (uint);
-}
+import "./TraitBase.sol";
 
 contract AssetRetriever {
 
-  address[] internal traitTypes;
+  TraitBase[] internal traitBases;
 
-  constructor(address[] memory addresses) {
-    traitTypes = addresses;
+  constructor(TraitBase[] memory _traitBases) {
+    traitBases = _traitBases;
   }
 
   function getAsset(uint assetID) public view returns (string memory) {
@@ -19,7 +16,7 @@ contract AssetRetriever {
       return "";
     }
 
-    return IAssetFromTrait(traitTypes[assetID / 1000 - 1]).getAssetFromTrait(assetID);
+    return traitBases[assetID / 1000 - 1].getAssetFromTrait(assetID);
   }
 
   function getProductivity(uint assetID) public view returns (uint) {
@@ -27,6 +24,6 @@ contract AssetRetriever {
       return 0;
     }
 
-    return IAssetFromTrait(traitTypes[assetID / 1000 - 1]).getProductivityFromTrait(assetID);
+    return traitBases[assetID / 1000 - 1].getProductivityFromTrait(assetID);
   }
 }
