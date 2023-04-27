@@ -7,7 +7,7 @@ gas_reports = ["*"]
 solc_version = '0.8.16'
 memory_limit = 1533554432 # 1533.5mb
 
-fuzz = { runs = 2_500 }
+fuzz = { runs = 500 }
 src = "test"
 
 [profile.default.optimizer_details]

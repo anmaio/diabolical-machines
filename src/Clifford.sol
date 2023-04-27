@@ -2,14 +2,12 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 
 import "ERC721A/ERC721A.sol";
-import "base64-sol/base64.sol";
 import "./Metadata.sol";
 import "./LibBitmap.sol";
 
@@ -21,7 +19,7 @@ interface ICypher {
 /// @author Zac Williams (https://twitter.com/ZacW369)
 /// @author Anomalous Materials (https://twitter.com/AnomalousMatter)
 
-contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
+contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   VRFCoordinatorV2Interface immutable COORDINATOR;
   LinkTokenInterface immutable LINKTOKEN;
 
@@ -100,6 +98,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
   uint private constant AUCTION_LENGTH = 5 days;
 
   uint private constant BID_EXTENSION_LENGTH = 15 minutes;
+
+  uint private constant BID_INCREASE_PERCENT = 10;
 
   // Note: subtract Cypher claims and team amount
   uint private saleCount;
@@ -248,8 +248,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     uint totalBidsFromBidder = bidAmount + allBids[msg.sender];
 
     // Check the bid is large enough to recieve at least 1 NFT at the current price
-    uint currentPricePerUnit = getCurrentPricePerUnit();
-    if (totalBidsFromBidder <= currentPricePerUnit) revert BidTooSmall(bidAmount);
+    uint currentPricePerUnit = getMinimumBid();
+    if (totalBidsFromBidder < currentPricePerUnit) revert BidTooSmall(bidAmount);
 
     // reset the timer to 15mins if less than 15mins is remaining
     if (block.timestamp + BID_EXTENSION_LENGTH > endAt) {
@@ -315,6 +315,15 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
 
   function getCurrentPricePerUnit() public view returns (uint) {
     return sumOfAllBids / saleCount;
+  }
+
+  function getMinimumBid() public view returns (uint) {
+    uint minimum = getCurrentPricePerUnit() + getCurrentPricePerUnit() * 1/BID_INCREASE_PERCENT;
+    if (minimum <= BID_INCREMENT) {
+      return BID_INCREMENT;
+    } else {
+      return minimum - minimum % BID_INCREMENT + BID_INCREMENT;
+    }
   }
 
   function getAllBidders() external view returns (address[] memory) {

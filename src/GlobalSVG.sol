@@ -165,6 +165,7 @@ contract GlobalSVG {
     output = string.concat(
       output,
       CommonSVG.SCRIPT,
+      CommonSVG.TEMP_STYLE,
       CommonSVG.STYLE,
       ApparatusCSS1.getPart(),
       ApparatusCSS2.getPart(),

@@ -108,7 +108,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 1000;
+  uint internal constant MINT_SIZE = 0;
   // string[] public allMachines = ["Altar", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
   string[] public allMachines = ["Altar"];
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
@@ -464,6 +464,63 @@ contract CliffordTest is Test {
     // }
   }
 
+  // 20 = 0.1ETH
+  // 100 = 0.5ETH
+  // 200 = 1ETH
+  // 1000 = 5ETH
+
+  function auctionSimulator(uint numOfBidders) public {
+    // start the cypher claim period
+    clifford.startCypherClaimPeriod();
+    // start the auction
+    clifford.startAuction();
+
+    // for numOfBidders create an address array with random addresses
+    address[] memory bidders = new address[](numOfBidders);
+    for (uint i = 0; i < numOfBidders; i++) {
+      bidders[i] = address(uint160(uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty, i)))));
+    }
+
+    // for each bidder
+    for (uint i = 0; i < numOfBidders; i++) {
+      // get the minimum bid value
+      uint minBidValue = clifford.getMinimumBid();
+      uint userBidAmount = (uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty, i))) % 20 + 1) * BID_INCREMENT;
+      if (userBidAmount < minBidValue || i % 2 == 0) { // 50% chance to bid the minimum
+        userBidAmount = minBidValue;
+      }
+      vm.deal(bidders[i], 100 ether);
+      vm.prank(bidders[i]);
+      clifford.placeBid{value: userBidAmount}();
+    }
+
+    uint ppu = clifford.getCurrentPricePerUnit();
+    uint finalMinBid = clifford.getMinimumBid();
+    uint preDistributionBalance = address(clifford).balance;
+
+    // Get when the auction ends
+    uint256 auctionEnd = clifford.getEndTimestamp();
+    // Fast forward to the end of the auction
+    vm.warp(auctionEnd);
+
+    clifford.distributeNFTs();
+
+    clifford.devClaim();
+
+    console2.log("numOfBidders: ", numOfBidders);
+    console2.log("current ppu: ", ppu);
+    console2.log("current minimum bid: ", finalMinBid);
+    console2.log("clifford balance before distribution: ", preDistributionBalance);
+    console2.log("clifford balance after distribution: ", address(clifford).balance);
+    console2.log("dev amount: ", clifford.balanceOf(clifford.owner()));
+  }
+
+  function testAuctionSimulator() public {
+    uint numOfBidders = 500;
+
+    auctionSimulator(numOfBidders);
+  }
+
   function preWriteImages() internal {
     // start the cypher claim period
     clifford.startCypherClaimPeriod();
@@ -475,6 +532,8 @@ contract CliffordTest is Test {
     vm.warp(auctionEnd);
     // mint entire supply to dev
     clifford.devClaim();
+    // reveal all
+    clifford.reveal();
   }
 
   function writeImagesInRange(uint start, uint stop) public {
@@ -532,6 +591,7 @@ contract CliffordTest is Test {
 
   // create a json file with the ids of the images that were created
   function testWriteJson() public {
+    preWriteImages();
 
     string memory itemOpen = "{\n    \"id\": ";
 
@@ -731,13 +791,28 @@ contract CliffordTest is Test {
     assertEq(clifford.getEndTimestamp() , block.timestamp + AUCTION_LENGTH, "Auction should be started");
   }
 
-  function testAuctionEndIsGreaterThanStart() public {
+  function testPlaceSingleBid() public {
     // Starting the cypher claim
     clifford.startCypherClaimPeriod();
     // Starting the auction
     clifford.startAuction();
-    // Check if the end timestamp is greater than the start timestamp
-    assertGt(clifford.getEndTimestamp(), clifford.getStartTimestamp(), "Auction end should be greater than start");
+    // Placing a bid of 1 ETH
+    clifford.placeBid{value: 1 ether}();
+    // Check the value of our bids
+    assertEq(clifford.getUserBid(address(this)), 1 ether, "Bid should be 1 ETH");
+  }
+
+  function testPlaceMultipleBids() public {
+    // Starting the cypher claim
+    clifford.startCypherClaimPeriod();
+    // Starting the auction
+    clifford.startAuction();
+    // Placing a bid of 1 ETH
+    clifford.placeBid{value: 1 ether}();
+    // Placing a bid of 2 ETH
+    clifford.placeBid{value: 2 ether}();
+    // Check the value of our bids
+    assertEq(clifford.getUserBid(address(this)), 3 ether, "Bid should be 3 ETH");
   }
 
 
