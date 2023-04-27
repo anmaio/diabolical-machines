@@ -18,6 +18,8 @@ library CommonSVG {
 
   string internal constant STYLE = "<style>";
 
+  string internal constant TEMP_STYLE = "<style> .no-animation * { animation: none !important; transition: none !important; } </style>";
+
   string internal constant STYLE_CLOSE = "</style>";
 
   string internal constant G_START = "<g>";

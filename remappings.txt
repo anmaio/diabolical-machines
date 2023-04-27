@@ -4,3 +4,4 @@ forge-std/=lib/forge-std/src/
 @chainlink/=lib/chainlink/
 base64-sol/=lib/base64/
 ERC721A/=lib/ERC721A/contracts/
+solady/=lib/solady/src/

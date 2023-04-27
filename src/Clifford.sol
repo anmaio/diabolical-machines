@@ -2,16 +2,14 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 
 import "ERC721A/ERC721A.sol";
-import "base64-sol/base64.sol";
 import "./Metadata.sol";
-import "./LibBitmap.sol";
+import "solady/utils/LibBitmap.sol";
 
 interface ICypher {
     function ownerOf(uint) external view returns (address);
@@ -21,97 +19,9 @@ interface ICypher {
 /// @author Zac Williams (https://twitter.com/ZacW369)
 /// @author Anomalous Materials (https://twitter.com/AnomalousMatter)
 
-contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
+contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   VRFCoordinatorV2Interface immutable COORDINATOR;
   LinkTokenInterface immutable LINKTOKEN;
-
-  // emit genId and seed when random number is generated
-  event RandomNumberGenerated(uint256 genId, uint256 seed);
-
-  // emit genId when reveal is called
-  event RandomnessRequested(uint256 genId);
-
-  // emit address of a failed transfer
-  event TransferNotSuccessful(address to);
-
-  // testing variable for local node or to save time on testnet
-  bool public constant PSUEDO_RANDOM = true;
-
-  // Counters.Counter private _tokenIdCounter;
-  uint256 public constant MAX_SUPPLY = 6_000;
-  // bool public saleComplete = false;
-  Metadata private immutable _metadata;
-
-  // Goerli coordinator. For other networks,
-  // see https://docs.chain.link/docs/vrf-contracts/#configurations
-  address private constant vrfCoordinator = 0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D;
-  // address private constant vrfCoordinator = 0x271682DEB8C4E0901D1a1550aD2e64D568E69909; // Mainnet
-
-  // Goerli LINK token contract. For other networks, see
-  // https://docs.chain.link/docs/vrf-contracts/#configurations
-  address private constant link_token_contract = 0x326C977E6efc84E512bB9C30f76E30c160eD06FB; // Goerli
-  // address private constant link_token_contract = 0x514910771AF9Ca656af840dff83E8264EcF986CA; // Mainnet
-
-  // The gas lane to use, which specifies the maximum gas price to bump to.
-  // For a list of available gas lanes on each network,
-  // see https://docs.chain.link/docs/vrf-contracts/#configurations
-  bytes32 private constant keyHash = 0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15;
-  // bytes32 private keyHash = 0xff8dedfbfa60af186cf3c830acbc32c05aae823045ae5ea7da1e45fbfaba4f92; // Mainnet 500 GWEI
-
-  // Depends on the number of requested values that you want sent to the
-  // fulfillRandomWords() function. Storing each word costs about 20,000 gas,
-  // so 100,000 is a safe default for this example contract. Test and adjust
-  // this limit based on the network that you select, the size of the request,
-  // and the processing of the callback request in the fulfillRandomWords()
-  // function.
-  uint32 private constant callbackGasLimit = 100_000;
-
-  // The default is 3, but you can set this higher.
-  uint16 private constant requestConfirmations = 3;
-
-  // Number of random values to request
-  uint32 private constant numWords = 1;
-
-  // Subscription Id set during deployment
-  uint64 public constant s_subscriptionId = 8715;
-
-  // requestId => genId
-  mapping(uint256 => uint256) private requestIdToGenId;
-
-  // genId => seed
-  mapping(uint256 => uint256) private genSeed;
-
-  // tokenId => genId
-  mapping(uint256 => uint256) private tokenIdToGenId;
-
-  // current genId for minting
-  uint private currentGen;
-
-  // Cypher claims
-
-  ICypher internal constant CYPHER_CONTRACT = ICypher(0xdDA32aabBBB6c44eFC567baC5F7C35f185338456);
-
-  bool private cypherClaimStarted;
-
-  LibBitmap.Bitmap private cypherClaims;
-
-  uint private constant BID_INCREMENT = 0.01 ether;
-
-  uint private constant AUCTION_LENGTH = 5 days;
-
-  uint private constant BID_EXTENSION_LENGTH = 15 minutes;
-
-  // Note: subtract Cypher claims and team amount
-  uint private saleCount;
-
-  uint private startedAt;
-  uint private endAt;
-  uint private sumOfAllBids;
-  bool distributed;
-
-  address[] private allBidders;
-
-  mapping(address => uint) private allBids;
 
   // CUSTOM ERRORS
 
@@ -134,16 +44,93 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
 	error AuctionNotOver();
   error NftsNotAllMinted();
 
+  // EVENTS
+
+  // emit genId and seed when random number is generated
+  event RandomNumberGenerated(uint256 genId, uint256 seed);
+
+  // emit genId when reveal is called
+  event RandomnessRequested(uint256 genId);
+
+  // emit address of a failed transfer
+  event TransferNotSuccessful(address to);
+
+  // MAPPINGS
+
+  // requestId => genId
+  mapping(uint256 => uint256) private requestIdToGenId;
+
+  // genId => seed
+  mapping(uint256 => uint256) private genSeed;
+
+  // tokenId => genId
+  mapping(uint256 => uint256) private tokenIdToGenId;
+
+  mapping(address => uint) private allBids;
+
+  // CONSTANTS
+
+  // testing variable for local node or to save time on testnet
+  bool public constant PSUEDO_RANDOM = true;
+
+  uint256 public constant MAX_SUPPLY = 6_000;
+
+  // Mainnet coordinator
+  address private constant vrfCoordinator = 0x271682DEB8C4E0901D1a1550aD2e64D568E69909;
+
+  address private constant link_token_contract = 0x514910771AF9Ca656af840dff83E8264EcF986CA; // Mainnet
+
+  // The gas lane to use, which specifies the maximum gas price to bump to.
+  bytes32 private keyHash = 0xff8dedfbfa60af186cf3c830acbc32c05aae823045ae5ea7da1e45fbfaba4f92; // Mainnet 500 GWEI
+
+  uint32 private constant callbackGasLimit = 100_000;
+
+  // The default is 3, but you can set this higher.
+  uint16 private constant requestConfirmations = 3;
+
+  // Number of random values to request
+  uint32 private constant numWords = 1;
+
+  // Subscription Id set during deployment
+  uint64 public constant s_subscriptionId = 0; // Need to create subscription before deployment
+
+  // Auction Settings
+
+  uint private constant BID_INCREMENT = 0.01 ether;
+
+  uint private constant AUCTION_LENGTH = 5 days;
+
+  uint private constant BID_EXTENSION_LENGTH = 15 minutes;
+
+  uint private constant BID_INCREASE_PERCENT = 10;
+
+  ICypher internal constant CYPHER_CONTRACT = ICypher(0xdDA32aabBBB6c44eFC567baC5F7C35f185338456);
+
+  // current genId for minting
+  uint private currentGen;
+
+  // Cypher claims
+  bool private cypherClaimStarted;
+
+  LibBitmap.Bitmap private cypherClaims;
+
+  // totalSupply subtract Cypher claims
+  uint private saleCount;
+
+  // Auction Info
+  uint private startedAt;
+  uint private endAt;
+  uint private sumOfAllBids;
+  address[] private allBidders;
+
+  bool distributed;
+
+  Metadata private immutable _metadata;
+
   constructor(Metadata metadata) ERC721A("Clifford", "Cliff") VRFConsumerBaseV2(vrfCoordinator) {
     COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
     LINKTOKEN = LinkTokenInterface(link_token_contract);
     _metadata = metadata;
-  }
-
-  function withdraw() external onlyOwner {
-    if (MAX_SUPPLY != totalSupply()) revert NftsNotAllMinted();
-    (bool success, ) = msg.sender.call{value: address(this).balance}("");
-    if (!success) revert TransferFailed();
   }
 
   // Assumes the subscription is funded sufficiently.
@@ -248,8 +235,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
     uint totalBidsFromBidder = bidAmount + allBids[msg.sender];
 
     // Check the bid is large enough to recieve at least 1 NFT at the current price
-    uint currentPricePerUnit = getCurrentPricePerUnit();
-    if (totalBidsFromBidder <= currentPricePerUnit) revert BidTooSmall(bidAmount);
+    uint currentPricePerUnit = getMinimumBid();
+    if (totalBidsFromBidder < currentPricePerUnit) revert BidTooSmall(bidAmount);
 
     // reset the timer to 15mins if less than 15mins is remaining
     if (block.timestamp + BID_EXTENSION_LENGTH > endAt) {
@@ -295,8 +282,15 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
 		if (startedAt == 0 || block.timestamp < endAt) revert AuctionNotOver();
 
     // After the first call to devClaim, this will always revert
+    // In the rare case that there are no NFTs left to mint, this will revert
 		_validMint(owner(), MAX_SUPPLY - totalSupply());
 	}
+
+  function withdraw(address recipient) external onlyOwner {
+    if (MAX_SUPPLY != totalSupply()) revert NftsNotAllMinted();
+    (bool success, ) = recipient.call{value: address(this).balance}("");
+    if (!success) revert TransferFailed();
+  }
 
 	// Getters/ View Functions
 
@@ -315,6 +309,15 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2, ReentrancyGuard {
 
   function getCurrentPricePerUnit() public view returns (uint) {
     return sumOfAllBids / saleCount;
+  }
+
+  function getMinimumBid() public view returns (uint) {
+    uint minimum = getCurrentPricePerUnit() + getCurrentPricePerUnit() / BID_INCREASE_PERCENT;
+    if (minimum <= BID_INCREMENT) {
+      return BID_INCREMENT;
+    } else {
+      return minimum - minimum % BID_INCREMENT + BID_INCREMENT;
+    }
   }
 
   function getAllBidders() external view returns (address[] memory) {

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-// TEMP STYLES
+// STYLES
 
 import "./styles/altar/AltarCSS1.sol";
 
@@ -29,7 +29,7 @@ import "./styles/conveyorBelt/ConveyorBeltCSS3.sol";
 import "./styles/character/CharacterCSS1.sol";
 import "./styles/character/CharacterCSS2.sol";
 
-// TEMP DEFS
+// DEFS
 
 import "./defs/patterns/PatternsDefs1.sol";
 import "./defs/patterns/PatternsDefs2.sol";
@@ -53,9 +53,11 @@ import "./defs/altar/AltarDefs1.sol";
 import "./defs/altar/AltarDefs2.sol";
 import "./defs/altar/AltarDefs3.sol";
 
-// import "./defs/drills/DrillsDefs1.sol";
+// SOUND
 
-// import "./defs/noses/NosesDefs1.sol";
+import "./sound/SoundImp1.sol";
+import "./sound/SoundImp2.sol";
+import "./sound/SoundImp3.sol";
 
 import "./defs/assets/AssetsDefs1.sol";
 import "./defs/assets/AssetsDefs2.sol";
@@ -165,6 +167,10 @@ contract GlobalSVG {
     output = string.concat(
       output,
       CommonSVG.SCRIPT,
+      SoundImp1.getPart(),
+      SoundImp2.getPart(),
+      SoundImp3.getPart(),
+      CommonSVG.TEMP_STYLE,
       CommonSVG.STYLE,
       ApparatusCSS1.getPart(),
       ApparatusCSS2.getPart(),
