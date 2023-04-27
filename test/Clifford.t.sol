@@ -108,7 +108,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 0;
+  uint internal constant MINT_SIZE = 10;
   // string[] public allMachines = ["Altar", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
   string[] public allMachines = ["Altar"];
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
@@ -467,6 +467,7 @@ contract CliffordTest is Test {
   // 20 = 0.1ETH
   // 100 = 0.5ETH
   // 200 = 1ETH
+  // 400 = 2ETH
   // 1000 = 5ETH
 
   function auctionSimulator(uint numOfBidders) public {
@@ -478,14 +479,14 @@ contract CliffordTest is Test {
     // for numOfBidders create an address array with random addresses
     address[] memory bidders = new address[](numOfBidders);
     for (uint i = 0; i < numOfBidders; i++) {
-      bidders[i] = address(uint160(uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty, i)))));
+      bidders[i] = address(uint160(uint(keccak256(abi.encodePacked(i)))));
     }
 
     // for each bidder
     for (uint i = 0; i < numOfBidders; i++) {
       // get the minimum bid value
       uint minBidValue = clifford.getMinimumBid();
-      uint userBidAmount = (uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty, i))) % 20 + 1) * BID_INCREMENT;
+      uint userBidAmount = (uint(keccak256(abi.encodePacked(bidders[i]))) % 200 + 1) * BID_INCREMENT;
       if (userBidAmount < minBidValue || i % 2 == 0) { // 50% chance to bid the minimum
         userBidAmount = minBidValue;
       }
@@ -516,7 +517,7 @@ contract CliffordTest is Test {
   }
 
   function testAuctionSimulator() public {
-    uint numOfBidders = 500;
+    uint numOfBidders = 100;
 
     auctionSimulator(numOfBidders);
   }
@@ -815,6 +816,58 @@ contract CliffordTest is Test {
     assertEq(clifford.getUserBid(address(this)), 3 ether, "Bid should be 3 ETH");
   }
 
+  function testAuctionExtension() public {
+    // start the cypher claim period
+    clifford.startCypherClaimPeriod();
+    // start the auction
+    clifford.startAuction();
+    // Get when the auction ends
+    uint256 auctionEnd = clifford.getEndTimestamp();
+    // Fast forward to just before the end of the auction
+    vm.warp(auctionEnd - BID_EXTENSION_LENGTH / 2);
+    // get the current block timestamp
+    uint256 currentTimestamp = block.timestamp;
+    // place a bid
+    clifford.placeBid{value: 1 ether}();
+    // check if the auction end was extended
+    assertEq(clifford.getEndTimestamp(), currentTimestamp + BID_EXTENSION_LENGTH, "Auction should have been extended");
+  }
+
+  function testDistributeNfts() public {
+    uint numOfBidders = 100;
+
+    auctionSimulator(numOfBidders);
+
+    // check if each bidder has the correct amount of NFTs
+    for (uint i = 0; i < numOfBidders; i++) {
+      address bidder = address(uint160(uint(keccak256(abi.encodePacked(i)))));
+      uint expectedNfts = clifford.getUserBid(bidder) / clifford.getCurrentPricePerUnit();
+      assertEq(clifford.balanceOf(bidder), expectedNfts, string.concat("Bidder should have ", Strings.toString(expectedNfts), " NFTs"));
+    }
+  }
+
+  function testDevClaim() public {
+    // start the cypher claim period
+    clifford.startCypherClaimPeriod();
+    // start the auction
+    clifford.startAuction();
+    // Get when the auction ends
+    uint256 auctionEnd = clifford.getEndTimestamp();
+    // Fast forward to the end of the auction
+    vm.warp(auctionEnd);
+    // mint entire supply to dev
+    clifford.devClaim();
+    // check if the dev has the correct amount of NFTs
+    assertEq(clifford.balanceOf(address(this)), clifford.totalSupply(), string.concat("Dev should have ", Strings.toString(clifford.totalSupply()), " NFTs"));
+  }
+
+  function testWithdrawAfterDevClaim() public {
+    uint numOfBidders = 100;
+
+    auctionSimulator(numOfBidders);
+
+    clifford.withdraw(TOP_CYPHER_HOLDER);
+  }
 
   // Test calling functions out of order to ensure they revert
 
@@ -836,7 +889,7 @@ contract CliffordTest is Test {
     // We should not be able to withdraw before the cypher claim
     // Trying to withdraw
     vm.expectRevert(NftsNotAllMinted.selector);
-    clifford.withdraw();
+    clifford.withdraw(TOP_CYPHER_HOLDER);
   }
 
   function testDevClaimBeforeAuctionOver() public {
@@ -858,7 +911,7 @@ contract CliffordTest is Test {
     clifford.startAuction();
     // Trying to withdraw
     vm.expectRevert(NftsNotAllMinted.selector);
-    clifford.withdraw();
+    clifford.withdraw(TOP_CYPHER_HOLDER);
   }
 
   function testWithdrawBeforeDevClaim() public {
@@ -873,7 +926,7 @@ contract CliffordTest is Test {
     vm.warp(auctionEnd);
     // Trying to withdraw
     vm.expectRevert(NftsNotAllMinted.selector);
-    clifford.withdraw();
+    clifford.withdraw(TOP_CYPHER_HOLDER);
   }
 
   // User tries actions that should revert

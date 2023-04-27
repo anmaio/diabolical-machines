@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-import "@openzeppelin/contracts/utils/Base64.sol";
+import "solady/utils/Base64.sol";
 import "./Machine.sol";
 import "./GridHelper.sol";
 import "./GlobalSVG.sol";
