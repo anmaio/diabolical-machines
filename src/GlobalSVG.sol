@@ -6,6 +6,7 @@ pragma solidity 0.8.16;
 import "./styles/altar/AltarCSS1.sol";
 
 import "./styles/assets/AssetsCSS1.sol";
+import "./styles/assets/AssetsCSS2.sol";
 
 import "./styles/apparatus/ApparatusCSS1.sol";
 import "./styles/apparatus/ApparatusCSS2.sol";
@@ -88,11 +89,13 @@ contract GlobalSVG {
     );
   }
 
-  function getShell(string memory flip, uint rand, int baseline) external pure returns (string memory) {
+  function getShell(string memory flip, uint rand, int baseline, string memory dataInfo) external pure returns (string memory) {
     return string.concat(
       CommonSVG.SHELL_OPEN,
       flip,
       CommonSVG.SHELL_CLOSE,
+      dataInfo,
+      // "data-info=\"{'id':0,'RandomNumber':'107902980979898548990920576554000892204849709403626377894656421886843343448711','State':'Degraded','Machine':'Altar','Productivity':'Very High','ProductivityValue':'41','GlobalAsset':'Cactus','ExpansionProp':'Grate','Colour':'Common'}\" >",
       CommonSVG.createShellOpacity(rand, baseline)
     );
   }
@@ -143,12 +146,10 @@ contract GlobalSVG {
       AltarDefs1.getPart(),
       AltarDefs2.getPart(),
       AltarDefs3.getPart()
-      // DrillsDefs1.getPart()
     );
 
     output = string.concat(
       output,
-      // NosesDefs1.getPart(),
       CellsDefs1.getPart(),
       CellsDefs2.getPart(),
       TubesDefs1.getPart(),
@@ -181,8 +182,6 @@ contract GlobalSVG {
       output,
 
       AltarCSS1.getPart(),
-      // DrillsCSS1.getPart(),
-      // NosesCSS1.getPart(),
       CellsCSS1.getPart(),
       CellsCSS2.getPart(),
       CellsCSS3.getPart()
@@ -207,6 +206,7 @@ contract GlobalSVG {
     return string.concat(
       output,
       AssetsCSS1.getPart(),
+      AssetsCSS2.getPart(),
       CharacterCSS1.getPart(),
       CharacterCSS2.getPart(),
       CommonSVG.STYLE_CLOSE

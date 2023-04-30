@@ -30,7 +30,7 @@ library CommonSVG {
 
   string internal constant SHELL_OPEN = "<g style='transform:scaleX(";
 
-  string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell' clip-path='url(#clipPathShell)'>";
+  string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell' clip-path='url(#clipPathShell)' ";
 
   string internal constant ROTATIONS = "-40-45-45";
 

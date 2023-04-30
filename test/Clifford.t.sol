@@ -37,10 +37,16 @@ import "../src/Assets/Assets/AssetsImp2.sol";
 import "../src/Assets/Assets/AssetsImp3.sol";
 import "../src/Assets/Assets/AssetsImp4.sol";
 import "../src/Assets/Assets/AssetsImp5.sol";
+import "../src/Assets/Assets/AssetsImp6.sol";
+import "../src/Assets/Assets/AssetsImp7.sol";
+import "../src/Assets/Assets/AssetsImp8.sol";
+import "../src/Assets/Assets/AssetsImp9.sol";
+import "../src/Assets/Assets/AssetsImp10.sol";
 
 import "../src/Assets/Misc/MiscImp1.sol";
 
 import "../src/Assets/Props/PropsImp1.sol";
+import "../src/Assets/Props/PropsImp2.sol";
 
 import "../src/Assets/Cells/CellsImp1.sol";
 import "../src/Assets/Cells/CellsImp2.sol";
@@ -108,9 +114,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 10;
-  // string[] public allMachines = ["Altar", "Apparatus", "Cells", "Tubes", "Beast", "ConveyorBelt"];
-  string[] public allMachines = ["Altar"];
+  uint internal constant MINT_SIZE = 40;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
 
@@ -216,20 +220,32 @@ contract CliffordTest is Test {
     AssetsImp3 assetsImp3 = new AssetsImp3();
     AssetsImp4 assetsImp4 = new AssetsImp4();
     AssetsImp5 assetsImp5 = new AssetsImp5();
-    address[] memory assetsImpsAds = new address[](5);
+    AssetsImp6 assetsImp6 = new AssetsImp6();
+    AssetsImp7 assetsImp7 = new AssetsImp7();
+    AssetsImp8 assetsImp8 = new AssetsImp8();
+    AssetsImp9 assetsImp9 = new AssetsImp9();
+    AssetsImp10 assetsImp10 = new AssetsImp10();
+    address[] memory assetsImpsAds = new address[](10);
     assetsImpsAds[0] = address(assetsImp1);
     assetsImpsAds[1] = address(assetsImp2);
     assetsImpsAds[2] = address(assetsImp3);
     assetsImpsAds[3] = address(assetsImp4);
     assetsImpsAds[4] = address(assetsImp5);
+    assetsImpsAds[5] = address(assetsImp6);
+    assetsImpsAds[6] = address(assetsImp7);
+    assetsImpsAds[7] = address(assetsImp8);
+    assetsImpsAds[8] = address(assetsImp9);
+    assetsImpsAds[9] = address(assetsImp10);
     assetsTB = new TraitBase(assetsImpsAds);
   }
 
   // Props
   function deployProps() internal {
     PropsImp1 propsImp1 = new PropsImp1();
-    address[] memory propsImpsAds = new address[](1);
+    PropsImp2 propsImp2 = new PropsImp2();
+    address[] memory propsImpsAds = new address[](2);
     propsImpsAds[0] = address(propsImp1);
+    propsImpsAds[1] = address(propsImp2);
     propsTB = new TraitBase(propsImpsAds);
   }
 
@@ -491,7 +507,7 @@ contract CliffordTest is Test {
         userBidAmount = minBidValue;
       }
       vm.deal(bidders[i], 100 ether);
-      vm.prank(bidders[i]);
+      vm.prank(bidders[i], bidders[i]);
       clifford.placeBid{value: userBidAmount}();
     }
 
@@ -504,7 +520,11 @@ contract CliffordTest is Test {
     // Fast forward to the end of the auction
     vm.warp(auctionEnd);
 
+    console.log("GAS BEFORE DISTRIBUTION: ", gasleft());
+
     clifford.distributeNFTs();
+
+    console.log("GAS AFTER DISTRIBUTION: ", gasleft());
 
     clifford.devClaim();
 
@@ -798,9 +818,11 @@ contract CliffordTest is Test {
     // Starting the auction
     clifford.startAuction();
     // Placing a bid of 1 ETH
+    vm.deal(TOP_CYPHER_HOLDER, 10 ether);
+    vm.prank(TOP_CYPHER_HOLDER, TOP_CYPHER_HOLDER);
     clifford.placeBid{value: 1 ether}();
     // Check the value of our bids
-    assertEq(clifford.getUserBid(address(this)), 1 ether, "Bid should be 1 ETH");
+    assertEq(clifford.getUserBid(TOP_CYPHER_HOLDER), 1 ether, "Bid should be 1 ETH");
   }
 
   function testPlaceMultipleBids() public {
@@ -809,11 +831,14 @@ contract CliffordTest is Test {
     // Starting the auction
     clifford.startAuction();
     // Placing a bid of 1 ETH
+    vm.deal(TOP_CYPHER_HOLDER, 10 ether);
+    vm.prank(TOP_CYPHER_HOLDER, TOP_CYPHER_HOLDER);
     clifford.placeBid{value: 1 ether}();
     // Placing a bid of 2 ETH
+    vm.prank(TOP_CYPHER_HOLDER, TOP_CYPHER_HOLDER);
     clifford.placeBid{value: 2 ether}();
     // Check the value of our bids
-    assertEq(clifford.getUserBid(address(this)), 3 ether, "Bid should be 3 ETH");
+    assertEq(clifford.getUserBid(TOP_CYPHER_HOLDER), 3 ether, "Bid should be 3 ETH");
   }
 
   function testAuctionExtension() public {
@@ -828,6 +853,8 @@ contract CliffordTest is Test {
     // get the current block timestamp
     uint256 currentTimestamp = block.timestamp;
     // place a bid
+    vm.deal(TOP_CYPHER_HOLDER, 10 ether);
+    vm.prank(TOP_CYPHER_HOLDER, TOP_CYPHER_HOLDER);
     clifford.placeBid{value: 1 ether}();
     // check if the auction end was extended
     assertEq(clifford.getEndTimestamp(), currentTimestamp + BID_EXTENSION_LENGTH, "Auction should have been extended");
@@ -866,7 +893,11 @@ contract CliffordTest is Test {
 
     auctionSimulator(numOfBidders);
 
-    clifford.withdraw(TOP_CYPHER_HOLDER);
+    clifford.transferOwnership(TOP_CYPHER_HOLDER);
+
+    vm.prank(clifford.owner());
+
+    clifford.withdraw();
   }
 
   // Test calling functions out of order to ensure they revert
@@ -889,7 +920,7 @@ contract CliffordTest is Test {
     // We should not be able to withdraw before the cypher claim
     // Trying to withdraw
     vm.expectRevert(NftsNotAllMinted.selector);
-    clifford.withdraw(TOP_CYPHER_HOLDER);
+    clifford.withdraw();
   }
 
   function testDevClaimBeforeAuctionOver() public {
@@ -911,7 +942,7 @@ contract CliffordTest is Test {
     clifford.startAuction();
     // Trying to withdraw
     vm.expectRevert(NftsNotAllMinted.selector);
-    clifford.withdraw(TOP_CYPHER_HOLDER);
+    clifford.withdraw();
   }
 
   function testWithdrawBeforeDevClaim() public {
@@ -926,7 +957,7 @@ contract CliffordTest is Test {
     vm.warp(auctionEnd);
     // Trying to withdraw
     vm.expectRevert(NftsNotAllMinted.selector);
-    clifford.withdraw(TOP_CYPHER_HOLDER);
+    clifford.withdraw();
   }
 
   // User tries actions that should revert
