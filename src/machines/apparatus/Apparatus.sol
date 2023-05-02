@@ -33,12 +33,11 @@ contract Apparatus {
   string internal constant POSSIBLE_CHARACTER_POSITIONS = "00000000-1560090-312018003120180";
 
   // Floor
-  string internal constant FLOOR_OFFSETS = "0312036004680270";
-  uint internal constant NUMBER_OF_FLOOR_POSITIONS = 2;
-
-  // Wall
-  string internal constant WALL_OFFSETS = "0000018001560090015602700312000003120180";
-  uint internal constant NUMBER_OF_WALL_POSITIONS = 5;
+  string internal constant SMALL_OFFSETS = "04680270";
+  string internal constant LARGE_OFFSETS = "03120360";
+  string internal constant OUT_WALL_OFFSETS = "00000180";
+  string internal constant FLAT_WALL_OFFSETS = "03120000031201800156009001560270";
+  uint internal constant NUMBER_OF_FLAT_WALL_POSITIONS = 4;
 
   uint internal constant ALL_DRILL_WRAPPER_NUMBER = 8037;
 
@@ -211,13 +210,8 @@ contract Apparatus {
     }
   }
  
-  function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
-    uint characterPositionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 23)] + baseline);
-
-    if (characterNumber == 14004 ) {
-      string memory characterOffset = string(GridHelper.slice(bytes(POSSIBLE_CHARACTER_POSITIONS), 8*(characterPositionDigits % 4), 8));
-      return characterOffset;
-    } else if (characterNumber == 14000 || characterNumber == 14002) {
+  function getCharacterPosition(uint characterNumber) internal pure returns(string memory) {
+    if (characterNumber == 14000 || characterNumber == 14002 || characterNumber == 14004) {
       return "03120180";
     } else {
       return "00000000";
@@ -229,8 +223,8 @@ contract Apparatus {
     uint[] memory numbersUsed = new uint[](80);
     string[] memory offsetsUsed = new string[](80);
 
-    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
+    numbersUsed[count] = GlobalNumbers.getFlatWallNumber(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getSingleOffset(rand, baseline, FLAT_WALL_OFFSETS, NUMBER_OF_FLAT_WALL_POSITIONS);
     count++;
 
     uint[5] memory characterNumbers = GlobalNumbers.getCharacterNumberAndLeverNumber(rand, false, baseline);
@@ -240,9 +234,9 @@ contract Apparatus {
       count++;
     }
 
-    if (keccak256(bytes(getCharacterPosition(characterNumbers[3], rand, baseline))) != keccak256(bytes("03120180"))) {
+    if (keccak256(bytes(getCharacterPosition(characterNumbers[3]))) != keccak256(bytes("03120180"))) {
       numbersUsed[count] = characterNumbers[3];
-      offsetsUsed[count] = getCharacterPosition(characterNumbers[3], rand, baseline);
+      offsetsUsed[count] = getCharacterPosition(characterNumbers[3]);
       count++;
     }
 
@@ -321,14 +315,22 @@ contract Apparatus {
     offsetsUsed[count] = getLeftTopOffset(getLeftTopObject(rand, baseline));
     count++;
 
-    if (keccak256(bytes(getCharacterPosition(characterNumbers[3], rand, baseline))) == keccak256(bytes("03120180"))) {
+    if (keccak256(bytes(getCharacterPosition(characterNumbers[3]))) == keccak256(bytes("03120180"))) {
       numbersUsed[count] = characterNumbers[3];
-      offsetsUsed[count] = getCharacterPosition(characterNumbers[3], rand, baseline);
+      offsetsUsed[count] = getCharacterPosition(characterNumbers[3]);
       count++;
     }
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
+    numbersUsed[count] = GlobalNumbers.getSmallAssetNumber(rand, baseline);
+    offsetsUsed[count] = SMALL_OFFSETS;
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getLargeAssetNumber(rand, baseline);
+    offsetsUsed[count] = LARGE_OFFSETS;
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getOutWallNumber(rand, baseline);
+    offsetsUsed[count] = OUT_WALL_OFFSETS;
     count++;
 
     return (numbersUsed, offsetsUsed);

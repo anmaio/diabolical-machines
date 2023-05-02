@@ -13,6 +13,8 @@ contract Metadata {
   // Clifford private _clifford;
   GlobalSVG private immutable _globalSVG;
 
+  string[3] allStates = ["Degraded", "Basic", "Embellished"];
+
   constructor(Machine machine, GlobalSVG globalSVG) {
       _machine = machine;
       _globalSVG = globalSVG;
@@ -36,7 +38,6 @@ contract Metadata {
   */
 
   function buildMetadata(uint256 tokenId, uint rand) public view returns (string memory) {
-    string[3] memory allStates = ["Degraded", "Basic", "Embellished"];
     int baseline = getBaselineRarity(rand);
     uint state = getState(baseline);
     string memory jsonInitial = string.concat(
@@ -48,14 +49,22 @@ contract Metadata {
         allStates[state],
         '"}, {"trait_type": "Productivity", "value":"',
         getProductivity(rand, baseline),
-        '"}, {"trait_type": "Global Asset:", "value":"',
-        _machine.getGlobalAssetName(rand, baseline)
+        '"}, {"trait_type": "Small Asset:", "value":"',
+        _machine.getSmallAssetName(rand, baseline)
+    );
+
+    jsonInitial = string.concat(
+      jsonInitial,
+      '"}, {"trait_type": "Large Asset:", "value":"',
+      _machine.getLargeAssetName(rand, baseline),
+      '"}, {"trait_type": "Wall Out:", "value":"',
+      _machine.getWallOutName(rand, baseline),
+      '"}, {"trait_type": "Wall Flat:", "value":"',
+      _machine.getWallFlatName(rand, baseline)
     );
 
     jsonInitial = string.concat(
         jsonInitial,
-        '"}, {"trait_type": "Expansion Prop:", "value":"',
-        _machine.getExpansionPropName(rand, baseline),
         '"}, {"trait_type": "Colour:", "value":"',
         getColourIndexTier(rand, baseline),
         '"}, {"trait_type": "Pattern:", "value":"',
@@ -71,6 +80,51 @@ contract Metadata {
     );
     string memory output = string.concat("data:application/json;base64,", jsonFinal);
     return output;
+  }
+
+  /**
+    * @dev Inject data into the SVG for the sound script
+    * @param rand The digits to use
+    * @return The data info object string
+   */
+  function createDataInfo(uint rand) internal view returns (string memory) {
+    int baseline = getBaselineRarity(rand);
+    uint state = getState(baseline);
+    string memory json = string.concat(
+        'data-info=\'{"RandomNumber":"',
+        Strings.toString(rand),
+        '","State":"',
+        allStates[state],
+        '","Machine":"',
+        getMachine(rand),
+        '","Productivity":"',
+        getProductivity(rand, baseline),
+        '","SmallAsset":"',
+        _machine.getSmallAssetName(rand, baseline)
+    );
+
+    json = string.concat(
+      json,
+      '","LargeAsset":"',
+      _machine.getLargeAssetName(rand, baseline),
+      '","WallOut":"',
+      _machine.getWallOutName(rand, baseline),
+      '","WallFlat":"',
+      _machine.getWallFlatName(rand, baseline)
+    );
+
+    json = string.concat(
+        json,
+        '","Colour":"',
+        getColourIndexTier(rand, baseline),
+        '","Pattern":"',
+        getPatternName(rand, baseline),
+        '","Character":"',
+        _machine.getCharacterName(rand, baseline),
+        '"}\' >'
+    );
+
+    return json;
   }
 
   /**
@@ -203,11 +257,13 @@ contract Metadata {
 
     uint colourValue = getBaseColourValue(rand, baseline);
 
+    string memory dataInfo = createDataInfo(rand);
+
     string memory opening = _globalSVG.getOpeningSVG(machine, colourValue, rand, baseline);
     
     string memory objects = _machine.machineToGetter(machine, rand, baseline);
     string memory closing = _globalSVG.getClosingSVG();
     // return all svg's concatenated together and base64 encoded
-    return string.concat(opening, _globalSVG.getShell(flip, rand, baseline), objects, closing);
+    return string.concat(opening, _globalSVG.getShell(flip, rand, baseline, dataInfo), objects, closing);
   }
 }

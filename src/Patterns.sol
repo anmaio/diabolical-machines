@@ -175,54 +175,54 @@ library Patterns {
     return rotateDigits * 45 / 255;
   }
 
-  /**
-    * @dev Get the pattern width and height based on the baseline rarity and random number
-    * @param rand The digits to use
-    * @param baseline The baseline rarity
-    * @param part The part of the random number to use
-    * @return The pattern width or height as a string
-   */
+  // /**
+  //   * @dev Get the pattern width and height based on the baseline rarity and random number
+  //   * @param rand The digits to use
+  //   * @param baseline The baseline rarity
+  //   * @param part The part of the random number to use
+  //   * @return The pattern width or height as a string
+  //  */
 
-  function getWidthHeight(uint rand, int baseline, uint part) public pure returns (string memory) {
-    uint digits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, part)] + baseline);
+  // function getWidthHeight(uint rand, int baseline, uint part) public pure returns (string memory) {
+  //   uint digits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, part)] + baseline);
 
-    bool isTexture = getIsTexture(rand, baseline);
+  //   bool isTexture = getIsTexture(rand, baseline);
 
-    if (isTexture) {
-      return "0.333";
-    }
+  //   if (isTexture) {
+  //     return "0.333";
+  //   }
 
-    uint[] memory probabilitiesArray = GridHelper.createEqualProbabilityArray(3);
+  //   uint[] memory probabilitiesArray = GridHelper.createEqualProbabilityArray(3);
 
-    if (digits < probabilitiesArray[0]) {
-      return "1";
-    } else if (digits < probabilitiesArray[1]) {
-      return "0.666";
-    } else {
-      return "0.333";
-    }
-  }
+  //   if (digits < probabilitiesArray[0]) {
+  //     return "1";
+  //   } else if (digits < probabilitiesArray[1]) {
+  //     return "0.666";
+  //   } else {
+  //     return "0.333";
+  //   }
+  // }
 
-  /**
-    * @dev Get the pattern width based on the baseline rarity and random number
-    * @param rand The digits to use
-    * @param baseline The baseline rarity
-    * @return The pattern width as a string
-   */
+  // /**
+  //   * @dev Get the pattern width based on the baseline rarity and random number
+  //   * @param rand The digits to use
+  //   * @param baseline The baseline rarity
+  //   * @return The pattern width as a string
+  //  */
 
-  function getWidth(uint rand, int baseline) public pure returns (string memory) {
-    return getWidthHeight(rand, baseline, 9);
-  }
+  // function getWidth(uint rand, int baseline) public pure returns (string memory) {
+  //   return getWidthHeight(rand, baseline, 9);
+  // }
 
-  /**
-    * @dev Get the pattern height based on the baseline rarity and random number
-    * @param rand The digits to use
-    * @param baseline The baseline rarity
-    * @return The pattern height as a string
-   */
+  // /**
+  //   * @dev Get the pattern height based on the baseline rarity and random number
+  //   * @param rand The digits to use
+  //   * @param baseline The baseline rarity
+  //   * @return The pattern height as a string
+  //  */
 
-  function getHeight(uint rand, int baseline) public pure returns (string memory) {
-    return getWidthHeight(rand, baseline, 10);
-  }
+  // function getHeight(uint rand, int baseline) public pure returns (string memory) {
+  //   return getWidthHeight(rand, baseline, 10);
+  // }
 
 }

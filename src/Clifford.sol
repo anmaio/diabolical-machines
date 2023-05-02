@@ -20,8 +20,11 @@ interface ICypher {
 /// @author Anomalous Materials (https://twitter.com/AnomalousMatter)
 
 contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
-  VRFCoordinatorV2Interface immutable COORDINATOR;
-  LinkTokenInterface immutable LINKTOKEN;
+  
+  address private constant vrfCoordinator = 0x271682DEB8C4E0901D1a1550aD2e64D568E69909; // Mainnet coordinator
+
+  VRFCoordinatorV2Interface constant COORDINATOR = VRFCoordinatorV2Interface(0x271682DEB8C4E0901D1a1550aD2e64D568E69909);
+  LinkTokenInterface constant LINKTOKEN = LinkTokenInterface(0x514910771AF9Ca656af840dff83E8264EcF986CA);
 
   // CUSTOM ERRORS
 
@@ -75,13 +78,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   uint256 public constant MAX_SUPPLY = 6_000;
 
-  // Mainnet coordinator
-  address private constant vrfCoordinator = 0x271682DEB8C4E0901D1a1550aD2e64D568E69909;
-
-  address private constant link_token_contract = 0x514910771AF9Ca656af840dff83E8264EcF986CA; // Mainnet
-
   // The gas lane to use, which specifies the maximum gas price to bump to.
-  bytes32 private keyHash = 0xff8dedfbfa60af186cf3c830acbc32c05aae823045ae5ea7da1e45fbfaba4f92; // Mainnet 500 GWEI
+  bytes32 private constant keyHash = 0xff8dedfbfa60af186cf3c830acbc32c05aae823045ae5ea7da1e45fbfaba4f92; // Mainnet 500 GWEI
 
   uint32 private constant callbackGasLimit = 100_000;
 
@@ -128,9 +126,12 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   Metadata private immutable _metadata;
 
   constructor(Metadata metadata) ERC721A("Clifford", "Cliff") VRFConsumerBaseV2(vrfCoordinator) {
-    COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
-    LINKTOKEN = LinkTokenInterface(link_token_contract);
     _metadata = metadata;
+  }
+
+  modifier callerIsUser() {
+    require(tx.origin == msg.sender, "The caller is another contract");
+    _;
   }
 
   // Assumes the subscription is funded sufficiently.
@@ -188,13 +189,13 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
       if (msg.sender != CYPHER_CONTRACT.ownerOf(tokenId)) revert NotOwnerOfCypher(tokenId);
 
       // check the cypher has not already been claimed
-      if (LibBitmap.get(cypherClaims, tokenId) == true) revert CypherAlreadyClaimed(tokenId);
+      if (LibBitmap.get(cypherClaims, tokenId)) revert CypherAlreadyClaimed(tokenId);
 
       // set claimed for this cypher to be true
       LibBitmap.set(cypherClaims, tokenId);
   }
 
-  function claimCyphers(uint[] memory tokenIds) public {
+  function claimCyphers(uint[] memory tokenIds) external callerIsUser {
     if (!cypherClaimStarted || startedAt != 0) revert CypherClaimNotActive();
     uint numOfCyphers = tokenIds.length;
     for (uint i = 0; i < numOfCyphers;) {
@@ -219,7 +220,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
     endAt = block.timestamp + AUCTION_LENGTH;
   }
 
-  function placeBid() public payable {
+  function placeBid() external payable callerIsUser {
     // Check the auction hasn't ended
     // This will also revert if the auction hasn't started as the endAt value will not have been set
     if (block.timestamp >= endAt) revert AuctionNotActive();
@@ -268,8 +269,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
         _validMint(bidder, quantityToMint);
       }
       uint remainder = amount % pricePerUnit;
-      // We don't want to fail if the transfer is not successful otherwise a malicious bidder could...
-      // break this function by bidding with a contract that cannot recieve ether
+      // We don't want to fail if the transfer is not successful otherwise the whole function will revert
       (bool success, ) = bidder.call{value: remainder}("");
       if (!success) emit TransferNotSuccessful(bidder);
     }
@@ -286,9 +286,9 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 		_validMint(owner(), MAX_SUPPLY - totalSupply());
 	}
 
-  function withdraw(address recipient) external onlyOwner {
+  function withdraw() external onlyOwner {
     if (MAX_SUPPLY != totalSupply()) revert NftsNotAllMinted();
-    (bool success, ) = recipient.call{value: address(this).balance}("");
+    (bool success, ) = msg.sender.call{value: address(this).balance}("");
     if (!success) revert TransferFailed();
   }
 

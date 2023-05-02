@@ -30,7 +30,7 @@ library CommonSVG {
 
   string internal constant SHELL_OPEN = "<g style='transform:scaleX(";
 
-  string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell' clip-path='url(#clipPathShell)'>";
+  string internal constant SHELL_CLOSE = ");transform-origin:50% 50%;' id='shell' clip-path='url(#clipPathShell)' ";
 
   string internal constant ROTATIONS = "-40-45-45";
 
@@ -195,9 +195,9 @@ library CommonSVG {
   function createShellPattern(uint rand, int baseline) external pure returns(string memory) {
     return string.concat(
       PATTERNS_START,
-      Patterns.getWidth(rand, baseline),
+      "0.330", // width
       PATTERNS_HEIGHT,
-      Patterns.getHeight(rand, baseline),
+      "0.330", // height
       PATTERNS_SCALE_OPEN,
       Patterns.getScale(rand, baseline),
       PATTERNS_SCALE_CLOSE,

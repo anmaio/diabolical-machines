@@ -20,7 +20,11 @@ library GlobalNumbers {
   // Bong
   // Lavalamp
 
-  string internal constant GLOBAL_ASSET_NUMBERS = "000000600406002060080600606000";
+  string internal constant SMALL_ASSET_NUMBERS = "000000602206021060280602706026060060600406014060020601106000060250602906020";
+  string internal constant LARGE_ASSET_NUMBERS = "00000020020200402003020010200902008060130600806019060090602306024060300601806017";
+
+  string internal constant OUT_WALL_NUMBERS = "0000006005060070601606010";
+  string internal constant FLAT_WALL_NUMBERS = "00000020000201102007020060200502010";
 
   // Expansion Props - 9 values
   // None
@@ -59,27 +63,51 @@ library GlobalNumbers {
   string internal constant CHARACTER_NUMBERS = "00000140021400114005140031400014004";
 
   /**
-    * @dev Returns the global asset number based on the digits
+    * @dev Returns the small asset number based on the digits
     * @param rand The digits to use
-    * @return The global asset number
+    * @return The small asset number
    */
 
-  function getGlobalAssetNumber(uint rand, int baseline) external pure returns (uint) {
-    uint globalAssetDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 20)] + baseline);
+  function getSmallAssetNumber(uint rand, int baseline) external pure returns (uint) {
+    uint smallAssetDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 20)] + baseline);
 
-    return GridHelper.getSingleObject(GLOBAL_ASSET_NUMBERS, globalAssetDigits, 6, 5);
+    return GridHelper.getSingleObject(SMALL_ASSET_NUMBERS, smallAssetDigits, 15, 5);
   }
-  
+
   /**
-    * @dev Returns the expansion prop number based on the digits
+    * @dev Returns the large asset number based on the digits
     * @param rand The digits to use
-    * @return The expansion prop number
+    * @return The large asset number
    */
 
-  function getExpansionPropsNumber(uint rand, int baseline) public pure returns (uint) {
-    uint expansionPropsDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 22)] + baseline);
+  function getLargeAssetNumber(uint rand, int baseline) external pure returns (uint) {
+    uint largeAssetDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 21)] + baseline);
 
-    return GridHelper.getSingleObject(EXPANSION_PROPS_NUMBERS, expansionPropsDigits, 9, 5);
+    return GridHelper.getSingleObject(LARGE_ASSET_NUMBERS, largeAssetDigits, 16, 5);
+  }
+
+  /**
+    * @dev Returns the out wall number based on the digits
+    * @param rand The digits to use
+    * @return The out wall number
+   */
+
+  function getOutWallNumber(uint rand, int baseline) external pure returns (uint) {
+    uint outWallDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 22)] + baseline);
+
+    return GridHelper.getSingleObject(OUT_WALL_NUMBERS, outWallDigits, 5, 5);
+  }
+
+  /**
+    * @dev Returns the flat wall number based on the digits
+    * @param rand The digits to use
+    * @return The flat wall number
+   */
+
+  function getFlatWallNumber(uint rand, int baseline) external pure returns (uint) {
+    uint flatWallDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 23)] + baseline);
+
+    return GridHelper.getSingleObject(FLAT_WALL_NUMBERS, flatWallDigits, 7, 5);
   }
 
   /**
@@ -130,47 +158,22 @@ library GlobalNumbers {
     return [flipOpen, characterLeverNumber, armMask, characterNumber, flipClose];
   }
 
-  /** 
-    * @dev Returns the global asset position based on the digits
+  /**
+    * @dev Returns the expansion prop number based on the digits
     * @param rand The digits to use
-    * @param floorOffsets The floor offsets
-    * @param numberOfFloorPositions The number of floor positions
-    * @return The global asset position
+    * @param baseline The baseline to use
+    * @param offsetNumbers The offset numbers to use
+    * @param numOptions The number of options
+    * @return The expansion prop number
    */
-  function getGlobalAssetPosition(uint rand, string memory floorOffsets, uint numberOfFloorPositions) public pure returns (string memory) {
 
-    uint globalAssetDigits = GridHelper.getRandByte(rand, 21);
+  function getSingleOffset(uint rand, int baseline, string memory offsetNumbers, uint numOptions) external pure returns (string memory) {
+    uint offsetDigits1 = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 20)] + baseline);
+    uint offsetDigits2 = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 21)] + baseline);
+    uint offsetDigits3 = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 22)] + baseline);
 
-    string memory assetOffset = string(GridHelper.slice(bytes(floorOffsets), (globalAssetDigits % numberOfFloorPositions)*8, 8));
+    uint finalOffsetDigits = (offsetDigits1 + offsetDigits2 + offsetDigits3) / 3;
 
-    return assetOffset;
-  }
-
-  /** 
-    * @dev Returns the expansion prop position based on the digits
-    * @param rand The digits to use
-    * @param baseline The baseline number
-    * @param floorOffsets The floor offsets
-    * @param numberOfFloorPositions The number of floor positions
-    * @param wallOffsets The wall offsets
-    * @param numberOfWallPositions The number of wall positions
-    * @return The expansion prop position
-   */
-  function getExpansionPropPosition(uint rand, int baseline, string memory floorOffsets, uint numberOfFloorPositions, string memory wallOffsets, uint numberOfWallPositions) external pure returns (string memory) {
-
-    uint expansionPropDigits = GridHelper.getRandByte(rand, 23);
-    uint expansionPropsNumber = getExpansionPropsNumber(rand, baseline);
-    if (expansionPropsNumber == 2000 || expansionPropsNumber == 2005 || expansionPropsNumber == 2006 || expansionPropsNumber == 2007) {
-      return string(GridHelper.slice(bytes(wallOffsets), (expansionPropDigits % numberOfWallPositions)*8, 8));
-    } else {
-      // Need to check that the position is not already taken by the global asset
-      string memory globalAssetOffset = getGlobalAssetPosition(rand, floorOffsets, numberOfFloorPositions);
-      string memory expansionPropOffset = string(GridHelper.slice(bytes(floorOffsets), (expansionPropDigits % numberOfFloorPositions)*8, 8));
-      if (keccak256(bytes(expansionPropOffset)) == keccak256(bytes(globalAssetOffset))) {
-        return string(GridHelper.slice(bytes(floorOffsets), ((expansionPropDigits+1) % numberOfFloorPositions)*8, 8));
-      } else {
-        return expansionPropOffset;
-      }
-    }
+    return string(GridHelper.slice(bytes(offsetNumbers), (finalOffsetDigits % numOptions)*8, 8));
   }
 }

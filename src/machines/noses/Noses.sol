@@ -12,12 +12,11 @@ contract Noses {
   AssetRetriever internal _assetRetriever;
 
   // Floor
-  string internal constant FLOOR_OFFSETS = "0312036004680270";
-  uint internal constant NUMBER_OF_FLOOR_POSITIONS = 2;
-
-  // Wall
-  string internal constant WALL_OFFSETS = "0000018001560090015602700312000003120180";
-  uint internal constant NUMBER_OF_WALL_POSITIONS = 5;
+  string internal constant SMALL_OFFSETS = "06240210";
+  string internal constant LARGE_OFFSETS = "0468027003120360";
+  string internal constant OUT_WALL_OFFSETS = "00000180";
+  string internal constant FLAT_WALL_OFFSETS = "03120000015600900000036000000540";
+  uint internal constant NUMBER_OF_FLAT_WALL_POSITIONS = 4;
 
   string internal constant NOSE_NUMBERS = "180021800318001";
 
@@ -110,12 +109,11 @@ contract Noses {
 
   }
 
-  function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
-
-    if ((characterNumber == 14000 || characterNumber == 14002 || characterNumber == 14004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
-      return "01560270";
-    } else {
+  function getCharacterPosition(uint characterNumber) internal pure returns(string memory) {
+    if (characterNumber == 14000 || characterNumber == 14002 || characterNumber == 14004) {
       return "03120180";
+    } else {
+      return "00000000";
     }
   }
 
@@ -139,8 +137,8 @@ contract Noses {
       count++;
     }
 
-    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
+    numbersUsed[count] = GlobalNumbers.getFlatWallNumber(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getSingleOffset(rand, baseline, FLAT_WALL_OFFSETS, NUMBER_OF_FLAT_WALL_POSITIONS);
     count++;
 
     numbersUsed[count] = ALL_NOSES_WRAPPER_NUMBER;
@@ -195,14 +193,22 @@ contract Noses {
     }
 
     numbersUsed[count] = characterNumbers[3];
-    offsetsUsed[count] = getCharacterPosition(characterNumbers[3], rand, baseline);
+    offsetsUsed[count] = getCharacterPosition(characterNumbers[3]);
     count++;
 
     numbersUsed[count] = characterNumbers[4];
     count++;
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
+    numbersUsed[count] = GlobalNumbers.getSmallAssetNumber(rand, baseline);
+    offsetsUsed[count] = SMALL_OFFSETS;
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getLargeAssetNumber(rand, baseline);
+    offsetsUsed[count] = LARGE_OFFSETS;
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getOutWallNumber(rand, baseline);
+    offsetsUsed[count] = OUT_WALL_OFFSETS;
     count++;
 
     return (numbersUsed, offsetsUsed);

@@ -36,10 +36,16 @@ import "../src/Assets/Assets/AssetsImp2.sol";
 import "../src/Assets/Assets/AssetsImp3.sol";
 import "../src/Assets/Assets/AssetsImp4.sol";
 import "../src/Assets/Assets/AssetsImp5.sol";
+import "../src/Assets/Assets/AssetsImp6.sol";
+import "../src/Assets/Assets/AssetsImp7.sol";
+import "../src/Assets/Assets/AssetsImp8.sol";
+import "../src/Assets/Assets/AssetsImp9.sol";
+import "../src/Assets/Assets/AssetsImp10.sol";
 
 import "../src/Assets/Misc/MiscImp1.sol";
 
 import "../src/Assets/Props/PropsImp1.sol";
+import "../src/Assets/Props/PropsImp2.sol";
 
 import "../src/Assets/Cells/CellsImp1.sol";
 import "../src/Assets/Cells/CellsImp2.sol";
@@ -180,20 +186,32 @@ contract CliffordScript is Script {
     AssetsImp3 assetsImp3 = new AssetsImp3();
     AssetsImp4 assetsImp4 = new AssetsImp4();
     AssetsImp5 assetsImp5 = new AssetsImp5();
-    address[] memory assetsImpsAds = new address[](5);
+    AssetsImp6 assetsImp6 = new AssetsImp6();
+    AssetsImp7 assetsImp7 = new AssetsImp7();
+    AssetsImp8 assetsImp8 = new AssetsImp8();
+    AssetsImp9 assetsImp9 = new AssetsImp9();
+    AssetsImp10 assetsImp10 = new AssetsImp10();
+    address[] memory assetsImpsAds = new address[](10);
     assetsImpsAds[0] = address(assetsImp1);
     assetsImpsAds[1] = address(assetsImp2);
     assetsImpsAds[2] = address(assetsImp3);
     assetsImpsAds[3] = address(assetsImp4);
     assetsImpsAds[4] = address(assetsImp5);
+    assetsImpsAds[5] = address(assetsImp6);
+    assetsImpsAds[6] = address(assetsImp7);
+    assetsImpsAds[7] = address(assetsImp8);
+    assetsImpsAds[8] = address(assetsImp9);
+    assetsImpsAds[9] = address(assetsImp10);
     assetsTB = new TraitBase(assetsImpsAds);
   }
 
   // Props
   function deployProps() internal {
     PropsImp1 propsImp1 = new PropsImp1();
-    address[] memory propsImpsAds = new address[](1);
+    PropsImp2 propsImp2 = new PropsImp2();
+    address[] memory propsImpsAds = new address[](2);
     propsImpsAds[0] = address(propsImp1);
+    propsImpsAds[1] = address(propsImp2);
     propsTB = new TraitBase(propsImpsAds);
   }
 
@@ -208,34 +226,6 @@ contract CliffordScript is Script {
     altarImpsAds[2] = address(altarImp3);
     altarTB = new TraitBase(altarImpsAds);
   }
-
-  // Drills
-  // function deployDrills() internal {
-  //   DrillsImp1 drillsImp1 = new DrillsImp1();
-  //   DrillsImp2 drillsImp2 = new DrillsImp2();
-  //   DrillsImp3 drillsImp3 = new DrillsImp3();
-  //   DrillsImp4 drillsImp4 = new DrillsImp4();
-  //   address[] memory drillsImpsAds = new address[](4);
-  //   drillsImpsAds[0] = address(drillsImp1);
-  //   drillsImpsAds[1] = address(drillsImp2);
-  //   drillsImpsAds[2] = address(drillsImp3);
-  //   drillsImpsAds[3] = address(drillsImp4);
-  //   drillsTB = new TraitBase(drillsImpsAds);
-  // }
-
-  // Noses
-  // function deployNoses() internal {
-  //   NosesImp1 nosesImp1 = new NosesImp1();
-  //   NosesImp2 nosesImp2 = new NosesImp2();
-  //   NosesImp3 nosesImp3 = new NosesImp3();
-  //   NosesImp4 nosesImp4 = new NosesImp4();
-  //   address[] memory nosesImpsAds = new address[](4);
-  //   nosesImpsAds[0] = address(nosesImp1);
-  //   nosesImpsAds[1] = address(nosesImp2);
-  //   nosesImpsAds[2] = address(nosesImp3);
-  //   nosesImpsAds[3] = address(nosesImp4);
-  //   nosesTB = new TraitBase(nosesImpsAds);
-  // }
 
   // Tubes
   function deployTubes() internal {
@@ -429,8 +419,6 @@ contract CliffordScript is Script {
     deployAssets();
     deployProps();
     deployAltar();
-    // deployDrills();
-    // deployNoses();
     deployTubes();
     deployApparatus();
     deployCells();

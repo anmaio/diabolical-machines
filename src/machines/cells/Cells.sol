@@ -15,7 +15,7 @@ contract Cells {
 
   string internal constant CELL_NUMBERS = "09030090320903109021090190902009018";
 
-  string internal constant POSSIBLE_CHARACTER_POSITIONS = "015600900312018000000180";
+  string internal constant POSSIBLE_CHARACTER_POSITIONS = "0000018001560090";
 
   string internal constant CELL_OFFSETS = "01560192015600000000028200000090";
 
@@ -26,12 +26,11 @@ contract Cells {
   string internal constant FEEDBACK_NUMBERS = "00000040030400204001040000900109000";
 
   // Floor
-  string internal constant FLOOR_OFFSETS = "046802700312036004680270";
-  uint internal constant NUMBER_OF_FLOOR_POSITIONS = 3;
-
-  // Wall
-  string internal constant WALL_OFFSETS = "0000018000000360000005400156009003120000";
-  uint internal constant NUMBER_OF_WALL_POSITIONS = 5;
+  string internal constant SMALL_OFFSETS = "06240210";
+  string internal constant LARGE_OFFSETS = "0468027003120360";
+  string internal constant OUT_WALL_OFFSETS = "00000180";
+  string internal constant FLAT_WALL_OFFSETS = "03120000015600900000036000000540";
+  uint internal constant NUMBER_OF_FLAT_WALL_POSITIONS = 4;
 
   uint internal constant ALL_CELL_WRAPPER_NUMBER = 13011;
 
@@ -214,8 +213,8 @@ contract Cells {
   function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
     uint characterPositionDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 23)] + baseline);
 
-    if (characterNumber == 14000 || characterNumber == 14004 || characterNumber == 14002) {
-      string memory characterOffset = string(GridHelper.slice(bytes(POSSIBLE_CHARACTER_POSITIONS), 8*(characterPositionDigits % 3), 8));
+    if (characterNumber == 14000 || characterNumber == 14002 || characterNumber == 14004) {
+      string memory characterOffset = string(GridHelper.slice(bytes(POSSIBLE_CHARACTER_POSITIONS), 8*(characterPositionDigits % 2), 8));
       return characterOffset;
     } else {
       return "01560090";
@@ -230,8 +229,8 @@ contract Cells {
     numbersUsed[count] = FLIP_NUMBER;
     count++;
 
-    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
+    numbersUsed[count] = GlobalNumbers.getFlatWallNumber(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getSingleOffset(rand, baseline, FLAT_WALL_OFFSETS, NUMBER_OF_FLAT_WALL_POSITIONS);
     count++;
 
     numbersUsed[count] = GROUP_CLOSE_NUMBER;
@@ -287,8 +286,22 @@ contract Cells {
     numbersUsed[count] = characterNumbers[4];
     count++;
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
+    numbersUsed[count] = GlobalNumbers.getSmallAssetNumber(rand, baseline);
+    offsetsUsed[count] = SMALL_OFFSETS;
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getLargeAssetNumber(rand, baseline);
+    offsetsUsed[count] = GlobalNumbers.getSingleOffset(rand, baseline, LARGE_OFFSETS, 2);
+    count++;
+
+    numbersUsed[count] = FLIP_NUMBER;
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getOutWallNumber(rand, baseline);
+    offsetsUsed[count] = OUT_WALL_OFFSETS;
+    count++;
+
+    numbersUsed[count] = GROUP_CLOSE_NUMBER;
     count++;
 
     return (numbersUsed, offsetsUsed);
