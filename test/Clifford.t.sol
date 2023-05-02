@@ -114,7 +114,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 40;
+  uint internal constant MINT_SIZE = 10;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
 
@@ -629,9 +629,9 @@ contract CliffordTest is Test {
 
       string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getSeed(i)), clifford.getSeed(i), baseline));
 
-      string memory globalAsset = machine.getGlobalAssetName(clifford.getSeed(i), baseline);
+      string memory globalAsset = machine.getSmallAssetName(clifford.getSeed(i), baseline);
 
-      string memory expansionProp = machine.getExpansionPropName(clifford.getSeed(i), baseline);
+      string memory expansionProp = machine.getLargeAssetName(clifford.getSeed(i), baseline);
 
       string memory colour = metadata.getColourIndexTier(clifford.getSeed(i), baseline);
 
@@ -658,9 +658,17 @@ contract CliffordTest is Test {
 
       item = string.concat(
         item, 
-        "\",\n    \"GlobalAsset\": \"",
+        "\",\n    \"Wall Out\": \"",
+        machine.getWallOutName(clifford.getSeed(i), baseline),
+        "\",\n    \"Wall Flat\": \"",
+        machine.getWallFlatName(clifford.getSeed(i), baseline)
+      );
+
+      item = string.concat(
+        item, 
+        "\",\n    \"Small Asset\": \"",
         globalAsset,
-        "\",\n    \"ExpansionProp\": \"",
+        "\",\n    \"Large Asset\": \"",
         expansionProp,
         "\",\n    \"Colour\": \"",
         colour

@@ -49,14 +49,22 @@ contract Metadata {
         allStates[state],
         '"}, {"trait_type": "Productivity", "value":"',
         getProductivity(rand, baseline),
-        '"}, {"trait_type": "Global Asset:", "value":"',
-        _machine.getGlobalAssetName(rand, baseline)
+        '"}, {"trait_type": "Small Asset:", "value":"',
+        _machine.getSmallAssetName(rand, baseline)
+    );
+
+    jsonInitial = string.concat(
+      jsonInitial,
+      '"}, {"trait_type": "Large Asset:", "value":"',
+      _machine.getLargeAssetName(rand, baseline),
+      '"}, {"trait_type": "Wall Out:", "value":"',
+      _machine.getWallOutName(rand, baseline),
+      '"}, {"trait_type": "Wall Flat:", "value":"',
+      _machine.getWallFlatName(rand, baseline)
     );
 
     jsonInitial = string.concat(
         jsonInitial,
-        '"}, {"trait_type": "Expansion Prop:", "value":"',
-        _machine.getExpansionPropName(rand, baseline),
         '"}, {"trait_type": "Colour:", "value":"',
         getColourIndexTier(rand, baseline),
         '"}, {"trait_type": "Pattern:", "value":"',
@@ -91,14 +99,22 @@ contract Metadata {
         getMachine(rand),
         '","Productivity":"',
         getProductivity(rand, baseline),
-        '","GlobalAsset":"',
-        _machine.getGlobalAssetName(rand, baseline)
+        '","SmallAsset":"',
+        _machine.getSmallAssetName(rand, baseline)
+    );
+
+    json = string.concat(
+      json,
+      '","LargeAsset":"',
+      _machine.getLargeAssetName(rand, baseline),
+      '","WallOut":"',
+      _machine.getWallOutName(rand, baseline),
+      '","WallFlat":"',
+      _machine.getWallFlatName(rand, baseline)
     );
 
     json = string.concat(
         json,
-        '","ExpansionProp":"',
-        _machine.getExpansionPropName(rand, baseline),
         '","Colour":"',
         getColourIndexTier(rand, baseline),
         '","Pattern":"',

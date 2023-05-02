@@ -195,9 +195,9 @@ library CommonSVG {
   function createShellPattern(uint rand, int baseline) external pure returns(string memory) {
     return string.concat(
       PATTERNS_START,
-      Patterns.getWidth(rand, baseline),
+      "0.330", // width
       PATTERNS_HEIGHT,
-      Patterns.getHeight(rand, baseline),
+      "0.330", // height
       PATTERNS_SCALE_OPEN,
       Patterns.getScale(rand, baseline),
       PATTERNS_SCALE_CLOSE,

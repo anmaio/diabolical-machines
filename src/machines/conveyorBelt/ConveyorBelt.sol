@@ -43,6 +43,8 @@ contract ConveyorBelt {
 
   uint internal constant SHELF_NUMBER = 6015;
 
+  uint internal constant FLIP_NUMBER = 13010;
+
   // EYES
   string internal constant EYES_NUMBERS = "0000012048120491205012051";
   uint internal constant WIDE_EYES_NUMBER = 5004;
@@ -56,12 +58,11 @@ contract ConveyorBelt {
   uint internal constant GROUP_CLOSE_NUMBER = 13000;
 
   // Floor
-  string internal constant FLOOR_OFFSETS = "0312036004680270";
-  uint internal constant NUMBER_OF_FLOOR_POSITIONS = 2;
-
-  // Wall
-  string internal constant WALL_OFFSETS = "01560090015602700312000003120180";
-  uint internal constant NUMBER_OF_WALL_POSITIONS = 4;
+  string internal constant SMALL_OFFSETS = "04680270";
+  string internal constant LARGE_OFFSETS = "03120360";
+  string internal constant OUT_WALL_OFFSETS = "00000180";
+  string internal constant FLAT_WALL_OFFSETS = "03120000015600900000036000000540";
+  uint internal constant NUMBER_OF_FLAT_WALL_POSITIONS = 4;
 
   constructor(address assetRetriever) {
     _assetRetriever = AssetRetriever(assetRetriever);
@@ -205,13 +206,8 @@ contract ConveyorBelt {
     }
   }
 
-  function getCharacterPosition(uint characterNumber, uint rand, int baseline) internal pure returns(string memory) {
-
-    if ((characterNumber == 14000 || characterNumber == 14002 || characterNumber == 14004) && keccak256(bytes(GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS))) != keccak256(bytes("04680270")) && keccak256(bytes(GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS))) != keccak256(bytes("04680270"))) {
-      return "01560270";
-    } else {
-      return "03120180";
-    }
+  function getCharacterPosition() internal pure returns(string memory) {
+    return "03120180";
   }
 
   function getAllNumbersUsed(uint rand, int baseline) public pure returns (uint[] memory, string[] memory) {
@@ -219,8 +215,8 @@ contract ConveyorBelt {
     uint[] memory numbersUsed = new uint[](80);
     string[] memory offsetsUsed = new string[](80);
 
-    numbersUsed[count] = GlobalNumbers.getExpansionPropsNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getExpansionPropPosition(rand, baseline, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS, WALL_OFFSETS, NUMBER_OF_WALL_POSITIONS);
+    numbersUsed[count] = GlobalNumbers.getFlatWallNumber(rand, baseline);
+    offsetsUsed[count] = FLAT_WALL_OFFSETS;
     count++;
 
     for (uint i = 0; i < 6; ++i) {
@@ -302,14 +298,28 @@ contract ConveyorBelt {
     }
 
     numbersUsed[count] = characterNumbers[3];
-    offsetsUsed[count] = getCharacterPosition(characterNumbers[3], rand, baseline);
+    offsetsUsed[count] = getCharacterPosition();
     count++;
 
     numbersUsed[count] = characterNumbers[4];
     count++;
 
-    numbersUsed[count] = GlobalNumbers.getGlobalAssetNumber(rand, baseline);
-    offsetsUsed[count] = GlobalNumbers.getGlobalAssetPosition(rand, FLOOR_OFFSETS, NUMBER_OF_FLOOR_POSITIONS);
+    numbersUsed[count] = GlobalNumbers.getSmallAssetNumber(rand, baseline);
+    offsetsUsed[count] = SMALL_OFFSETS;
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getLargeAssetNumber(rand, baseline);
+    offsetsUsed[count] = LARGE_OFFSETS;
+    count++;
+
+    numbersUsed[count] = FLIP_NUMBER;
+    count++;
+
+    numbersUsed[count] = GlobalNumbers.getOutWallNumber(rand, baseline);
+    offsetsUsed[count] = OUT_WALL_OFFSETS;
+    count++;
+
+    numbersUsed[count] = GROUP_CLOSE_NUMBER;
     count++;
 
     return (numbersUsed, offsetsUsed);
