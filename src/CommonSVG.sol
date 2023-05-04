@@ -63,7 +63,7 @@ library CommonSVG {
 
   string internal constant PATTERNS_SCALE_CLOSE = ")'><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#mp2-u-group-";
 
-  string internal constant PATTERNS_END = "' id='shell-pattern-use'/></pattern>";
+  string internal constant PATTERNS_END = "' id='shell-pattern-use' class='pulsateInOutOld'/></pattern>";
 
   string internal constant OPACITY_START = "<g id='leftWall'><polygon points='0,270 468,0 468,540 0,810' fill='url(#s0)' stroke='black'/><g id='leftWallPat' transform='skewY(-30)'><rect x='0' y='270' width='468' height='540' opacity='";
 

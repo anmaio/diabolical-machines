@@ -49,6 +49,7 @@ import "./defs/patterns/PatternsDefs14.sol";
 import "./defs/patterns/PatternsDefs15.sol";
 import "./defs/patterns/PatternsDefs16.sol";
 import "./defs/patterns/PatternsDefs17.sol";
+import "./defs/patterns/PatternsDefs18.sol";
 
 import "./defs/altar/AltarDefs1.sol";
 import "./defs/altar/AltarDefs2.sol";
@@ -81,6 +82,39 @@ import "./defs/props/PropsDefs1.sol";
 import "./CommonSVG.sol";
 
 contract GlobalSVG {
+  //  :root { --grey: hsl(0, 0%, 10%); --anim-speed: 40s; --rdm-seed: 0.3; --anim-scale-0: 1; --anim-scale-50: 5; --anim-scale-100: 1; --end-rotation: calc(var(--rdm-seed) * 360); --num-rectangles: 7; } .pulsateInOutOld { animation: pulsateInOutOld var(--anim-speed) infinite linear; } @keyframes infinityWellRect { 0% { opacity: 0; transform: scale(1.1) rotate(0deg); transform-origin: 78px 90px; } 10% { opacity: 1; } 100% { opacity: 1; transform: scale(0) rotate(calc(var(--end-rotation) * 1deg)); transform-origin: 78px 90px; } } .infinityWell { animation: infinityWell var(--anim-speed) infinite linear forwards; } .infinityWellRect { animation: infinityWell var(--anim-speed) infinite linear forwards; } .rt-0 { animation: infinityWellRect var(--anim-speed) infinite linear; } .rt-1 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 1); } .rt-2 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 2); } .rt-3 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 3); } .rt-4 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 4); } .rt-5 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 5); } .rt-6 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 6); } .rt-7 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 7); } } 
+
+  string internal constant TEXTURE_CSS_OPEN = ":root { --grey: hsl(0, 0%, 10%); --anim-speed: ";
+  string internal constant TEXTURE_CSS_MID = "s; --rdm-seed: 0.";
+  string internal constant TEXTURE_CSS_CLOSE = "; --anim-scale-0: 1; --anim-scale-50: 5; --anim-scale-100: 1; --end-rotation: calc(var(--rdm-seed) * 360); --num-rectangles: 7; } .pulsateInOutOld { animation: pulsateInOutOld var(--anim-speed) infinite linear; } @keyframes infinityWellRect { 0% { opacity: 0; transform: scale(1.1) rotate(0deg); transform-origin: 78px 90px; } 10% { opacity: 1; } 100% { opacity: 1; transform: scale(0) rotate(calc(var(--end-rotation) * 1deg)); transform-origin: 78px 90px; } } .infinityWell { animation: infinityWell var(--anim-speed) infinite linear forwards; } .infinityWellRect { animation: infinityWell var(--anim-speed) infinite linear forwards; } .rt-0 { animation: infinityWellRect var(--anim-speed) infinite linear; } .rt-1 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 1); } .rt-2 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 2); } .rt-3 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 3); } .rt-4 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 4); } .rt-5 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 5); } .rt-6 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 6); } .rt-7 { animation: infinityWellRect var(--anim-speed) infinite linear; animation-delay: calc(var(--anim-speed) / 8 * 7); } }";
+
+  string internal constant PATTERN_CSS_OPEN = ":root { --anim-speed: ";
+  string internal constant PATTERN_CSS_CLOSE = "s; --anim-scale-0: 1; --anim-scale-50: 2; --anim-scale-100: 1; } @keyframes pulsateInOutOld { 0% { transform: scale(var(--anim-scale-0)); transform-origin: 78px 90px; } 50% { transform: scale(var(--anim-scale-50)); transform-origin: 78px 90px; } 100% { transform: scale(var(--anim-scale-100)); transform-origin: 78px 90px; } } .pulsateInOutOld { animation: pulsateInOutOld var(--anim-speed) infinite linear; }";
+
+  function getAnimationSpeed(int baseline) internal pure returns (string memory) {
+    uint patternSpeed = 0;
+    uint textureSpeed = uint(baseline) % 30;
+
+    if (baseline > 180 || baseline < 43) {
+      patternSpeed = 10 + uint(baseline) % 11;
+    }
+
+    if (baseline < 43) {
+      return string.concat(
+        TEXTURE_CSS_OPEN,
+        Strings.toString(patternSpeed),
+        TEXTURE_CSS_MID,
+        Strings.toString(textureSpeed),
+        TEXTURE_CSS_CLOSE
+      );
+    } else {
+      return string.concat(
+        PATTERN_CSS_OPEN,
+        Strings.toString(patternSpeed),
+        PATTERN_CSS_CLOSE
+      );
+    }
+  }
 
   function getClosingSVG() external pure returns (string memory) {
     return string.concat(
@@ -134,7 +168,8 @@ contract GlobalSVG {
       PatternsDefs14.getPart(),
       PatternsDefs15.getPart(),
       PatternsDefs16.getPart(),
-      PatternsDefs17.getPart()
+      PatternsDefs17.getPart(),
+      PatternsDefs18.getPart()
     );
 
     output = string.concat(
@@ -173,6 +208,7 @@ contract GlobalSVG {
       // SoundImp3.getPart(),
       CommonSVG.TEMP_STYLE,
       CommonSVG.STYLE,
+      getAnimationSpeed(baseline),
       ApparatusCSS1.getPart(),
       ApparatusCSS2.getPart(),
       ApparatusCSS3.getPart()

@@ -318,13 +318,15 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   // TODO - IMPLEMENT FINAL DEV CLAIM
  
-	function devClaim() external onlyOwner {
+	function devClaim(uint amount) external onlyOwner {
     // Check the auction has started, ended and the claim period has passed
 		if (startedAt == 0 || block.timestamp < endAt + CLAIM_PERIOD) revert AuctionNotOver();
 
-    // After the first call to devClaim, this will always revert
-    // In the rare case that there are no NFTs left to mint, this will revert
-		_validMint(owner(), MAX_SUPPLY - totalSupply());
+    if (totalSupply() + amount > MAX_SUPPLY) revert TooManyRequested();
+
+    // After all nfts have been minted, this will revert
+    // In the rare case that there are no NFTs left after the auction, this will revert
+		_validMint(owner(), amount);
 	}
 
   // Step 4 - Withdraw

@@ -7,11 +7,16 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 library Patterns {
 
+  // 20 to 2 inclusive in 0.5 decrements
+  string internal constant ANIMATED_TEXTURE_NUMBERS = "20.019.018.017.016.015.014.013.012.011.010.09.008.007.006.005.004.003.002.00";
+
   // 4 to 1 inclusive in 0.1 decriments
   string internal constant TEXTURE_SCALE_NUMBERS = "4.03.93.83.73.63.53.43.33.23.13.02.92.82.72.62.52.42.32.22.12.01.91.81.71.61.51.41.31.21.11.0";
 
   // 15 to 0.3 inclusive in 0.3 decriments
   string internal constant PATTERNS_SCALE_NUMBERS = "15.014.714.414.113.813.513.212.912.612.312.011.711.411.110.810.510.209.909.609.309.008.708.408.107.807.507.206.906.606.306.005.705.405.104.804.504.203.903.603.303.002.702.402.101.801.501.200.900.600.3";
+
+  string internal constant ANIMATED_TEXTURE_NAMES = "sqrestriancircsoctagstarsovals";
 
   string internal constant TEXTURE_NAMES = "g-1a-2f-2d-1f-3b-1b-2e-1";
 
@@ -42,11 +47,17 @@ library Patterns {
 
     bool isTexture = getIsTexture(rand, baseline);
 
+    bool isAnimatedTexture = baseline < 43;
+
     uint nameLength;
     uint nameCount;
     string memory names;
 
-    if (isTexture) {
+    if (isAnimatedTexture) {
+      nameLength = 5;
+      nameCount = 6;
+      names = ANIMATED_TEXTURE_NAMES;
+    } else if (isTexture && !isAnimatedTexture) {
       nameLength = 3;
       nameCount = 8;
       names = TEXTURE_NAMES;
@@ -79,6 +90,10 @@ library Patterns {
   function getSurfaceQuantity(uint rand, int baseline) public pure returns (bool[3] memory) {
     uint surfaceDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 6)] + baseline);
 
+    if (baseline < 43) {
+      surfaceDigits += 128; // animated textures should appear on 2+ surfaces
+    }
+
     // LW, RW, FLOOR
     uint[] memory surfaceProbabilitiesArray = GridHelper.createEqualProbabilityArray(4);
 
@@ -104,12 +119,17 @@ library Patterns {
     uint scaleDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 7)] + baseline);
 
     bool isTexture = getIsTexture(rand, baseline);
+    bool isAnimatedTexture = baseline < 43;
 
     uint scaleLength;
     uint scaleCount;
     string memory scales;
 
-    if (isTexture) {
+    if (isAnimatedTexture) {
+      scaleLength = 4;
+      scaleCount = 19;
+      scales = ANIMATED_TEXTURE_NUMBERS;
+    } else if (isTexture && !isAnimatedTexture) {
       scaleLength = 3;
       scaleCount = 31;
       scales = TEXTURE_SCALE_NUMBERS;
@@ -122,6 +142,11 @@ library Patterns {
     uint[] memory scaleProbabilitiesArray = GridHelper.createEqualProbabilityArray(scaleCount);
 
     uint oneLess = scaleCount - 1;
+
+    if (baseline > 180) {
+      uint scaleValue = oneLess - (scaleDigits % 5);
+      return string(GridHelper.slice(bytes(scales), scaleValue * scaleLength, scaleLength));
+    }
 
     for (uint i = 0; i < oneLess; ++i) {
       if (scaleDigits < scaleProbabilitiesArray[i]) {
@@ -155,8 +180,12 @@ library Patterns {
       // 100 -> 20
       return Strings.toString(100 - (opacityDigits * 80 / 255 + 20));
     } else {
-      // 25 -> 100
-      return Strings.toString(opacityDigits * 75 / 255 + 25);
+      if (baseline > 180) {
+        return Strings.toString(100);
+      } else {
+        // 25 -> 100
+        return Strings.toString(opacityDigits * 75 / 255 + 25);
+      }
     }
   }
 
