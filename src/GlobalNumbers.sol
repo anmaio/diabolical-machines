@@ -20,7 +20,7 @@ library GlobalNumbers {
   // Bong
   // Lavalamp
 
-  string internal constant SMALL_ASSET_NUMBERS = "000000602206021060280602706026060060600406014060020601106000060250602906020";
+  string internal constant SMALL_ASSET_NUMBERS = "0000006022060210602806027060260600606004060140601106000060250602906020";
   string internal constant LARGE_ASSET_NUMBERS = "00000020020200402003020010200902008060130600806019060090602306024060300601806017";
 
   string internal constant OUT_WALL_NUMBERS = "0000006005060070601606010";
@@ -71,7 +71,7 @@ library GlobalNumbers {
   function getSmallAssetNumber(uint rand, int baseline) external pure returns (uint) {
     uint smallAssetDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 20)] + baseline);
 
-    return GridHelper.getSingleObject(SMALL_ASSET_NUMBERS, smallAssetDigits, 15, 5);
+    return GridHelper.getSingleObject(SMALL_ASSET_NUMBERS, smallAssetDigits, 14, 5);
   }
 
   /**

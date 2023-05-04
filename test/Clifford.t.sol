@@ -149,6 +149,7 @@ contract CliffordTest is Test {
   error NftsNotAllMinted();
 
   error MintZeroQuantity();
+  error NoBidToClaim(address to);
 
   // Trait bases
   TraitBase private substancesTB;
@@ -518,14 +519,20 @@ contract CliffordTest is Test {
     // Get when the auction ends
     uint256 auctionEnd = clifford.getEndTimestamp();
     // Fast forward to the end of the auction
-    vm.warp(auctionEnd);
+    vm.warp(auctionEnd + 15 minutes);
 
     console.log("GAS BEFORE DISTRIBUTION: ", gasleft());
 
-    clifford.distributeNFTs();
+    // clifford.distributeNFTs();
+    for (uint i = 0; i < numOfBidders; i++) {
+      vm.prank(bidders[i], bidders[i]);
+      clifford.claimAfterAuction();
+    }
 
     console.log("GAS AFTER DISTRIBUTION: ", gasleft());
 
+    // get to when the claim period ends
+    vm.warp(auctionEnd + 1 weeks);
     clifford.devClaim();
 
     console2.log("numOfBidders: ", numOfBidders);
@@ -550,7 +557,7 @@ contract CliffordTest is Test {
     // Get when the auction ends
     uint256 auctionEnd = clifford.getEndTimestamp();
     // Fast forward to the end of the auction
-    vm.warp(auctionEnd);
+    vm.warp(auctionEnd + 1 weeks);
     // mint entire supply to dev
     clifford.devClaim();
     // reveal all
@@ -868,17 +875,32 @@ contract CliffordTest is Test {
     assertEq(clifford.getEndTimestamp(), currentTimestamp + BID_EXTENSION_LENGTH, "Auction should have been extended");
   }
 
-  function testDistributeNfts() public {
+  function testMultipleClaimsAfterAuction() public {
     uint numOfBidders = 100;
 
     auctionSimulator(numOfBidders);
 
-    // check if each bidder has the correct amount of NFTs
-    for (uint i = 0; i < numOfBidders; i++) {
-      address bidder = address(uint160(uint(keccak256(abi.encodePacked(i)))));
-      uint expectedNfts = clifford.getUserBid(bidder) / clifford.getCurrentPricePerUnit();
-      assertEq(clifford.balanceOf(bidder), expectedNfts, string.concat("Bidder should have ", Strings.toString(expectedNfts), " NFTs"));
-    }
+    // this test starts after everyone has claimed so it should not be possible to claim again
+    // try to claim again
+    address bidder = address(uint160(uint(keccak256(abi.encodePacked(uint(0))))));
+
+    // attempt to claim
+    vm.prank(bidder, bidder);
+    vm.expectRevert(abi.encodeWithSelector(NoBidToClaim.selector, bidder));
+    clifford.claimAfterAuction();
+  }
+
+  function testClaimFromNonBidder() public {
+    uint numOfBidders = 100;
+
+    auctionSimulator(numOfBidders);
+
+    // TOP_CYPHER_HOLDER should not be able to claim as they did not bid
+
+    // attempt to claim
+    vm.prank(TOP_CYPHER_HOLDER, TOP_CYPHER_HOLDER);
+    vm.expectRevert(abi.encodeWithSelector(NoBidToClaim.selector, TOP_CYPHER_HOLDER));
+    clifford.claimAfterAuction();
   }
 
   function testDevClaim() public {
@@ -889,7 +911,7 @@ contract CliffordTest is Test {
     // Get when the auction ends
     uint256 auctionEnd = clifford.getEndTimestamp();
     // Fast forward to the end of the auction
-    vm.warp(auctionEnd);
+    vm.warp(auctionEnd + 1 weeks);
     // mint entire supply to dev
     clifford.devClaim();
     // check if the dev has the correct amount of NFTs

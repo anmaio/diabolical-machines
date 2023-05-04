@@ -129,8 +129,6 @@ contract Machine {
 
     if (assetNumber == 6000) {
       return "Lava Lamp";
-    } else if (assetNumber == 6002) {
-      return "Cactus";
     } else if (assetNumber == 6004) {
       return "Martini";
     } else if (assetNumber == 6006) {

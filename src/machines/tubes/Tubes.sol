@@ -71,12 +71,10 @@ contract Tubes {
 
     uint[] memory machineOneTasslesArray = GridHelper.setUintArrayFromString(MACHINE_ONE_TASSLE_NUMBERS, 2, 5);
 
-    uint[] memory tasslesProbabilitiesArray = GridHelper.createEqualProbabilityArray(3);
+    uint[] memory tasslesProbabilitiesArray = GridHelper.createEqualProbabilityArray(2);
 
     if (machineOneTassleDigits < tasslesProbabilitiesArray[0]) {
       return [uint(0), 0];
-    } else if (machineOneTassleDigits < tasslesProbabilitiesArray[1]) {
-      return [machineOneTasslesArray[0], 0];
     } else {
       return [machineOneTasslesArray[0], machineOneTasslesArray[1]];
     }
@@ -87,12 +85,10 @@ contract Tubes {
 
     uint[] memory machineTwoTasslesArray = GridHelper.setUintArrayFromString(MACHINE_TWO_TASSLE_NUMBERS, 2, 5);
 
-    uint[] memory tasslesProbabilitiesArray = GridHelper.createEqualProbabilityArray(3);
+    uint[] memory tasslesProbabilitiesArray = GridHelper.createEqualProbabilityArray(2);
 
     if (machineTwoTassleDigits < tasslesProbabilitiesArray[0]) {
       return [uint(0), 0];
-    } else if (machineTwoTassleDigits < tasslesProbabilitiesArray[1]) {
-      return [machineTwoTasslesArray[0], 0];
     } else {
       return [machineTwoTasslesArray[0], machineTwoTasslesArray[1]];
     }
@@ -103,12 +99,10 @@ contract Tubes {
 
     uint[] memory machineFourTasslesArray = GridHelper.setUintArrayFromString(MACHINE_FOUR_TASSLE_NUMBERS, 2, 5);
 
-    uint[] memory tasslesProbabilitiesArray = GridHelper.createEqualProbabilityArray(3);
+    uint[] memory tasslesProbabilitiesArray = GridHelper.createEqualProbabilityArray(2);
 
     if (machineFourTassleDigits < tasslesProbabilitiesArray[0]) {
       return [uint(0), 0];
-    } else if (machineFourTassleDigits < tasslesProbabilitiesArray[1]) {
-      return [machineFourTasslesArray[0], 0];
     } else {
       return [machineFourTasslesArray[0], machineFourTasslesArray[1]];
     }
@@ -187,20 +181,20 @@ contract Tubes {
 
     numbersUsed[8] = tasslesTwo[0];
 
-    numbersUsed[9] = C_CONNECTORR3;
+    numbersUsed[9] = tasslesTwo[1];
 
-    numbersUsed[11] = getMiddlePipe(rand, baseline, version);
+    numbersUsed[10] = C_CONNECTORR3;
+
+    numbersUsed[12] = getMiddlePipe(rand, baseline, version);
 
     // strange render order
     if (numbersUsed[2] == 10012) {
-      numbersUsed[10] = C_CONNECTOR7;
+      numbersUsed[11] = C_CONNECTOR7;
     } else {
-      numbersUsed[12] = JUMPER_CUFF;
+      numbersUsed[13] = JUMPER_CUFF;
     }
 
-    numbersUsed[13] = C_CONNECTOR8;
-
-    numbersUsed[14] = tasslesTwo[1];
+    numbersUsed[14] = C_CONNECTOR8;
 
     uint machineFour = getMachineFour(rand, baseline, version);
 

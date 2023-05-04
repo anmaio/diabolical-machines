@@ -21,7 +21,7 @@ contract ConveyorBelt {
 
   string internal constant FLOOB_NUMBERS = "1203212031120301202812028120311202912030120291202812028";
 
-  string internal constant PIPE_OFFSETS = "00000000000000600000012000000180000002400000030000000360";
+  string internal constant PIPE_OFFSETS = "0000000000000060000001200000018000000240000003000000036000004200000480";
 
   string internal constant SAW_A_OFFSETS = "120401204112042";
 
@@ -219,7 +219,7 @@ contract ConveyorBelt {
     offsetsUsed[count] = FLAT_WALL_OFFSETS;
     count++;
 
-    for (uint i = 0; i < 6; ++i) {
+    for (uint i = 0; i < 8; ++i) {
       numbersUsed[count] = getWallPipes(rand, baseline, i);
       offsetsUsed[count] = string(GridHelper.slice(bytes(PIPE_OFFSETS), i*8, 8));
       count++;
@@ -227,6 +227,7 @@ contract ConveyorBelt {
 
     // get the hole number
     numbersUsed[count] = getHole(rand, baseline);
+    offsetsUsed[count] = "00120010";
     count++;
 
     // get the platform numbers

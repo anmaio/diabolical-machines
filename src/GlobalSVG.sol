@@ -84,6 +84,7 @@ contract GlobalSVG {
 
   function getClosingSVG() external pure returns (string memory) {
     return string.concat(
+      "<g id='shell-vignette' style='mix-blend-mode:normal'><rect fill='url(#vig1-u-vig1-fill)' width='1080' height='1080'/></g>",
       "</g>",
       "</svg>"
     );
@@ -95,7 +96,6 @@ contract GlobalSVG {
       flip,
       CommonSVG.SHELL_CLOSE,
       dataInfo,
-      // "data-info=\"{'id':0,'RandomNumber':'107902980979898548990920576554000892204849709403626377894656421886843343448711','State':'Degraded','Machine':'Altar','Productivity':'Very High','ProductivityValue':'41','GlobalAsset':'Cactus','ExpansionProp':'Grate','Colour':'Common'}\" >",
       CommonSVG.createShellOpacity(rand, baseline)
     );
   }
@@ -168,9 +168,9 @@ contract GlobalSVG {
     output = string.concat(
       output,
       CommonSVG.SCRIPT,
-      SoundImp1.getPart(),
-      SoundImp2.getPart(),
-      SoundImp3.getPart(),
+      // SoundImp1.getPart(),
+      // SoundImp2.getPart(),
+      // SoundImp3.getPart(),
       CommonSVG.TEMP_STYLE,
       CommonSVG.STYLE,
       ApparatusCSS1.getPart(),
