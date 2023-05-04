@@ -133,16 +133,12 @@ contract Apparatus {
   function getBaseRunner(uint rand, int baseline) internal pure returns (uint[2] memory) {
     uint baseRunnerDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 17)] + baseline);
 
-    uint[] memory baseRunnerProbabilitiesArray = GridHelper.createEqualProbabilityArray(4);
+    uint[] memory baseRunnerProbabilitiesArray = GridHelper.createEqualProbabilityArray(2);
 
     uint[] memory baseRunnerNumbersArray = GridHelper.setUintArrayFromString(BASE_RUNNER_NUMBERS, 2, 5);
 
     if (baseRunnerDigits < baseRunnerProbabilitiesArray[0]) {
       return [uint(0), 0];
-    } else if (baseRunnerDigits < baseRunnerProbabilitiesArray[1]) {
-      return [baseRunnerNumbersArray[0], 0];
-    } else if (baseRunnerDigits < baseRunnerProbabilitiesArray[2]) {
-      return [baseRunnerNumbersArray[1], 0];
     } else {
       return [baseRunnerNumbersArray[0], baseRunnerNumbersArray[1]];
     }

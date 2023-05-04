@@ -16,8 +16,6 @@ contract AssetsImp1 {
       return C_LAVALAMP_A;
     } else if (assetID == 6001) {
       return string.concat(CB_LAVALAMP_WRAPPER, C_LAVALAMP_A, GROUP2_CLOSE);
-    } else if (assetID == 6002) {
-      return C_CACTUS_A;
     } else if (assetID == 6003) {
       return string.concat(CB_CACTUS_WRAPPER, C_CACTUS_A, GROUP2_CLOSE);
     } else if (assetID == 6004) {

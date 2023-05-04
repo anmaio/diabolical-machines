@@ -43,13 +43,16 @@ library CommonSVG {
 
   string internal constant GRADIENT_STYLE_CLOSE = " } </style>";
 
-  string internal constant GLOBAL_COLOURS = "085092060082067051085092060082067051085092060082067051085092060082067051";
+  string internal constant GLOBAL_COLOURS = "051093072328072085027087076000000069042080068327073074025054060000000050085092060051093072002087076000000069082067051060088081000054060000000050322092060322092060047084056000000069316066168316066168046068047000000050";
 
   string internal constant GLOBAL_COLOURS_IDS = "g0g1g2g3g4g5g6g7";
 
   string internal constant SHELL_COLOUR_IDS = "s2s1s0";
 
   string internal constant CHARACTER_COLOUR_IDS = "r0";
+
+  // string internal constant x = "<g id='shell-vignette' style='mix-blend-mode:normal'><rect fill='url(#vig1-u-vig1-fill)' width='1080' height='1080'/></g>";
+  string internal constant VIGNETTE_GRADIENT = "<clipPath id='clipPathShell'><polygon points='0,270 468,0 936,270 936,810 468,1080 0,810'/></clipPath><radialGradient id='vig1-u-vig1-fill' cx='0' cy='0' r='0.5' spreadMethod='pad' gradientUnits='objectBoundingBox' gradientTransform='translate(0.43 0.5)'><stop id='vig1-u-vig1-fill-0' offset='50%' stop-color='#000' stop-opacity='0'/><stop id='vig1-u-vig1-fill-1' offset='100%' stop-color='#000' stop-opacity='0.3'/></radialGradient>";
 
   // PATTERNS
   string internal constant PATTERNS_START = "<pattern id='shell-pattern' patternUnits='objectBoundingBox' x='0' y='0' width='";
@@ -69,34 +72,6 @@ library CommonSVG {
   string internal constant OPACITY_MID_TWO = "%' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g><polygon points='468,540 468,0 936,270 936,810' fill='url(#rDT)' stroke='black'/></g><g id='floor'><polygon id='polygon-floor-border' points='0,810 468,1080 936,810 468,540' fill='url(#s2)' stroke='black'/><g id='floorPat' transform='translate(234 135) rotate(60)' transform-origin='0 540'><g transform='skewY(-30)' transform-origin='0 0'><rect id='floorPatRect' x='0' y='270' width='468' height='540' opacity='";
 
   string internal constant OPACITY_END = "%' style='mix-blend-mode: normal;' fill='url(#shell-pattern)'/></g></g><polygon id='polygon-floor-border-DT' points='0,810 468,1080 936,810 468,540' fill='url(#fDT)' stroke='black'/></g>";
-
-  function createShellGradient(uint[6] memory colours, string memory id, string memory rotation) internal pure returns (string memory) {
-    string memory output = string.concat(
-      "<linearGradient id='",
-      id,
-      "' gradientTransform='rotate(",
-      rotation,
-      ")'><stop offset='0' stop-color='hsl(",
-      Strings.toString(colours[0]),
-      ",",
-      Strings.toString(colours[1]),
-      "%,"
-    );
-
-    output = string.concat(
-      output,
-      Strings.toString(colours[2]),
-      "%)'/><stop offset='1' stop-color='hsl(",
-      Strings.toString(colours[3]),
-      ",",
-      Strings.toString(colours[4]),
-      "%,",
-      Strings.toString(colours[5]),
-      "%)'/></linearGradient>"
-    );
-
-    return output;
-  }
 
   function createObjectGradient(uint[6] memory colours, string memory id) internal pure returns (string memory) {
     string memory output = string.concat(
@@ -163,9 +138,15 @@ library CommonSVG {
     }
 
     // GLOBAL COLOURS
-    uint[] memory globalColours = GridHelper.setUintArrayFromString(GLOBAL_COLOURS, 24, 3);
+    uint[] memory globalColours = GridHelper.setUintArrayFromString(GLOBAL_COLOURS, 72, 3);
+    uint globalOffset = 0;
+    if (colourValue > 170) {
+      globalOffset = 48;
+    } else if (colourValue > 84) {
+      globalOffset = 24;
+    }
     for (uint i = 0; i < 8; ++i) {
-      gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(GLOBAL_COLOURS_IDS), i*2, 2)), globalColours[i*3], globalColours[i*3+1], globalColours[i*3+2]);
+      gradientStyle = appendToGradientStyle(gradientStyle, string(GridHelper.slice(bytes(GLOBAL_COLOURS_IDS), i*2, 2)), globalColours[i*3+globalOffset], globalColours[i*3+1+globalOffset], globalColours[i*3+2+globalOffset]);
     }
 
     // CHARACTER COLOURs
@@ -176,6 +157,7 @@ library CommonSVG {
     string memory returnDefs = string.concat(
       gradientStyle,
       "<defs>",
+      VIGNETTE_GRADIENT,
       DUOTONE_DEFS
     );
 

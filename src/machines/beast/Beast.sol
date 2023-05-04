@@ -116,14 +116,12 @@ contract Beast {
   function getRunnerTassles(uint rand, int baseline) internal pure returns (uint[2] memory) {
     uint tassleDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 16)] + baseline);
 
-    uint[] memory tassleprobabilitiesArray = GridHelper.createEqualProbabilityArray(3);
+    uint[] memory tassleprobabilitiesArray = GridHelper.createEqualProbabilityArray(2);
 
     uint[] memory tassleNumbersArray = GridHelper.setUintArrayFromString(TASSLE_NUMBERS, 2, 5);
 
     if (tassleDigits < tassleprobabilitiesArray[0]) {
       return [uint(0), 0];
-    } else if (tassleDigits < tassleprobabilitiesArray[1]) {
-      return [tassleNumbersArray[0], 0];
     } else {
       return [tassleNumbersArray[0], tassleNumbersArray[1]];
     }
