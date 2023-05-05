@@ -47,6 +47,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   error NftsNotAllMinted();
   error TransferNotSuccessful(address to);
   error NoBidToClaim(address to);
+  error TooManyRequested();
 
   // EVENTS
 
@@ -55,6 +56,9 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   // emit genId when reveal is called
   event RandomnessRequested(uint256 genId);
+
+  // emit bidder's address and amount bid
+  event UserPlacesBid(address user, uint amount);
 
   // MAPPINGS
 
@@ -285,6 +289,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
     sumOfAllBids += bidAmount;
     allBids[msg.sender] = totalBidsFromBidder;
+
+    emit UserPlacesBid(msg.sender, totalBidsFromBidder);
   }
 
   /**
@@ -315,8 +321,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   }
 
 	// Step 3 - Team Claim
-
-  // TODO - IMPLEMENT FINAL DEV CLAIM
  
 	function devClaim(uint amount) external onlyOwner {
     // Check the auction has started, ended and the claim period has passed
@@ -435,5 +439,9 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   function getIfCypherClaimStarted() external view returns(bool) {
     return cypherClaimStarted;
+  }
+
+  function getIfCypherClaimed(uint tokenId) external view returns(bool) {
+    return LibBitmap.get(cypherClaims, tokenId);
   }
 }

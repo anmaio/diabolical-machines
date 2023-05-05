@@ -147,9 +147,11 @@ contract CliffordTest is Test {
 
 	error AuctionNotOver();
   error NftsNotAllMinted();
+  error TransferNotSuccessful(address to);
+  error NoBidToClaim(address to);
+  error TooManyRequested();
 
   error MintZeroQuantity();
-  error NoBidToClaim(address to);
 
   // Trait bases
   TraitBase private substancesTB;
@@ -533,7 +535,7 @@ contract CliffordTest is Test {
 
     // get to when the claim period ends
     vm.warp(auctionEnd + 1 weeks);
-    clifford.devClaim();
+    clifford.devClaim(6000 - clifford.totalSupply());
 
     console2.log("numOfBidders: ", numOfBidders);
     console2.log("current ppu: ", ppu);
@@ -559,7 +561,7 @@ contract CliffordTest is Test {
     // Fast forward to the end of the auction
     vm.warp(auctionEnd + 1 weeks);
     // mint entire supply to dev
-    clifford.devClaim();
+    clifford.devClaim(6000 - clifford.totalSupply());
     // reveal all
     clifford.reveal();
   }
@@ -913,7 +915,7 @@ contract CliffordTest is Test {
     // Fast forward to the end of the auction
     vm.warp(auctionEnd + 1 weeks);
     // mint entire supply to dev
-    clifford.devClaim();
+    clifford.devClaim(6000 - clifford.totalSupply());
     // check if the dev has the correct amount of NFTs
     assertEq(clifford.balanceOf(address(this)), clifford.totalSupply(), string.concat("Dev should have ", Strings.toString(clifford.totalSupply()), " NFTs"));
   }
@@ -942,8 +944,9 @@ contract CliffordTest is Test {
   function testDevClaimBeforeCypherClaim() public {
     // We should not be able to claim dev before the cypher claim
     // Trying to start the dev claim
+    uint currentSupply = clifford.totalSupply();
     vm.expectRevert(AuctionNotOver.selector);
-    clifford.devClaim();
+    clifford.devClaim(6000 - currentSupply);
   }
 
   function testWithdrawBeforeCypherClaim() public {
@@ -960,8 +963,9 @@ contract CliffordTest is Test {
     // start the auction
     clifford.startAuction();
     // Trying to start the dev claim
+    uint currentSupply = clifford.totalSupply();
     vm.expectRevert(AuctionNotOver.selector);
-    clifford.devClaim();
+    clifford.devClaim(6000 - currentSupply);
   }
 
   function testWithdrawBeforeAuctionOver() public {
