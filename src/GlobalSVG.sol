@@ -95,11 +95,11 @@ contract GlobalSVG {
     uint patternSpeed = 0;
     uint textureSpeed = uint(baseline) % 30;
 
-    if (baseline > 180 || baseline < 43) {
+    if (baseline > 185 || baseline < 70) {
       patternSpeed = 10 + uint(baseline) % 11;
     }
 
-    if (baseline < 43) {
+    if (baseline < 70) {
       return string.concat(
         TEXTURE_CSS_OPEN,
         Strings.toString(patternSpeed),

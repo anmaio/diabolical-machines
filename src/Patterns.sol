@@ -30,7 +30,7 @@ library Patterns {
    */
 
   function getIsTexture(uint rand, int baseline) public pure returns (bool) {
-    uint textureDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 4)] + baseline);
+    uint textureDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 5)] + baseline);
 
     return textureDigits < 128;
   }
@@ -47,7 +47,13 @@ library Patterns {
 
     bool isTexture = getIsTexture(rand, baseline);
 
-    bool isAnimatedTexture = baseline < 43;
+    if (!isTexture) {
+      patternDigits -= 128;
+    }
+
+    patternDigits *= 2;
+
+    bool isAnimatedTexture = baseline < 70;
 
     uint nameLength;
     uint nameCount;
@@ -90,7 +96,7 @@ library Patterns {
   function getSurfaceQuantity(uint rand, int baseline) public pure returns (bool[3] memory) {
     uint surfaceDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 6)] + baseline);
 
-    if (baseline < 43) {
+    if (baseline < 70) {
       surfaceDigits += 128; // animated textures should appear on 2+ surfaces
     }
 
@@ -119,7 +125,7 @@ library Patterns {
     uint scaleDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 7)] + baseline);
 
     bool isTexture = getIsTexture(rand, baseline);
-    bool isAnimatedTexture = baseline < 43;
+    bool isAnimatedTexture = baseline < 70;
 
     uint scaleLength;
     uint scaleCount;
@@ -143,7 +149,7 @@ library Patterns {
 
     uint oneLess = scaleCount - 1;
 
-    if (baseline > 180) {
+    if (baseline > 185) {
       uint scaleValue = oneLess - (scaleDigits % 5);
       return string(GridHelper.slice(bytes(scales), scaleValue * scaleLength, scaleLength));
     }
@@ -180,7 +186,7 @@ library Patterns {
       // 100 -> 20
       return Strings.toString(100 - (opacityDigits * 80 / 255 + 20));
     } else {
-      if (baseline > 180) {
+      if (baseline > 185) {
         return Strings.toString(100);
       } else {
         // 25 -> 100
