@@ -1,0 +1,90 @@
+trigger:
+  branches:
+    include:
+    - release/*
+    exclude:
+    - feature/*
+
+name: $(Build.SourceBranchName)_$(date:yyyyMMdd)$(rev:.r)
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- name: dotenvFile
+  value: '.env'
+
+stages:
+# Run unit tests
+# - stage: test
+#   displayName: 'Test'
+#   condition: eq(variables['build.reason'], 'PullRequest')
+#   jobs:
+#   - deployment: test
+#     displayName: Unit tests
+#     environment: fr-tst
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - checkout: self
+#           - template: pipeline/templates/dotenv-download.yml@self
+#           - script: |
+#               docker compose up dev --build --detach --no-color --quiet-pull
+#               docker compose exec dev forge install
+#               docker compose exec dev forge build --names --sizes
+#               docker compose exec dev forge test --gas-report -vvvv
+#               # docker compose exec dev slither ./src/Clifford.sol --print human-summary
+#             displayName: Run unit tests
+#           - template: pipeline/templates/docker-cleanup.yml@self
+
+# Deploy to testnet
+- stage: staging
+  displayName: Staging
+  condition: startsWith(variables['build.sourceBranch'], 'refs/heads/release')
+  dependsOn: []
+  jobs:
+  - deployment: testnet
+    displayName: Deploy to testnet
+    environment: fr-stg
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - template: pipeline/templates/dotenv-download.yml@self
+          - script: |
+              docker compose up dev --build --detach --no-color --quiet-pull
+              docker compose exec dev forge install
+              docker compose exec dev forge build --names --sizes --via-ir
+              docker compose exec dev forge script script/Composer.s.sol:ComposerScript  --via-ir --rpc-url $GOERLI_RPC_URL --broadcast --verify -vvvv
+            name: deploy
+            displayName: Run deployment
+          - template: pipeline/templates/docker-cleanup.yml@self
+          # - Publish ABI to artifact repository
+
+# Deploy to mainnet
+- stage: prodution
+  displayName: Production
+  condition: startsWith(variables['build.sourceBranch'], 'refs/heads/release')
+  dependsOn: staging
+  jobs:
+  - deployment: mainnet
+    displayName: Deploy to mainnet
+    environment: fr-prd
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - template: pipeline/templates/dotenv-download.yml@self
+          # Replace placeholder with 'docker compose exec dev yarn deploy:mainnet'
+          #   - Replace echo with: docker compose exec dev forge script script/Composer.s.sol:ComposerScript --rpc-url $MAINNET_RPC_URL --broadcast --verify -vvvv
+          - script: |
+              docker compose up dev --build --detach --no-color --quiet-pull
+              docker compose exec dev forge install
+              docker compose exec dev forge build --names --sizes --via-ir
+              echo "PLACEHOLDER: Successfully deployed to mainnet."
+            name: deploy
+            displayName: Run deployment
+          - template: pipeline/templates/docker-cleanup.yml@self

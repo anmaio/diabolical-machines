@@ -1,0 +1,82 @@
+version: '3.9'
+
+services:
+  # Foundry node container
+  # Binds lcoal source dir and docker daemon as volumes
+  node:
+    build:
+      args:
+        - SOLC_VERSION=0.8.16
+      context: .
+    container_name: diabolical_anvil
+    entrypoint: ["anvil"]
+    env_file:
+      - '.env'
+    network_mode: "host"
+    # ports:
+      # - "8545:8545"
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  # Development environment container
+  # Binds local source dir. docker daemon and git credential manager as volumes  
+  dev:
+    build:
+      args:
+        - SOLC_VERSION=0.8.16
+      context: .
+    container_name: diabolical_forge
+    entrypoint: ["/docker/entrypoint.sh"]
+    env_file:
+      - '.env'
+    network_mode: "host"
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe:/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe
+
+  echidna:
+    build:
+      context: ./echidna
+    container_name: diabolical_echidna
+    network_mode: "host"
+    volumes:
+      - .:/app
+
+  mythril:
+    build:
+      context: ./mythril
+    container_name: diabolical_mythril
+    network_mode: "host"
+    volumes:
+      - .:/app
+
+
+  # Container for running build and test 
+  build:
+    build:
+      context: .
+    container_name: diabolical_build
+    entrypoint: ["forge", "build", "--via-ir"]
+    env_file:
+      - '.env'
+    network_mode: "host"
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe:/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe
+
+  # Container for running build and test 
+  test:
+    build:
+      context: .
+    container_name: diabolical_test
+    entrypoint: ["forge", "test", "--via-ir", "-vvvv"]
+    env_file:
+      - '.env'
+    network_mode: "host"
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe:/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe

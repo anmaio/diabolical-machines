@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang=''>
+  <head>
+    <meta charset='UTF-8'>
+    <title>html-ipfs-test</title>
+    <style></style>
+  </head>
+  <body>
+    <canvas id='canvas'></canvas>
+    <script>
+      var bw = 600;
+      var bh = bw;
+      var sqW = bw / 6;
+      var sqH = bh / 6;
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      const shellObjectArray = [
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0]
+      ];
+      const floorGridArray = [
+        [bw * 0.333333, bh * 0.5],
+        [bw * 0.5, bh * 0.427],
+        [bw * 0.66666, bh * 0.35333],
+        [bw * 0.17, bh * 0.427],
+        [bw * 0.333333, bh * 0.35333],
+        [bw * 0.5, bh * 0.28],
+        [2, bh * 0.35333],
+        [bw * 0.17, bh * 0.28],
+        [bw * 0.333333, bh * 0.206668]
+      ];
+      const leftWallGridArray = [
+        [2, bh * 0.5],
+        [bw * 0.16666, bh * 0.416666],
+        [bw * 0.3333333, bh * 0.353333],
+        [2, bh * 0.35333],
+        [bw * 0.16666, bh * 0.25],
+        [bw * 0.3333333, bh * 0.16666],
+        [2, bh * 0.144],
+        [2 + bw * 0.16666, bh * 0.074],
+        [2 + bw * 0.333333, 0.06999999999999999]
+      ];
+      const rightWallGridArray = [
+        [bw * 0.5, bh * 0.353333],
+        [bw * 0.66666, bh * 0.416666],
+        [bw * 0.83333, bh * 0.5],
+        [bw * 0.5, bh * 0.166666],
+        [bw * 0.66666, bh * 0.25],
+        [bw * 0.83333, bh * 0.353333],
+        [bw * 0.5, 0],
+        [bw * 0.66666, bh * 0.083333],
+        [bw * 0.83333, bh * 0.16666]
+      ];
+      canvas.width = bw + 10;
+      canvas.height = bh + 10;
+
+      function placeShellObject(id, position) {
+        var img = data.filter(o => o.id == id)[0].b;
+        context.drawImage(img, (shellObjectArray[position][0]), (shellObjectArray[position][1]), sqW * 6, sqH * 6);
+      };
+
+      function placeFloorObject(id, position) {
+        var img = data.filter(o => o.id == id)[0].b;
+        context.drawImage(img, (floorGridArray[position][0]), (floorGridArray[position][1]), sqW * 2, sqH * 3);
+      }
+
+      function placeLeftWallObject(id, position) {
+        var img = data.filter(o => o.id == id)[0].b;
+        context.drawImage(img, (leftWallGridArray[position][0]), (leftWallGridArray[position][1]), sqW * 2, sqH * 2);
+      }
+
+      function placeRightWallObject(id, position) {
+        var img = data.filter(o => o.id == id)[0].b;
+        context.drawImage(img, (rightWallGridArray[position][0]), (rightWallGridArray[position][1]), sqW * 2, sqH * 2);
+      }
+
+      function run() {
+        var k = 0;
+        for (var i in data) {
+          var a = data[i];
+          k++;
+          window[a.f](a.id, a.p);
+        }
+      }
+
+      function prepare() {
+        data = data.filter(o => o.f != 'placeFloorObject').sort((a, b) => b.p - a.p).concat(data.filter(o => o.f == 'placeFloorObject').sort((a, b) => b.p - a.p));
+        let k = 0;
+        for (let i in data) {
+          let asset = data[i];
+          const img = new Image();
+          img.id = asset.id;
+          img.src = asset.u;
+          img.onload = () => {
+            k++;
+            data.filter(obj => obj.id == img.id)[0].b = img;
+            if (k == data.length) {
+              setTimeout(run, 60)
+            }
+          }
+        }
+      }
+      var data = [{
+        id: 0,
+        f: 'placeShellObject',
+        u: 'https://anma.mypinata.cloud/ipfs/QmfXLhvWWb6oA2eY3iCwZewPNJzcDyXKnYmhNo6kjex97o/s/shell.png',
+        p: 8
+      }, {
+        id: 1,
+        f: 'placeRightWallObject',
+        u: 'https://anma.mypinata.cloud/ipfs/QmfXLhvWWb6oA2eY3iCwZewPNJzcDyXKnYmhNo6kjex97o/r/frame.png',
+        p: 7
+      }, {
+        id: 2,
+        f: 'placeRightWallObject',
+        u: 'https://anma.mypinata.cloud/ipfs/QmfXLhvWWb6oA2eY3iCwZewPNJzcDyXKnYmhNo6kjex97o/r/clock.png',
+        p: 4
+      }, {
+        id: 3,
+        f: 'placeLeftWallObject',
+        u: 'https://anma.mypinata.cloud/ipfs/QmfXLhvWWb6oA2eY3iCwZewPNJzcDyXKnYmhNo6kjex97o/l/frame.png',
+        p: 7
+      }, {
+        id: 4,
+        f: 'placeFloorObject',
+        u: 'https://anma.mypinata.cloud/ipfs/QmfXLhvWWb6oA2eY3iCwZewPNJzcDyXKnYmhNo6kjex97o/f/altar.png',
+        p: 3
+      }, {
+        id: 5,
+        f: 'placeFloorObject',
+        u: 'https://anma.mypinata.cloud/ipfs/QmfXLhvWWb6oA2eY3iCwZewPNJzcDyXKnYmhNo6kjex97o/f/props.png',
+        p: 7
+      }];
+      prepare();
+    </script>
+  </body>
+</html>

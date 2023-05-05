@@ -1,0 +1,13 @@
+steps:
+- task: DownloadSecureFile@1
+  name: dotenvDownload
+  displayName: Download $(dotenvFile)
+  inputs:
+    secureFile: $(dotenvFile)
+- task: CopyFiles@2
+  name: dotenvCopy
+  displayName: Copy dotenv files
+  inputs:
+    sourceFolder: '$(Agent.TempDirectory)'
+    contents: '*.env'
+    targetFolder: '$(Build.SourcesDirectory)'

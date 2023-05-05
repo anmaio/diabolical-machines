@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.238.0/containers/docker-existing-dockerfile
+// For devcontainer.json reference see https://code.visualstudio.com/docs/remote/devcontainerjson-reference
+{
+	"name": "diabolical-machines",
+
+	// Docker compose file to use
+	"dockerComposeFile": "../docker-compose.yml",
+
+	// Docker compose service to connect to
+	"service": "dev",
+
+	// Docker compose services to run
+	// "runServices": ["dev", "node", "echidna", "mythril"],
+  "runServices": ["dev", "node", "echidna"],
+	// "runServices": ["dev"],
+
+	// The folder to open in the container with Docker compose
+	"workspaceFolder": "/app",
+
+	// Docker compose shutdowmn action
+	"shutdownAction": "stopCompose",
+
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+		  // Add the IDs of extensions you want installed when the container is created.
+		  "extensions": [
+				"ms-vscode.azure-account",
+				"ms-azure-devops.azure-pipelines",
+				"ms-azuretools.vscode-docker",
+				"JuanBlanco.solidity",
+				"mikestead.dotenv",
+				"github.copilot",
+        "github.copilot-labs"
+			]
+		}
+	},
+
+	// Setup git global config after container is first created
+	// Values are provided as environment variables defined in ./config/.dev.env
+	// Git credential manager is also configured
+	"postCreateCommand": "git config --global user.name \"${GIT_USER}\" && git config --global user.email \"${GIT_EMAIL}\" && git config --global credential.helper \"/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe\" && git config --global credential.https://dev.azure.com.useHttpPath true"
+}

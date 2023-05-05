@@ -1,0 +1,20 @@
+# Compiler files
+cache/
+out/
+
+# Ignores development broadcast logs
+# goerli chain id 5
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+/broadcast/*/5/   
+
+# Dotenv file
+.env
+
+# Images
+images/*.svg
+images2/
+outputMetadata
+
+
