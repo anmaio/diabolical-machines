@@ -535,14 +535,14 @@ contract CliffordTest is Test {
 
     // get to when the claim period ends
     vm.warp(auctionEnd + 1 weeks);
-    clifford.devClaim(6000 - clifford.totalSupply());
+    clifford.withdrawRemainingNFTs(6000 - clifford.totalSupply());
 
     console2.log("numOfBidders: ", numOfBidders);
     console2.log("current ppu: ", ppu);
     console2.log("current minimum bid: ", finalMinBid);
     console2.log("clifford balance before distribution: ", preDistributionBalance);
     console2.log("clifford balance after distribution: ", address(clifford).balance);
-    console2.log("dev amount: ", clifford.balanceOf(clifford.owner()));
+    console2.log("withdraw nfts amount: ", clifford.balanceOf(clifford.owner()));
   }
 
   function testAuctionSimulator() public {
@@ -561,7 +561,7 @@ contract CliffordTest is Test {
     // Fast forward to the end of the auction
     vm.warp(auctionEnd + 1 weeks);
     // mint entire supply to dev
-    clifford.devClaim(6000 - clifford.totalSupply());
+    clifford.withdrawRemainingNFTs(6000 - clifford.totalSupply());
     // reveal all
     clifford.reveal();
   }
@@ -905,7 +905,7 @@ contract CliffordTest is Test {
     clifford.claimAfterAuction();
   }
 
-  function testDevClaim() public {
+  function testWithdrawRemainingNfts() public {
     // start the cypher claim period
     clifford.startCypherClaimPeriod();
     // start the auction
@@ -915,12 +915,12 @@ contract CliffordTest is Test {
     // Fast forward to the end of the auction
     vm.warp(auctionEnd + 1 weeks);
     // mint entire supply to dev
-    clifford.devClaim(6000 - clifford.totalSupply());
+    clifford.withdrawRemainingNFTs(6000 - clifford.totalSupply());
     // check if the dev has the correct amount of NFTs
     assertEq(clifford.balanceOf(address(this)), clifford.totalSupply(), string.concat("Dev should have ", Strings.toString(clifford.totalSupply()), " NFTs"));
   }
 
-  function testWithdrawAfterDevClaim() public {
+  function testWithdrawAfterAllNftsMinted() public {
     uint numOfBidders = 100;
 
     auctionSimulator(numOfBidders);
@@ -941,12 +941,12 @@ contract CliffordTest is Test {
     clifford.startAuction();
   }
 
-  function testDevClaimBeforeCypherClaim() public {
-    // We should not be able to claim dev before the cypher claim
-    // Trying to start the dev claim
+  function testWithdrawNftsBeforeCypherClaim() public {
+    // We should not be able to claim nfts before the cypher claim
+    // Trying to claim the nfts
     uint currentSupply = clifford.totalSupply();
     vm.expectRevert(AuctionNotOver.selector);
-    clifford.devClaim(6000 - currentSupply);
+    clifford.withdrawRemainingNFTs(6000 - currentSupply);
   }
 
   function testWithdrawBeforeCypherClaim() public {
@@ -956,21 +956,21 @@ contract CliffordTest is Test {
     clifford.withdraw();
   }
 
-  function testDevClaimBeforeAuctionOver() public {
-    // We should not be able to claim dev before the auction is over
-    // start the dev claim
+  function testWithdrawNftsBeforeAuctionOver() public {
+    // We should not be able to withdraw nfts before the auction is over
+    // start the cypher claim
     clifford.startCypherClaimPeriod();
     // start the auction
     clifford.startAuction();
-    // Trying to start the dev claim
+    // Trying to withdraw the remainder
     uint currentSupply = clifford.totalSupply();
     vm.expectRevert(AuctionNotOver.selector);
-    clifford.devClaim(6000 - currentSupply);
+    clifford.withdrawRemainingNFTs(6000 - currentSupply);
   }
 
   function testWithdrawBeforeAuctionOver() public {
     // We should not be able to withdraw before the auction is over
-    // start the dev claim
+    // start the cypher claim
     clifford.startCypherClaimPeriod();
     // start the auction
     clifford.startAuction();
@@ -979,9 +979,9 @@ contract CliffordTest is Test {
     clifford.withdraw();
   }
 
-  function testWithdrawBeforeDevClaim() public {
-    // We should not be able to withdraw before the dev claim
-    // start the dev claim
+  function testWithdrawBeforeAllNftsMinted() public {
+    // We should not be able to withdraw before all the nfts are minted
+    // start the cypher claim
     clifford.startCypherClaimPeriod();
     // start the auction
     clifford.startAuction();

@@ -68,8 +68,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   // genId => seed
   mapping(uint256 => uint256) private genSeed;
 
-  // tokenId => genId
-  mapping(uint256 => uint256) private tokenIdToGenId;
+  // genId => tokenId
+  mapping(uint256 => uint256) private genIdToTokenId;
 
   // bidder => total amount bidded
   mapping(address => uint) private allBids;
@@ -140,6 +140,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   function reveal() external onlyOwner {
     // Assumes the subscription is funded sufficiently.
     uint gen = currentGen;
+    genIdToTokenId[gen] = totalSupply();
     currentGen++;
     if (!PSUEDO_RANDOM) {
       // Will revert if subscription is not set and funded.
@@ -173,24 +174,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
     delete requestIdToGenId[genId];
     genSeed[genId] = randomness;
     emit RandomNumberGenerated(genId, randomness);
-  }
-
-  /**
-    * @dev Mint function that should be called if all the conditions are met for a certain step.
-    * @param to The address to mint the tokens to.
-    * @param quantity The number of tokens to mint.
-   */
-
-  function _validMint(address to, uint quantity) internal {
-    uint startingSupply = totalSupply();
-    for (uint i = 0; i < quantity;) {
-      uint tokenId = startingSupply + i;
-      tokenIdToGenId[tokenId] = currentGen;
-      unchecked {
-        ++i;
-      }
-    }
-    _mint(to, quantity);
   }
 
 	// Step 1 - Cypher Claim
@@ -233,7 +216,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
           ++i;
       }
     }
-    _validMint(msg.sender, numOfCyphers);
+    _mint(msg.sender, numOfCyphers);
   }
 
 	// Step 2 - Auction
@@ -273,8 +256,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
     uint totalBidsFromBidder = bidAmount + allBids[msg.sender];
 
     // Check the bid is large enough to recieve at least 1 NFT at the current price
-    uint currentPricePerUnit = getMinimumBid();
-    if (totalBidsFromBidder < currentPricePerUnit) revert BidTooSmall(bidAmount);
+    if (totalBidsFromBidder < getMinimumBid()) revert BidTooSmall(bidAmount);
 
     // reset the timer to 15mins if less than 15mins is remaining
     if (block.timestamp + BID_EXTENSION_LENGTH > endAt) {
@@ -312,7 +294,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
     allBids[msg.sender] = 0;
 
     if (quantityToMint > 0) {
-      _validMint(msg.sender, quantityToMint);
+      _mint(msg.sender, quantityToMint);
     }
 
     uint remainder = amount % pricePerUnit;
@@ -320,9 +302,9 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
     if (!success) revert TransferNotSuccessful(msg.sender);
   }
 
-	// Step 3 - Team Claim
+	// Step 3 - Withdraw Remaining NFTs
  
-	function devClaim(uint amount) external onlyOwner {
+	function withdrawRemainingNFTs(uint amount) external onlyOwner {
     // Check the auction has started, ended and the claim period has passed
 		if (startedAt == 0 || block.timestamp < endAt + CLAIM_PERIOD) revert AuctionNotOver();
 
@@ -330,7 +312,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
     // After all nfts have been minted, this will revert
     // In the rare case that there are no NFTs left after the auction, this will revert
-		_validMint(owner(), amount);
+		_mint(owner(), amount);
 	}
 
   // Step 4 - Withdraw
@@ -356,10 +338,20 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   function getSeed(uint256 tokenId) public view returns (uint256) {
     if (tokenId >= totalSupply()) revert InvalidTokenId(tokenId);
 
-    uint _genSeed = genSeed[tokenIdToGenId[tokenId]];
-    if (_genSeed == 0) revert SeedNotSet(tokenIdToGenId[tokenId]);
+    if (currentGen == 0) revert SeedNotSet(currentGen);
 
-    return uint256(keccak256(abi.encodePacked(_genSeed, tokenId)));
+    for (uint i = 0; i < currentGen;) {
+      if (tokenId < genIdToTokenId[i]) {
+        uint seed = genSeed[i];
+        // if (seed == 0) revert SeedNotSet(i);
+        return uint256(keccak256(abi.encodePacked(seed, tokenId)));
+      }
+      unchecked {
+          ++i;
+      }
+    }
+
+    revert SeedNotSet(currentGen);
   }
 
   /**
@@ -440,6 +432,12 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   function getIfCypherClaimStarted() external view returns(bool) {
     return cypherClaimStarted;
   }
+
+  /**
+    * @dev check if an individual cypher claim has been claimed
+    * @param tokenId The tokenId to check if it has been claimed.
+    * @return true if the given tokenId has been claimed.
+   */
 
   function getIfCypherClaimed(uint tokenId) external view returns(bool) {
     return LibBitmap.get(cypherClaims, tokenId);

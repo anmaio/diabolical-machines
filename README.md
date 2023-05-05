@@ -3,7 +3,7 @@ forge build --via-ir
 <!-- Note: Use vv when mass minting -->
 forge test --via-ir -vvvv
 forge test -vvv
-forge test --match-contract Clifford --match-test testWriteImages -vvvv
+forge test --match-contract Clifford --match-test testAuctionSimulator -vvvv
 
 <!-- Test without optimizer -->
 forge test --via-ir --gas-report  -vvvv
