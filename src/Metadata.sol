@@ -41,9 +41,9 @@ contract Metadata {
     int baseline = getBaselineRarity(rand);
     uint state = getState(baseline);
     string memory jsonInitial = string.concat(
-        '{"name": "Clifford # ',
+        '{"name": "Diabolical Machine # ',
         Strings.toString(tokenId),
-        '", "description": "PUT DESCRIPTION HERE", "attributes": [{"trait_type": "Machine", "value":"',
+        '", "description": "Your very own Worker in a Box. The ultimate collectible.", "attributes": [{"trait_type": "Machine", "value":"',
         getMachine(rand),
         '"}, {"trait_type": "State", "value":"',
         allStates[state],
