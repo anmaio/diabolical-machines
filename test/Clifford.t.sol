@@ -114,7 +114,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 10;
+  uint internal constant MINT_SIZE = 1000;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
 
@@ -402,25 +402,26 @@ contract CliffordTest is Test {
     characterTB = new TraitBase(characterImpsAds);
   }
 
-  function deployAssetRetriever() internal {
+  function deployAssetRetriever(TraitBase[] memory allTraitBases) internal {
     // Order of traitBases must match the order of TraitBases in AssetRetriever
-    TraitBase[] memory traitBases = new TraitBase[](14);
-    traitBases[0] = substancesTB;
-    traitBases[1] = propsTB;
-    traitBases[2] = activationTB;
-    traitBases[3] = feedbackTB;
-    traitBases[4] = eyesTB;
-    traitBases[5] = assetsTB;
-    traitBases[6] = altarTB;
-    traitBases[7] = apparatusTB;
-    traitBases[8] = cellsTB;
-    traitBases[9] = tubesTB;
-    traitBases[10] = beastTB;
-    traitBases[11] = conveyorTB;
-    traitBases[12] = miscTB;
-    traitBases[13] = characterTB;
+    // TraitBase[] memory traitBases = new TraitBase[](14);
+    // traitBases[0] = substancesTB;
+    // traitBases[1] = propsTB;
+    // traitBases[2] = activationTB;
+    // traitBases[3] = feedbackTB;
+    // traitBases[4] = eyesTB;
+    // traitBases[5] = assetsTB;
+    // traitBases[6] = altarTB;
+    // traitBases[7] = apparatusTB;
+    // traitBases[8] = cellsTB;
+    // traitBases[9] = tubesTB;
+    // traitBases[10] = beastTB;
+    // traitBases[11] = conveyorTB;
+    // traitBases[12] = miscTB;
+    // traitBases[13] = characterTB;
+
     // Add the address of each TraitBase
-    assetRetriever = new AssetRetriever(traitBases);
+    assetRetriever = new AssetRetriever(allTraitBases);
   }
 
   // deploy machines
@@ -448,20 +449,58 @@ contract CliffordTest is Test {
 
     // Can be Done individually
     deploySubstances();
+    deployProps();
+    deployActivation();
     deployFeedback();
     deployEyes();
     deployAssets();
-    deployProps();
     deployAltar();
-    deployTubes();
     deployApparatus();
     deployCells();
+    deployTubes();
     deployBeast();
     deployConveyor();
     deployMisc();
-    deployActivation();
     deployCharacter();
-    deployAssetRetriever();
+
+    // MUST be done in this specific order
+    // substances, props, activation, feedback, eyes, assets, altar, apparatus, cells, tubes, beast, conveyor, misc, character
+
+    TraitBase[] memory traitBases = new TraitBase[](14);
+    traitBases[0] = substancesTB;
+    traitBases[1] = propsTB;
+    traitBases[2] = activationTB;
+    traitBases[3] = feedbackTB;
+    traitBases[4] = eyesTB;
+    traitBases[5] = assetsTB;
+    traitBases[6] = altarTB;
+    traitBases[7] = apparatusTB;
+    traitBases[8] = cellsTB;
+    traitBases[9] = tubesTB;
+    traitBases[10] = beastTB;
+    traitBases[11] = conveyorTB;
+    traitBases[12] = miscTB;
+    traitBases[13] = characterTB;
+
+    // OR Manually add the addresses
+
+    // TraitBase[] memory traitBases = new TraitBase[](14);
+    // traitBases[0] = TraitBase(0x00); // substances
+    // traitBases[1] = TraitBase(0x00); // props
+    // traitBases[2] = TraitBase(0x00); // activation
+    // traitBases[3] = TraitBase(0x00); // feedback
+    // traitBases[4] = TraitBase(0x00); // eyes
+    // traitBases[5] = TraitBase(0x00); // assets
+    // traitBases[6] = TraitBase(0x00); // altar
+    // traitBases[7] = TraitBase(0x00); // apparatus
+    // traitBases[8] = TraitBase(0x00); // cells
+    // traitBases[9] = TraitBase(0x00); // tubes
+    // traitBases[10] = TraitBase(0x00); // beast
+    // traitBases[11] = TraitBase(0x00); // conveyor
+    // traitBases[12] = TraitBase(0x00); // misc
+    // traitBases[13] = TraitBase(0x00); // character
+
+    deployAssetRetriever(traitBases);
     deployMachines();
     deployLogic();
 
