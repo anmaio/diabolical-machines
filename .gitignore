@@ -7,14 +7,17 @@ out/
 !/broadcast
 /broadcast/*/31337/
 /broadcast/**/dry-run/
-/broadcast/*/5/   
+/broadcast/*/5/ 
+/broadcast/*/1/  
 
 # Dotenv file
 .env
 
 # Images
 images/*.svg
+images/na*
 images2/
 outputMetadata
+outputJson/*
 
 

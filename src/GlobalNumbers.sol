@@ -12,18 +12,60 @@ library GlobalNumbers {
 
   uint internal constant GROUP_CLOSE_NUMBER = 13000;
 
-  // Global Asset - 6 values
-  // None
-  // Martini
-  // Cactus
-  // Fridge
-  // Bong
-  // Lavalamp
+  // Small Asset numbers
+  // 00000 - None
+  // 06022 - Rat
+  // 06021 - Skull
+  // 06028 - Dead Plant
+  // 06014 - Dog Bowl
+  // 06027 - Bottle
+  // 06026 - Can
+  // 06006 - Bong
+  // 06004 - Martini
+  // 06011 - Books
+  // 06000 - Lavalamp
+  // 06025 - Pineapple
+  // 06029 - Watermelon
+  // 06020 - Lizard
 
-  string internal constant SMALL_ASSET_NUMBERS = "0000006022060210602806027060260600606004060140601106000060250602906020";
-  string internal constant LARGE_ASSET_NUMBERS = "00000020020200402003020010200902008060130600806019060090602306024060300601806017";
+  string internal constant SMALL_ASSET_NUMBERS = "0000006022060210602806014060270602606006060040601106000060250602906020";
+
+  // Large Asset numbers
+  // 00000 - None
+  // 02002 - Pit
+  // 06013 - Toilet
+  // 02001 - Pit with Grate
+  // 02009 - Spikes B
+  // 02008 - Spikes A
+  // 02004 - Ladder
+  // 02003 - Stairs
+  // 06008 - Fridge
+  // 06019 - Stool
+  // 06009 - Circular Rug
+  // 06023 - Desk Chair
+  // 06024 - Cactus (Large)
+  // 06030 - Gramaphone
+  // 06018 - Cello
+  // 06017 - Harp
+
+  string internal constant LARGE_ASSET_NUMBERS = "00000020020601302001020090200802004020030600806019060090602306024060300601806017";
+
+  // Out Wall numbers
+  // 06005 - Peephole A
+  // 06007 - Peephole B
+  // 06016 - Megaphone
+  // 06010 - CCTV
 
   string internal constant OUT_WALL_NUMBERS = "0000006005060070601606010";
+
+  // Flat Wall numbers
+  // 02000 - Crack
+  // 02011 - Numbers
+  // 02007 - Recess C
+  // 02006 - Recess B
+  // 02005 - Recess A
+  // 02010 - Wall Rug
+  
   string internal constant FLAT_WALL_NUMBERS = "00000020000201102007020060200502010";
 
   // Expansion Props - 9 values
@@ -52,15 +94,15 @@ library GlobalNumbers {
   string internal constant CHARACTER_LEVER_NUMBERS = "0300003001030020300303016030170301803019";
 
   // Character - 7 values
-  // None
-  // COLLAPSED
-  // STANDING
-  // HUNCHED
-  // SLOUCHED
-  // SITTING
-  // MEDITATING
+  // 00000 - None
+  // 14002 - COLLAPSED
+  // 14001 - STANDING
+  // 14005 - HUNCHED
+  // 14003 - SLOUCHED
+  // 14000 - SITTING
+  // 14004 - MEDITATING
 
-  string internal constant CHARACTER_NUMBERS = "00000140021400114005140031400014004";
+  string internal constant CHARACTER_NUMBERS = "00000140021400514003140011400014004";
 
   /**
     * @dev Returns the small asset number based on the digits
