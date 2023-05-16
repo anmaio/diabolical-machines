@@ -8,10 +8,6 @@ import "./Additional/CellsAdditional4.sol";
 import "./Additional/CellsAdditional5.sol";
 
 contract CellsImp5 {
-
-  string internal C_CELL_B_JUMPER = string.concat(CellsAdditional1.getPart(), CellsAdditional2.getPart(), CellsAdditional3.getPart());
-
-  string internal C_CELL_C_JUMPER = string.concat(CellsAdditional4.getPart(), CellsAdditional5.getPart());
   
   string internal constant C_SHELF = "<g id='cs-u-c-shelf-2'><path id='cs-u-path-c0-s2' d='M323.65 374.63v8.76l144.51 83.19v-8.78l-144.51-83.17Z' fill='var(--c0l)' stroke='#000'/><path id='cs-u-polygon-c0-s2' fill='url(#cs-u-polygon-c0-s2-fill)' stroke='#000' d='m323.65 374.63 138.81-80.83 144.48 83.18-138.78 80.83-144.51-83.18z'/><path id='cs-u-path-c0-s12' d='M468.14 457.81v8.78l138.81-80.82v-8.76l-138.81 80.8Z' fill='url(#cs-u-path-c0-s12-fill)' stroke='#000'/></g>";
 
@@ -19,9 +15,9 @@ contract CellsImp5 {
 
   function getAssetFromID(uint assetID) external view returns (string memory) {
     if (assetID == 9020) {
-      return C_CELL_B_JUMPER;
+      return string.concat(CellsAdditional1.getPart(), CellsAdditional2.getPart(), CellsAdditional3.getPart());
     } else if (assetID == 9021) {
-      return C_CELL_C_JUMPER;
+      return string.concat(CellsAdditional4.getPart(), CellsAdditional5.getPart());
     } else if (assetID == 9026) {
       return C_SHELF;
     } else if (assetID == 9030) {

@@ -500,6 +500,8 @@ contract CliffordTest is Test {
     // traitBases[12] = TraitBase(0x00); // misc
     // traitBases[13] = TraitBase(0x00); // character
 
+    // Need to be deployed together
+
     deployAssetRetriever(traitBases);
     deployMachines();
     deployLogic();
