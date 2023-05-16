@@ -367,21 +367,6 @@ contract CliffordScript is Script {
 
   function deployAssetRetriever(TraitBase[] memory allTraitBases) internal {
     // Order of traitBases must match the order of TraitBases in AssetRetriever
-    // TraitBase[] memory traitBases = new TraitBase[](14);
-    // traitBases[0] = substancesTB;
-    // traitBases[1] = propsTB;
-    // traitBases[2] = activationTB;
-    // traitBases[3] = feedbackTB;
-    // traitBases[4] = eyesTB;
-    // traitBases[5] = assetsTB;
-    // traitBases[6] = altarTB;
-    // traitBases[7] = apparatusTB;
-    // traitBases[8] = cellsTB;
-    // traitBases[9] = tubesTB;
-    // traitBases[10] = beastTB;
-    // traitBases[11] = conveyorTB;
-    // traitBases[12] = miscTB;
-    // traitBases[13] = characterTB;
 
     // Add the address of each TraitBase
     assetRetriever = new AssetRetriever(allTraitBases);
@@ -465,6 +450,8 @@ contract CliffordScript is Script {
     // traitBases[11] = TraitBase(0x00); // conveyor
     // traitBases[12] = TraitBase(0x00); // misc
     // traitBases[13] = TraitBase(0x00); // character
+
+    // Need to be deployed together
 
     deployAssetRetriever(traitBases);
     deployMachines();
