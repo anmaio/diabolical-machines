@@ -209,7 +209,7 @@ contract GlobalSVG {
       CommonSVG.TEMP_STYLE,
       CommonSVG.STYLE,
       getAnimationSpeed(baseline),
-      ApparatusCSS1.getPart(),
+      ApparatusCSS1.getPart(), // MUST: be apparatucss1 after getAnimationSpeed
       ApparatusCSS2.getPart(),
       ApparatusCSS3.getPart()
     );

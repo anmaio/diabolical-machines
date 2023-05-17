@@ -191,12 +191,13 @@ library GridHelper {
   }
 
   /**
-    * @dev constrain a value to the range 0-255
+    * @dev constrain a value to the range 0-255, must be between -255 and 510
     * @param value The value to constrain
     * @return The constrained value
    */
 
   function constrainToHex(int value) internal pure returns (uint) {
+    require(value >= -255 && value <= 510, "Value out of bounds.");
     if (value < 0) { // if negative, make positive
       return uint(0 - value);
     }

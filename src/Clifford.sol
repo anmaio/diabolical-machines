@@ -42,6 +42,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   error BidTooSmall(uint amount);
   error AuctionAlreadyStarted();
   error CypherClaimNotStarted();
+  error CypherClaimNotEnded();
 
 	error AuctionNotOver();
   error NftsNotAllMinted();
@@ -115,6 +116,8 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   bool private cypherClaimStarted;
 
+  uint private cypherClaimStartTimestamp;
+
   // Cypher claims equivalent to mapping(uint => bool) private cypherClaims;
   LibBitmap.Bitmap private cypherClaims;
 
@@ -184,6 +187,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   function startCypherClaimPeriod() external onlyOwner {
 		cypherClaimStarted = true;
+    cypherClaimStartTimestamp = block.timestamp;
 	}
 
   /**
@@ -227,6 +231,10 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
 	function startAuction() external onlyOwner {
     if (!cypherClaimStarted) revert CypherClaimNotStarted();
+
+    // Check it has been at least 5 days since the cypher claim period started
+
+    if (block.timestamp < cypherClaimStartTimestamp + 5 days) revert CypherClaimNotEnded();
 
     if (startedAt != 0) revert AuctionAlreadyStarted();
 
