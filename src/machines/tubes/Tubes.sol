@@ -45,8 +45,8 @@ contract Tubes {
   string internal constant SMALL_OFFSETS = "04680270";
   string internal constant LARGE_OFFSETS = "03120360";
   string internal constant OUT_WALL_OFFSETS = "00000180";
-  string internal constant FLAT_WALL_OFFSETS = "03120000031201800156009001560270";
-  uint internal constant NUMBER_OF_FLAT_WALL_POSITIONS = 4;
+  string internal constant FLAT_WALL_OFFSETS = "0312018001560270";
+  uint internal constant NUMBER_OF_FLAT_WALL_POSITIONS = 2;
 
   uint internal constant NO_TRANSFORM = 13012;
   uint internal constant TRANSFORM_ONE = 13002;
