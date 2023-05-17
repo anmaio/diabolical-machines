@@ -15,7 +15,7 @@ contract ConveyorImp4 {
   string internal constant CB_U_SHAD_P3 = "<g id='cb-u-shad-p3'><g transform='translate(4-2)'><path id='cb-s-polygon17' fill='#1d1d1b' d='M624.06 630.5 468.63 720.13 624.47 810.35 780.36 720.6 624.06 630.5z' opacity='0.3' style='mix-blend-mode:multiply'/></g></g>";
   string internal constant CB_U_SHAD_P4 = "<g id='cb-u-shad-p4'><g transform='translate(-153 87)'><path id='cb-s-polygon18' fill='#1d1d1b' d='M624.06 630.5 468.63 720.13 624.47 810.35 780.36 720.6 624.06 630.5z' opacity='0.3' style='mix-blend-mode:multiply'/></g></g>";
 
-  function getAssetFromID(uint assetID) external view returns (string memory) {
+  function getAssetFromID(uint assetID) external pure returns (string memory) {
     if (assetID == 12018) {
       return CB_U_F_P5F3_REV_PL;
     } else if (assetID == 12019) {

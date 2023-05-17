@@ -96,9 +96,9 @@ library GlobalNumbers {
   // Character - 7 values
   // 00000 - None
   // 14002 - COLLAPSED
-  // 14001 - STANDING
   // 14005 - HUNCHED
   // 14003 - SLOUCHED
+  // 14001 - STANDING
   // 14000 - SITTING
   // 14004 - MEDITATING
 
