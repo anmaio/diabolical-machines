@@ -114,7 +114,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 10;
+  uint internal constant MINT_SIZE = 1000;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public output = "[\n  ";
 
@@ -143,6 +143,7 @@ contract CliffordTest is Test {
   error BidTooSmall(uint amount);
   error AuctionAlreadyStarted();
   error CypherClaimNotStarted();
+  error CypherClaimNotEnded();
   error NftsAlreadyDistributed();
 
 	error AuctionNotOver();
@@ -533,6 +534,8 @@ contract CliffordTest is Test {
   function auctionSimulator(uint numOfBidders) public {
     // start the cypher claim period
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // start the auction
     clifford.startAuction();
 
@@ -595,6 +598,8 @@ contract CliffordTest is Test {
   function preWriteImages() internal {
     // start the cypher claim period
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // start the auction
     clifford.startAuction();
     // Get when the auction ends
@@ -701,7 +706,7 @@ contract CliffordTest is Test {
         metadata.getMachine(clifford.getSeed(i)), // machine name
         "\""
         ",\n    \"Productivity\": \"",
-        metadata.getProductivity(clifford.getSeed(i), baseline), // productivity
+        metadata.getProductivityTier(clifford.getSeed(i), baseline), // productivity
         "\",\n    \"ProductivityValue\": \"",
         productivityValue
       );
@@ -863,6 +868,8 @@ contract CliffordTest is Test {
   function testStartAuction() public {
     // Starting the cypher claim
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // Starting the auction
     clifford.startAuction();
     // Check if the state is correct
@@ -873,6 +880,8 @@ contract CliffordTest is Test {
   function testPlaceSingleBid() public {
     // Starting the cypher claim
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // Starting the auction
     clifford.startAuction();
     // Placing a bid of 1 ETH
@@ -886,6 +895,8 @@ contract CliffordTest is Test {
   function testPlaceMultipleBids() public {
     // Starting the cypher claim
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // Starting the auction
     clifford.startAuction();
     // Placing a bid of 1 ETH
@@ -902,6 +913,8 @@ contract CliffordTest is Test {
   function testAuctionExtension() public {
     // start the cypher claim period
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // start the auction
     clifford.startAuction();
     // Get when the auction ends
@@ -949,6 +962,8 @@ contract CliffordTest is Test {
   function testWithdrawRemainingNfts() public {
     // start the cypher claim period
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // start the auction
     clifford.startAuction();
     // Get when the auction ends
@@ -1001,6 +1016,8 @@ contract CliffordTest is Test {
     // We should not be able to withdraw nfts before the auction is over
     // start the cypher claim
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // start the auction
     clifford.startAuction();
     // Trying to withdraw the remainder
@@ -1013,6 +1030,8 @@ contract CliffordTest is Test {
     // We should not be able to withdraw before the auction is over
     // start the cypher claim
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // start the auction
     clifford.startAuction();
     // Trying to withdraw
@@ -1024,6 +1043,8 @@ contract CliffordTest is Test {
     // We should not be able to withdraw before all the nfts are minted
     // start the cypher claim
     clifford.startCypherClaimPeriod();
+    // warp the time to 5 days after the cypher claim period
+    vm.warp(block.timestamp + 5 days + 1);
     // start the auction
     clifford.startAuction();
     // Get when the auction ends

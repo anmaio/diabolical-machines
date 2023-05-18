@@ -48,7 +48,7 @@ contract Metadata {
         '"}, {"trait_type": "State", "value":"',
         allStates[state],
         '"}, {"trait_type": "Productivity", "value":"',
-        getProductivity(rand, baseline),
+        getProductivityTier(rand, baseline),
         '"}, {"trait_type": "Small Asset:", "value":"',
         _machine.getSmallAssetName(rand, baseline)
     );
@@ -98,7 +98,7 @@ contract Metadata {
         '","Machine":"',
         getMachine(rand),
         '","Productivity":"',
-        getProductivity(rand, baseline),
+        getProductivityTier(rand, baseline),
         '","SmallAsset":"',
         _machine.getSmallAssetName(rand, baseline)
     );
@@ -134,9 +134,9 @@ contract Metadata {
     * @return The productivity as a string
    */
 
-  function getProductivity(uint rand, int baseline) public view returns (string memory) {
+  function getProductivityTier(uint rand, int baseline) public view returns (string memory) {
     string memory machine = getMachine(rand);
-    return _machine.getProductivity(machine, rand, baseline);
+    return _machine. getProductivityTier(machine, rand, baseline);
   }
 
   /**

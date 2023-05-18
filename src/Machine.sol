@@ -82,7 +82,7 @@ contract Machine {
     * @return The productivity tier
    */
 
-  function getProductivity(string memory machine, uint rand, int baseline) external view returns(string memory) {
+  function getProductivityTier(string memory machine, uint rand, int baseline) external view returns(string memory) {
 
     uint productivity = getProductivityValue(machine, rand, baseline);
 
