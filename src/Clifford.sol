@@ -103,6 +103,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   uint private constant AUCTION_LENGTH = 5 days;
 
   // Time after auction ends that users can claim their nfts and refunds
+  // Also the time cypher holders have to claim their NFT
   uint private constant CLAIM_PERIOD = 1 weeks;
 
   uint private constant BID_EXTENSION_LENGTH = 15 minutes;
@@ -114,9 +115,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   // current genId for minting
   uint private currentGen;
 
-  bool private cypherClaimStarted;
-
-  uint private cypherClaimStartTimestamp;
+  uint private numOfCyphersClaimed;
 
   // Cypher claims equivalent to mapping(uint => bool) private cypherClaims;
   LibBitmap.Bitmap private cypherClaims;
@@ -186,8 +185,9 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
    */
 
   function startCypherClaimPeriod() external onlyOwner {
-		cypherClaimStarted = true;
-    cypherClaimStartTimestamp = block.timestamp;
+    // Auction settings
+    startedAt = block.timestamp + CLAIM_PERIOD;
+    endAt = block.timestamp + CLAIM_PERIOD + AUCTION_LENGTH;
 	}
 
   /**
@@ -212,8 +212,10 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
    */
 
   function claimCyphers(uint[] memory tokenIds) external {
-    if (!cypherClaimStarted || startedAt != 0) revert CypherClaimNotActive();
+    // will revert if the claim period hasn't started or if the auction has started
+    if (block.timestamp >= startedAt) revert CypherClaimNotActive();
     uint numOfCyphers = tokenIds.length;
+    numOfCyphersClaimed += numOfCyphers;
     for (uint i = 0; i < numOfCyphers;) {
       _validateCypherClaim(tokenIds[i]);
       unchecked {
@@ -226,32 +228,12 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 	// Step 2 - Auction
 
   /**
-    * @dev Start the auction and set the start and initial end times.
-   */
-
-	function startAuction() external onlyOwner {
-    if (!cypherClaimStarted) revert CypherClaimNotStarted();
-
-    // Check it has been at least 5 days since the cypher claim period started
-
-    if (block.timestamp < cypherClaimStartTimestamp + 5 days) revert CypherClaimNotEnded();
-
-    if (startedAt != 0) revert AuctionAlreadyStarted();
-
-    saleCount = MAX_SUPPLY - totalSupply();
-
-    startedAt = block.timestamp;
-    endAt = block.timestamp + AUCTION_LENGTH;
-  }
-
-  /**
     * @dev User places a bid in the auction in the form of ETH.
    */
 
   function placeBid() external payable {
-    // Check the auction hasn't ended
-    // This will also revert if the auction hasn't started as the endAt value will not have been set
-    if (block.timestamp >= endAt) revert AuctionNotActive();
+    // Check the auction has started and hasn't ended
+    if (block.timestamp >= endAt || block.timestamp < startedAt) revert AuctionNotActive();
 
     uint bidAmount = msg.value;
 
@@ -378,7 +360,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
    */
 
   function getCurrentPricePerUnit() public view returns (uint) {
-    return sumOfAllBids / saleCount;
+    return sumOfAllBids / (MAX_SUPPLY - numOfCyphersClaimed);
   }
 
   /**
@@ -430,15 +412,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   function getEndTimestamp() external view returns(uint) {
     return endAt;
-  }
-
-  /**
-    * @dev check if the cypher claim has started
-    * @return true if the cypher claim has started.
-   */
-
-  function getIfCypherClaimStarted() external view returns(bool) {
-    return cypherClaimStarted;
   }
 
   /**
