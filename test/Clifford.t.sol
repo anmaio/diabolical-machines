@@ -114,16 +114,16 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 10;
+  uint internal constant MINT_SIZE = 6000;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
-  string public output = "[\n  ";
+  string public openJson = "[\n";
 
   address internal constant CYPHER_CONTRACT = 0xdDA32aabBBB6c44eFC567baC5F7C35f185338456;
   address internal constant TOP_CYPHER_HOLDER = 0x0aD0b792A54704dc7b6f85CBB774106d22E814d9;
 
   uint private constant BID_INCREMENT = 0.01 ether;
 
-  uint private constant AUCTION_LENGTH = 5 days;
+  uint private constant AUCTION_LENGTH = 1 weeks;
 
   uint private constant BID_EXTENSION_LENGTH = 15 minutes;
 
@@ -622,57 +622,94 @@ contract CliffordTest is Test {
   function testWriteImages1() public {
     // Memory leak causes wsl to crash for me with large amount of images
     // https://github.com/ethereum/solidity/issues/13885
-    writeImagesInRange(0, MINT_SIZE/10);
+    writeImagesInRange(0, MINT_SIZE/20);
   }
 
   function testWriteImages2() public {
-    writeImagesInRange(MINT_SIZE/10, 2*MINT_SIZE/10);
+    writeImagesInRange(MINT_SIZE/20, 2*MINT_SIZE/20);
   }
 
   function testWriteImages3() public {
-    writeImagesInRange(2*MINT_SIZE/10, 3*MINT_SIZE/10);
+    writeImagesInRange(2*MINT_SIZE/20, 3*MINT_SIZE/20);
   }
 
   function testWriteImages4() public {
-    writeImagesInRange(3*MINT_SIZE/10, 4*MINT_SIZE/10);
+    writeImagesInRange(3*MINT_SIZE/20, 4*MINT_SIZE/20);
   }
 
   function testWriteImages5() public {
-    writeImagesInRange(4*MINT_SIZE/10, 5*MINT_SIZE/10);
+    writeImagesInRange(4*MINT_SIZE/20, 5*MINT_SIZE/20);
   }
 
   function testWriteImages6() public {
-    writeImagesInRange(5*MINT_SIZE/10, 6*MINT_SIZE/10);
+    writeImagesInRange(5*MINT_SIZE/20, 6*MINT_SIZE/20);
   }
 
   function testWriteImages7() public {
-    writeImagesInRange(6*MINT_SIZE/10, 7*MINT_SIZE/10);
+    writeImagesInRange(6*MINT_SIZE/20, 7*MINT_SIZE/20);
   }
 
   function testWriteImages8() public {
-    writeImagesInRange(7*MINT_SIZE/10, 8*MINT_SIZE/10);
+    writeImagesInRange(7*MINT_SIZE/20, 8*MINT_SIZE/20);
   }
 
   function testWriteImages9() public {
-    writeImagesInRange(8*MINT_SIZE/10, 9*MINT_SIZE/10);
+    writeImagesInRange(8*MINT_SIZE/20, 9*MINT_SIZE/20);
   }
 
   function testWriteImages10() public {
-    writeImagesInRange(9*MINT_SIZE/10, 10*MINT_SIZE/10);
+    writeImagesInRange(9*MINT_SIZE/20, 10*MINT_SIZE/20);
+  }
+
+  function testWriteImages11() public {
+    writeImagesInRange(10*MINT_SIZE/20, 11*MINT_SIZE/20);
+  }
+
+  function testWriteImages12() public {
+    writeImagesInRange(11*MINT_SIZE/20, 12*MINT_SIZE/20);
+  }
+
+  function testWriteImages13() public {
+    writeImagesInRange(12*MINT_SIZE/20, 13*MINT_SIZE/20);
+  }
+
+  function testWriteImages14() public {
+    writeImagesInRange(13*MINT_SIZE/20, 14*MINT_SIZE/20);
+  }
+
+  function testWriteImages15() public {
+    writeImagesInRange(14*MINT_SIZE/20, 15*MINT_SIZE/20);
+  }
+
+  function testWriteImages16() public {
+    writeImagesInRange(15*MINT_SIZE/20, 16*MINT_SIZE/20);
+  }
+
+  function testWriteImages17() public {
+    writeImagesInRange(16*MINT_SIZE/20, 17*MINT_SIZE/20);
+  }
+
+  function testWriteImages18() public {
+    writeImagesInRange(17*MINT_SIZE/20, 18*MINT_SIZE/20);
+  }
+
+  function testWriteImages19() public {
+    writeImagesInRange(18*MINT_SIZE/20, 19*MINT_SIZE/20);
+  }
+
+  function testWriteImages20() public {
+    writeImagesInRange(19*MINT_SIZE/20, MINT_SIZE);
   }
 
   // create a json file with the ids of the images that were created
-  function testWriteJson() public {
-    preWriteImages();
 
+  function writeJson(uint start, uint stop) public {
+    string memory output = "  ";
     string memory itemOpen = "{\n    \"id\": ";
 
-    for (uint256 i = 0; i < MINT_SIZE; i++) {
+    for (uint256 i = start; i < stop; i++) {
       string memory id = Strings.toString(i);
       string memory itemClose = "\n  },\n  ";
-      if (i == MINT_SIZE - 1) {
-        itemClose = "\n  }\n";
-      }
 
       int baseline = metadata.getBaselineRarity(clifford.getSeed(i));
 
@@ -738,9 +775,131 @@ contract CliffordTest is Test {
       output = string.concat(output, item);
     }
 
-    string memory json = string.concat(output, "]");
-    vm.writeFile("outputJson/ids.json", json);
-    
+    vm.writeLine("outputJson/ids.json", output);
+  }
+
+  function testPreWriteJson() public {
+    vm.writeFile("outputJson/ids.json", openJson);
+  }
+
+  function testWriteJson01() public {
+    preWriteImages();
+
+    writeJson(0, MINT_SIZE/20);
+  }
+
+  function testWriteJson02() public {
+    preWriteImages();
+
+    writeJson(MINT_SIZE/20, 2*MINT_SIZE/20);
+  }
+
+  function testWriteJson03() public {
+    preWriteImages();
+
+    writeJson(2*MINT_SIZE/20, 3*MINT_SIZE/20);
+  }
+
+  function testWriteJson04() public {
+    preWriteImages();
+
+    writeJson(3*MINT_SIZE/20, 4*MINT_SIZE/20);
+  }
+
+  function testWriteJson05() public {
+    preWriteImages();
+
+    writeJson(4*MINT_SIZE/20, 5*MINT_SIZE/20);
+  }
+
+  function testWriteJson06() public {
+    preWriteImages();
+
+    writeJson(5*MINT_SIZE/20, 6*MINT_SIZE/20);
+  }
+
+  function testWriteJson07() public {
+    preWriteImages();
+
+    writeJson(6*MINT_SIZE/20, 7*MINT_SIZE/20);
+  }
+
+  function testWriteJson08() public {
+    preWriteImages();
+
+    writeJson(7*MINT_SIZE/20, 8*MINT_SIZE/20);
+  }
+
+  function testWriteJson09() public {
+    preWriteImages();
+
+    writeJson(8*MINT_SIZE/20, 9*MINT_SIZE/20);
+  }
+
+  function testWriteJson10() public {
+    preWriteImages();
+
+    writeJson(9*MINT_SIZE/20, 10*MINT_SIZE/20);
+  }
+
+  function testWriteJson11() public {
+    preWriteImages();
+
+    writeJson(10*MINT_SIZE/20, 11*MINT_SIZE/20);
+  }
+
+  function testWriteJson12() public {
+    preWriteImages();
+
+    writeJson(11*MINT_SIZE/20, 12*MINT_SIZE/20);
+  }
+
+  function testWriteJson13() public {
+    preWriteImages();
+
+    writeJson(12*MINT_SIZE/20, 13*MINT_SIZE/20);
+  }
+
+  function testWriteJson14() public {
+    preWriteImages();
+
+    writeJson(13*MINT_SIZE/20, 14*MINT_SIZE/20);
+  }
+
+  function testWriteJson15() public {
+    preWriteImages();
+
+    writeJson(14*MINT_SIZE/20, 15*MINT_SIZE/20);
+  }
+
+  function testWriteJson16() public {
+    preWriteImages();
+
+    writeJson(15*MINT_SIZE/20, 16*MINT_SIZE/20);
+  }
+
+  function testWriteJson17() public {
+    preWriteImages();
+
+    writeJson(16*MINT_SIZE/20, 17*MINT_SIZE/20);
+  }
+
+  function testWriteJson18() public {
+    preWriteImages();
+
+    writeJson(17*MINT_SIZE/20, 18*MINT_SIZE/20);
+  }
+
+  function testWriteJson19() public {
+    preWriteImages();
+
+    writeJson(18*MINT_SIZE/20, 19*MINT_SIZE/20);
+  }
+
+  function testWriteJson20() public {
+    preWriteImages();
+
+    writeJson(19*MINT_SIZE/20, MINT_SIZE);
   }
 
   // Simple tests to simulate the auction process

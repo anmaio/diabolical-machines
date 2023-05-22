@@ -100,7 +100,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   uint private constant BID_INCREMENT = 0.01 ether;
 
-  uint private constant AUCTION_LENGTH = 5 days;
+  uint private constant AUCTION_LENGTH = 1 weeks;
 
   // Time after auction ends that users can claim their nfts and refunds
   // Also the time cypher holders have to claim their NFT
