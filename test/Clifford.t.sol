@@ -109,12 +109,19 @@ import "../src/Assets/Character/CharacterImp3.sol";
 import "../src/Assets/Character/CharacterImp4.sol";
 import "../src/Assets/Character/CharacterImp5.sol";
 
+import "../src/libraryDeployments/Deployment1.sol";
+import "../src/libraryDeployments/Deployment2.sol";
+import "../src/libraryDeployments/Deployment3.sol";
+import "../src/libraryDeployments/Deployment4.sol";
+import "../src/libraryDeployments/Deployment5.sol";
+import "../src/libraryDeployments/Deployment6.sol";
+
 import "../src/TraitBase.sol";
 import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 6000;
+  uint internal constant MINT_SIZE = 100;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public openJson = "[\n";
 
@@ -171,6 +178,14 @@ contract CliffordTest is Test {
   TraitBase private characterTB;
 
   AssetRetriever private assetRetriever;
+
+  // Library deployments
+  Deployment1 private deployment1;
+  Deployment2 private deployment2;
+  Deployment3 private deployment3;
+  Deployment4 private deployment4;
+  Deployment5 private deployment5;
+  Deployment6 private deployment6;
 
   // Machines
   Altar private altar;
@@ -439,11 +454,9 @@ contract CliffordTest is Test {
 
   // deploy logic
   function deployLogic() internal {
-    globalSVG = new GlobalSVG();
-    // machine = new Machine([address(altar), address(drills), address(noses), address(apparatus), address(cells), address(tubes), address(beast), address(conveyorBelt)], assetRetriever);
+    globalSVG = new GlobalSVG([address(deployment1), address(deployment2), address(deployment3), address(deployment4), address(deployment5), address(deployment6)]);
     machine = new Machine([address(altar), address(apparatus), address(cells), address(tubes), address(beast), address(conveyorBelt)], assetRetriever);
     metadata = new Metadata(machine, globalSVG);
-    clifford = new Clifford(metadata);
   }
 
   function setUp() public {
@@ -463,6 +476,12 @@ contract CliffordTest is Test {
     deployConveyor();
     deployMisc();
     deployCharacter();
+    deployment1 = new Deployment1();
+    deployment2 = new Deployment2();
+    deployment3 = new Deployment3();
+    deployment4 = new Deployment4();
+    deployment5 = new Deployment5();
+    deployment6 = new Deployment6();
 
     // MUST be done in this specific order
     // substances, props, activation, feedback, eyes, assets, altar, apparatus, cells, tubes, beast, conveyor, misc, character
@@ -506,6 +525,10 @@ contract CliffordTest is Test {
     deployAssetRetriever(traitBases);
     deployMachines();
     deployLogic();
+
+    // Must be last to deploy
+
+    clifford = new Clifford(metadata);
 
     // Testing only
     setupMint();

@@ -21,10 +21,10 @@ interface ICypher {
 
 contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   
-  address private constant vrfCoordinator = 0x271682DEB8C4E0901D1a1550aD2e64D568E69909; // Mainnet coordinator
+  address private constant vrfCoordinator = 0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D; // Todo: Mainnet coordinator
 
-  VRFCoordinatorV2Interface constant COORDINATOR = VRFCoordinatorV2Interface(0x271682DEB8C4E0901D1a1550aD2e64D568E69909);
-  LinkTokenInterface constant LINKTOKEN = LinkTokenInterface(0x514910771AF9Ca656af840dff83E8264EcF986CA);
+  VRFCoordinatorV2Interface constant COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
+  LinkTokenInterface constant LINKTOKEN = LinkTokenInterface(0x326C977E6efc84E512bB9C30f76E30c160eD06FB); // Todo: Mainnet link token
 
   // CUSTOM ERRORS
 
@@ -83,18 +83,17 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   uint256 public constant MAX_SUPPLY = 6_000;
 
   // The gas lane to use, which specifies the maximum gas price to bump to.
-  bytes32 private constant keyHash = 0xff8dedfbfa60af186cf3c830acbc32c05aae823045ae5ea7da1e45fbfaba4f92; // Mainnet 500 GWEI
+  bytes32 private constant keyHash = 0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15; // Todo: Set Mainnet
 
   uint32 private constant callbackGasLimit = 100_000;
 
-  // The default is 3, but you can set this higher.
   uint16 private constant requestConfirmations = 3;
 
   // Number of random values to request
   uint32 private constant numWords = 1;
 
   // Subscription Id set during deployment
-  uint64 public constant s_subscriptionId = 0; // Need to create subscription before deployment
+  uint64 public constant s_subscriptionId = 2255; // Todo: Set Mainnet subscription
 
   // Auction Settings
 
@@ -119,9 +118,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   // Cypher claims equivalent to mapping(uint => bool) private cypherClaims;
   LibBitmap.Bitmap private cypherClaims;
-
-  // totalSupply subtract Cypher claims
-  uint private saleCount;
 
   // Auction Info
   uint private startedAt;
@@ -328,8 +324,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   function getSeed(uint256 tokenId) public view returns (uint256) {
     if (tokenId >= totalSupply()) revert InvalidTokenId(tokenId);
 
-    if (currentGen == 0) revert SeedNotSet(currentGen);
-
     for (uint i = 0; i < currentGen;) {
       if (tokenId < genIdToTokenId[i]) {
         uint seed = genSeed[i];
@@ -341,7 +335,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
       }
     }
 
-    revert SeedNotSet(currentGen);
+    return 0;
   }
 
   /**
@@ -351,7 +345,11 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
    */
 
   function tokenURI(uint256 tokenId) public view override returns (string memory) {
-    return _metadata.buildMetadata(tokenId, getSeed(tokenId));
+    uint seed = getSeed(tokenId);
+    if (seed == 0) {
+      return "PLACEHOLDER";
+    }
+    return _metadata.buildMetadata(tokenId, seed);
   }
 
   /**
