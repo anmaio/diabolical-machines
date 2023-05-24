@@ -12,10 +12,10 @@ forge test --via-ir --gas-report  -vvvv --optimize --optimizer-runs 1000
 <!-- Deploy to localhost -->
 forge script script/Clifford.s.sol:CliffordScript --rpc-url http://localhost:8545 --broadcast -vvv
 forge script script/Clifford.s.sol:CliffordScript --private-key $PRIVATE_KEY --rpc-url http://localhost:8545 --broadcast  -vvvv
-forge script script/ParseFromFile.s.sol:ParseFromFileScript --private-key $PRIVATE_KEY --rpc-url http://localhost:8545 --broadcast  -vvvv
-forge script script/BasicNFT.s.sol:BasicNFTScript --private-key $PRIVATE_KEY --rpc-url http://localhost:8545 --broadcast  -vvvv
+forge script script/FakeClifford.s.sol:FakeCliffordScript --rpc-url http://localhost:8545 --broadcast -vvv
 <!-- Deploy to Goerli -->
-forge script script/Clifford.s.sol:CliffordScript --rpc-url $MAINNET_RPC_URL --broadcast --verify -vvvv
+forge script script/Clifford.s.sol:CliffordScript --rpc-url $GOERLI_RPC_URL --broadcast --verify -vvvv
+forge script script/FakeClifford.s.sol:FakeCliffordScript --rpc-url $GOERLI_RPC_URL --broadcast --verify -vvv
 <!-- Deploy to Sepolia -->
 forge script script/Clifford.s.sol:CliffordScript --private-key $PRIVATE_KEY --rpc-url $MAINNET_RPC_URL --broadcast --verify -vvvv
 <!-- Slither overview -->

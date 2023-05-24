@@ -23,7 +23,7 @@ contract Altar {
 
   string internal constant FLOOB_NUMBERS = "0101001005010130100401008010090102001017010190101601015";
   string internal constant ORB_NUMBERS = "0000004035040360403704038";
-  string internal constant TOP_ROW_NUMBERS = "000000603106012";
+  string internal constant TOP_ROW_NUMBERS = "0000006012";
 
   // Floor
   string internal constant SMALL_OFFSETS = "04680270";
@@ -159,7 +159,7 @@ contract Altar {
     }
 
     else {
-      return GridHelper.getSingleObject(TOP_ROW_NUMBERS, topRowDigits, 3, 5);
+      return GridHelper.getSingleObject(TOP_ROW_NUMBERS, topRowDigits, 2, 5);
     }
   }
 
