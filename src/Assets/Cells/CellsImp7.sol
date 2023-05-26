@@ -30,22 +30,4 @@ contract CellsImp7 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 9033) {
-      return 3;
-    } else if (assetID == 9034) {
-      return 3;
-    } else if (assetID == 9035) {
-      return 3;
-    } else if (assetID == 9036) {
-      return 3;
-    } else if (assetID == 9037) {
-      return 3;
-    } else if (assetID == 9038) {
-      return 3;
-    } else {
-      return 0;
-    }
-  }
 }

@@ -84,66 +84,6 @@ contract DrillsImp4 {
     }
   }
 
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 15015) {
-      return 1;
-    } else if (assetID == 15016) {
-      return 3;
-    } else if (assetID == 15017) {
-      return 3;
-    } else if (assetID == 15018) {
-      return 3;
-    } else if (assetID == 15019) {
-      return 3;
-    } else if (assetID == 15020) {
-      return 3;
-    } else if (assetID == 15021) {
-      return 3;
-    } else if (assetID == 15022) {
-      return 3;
-    } else if (assetID == 15023) {
-      return 3;
-    } else if (assetID == 15024) {
-      return 3;
-    } else if (assetID == 15025) {
-      return 3;
-    } else if (assetID == 15026) {
-      return 3;
-    } else if (assetID == 15027) {
-      return 3;
-    } else if (assetID == 15028) {
-      return 3;
-    } else if (assetID == 15029) {
-      return 3;
-    } else if (assetID == 15030) {
-      return 3;
-    } else if (assetID == 15031) {
-      return 3;
-    } else if (assetID == 15032) {
-      return 3;
-    } else if (assetID == 15033) {
-      return 3;
-    } else if (assetID == 15034) {
-      return 3;
-    } else if (assetID == 15035) {
-      return 3;
-    } else if (assetID == 15036) {
-      return 3;
-    } else if (assetID == 15037) {
-      return 3;
-    } else if (assetID == 15038) {
-      return 3;
-    } else if (assetID == 15039) {
-      return 3;
-    } else if (assetID == 15040) {
-      return 3;
-    } else if (assetID == 15041) {
-      return 3;
-    } else {
-      return 0;
-    }
-  }
-
   // add this to be excluded from coverage report
   // Not used in release 1 so should be excluded from coverage report
   function test() public {}

@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "forge-std/Test.sol";
+import "solady/utils/Base64.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
 import "../src/Clifford.sol";
@@ -121,7 +122,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 100;
+  uint internal constant MINT_SIZE = 20;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public openJson = "[\n";
 
@@ -738,8 +739,6 @@ contract CliffordTest is Test {
 
       uint state = metadata.getState(baseline);
 
-      string memory productivityValue = Strings.toString(machine.getProductivityValue(metadata.getMachine(clifford.getSeed(i)), clifford.getSeed(i), baseline));
-
       string memory globalAsset = machine.getSmallAssetName(clifford.getSeed(i), baseline);
 
       string memory expansionProp = machine.getLargeAssetName(clifford.getSeed(i), baseline);
@@ -759,12 +758,7 @@ contract CliffordTest is Test {
       item = string.concat(
         item, 
         ",\n    \"Machine\": \"",
-        metadata.getMachine(clifford.getSeed(i)), // machine name
-        "\""
-        ",\n    \"Productivity\": \"",
-        metadata.getProductivityTier(clifford.getSeed(i), baseline), // productivity
-        "\",\n    \"ProductivityValue\": \"",
-        productivityValue
+        metadata.getMachine(clifford.getSeed(i)) // machine name
       );
 
       item = string.concat(
@@ -799,6 +793,14 @@ contract CliffordTest is Test {
     }
 
     vm.writeLine("outputJson/ids.json", output);
+  }
+
+  function testTokenURI() public {
+    preWriteImages();
+    // get the result of the tokenURI function call for token 0
+    string memory tokenURI = clifford.tokenURI(0);
+    // save the result to a file
+    vm.writeFile("outputJson/tokenURI.json", tokenURI);
   }
 
   function testPreWriteJson() public {

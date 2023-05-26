@@ -31,26 +31,4 @@ contract ActivationImp1 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 3000) {
-      return 2;
-    } else if (assetID == 3001) {
-      return 1;
-    } else if (assetID == 3002) {
-      return 3;
-    } else if (assetID == 3003) {
-      return 4;
-    } else if (assetID == 3016) {
-      return 4;
-    } else if (assetID == 3017) {
-      return 3;
-    } else if (assetID == 3018) {
-      return 5;
-    } else if (assetID == 3019) {
-      return 5;
-    } else {
-      return 0;
-    }
-  }
 }

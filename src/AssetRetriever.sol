@@ -18,12 +18,4 @@ contract AssetRetriever {
 
     return traitBases[assetID / 1000 - 1].getAssetFromTrait(assetID);
   }
-
-  function getProductivity(uint assetID) public view returns (uint) {
-    if (assetID == 0) {
-      return 0;
-    }
-
-    return traitBases[assetID / 1000 - 1].getProductivityFromTrait(assetID);
-  }
 }

@@ -19,16 +19,4 @@ contract AssetsImp4 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 6013) {
-      return 5;
-    } else if (assetID == 6014) {
-      return 5;
-    } else if (assetID == 6015) {
-      return 5;
-    } else {
-      return 0;
-    }
-  }
 }

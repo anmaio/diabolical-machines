@@ -27,20 +27,4 @@ contract TubesImp3 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 10021) {
-      return 2;
-    } else if (assetID == 10022) {
-      return 4;
-    } else if (assetID == 10023) {
-      return 2;
-    } else if (assetID == 10027) {
-      return 4;
-    } else if (assetID == 10052) {
-      return 5;
-    } else {
-      return 0;
-    }
-  }
 }

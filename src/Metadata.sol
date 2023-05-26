@@ -47,8 +47,6 @@ contract Metadata {
         getMachine(rand),
         '"}, {"trait_type": "State", "value":"',
         allStates[state],
-        '"}, {"trait_type": "Productivity", "value":"',
-        getProductivityTier(rand, baseline),
         '"}, {"trait_type": "Small Asset:", "value":"',
         _machine.getSmallAssetName(rand, baseline)
     );
@@ -76,8 +74,16 @@ contract Metadata {
     );
 
     string memory jsonFinal = Base64.encode(
-      bytes(string.concat(jsonInitial, composeSVG(rand, baseline), '"}'))
+      bytes(string.concat(
+        jsonInitial,
+        composeSVG(rand, baseline),
+        '", ',
+        '"animation_url": "data:image/svg+xml;base64,',
+        composeSVG(rand, baseline),
+        '"}'
+      ))
     );
+
     string memory output = string.concat("data:application/json;base64,", jsonFinal);
     return output;
   }
@@ -97,8 +103,6 @@ contract Metadata {
         allStates[state],
         '","Machine":"',
         getMachine(rand),
-        '","Productivity":"',
-        getProductivityTier(rand, baseline),
         '","SmallAsset":"',
         _machine.getSmallAssetName(rand, baseline)
     );
@@ -125,18 +129,6 @@ contract Metadata {
     );
 
     return json;
-  }
-
-  /**
-    * @dev Get the productivity based on the baseline rarity and random number
-    * @param rand The digits to use
-    * @param baseline The baseline rarity
-    * @return The productivity as a string
-   */
-
-  function getProductivityTier(uint rand, int baseline) public view returns (string memory) {
-    string memory machine = getMachine(rand);
-    return _machine. getProductivityTier(machine, rand, baseline);
   }
 
   /**

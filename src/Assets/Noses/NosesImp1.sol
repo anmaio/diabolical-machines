@@ -27,22 +27,6 @@ contract NosesImp1 {
     }
   }
 
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 18000) {
-      return 3;
-    } else if (assetID == 18001) {
-      return 1;
-    } else if (assetID == 18002) {
-      return 3;
-    } else if (assetID == 18003) {
-      return 5;
-    } else if (assetID == 18004) {
-      return 3;
-    } else {
-      return 0;
-    }
-  }
-
   // add this to be excluded from coverage report
   // Not used in release 1 so should be excluded from coverage report
   function test() public {}

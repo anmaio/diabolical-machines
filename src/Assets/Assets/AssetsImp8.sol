@@ -12,12 +12,4 @@ contract AssetsImp8 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 6024) {
-      return 5;
-    } else {
-      return 0;
-    }
-  }
 }

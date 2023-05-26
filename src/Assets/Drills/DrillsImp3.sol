@@ -23,20 +23,6 @@ contract DrillsImp3 {
     }
   }
 
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 15015) {
-      return 1;
-    } else if (assetID == 15016) {
-      return 3;
-    } else if (assetID == 15017) {
-      return 3;
-    } else if (assetID == 15018) {
-      return 3;
-    } else {
-      return 0;
-    }
-  }
-
   // add this to be excluded from coverage report
   // Not used in release 1 so should be excluded from coverage report
   function test() public {}

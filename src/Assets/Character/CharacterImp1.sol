@@ -12,12 +12,4 @@ contract CharacterImp1 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 14000) {
-      return 2;
-    } else {
-      return 0;
-    }
-  }
 }

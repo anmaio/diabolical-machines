@@ -16,14 +16,4 @@ contract BeastImp4 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 11009) {
-      return 4;
-    } else if (assetID == 11010) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
 }
