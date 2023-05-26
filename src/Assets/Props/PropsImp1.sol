@@ -39,30 +39,4 @@ contract PropsImp1 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 2000) {
-      return 1;
-    } else if (assetID == 2001) {
-      return 1;
-    } else if (assetID == 2002) {
-      return 3;
-    } else if (assetID == 2003) {
-      return 5;
-    } else if (assetID == 2004) {
-      return 5;
-    } else if (assetID == 2005) {
-      return 2;
-    } else if (assetID == 2006) {
-      return 3;
-    } else if (assetID == 2007) {
-      return 4;
-    } else if (assetID == 2008) {
-      return 3;
-    } else if (assetID == 2009) {
-      return 4;
-    } else {
-      return 0;
-    }
-  }
 }

@@ -21,18 +21,4 @@ contract EyesImp1 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 5000) {
-      return 1;
-    } else if (assetID == 5002) {
-      return 1;
-    } else if (assetID == 5004) {
-      return 3;
-    } else if (assetID == 5007) {
-      return 5;
-    } else {
-      return 0;
-    }
-  }
 }

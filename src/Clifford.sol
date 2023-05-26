@@ -131,6 +131,11 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
     _metadata = metadata;
   }
 
+  // TODO: Remove this function
+  function testMint(uint quantity) external {
+    _mint(msg.sender, quantity);
+  }
+
   /**
     * @dev Reveals all minted tokens that have not been revealed yet.
    */
@@ -308,7 +313,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
    */
 
   function withdraw() external onlyOwner {
-    if (MAX_SUPPLY != totalSupply()) revert NftsNotAllMinted();
+    if (totalSupply() != MAX_SUPPLY) revert NftsNotAllMinted();
     (bool success, ) = msg.sender.call{value: address(this).balance}("");
     if (!success) revert TransferFailed();
   }
@@ -327,7 +332,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
     for (uint i = 0; i < currentGen;) {
       if (tokenId < genIdToTokenId[i]) {
         uint seed = genSeed[i];
-        // if (seed == 0) revert SeedNotSet(i);
         return uint256(keccak256(abi.encodePacked(seed, tokenId)));
       }
       unchecked {

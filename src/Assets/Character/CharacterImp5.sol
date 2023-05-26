@@ -16,14 +16,4 @@ contract CharacterImp5 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 14005) {
-      return 2;
-    } else if (assetID == 14006) {
-      return 3;
-    } else {
-      return 0;
-    }
-  }
 }

@@ -38,28 +38,4 @@ contract AltarImp1 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 7000) {
-      return 2;
-    } else if (assetID == 7001) {
-      return 2;
-    } else if (assetID == 7002) {
-      return 2;
-    } else if (assetID == 7003) {
-      return 2;
-    } else if (assetID == 7004) {
-      return 3;
-    } else if (assetID == 7005) {
-      return 3;
-    } else if (assetID == 7006) {
-      return 3;
-    } else if (assetID == 7007) {
-      return 5;
-    } else if (assetID == 7008) {
-      return 3;
-    } else {
-      return 0;
-    }
-  }
 }

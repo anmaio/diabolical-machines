@@ -56,38 +56,4 @@ contract ApparatusImp5 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 8022) {
-      return 4;
-    } else if (assetID == 8023) {
-      return 4;
-    } else if (assetID == 8024) {
-      return 4;
-    } else if (assetID == 8026) {
-      return 4;
-    } else if (assetID == 8027) {
-      return 1;
-    } else if (assetID == 8028) {
-      return 3;
-    } else if (assetID == 8029) {
-      return 3;
-    } else if (assetID == 8030) {
-      return 3;
-    } else if (assetID == 8031) {
-      return 3;
-    } else if (assetID == 8032) {
-      return 2;
-    } else if (assetID == 8033) {
-      return 2;
-    } else if (assetID == 8034) {
-      return 2;
-    } else if (assetID == 8035) {
-      return 4;
-    } else if (assetID == 8036) {
-      return 4;
-    } else {
-      return 0;
-    }
-  }
 }

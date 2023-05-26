@@ -18,16 +18,4 @@ contract ApparatusImp4 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 8019) {
-      return 4;
-    } else if (assetID == 8020) {
-      return 4;
-    } else if (assetID == 8021) {
-      return 4;
-    } else {
-      return 0;
-    }
-  }
 }

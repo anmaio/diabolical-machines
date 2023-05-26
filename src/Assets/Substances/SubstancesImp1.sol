@@ -55,38 +55,4 @@ contract SubstancesImp1 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 1000) {
-      return 3;
-    } else if (assetID == 1001) {
-      return 3;
-    } else if (assetID == 1002) {
-      return 3;
-    } else if (assetID == 1004) {
-      return 1;
-    } else if (assetID == 1005) {
-      return 1;
-    } else if (assetID == 1008) {
-      return 3;
-    } else if (assetID == 1009) {
-      return 4;
-    } else if (assetID == 1010) {
-      return 4;
-    } else if (assetID == 1013) {
-      return 5;
-    } else if (assetID == 1015) {
-      return 5;
-    } else if (assetID == 1016) {
-      return 5;
-    } else if (assetID == 1017) {
-      return 5;
-    } else if (assetID == 1019) {
-      return 5;
-    } else if (assetID == 1020) {
-      return 5;
-    } else {
-      return 0;
-    }
-  }
 }

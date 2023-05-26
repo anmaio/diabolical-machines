@@ -40,30 +40,4 @@ contract ConveyorImp1 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 12000) {
-      return 2;
-    } else if (assetID == 12001) {
-      return 3;
-    } else if (assetID == 12002) {
-      return 5;
-    } else if (assetID == 12003) {
-      return 4;
-    } else if (assetID == 12004) {
-      return 1;
-    } else if (assetID == 12005) {
-      return 4;
-    } else if (assetID == 12006) {
-      return 2;
-    } else if (assetID == 12007) {
-      return 3;
-    } else if (assetID == 12008) {
-      return 5;
-    } else if (assetID == 12009) {
-      return 3;
-    } else {
-      return 0;
-    }
-  }
 }

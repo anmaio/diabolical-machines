@@ -45,32 +45,4 @@ contract FeedbackImp2 {
       return "";
     }
   }
-
-  function getProductivityFromID(uint assetID) external pure returns (uint) {
-    if (assetID == 4018) {
-      return 3;
-    } else if (assetID == 4025) {
-      return 2;
-    } else if (assetID == 4026) {
-      return 2;
-    } else if (assetID == 4027) {
-      return 2;
-    } else if (assetID == 4028) {
-      return 3;
-    } else if (assetID == 4029) {
-      return 2;
-    } else if (assetID == 4030) {
-      return 1;
-    } else if (assetID == 4035) {
-      return 4;
-    } else if (assetID == 4036) {
-      return 4;
-    } else if (assetID == 4037) {
-      return 4;
-    } else if (assetID == 4038) {
-      return 5;
-    } else {
-      return 0;
-    }
-  }
 }
