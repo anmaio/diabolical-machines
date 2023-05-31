@@ -66,7 +66,7 @@ contract Metadata {
         '"}, {"trait_type": "Colour:", "value":"',
         getColourIndexTier(rand, baseline),
         '"}, {"trait_type": "Pattern:", "value":"',
-        getPatternName(rand, baseline),
+        Patterns.getPatternName(rand, baseline),
         '"}, {"trait_type": "Character:", "value":"',
         _machine.getCharacterName(rand, baseline),
         '"}],',
@@ -122,7 +122,7 @@ contract Metadata {
         '","Colour":"',
         getColourIndexTier(rand, baseline),
         '","Pattern":"',
-        getPatternName(rand, baseline),
+        Patterns.getPatternName(rand, baseline),
         '","Character":"',
         _machine.getCharacterName(rand, baseline),
         '"}\' >'
@@ -152,38 +152,11 @@ contract Metadata {
   function getColourIndexTier(uint rand, int baseline) public pure returns(string memory) {
     uint value = Environment.getColourIndex(getBaseColourValue(rand, baseline));
 
-    uint singleStateValue = value % 8;
-    uint doubleStateValue = value % 4;
-
-    string memory colourTier = "";
-
-    if (value < 4) {
-      colourTier = string.concat("Very Degraded ", Strings.toString(doubleStateValue));
-    } else if (value < 8) {
-      colourTier = string.concat("Degraded ", Strings.toString(doubleStateValue));
-    } else if (value < 16) {
-      colourTier = string.concat("Basic ", Strings.toString(singleStateValue));
-    } else if (value < 20) {
-      colourTier = string.concat("Embellished ", Strings.toString(doubleStateValue));
-    } else if (value < 24) {
-      colourTier = string.concat("Very Embellished ", Strings.toString(doubleStateValue));
+    if (value < 12) {
+      return string.concat("DEG", Strings.toString(11-value));
     } else {
-      colourTier = "Unknown";
+      return string.concat("EMB", Strings.toString(value-12));
     }
-    return colourTier;
-  }
-
-  function getPatternName(uint rand, int baseline) public pure returns(string memory) {
-    bool isTexture = Patterns.getIsTexture(rand, baseline);
-
-    string memory pattern = "Pattern ";
-    if (isTexture) {
-      pattern = "Texture ";
-    }
-
-    string memory patternName = Patterns.getPatternName(rand, baseline);
-
-    return string.concat(pattern, patternName);
   }
 
   /**

@@ -16,11 +16,11 @@ library Patterns {
   // 15 to 0.3 inclusive in 0.3 decriments
   string internal constant PATTERNS_SCALE_NUMBERS = "15.014.714.414.113.813.513.212.912.612.312.011.711.411.110.810.510.209.909.609.309.008.708.408.107.807.507.206.906.606.306.005.705.405.104.804.504.203.903.603.303.002.702.402.101.801.501.200.900.600.3";
 
-  string internal constant ANIMATED_TEXTURE_NAMES = "sqrestriancircsoctagstarsovals";
+  string internal constant ANIMATED_TEXTURE_NAMES = "TEXT12TEXT14TEXT09TEXT10TEXT13TEXT11";
 
-  string internal constant TEXTURE_NAMES = "g-1a-2f-2d-1f-3b-1b-2e-1";
+  string internal constant TEXTURE_NAMES = "TEXT04TEXT01TEXT07TEXT05TEXT08TEXT02TEXT03TEXT06";
 
-  string internal constant PATTERNS_NAMES = "cdrqbaiosekgpfnjlm";
+  string internal constant PATTERNS_NAMES = "GEOM03GEOM04PIXE02AZTC10GEOM02GEOM01LOGI01GEOM05PIXE02AZTC01AZTC05AZTC03AZTC09AZTC02AZTC08AZTC04AZTC06AZTC07";
 
   /**
     * @dev Get if the pattern is a texture or not based on the baseline rarity and random number
@@ -60,15 +60,15 @@ library Patterns {
     string memory names;
 
     if (isAnimatedTexture) {
-      nameLength = 5;
+      nameLength = 6;
       nameCount = 6;
       names = ANIMATED_TEXTURE_NAMES;
     } else if (isTexture && !isAnimatedTexture) {
-      nameLength = 3;
+      nameLength = 6;
       nameCount = 8;
       names = TEXTURE_NAMES;
     } else {
-      nameLength = 1;
+      nameLength = 6;
       nameCount = 18;
       names = PATTERNS_NAMES;
     }
