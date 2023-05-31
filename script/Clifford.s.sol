@@ -114,6 +114,13 @@ import "../src/libraryDeployments/Deployment3.sol";
 import "../src/libraryDeployments/Deployment4.sol";
 import "../src/libraryDeployments/Deployment5.sol";
 import "../src/libraryDeployments/Deployment6.sol";
+import "../src/libraryDeployments/Deployment7.sol";
+import "../src/libraryDeployments/Deployment8.sol";
+import "../src/libraryDeployments/Deployment9.sol";
+import "../src/libraryDeployments/Deployment10.sol";
+import "../src/libraryDeployments/Deployment11.sol";
+import "../src/libraryDeployments/Deployment12.sol";
+import "../src/libraryDeployments/Deployment13.sol";
 
 import "../src/TraitBase.sol";
 import "../src/AssetRetriever.sol";
@@ -146,6 +153,13 @@ contract CliffordScript is Script {
   Deployment4 private deployment4;
   Deployment5 private deployment5;
   Deployment6 private deployment6;
+  Deployment7 private deployment7;
+  Deployment8 private deployment8;
+  Deployment9 private deployment9;
+  Deployment10 private deployment10;
+  Deployment11 private deployment11;
+  Deployment12 private deployment12;
+  Deployment13 private deployment13;
 
   // Machines
   Altar private altar;
@@ -401,7 +415,7 @@ contract CliffordScript is Script {
 
   // deploy logic
   function deployLogic() internal {
-    globalSVG = new GlobalSVG([address(deployment1), address(deployment2), address(deployment3), address(deployment4), address(deployment5), address(deployment6)]);
+    globalSVG = new GlobalSVG([address(deployment1), address(deployment2), address(deployment3), address(deployment4), address(deployment5), address(deployment6), address(deployment7), address(deployment8), address(deployment9), address(deployment10), address(deployment11), address(deployment12), address(deployment13)]);
     machine = new Machine([address(altar), address(apparatus), address(cells), address(tubes), address(beast), address(conveyorBelt)], assetRetriever);
     metadata = new Metadata(machine, globalSVG);
   }
@@ -412,45 +426,47 @@ contract CliffordScript is Script {
     vm.startBroadcast(deployerPrivateKey);
 
     // Can be Done individually but MUST keep track of addresses
-    deploySubstances();
-    deployProps();
-    deployActivation();
-    deployFeedback();
-    deployEyes();
-    deployAssets();
-    deployAltar();
-    deployApparatus();
-    deployCells();
-    deployTubes();
-    deployBeast();
-    deployConveyor();
-    deployMisc();
-    deployCharacter();
-    deployment1 = new Deployment1();
-    deployment2 = new Deployment2();
-    deployment3 = new Deployment3();
-    deployment4 = new Deployment4();
-    deployment5 = new Deployment5();
-    deployment6 = new Deployment6();
+    // deploySubstances();
+    // deployProps();
+    // deployActivation();
+    // deployFeedback();
+    // deployEyes();
+    // deployAssets();
+    // deployAltar();
+    // deployApparatus();
+    // deployCells();
+    // deployTubes();
+    // deployBeast();
+    // deployConveyor();
+    // deployMisc();
+    // deployCharacter();
+
+    // // Global SVG styles, defs, pattterns, sound
+    // deployment1 = new Deployment1();
+    // deployment2 = new Deployment2();
+    // deployment3 = new Deployment3();
+    // deployment4 = new Deployment4();
+    // deployment5 = new Deployment5();
+    // deployment6 = new Deployment6();
 
     // MUST be done in this specific order
     // substances, props, activation, feedback, eyes, assets, altar, apparatus, cells, tubes, beast, conveyor, misc, character
 
-    TraitBase[] memory traitBases = new TraitBase[](14);
-    traitBases[0] = substancesTB;
-    traitBases[1] = propsTB;
-    traitBases[2] = activationTB;
-    traitBases[3] = feedbackTB;
-    traitBases[4] = eyesTB;
-    traitBases[5] = assetsTB;
-    traitBases[6] = altarTB;
-    traitBases[7] = apparatusTB;
-    traitBases[8] = cellsTB;
-    traitBases[9] = tubesTB;
-    traitBases[10] = beastTB;
-    traitBases[11] = conveyorTB;
-    traitBases[12] = miscTB;
-    traitBases[13] = characterTB;
+    // TraitBase[] memory traitBases = new TraitBase[](14);
+    // traitBases[0] = substancesTB;
+    // traitBases[1] = propsTB;
+    // traitBases[2] = activationTB;
+    // traitBases[3] = feedbackTB;
+    // traitBases[4] = eyesTB;
+    // traitBases[5] = assetsTB;
+    // traitBases[6] = altarTB;
+    // traitBases[7] = apparatusTB;
+    // traitBases[8] = cellsTB;
+    // traitBases[9] = tubesTB;
+    // traitBases[10] = beastTB;
+    // traitBases[11] = conveyorTB;
+    // traitBases[12] = miscTB;
+    // traitBases[13] = characterTB;
 
     // OR Manually add the addresses
 
@@ -472,13 +488,13 @@ contract CliffordScript is Script {
 
     // Need to be deployed together
 
-    deployAssetRetriever(traitBases);
-    deployMachines();
-    deployLogic();
+    // deployAssetRetriever(traitBases);
+    // deployMachines();
+    // deployLogic();
 
     // Must be last to deploy
 
-    clifford = new Clifford(metadata);
+    // clifford = new Clifford(metadata);
 
     vm.stopBroadcast();
   }

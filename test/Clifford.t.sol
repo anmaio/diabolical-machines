@@ -116,6 +116,13 @@ import "../src/libraryDeployments/Deployment3.sol";
 import "../src/libraryDeployments/Deployment4.sol";
 import "../src/libraryDeployments/Deployment5.sol";
 import "../src/libraryDeployments/Deployment6.sol";
+import "../src/libraryDeployments/Deployment7.sol";
+import "../src/libraryDeployments/Deployment8.sol";
+import "../src/libraryDeployments/Deployment9.sol";
+import "../src/libraryDeployments/Deployment10.sol";
+import "../src/libraryDeployments/Deployment11.sol";
+import "../src/libraryDeployments/Deployment12.sol";
+import "../src/libraryDeployments/Deployment13.sol";
 
 import "../src/TraitBase.sol";
 import "../src/AssetRetriever.sol";
@@ -187,6 +194,13 @@ contract CliffordTest is Test {
   Deployment4 private deployment4;
   Deployment5 private deployment5;
   Deployment6 private deployment6;
+  Deployment7 private deployment7;
+  Deployment8 private deployment8;
+  Deployment9 private deployment9;
+  Deployment10 private deployment10;
+  Deployment11 private deployment11;
+  Deployment12 private deployment12;
+  Deployment13 private deployment13;
 
   // Machines
   Altar private altar;
@@ -455,7 +469,7 @@ contract CliffordTest is Test {
 
   // deploy logic
   function deployLogic() internal {
-    globalSVG = new GlobalSVG([address(deployment1), address(deployment2), address(deployment3), address(deployment4), address(deployment5), address(deployment6)]);
+    globalSVG = new GlobalSVG([address(deployment1), address(deployment2), address(deployment3), address(deployment4), address(deployment5), address(deployment6), address(deployment7), address(deployment8), address(deployment9), address(deployment10), address(deployment11), address(deployment12), address(deployment13)]);
     machine = new Machine([address(altar), address(apparatus), address(cells), address(tubes), address(beast), address(conveyorBelt)], assetRetriever);
     metadata = new Metadata(machine, globalSVG);
   }
@@ -483,6 +497,13 @@ contract CliffordTest is Test {
     deployment4 = new Deployment4();
     deployment5 = new Deployment5();
     deployment6 = new Deployment6();
+    deployment7 = new Deployment7();
+    deployment8 = new Deployment8();
+    deployment9 = new Deployment9();
+    deployment10 = new Deployment10();
+    deployment11 = new Deployment11();
+    deployment12 = new Deployment12();
+    deployment13 = new Deployment13();
 
     // MUST be done in this specific order
     // substances, props, activation, feedback, eyes, assets, altar, apparatus, cells, tubes, beast, conveyor, misc, character
