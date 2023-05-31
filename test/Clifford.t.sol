@@ -129,7 +129,7 @@ import "../src/AssetRetriever.sol";
 
 contract CliffordTest is Test {
 
-  uint internal constant MINT_SIZE = 20;
+  uint internal constant MINT_SIZE = 6000;
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public openJson = "[\n";
 
@@ -803,7 +803,7 @@ contract CliffordTest is Test {
       item = string.concat(
         item,
         "\",\n    \"Pattern\": \"",
-        metadata.getPatternName(clifford.getSeed(i), baseline),
+        Patterns.getPatternName(clifford.getSeed(i), baseline),
         "\",\n    \"Character\": \"",
         machine.getCharacterName(clifford.getSeed(i), baseline),
         "\"",
