@@ -171,7 +171,7 @@ library GlobalNumbers {
    */
 
   function getCharacterNumber(uint rand, int baseline) internal pure returns (uint) {
-    uint characterDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 31)] + baseline);
+    uint characterDigits = GridHelper.constrainToHex(Noise.getNoiseArrayTwo()[GridHelper.getRandByte(rand, 31)] + baseline);
 
     return GridHelper.getSingleObject(CHARACTER_NUMBERS, characterDigits, 7, 5);
   }

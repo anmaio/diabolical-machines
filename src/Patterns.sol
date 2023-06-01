@@ -30,7 +30,7 @@ library Patterns {
    */
 
   function getIsTexture(uint rand, int baseline) public pure returns (bool) {
-    uint textureDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 5)] + baseline);
+    uint textureDigits = GridHelper.constrainToHex(Noise.getNoiseArrayThree()[GridHelper.getRandByte(rand, 5)] + baseline);
 
     return textureDigits < 128;
   }
@@ -43,7 +43,7 @@ library Patterns {
    */
 
   function getPatternName(uint rand, int baseline) public pure returns (string memory) {
-    uint patternDigits = GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 5)] + baseline);
+    uint patternDigits = GridHelper.constrainToHex(Noise.getNoiseArrayThree()[GridHelper.getRandByte(rand, 5)] + baseline);
 
     bool isTexture = getIsTexture(rand, baseline);
 
