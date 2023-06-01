@@ -21,10 +21,10 @@ interface ICypher {
 
 contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   
-  address private constant vrfCoordinator = 0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D; // Todo: Mainnet coordinator
+  address private constant vrfCoordinator = 0x271682DEB8C4E0901D1a1550aD2e64D568E69909;
 
   VRFCoordinatorV2Interface constant COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
-  LinkTokenInterface constant LINKTOKEN = LinkTokenInterface(0x326C977E6efc84E512bB9C30f76E30c160eD06FB); // Todo: Mainnet link token
+  LinkTokenInterface constant LINKTOKEN = LinkTokenInterface(0x514910771AF9Ca656af840dff83E8264EcF986CA);
 
   // CUSTOM ERRORS
 
@@ -83,7 +83,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   uint256 public constant MAX_SUPPLY = 6_000;
 
   // The gas lane to use, which specifies the maximum gas price to bump to.
-  bytes32 private constant keyHash = 0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15; // Todo: Set Mainnet
+  bytes32 private constant keyHash = 0xff8dedfbfa60af186cf3c830acbc32c05aae823045ae5ea7da1e45fbfaba4f92;
 
   uint32 private constant callbackGasLimit = 100_000;
 
@@ -93,7 +93,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   uint32 private constant numWords = 1;
 
   // Subscription Id set during deployment
-  uint64 public constant s_subscriptionId = 2255; // Todo: Set Mainnet subscription
+  uint64 public constant s_subscriptionId = 747;
 
   // Auction Settings
 
@@ -129,11 +129,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   constructor(Metadata metadata) ERC721A("Clifford", "Cliff") VRFConsumerBaseV2(vrfCoordinator) {
     _metadata = metadata;
-  }
-
-  // TODO: Remove this function
-  function testMint(uint quantity) external {
-    _mint(msg.sender, quantity);
   }
 
   /**
