@@ -1,0 +1,36 @@
+{
+  "transactions": [
+    {
+      "hash": "0x56fc97c735621dbf9662000785e34f5bdf8137309fbd95b5ca246a8e21faa8e5",
+      "transactionType": "CALL",
+      "contractName": null,
+      "contractAddress": "0x8961423b54f06bf6D57F8dD3dD1184FA6F3aac3f",
+      "function": null,
+      "arguments": null,
+      "rpc": "http://20.108.234.164:8545",
+      "transaction": {
+        "type": "0x02",
+        "from": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "to": "0x8961423b54f06bf6d57f8dd3dd1184fa6f3aac3f",
+        "gas": "0xe88a",
+        "value": "0x2386f26fc10000",
+        "data": "0xecfc7ecc",
+        "nonce": "0xc5d",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [
+    "0x56fc97c735621dbf9662000785e34f5bdf8137309fbd95b5ca246a8e21faa8e5"
+  ],
+  "path": "/app/broadcast/StartAuction.s.sol/1/run-latest.json",
+  "returns": {},
+  "timestamp": 1684928855,
+  "chain": 1,
+  "multi": false,
+  "commit": "2db8515"
+}

@@ -403,20 +403,20 @@ contract CliffordScript is Script {
 
   // deploy machines
   function deployMachines() internal {
-    altar = new Altar(address(assetRetriever));
+    altar = new Altar(address(0xB678f5F084C5B2f062c43501b06Cf617bDBFa18d));
     // drills = new Drills(address(assetRetriever));
     // noses = new Noses(address(assetRetriever));
-    apparatus = new Apparatus(address(assetRetriever));
-    cells = new Cells(address(assetRetriever));
-    tubes = new Tubes(address(assetRetriever));
-    beast = new Beast(address(assetRetriever));
-    conveyorBelt = new ConveyorBelt(address(assetRetriever));
+    apparatus = new Apparatus(address(0xB678f5F084C5B2f062c43501b06Cf617bDBFa18d));
+    cells = new Cells(address(0xB678f5F084C5B2f062c43501b06Cf617bDBFa18d));
+    tubes = new Tubes(address(0xB678f5F084C5B2f062c43501b06Cf617bDBFa18d));
+    beast = new Beast(address(0xB678f5F084C5B2f062c43501b06Cf617bDBFa18d));
+    conveyorBelt = new ConveyorBelt(address(0xB678f5F084C5B2f062c43501b06Cf617bDBFa18d));
   }
 
   // deploy logic
   function deployLogic() internal {
-    globalSVG = new GlobalSVG([address(deployment1), address(deployment2), address(deployment3), address(deployment4), address(deployment5), address(deployment6), address(deployment7), address(deployment8), address(deployment9), address(deployment10), address(deployment11), address(deployment12), address(deployment13)]);
-    machine = new Machine([address(altar), address(apparatus), address(cells), address(tubes), address(beast), address(conveyorBelt)], assetRetriever);
+    globalSVG = new GlobalSVG([address(0xEaE8c020211C03a58a447F670E53400904df86e0), address(0xE428BADea508601b1D6029E6139044f8f7cC9BA9), address(0xa7adb2466fdf798a5187D861Fe8Fce782af297a4), address(0x9da7d6CC0Fb7E4838740E942a1D8DD7Bf64ebfc4), address(0x083177ebE328DE8b9f6D72BDBc0fEaFdf77BdA6f), address(0x042A14C93C1ACD24843B484FE80315D3d3918721), address(0x7b616Ea34a646de3Bd58A06D0F4c5B9E0E1CDC8D), address(0x3baCa27f1CAD55Aea8E81048f8F587e5eD9C8c70), address(0x25b5Ee6Ea0c670F49386fB0463020D6d87f75ebE), address(0xC27c8DE1Ac8DF47A7F6aCae2EEdFd10256A3c6E6), address(0x22B82BD23537a8c8EF37dC625990DC55508D6e04), address(0x00a3CdeB78EB5e55C94f3A379d459929A58641eb), address(0x1ea48b24d4FE8C0226bb7d2D632e39d6f3d57599)]);
+    machine = new Machine([address(0x0a6181E942FAC51242981f3e80128d7Cc3F739c8), address(0x63F78A9A5B8d68ECcEd44C1dA4bCEb178b676D7F), address(0x9432B35318242aCa09F673561316B5358dFcEd57), address(0xfE54265EA3a9C60cBC84A0a1E3800BF55192C5e9), address(0x3Ff4eA2376277409c3E6cCf49f92f63b86179530), address(0x075196212A077FF90E71c588c12Ea113D4fF6c1B)], AssetRetriever(0xB678f5F084C5B2f062c43501b06Cf617bDBFa18d));
     metadata = new Metadata(machine, globalSVG);
   }
 
@@ -442,19 +442,19 @@ contract CliffordScript is Script {
     // deployCharacter();
 
     // // Global SVG styles, defs, pattterns, sound
-    deployment1 = new Deployment1();
-    deployment2 = new Deployment2();
-    deployment3 = new Deployment3();
-    deployment4 = new Deployment4();
-    deployment5 = new Deployment5();
-    deployment6 = new Deployment6();
-    deployment7 = new Deployment7();
-    deployment8 = new Deployment8();
-    deployment9 = new Deployment9();
-    deployment10 = new Deployment10();
-    deployment11 = new Deployment11();
-    deployment12 = new Deployment12();
-    deployment13 = new Deployment13();
+    // deployment1 = new Deployment1(); // 0xEaE8c020211C03a58a447F670E53400904df86e0
+    // deployment2 = new Deployment2(); // 0xE428BADea508601b1D6029E6139044f8f7cC9BA9
+    // deployment3 = new Deployment3(); // 0xa7adb2466fdf798a5187D861Fe8Fce782af297a4
+    // deployment4 = new Deployment4(); // 0x9da7d6CC0Fb7E4838740E942a1D8DD7Bf64ebfc4
+    // deployment5 = new Deployment5(); // 0x083177ebE328DE8b9f6D72BDBc0fEaFdf77BdA6f
+    // deployment6 = new Deployment6(); // 0x042A14C93C1ACD24843B484FE80315D3d3918721
+    // deployment7 = new Deployment7(); // 0x7b616Ea34a646de3Bd58A06D0F4c5B9E0E1CDC8D
+    // deployment8 = new Deployment8(); // 0x3baCa27f1CAD55Aea8E81048f8F587e5eD9C8c70
+    // deployment9 = new Deployment9(); // 0x25b5Ee6Ea0c670F49386fB0463020D6d87f75ebE
+    // deployment10 = new Deployment10(); // 0xC27c8DE1Ac8DF47A7F6aCae2EEdFd10256A3c6E6
+    // deployment11 = new Deployment11(); // 0x22B82BD23537a8c8EF37dC625990DC55508D6e04
+    // deployment12 = new Deployment12(); // 0x00a3CdeB78EB5e55C94f3A379d459929A58641eb
+    // deployment13 = new Deployment13(); // 0x1ea48b24d4FE8C0226bb7d2D632e39d6f3d57599
 
     // MUST be done in this specific order
     // substances, props, activation, feedback, eyes, assets, altar, apparatus, cells, tubes, beast, conveyor, misc, character
@@ -496,12 +496,23 @@ contract CliffordScript is Script {
     // Need to be deployed together
 
     // deployAssetRetriever(traitBases);
+
     // deployMachines();
-    // deployLogic();
+      // Noise@0x1D5d373763Ebba893690ea723b4eC01Ab68Acf97
+      // GlobalNumbers@0x44F35c1d7B6A5e0A280AF135Ae7AbCa2e40f4fad
+      // Noise@0x5F892204D955d40F94F98029Aef8De854C6D530c
+      // Altar@0x0a6181E942FAC51242981f3e80128d7Cc3F739c8
+      // Apparatus@0x63F78A9A5B8d68ECcEd44C1dA4bCEb178b676D7F
+      // Cells@0x9432B35318242aCa09F673561316B5358dFcEd57
+      // Tubes@0xfE54265EA3a9C60cBC84A0a1E3800BF55192C5e9
+      // Beast@0x3Ff4eA2376277409c3E6cCf49f92f63b86179530
+      // ConveyorBelt@0x075196212A077FF90E71c588c12Ea113D4fF6c1B
+    
+    deployLogic();
 
     // Must be last to deploy
 
-    // clifford = new Clifford(metadata);
+    clifford = new Clifford(Metadata(0x787c9d967EC3993d40644856128A6608e4224b9a));
 
     vm.stopBroadcast();
   }
