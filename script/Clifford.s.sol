@@ -442,12 +442,19 @@ contract CliffordScript is Script {
     // deployCharacter();
 
     // // Global SVG styles, defs, pattterns, sound
-    // deployment1 = new Deployment1();
-    // deployment2 = new Deployment2();
-    // deployment3 = new Deployment3();
-    // deployment4 = new Deployment4();
-    // deployment5 = new Deployment5();
-    // deployment6 = new Deployment6();
+    deployment1 = new Deployment1();
+    deployment2 = new Deployment2();
+    deployment3 = new Deployment3();
+    deployment4 = new Deployment4();
+    deployment5 = new Deployment5();
+    deployment6 = new Deployment6();
+    deployment7 = new Deployment7();
+    deployment8 = new Deployment8();
+    deployment9 = new Deployment9();
+    deployment10 = new Deployment10();
+    deployment11 = new Deployment11();
+    deployment12 = new Deployment12();
+    deployment13 = new Deployment13();
 
     // MUST be done in this specific order
     // substances, props, activation, feedback, eyes, assets, altar, apparatus, cells, tubes, beast, conveyor, misc, character
