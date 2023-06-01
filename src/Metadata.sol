@@ -139,7 +139,7 @@ contract Metadata {
    */
 
   function getBaseColourValue(uint rand, int baseline) internal pure returns (uint) {
-    return GridHelper.constrainToHex(Noise.getNoiseArrayOne()[GridHelper.getRandByte(rand, 3)] + baseline);
+    return GridHelper.constrainToHex(Noise.getNoiseArrayThree()[GridHelper.getRandByte(rand, 3)] + baseline);
   }
 
   /**
