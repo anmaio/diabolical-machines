@@ -15,7 +15,7 @@ interface ICypher {
     function ownerOf(uint) external view returns (address);
 }
 
-/// @notice Main Contract for the diabolical machines NFT collection.
+/// @notice Main Contract for the Machine For Dying NFT collection.
 /// @author Zac Williams (https://twitter.com/ZacW369)
 /// @author Anomalous Materials (https://twitter.com/AnomalousMatter)
 
@@ -77,9 +77,6 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   // CONSTANTS
 
-  // testing variable for local node or to save time on testnet
-  bool public constant PSUEDO_RANDOM = true;
-
   uint256 public constant MAX_SUPPLY = 6_000;
 
   // The gas lane to use, which specifies the maximum gas price to bump to.
@@ -140,21 +137,17 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
     uint gen = currentGen;
     genIdToTokenId[gen] = totalSupply();
     currentGen++;
-    if (!PSUEDO_RANDOM) {
-      // Will revert if subscription is not set and funded.
-      uint256 s_requestId = COORDINATOR.requestRandomWords(
-        keyHash,
-        s_subscriptionId,
-        requestConfirmations,
-        callbackGasLimit,
-        numWords
-      );
-      requestIdToGenId[s_requestId] = gen;
-      emit RandomnessRequested(gen);
 
-    } else { // Testing
-      genSeed[gen] = uint256(keccak256(abi.encodePacked(block.number, block.timestamp, totalSupply())));
-    }
+    // Will revert if subscription is not set and funded.
+    uint256 s_requestId = COORDINATOR.requestRandomWords(
+      keyHash,
+      s_subscriptionId,
+      requestConfirmations,
+      callbackGasLimit,
+      numWords
+    );
+    requestIdToGenId[s_requestId] = gen;
+    emit RandomnessRequested(gen);
   }
 
   /**
@@ -346,7 +339,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   function tokenURI(uint256 tokenId) public view override returns (string memory) {
     uint seed = getSeed(tokenId);
     if (seed == 0) {
-      return "PLACEHOLDER";
+      return "ipfs://QmamxRR8SGmh82XzHUsfpiHTrqVaEXzgKGtqeRoPXn6y56";
     }
     return _metadata.buildMetadata(tokenId, seed);
   }

@@ -13,6 +13,7 @@ out/
 .env
 
 # Images
+deploymentImages/*.svg
 images/*.svg
 images/na*
 images2/
