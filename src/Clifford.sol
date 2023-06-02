@@ -339,7 +339,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
   function tokenURI(uint256 tokenId) public view override returns (string memory) {
     uint seed = getSeed(tokenId);
     if (seed == 0) {
-      return "ipfs://QmamxRR8SGmh82XzHUsfpiHTrqVaEXzgKGtqeRoPXn6y56";
+      return "ipfs://QmTJf1jnE2E8iMtVdVvdcCUwC1D8kJ4Qktise1XM1CfvyS";
     }
     return _metadata.buildMetadata(tokenId, seed);
   }
