@@ -508,11 +508,11 @@ contract CliffordScript is Script {
       // Beast@0x3Ff4eA2376277409c3E6cCf49f92f63b86179530
       // ConveyorBelt@0x075196212A077FF90E71c588c12Ea113D4fF6c1B
     
-    deployLogic();
+    // deployLogic();
 
     // Must be last to deploy
 
-    // clifford = new Clifford(Metadata(0x787c9d967EC3993d40644856128A6608e4224b9a));
+    clifford = new Clifford(Metadata(0x45e3FF727Ef1F96F4a929295A2B49570e3AE9E6d));
 
     vm.stopBroadcast();
   }
