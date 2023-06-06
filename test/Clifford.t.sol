@@ -138,7 +138,7 @@ contract CliffordTest is Test {
   address internal constant CYPHER_CONTRACT = 0xdDA32aabBBB6c44eFC567baC5F7C35f185338456;
   address internal constant TOP_CYPHER_HOLDER = 0x0aD0b792A54704dc7b6f85CBB774106d22E814d9;
   
-  Metadata internal constant DEPLOYED_METADATA = Metadata(0x787c9d967EC3993d40644856128A6608e4224b9a);
+  Metadata internal constant DEPLOYED_METADATA = Metadata(0x45e3FF727Ef1F96F4a929295A2B49570e3AE9E6d);
 
   uint private constant BID_INCREMENT = 0.01 ether;
 
