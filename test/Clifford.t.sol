@@ -130,12 +130,15 @@ import "../src/AssetRetriever.sol";
 contract CliffordTest is Test {
 
   uint internal constant MINT_SIZE = 10;
+  uint internal constant DEPLOYMENT_MINT_SIZE = 250;
 
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public openJson = "[\n";
 
   address internal constant CYPHER_CONTRACT = 0xdDA32aabBBB6c44eFC567baC5F7C35f185338456;
   address internal constant TOP_CYPHER_HOLDER = 0x0aD0b792A54704dc7b6f85CBB774106d22E814d9;
+  
+  Metadata internal constant DEPLOYED_METADATA = Metadata(0x45e3FF727Ef1F96F4a929295A2B49570e3AE9E6d);
 
   uint private constant BID_INCREMENT = 0.01 ether;
 
@@ -745,6 +748,25 @@ contract CliffordTest is Test {
 
   function testWriteImages20() public {
     writeImagesInRange(19*MINT_SIZE/20, MINT_SIZE);
+  }
+
+  function writeImagesFromChain(uint start, uint stop) public {
+    if (block.chainid != 1) {
+      return;
+    }
+    for (uint i = start; i < stop; i++) {
+      uint seed = uint256(keccak256(abi.encodePacked(i*i+9000, block.timestamp, block.number)));
+      string memory path = string.concat("deploymentImages/", Strings.toString(i), ".svg");
+      int baseline = int(seed % 256);
+      string memory image = DEPLOYED_METADATA.composeOnlyImage(seed, baseline);
+      vm.writeFile(path, image);
+    }
+  }
+
+  function testWriteChain() public {
+    // Memory leak causes wsl to crash for me with large amount of images
+    // https://github.com/ethereum/solidity/issues/13885
+    writeImagesFromChain(0, DEPLOYMENT_MINT_SIZE);
   }
 
   // create a json file with the ids of the images that were created

@@ -7,13 +7,13 @@ out/
 !/broadcast
 /broadcast/*/31337/
 /broadcast/**/dry-run/
-/broadcast/*/5/ 
-/broadcast/*/1/  
+/broadcast/*/5/
 
 # Dotenv file
 .env
 
 # Images
+deploymentImages/*.svg
 images/*.svg
 images/na*
 images2/
