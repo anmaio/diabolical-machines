@@ -124,7 +124,7 @@ contract Clifford is ERC721A, Ownable, VRFConsumerBaseV2 {
 
   Metadata private immutable _metadata;
 
-  constructor(Metadata metadata) ERC721A("Clifford", "Cliff") VRFConsumerBaseV2(vrfCoordinator) {
+  constructor(Metadata metadata) ERC721A("AMachineForDying", "AMFD") VRFConsumerBaseV2(vrfCoordinator) {
     _metadata = metadata;
   }
 
