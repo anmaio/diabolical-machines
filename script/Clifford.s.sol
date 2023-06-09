@@ -512,7 +512,7 @@ contract CliffordScript is Script {
 
     // Must be last to deploy
 
-    clifford = new Clifford(Metadata(0x45e3FF727Ef1F96F4a929295A2B49570e3AE9E6d));
+    clifford = new Clifford(Metadata(0x248B1149203933c1B08E985aD67138AF0dDd1b94));
 
     vm.stopBroadcast();
   }

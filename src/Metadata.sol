@@ -43,7 +43,7 @@ contract Metadata {
     string memory jsonInitial = string.concat(
         '{"name": "A Machine For Dying # ',
         Strings.toString(tokenId),
-        '", "description": "A Machine For Dying is centred around the concept of the \"Worker in a Box\", a trapped individual, doomed to toil forever. The collection presents the stark contrast between autonomy and individuality versus the destruction and apathy that can come from being trapped and exploited by the corporate machine.", "attributes": [{"trait_type": "Machine", "value":"',
+        '", "description": "A Machine For Dying is centred around the concept of the Worker in a Box, a trapped individual, doomed to toil forever. The collection presents the stark contrast between autonomy and individuality versus the destruction and apathy that can come from being trapped and exploited by the corporate machine.", "attributes": [{"trait_type": "Machine", "value":"',
         getMachine(rand),
         '"}, {"trait_type": "State", "value":"',
         allStates[state],
