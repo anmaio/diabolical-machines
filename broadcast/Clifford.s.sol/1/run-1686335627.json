@@ -23,45 +23,14 @@
       "isFixedGasLimit": false
     }
   ],
-  "receipts": [
-    {
-      "transactionHash": "0x38fb05a14a557eb5a04823f099494451c696ed7ac9bace1e890105ca26c52d56",
-      "transactionIndex": "0x9",
-      "blockHash": "0x1aafd5a214d794aebabc3e95119233ffcf13e7eaed98ff30d2d17632c9efc038",
-      "blockNumber": "0x10a2e77",
-      "from": "0x7552Edf8f4f281F32Bd6a00044C31805152767f4",
-      "to": null,
-      "cumulativeGasUsed": "0x28f7fd",
-      "gasUsed": "0x1f05ad",
-      "contractAddress": "0x3965dEE5ef611d4dd74FC6B6c54c37F643208A5C",
-      "logs": [
-        {
-          "address": "0x3965dEE5ef611d4dd74FC6B6c54c37F643208A5C",
-          "topics": [
-            "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
-            "0x0000000000000000000000000000000000000000000000000000000000000000",
-            "0x0000000000000000000000007552edf8f4f281f32bd6a00044c31805152767f4"
-          ],
-          "data": "0x",
-          "blockHash": "0x1aafd5a214d794aebabc3e95119233ffcf13e7eaed98ff30d2d17632c9efc038",
-          "blockNumber": "0x10a2e77",
-          "transactionHash": "0x38fb05a14a557eb5a04823f099494451c696ed7ac9bace1e890105ca26c52d56",
-          "transactionIndex": "0x9",
-          "logIndex": "0xd",
-          "removed": false
-        }
-      ],
-      "status": "0x1",
-      "logsBloom": "0x00000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000020000000000000400000800000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000000000000800000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000020000000000000000000000000080000000000000000000000000000000000000000",
-      "type": "0x2",
-      "effectiveGasPrice": "0x533f589a2"
-    }
-  ],
+  "receipts": [],
   "libraries": [],
-  "pending": [],
+  "pending": [
+    "0x38fb05a14a557eb5a04823f099494451c696ed7ac9bace1e890105ca26c52d56"
+  ],
   "path": "/app/broadcast/Clifford.s.sol/1/run-latest.json",
   "returns": {},
-  "timestamp": 1686335657,
+  "timestamp": 1686335627,
   "chain": 1,
   "multi": false,
   "commit": "a995f08"
