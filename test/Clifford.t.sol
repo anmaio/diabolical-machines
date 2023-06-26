@@ -130,7 +130,8 @@ import "../src/AssetRetriever.sol";
 contract CliffordTest is Test {
 
   uint internal constant MINT_SIZE = 10;
-  uint internal constant DEPLOYMENT_MINT_SIZE = 250;
+  uint internal constant DEPLOYMENT_MINT_SIZE = 10;
+  uint internal constant AMOUNT_CURRENTLY_MINTED = 446;
 
   string[3] public allStates = ["Degraded", "Basic", "Embellished"];
   string public openJson = "[\n";
@@ -138,7 +139,8 @@ contract CliffordTest is Test {
   address internal constant CYPHER_CONTRACT = 0xdDA32aabBBB6c44eFC567baC5F7C35f185338456;
   address internal constant TOP_CYPHER_HOLDER = 0x0aD0b792A54704dc7b6f85CBB774106d22E814d9;
   
-  Metadata internal constant DEPLOYED_METADATA = Metadata(0x45e3FF727Ef1F96F4a929295A2B49570e3AE9E6d);
+  Metadata internal constant DEPLOYED_METADATA = Metadata(0x248B1149203933c1B08E985aD67138AF0dDd1b94);
+  Clifford internal constant DEPLOYED_CLIFFORD = Clifford(0x3965dEE5ef611d4dd74FC6B6c54c37F643208A5C);
 
   uint private constant BID_INCREMENT = 0.01 ether;
 
@@ -760,6 +762,96 @@ contract CliffordTest is Test {
       int baseline = int(seed % 256);
       string memory image = DEPLOYED_METADATA.composeOnlyImage(seed, baseline);
       vm.writeFile(path, image);
+    }
+  }
+
+  function testWriteTokenURI() public {
+    if (block.chainid != 1) {
+      return;
+    }
+    for (uint i = 0; i < 446; ++i) {
+        string memory path = string.concat("deploymentJson/", Strings.toString(i), ".txt");
+        string memory image = DEPLOYED_CLIFFORD.tokenURI(i);
+        vm.writeFile(path, image);
+    }
+  }
+
+  function testGetTopBidders() public {
+    if (block.chainid != 1) {
+      return;
+    }
+    string memory path = "outputJson/topBidders.csv";
+    string memory csvStart = "Rank;Address;Amount;Allocation\n";
+    vm.writeFile(path, csvStart);
+
+    address[] memory allBidders = DEPLOYED_CLIFFORD.getAllBidders();
+
+    // sort the bidders by amount
+    for (uint i = 0; i < allBidders.length; ++i) {
+        for (uint j = i + 1; j < allBidders.length; ++j) {
+            if (DEPLOYED_CLIFFORD.getUserBid(allBidders[i]) < DEPLOYED_CLIFFORD.getUserBid(allBidders[j])) {
+                address temp = allBidders[i];
+                allBidders[i] = allBidders[j];
+                allBidders[j] = temp;
+            }
+        }
+    }
+
+    for (uint i = 0; i < 20; ++i) {
+        address bidder = allBidders[i];
+        uint bid = DEPLOYED_CLIFFORD.getUserBid(bidder);
+        uint allocation = bid / DEPLOYED_CLIFFORD.getCurrentPricePerUnit();
+        string memory csv = string.concat(Strings.toString(i+1), ";", Strings.toHexString(uint256(uint160(bidder))), ";", Strings.toString(bid), ";", Strings.toString(allocation));
+        vm.writeLine(path, csv);
+    }
+  }
+
+  function testGetSumOfAllNFTs() public view {
+    if (block.chainid != 1) {
+      return;
+    }
+
+    uint sum = 446; // the 446 NFTs that were minted before the auction
+    address[] memory allBidders = DEPLOYED_CLIFFORD.getAllBidders();
+
+    // sort the bidders by amount
+    for (uint i = 0; i < allBidders.length; ++i) {
+        for (uint j = i + 1; j < allBidders.length; ++j) {
+            if (DEPLOYED_CLIFFORD.getUserBid(allBidders[i]) < DEPLOYED_CLIFFORD.getUserBid(allBidders[j])) {
+                address temp = allBidders[i];
+                allBidders[i] = allBidders[j];
+                allBidders[j] = temp;
+            }
+        }
+    }
+
+    for (uint i = 0; i < allBidders.length; ++i) {
+        uint bid = DEPLOYED_CLIFFORD.getUserBid(allBidders[i]);
+        uint allocation = bid / DEPLOYED_CLIFFORD.getCurrentPricePerUnit();
+        sum += allocation;
+    }
+
+    console.log("Sum of all NFTs: ", sum);
+    console.log("Current price per unit: ", DEPLOYED_CLIFFORD.getCurrentPricePerUnit());
+    console.log("total raised: ", (sum-446) * DEPLOYED_CLIFFORD.getCurrentPricePerUnit());
+    console.log("total raised without Ben: ", ((sum-446) * DEPLOYED_CLIFFORD.getCurrentPricePerUnit()) - DEPLOYED_CLIFFORD.getUserBid(allBidders[0]));
+    console.log("total raised without Ben and Pranksy: ", (((sum-446) * DEPLOYED_CLIFFORD.getCurrentPricePerUnit()) - DEPLOYED_CLIFFORD.getUserBid(allBidders[0])) - DEPLOYED_CLIFFORD.getUserBid(allBidders[1]));
+  }
+
+  function testGetClaimedCyphers() public {
+    if (block.chainid != 1) {
+      return;
+    }
+    string memory path = "outputJson/claims.csv";
+    string memory csvStart = "TokenId;IsClaimed;Owner\n";
+    vm.writeFile(path, csvStart);
+    for (uint i = 0; i < 1024; ++i){
+        bool isClaimed = DEPLOYED_CLIFFORD.getIfCypherClaimed(i);
+        string memory claimed = isClaimed ? "true" : "false";
+        // get the owner of the cypher
+        address owner = Clifford(CYPHER_CONTRACT).ownerOf(i);
+        string memory csv = string.concat(Strings.toString(i), ";", claimed, ";", Strings.toHexString(uint256(uint160(owner))));
+        vm.writeLine(path, csv);
     }
   }
 

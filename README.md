@@ -4,7 +4,7 @@ forge build --via-ir
 forge test --via-ir -vvvv
 forge test -vvv
 forge test --match-contract Clifford --match-test testAuctionSimulator -vvvv
-forge test --match-contract Clifford --match-test testWriteChain1 --fork-url $MAINNET_RPC_URL
+forge test --match-contract Clifford --match-test testWriteChain --fork-url $MAINNET_RPC_URL
 
 <!-- Test without optimizer -->
 forge test --via-ir --gas-report  -vvvv
